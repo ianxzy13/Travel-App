@@ -34,6 +34,7 @@ export type WeddingRow = Timestamps & {
   rsvp_notify_email: boolean;
   budget_total: number | null;
   destination_airport: string | null;
+  reminders_checked_on: string | null;
 };
 
 export type WeddingMemberRow = Timestamps & {
@@ -159,6 +160,7 @@ export type NotificationRow = WeddingScoped & {
   body: string | null;
   link: string | null;
   read_at: string | null;
+  dedupe_key: string | null;
 };
 
 // ---------- Phase 4: seating ----------
@@ -383,6 +385,33 @@ export type WebsiteSettingsRow = Timestamps & {
   published_at: string | null;
 };
 
+export type TaskRow = WeddingScoped & {
+  title: string;
+  notes: string | null;
+  due_date: string | null;
+  assignee_id: string | null;
+  category: string | null;
+  link: string | null;
+  suggestion_key: string | null;
+  done: boolean;
+  done_at: string | null;
+  done_by: string | null;
+  sort_order: number;
+  created_by: string | null;
+};
+
+export type ScheduleItemRow = WeddingScoped & {
+  day: string | null;
+  start_time: string;
+  duration_min: number | null;
+  title: string;
+  location: string | null;
+  owner: string | null;
+  notes: string | null;
+  vendor_id: string | null;
+  event_id: string | null;
+};
+
 export type WebsiteSectionRow = WeddingScoped & {
   kind: SiteSectionKind;
   sort_order: number;
@@ -479,6 +508,8 @@ export type Database = {
       palette_colors: Table<PaletteColorRow, "wedding_id" | "hex">;
       website_settings: Table<WebsiteSettingsRow, "wedding_id">;
       website_sections: Table<WebsiteSectionRow, "wedding_id" | "kind">;
+      tasks: Table<TaskRow, "wedding_id" | "title">;
+      schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -529,6 +560,7 @@ export type Database = {
       unlock_site: { Args: { p_slug: string; p_password: string }; Returns: string | null };
       set_site_password: { Args: { p_wedding_id: string; p_password: string | null }; Returns: undefined };
       site_has_password: { Args: { p_wedding_id: string }; Returns: boolean };
+      sync_reminders: { Args: { p_wedding_id: string }; Returns: number };
       apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };

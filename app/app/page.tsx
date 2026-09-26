@@ -38,7 +38,8 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const [rsvp, seating, venues, budget, inspiration, website] = await Promise.all([
+  const today = new Date().toISOString().slice(0, 10);
+  const [rsvp, seating, venues, budget, inspiration, website, tasks] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -70,6 +71,7 @@ export default async function DashboardPage({
       .eq("wedding_id", wedding.id)
       .maybeSingle()
       .then(({ data }) => ({ published: !!data?.published })),
+    tasksSummary(supabase, wedding.id),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -101,6 +103,7 @@ export default async function DashboardPage({
     { label: "Book your venue", href: "/app/venues", done: venues.booked > 0 },
     { label: "Start an inspiration board", href: "/app/inspiration", done: inspiration.pins.length > 0 },
     { label: "Publish your wedding website", href: "/app/website", done: website.published },
+    { label: "Create your planning timeline", href: "/app/tasks", done: tasks.total > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 
@@ -325,10 +328,35 @@ export default async function DashboardPage({
           <SummaryCard
             icon={ListChecks}
             title="To-dos"
-            empty="Nothing due. We'll build a timeline from your wedding date."
+            empty="No to-dos yet. We'll build a timeline from your wedding date."
             href="/app/tasks"
             cta="See to-dos"
-          />
+          >
+            {tasks.total > 0 && (
+              <div className="space-y-3">
+                <p className="text-sm">
+                  <span className="font-serif text-3xl font-semibold tabular-nums">{tasks.done}</span>{" "}
+                  <span className="text-muted-foreground">of {tasks.total} done</span>
+                  {tasks.overdue > 0 && <span className="text-destructive"> · {tasks.overdue} overdue</span>}
+                </p>
+                <div className="bg-muted h-2 rounded-full">
+                  <div className="bg-primary h-2 rounded-full" style={{ width: `${(tasks.done / tasks.total) * 100}%` }} />
+                </div>
+                {tasks.next.length > 0 && (
+                  <ul className="space-y-1 text-xs">
+                    {tasks.next.map((t) => (
+                      <li key={t.id} className={cn("flex justify-between gap-2", t.due_date && t.due_date < today && "text-destructive")}>
+                        <Link href={`/app/tasks?task=${t.id}`} className="truncate hover:underline">
+                          {t.title}
+                        </Link>
+                        {t.due_date && <span className="shrink-0 tabular-nums">{formatWeddingDate(t.due_date, "d MMM")}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </SummaryCard>
         </div>
       </div>
     </div>
@@ -400,6 +428,25 @@ async function rsvpSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     declined: [...answered].filter((id) => !attending.has(id)).length,
     waiting: [...invited].filter((id) => !answered.has(id)).length,
   };
+}
+
+/** Done / total, overdue count and the next few open to-dos. */
+async function tasksSummary(supabase: Awaited<ReturnType<typeof createClient>>, weddingId: string) {
+  const today = new Date().toISOString().slice(0, 10);
+  const head = { count: "exact" as const, head: true };
+  const [{ count: total }, { count: done }, { count: overdue }, { data: next }] = await Promise.all([
+    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId),
+    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId).eq("done", true),
+    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId).eq("done", false).lt("due_date", today),
+    supabase
+      .from("tasks")
+      .select("id, title, due_date")
+      .eq("wedding_id", weddingId)
+      .eq("done", false)
+      .order("due_date", { nullsFirst: false })
+      .limit(3),
+  ]);
+  return { total: total ?? 0, done: done ?? 0, overdue: overdue ?? 0, next: next ?? [] };
 }
 
 /** The newest pins (with temporary links for uploads) and the palette. */

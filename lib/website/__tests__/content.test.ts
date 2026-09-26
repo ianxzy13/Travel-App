@@ -68,8 +68,8 @@ describe("sitePaths", () => {
 describe("templates", () => {
   it("uses the template colour unless the couple picked one", () => {
     const base = { template: "boho" as const, accent_color: null, heading_font: null, body_font: null };
-    expect(siteVars(base)["--site-accent" as keyof typeof base]).toBe("#9a4424");
-    expect(siteVars({ ...base, accent_color: "#123456" })["--site-accent" as keyof typeof base]).toBe("#123456");
+    expect((siteVars(base) as Record<string, string>)["--site-accent"]).toBe("#9a4424");
+    expect((siteVars({ ...base, accent_color: "#123456" }) as Record<string, string>)["--site-accent"]).toBe("#123456");
   });
   it("picks readable button text", () => {
     expect(onAccent("#0b0b0b")).toBe("#ffffff");

@@ -6,11 +6,12 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–8 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
+> **Status:** Phases 1–9 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
 > seating chart, budget, vendors, venues (comparison, visit checklists, photos), hotels (room blocks,
 > guest assignments), travel (arrivals board, flight search links) inspiration boards (pins,
-> hearts, comments, colour palette, share links) and the wedding website (5 templates, editor with
-> live preview, password, publishing). The other modules show a
+> hearts, comments, colour palette, share links) the wedding website (5 templates, editor with
+> live preview, password, publishing), to-dos with a suggested timeline, the day-of schedule and
+> reminder notifications. The other modules show a
 > "coming soon" page until their phase is built.
 
 ---
@@ -83,6 +84,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20261001000000_venues_travel.sql` (phase 6: venues, checklists, hotels, flights)
    - `20261002000000_inspiration.sql` (phase 7: boards, pins, comments, hearts, palette, shared links)
    - `20261003000000_website.sql` (phase 8: wedding website, sections, password protection)
+   - `20261004000000_tasks_schedule.sql` (phase 9: to-dos, day-of schedule, reminders)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -241,6 +243,21 @@ The Inspiration page can search free photos on Unsplash. Without a key everythin
   30 days; changing it asks everyone again. Collaborators never need it.
 - Published sites without a password can appear in Google. Sharing the link shows a preview image
   with your names, date and place (also for password-protected sites, but nothing else).
+
+**To-dos, schedule & notifications tips**
+
+- **To-dos → Create my timeline** adds about 45 suggested to-dos, dated backwards from your wedding
+  (12 months out to thank-you notes). Starting late? Things that are already due are spread over
+  the next few weeks. Edit, delete or add your own; drag the grip to reorder within a group.
+- Give a to-do to a collaborator with **Who**: they get a notification. "Looks done" appears when
+  the app can see it's done (e.g. a venue marked booked); click **Tick it off**.
+- **Day-of schedule**: start from the template (timed around your ceremony) or from scratch; add
+  your events with one click. Use **⋯ → 15 min later, with everything after** when plans move.
+  **Print** gives a run sheet with vendor phone numbers for your coordinator.
+- **Notifications** (the bell): new RSVPs, to-dos given to you, and reminders for payments due
+  within 7 days or overdue, hotel room-block cut-offs within 14 days, to-dos due in 3 days, and a
+  weekly summary of overdue to-dos. Reminders are checked once a day when someone opens the app,
+  so no extra setup (cron job) is needed.
 
 **Seating chart tips**
 

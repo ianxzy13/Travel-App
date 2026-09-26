@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { formatDistanceToNowStrict, parseISO } from "date-fns";
-import { Bell } from "lucide-react";
+import { Bell, CalendarClock, Hotel, ListChecks, MailCheck, Wallet, type LucideIcon } from "lucide-react";
 import { markNotificationsRead } from "@/app/app/rsvp/actions";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 export type NotificationItem = {
   id: string;
+  type: string;
   title: string;
   body: string | null;
   link: string | null;
@@ -18,7 +19,9 @@ export type NotificationItem = {
   createdAt: string;
 };
 
-/** Bell with unread count; lists recent notifications (new RSVPs, and more in later phases). */
+const ICONS: Record<string, LucideIcon> = { rsvp: MailCheck, payment: Wallet, hotel: Hotel, task: ListChecks };
+
+/** Bell with unread count: new RSVPs, to-dos given to you, and daily reminders (payments, hotels, overdue to-dos). */
 export function NotificationBell({
   items,
   unread,
@@ -67,24 +70,26 @@ export function NotificationBell({
         </div>
         {items.length === 0 ? (
           <p className="text-muted-foreground px-4 py-8 text-center text-sm">
-            Nothing yet. You&apos;ll see new RSVPs here.
+            Nothing yet. New RSVPs, to-dos for you and reminders about payments and deadlines show up here.
           </p>
         ) : (
           <ul className="max-h-96 divide-y overflow-y-auto">
             {items.map((n) => {
+              const Icon = ICONS[n.type] ?? CalendarClock;
               const content = (
                 <>
                   <span className="flex items-start gap-2">
+                    <Icon className="text-muted-foreground mt-0.5 size-4 shrink-0" aria-hidden />
+                    <span className={cn("flex-1 text-sm", !n.readAt && "font-medium")}>{n.title}</span>
                     {!n.readAt && (
                       <span
                         className="bg-primary mt-1.5 size-2 shrink-0 rounded-full"
                         aria-label="Unread"
                       />
                     )}
-                    <span className={cn("text-sm", !n.readAt && "font-medium")}>{n.title}</span>
                   </span>
-                  {n.body && <span className="text-muted-foreground block text-xs">{n.body}</span>}
-                  <span className="text-muted-foreground block text-xs">
+                  {n.body && <span className="text-muted-foreground block pl-6 text-xs">{n.body}</span>}
+                  <span className="text-muted-foreground block pl-6 text-xs">
                     {formatDistanceToNowStrict(parseISO(n.createdAt), { addSuffix: true })}
                   </span>
                 </>
