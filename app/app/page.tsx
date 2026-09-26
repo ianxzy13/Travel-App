@@ -38,7 +38,7 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const [rsvp, seating, venues, budget, inspiration] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -64,6 +64,12 @@ export default async function DashboardPage({
       ),
     })),
     inspirationSummary(supabase, wedding.id),
+    supabase
+      .from("website_settings")
+      .select("published")
+      .eq("wedding_id", wedding.id)
+      .maybeSingle()
+      .then(({ data }) => ({ published: !!data?.published })),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -94,6 +100,7 @@ export default async function DashboardPage({
     { label: "Shortlist venues", href: "/app/venues", done: venues.total > 0 },
     { label: "Book your venue", href: "/app/venues", done: venues.booked > 0 },
     { label: "Start an inspiration board", href: "/app/inspiration", done: inspiration.pins.length > 0 },
+    { label: "Publish your wedding website", href: "/app/website", done: website.published },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 

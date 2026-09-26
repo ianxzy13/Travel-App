@@ -44,7 +44,7 @@ export type InspirationData = {
 export async function signPaths(sb: Supabase, paths: string[]) {
   if (!paths.length) return new Map<string, string>();
   const { data } = await sb.storage.from(FILES_BUCKET).createSignedUrls(paths, 3600);
-  return new Map((data ?? []).filter((d) => d.path && d.signedUrl).map((d) => [d.path!, d.signedUrl]));
+  return new Map((data ?? []).filter((d) => d.path && d.signedUrl).map((d) => [d.path!, d.signedUrl as string]));
 }
 
 export async function loadInspiration(sb: Supabase, weddingId: string): Promise<InspirationData> {

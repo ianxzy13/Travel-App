@@ -6,10 +6,11 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–7 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
+> **Status:** Phases 1–8 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
 > seating chart, budget, vendors, venues (comparison, visit checklists, photos), hotels (room blocks,
-> guest assignments), travel (arrivals board, flight search links) and inspiration boards (pins,
-> hearts, comments, colour palette, share links). The other modules show a
+> guest assignments), travel (arrivals board, flight search links) inspiration boards (pins,
+> hearts, comments, colour palette, share links) and the wedding website (5 templates, editor with
+> live preview, password, publishing). The other modules show a
 > "coming soon" page until their phase is built.
 
 ---
@@ -81,6 +82,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20260930000000_budget_vendors.sql` (phase 5: budget, payments, vendors, private file storage)
    - `20261001000000_venues_travel.sql` (phase 6: venues, checklists, hotels, flights)
    - `20261002000000_inspiration.sql` (phase 7: boards, pins, comments, hearts, palette, shared links)
+   - `20261003000000_website.sql` (phase 8: wedding website, sections, password protection)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -222,6 +224,23 @@ The Inspiration page can search free photos on Unsplash. Without a key everythin
   colour to copy its hex code.
 - **Share** gives a board a secret read-only link (`/b/...`) for your florist or stylist. Turning it
   off makes the old link stop working. Comments and hearts are never shared.
+
+**Wedding website tips**
+
+- **Website** in the sidebar opens the editor. Everything saves automatically ("All changes saved").
+  On a phone, switch between **Edit** and **Preview** at the top; on a computer the live preview
+  sits on the right, with a Desktop / Phone toggle.
+- **Design**: pick one of 5 templates (Classic, Modern Minimal, Garden, Boho, Beach). Switching
+  keeps all your content. Change the accent colour and fonts, and upload a hero photo.
+- **Sections**: drag the grip to reorder (keyboard: focus the grip, Space, arrow keys, Space),
+  use the switch to show or hide a section, click a name to edit it. Empty sections stay hidden on
+  the live site automatically. Schedule comes from Settings → Events, Travel from Hotels ("Show on
+  website") and the airport saved in Travel; RSVP uses the invitation codes from phase 3.
+- **Publish**: your site lives at `/w/<your-address>`. Until you publish, only your wedding team can
+  see it (with a "Preview" bar). Optional **password**: guests type it once and it's remembered for
+  30 days; changing it asks everyone again. Collaborators never need it.
+- Published sites without a password can appear in Google. Sharing the link shows a preview image
+  with your names, date and place (also for password-protected sites, but nothing else).
 
 **Seating chart tips**
 

@@ -367,6 +367,29 @@ export type PinCommentRow = WeddingScoped & { pin_id: string; user_id: string; b
 export type PinReactionRow = Timestamps & { pin_id: string; user_id: string; wedding_id: string };
 export type PaletteColorRow = WeddingScoped & { hex: string; source_pin_id: string | null; sort_order: number };
 
+export type SiteTemplate = "classic" | "modern" | "garden" | "boho" | "beach";
+export type SiteSectionKind = "home" | "story" | "events" | "travel" | "party" | "rsvp" | "registry" | "faq" | "gallery";
+export type HeadingFont = "cormorant" | "playfair" | "fraunces" | "josefin" | "inter" | "great-vibes";
+export type BodyFont = "inter" | "lora" | "nunito" | "josefin";
+
+export type WebsiteSettingsRow = Timestamps & {
+  wedding_id: string;
+  template: SiteTemplate;
+  accent_color: string | null;
+  heading_font: HeadingFont | null;
+  body_font: BodyFont | null;
+  hero_path: string | null;
+  published: boolean;
+  published_at: string | null;
+};
+
+export type WebsiteSectionRow = WeddingScoped & {
+  kind: SiteSectionKind;
+  sort_order: number;
+  visible: boolean;
+  content: Json;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -454,6 +477,8 @@ export type Database = {
       pin_comments: Table<PinCommentRow, "wedding_id" | "pin_id" | "user_id" | "body">;
       pin_reactions: Table<PinReactionRow, "pin_id" | "user_id" | "wedding_id">;
       palette_colors: Table<PaletteColorRow, "wedding_id" | "hex">;
+      website_settings: Table<WebsiteSettingsRow, "wedding_id">;
+      website_sections: Table<WebsiteSectionRow, "wedding_id" | "kind">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -500,6 +525,10 @@ export type Database = {
       get_wedding_public: { Args: { p_slug: string }; Returns: Json };
       find_rsvp_code: { Args: { p_slug: string; p_name: string }; Returns: string | null };
       get_shared_board: { Args: { p_share_id: string }; Returns: Json };
+      get_public_site: { Args: { p_slug: string; p_token?: string | null }; Returns: Json };
+      unlock_site: { Args: { p_slug: string; p_password: string }; Returns: string | null };
+      set_site_password: { Args: { p_wedding_id: string; p_password: string | null }; Returns: undefined };
+      site_has_password: { Args: { p_wedding_id: string }; Returns: boolean };
       apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };
@@ -522,6 +551,8 @@ export type Database = {
       flight_direction: FlightDirection;
       flight_status: FlightStatus;
       pin_status: PinStatus;
+      site_template: SiteTemplate;
+      site_section: SiteSectionKind;
     };
     CompositeTypes: { [_ in never]: never };
   };
