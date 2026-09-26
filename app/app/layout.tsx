@@ -16,11 +16,22 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const { wedding, weddings } = await requireWedding();
 
   const supabase = await createClient();
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("full_name, avatar_url")
-    .eq("id", user.id)
-    .maybeSingle();
+  const [{ data: profile }, { data: notifications }, { count: unread }] = await Promise.all([
+    supabase.from("profiles").select("full_name, avatar_url").eq("id", user.id).maybeSingle(),
+    supabase
+      .from("notifications")
+      .select("id, title, body, link, read_at, created_at")
+      .eq("user_id", user.id)
+      .eq("wedding_id", wedding.id)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    supabase
+      .from("notifications")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .eq("wedding_id", wedding.id)
+      .is("read_at", null),
+  ]);
 
   const collapsed = (await cookies()).get(SIDEBAR_COOKIE)?.value === "collapsed";
   const current = weddings.find((w) => w.id === wedding.id) ?? weddings[0];
@@ -31,6 +42,17 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       weddings={weddings}
       accent={wedding.accent}
       defaultCollapsed={collapsed}
+      notifications={{
+        unread: unread ?? 0,
+        items: (notifications ?? []).map((n) => ({
+          id: n.id,
+          title: n.title,
+          body: n.body,
+          link: n.link,
+          readAt: n.read_at,
+          createdAt: n.created_at,
+        })),
+      }}
       user={{
         name: profile?.full_name ?? null,
         email: user.email ?? "",

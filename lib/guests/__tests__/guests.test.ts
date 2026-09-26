@@ -35,6 +35,7 @@ function guest(overrides: Partial<GuestView>): GuestView {
     list: "a",
     tagIds: [],
     eventIds: [],
+    rsvp: {},
     ...overrides,
   };
 }
@@ -203,6 +204,29 @@ describe("guest list filtering and sorting", () => {
     const groups = groupByHousehold(list);
     expect(groups.map((g) => g.name)).toEqual(["Adams", "Zed"]);
     expect(groups[1].guests.map((g) => g.id)).toEqual(["host", "p", "y"]);
+  });
+});
+
+describe("RSVP filter", () => {
+  const guests = [
+    guest({ id: "yes", eventIds: ["e1", "e2"], rsvp: { e1: "attending" } }),
+    guest({ id: "no", eventIds: ["e1"], rsvp: { e1: "declined" } }),
+    guest({ id: "none", eventIds: ["e1"] }),
+    guest({ id: "uninvited" }),
+  ];
+  const ids = (f: Partial<typeof DEFAULT_FILTERS>) =>
+    filterGuests(guests, { ...DEFAULT_FILTERS, ...f }).map((g) => g.id);
+
+  it("uses any invited event by default", () => {
+    expect(ids({ rsvp: "attending" })).toEqual(["yes"]);
+    expect(ids({ rsvp: "declined" })).toEqual(["no"]);
+    // "yes" still has e2 unanswered, so it also counts as waiting
+    expect(ids({ rsvp: "waiting" })).toEqual(["yes", "none"]);
+  });
+
+  it("uses only the chosen event when an event filter is set", () => {
+    expect(ids({ rsvp: "waiting", eventId: "e1" })).toEqual(["none"]);
+    expect(ids({ rsvp: "waiting", eventId: "e2" })).toEqual(["yes"]);
   });
 });
 

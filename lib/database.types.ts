@@ -27,6 +27,11 @@ export type WeddingRow = Timestamps & {
   style_tags: string[];
   accent: Accent;
   created_by: string | null;
+  slug: string;
+  rsvp_deadline: string | null;
+  rsvp_contact: string | null;
+  rsvp_ask_song: boolean;
+  rsvp_notify_email: boolean;
 };
 
 export type WeddingMemberRow = Timestamps & {
@@ -68,6 +73,7 @@ export type EventRow = WeddingScoped & {
   dress_code: string | null;
   description: string | null;
   sort_order: number;
+  meal_choice: boolean;
 };
 
 export type HouseholdRow = WeddingScoped & {
@@ -79,6 +85,10 @@ export type HouseholdRow = WeddingScoped & {
   postal_code: string | null;
   country: string | null;
   notes: string | null;
+  rsvp_code: string;
+  rsvp_song_request: string | null;
+  rsvp_message: string | null;
+  rsvp_responded_at: string | null;
 };
 
 export type GuestRow = WeddingScoped & {
@@ -105,6 +115,48 @@ export type GuestRelationshipRow = WeddingScoped & {
   guest_b: string;
   type: RelationshipType;
   note: string | null;
+};
+
+// ---------- Phase 3: RSVP ----------
+
+export type RsvpStatus = "attending" | "declined";
+export type EmailKind = "invitation" | "reminder";
+export type EmailStatus = "sent" | "delivered" | "opened" | "bounced" | "complained" | "failed";
+
+export type MealOptionRow = WeddingScoped & {
+  name: string;
+  description: string | null;
+  sort_order: number;
+};
+
+export type RsvpResponseRow = WeddingScoped & {
+  guest_id: string;
+  event_id: string;
+  status: RsvpStatus;
+  meal_option_id: string | null;
+  responded_by: "guest" | "couple";
+  responded_at: string;
+};
+
+export type EmailSendRow = WeddingScoped & {
+  household_id: string;
+  kind: EmailKind;
+  to_emails: string[];
+  resend_id: string | null;
+  status: EmailStatus;
+  error: string | null;
+  sent_by: string | null;
+  delivered_at: string | null;
+  opened_at: string | null;
+};
+
+export type NotificationRow = WeddingScoped & {
+  user_id: string;
+  type: string;
+  title: string;
+  body: string | null;
+  link: string | null;
+  read_at: string | null;
 };
 
 // Helper: columns with DB defaults become optional on insert.
@@ -166,6 +218,10 @@ export type Database = {
       guest_event_invites: Table<GuestEventInviteRow, "wedding_id" | "guest_id" | "event_id">;
       tags: Table<TagRow, "wedding_id" | "name">;
       guest_tags: Table<GuestTagRow, "wedding_id" | "guest_id" | "tag_id">;
+      meal_options: Table<MealOptionRow, "wedding_id" | "name">;
+      rsvp_responses: Table<RsvpResponseRow, "wedding_id" | "guest_id" | "event_id" | "status">;
+      email_sends: Table<EmailSendRow, "wedding_id" | "household_id" | "kind" | "to_emails">;
+      notifications: Table<NotificationRow, "wedding_id" | "user_id" | "type" | "title">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -204,6 +260,17 @@ export type Database = {
       can_edit_wedding: { Args: { wid: string }; Returns: boolean };
       is_wedding_owner: { Args: { wid: string }; Returns: boolean };
       delete_empty_households: { Args: { wid: string }; Returns: undefined };
+      get_rsvp: { Args: { p_code: string }; Returns: Json };
+      submit_rsvp: {
+        Args: { p_code: string; p_payload: Json; p_as_couple?: boolean };
+        Returns: Json;
+      };
+      get_wedding_public: { Args: { p_slug: string }; Returns: Json };
+      find_rsvp_code: { Args: { p_slug: string; p_name: string }; Returns: string | null };
+      record_email_event: {
+        Args: { p_resend_id: string; p_event: string; p_at: string };
+        Returns: undefined;
+      };
     };
     Enums: {
       member_role: MemberRole;
@@ -211,6 +278,7 @@ export type Database = {
       age_group: AgeGroup;
       guest_list: GuestList;
       relationship_type: RelationshipType;
+      rsvp_status: RsvpStatus;
     };
     CompositeTypes: { [_ in never]: never };
   };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GuestManager } from "@/components/guests/guest-manager";
 import { loadGuestData } from "@/lib/guests/load";
+import { isEmailConfigured } from "@/lib/email/resend";
 import { buildGuestViews } from "@/lib/guests/model";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
@@ -9,12 +10,12 @@ export const metadata: Metadata = { title: "Guests" };
 
 export default async function GuestsPage() {
   const { wedding, role } = await requireWedding();
-  const { guests, households, invites, guestTags, events, tags, relationships } =
+  const { guests, households, invites, guestTags, events, tags, relationships, responses } =
     await loadGuestData(await createClient(), wedding.id);
 
   return (
     <GuestManager
-      guests={buildGuestViews({ guests, households, invites, guestTags })}
+      guests={buildGuestViews({ guests, households, invites, guestTags, responses })}
       households={households.map((h) => ({
         id: h.id,
         name: h.name,
@@ -38,6 +39,7 @@ export default async function GuestsPage() {
       }))}
       names={{ a: wedding.partner_a_name, b: wedding.partner_b_name }}
       canEdit={canEdit(role)}
+      emailConfigured={isEmailConfigured}
     />
   );
 }

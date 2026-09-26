@@ -15,6 +15,7 @@ import {
   type SortState,
 } from "@/lib/guests/filter";
 import { computeStats } from "@/lib/guests/stats";
+import { SendEmailDialog } from "@/components/rsvp-admin/send-email-dialog";
 import { BulkBar } from "./bulk-bar";
 import { GuestList, type GuestGroup } from "./guest-list";
 import { GuestSheet, type SheetMode } from "./guest-sheet";
@@ -26,7 +27,7 @@ import type { GuestPageData } from "./types";
 
 /** The whole /app/guests screen. Filtering and sorting happen in the browser. */
 export function GuestManager(data: GuestPageData) {
-  const { guests, households, events, tags, names, canEdit } = data;
+  const { guests, households, events, tags, names, canEdit, emailConfigured } = data;
 
   const [filters, setFilters] = useState<GuestFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortState>({ key: "name", dir: "asc" });
@@ -35,6 +36,7 @@ export function GuestManager(data: GuestPageData) {
   const [sheet, setSheet] = useState<SheetMode>(null);
   const [tagsOpen, setTagsOpen] = useState(false);
   const [householdId, setHouseholdId] = useState<string | null>(null);
+  const [emailOpen, setEmailOpen] = useState(false);
 
   const tagsById = useMemo(() => new Map(tags.map((t) => [t.id, t])), [tags]);
   const guestNames = useMemo(() => new Map(guests.map((g) => [g.id, g.name])), [guests]);
@@ -193,6 +195,7 @@ export function GuestManager(data: GuestPageData) {
         <BulkBar
           ids={selectedIds}
           onClear={() => setSelected(new Set())}
+          onEmail={() => setEmailOpen(true)}
           events={events}
           tags={tags}
           names={names}
@@ -200,6 +203,13 @@ export function GuestManager(data: GuestPageData) {
       )}
 
       <GuestSheet mode={sheet} onModeChange={setSheet} {...data} />
+      <SendEmailDialog
+        open={emailOpen}
+        onOpenChange={setEmailOpen}
+        emailConfigured={emailConfigured}
+        households={emailTargets(guests, selectedIds)}
+        onSent={() => setSelected(new Set())}
+      />
       <TagsDialog open={tagsOpen} onOpenChange={setTagsOpen} tags={tags} usage={tagUsage} />
       <HouseholdDialog
         household={households.find((h) => h.id === householdId) ?? null}
@@ -207,4 +217,23 @@ export function GuestManager(data: GuestPageData) {
       />
     </>
   );
+}
+
+/** The households of the selected guests (emails go out per household). */
+function emailTargets(guests: GuestPageData["guests"], selectedIds: string[]) {
+  const chosen = new Set(
+    guests.filter((g) => selectedIds.includes(g.id)).map((g) => g.householdId),
+  );
+  const targets = new Map<string, { id: string; name: string; hasEmail: boolean }>();
+  for (const g of guests) {
+    if (!chosen.has(g.householdId)) continue;
+    const t = targets.get(g.householdId) ?? {
+      id: g.householdId,
+      name: g.householdName,
+      hasEmail: false,
+    };
+    if (g.email && !g.plusOneOf) t.hasEmail = true;
+    targets.set(g.householdId, t);
+  }
+  return [...targets.values()];
 }

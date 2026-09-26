@@ -22,4 +22,5 @@ export type GuestPageData = {
   relationships: RelationshipItem[];
   names: PartnerNames;
   canEdit: boolean;
+  emailConfigured: boolean;
 };

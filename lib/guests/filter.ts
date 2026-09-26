@@ -9,6 +9,8 @@ export type GuestFilters = {
   tagId: string; // "all" or a tag id
   ageGroup: AgeGroup | "all";
   list: GuestList | "all";
+  /** RSVP answer, for the chosen event (or any invited event when "all") */
+  rsvp: "all" | "attending" | "declined" | "waiting";
 };
 
 export const DEFAULT_FILTERS: GuestFilters = {
@@ -19,11 +21,12 @@ export const DEFAULT_FILTERS: GuestFilters = {
   tagId: "all",
   ageGroup: "all",
   list: "all",
+  rsvp: "all",
 };
 
 /** How many filters (besides search) are active, for the "Filters (2)" badge. */
 export function activeFilterCount(f: GuestFilters) {
-  return (["side", "householdId", "eventId", "tagId", "ageGroup", "list"] as const).filter(
+  return (["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp"] as const).filter(
     (k) => f[k] !== "all",
   ).length;
 }
@@ -50,6 +53,7 @@ export function filterGuests(guests: GuestView[], f: GuestFilters): GuestView[] 
     if (f.eventId !== "all" && f.eventId !== "none" && !g.eventIds.includes(f.eventId)) {
       return false;
     }
+    if (f.rsvp !== "all" && !matchesRsvp(g, f)) return false;
     if (words.length) {
       // every search word must appear somewhere in the guest's details
       const haystack = normalize([g.name, g.householdName, g.email ?? "", g.phone ?? ""].join(" "));
@@ -57,6 +61,20 @@ export function filterGuests(guests: GuestView[], f: GuestFilters): GuestView[] 
     }
     return true;
   });
+}
+
+/**
+ * attending = coming to at least one of the events; declined = said no to all;
+ * waiting = hasn't answered at least one. With an event filter, only that event counts.
+ */
+function matchesRsvp(g: GuestView, f: GuestFilters) {
+  const specific = f.eventId !== "all" && f.eventId !== "none";
+  const events = specific ? g.eventIds.filter((e) => e === f.eventId) : g.eventIds;
+  const answers = events.map((e) => g.rsvp[e]);
+  if (answers.length === 0) return false;
+  if (f.rsvp === "attending") return answers.includes("attending");
+  if (f.rsvp === "declined") return answers.every((a) => a === "declined");
+  return answers.some((a) => !a);
 }
 
 export type SortKey = "name" | "household" | "side" | "age" | "list";

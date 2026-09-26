@@ -214,16 +214,42 @@ function Hint({ icon: Icon, label }: { icon: typeof Utensils; label: string }) {
   );
 }
 
+/** Invited events, each with a dot: green = coming, grey = not coming, hollow = no reply. */
 function eventSummary(guest: GuestView, events: EventOption[]) {
   if (events.length === 0) return null;
   if (guest.eventIds.length === 0) return <span className="text-warning">Not invited</span>;
-  if (guest.eventIds.length === events.length) return <span>All events</span>;
   return (
-    <span>
+    <span className="inline-flex flex-wrap gap-x-2.5 gap-y-0.5">
       {events
         .filter((e) => guest.eventIds.includes(e.id))
-        .map((e) => e.name)
-        .join(", ")}
+        .map((e) => {
+          const status = guest.rsvp[e.id];
+          const label =
+            status === "attending"
+              ? "attending"
+              : status === "declined"
+                ? "not attending"
+                : "no reply yet";
+          return (
+            <span
+              key={e.id}
+              className="inline-flex items-center gap-1 whitespace-nowrap"
+              title={`${e.name}: ${label}`}
+            >
+              <span
+                aria-hidden
+                className={cn(
+                  "inline-block size-2 rounded-full",
+                  status === "attending" && "bg-success",
+                  status === "declined" && "bg-foreground/30",
+                  !status && "border-muted-foreground border",
+                )}
+              />
+              <span className={cn(status === "declined" && "line-through")}>{e.name}</span>
+              <span className="sr-only">({label})</span>
+            </span>
+          );
+        })}
     </span>
   );
 }

@@ -19,6 +19,7 @@ import {
   SIDEBAR_COOKIE,
   type NavItem,
 } from "./nav-items";
+import { NotificationBell, type NotificationItem } from "./notification-bell";
 import { UserMenu, type CurrentUser } from "./user-menu";
 import { WeddingSwitcher } from "./wedding-switcher";
 
@@ -28,6 +29,7 @@ type Props = {
   user: CurrentUser;
   accent: Accent;
   defaultCollapsed: boolean;
+  notifications: { items: NotificationItem[]; unread: number };
   children: React.ReactNode;
 };
 
@@ -36,7 +38,15 @@ type Props = {
  * - desktop: collapsible left sidebar
  * - mobile: top bar + bottom tab bar with a "More" sheet
  */
-export function AppShell({ current, weddings, user, accent, defaultCollapsed, children }: Props) {
+export function AppShell({
+  current,
+  weddings,
+  user,
+  accent,
+  defaultCollapsed,
+  notifications,
+  children,
+}: Props) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
@@ -66,7 +76,12 @@ export function AppShell({ current, weddings, user, accent, defaultCollapsed, ch
         )}
         aria-label="Main navigation"
       >
-        <div className={cn("flex h-16 items-center", collapsed ? "justify-center" : "px-5")}>
+        <div
+          className={cn(
+            "flex items-center",
+            collapsed ? "flex-col gap-1 py-3" : "h-16 justify-between pr-3 pl-5",
+          )}
+        >
           {collapsed ? (
             <Link href="/app" className="font-serif text-2xl font-semibold" aria-label="Dashboard">
               V<span className="text-primary">.</span>
@@ -74,6 +89,7 @@ export function AppShell({ current, weddings, user, accent, defaultCollapsed, ch
           ) : (
             <Logo href="/app" />
           )}
+          <NotificationBell {...notifications} align={collapsed ? "start" : "end"} />
         </div>
 
         <div className="px-3">
@@ -131,6 +147,7 @@ export function AppShell({ current, weddings, user, accent, defaultCollapsed, ch
         <div className="min-w-0 flex-1">
           <WeddingSwitcher current={current} weddings={weddings} />
         </div>
+        <NotificationBell {...notifications} />
         <UserMenu user={user} showName={false} />
       </header>
 

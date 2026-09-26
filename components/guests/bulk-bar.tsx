@@ -36,12 +36,14 @@ import type { EventOption, TagOption } from "./types";
 export function BulkBar({
   ids,
   onClear,
+  onEmail,
   events,
   tags,
   names,
 }: {
   ids: string[];
   onClear: () => void;
+  onEmail: () => void;
   events: EventOption[];
   tags: TagOption[];
   names: PartnerNames;
@@ -189,16 +191,19 @@ export function BulkBar({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Emails arrive with RSVPs in phase 3. */}
         <Tooltip>
           <TooltipTrigger asChild>
-            <span tabIndex={0}>
-              <Button variant="ghost" size="sm" disabled aria-label="Send email (coming soon)">
-                <Mail aria-hidden />
-              </Button>
-            </span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onEmail}
+              disabled={pending}
+              aria-label="Email their households"
+            >
+              <Mail aria-hidden />
+            </Button>
           </TooltipTrigger>
-          <TooltipContent>Sending invitations arrives with RSVPs</TooltipContent>
+          <TooltipContent>Email invitation or reminder</TooltipContent>
         </Tooltip>
 
         <ConfirmDialog

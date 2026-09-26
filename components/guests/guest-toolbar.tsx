@@ -164,6 +164,17 @@ function FilterPopover({
           onChange={(v) => set("ageGroup", v as GuestFilters["ageGroup"])}
           options={Object.entries(AGE_GROUP_LABELS).map(([value, label]) => ({ value, label }))}
         />
+        <FilterSelect
+          id="f-rsvp"
+          label="RSVP"
+          value={filters.rsvp}
+          onChange={(v) => set("rsvp", v as GuestFilters["rsvp"])}
+          options={[
+            { value: "attending", label: "Attending" },
+            { value: "declined", label: "Not attending" },
+            { value: "waiting", label: "No reply yet" },
+          ]}
+        />
         <div className="flex items-center justify-between border-t pt-3 text-sm">
           <span className="text-muted-foreground">{resultCount} matching</span>
           <Button

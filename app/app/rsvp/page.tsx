@@ -1,22 +1,40 @@
 import type { Metadata } from "next";
-import { MailCheck } from "lucide-react";
-import { ComingSoon } from "@/components/app/coming-soon";
+import { RsvpDashboard } from "@/components/rsvp-admin/rsvp-dashboard";
+import { isEmailConfigured } from "@/lib/email/resend";
+import { loadRsvpDashboard } from "@/lib/rsvp/load";
+import { getSiteUrl } from "@/lib/site-url";
+import { createClient } from "@/lib/supabase/server";
+import { canEdit, coupleName, requireWedding } from "@/lib/wedding";
 
 export const metadata: Metadata = { title: "RSVPs" };
 
-export default function RSVPsPage() {
+export default async function RsvpPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ household?: string }>;
+}) {
+  const { wedding, role } = await requireWedding();
+  const { household } = await searchParams;
+  const data = await loadRsvpDashboard(await createClient(), wedding);
+
   return (
-    <ComingSoon
-      title="RSVPs"
-      description="Invitations, replies and meal counts."
-      icon={MailCheck}
-      phase={3}
-      features={[
-        "A private RSVP link per household",
-        "Per-event answers and meal choices",
-        "Email invites and reminders",
-        "Live totals for the caterer",
-      ]}
+    <RsvpDashboard
+      // re-mount when switching weddings
+      key={wedding.id}
+      data={data}
+      settings={{
+        deadline: wedding.rsvp_deadline ?? "",
+        contact: wedding.rsvp_contact ?? "",
+        askSong: wedding.rsvp_ask_song,
+        notifyEmail: wedding.rsvp_notify_email,
+      }}
+      siteUrl={await getSiteUrl()}
+      slug={wedding.slug}
+      couple={coupleName(wedding)}
+      emailConfigured={isEmailConfigured}
+      adminConfigured={Boolean(process.env.SUPABASE_SECRET_KEY)}
+      canEdit={canEdit(role)}
+      focusHouseholdId={household}
     />
   );
 }

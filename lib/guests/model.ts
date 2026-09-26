@@ -6,6 +6,7 @@ import type {
   GuestSide,
   GuestTagRow,
   HouseholdRow,
+  RsvpStatus,
 } from "@/lib/database.types";
 
 /** A guest with everything the guest list screen needs, flattened. */
@@ -30,6 +31,8 @@ export type GuestView = {
   list: GuestList;
   tagIds: string[];
   eventIds: string[];
+  /** event id → RSVP answer (missing = no reply yet) */
+  rsvp: Record<string, RsvpStatus>;
 };
 
 export type PartnerNames = { a: string; b: string };
@@ -66,11 +69,16 @@ export function buildGuestViews(data: {
   households: Pick<HouseholdRow, "id" | "name">[];
   invites: Pick<GuestEventInviteRow, "guest_id" | "event_id">[];
   guestTags: Pick<GuestTagRow, "guest_id" | "tag_id">[];
+  responses?: { guest_id: string; event_id: string; status: RsvpStatus }[];
 }): GuestView[] {
   const householdNames = new Map(data.households.map((h) => [h.id, h.name]));
   const firstNames = new Map(data.guests.map((g) => [g.id, g.first_name]));
   const eventsByGuest = groupIds(data.invites, "guest_id", "event_id");
   const tagsByGuest = groupIds(data.guestTags, "guest_id", "tag_id");
+  const rsvpByGuest = new Map<string, Record<string, RsvpStatus>>();
+  for (const r of data.responses ?? []) {
+    rsvpByGuest.set(r.guest_id, { ...rsvpByGuest.get(r.guest_id), [r.event_id]: r.status });
+  }
 
   return data.guests.map((g) => ({
     id: g.id,
@@ -91,6 +99,7 @@ export function buildGuestViews(data: {
     list: g.list,
     tagIds: tagsByGuest.get(g.id) ?? [],
     eventIds: eventsByGuest.get(g.id) ?? [],
+    rsvp: rsvpByGuest.get(g.id) ?? {},
   }));
 }
 

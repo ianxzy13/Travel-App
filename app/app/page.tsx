@@ -15,6 +15,7 @@ import { Countdown } from "@/components/dashboard/countdown";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatWeddingDate } from "@/lib/format";
+import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { canEdit, coupleName, requireWedding } from "@/lib/wedding";
@@ -30,6 +31,7 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
+  const rsvp = await rsvpSummary(supabase, wedding.id);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
       .from("wedding_members")
@@ -160,7 +162,24 @@ export default async function DashboardPage({
             empty="No replies yet. Add guests, then send your invitations."
             href="/app/rsvp"
             cta="View RSVPs"
-          />
+          >
+            {rsvp.invited > 0 && (
+              <dl className="grid grid-cols-3 gap-2 text-center">
+                {(
+                  [
+                    ["Attending", rsvp.attending],
+                    ["Declined", rsvp.declined],
+                    ["Waiting", rsvp.waiting],
+                  ] as const
+                ).map(([label, n]) => (
+                  <div key={label} className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-semibold tabular-nums">{n}</dd>
+                    <dt className="text-muted-foreground text-xs">{label}</dt>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </SummaryCard>
           <SummaryCard
             icon={Armchair}
             title="Seating"
@@ -187,12 +206,15 @@ function SummaryCard({
   empty,
   href,
   cta,
+  children,
 }: {
   icon: LucideIcon;
   title: string;
   empty: string;
   href: string;
   cta: string;
+  /** real numbers; the "empty" text shows when there are none */
+  children?: React.ReactNode;
 }) {
   return (
     <Card>
@@ -203,11 +225,44 @@ function SummaryCard({
         <CardTitle className="font-serif text-2xl">{title}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-muted-foreground text-sm">{empty}</p>
+        {children || <p className="text-muted-foreground text-sm">{empty}</p>}
         <Button asChild variant="outline" size="sm">
           <Link href={href}>{cta}</Link>
         </Button>
       </CardContent>
     </Card>
   );
+}
+
+/** People coming to at least one event / declined everything / not answered anything yet. */
+async function rsvpSummary(supabase: Awaited<ReturnType<typeof createClient>>, weddingId: string) {
+  const [invites, responses] = await Promise.all([
+    fetchAll((f, t) =>
+      supabase
+        .from("guest_event_invites")
+        .select("guest_id")
+        .eq("wedding_id", weddingId)
+        .order("id")
+        .range(f, t),
+    ),
+    fetchAll((f, t) =>
+      supabase
+        .from("rsvp_responses")
+        .select("guest_id, status")
+        .eq("wedding_id", weddingId)
+        .order("id")
+        .range(f, t),
+    ),
+  ]);
+  const invited = new Set(invites.map((i) => i.guest_id));
+  const answered = new Set(responses.map((r) => r.guest_id));
+  const attending = new Set(
+    responses.filter((r) => r.status === "attending").map((r) => r.guest_id),
+  );
+  return {
+    invited: invited.size,
+    attending: attending.size,
+    declined: [...answered].filter((id) => !attending.has(id)).length,
+    waiting: [...invited].filter((id) => !answered.has(id)).length,
+  };
 }
