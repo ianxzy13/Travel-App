@@ -6,7 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2, MailCheck } from "lucide-react";
 import { toast } from "sonner";
-import { sendMagicLink, signInWithGoogle } from "@/app/login/actions";
+import { useRouter } from "next/navigation";
+import { sendMagicLink, signInWithGoogle, verifyEmailCode } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
 import { FieldError } from "@/components/form-field";
 import { Input } from "@/components/ui/input";
@@ -29,19 +30,7 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
   );
 
   if (sentTo) {
-    return (
-      <div className="space-y-3 text-center" role="status">
-        <MailCheck className="text-primary mx-auto size-10" aria-hidden />
-        <p className="font-medium">Check your inbox</p>
-        <p className="text-muted-foreground text-sm">
-          We sent a sign-in link to <strong className="text-foreground">{sentTo}</strong>. Open it
-          on this device to continue.
-        </p>
-        <Button variant="link" onClick={() => setSentTo(null)}>
-          Use a different email
-        </Button>
-      </div>
-    );
+    return <CheckInbox email={sentTo} next={next} onBack={() => setSentTo(null)} />;
   }
 
   const emailError = form.formState.errors.email?.message;
@@ -85,6 +74,66 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
           Email me a sign-in link
         </Button>
       </form>
+    </div>
+  );
+}
+
+/** "Check your inbox" + a box to type the code from the email instead of clicking the link. */
+function CheckInbox({ email, next, onBack }: { email: string; next: string; onBack: () => void }) {
+  const router = useRouter();
+  const [code, setCode] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    startTransition(async () => {
+      const result = await verifyEmailCode({ email, code });
+      if (result.ok) {
+        router.replace(next);
+        router.refresh();
+      } else {
+        setError(result.error);
+      }
+    });
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="space-y-2 text-center" role="status">
+        <MailCheck className="text-primary mx-auto size-10" aria-hidden />
+        <p className="font-medium">Check your inbox</p>
+        <p className="text-muted-foreground text-sm">
+          We sent an email to <strong className="text-foreground">{email}</strong>. Click the link
+          in it (in this browser), or type the code from the email below.
+        </p>
+      </div>
+      <form onSubmit={submit} className="space-y-3" noValidate>
+        <div className="space-y-2">
+          <Label htmlFor="code">Code from the email</Label>
+          <Input
+            id="code"
+            inputMode="numeric"
+            autoComplete="one-time-code"
+            placeholder="123456"
+            maxLength={10}
+            value={code}
+            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+            aria-invalid={!!error}
+            aria-describedby={error ? "code-error" : undefined}
+            className="text-center text-lg tracking-[0.3em]"
+          />
+          <FieldError id="code-error" message={error ?? undefined} />
+        </div>
+        <Button type="submit" className="w-full" disabled={pending || code.length < 6}>
+          {pending && <Loader2 className="animate-spin" aria-hidden />}
+          Sign in with code
+        </Button>
+      </form>
+      <Button variant="link" className="w-full" onClick={onBack}>
+        Send a new email or use a different address
+      </Button>
     </div>
   );
 }

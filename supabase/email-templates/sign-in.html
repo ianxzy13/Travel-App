@@ -1,0 +1,23 @@
+<!--
+  Sign-in email for Supabase. Paste this into BOTH templates:
+  Authentication → Emails → "Magic link" and "Confirm signup" (Message body).
+  It contains the link and a numeric code as a backup.
+-->
+<div style="font-family: Georgia, serif; max-width: 480px; margin: 0 auto; padding: 24px; color: #3a2e2a;">
+  <h1 style="font-weight: normal; font-size: 28px; margin: 0 0 16px;">Sign in to Vow</h1>
+  <p style="font-family: Arial, sans-serif; font-size: 15px; line-height: 1.5;">
+    Click the button to sign in. Open it in the same browser where you asked for the email.
+  </p>
+  <p style="margin: 24px 0;">
+    <a href="{{ .ConfirmationURL }}" style="background: #9b5a63; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-family: Arial, sans-serif; font-size: 15px;">Sign in</a>
+  </p>
+  <p style="font-family: Arial, sans-serif; font-size: 15px; line-height: 1.5;">
+    Or type this code on the sign-in page:
+  </p>
+  <p style="font-family: 'Courier New', monospace; font-size: 30px; letter-spacing: 6px; margin: 8px 0 24px;">
+    <strong>{{ .Token }}</strong>
+  </p>
+  <p style="font-family: Arial, sans-serif; font-size: 13px; color: #7a6a64;">
+    If you didn't ask to sign in, you can ignore this email.
+  </p>
+</div>
