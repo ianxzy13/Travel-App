@@ -5,6 +5,7 @@ import {
   CalendarPlus,
   CheckCircle2,
   Circle,
+  Lightbulb,
   ListChecks,
   MailCheck,
   MapPin,
@@ -14,10 +15,13 @@ import {
 import { Countdown } from "@/components/dashboard/countdown";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PaletteStrip } from "@/components/inspiration/palette-strip";
+import { PinImage } from "@/components/inspiration/pin-image";
 import { formatWeddingDate } from "@/lib/format";
 import { loadBudget } from "@/lib/budget/load";
 import { formatMoney } from "@/lib/budget/money";
 import { summarizeBudget, upcomingPayments } from "@/lib/budget/stats";
+import { signPaths } from "@/lib/inspiration/load";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -34,7 +38,7 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const [rsvp, seating, venues, budget] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -59,6 +63,7 @@ export default async function DashboardPage({
         new Date().toISOString().slice(0, 10),
       ),
     })),
+    inspirationSummary(supabase, wedding.id),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -88,6 +93,7 @@ export default async function DashboardPage({
     { label: "Set your total budget", href: "/app/budget", done: wedding.budget_total != null },
     { label: "Shortlist venues", href: "/app/venues", done: venues.total > 0 },
     { label: "Book your venue", href: "/app/venues", done: venues.booked > 0 },
+    { label: "Start an inspiration board", href: "/app/inspiration", done: inspiration.pins.length > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 
@@ -290,6 +296,26 @@ export default async function DashboardPage({
             )}
           </SummaryCard>
           <SummaryCard
+            icon={Lightbulb}
+            title="Inspiration"
+            empty="No pins yet. Collect ideas and pull a colour palette from them."
+            href="/app/inspiration"
+            cta="Open boards"
+          >
+            {inspiration.pins.length > 0 && (
+              <div className="space-y-3">
+                <ul className="grid grid-cols-3 gap-2">
+                  {inspiration.pins.map((p) => (
+                    <li key={p.id} className="overflow-hidden rounded-lg">
+                      <PinImage src={p.src} alt={p.title || "Pin"} width={1} height={1} size={240} />
+                    </li>
+                  ))}
+                </ul>
+                <PaletteStrip colors={inspiration.palette} canEdit={false} size="sm" />
+              </div>
+            )}
+          </SummaryCard>
+          <SummaryCard
             icon={ListChecks}
             title="To-dos"
             empty="Nothing due. We'll build a timeline from your wedding date."
@@ -366,6 +392,33 @@ async function rsvpSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     attending: attending.size,
     declined: [...answered].filter((id) => !attending.has(id)).length,
     waiting: [...invited].filter((id) => !answered.has(id)).length,
+  };
+}
+
+/** The newest pins (with temporary links for uploads) and the palette. */
+async function inspirationSummary(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  weddingId: string,
+) {
+  const [{ data: pins }, { data: palette }] = await Promise.all([
+    supabase
+      .from("pins")
+      .select("id, title, image_path, image_url")
+      .eq("wedding_id", weddingId)
+      .order("created_at", { ascending: false })
+      .limit(6),
+    supabase.from("palette_colors").select("id, hex").eq("wedding_id", weddingId).order("sort_order"),
+  ]);
+  const signed = await signPaths(
+    supabase,
+    (pins ?? []).map((p) => p.image_path).filter((p): p is string => !!p),
+  );
+  return {
+    pins: (pins ?? []).map((p) => ({
+      ...p,
+      src: p.image_path ? (signed.get(p.image_path) ?? null) : p.image_url,
+    })),
+    palette: palette ?? [],
   };
 }
 

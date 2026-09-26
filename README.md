@@ -6,9 +6,10 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–6 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
+> **Status:** Phases 1–7 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
 > seating chart, budget, vendors, venues (comparison, visit checklists, photos), hotels (room blocks,
-> guest assignments) and travel (arrivals board, flight search links). The other modules show a
+> guest assignments), travel (arrivals board, flight search links) and inspiration boards (pins,
+> hearts, comments, colour palette, share links). The other modules show a
 > "coming soon" page until their phase is built.
 
 ---
@@ -79,6 +80,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20260929000000_seating.sql` (phase 4: floor plans, tables, seat assignments)
    - `20260930000000_budget_vendors.sql` (phase 5: budget, payments, vendors, private file storage)
    - `20261001000000_venues_travel.sql` (phase 6: venues, checklists, hotels, flights)
+   - `20261002000000_inspiration.sql` (phase 7: boards, pins, comments, hearts, palette, shared links)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -145,6 +147,17 @@ Both need the Supabase **secret key**, which bypasses security rules, so keep it
    `email.opened`, `email.bounced`, `email.complained`. Copy the **Signing secret** into
    `RESEND_WEBHOOK_SECRET`. Open tracking must also be switched on for your domain in Resend.
 
+### 2h. (Optional) Discover photos on Unsplash
+
+The Inspiration page can search free photos on Unsplash. Without a key everything else still works.
+
+1. Create a free account at <https://unsplash.com/developers> → **Your apps → New Application**,
+   accept the guidelines, and give it a name (e.g. "Vow wedding planner").
+2. On the app page, copy the **Access Key** (not the Secret key) into `.env.local` as
+   `UNSPLASH_ACCESS_KEY=...`, then restart `npm run dev`. On Vercel, add the same variable.
+3. New apps start in "Demo" mode (50 searches per hour), which is plenty for a couple. Photos are
+   shown from Unsplash with the photographer credited, as Unsplash requires.
+
 ---
 
 ## 3. Try it out
@@ -194,6 +207,21 @@ Both need the Supabase **secret key**, which bypasses security rules, so keep it
   groups guest arrivals by day for planning pickups. Save your nearest airport code (e.g. LIS) in
   "Search flights" to prefill Google Flights / Skyscanner. No flight API is used; the data model has
   `provider` fields ready for one later.
+
+**Inspiration tips**
+
+- Start with a suggested board (Dress, Flowers, …) or your own. **Add pins**: upload photos, paste
+  a link (a web page or an image; the server fetches its main picture), or **Discover** photos on
+  Unsplash.
+- Drag a pin onto a board chip to move it, or onto another pin to change the order (on a phone:
+  long-press, then drag). Reorder boards with the grip; with a keyboard, focus the grip, press
+  Space, use the arrow keys, then Space again. You can also move a pin with its "Board" menu.
+- In a pin: add notes, tags and a verdict (Love it / Maybe), link it to a budget category or vendor,
+  heart it and comment (viewers can heart and comment too). **Find colours** reads the main colours
+  of the image; add the ones you like to your **wedding palette** (up to 12). Click a palette
+  colour to copy its hex code.
+- **Share** gives a board a secret read-only link (`/b/...`) for your florist or stylist. Turning it
+  off makes the old link stop working. Comments and hearts are never shared.
 
 **Seating chart tips**
 

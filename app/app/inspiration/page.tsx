@@ -1,22 +1,31 @@
 import type { Metadata } from "next";
-import { Images } from "lucide-react";
-import { ComingSoon } from "@/components/app/coming-soon";
+import { InspirationPage } from "@/components/inspiration/inspiration-page";
+import { loadInspiration } from "@/lib/inspiration/load";
+import { isUnsplashConfigured } from "@/lib/inspiration/unsplash";
+import { createClient } from "@/lib/supabase/server";
+import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
 export const metadata: Metadata = { title: "Inspiration" };
 
-export default function InspirationPage() {
+export default async function Inspiration() {
+  const user = await requireUser();
+  const { wedding, role } = await requireWedding();
+  const sb = await createClient();
+  const [data, { data: categories }, { data: vendors }] = await Promise.all([
+    loadInspiration(sb, wedding.id),
+    sb.from("budget_categories").select("id, name").eq("wedding_id", wedding.id).order("sort_order"),
+    sb.from("vendors").select("id, name").eq("wedding_id", wedding.id).order("name"),
+  ]);
+
   return (
-    <ComingSoon
-      title="Inspiration"
-      description="Pinterest-style boards for your ideas."
-      icon={Images}
-      phase={7}
-      features={[
-        "Boards for dress, flowers, decor",
-        "Upload images or paste links",
-        "Discover wedding photos",
-        "Colour palette extractor",
-      ]}
+    <InspirationPage
+      {...data}
+      categories={categories ?? []}
+      vendors={vendors ?? []}
+      weddingId={wedding.id}
+      userId={user.id}
+      canEdit={canEdit(role)}
+      unsplashEnabled={isUnsplashConfigured}
     />
   );
 }

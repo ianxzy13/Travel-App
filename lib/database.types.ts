@@ -332,6 +332,41 @@ export type FlightTravellerRow = Timestamps & {
   wedding_id: string;
 };
 
+// ---------- Phase 7: inspiration ----------
+
+export type PinStatus = "love" | "maybe";
+
+export type BoardRow = WeddingScoped & {
+  name: string;
+  description: string | null;
+  sort_order: number;
+  share_id: string | null;
+};
+
+export type PinRow = WeddingScoped & {
+  board_id: string;
+  image_path: string | null;
+  image_url: string | null;
+  width: number | null;
+  height: number | null;
+  title: string | null;
+  note: string | null;
+  source_url: string | null;
+  tags: string[];
+  status: PinStatus | null;
+  budget_category_id: string | null;
+  vendor_id: string | null;
+  credit_name: string | null;
+  credit_url: string | null;
+  unsplash_id: string | null;
+  sort_order: number;
+  created_by: string | null;
+};
+
+export type PinCommentRow = WeddingScoped & { pin_id: string; user_id: string; body: string };
+export type PinReactionRow = Timestamps & { pin_id: string; user_id: string; wedding_id: string };
+export type PaletteColorRow = WeddingScoped & { hex: string; source_pin_id: string | null; sort_order: number };
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -414,6 +449,11 @@ export type Database = {
       hotel_guest_assignments: Table<HotelGuestRow, "wedding_id" | "hotel_id" | "guest_id">;
       flights: Table<FlightRow, "wedding_id">;
       flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
+      boards: Table<BoardRow, "wedding_id" | "name">;
+      pins: Table<PinRow, "wedding_id" | "board_id">;
+      pin_comments: Table<PinCommentRow, "wedding_id" | "pin_id" | "user_id" | "body">;
+      pin_reactions: Table<PinReactionRow, "pin_id" | "user_id" | "wedding_id">;
+      palette_colors: Table<PaletteColorRow, "wedding_id" | "hex">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -459,6 +499,7 @@ export type Database = {
       };
       get_wedding_public: { Args: { p_slug: string }; Returns: Json };
       find_rsvp_code: { Args: { p_slug: string; p_name: string }; Returns: string | null };
+      get_shared_board: { Args: { p_share_id: string }; Returns: Json };
       apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };
@@ -480,6 +521,7 @@ export type Database = {
       flight_category: FlightCategory;
       flight_direction: FlightDirection;
       flight_status: FlightStatus;
+      pin_status: PinStatus;
     };
     CompositeTypes: { [_ in never]: never };
   };
