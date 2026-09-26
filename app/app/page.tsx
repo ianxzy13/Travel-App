@@ -15,6 +15,9 @@ import { Countdown } from "@/components/dashboard/countdown";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatWeddingDate } from "@/lib/format";
+import { loadBudget } from "@/lib/budget/load";
+import { formatMoney } from "@/lib/budget/money";
+import { summarizeBudget, upcomingPayments } from "@/lib/budget/stats";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -31,9 +34,23 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const [rsvp, seating] = await Promise.all([
+  const [rsvp, seating, budget] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
+    loadBudget(supabase, wedding.id).then((b) => ({
+      summary: summarizeBudget(
+        wedding.budget_total == null ? null : Number(wedding.budget_total),
+        b.categories,
+        b.expenses,
+        b.payments,
+      ),
+      upcoming: upcomingPayments(
+        b.payments,
+        b.expenses,
+        b.categories,
+        new Date().toISOString().slice(0, 10),
+      ),
+    })),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -60,7 +77,7 @@ export default async function DashboardPage({
       href: "/app/guests",
       done: (guestCount ?? 0) > 0,
     },
-    { label: "Set your total budget", href: "/app/budget", done: false },
+    { label: "Set your total budget", href: "/app/budget", done: wedding.budget_total != null },
     { label: "Shortlist venues", href: "/app/venues", done: false },
   ];
   const doneCount = steps.filter((s) => s.done).length;
@@ -158,7 +175,59 @@ export default async function DashboardPage({
             empty="No budget yet. Set a total and we'll suggest how to split it."
             href="/app/budget"
             cta="Plan budget"
-          />
+          >
+            {(budget.summary.total != null || budget.summary.totals.committed > 0) && (
+              <div className="space-y-3">
+                <p className="text-sm">
+                  <span className="font-serif text-3xl font-semibold tabular-nums">
+                    {formatMoney(budget.summary.totals.committed, wedding.currency)}
+                  </span>{" "}
+                  <span className="text-muted-foreground">
+                    committed
+                    {budget.summary.total != null &&
+                      ` of ${formatMoney(budget.summary.total, wedding.currency)}`}
+                  </span>
+                </p>
+                {budget.summary.total != null && budget.summary.total > 0 && (
+                  <div className="bg-muted h-2 rounded-full">
+                    <div
+                      className={cn(
+                        "h-2 rounded-full",
+                        budget.summary.totals.committed > budget.summary.total
+                          ? "bg-destructive"
+                          : "bg-primary",
+                      )}
+                      style={{
+                        width: `${Math.min(100, (budget.summary.totals.committed / budget.summary.total) * 100)}%`,
+                      }}
+                    />
+                  </div>
+                )}
+                {budget.upcoming.length > 0 && (
+                  <ul className="space-y-1 text-xs">
+                    {budget.upcoming.slice(0, 3).map((p) => (
+                      <li
+                        key={p.id}
+                        className={cn(
+                          "flex justify-between gap-2",
+                          p.overdue && "text-destructive",
+                        )}
+                      >
+                        <span className="truncate">
+                          {p.overdue ? "Overdue: " : ""}
+                          {p.expenseName}
+                        </span>
+                        <span className="shrink-0 tabular-nums">
+                          {formatMoney(p.amount, wedding.currency)} ·{" "}
+                          {formatWeddingDate(p.dueDate, "d MMM")}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </SummaryCard>
           <SummaryCard
             icon={MailCheck}
             title="RSVPs"

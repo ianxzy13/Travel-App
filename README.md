@@ -6,10 +6,9 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–4 are done: sign-in, onboarding, dashboard, settings, the guest list, RSVPs
-> (private links, meals, email invitations) and the seating chart (drag and drop floor plan, rules,
-> auto-arrange, live collaboration, printing). The other modules show a "coming soon" page until
-> their phase is built.
+> **Status:** Phases 1–5 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
+> seating chart, budget (categories, expenses, payment schedules, receipts, charts) and vendors. The
+> other modules show a "coming soon" page until their phase is built.
 
 ---
 
@@ -77,6 +76,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20260927000000_guests_events.sql` (phase 2: events, households, guests, tags)
    - `20260928000000_rsvp.sql` (phase 3: RSVP codes, meals, replies, emails, notifications)
    - `20260929000000_seating.sql` (phase 4: floor plans, tables, seat assignments)
+   - `20260930000000_budget_vendors.sql` (phase 5: budget, payments, vendors, private file storage)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -168,6 +168,17 @@ Both need the Supabase **secret key**, which bypasses security rules, so keep it
 - **RSVPs → Meals & settings**: deadline, message after the deadline, meal options, and which
   events ask for a meal (usually the reception).
 - Got an answer by phone or on paper? **RSVPs → ⋯ → Record or edit their reply**.
+
+**Budget & vendor tips**
+
+- Set your **total budget**, then "Use suggested categories": 16 common categories with a typical
+  split of your total. Rename, delete or change any of them.
+- Each expense has an **estimate** and, once agreed, an **actual** price. Totals use the actual price
+  when known. Add **payments** (deposits, balance) with due dates; tick them when paid. Overdue ones
+  are shown in red on the budget page and dashboard.
+- Receipts and contracts are stored privately in Supabase Storage (bucket `wedding-files`, created
+  by the phase 5 migration). Only people planning your wedding can open them.
+- On a vendor, **Add quote to budget** creates an expense in the vendor's category.
 
 **Seating chart tips**
 

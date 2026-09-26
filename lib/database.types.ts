@@ -32,6 +32,7 @@ export type WeddingRow = Timestamps & {
   rsvp_contact: string | null;
   rsvp_ask_song: boolean;
   rsvp_notify_email: boolean;
+  budget_total: number | null;
 };
 
 export type WeddingMemberRow = Timestamps & {
@@ -191,6 +192,53 @@ export type SeatAssignmentRow = Timestamps & {
   seat_index: number;
 };
 
+// ---------- Phase 5: budget & vendors ----------
+// (numeric columns: Supabase may return them as strings; convert with Number())
+
+export type VendorStatus = "researching" | "contacted" | "quoted" | "booked" | "rejected";
+
+export type BudgetCategoryRow = WeddingScoped & {
+  name: string;
+  allocated: number;
+  sort_order: number;
+};
+
+export type VendorRow = WeddingScoped & {
+  name: string;
+  category_id: string | null;
+  contact_name: string | null;
+  email: string | null;
+  phone: string | null;
+  website: string | null;
+  instagram: string | null;
+  address: string | null;
+  quote: number | null;
+  status: VendorStatus;
+  notes: string | null;
+  contract_path: string | null;
+  contract_name: string | null;
+};
+
+export type ExpenseRow = WeddingScoped & {
+  category_id: string;
+  vendor_id: string | null;
+  name: string;
+  estimated: number;
+  actual: number | null;
+  notes: string | null;
+  receipt_path: string | null;
+  receipt_name: string | null;
+};
+
+export type PaymentRow = WeddingScoped & {
+  expense_id: string;
+  amount: number;
+  due_date: string | null;
+  paid: boolean;
+  paid_on: string | null;
+  note: string | null;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -263,6 +311,10 @@ export type Database = {
         SeatAssignmentRow,
         "layout_id" | "guest_id" | "wedding_id" | "object_id" | "seat_index"
       >;
+      budget_categories: Table<BudgetCategoryRow, "wedding_id" | "name">;
+      vendors: Table<VendorRow, "wedding_id" | "name">;
+      expenses: Table<ExpenseRow, "wedding_id" | "category_id" | "name">;
+      payments: Table<PaymentRow, "wedding_id" | "expense_id" | "amount">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -321,6 +373,7 @@ export type Database = {
       guest_list: GuestList;
       relationship_type: RelationshipType;
       rsvp_status: RsvpStatus;
+      vendor_status: VendorStatus;
     };
     CompositeTypes: { [_ in never]: never };
   };
