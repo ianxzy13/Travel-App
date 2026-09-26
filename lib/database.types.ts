@@ -48,8 +48,75 @@ export type WeddingInvitationRow = Timestamps & {
   expires_at: string;
 };
 
+// ---------- Phase 2: guests & events ----------
+
+export type GuestSide = "partner_a" | "partner_b" | "both";
+export type AgeGroup = "adult" | "child" | "infant";
+export type GuestList = "a" | "b";
+export type RelationshipType = "keep_together" | "keep_apart";
+export type TagColor = "stone" | "rose" | "sage" | "sky" | "amber" | "violet";
+
+type WeddingScoped = Timestamps & { id: string; wedding_id: string };
+
+export type EventRow = WeddingScoped & {
+  name: string;
+  event_date: string | null;
+  start_time: string | null;
+  end_time: string | null;
+  venue_name: string | null;
+  address: string | null;
+  dress_code: string | null;
+  description: string | null;
+  sort_order: number;
+};
+
+export type HouseholdRow = WeddingScoped & {
+  name: string;
+  address_line1: string | null;
+  address_line2: string | null;
+  city: string | null;
+  region: string | null;
+  postal_code: string | null;
+  country: string | null;
+  notes: string | null;
+};
+
+export type GuestRow = WeddingScoped & {
+  household_id: string;
+  first_name: string;
+  last_name: string;
+  email: string | null;
+  phone: string | null;
+  side: GuestSide;
+  age_group: AgeGroup;
+  plus_one_allowed: boolean;
+  plus_one_of: string | null;
+  dietary: string | null;
+  accessibility: string | null;
+  notes: string | null;
+  list: GuestList;
+};
+
+export type GuestEventInviteRow = WeddingScoped & { guest_id: string; event_id: string };
+export type TagRow = WeddingScoped & { name: string; color: TagColor };
+export type GuestTagRow = WeddingScoped & { guest_id: string; tag_id: string };
+export type GuestRelationshipRow = WeddingScoped & {
+  guest_a: string;
+  guest_b: string;
+  type: RelationshipType;
+  note: string | null;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
+
+// Helper for tables we don't join through the API.
+type Table<Row, Required extends keyof Row> = {
+  Row: Row;
+  Insert: InsertOf<Row, Required>;
+  Update: Partial<Row>;
+  Relationships: [];
+};
 
 export type Database = {
   public: {
@@ -93,6 +160,16 @@ export type Database = {
         Update: Partial<WeddingInvitationRow>;
         Relationships: [];
       };
+      events: Table<EventRow, "wedding_id" | "name">;
+      households: Table<HouseholdRow, "wedding_id" | "name">;
+      guests: Table<GuestRow, "wedding_id" | "household_id">;
+      guest_event_invites: Table<GuestEventInviteRow, "wedding_id" | "guest_id" | "event_id">;
+      tags: Table<TagRow, "wedding_id" | "name">;
+      guest_tags: Table<GuestTagRow, "wedding_id" | "guest_id" | "tag_id">;
+      guest_relationships: Table<
+        GuestRelationshipRow,
+        "wedding_id" | "guest_a" | "guest_b" | "type"
+      >;
     };
     Views: { [_ in never]: never };
     Functions: {
@@ -126,8 +203,15 @@ export type Database = {
       is_wedding_member: { Args: { wid: string }; Returns: boolean };
       can_edit_wedding: { Args: { wid: string }; Returns: boolean };
       is_wedding_owner: { Args: { wid: string }; Returns: boolean };
+      delete_empty_households: { Args: { wid: string }; Returns: undefined };
     };
-    Enums: { member_role: MemberRole };
+    Enums: {
+      member_role: MemberRole;
+      guest_side: GuestSide;
+      age_group: AgeGroup;
+      guest_list: GuestList;
+      relationship_type: RelationshipType;
+    };
     CompositeTypes: { [_ in never]: never };
   };
 };

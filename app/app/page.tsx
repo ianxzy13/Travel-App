@@ -30,10 +30,16 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const { count: memberCount } = await supabase
-    .from("wedding_members")
-    .select("id", { count: "exact", head: true })
-    .eq("wedding_id", wedding.id);
+  const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
+    supabase
+      .from("wedding_members")
+      .select("id", { count: "exact", head: true })
+      .eq("wedding_id", wedding.id),
+    supabase
+      .from("guests")
+      .select("id", { count: "exact", head: true })
+      .eq("wedding_id", wedding.id),
+  ]);
 
   // Suggestions based on what's still missing. More are added in later phases.
   const steps: { label: string; href: string; done: boolean }[] = [
@@ -44,7 +50,11 @@ export default async function DashboardPage({
       href: "/app/settings#collaborators",
       done: (memberCount ?? 1) > 1,
     },
-    { label: "Add your guest list", href: "/app/guests", done: false },
+    {
+      label: guestCount ? `Add your guest list (${guestCount} so far)` : "Add your guest list",
+      href: "/app/guests",
+      done: (guestCount ?? 0) > 0,
+    },
     { label: "Set your total budget", href: "/app/budget", done: false },
     { label: "Shortlist venues", href: "/app/venues", done: false },
   ];
@@ -186,7 +196,7 @@ function SummaryCard({
 }) {
   return (
     <Card>
-      <CardHeader className="flex-row items-center gap-3">
+      <CardHeader className="flex items-center gap-3">
         <span className="bg-primary-soft text-primary inline-flex size-9 items-center justify-center rounded-full">
           <Icon className="size-4" aria-hidden />
         </span>

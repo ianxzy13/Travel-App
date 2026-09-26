@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/app/page-header";
 import { Collaborators } from "@/components/settings/collaborators";
 import { DangerZone } from "@/components/settings/danger-zone";
+import { EventsCard } from "@/components/settings/events-card";
 import { WeddingDetailsForm } from "@/components/settings/wedding-details-form";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
@@ -34,6 +35,22 @@ export default async function SettingsPage() {
       : Promise.resolve({ data: [] }),
   ]);
 
+  const { data: events } = await supabase
+    .from("events")
+    .select("*")
+    .eq("wedding_id", wedding.id)
+    .order("sort_order");
+  // One small count query per event (events are few; invitations can be many).
+  const invitedCounts = await Promise.all(
+    (events ?? []).map(async (e) => {
+      const { count } = await supabase
+        .from("guest_event_invites")
+        .select("id", { count: "exact", head: true })
+        .eq("event_id", e.id);
+      return count ?? 0;
+    }),
+  );
+
   const siteUrl = await getSiteUrl();
 
   const values: WeddingFormValues = {
@@ -51,7 +68,7 @@ export default async function SettingsPage() {
     <>
       <PageHeader
         title="Settings"
-        description="Your wedding details and who's planning with you."
+        description="Your wedding details, events and who's planning with you."
       />
       <div className="space-y-8">
         <WeddingDetailsForm
@@ -59,6 +76,10 @@ export default async function SettingsPage() {
           key={wedding.id}
           defaultValues={values}
           readOnly={!canEdit(role)}
+        />
+        <EventsCard
+          readOnly={!canEdit(role)}
+          events={(events ?? []).map((e, i) => ({ ...e, invitedCount: invitedCounts[i] }))}
         />
         <Collaborators
           currentUserId={user.id}

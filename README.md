@@ -6,9 +6,9 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phase 1 (foundation) is done: landing page, sign-in, onboarding, dashboard shell,
-> settings with collaborators. The other modules show a "coming soon" page until their phase is
-> built.
+> **Status:** Phases 1–2 are done: landing page, sign-in, onboarding, dashboard shell, settings
+> with collaborators and events, and the full guest list (households, tags, seating rules, CSV
+> import/export). The other modules show a "coming soon" page until their phase is built.
 
 ---
 
@@ -35,6 +35,7 @@ Useful commands:
 | `npm run lint`      | Check code for common mistakes      |
 | `npm run typecheck` | Check TypeScript types              |
 | `npm run format`    | Auto-format all files with Prettier |
+| `npm run test`      | Run the unit tests (Vitest)         |
 
 ---
 
@@ -71,10 +72,10 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
 1. In Supabase, open **SQL Editor** (left sidebar) → **New query**.
 2. Open each file in `supabase/migrations/` **in filename order**, copy its entire contents,
    paste into the editor and click **Run**. You should see "Success. No rows returned".
-   - Phase 1 has one file: `20260926000000_foundation.sql`.
+   - `20260926000000_foundation.sql` (phase 1: users, weddings, collaborators)
+   - `20260927000000_guests_events.sql` (phase 2: events, households, guests, tags)
    - Later phases add more files. Run only the new ones each time.
-3. Check **Table Editor**: you should see `profiles`, `weddings`, `wedding_members` and
-   `wedding_invitations`.
+3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
 _(Advanced alternative: install the Supabase CLI, `npx supabase link`, then `npx supabase db push`.)_
 
@@ -111,6 +112,18 @@ still works.
 ---
 
 ## 3. Try it out
+
+**Guest list tips**
+
+- A **household** gets one invitation and one RSVP link (phase 3). Put couples and families in the
+  same household.
+- **Plus-ones** are real guest rows linked to the guest who brings them, so they can RSVP and be
+  seated later. Unnamed ones show as "Ann's guest".
+- **Import**: Guests → Import → upload a CSV. Columns are matched automatically and you can fix
+  them before anything is saved. Rows with the same _Household_ value become one household.
+  Export produces a file you can edit and re-import.
+- **Seating rules** (keep together / keep apart) are set in a guest's edit panel and are used by
+  the seating chart in phase 4.
 
 1. `npm run dev`, open <http://localhost:3000>, click **Get started**.
 2. Enter your email → open the link in the email → you land on **onboarding**.
