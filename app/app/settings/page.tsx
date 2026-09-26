@@ -35,6 +35,11 @@ export default async function SettingsPage() {
       : Promise.resolve({ data: [] }),
   ]);
 
+  const { data: bookedVenues } = await supabase
+    .from("venues")
+    .select("id, name, address")
+    .eq("wedding_id", wedding.id)
+    .eq("status", "booked");
   const { data: events } = await supabase
     .from("events")
     .select("*")
@@ -80,6 +85,7 @@ export default async function SettingsPage() {
         <EventsCard
           readOnly={!canEdit(role)}
           events={(events ?? []).map((e, i) => ({ ...e, invitedCount: invitedCounts[i] }))}
+          bookedVenues={bookedVenues ?? []}
         />
         <Collaborators
           currentUserId={user.id}

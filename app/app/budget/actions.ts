@@ -218,16 +218,3 @@ export async function setPaymentPaid(id: string, paid: boolean): Promise<ActionR
   if (error) return fail("setPaymentPaid", error);
   return done();
 }
-
-/** Removes a file uploaded in a form that was then cancelled. */
-export async function discardUpload(path: string): Promise<ActionResult> {
-  const ctx = await editor();
-  if (!ctx || !isOwnFile(path, ctx.wedding.id)) return NO_PERMISSION;
-  // only delete if nothing refers to it
-  const [{ count: e }, { count: v }] = await Promise.all([
-    ctx.sb.from("expenses").select("id", { count: "exact", head: true }).eq("receipt_path", path),
-    ctx.sb.from("vendors").select("id", { count: "exact", head: true }).eq("contract_path", path),
-  ]);
-  if (!e && !v) await removeFiles(ctx.sb, [path]);
-  return { ok: true };
-}

@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { ExternalLink, FileText, Loader2, Paperclip, X } from "lucide-react";
 import { toast } from "sonner";
-import { discardUpload } from "@/app/app/budget/actions";
+import { discardUpload } from "@/app/app/file-actions";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import type { FileRef } from "@/lib/validation/budget";
@@ -47,7 +47,7 @@ export function FileField({
   label = "Attach file",
 }: {
   weddingId: string;
-  folder: "receipts" | "contracts";
+  folder: "receipts" | "contracts" | "venues";
   value: FileRef;
   onChange: (value: FileRef) => void;
   disabled?: boolean;

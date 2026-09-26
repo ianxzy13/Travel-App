@@ -48,7 +48,17 @@ import { eventSchema, type EventFormValues } from "@/lib/validation/guest";
 
 export type EventItem = EventRow & { invitedCount: number };
 
-export function EventsCard({ events, readOnly }: { events: EventItem[]; readOnly: boolean }) {
+export type BookedVenue = { id: string; name: string; address: string | null };
+
+export function EventsCard({
+  events,
+  readOnly,
+  bookedVenues = [],
+}: {
+  events: EventItem[];
+  readOnly: boolean;
+  bookedVenues?: BookedVenue[];
+}) {
   const [editing, setEditing] = useState<EventItem | "new" | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -190,6 +200,7 @@ export function EventsCard({ events, readOnly }: { events: EventItem[]; readOnly
         key={editing === "new" ? "new" : (editing?.id ?? "closed")}
         event={editing}
         onClose={() => setEditing(null)}
+        bookedVenues={bookedVenues}
       />
     </Card>
   );
@@ -208,7 +219,15 @@ function toFormValues(e: EventRow | null): EventFormValues {
   };
 }
 
-function EventDialog({ event, onClose }: { event: EventItem | "new" | null; onClose: () => void }) {
+function EventDialog({
+  event,
+  onClose,
+  bookedVenues,
+}: {
+  event: EventItem | "new" | null;
+  onClose: () => void;
+  bookedVenues: BookedVenue[];
+}) {
   const existing = event && event !== "new" ? event : null;
   const [pending, startTransition] = useTransition();
   const form = useForm({
@@ -240,6 +259,25 @@ function EventDialog({ event, onClose }: { event: EventItem | "new" | null; onCl
             These details appear on invitations and your wedding website.
           </DialogDescription>
         </DialogHeader>
+        {bookedVenues.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-muted-foreground">Use a booked venue:</span>
+            {bookedVenues.map((v) => (
+              <Button
+                key={v.id}
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  form.setValue("venueName", v.name, { shouldDirty: true });
+                  form.setValue("address", v.address ?? "", { shouldDirty: true });
+                }}
+              >
+                {v.name}
+              </Button>
+            ))}
+          </div>
+        )}
         <form id="event-form" onSubmit={onSubmit} className="grid gap-4" noValidate>
           <FormField id="ev-name" label="Name" error={errors.name?.message}>
             {(aria) => (

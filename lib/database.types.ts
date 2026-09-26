@@ -33,6 +33,7 @@ export type WeddingRow = Timestamps & {
   rsvp_ask_song: boolean;
   rsvp_notify_email: boolean;
   budget_total: number | null;
+  destination_airport: string | null;
 };
 
 export type WeddingMemberRow = Timestamps & {
@@ -239,6 +240,93 @@ export type PaymentRow = WeddingScoped & {
   note: string | null;
 };
 
+// ---------- Phase 6: venues, hotels, travel ----------
+
+export type VenueKind = "ceremony" | "reception" | "both";
+export type VenueStatus = "researching" | "contacted" | "visited" | "shortlisted" | "booked" | "rejected";
+export type VenueAvailability = "unknown" | "available" | "tentative" | "unavailable";
+export type HotelStatus = "considering" | "contacted" | "block_confirmed" | "rejected";
+export type FlightCategory = "guest" | "couple" | "honeymoon";
+export type FlightDirection = "arrival" | "departure" | "other";
+export type FlightStatus = "considering" | "booked";
+
+export type VenueRow = WeddingScoped & {
+  name: string;
+  kind: VenueKind;
+  status: VenueStatus;
+  availability: VenueAvailability;
+  address: string | null;
+  contact_name: string | null;
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+  capacity: number | null;
+  price: number | null;
+  included: string | null;
+  pros: string | null;
+  cons: string | null;
+  notes: string | null;
+  rating: number | null;
+  visit_date: string | null;
+  photo_paths: string[];
+};
+
+export type VenueChecklistRow = WeddingScoped & {
+  venue_id: string;
+  question: string;
+  answer: string | null;
+  done: boolean;
+  sort_order: number;
+};
+
+export type HotelRow = WeddingScoped & {
+  name: string;
+  status: HotelStatus;
+  address: string | null;
+  distance: string | null;
+  website: string | null;
+  booking_url: string | null;
+  price_per_night: number | null;
+  rooms_held: number | null;
+  rooms_booked: number | null;
+  discount_code: string | null;
+  cutoff_date: string | null;
+  show_on_website: boolean;
+  for_couple: boolean;
+  notes: string | null;
+};
+
+export type HotelGuestRow = WeddingScoped & {
+  hotel_id: string;
+  guest_id: string;
+  room: string | null;
+  check_in: string | null;
+  check_out: string | null;
+};
+
+export type FlightRow = WeddingScoped & {
+  category: FlightCategory;
+  direction: FlightDirection;
+  status: FlightStatus;
+  airline: string | null;
+  flight_number: string | null;
+  from_airport: string | null;
+  to_airport: string | null;
+  /** local time "YYYY-MM-DDTHH:mm:ss" (no time zone) */
+  depart_at: string | null;
+  arrive_at: string | null;
+  booking_ref: string | null;
+  price: number | null;
+  baggage: string | null;
+  other_travellers: string | null;
+  needs_pickup: boolean;
+  notes: string | null;
+  provider: string | null;
+  provider_ref: string | null;
+};
+
+export type FlightTravellerRow = Timestamps & { flight_id: string; guest_id: string; wedding_id: string };
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -315,6 +403,12 @@ export type Database = {
       vendors: Table<VendorRow, "wedding_id" | "name">;
       expenses: Table<ExpenseRow, "wedding_id" | "category_id" | "name">;
       payments: Table<PaymentRow, "wedding_id" | "expense_id" | "amount">;
+      venues: Table<VenueRow, "wedding_id" | "name">;
+      venue_checklist_items: Table<VenueChecklistRow, "wedding_id" | "venue_id" | "question">;
+      hotels: Table<HotelRow, "wedding_id" | "name">;
+      hotel_guest_assignments: Table<HotelGuestRow, "wedding_id" | "hotel_id" | "guest_id">;
+      flights: Table<FlightRow, "wedding_id">;
+      flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -374,6 +468,13 @@ export type Database = {
       relationship_type: RelationshipType;
       rsvp_status: RsvpStatus;
       vendor_status: VendorStatus;
+      venue_kind: VenueKind;
+      venue_status: VenueStatus;
+      venue_availability: VenueAvailability;
+      hotel_status: HotelStatus;
+      flight_category: FlightCategory;
+      flight_direction: FlightDirection;
+      flight_status: FlightStatus;
     };
     CompositeTypes: { [_ in never]: never };
   };

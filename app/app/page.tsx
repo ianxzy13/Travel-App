@@ -34,9 +34,17 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const [rsvp, seating, budget] = await Promise.all([
+  const [rsvp, seating, venues, budget] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
+    supabase
+      .from("venues")
+      .select("status")
+      .eq("wedding_id", wedding.id)
+      .then(({ data }) => ({
+        total: data?.length ?? 0,
+        booked: data?.filter((v) => v.status === "booked").length ?? 0,
+      })),
     loadBudget(supabase, wedding.id).then((b) => ({
       summary: summarizeBudget(
         wedding.budget_total == null ? null : Number(wedding.budget_total),
@@ -78,7 +86,8 @@ export default async function DashboardPage({
       done: (guestCount ?? 0) > 0,
     },
     { label: "Set your total budget", href: "/app/budget", done: wedding.budget_total != null },
-    { label: "Shortlist venues", href: "/app/venues", done: false },
+    { label: "Shortlist venues", href: "/app/venues", done: venues.total > 0 },
+    { label: "Book your venue", href: "/app/venues", done: venues.booked > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 

@@ -53,7 +53,18 @@ export default async function SeatingPage({
       </>
     );
   }
-  const data = await loadSeatingData(supabase, layout);
+  const [data, { data: venues }] = await Promise.all([
+    loadSeatingData(supabase, layout),
+    // the booked reception venue's capacity is used as a warning
+    supabase
+      .from("venues")
+      .select("name, capacity")
+      .eq("wedding_id", wedding.id)
+      .eq("status", "booked")
+      .in("kind", ["reception", "both"])
+      .not("capacity", "is", null),
+  ]);
+  const venue = venues?.[0] ? { name: venues[0].name, capacity: venues[0].capacity! } : null;
 
   return (
     <SeatingEditor
@@ -69,6 +80,7 @@ export default async function SeatingPage({
       mealOptions={data.mealOptions}
       names={{ a: wedding.partner_a_name, b: wedding.partner_b_name }}
       canEdit={editable}
+      venue={venue}
     />
   );
 }

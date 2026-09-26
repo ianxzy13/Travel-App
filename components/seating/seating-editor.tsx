@@ -91,6 +91,8 @@ type Props = {
   mealOptions: { id: string; name: string }[];
   names: PartnerNames;
   canEdit: boolean;
+  /** capacity of the booked reception venue, if any */
+  venue?: { name: string; capacity: number } | null;
   /** only for tests: replaces saving to the database */
   saveChanges?: Parameters<typeof useSeatingStore>[3];
 };
@@ -329,6 +331,12 @@ export function SeatingEditor(props: Props) {
 
   const selectedIssues = selectedId ? (analysis.byTable[selectedId] ?? []) : [];
   const { totals } = analysis;
+  // More seats (or attending guests) than the booked venue holds?
+  const venueOver =
+    props.venue && Math.max(totals.seats, totals.attending) > props.venue.capacity
+      ? `${props.venue.name} holds ${props.venue.capacity}, but you have ${totals.seats} seats and ${totals.attending} attending guests.`
+      : null;
+  const warningCount = issues.length + (venueOver ? 1 : 0) + (totals.seatsShort > 0 ? 1 : 0);
   const legend = legendItems(colorMode, names, props.mealOptions);
 
   const panel = (
@@ -415,6 +423,9 @@ export function SeatingEditor(props: Props) {
                 {" "}
                 · {totals.seatsShort} seats short
               </span>
+            )}
+            {venueOver && (
+              <span className="text-destructive font-medium"> · over venue capacity</span>
             )}
           </p>
           <SaveIndicator status={store.saveStatus} canEdit={canEdit} />
@@ -535,18 +546,19 @@ export function SeatingEditor(props: Props) {
               <Button
                 variant="ghost"
                 size="sm"
-                className={cn(issues.length > 0 && "text-destructive")}
-                aria-label={`${issues.length} warnings`}
+                className={cn(warningCount > 0 && "text-destructive")}
+                aria-label={`${warningCount} warnings`}
               >
-                <AlertTriangle aria-hidden /> {issues.length}
+                <AlertTriangle aria-hidden /> {warningCount}
               </Button>
             </PopoverTrigger>
             <PopoverContent align="end" className="w-80">
               <p className="mb-2 font-medium">Warnings</p>
-              {issues.length === 0 && totals.seatsShort === 0 ? (
+              {issues.length === 0 && totals.seatsShort === 0 && !venueOver ? (
                 <p className="text-muted-foreground text-sm">Everything looks good.</p>
               ) : (
                 <ul className="max-h-80 space-y-2 overflow-y-auto text-sm">
+                  {venueOver && <li className="text-destructive">{venueOver}</li>}
                   {totals.seatsShort > 0 && (
                     <li className="text-destructive">
                       {totals.attending} guests are attending but there are only {totals.seats}{" "}
