@@ -6,7 +6,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { normalize } from "@/lib/guests/filter";
 
-export type PickerGuest = { id: string; name: string; householdId: string; householdName: string; note?: string };
+export type PickerGuest = {
+  id: string;
+  name: string;
+  householdId: string;
+  householdName: string;
+  note?: string;
+};
 
 /** Searchable list of guests with checkboxes, grouped by household. */
 export function GuestPicker({
@@ -29,7 +35,11 @@ export function GuestPicker({
     for (const g of guests) {
       const hay = normalize(`${g.name} ${g.householdName}`);
       if (!words.every((w) => hay.includes(w)) && !chosen.has(g.id)) continue;
-      const group = map.get(g.householdId) ?? { id: g.householdId, name: g.householdName, guests: [] };
+      const group = map.get(g.householdId) ?? {
+        id: g.householdId,
+        name: g.householdName,
+        guests: [],
+      };
       group.guests.push(g);
       map.set(g.householdId, group);
     }
@@ -49,7 +59,10 @@ export function GuestPicker({
   return (
     <div className="rounded-lg border">
       <div className="relative border-b p-2">
-        <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2" aria-hidden />
+        <Search
+          className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2"
+          aria-hidden
+        />
         <Input
           type="search"
           value={search}
@@ -77,10 +90,18 @@ export function GuestPicker({
                   {h.name}
                 </label>
                 {h.guests.map((g) => (
-                  <label key={g.id} className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1 pl-7 text-sm">
-                    <Checkbox checked={chosen.has(g.id)} onCheckedChange={(c) => set([g.id], c === true)} />
+                  <label
+                    key={g.id}
+                    className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1 pl-7 text-sm"
+                  >
+                    <Checkbox
+                      checked={chosen.has(g.id)}
+                      onCheckedChange={(c) => set([g.id], c === true)}
+                    />
                     <span className="flex-1 truncate">{g.name}</span>
-                    {g.note && <span className="text-muted-foreground shrink-0 text-xs">{g.note}</span>}
+                    {g.note && (
+                      <span className="text-muted-foreground shrink-0 text-xs">{g.note}</span>
+                    )}
                   </label>
                 ))}
               </div>

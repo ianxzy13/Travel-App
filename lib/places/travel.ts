@@ -15,7 +15,12 @@ export type BoardFlight = {
   status: "considering" | "booked";
 };
 
-export type BoardDay = { date: string | null; label: string; flights: BoardFlight[]; people: number };
+export type BoardDay = {
+  date: string | null;
+  label: string;
+  flights: BoardFlight[];
+  people: number;
+};
 
 /** Groups flights by local day, sorted by time; flights without a time go last. */
 export function groupByDay(flights: BoardFlight[]): BoardDay[] {
@@ -50,7 +55,12 @@ export const iata = (code: string | null | undefined) => {
  * Deep links to flight search sites (no API needed).
  * Dates are "YYYY-MM-DD"; `to` is required, the rest optional.
  */
-export function flightSearchLinks(opts: { from?: string | null; to: string; depart?: string | null; ret?: string | null }) {
+export function flightSearchLinks(opts: {
+  from?: string | null;
+  to: string;
+  depart?: string | null;
+  ret?: string | null;
+}) {
   const from = iata(opts.from);
   const to = iata(opts.to) ?? opts.to.trim();
   const phrase = [
@@ -78,7 +88,11 @@ export function flightSearchLinks(opts: { from?: string | null; to: string; depa
 export const mapsSearch = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
-export type RoomBlockState = { level: "none" | "ok" | "soon" | "passed"; daysLeft: number | null; free: number | null };
+export type RoomBlockState = {
+  level: "none" | "ok" | "soon" | "passed";
+  daysLeft: number | null;
+  free: number | null;
+};
 
 /**
  * Room-block reminder: "soon" within 30 days of the cut-off while rooms are
@@ -90,7 +104,9 @@ export function roomBlockState(
 ): RoomBlockState {
   const free = h.rooms_held == null ? null : Math.max(0, h.rooms_held - (h.rooms_booked ?? 0));
   if (!h.cutoff_date) return { level: "none", daysLeft: null, free };
-  const days = Math.round((Date.parse(`${h.cutoff_date}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000);
+  const days = Math.round(
+    (Date.parse(`${h.cutoff_date}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86_400_000,
+  );
   if (days < 0) return { level: "passed", daysLeft: days, free };
   if (days <= 30 && (free == null || free > 0)) return { level: "soon", daysLeft: days, free };
   return { level: "ok", daysLeft: days, free };

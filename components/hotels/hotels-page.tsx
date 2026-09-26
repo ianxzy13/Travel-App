@@ -4,7 +4,17 @@ import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, parseISO } from "date-fns";
-import { AlarmClock, BedDouble, Copy, ExternalLink, Globe, Heart, Loader2, Plus, Trash2 } from "lucide-react";
+import {
+  AlarmClock,
+  BedDouble,
+  Copy,
+  ExternalLink,
+  Globe,
+  Heart,
+  Loader2,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { deleteHotel, saveHotel, setHotelGuests } from "@/app/app/hotels/actions";
 import { PageHeader } from "@/components/app/page-header";
@@ -22,7 +32,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,7 +80,9 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
     .filter((h) => h.status !== "rejected")
     .map((h) => ({ h, s: roomBlockState(h, today) }))
     .filter((x) => x.s.level === "soon");
-  const attendingWithoutHotel = guests.filter((g) => g.attending && !stays.some((s) => s.guest_id === g.id)).length;
+  const attendingWithoutHotel = guests.filter(
+    (g) => g.attending && !stays.some((s) => s.guest_id === g.id),
+  ).length;
 
   return (
     <>
@@ -85,8 +104,10 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
             <p key={h.id} className="flex items-center gap-2">
               <AlarmClock className="text-warning size-4 shrink-0" aria-hidden />
               <span>
-                <strong>{h.name}</strong>: room block cut-off in {s.daysLeft} day{s.daysLeft === 1 ? "" : "s"}
-                {s.free != null && ` with ${s.free} room${s.free === 1 ? "" : "s"} still free`}. Remind your guests to book!
+                <strong>{h.name}</strong>: room block cut-off in {s.daysLeft} day
+                {s.daysLeft === 1 ? "" : "s"}
+                {s.free != null && ` with ${s.free} room${s.free === 1 ? "" : "s"} still free`}.
+                Remind your guests to book!
               </span>
             </p>
           ))}
@@ -100,8 +121,8 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
           </span>
           <h2 className="text-3xl">No hotels yet</h2>
           <p className="text-muted-foreground max-w-sm">
-            Add where you&apos;re staying and any hotels with a room block for guests. You can show them on your wedding
-            website.
+            Add where you&apos;re staying and any hotels with a room block for guests. You can show
+            them on your wedding website.
           </p>
           {canEdit && (
             <Button onClick={() => setSheet("new")}>
@@ -115,7 +136,9 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
             {hotels.map((h) => {
               const s = roomBlockState(h, today);
               const count = stays.filter((x) => x.hotel_id === h.id).length;
-              const pct = h.rooms_held ? Math.min(100, ((h.rooms_booked ?? 0) / h.rooms_held) * 100) : 0;
+              const pct = h.rooms_held
+                ? Math.min(100, ((h.rooms_booked ?? 0) / h.rooms_held) * 100)
+                : 0;
               return (
                 <li key={h.id} className="bg-card flex flex-col rounded-xl border">
                   <button
@@ -124,7 +147,12 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                     className="focus-visible:ring-ring flex flex-1 flex-col gap-2 rounded-xl p-4 text-left focus-visible:ring-2 focus-visible:outline-none"
                   >
                     <div className="flex flex-wrap gap-1.5">
-                      <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium", HOTEL_STATUS[h.status].className)}>
+                      <span
+                        className={cn(
+                          "rounded-full px-2 py-0.5 text-xs font-medium",
+                          HOTEL_STATUS[h.status].className,
+                        )}
+                      >
                         {HOTEL_STATUS[h.status].label}
                       </span>
                       {h.for_couple && (
@@ -142,7 +170,11 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                     </div>
                     <p className="font-serif text-2xl leading-tight font-semibold">{h.name}</p>
                     <p className="text-muted-foreground text-sm">
-                      {[h.distance, h.price_per_night != null && `${formatMoney(h.price_per_night, currency)} / night`]
+                      {[
+                        h.distance,
+                        h.price_per_night != null &&
+                          `${formatMoney(h.price_per_night, currency)} / night`,
+                      ]
                         .filter(Boolean)
                         .join(" · ") || " "}
                     </p>
@@ -152,7 +184,10 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                           Room block: {h.rooms_booked ?? 0} of {h.rooms_held} booked
                         </p>
                         <div className="bg-muted mt-1 h-1.5 rounded-full">
-                          <div className="bg-primary h-1.5 rounded-full" style={{ width: `${pct}%` }} />
+                          <div
+                            className="bg-primary h-1.5 rounded-full"
+                            style={{ width: `${pct}%` }}
+                          />
                         </div>
                       </div>
                     )}
@@ -167,9 +202,13 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                               : "text-muted-foreground",
                         )}
                       >
-                        {s.level === "soon" && <AlarmClock className="mr-1 inline size-3" aria-hidden />}
+                        {s.level === "soon" && (
+                          <AlarmClock className="mr-1 inline size-3" aria-hidden />
+                        )}
                         Cut-off {format(parseISO(h.cutoff_date), "d MMM yyyy")}
-                        {s.level === "passed" ? " (passed)" : s.daysLeft != null && ` · ${s.daysLeft} days left`}
+                        {s.level === "passed"
+                          ? " (passed)"
+                          : s.daysLeft != null && ` · ${s.daysLeft} days left`}
                       </p>
                     )}
                     <p className="text-muted-foreground mt-auto pt-2 text-xs">
@@ -200,7 +239,9 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
           <section className="space-y-3">
             <h2 className="text-3xl">Who&apos;s staying where</h2>
             {stays.length === 0 ? (
-              <p className="text-muted-foreground text-sm">Nobody assigned yet. Open a hotel and use the Guests tab.</p>
+              <p className="text-muted-foreground text-sm">
+                Nobody assigned yet. Open a hotel and use the Guests tab.
+              </p>
             ) : (
               <div className="bg-card overflow-x-auto rounded-xl border">
                 <table className="w-full text-sm">
@@ -214,7 +255,11 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                   </thead>
                   <tbody className="divide-y">
                     {[...stays]
-                      .sort((a, b) => (guestName.get(a.guest_id) ?? "").localeCompare(guestName.get(b.guest_id) ?? ""))
+                      .sort((a, b) =>
+                        (guestName.get(a.guest_id) ?? "").localeCompare(
+                          guestName.get(b.guest_id) ?? "",
+                        ),
+                      )
                       .map((s) => (
                         <tr key={s.guest_id}>
                           <td className="px-3 py-2">{guestName.get(s.guest_id)}</td>
@@ -232,8 +277,9 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
             )}
             {attendingWithoutHotel > 0 && (
               <p className="text-muted-foreground text-sm">
-                {attendingWithoutHotel} attending guest{attendingWithoutHotel === 1 ? " has" : "s have"} no hotel assigned
-                (they may be staying elsewhere).
+                {attendingWithoutHotel} attending guest
+                {attendingWithoutHotel === 1 ? " has" : "s have"} no hotel assigned (they may be
+                staying elsewhere).
               </p>
             )}
           </section>
@@ -249,7 +295,13 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
               stays={stays}
               guests={guests.map((g) => {
                 const at = stays.find((s) => s.guest_id === g.id);
-                return { ...g, note: at && at.hotel_id !== current?.id ? `at ${hotelName.get(at.hotel_id)}` : undefined };
+                return {
+                  ...g,
+                  note:
+                    at && at.hotel_id !== current?.id
+                      ? `at ${hotelName.get(at.hotel_id)}`
+                      : undefined,
+                };
               })}
               currency={currency}
               canEdit={canEdit}
@@ -372,22 +424,37 @@ function HotelForm({
                 control={form.control}
                 name="pricePerNight"
                 render={({ field }) => (
-                  <MoneyInput {...aria} currency={currency} allowEmpty value={field.value} onChange={field.onChange} />
+                  <MoneyInput
+                    {...aria}
+                    currency={currency}
+                    allowEmpty
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
                 )}
               />
             )}
           </FormField>
-          <FormField id="h-distance" label="Distance to venue" hint="e.g. 10 min drive" error={errors.distance?.message}>
+          <FormField
+            id="h-distance"
+            label="Distance to venue"
+            hint="e.g. 10 min drive"
+            error={errors.distance?.message}
+          >
             {(aria) => <Input {...aria} {...form.register("distance")} />}
           </FormField>
           <FormField id="h-address" label="Address" error={errors.address?.message}>
             {(aria) => <Input {...aria} {...form.register("address")} />}
           </FormField>
           <FormField id="h-web" label="Website" error={errors.website?.message}>
-            {(aria) => <Input {...aria} type="url" placeholder="https://" {...form.register("website")} />}
+            {(aria) => (
+              <Input {...aria} type="url" placeholder="https://" {...form.register("website")} />
+            )}
           </FormField>
           <FormField id="h-book" label="Booking link for guests" error={errors.bookingUrl?.message}>
-            {(aria) => <Input {...aria} type="url" placeholder="https://" {...form.register("bookingUrl")} />}
+            {(aria) => (
+              <Input {...aria} type="url" placeholder="https://" {...form.register("bookingUrl")} />
+            )}
           </FormField>
         </div>
         <fieldset className="space-y-4 rounded-lg border p-4">
@@ -395,7 +462,11 @@ function HotelForm({
           <div className="grid gap-4 sm:grid-cols-2">
             {numberField("roomsHeld", "Rooms held for guests")}
             {numberField("roomsBooked", "Rooms booked so far")}
-            <FormField id="h-code" label="Discount / booking code" error={errors.discountCode?.message}>
+            <FormField
+              id="h-code"
+              label="Discount / booking code"
+              error={errors.discountCode?.message}
+            >
               {(aria) => <Input {...aria} {...form.register("discountCode")} />}
             </FormField>
             <FormField
@@ -413,7 +484,9 @@ function HotelForm({
           <Controller
             control={form.control}
             name="showOnWebsite"
-            render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+            render={({ field }) => (
+              <Switch checked={field.value} onCheckedChange={field.onChange} />
+            )}
           />
         </Label>
         <Label className="justify-between font-normal">
@@ -421,7 +494,9 @@ function HotelForm({
           <Controller
             control={form.control}
             name="forCouple"
-            render={({ field }) => <Switch checked={field.value} onCheckedChange={field.onChange} />}
+            render={({ field }) => (
+              <Switch checked={field.value} onCheckedChange={field.onChange} />
+            )}
           />
         </Label>
         <FormField id="h-notes" label="Notes" error={errors.notes?.message}>
@@ -434,15 +509,21 @@ function HotelForm({
   return (
     <>
       <SheetHeader className="border-b px-6 py-4">
-        <SheetTitle className="font-serif text-3xl">{hotel ? hotel.name : "Add a hotel"}</SheetTitle>
-        <SheetDescription>{hotel ? HOTEL_STATUS[hotel.status].label : "Only the name is required."}</SheetDescription>
+        <SheetTitle className="font-serif text-3xl">
+          {hotel ? hotel.name : "Add a hotel"}
+        </SheetTitle>
+        <SheetDescription>
+          {hotel ? HOTEL_STATUS[hotel.status].label : "Only the name is required."}
+        </SheetDescription>
       </SheetHeader>
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {hotel ? (
           <Tabs defaultValue="details">
             <TabsList className="mb-4">
               <TabsTrigger value="details">Details</TabsTrigger>
-              <TabsTrigger value="guests">Guests ({stays.filter((s) => s.hotel_id === hotel.id).length})</TabsTrigger>
+              <TabsTrigger value="guests">
+                Guests ({stays.filter((s) => s.hotel_id === hotel.id).length})
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="details">{details}</TabsContent>
             <TabsContent value="guests">
@@ -503,9 +584,14 @@ function HotelGuests({
 }) {
   const initial = stays.filter((s) => s.hotel_id === hotelId);
   const [ids, setIds] = useState(initial.map((s) => s.guest_id));
-  const [details, setDetails] = useState<Record<string, { room: string; checkIn: string; checkOut: string }>>(() =>
+  const [details, setDetails] = useState<
+    Record<string, { room: string; checkIn: string; checkOut: string }>
+  >(() =>
     Object.fromEntries(
-      initial.map((s) => [s.guest_id, { room: s.room ?? "", checkIn: s.check_in ?? "", checkOut: s.check_out ?? "" }]),
+      initial.map((s) => [
+        s.guest_id,
+        { room: s.room ?? "", checkIn: s.check_in ?? "", checkOut: s.check_out ?? "" },
+      ]),
     ),
   );
   const [pending, startTransition] = useTransition();
@@ -516,12 +602,19 @@ function HotelGuests({
 
   return (
     <div className="space-y-4">
-      {canEdit && <GuestPicker guests={guests} selected={ids} onChange={setIds} maxHeight="14rem" />}
+      {canEdit && (
+        <GuestPicker guests={guests} selected={ids} onChange={setIds} maxHeight="14rem" />
+      )}
       {ids.length > 0 && (
         <ul className="space-y-2">
           {ids.map((id) => (
-            <li key={id} className="grid grid-cols-2 gap-2 rounded-lg border p-2 sm:grid-cols-[1fr_5rem_8.5rem_8.5rem]">
-              <span className="col-span-2 self-center truncate text-sm font-medium sm:col-span-1">{name.get(id)}</span>
+            <li
+              key={id}
+              className="grid grid-cols-2 gap-2 rounded-lg border p-2 sm:grid-cols-[1fr_5rem_8.5rem_8.5rem]"
+            >
+              <span className="col-span-2 self-center truncate text-sm font-medium sm:col-span-1">
+                {name.get(id)}
+              </span>
               <Input
                 className="h-8"
                 placeholder="Room"

@@ -243,7 +243,8 @@ export type PaymentRow = WeddingScoped & {
 // ---------- Phase 6: venues, hotels, travel ----------
 
 export type VenueKind = "ceremony" | "reception" | "both";
-export type VenueStatus = "researching" | "contacted" | "visited" | "shortlisted" | "booked" | "rejected";
+export type VenueStatus =
+  "researching" | "contacted" | "visited" | "shortlisted" | "booked" | "rejected";
 export type VenueAvailability = "unknown" | "available" | "tentative" | "unavailable";
 export type HotelStatus = "considering" | "contacted" | "block_confirmed" | "rejected";
 export type FlightCategory = "guest" | "couple" | "honeymoon";
@@ -325,7 +326,11 @@ export type FlightRow = WeddingScoped & {
   provider_ref: string | null;
 };
 
-export type FlightTravellerRow = Timestamps & { flight_id: string; guest_id: string; wedding_id: string };
+export type FlightTravellerRow = Timestamps & {
+  flight_id: string;
+  guest_id: string;
+  wedding_id: string;
+};
 
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;

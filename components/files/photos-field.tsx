@@ -63,7 +63,8 @@ export function PhotosField({
     const chosen = files.slice(0, room);
     if (files.length > room) toast.warning(`Only ${room} more photo(s) fit.`);
     const ok = chosen.filter((f) => {
-      if (!TYPES.includes(f.type)) toast.error(`${f.name}: please choose a JPG, PNG, WebP, GIF or HEIC image.`);
+      if (!TYPES.includes(f.type))
+        toast.error(`${f.name}: please choose a JPG, PNG, WebP, GIF or HEIC image.`);
       else if (f.size > MAX_BYTES) toast.error(`${f.name} is larger than 10 MB.`);
       else return true;
       return false;
@@ -112,7 +113,14 @@ export function PhotosField({
         {value.map((p, i) => (
           <li key={p} className="bg-muted relative aspect-square overflow-hidden rounded-lg">
             {urls[p] ? (
-              <Image src={urls[p]} alt={`Photo ${i + 1}`} fill sizes="150px" className="object-cover" unoptimized />
+              <Image
+                src={urls[p]}
+                alt={`Photo ${i + 1}`}
+                fill
+                sizes="150px"
+                className="object-cover"
+                unoptimized
+              />
             ) : (
               <div className="flex size-full items-center justify-center">
                 <Loader2 className="text-muted-foreground size-4 animate-spin" aria-hidden />
@@ -140,13 +148,19 @@ export function PhotosField({
                 "hover:bg-accent focus-visible:ring-ring flex aspect-square w-full flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed text-xs focus-visible:ring-2 focus-visible:outline-none",
               )}
             >
-              {uploading ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <ImagePlus className="size-5" aria-hidden />}
+              {uploading ? (
+                <Loader2 className="size-5 animate-spin" aria-hidden />
+              ) : (
+                <ImagePlus className="size-5" aria-hidden />
+              )}
               {uploading ? `Uploading ${uploading}…` : "Add photos"}
             </button>
           </li>
         )}
       </ul>
-      <p className="text-muted-foreground text-xs">Up to {max} photos, 10 MB each. Only people planning your wedding can see them.</p>
+      <p className="text-muted-foreground text-xs">
+        Up to {max} photos, 10 MB each. Only people planning your wedding can see them.
+      </p>
     </div>
   );
 }

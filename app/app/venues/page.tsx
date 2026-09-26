@@ -11,9 +11,16 @@ export default async function Venues() {
   const { wedding, role } = await requireWedding();
   const sb = await createClient();
   const [venues, checklist, { count: attending }] = await Promise.all([
-    fetchAll((f, t) => sb.from("venues").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t)),
     fetchAll((f, t) =>
-      sb.from("venue_checklist_items").select("*").eq("wedding_id", wedding.id).order("sort_order").range(f, t),
+      sb.from("venues").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("venue_checklist_items")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("sort_order")
+        .range(f, t),
     ),
     supabaseAttending(sb, wedding.id),
   ]);

@@ -1,8 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { flightSearchLinks, groupByDay, iata, roomBlockState, timeOf, type BoardFlight } from "../travel";
+import {
+  flightSearchLinks,
+  groupByDay,
+  iata,
+  roomBlockState,
+  timeOf,
+  type BoardFlight,
+} from "../travel";
 
 const f = (id: string, time: string | null, travellers: string[] = []): BoardFlight => ({
-  id, time, flightNumber: null, airline: null, airport: null, travellers, needsPickup: false, status: "booked",
+  id,
+  time,
+  flightNumber: null,
+  airline: null,
+  airport: null,
+  travellers,
+  needsPickup: false,
+  status: "booked",
 });
 
 describe("arrivals board", () => {
@@ -23,9 +37,18 @@ describe("arrivals board", () => {
 
 describe("flight search links", () => {
   it("builds Google Flights and Skyscanner links", () => {
-    const l = flightSearchLinks({ from: "lhr", to: "LIS", depart: "2027-06-10", ret: "2027-06-15" });
-    expect(l.google).toContain(encodeURIComponent("Flights from LHR to LIS on 2027-06-10 returning 2027-06-15"));
-    expect(l.skyscanner).toBe("https://www.skyscanner.net/transport/flights/lhr/lis/270610/270615/");
+    const l = flightSearchLinks({
+      from: "lhr",
+      to: "LIS",
+      depart: "2027-06-10",
+      ret: "2027-06-15",
+    });
+    expect(l.google).toContain(
+      encodeURIComponent("Flights from LHR to LIS on 2027-06-10 returning 2027-06-15"),
+    );
+    expect(l.skyscanner).toBe(
+      "https://www.skyscanner.net/transport/flights/lhr/lis/270610/270615/",
+    );
   });
 
   it("skips Skyscanner without an airport code or date", () => {
@@ -38,10 +61,19 @@ describe("flight search links", () => {
 describe("room block reminders", () => {
   const block = { rooms_held: 20, rooms_booked: 12 };
   it("warns within 30 days of the cut-off while rooms are free", () => {
-    expect(roomBlockState({ ...block, cutoff_date: "2027-05-01" }, "2027-04-10")).toEqual({ level: "soon", daysLeft: 21, free: 8 });
+    expect(roomBlockState({ ...block, cutoff_date: "2027-05-01" }, "2027-04-10")).toEqual({
+      level: "soon",
+      daysLeft: 21,
+      free: 8,
+    });
     expect(roomBlockState({ ...block, cutoff_date: "2027-05-01" }, "2027-01-10").level).toBe("ok");
-    expect(roomBlockState({ ...block, cutoff_date: "2027-05-01" }, "2027-05-02").level).toBe("passed");
-    expect(roomBlockState({ rooms_held: 10, rooms_booked: 10, cutoff_date: "2027-05-01" }, "2027-04-25").level).toBe("ok");
+    expect(roomBlockState({ ...block, cutoff_date: "2027-05-01" }, "2027-05-02").level).toBe(
+      "passed",
+    );
+    expect(
+      roomBlockState({ rooms_held: 10, rooms_booked: 10, cutoff_date: "2027-05-01" }, "2027-04-25")
+        .level,
+    ).toBe("ok");
     expect(roomBlockState({ ...block, cutoff_date: null }, "2027-04-25").level).toBe("none");
   });
 });

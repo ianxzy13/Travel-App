@@ -6,9 +6,10 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–5 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
-> seating chart, budget (categories, expenses, payment schedules, receipts, charts) and vendors. The
-> other modules show a "coming soon" page until their phase is built.
+> **Status:** Phases 1–6 are done: sign-in, onboarding, dashboard, settings, guest list, RSVPs,
+> seating chart, budget, vendors, venues (comparison, visit checklists, photos), hotels (room blocks,
+> guest assignments) and travel (arrivals board, flight search links). The other modules show a
+> "coming soon" page until their phase is built.
 
 ---
 
@@ -77,6 +78,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20260928000000_rsvp.sql` (phase 3: RSVP codes, meals, replies, emails, notifications)
    - `20260929000000_seating.sql` (phase 4: floor plans, tables, seat assignments)
    - `20260930000000_budget_vendors.sql` (phase 5: budget, payments, vendors, private file storage)
+   - `20261001000000_venues_travel.sql` (phase 6: venues, checklists, hotels, flights)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -179,6 +181,19 @@ Both need the Supabase **secret key**, which bypasses security rules, so keep it
 - Receipts and contracts are stored privately in Supabase Storage (bucket `wedding-files`, created
   by the phase 5 migration). Only people planning your wedding can open them.
 - On a vendor, **Add quote to budget** creates an expense in the vendor's category.
+
+**Venues, hotels & travel tips**
+
+- Every new venue gets a 10-question **site-visit checklist**. Tick "Compare" on 2–4 venues to see
+  them side by side, answers included. Marking one **Booked** frees any other booked venue for the
+  same role; its capacity is then checked in the seating chart, and Settings → Events offers to use
+  it as an event's venue.
+- Hotels: fill in the **room block** (rooms held/booked, code, cut-off). From 30 days before the
+  cut-off you'll see a reminder. "Show on website" is used by the wedding website (phase 8).
+- Travel: flight times are **local airport times**, exactly as on the ticket. The **arrivals board**
+  groups guest arrivals by day for planning pickups. Save your nearest airport code (e.g. LIS) in
+  "Search flights" to prefill Google Flights / Skyscanner. No flight API is used; the data model has
+  `provider` fields ready for one later.
 
 **Seating chart tips**
 

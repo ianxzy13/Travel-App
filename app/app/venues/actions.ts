@@ -45,7 +45,10 @@ async function releaseOtherBookings(sb: Sb, weddingId: string, keepId: string, k
     .neq("id", keepId);
 }
 
-export async function saveVenue(input: unknown, id?: string): Promise<ActionResult<{ id: string }>> {
+export async function saveVenue(
+  input: unknown,
+  id?: string,
+): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
   if (!ctx) return NO_PERMISSION;
   const parsed = venueSchema.safeParse(input);
@@ -84,17 +87,35 @@ export async function saveVenue(input: unknown, id?: string): Promise<ActionResu
       .eq("wedding_id", wid)
       .maybeSingle();
     if (!old) return { ok: false, error: "This venue no longer exists." };
-    const { error } = await ctx.sb.from("venues").update(row).eq("id", venueId).eq("wedding_id", wid);
+    const { error } = await ctx.sb
+      .from("venues")
+      .update(row)
+      .eq("id", venueId)
+      .eq("wedding_id", wid);
     if (error) return fail("saveVenue", error);
-    await removeFiles(ctx.sb, old.photo_paths.filter((p) => !v.photoPaths.includes(p)));
+    await removeFiles(
+      ctx.sb,
+      old.photo_paths.filter((p) => !v.photoPaths.includes(p)),
+    );
   } else {
-    const { data, error } = await ctx.sb.from("venues").insert({ ...row, wedding_id: wid }).select("id").single();
+    const { data, error } = await ctx.sb
+      .from("venues")
+      .insert({ ...row, wedding_id: wid })
+      .select("id")
+      .single();
     if (error) return fail("saveVenue", error);
     venueId = data.id;
     // start every venue with a useful site-visit checklist
-    await ctx.sb.from("venue_checklist_items").insert(
-      DEFAULT_VISIT_QUESTIONS.map((question, i) => ({ wedding_id: wid, venue_id: venueId!, question, sort_order: i })),
-    );
+    await ctx.sb
+      .from("venue_checklist_items")
+      .insert(
+        DEFAULT_VISIT_QUESTIONS.map((question, i) => ({
+          wedding_id: wid,
+          venue_id: venueId!,
+          question,
+          sort_order: i,
+        })),
+      );
   }
 
   if (v.status === "booked") await releaseOtherBookings(ctx.sb, wid, venueId, v.kind);
@@ -128,18 +149,29 @@ export async function deleteVenue(id: string): Promise<ActionResult> {
     .eq("wedding_id", ctx.wedding.id)
     .select("photo_paths");
   if (error) return fail("deleteVenue", error);
-  await removeFiles(ctx.sb, (data ?? []).flatMap((r) => r.photo_paths));
+  await removeFiles(
+    ctx.sb,
+    (data ?? []).flatMap((r) => r.photo_paths),
+  );
   return done();
 }
 
 // ---------- site-visit checklist ----------
 
-export async function saveChecklistItem(venueId: string, input: unknown, id?: string): Promise<ActionResult> {
+export async function saveChecklistItem(
+  venueId: string,
+  input: unknown,
+  id?: string,
+): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !idSchema.safeParse(venueId).success) return NO_PERMISSION;
   const parsed = checklistItemSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
-  const row = { question: parsed.data.question, answer: parsed.data.answer || null, done: parsed.data.done };
+  const row = {
+    question: parsed.data.question,
+    answer: parsed.data.answer || null,
+    done: parsed.data.done,
+  };
 
   if (id) {
     const { error } = await ctx.sb

@@ -91,14 +91,26 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
   const visible = useMemo(
     () =>
       venues
-        .filter((v) => (status === "all" || v.status === status) && (kind === "all" || v.kind === kind))
-        .sort((a, b) => Number(b.status === "booked") - Number(a.status === "booked") || (b.rating ?? 0) - (a.rating ?? 0)),
+        .filter(
+          (v) => (status === "all" || v.status === status) && (kind === "all" || v.kind === kind),
+        )
+        .sort(
+          (a, b) =>
+            Number(b.status === "booked") - Number(a.status === "booked") ||
+            (b.rating ?? 0) - (a.rating ?? 0),
+        ),
     [venues, status, kind],
   );
-  const current = sheet && sheet !== "new" ? venues.find((v) => v.id === sheet) ?? null : null;
+  const current = sheet && sheet !== "new" ? (venues.find((v) => v.id === sheet) ?? null) : null;
 
   function toggleCompare(id: string) {
-    setCompare((c) => (c.includes(id) ? c.filter((x) => x !== id) : c.length >= 4 ? (toast.info("Compare up to 4 venues at a time."), c) : [...c, id]));
+    setCompare((c) =>
+      c.includes(id)
+        ? c.filter((x) => x !== id)
+        : c.length >= 4
+          ? (toast.info("Compare up to 4 venues at a time."), c)
+          : [...c, id],
+    );
   }
 
   return (
@@ -109,7 +121,11 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
         actions={
           <>
             <Button asChild variant="outline" size="sm">
-              <a href={mapsSearch(`wedding venues near ${location || "me"}`)} target="_blank" rel="noreferrer">
+              <a
+                href={mapsSearch(`wedding venues near ${location || "me"}`)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Search aria-hidden /> Find venues{location ? ` near ${location}` : ""}
               </a>
             </Button>
@@ -129,7 +145,8 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
           </span>
           <h2 className="text-3xl">No venues yet</h2>
           <p className="text-muted-foreground max-w-sm">
-            Add the places you&apos;re considering. Each one gets a site-visit checklist, and you can compare them side by side.
+            Add the places you&apos;re considering. Each one gets a site-visit checklist, and you
+            can compare them side by side.
           </p>
           {canEdit && (
             <Button onClick={() => setSheet("new")}>
@@ -141,24 +158,34 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <Select value={status} onValueChange={setStatus}>
-              <SelectTrigger className="w-44" aria-label="Filter by status"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-44" aria-label="Filter by status">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Any status</SelectItem>
                 {Object.entries(VENUE_STATUS).map(([k, v]) => (
-                  <SelectItem key={k} value={k}>{v.label}</SelectItem>
+                  <SelectItem key={k} value={k}>
+                    {v.label}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={kind} onValueChange={setKind}>
-              <SelectTrigger className="w-52" aria-label="Filter by type"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-52" aria-label="Filter by type">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Ceremony or reception</SelectItem>
                 {Object.entries(VENUE_KIND).map(([k, v]) => (
-                  <SelectItem key={k} value={k}>{v}</SelectItem>
+                  <SelectItem key={k} value={k}>
+                    {v}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-muted-foreground self-center text-sm">Tick up to 4 to compare them side by side.</p>
+            <p className="text-muted-foreground self-center text-sm">
+              Tick up to 4 to compare them side by side.
+            </p>
           </div>
 
           <ul className="grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] gap-4">
@@ -183,7 +210,12 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
           <Button size="sm" onClick={() => setComparing(true)}>
             <Columns3 aria-hidden /> Compare
           </Button>
-          <Button variant="ghost" size="icon-sm" onClick={() => setCompare([])} aria-label="Clear comparison">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            onClick={() => setCompare([])}
+            aria-label="Clear comparison"
+          >
             <X aria-hidden />
           </Button>
         </div>
@@ -192,7 +224,9 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
       <CompareDialog
         open={comparing}
         onOpenChange={setComparing}
-        venues={compare.map((id) => venues.find((v) => v.id === id)).filter((v): v is VenueItem => !!v)}
+        venues={compare
+          .map((id) => venues.find((v) => v.id === id))
+          .filter((v): v is VenueItem => !!v)}
         currency={currency}
         guestCount={guestCount}
       />
@@ -217,7 +251,13 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
 }
 
 function Badge({ className, children }: { className: string; children: React.ReactNode }) {
-  return <span className={cn("rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap", className)}>{children}</span>;
+  return (
+    <span
+      className={cn("rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap", className)}
+    >
+      {children}
+    </span>
+  );
 }
 
 function VenueCard({
@@ -238,11 +278,28 @@ function VenueCard({
   const answered = v.checklist.filter((c) => c.done || c.answer).length;
   const tooSmall = v.capacity != null && guestCount != null && v.capacity < guestCount;
   return (
-    <li className={cn("bg-card relative flex flex-col overflow-hidden rounded-xl border", v.status === "booked" && "ring-2 ring-emerald-500/60", compared && "ring-primary ring-2")}>
-      <button type="button" onClick={onOpen} className="focus-visible:ring-ring flex flex-1 flex-col text-left focus-visible:ring-2 focus-visible:outline-none">
+    <li
+      className={cn(
+        "bg-card relative flex flex-col overflow-hidden rounded-xl border",
+        v.status === "booked" && "ring-2 ring-emerald-500/60",
+        compared && "ring-primary ring-2",
+      )}
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="focus-visible:ring-ring flex flex-1 flex-col text-left focus-visible:ring-2 focus-visible:outline-none"
+      >
         <div className="bg-muted relative aspect-[16/9]">
           {v.coverUrl ? (
-            <Image src={v.coverUrl} alt="" fill sizes="(max-width: 640px) 100vw, 320px" className="object-cover" unoptimized />
+            <Image
+              src={v.coverUrl}
+              alt=""
+              fill
+              sizes="(max-width: 640px) 100vw, 320px"
+              className="object-cover"
+              unoptimized
+            />
           ) : (
             <div className="flex size-full items-center justify-center">
               <Landmark className="text-muted-foreground/50 size-10" aria-hidden />
@@ -251,8 +308,12 @@ function VenueCard({
         </div>
         <div className="flex flex-1 flex-col gap-2 p-4">
           <div className="flex flex-wrap items-center gap-1.5">
-            <Badge className={VENUE_STATUS[v.status].className}>{VENUE_STATUS[v.status].label}</Badge>
-            <Badge className={AVAILABILITY[v.availability].className}>{AVAILABILITY[v.availability].label}</Badge>
+            <Badge className={VENUE_STATUS[v.status].className}>
+              {VENUE_STATUS[v.status].label}
+            </Badge>
+            <Badge className={AVAILABILITY[v.availability].className}>
+              {AVAILABILITY[v.availability].label}
+            </Badge>
           </div>
           <p className="font-serif text-2xl leading-tight font-semibold">{v.name}</p>
           <p className="text-muted-foreground text-xs">{VENUE_KIND[v.kind]}</p>
@@ -261,11 +322,16 @@ function VenueCard({
             <div className={cn("flex items-center gap-1", tooSmall && "text-destructive")}>
               <Users className="size-3.5" aria-hidden />
               <dt className="sr-only">Capacity</dt>
-              <dd>{v.capacity ?? "–"}{tooSmall && " (too small)"}</dd>
+              <dd>
+                {v.capacity ?? "–"}
+                {tooSmall && " (too small)"}
+              </dd>
             </div>
             <div>
               <dt className="sr-only">Price</dt>
-              <dd className="text-foreground text-right font-medium tabular-nums">{v.price == null ? "–" : formatMoney(v.price, currency)}</dd>
+              <dd className="text-foreground text-right font-medium tabular-nums">
+                {v.price == null ? "–" : formatMoney(v.price, currency)}
+              </dd>
             </div>
           </dl>
           {v.address && (
@@ -305,15 +371,37 @@ function CompareDialog({
   const questions = [...new Set(venues.flatMap((v) => v.checklist.map((c) => c.question)))];
   const rows: { label: string; cell: (v: VenueItem) => React.ReactNode }[] = [
     { label: "Type", cell: (v) => VENUE_KIND[v.kind] },
-    { label: "Status", cell: (v) => <Badge className={VENUE_STATUS[v.status].className}>{VENUE_STATUS[v.status].label}</Badge> },
-    { label: "Our date", cell: (v) => <Badge className={AVAILABILITY[v.availability].className}>{AVAILABILITY[v.availability].label}</Badge> },
+    {
+      label: "Status",
+      cell: (v) => (
+        <Badge className={VENUE_STATUS[v.status].className}>{VENUE_STATUS[v.status].label}</Badge>
+      ),
+    },
+    {
+      label: "Our date",
+      cell: (v) => (
+        <Badge className={AVAILABILITY[v.availability].className}>
+          {AVAILABILITY[v.availability].label}
+        </Badge>
+      ),
+    },
     {
       label: "Capacity",
       cell: (v) => (
-        <span className={cn(v.capacity != null && guestCount != null && v.capacity < guestCount && "text-destructive font-medium")}>
+        <span
+          className={cn(
+            v.capacity != null &&
+              guestCount != null &&
+              v.capacity < guestCount &&
+              "text-destructive font-medium",
+          )}
+        >
           {v.capacity ?? "–"}
           {v.capacity != null && guestCount != null && v.capacity < guestCount && (
-            <span className="block text-xs"><AlertTriangle className="mr-1 inline size-3" aria-hidden />Fewer than your {guestCount} guests</span>
+            <span className="block text-xs">
+              <AlertTriangle className="mr-1 inline size-3" aria-hidden />
+              Fewer than your {guestCount} guests
+            </span>
           )}
         </span>
       ),
@@ -323,7 +411,10 @@ function CompareDialog({
     { label: "Included", cell: (v) => v.included },
     { label: "Pros", cell: (v) => v.pros },
     { label: "Cons", cell: (v) => v.cons },
-    { label: "Contact", cell: (v) => [v.contact_name, v.phone, v.email].filter(Boolean).join(" · ") },
+    {
+      label: "Contact",
+      cell: (v) => [v.contact_name, v.phone, v.email].filter(Boolean).join(" · "),
+    },
     ...questions.map((q) => ({
       label: q,
       cell: (v: VenueItem) => {
@@ -331,8 +422,11 @@ function CompareDialog({
         if (!item) return <span className="text-muted-foreground">–</span>;
         return (
           <span className="flex gap-1">
-            {item.done && <Check className="text-success mt-0.5 size-3.5 shrink-0" aria-label="Checked" />}
-            {item.answer || (item.done ? "" : <span className="text-muted-foreground">Not asked yet</span>)}
+            {item.done && (
+              <Check className="text-success mt-0.5 size-3.5 shrink-0" aria-label="Checked" />
+            )}
+            {item.answer ||
+              (item.done ? "" : <span className="text-muted-foreground">Not asked yet</span>)}
           </span>
         );
       },
@@ -355,7 +449,14 @@ function CompareDialog({
                   <th key={v.id} className="p-2 text-left align-bottom">
                     {v.coverUrl && (
                       <div className="bg-muted relative mb-2 aspect-[16/9] overflow-hidden rounded-lg">
-                        <Image src={v.coverUrl} alt="" fill sizes="240px" className="object-cover" unoptimized />
+                        <Image
+                          src={v.coverUrl}
+                          alt=""
+                          fill
+                          sizes="240px"
+                          className="object-cover"
+                          unoptimized
+                        />
                       </div>
                     )}
                     <span className="font-serif text-xl font-semibold">{v.name}</span>
@@ -366,9 +467,16 @@ function CompareDialog({
             <tbody className="divide-y">
               {rows.map((r) => (
                 <tr key={r.label}>
-                  <th scope="row" className="text-muted-foreground p-2 text-left align-top text-xs font-medium">{r.label}</th>
+                  <th
+                    scope="row"
+                    className="text-muted-foreground p-2 text-left align-top text-xs font-medium"
+                  >
+                    {r.label}
+                  </th>
                   {venues.map((v) => (
-                    <td key={v.id} className="p-2 align-top whitespace-pre-line">{r.cell(v) || <span className="text-muted-foreground">–</span>}</td>
+                    <td key={v.id} className="p-2 align-top whitespace-pre-line">
+                      {r.cell(v) || <span className="text-muted-foreground">–</span>}
+                    </td>
                   ))}
                 </tr>
               ))}
@@ -431,14 +539,22 @@ function VenueForm({
         toast.error(r.error);
         return;
       }
-      if (values.status === "booked") toast.success(`${values.name} is booked! 🎉 Add it to your events in Settings → Events.`);
-      else toast.success(venue ? "Venue saved" : "Venue added, with a site-visit checklist to fill in");
+      if (values.status === "booked")
+        toast.success(`${values.name} is booked! 🎉 Add it to your events in Settings → Events.`);
+      else
+        toast.success(
+          venue ? "Venue saved" : "Venue added, with a site-visit checklist to fill in",
+        );
       if (venue) onClose();
       else onCreated(r.data.id);
     }),
   );
 
-  const select = <K extends "kind" | "status" | "availability">(name: K, label: string, options: Record<string, string>) => (
+  const select = <K extends "kind" | "status" | "availability">(
+    name: K,
+    label: string,
+    options: Record<string, string>,
+  ) => (
     <FormField id={`v-${name}`} label={label}>
       {(aria) => (
         <Controller
@@ -446,10 +562,14 @@ function VenueForm({
           name={name}
           render={({ field }) => (
             <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger {...aria} className="w-full"><SelectValue /></SelectTrigger>
+              <SelectTrigger {...aria} className="w-full">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 {Object.entries(options).map(([k, l]) => (
-                  <SelectItem key={k} value={k}>{l}</SelectItem>
+                  <SelectItem key={k} value={k}>
+                    {l}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -466,12 +586,26 @@ function VenueForm({
           {(aria) => <Input {...aria} {...form.register("name")} />}
         </FormField>
         <div className="grid gap-4 sm:grid-cols-2">
-          {select("status", "Status", Object.fromEntries(Object.entries(VENUE_STATUS).map(([k, v]) => [k, v.label])))}
+          {select(
+            "status",
+            "Status",
+            Object.fromEntries(Object.entries(VENUE_STATUS).map(([k, v]) => [k, v.label])),
+          )}
           {select("kind", "For", VENUE_KIND)}
-          {select("availability", "Available on our date?", Object.fromEntries(Object.entries(AVAILABILITY).map(([k, v]) => [k, v.label])))}
+          {select(
+            "availability",
+            "Available on our date?",
+            Object.fromEntries(Object.entries(AVAILABILITY).map(([k, v]) => [k, v.label])),
+          )}
           <div className="space-y-2">
             <span className="text-sm font-medium">Rating</span>
-            <Controller control={form.control} name="rating" render={({ field }) => <StarRating value={field.value} onChange={field.onChange} label="Your rating" />} />
+            <Controller
+              control={form.control}
+              name="rating"
+              render={({ field }) => (
+                <StarRating value={field.value} onChange={field.onChange} label="Your rating" />
+              )}
+            />
           </div>
           <FormField id="v-cap" label="Capacity (guests)" error={errors.capacity?.message}>
             {(aria) => (
@@ -479,14 +613,34 @@ function VenueForm({
                 control={form.control}
                 name="capacity"
                 render={({ field }) => (
-                  <Input {...aria} inputMode="numeric" value={field.value ?? ""} onChange={(e) => { const d = e.target.value.replace(/\D/g, ""); field.onChange(d === "" ? null : Number(d)); }} />
+                  <Input
+                    {...aria}
+                    inputMode="numeric"
+                    value={field.value ?? ""}
+                    onChange={(e) => {
+                      const d = e.target.value.replace(/\D/g, "");
+                      field.onChange(d === "" ? null : Number(d));
+                    }}
+                  />
                 )}
               />
             )}
           </FormField>
           <FormField id="v-price" label="Price / quote" error={errors.price?.message}>
             {(aria) => (
-              <Controller control={form.control} name="price" render={({ field }) => <MoneyInput {...aria} currency={currency} allowEmpty value={field.value} onChange={field.onChange} />} />
+              <Controller
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <MoneyInput
+                    {...aria}
+                    currency={currency}
+                    allowEmpty
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
             )}
           </FormField>
         </div>
@@ -495,7 +649,9 @@ function VenueForm({
         </FormField>
         {venue?.address && (
           <Button asChild variant="outline" size="sm">
-            <a href={mapsSearch(venue.address)} target="_blank" rel="noreferrer"><MapPin aria-hidden /> Open in Google Maps</a>
+            <a href={mapsSearch(venue.address)} target="_blank" rel="noreferrer">
+              <MapPin aria-hidden /> Open in Google Maps
+            </a>
           </Button>
         )}
         <div className="grid gap-4 sm:grid-cols-2">
@@ -509,14 +665,23 @@ function VenueForm({
             {(aria) => <Input {...aria} type="email" {...form.register("email")} />}
           </FormField>
           <FormField id="v-web" label="Website" error={errors.website?.message}>
-            {(aria) => <Input {...aria} type="url" placeholder="https://" {...form.register("website")} />}
+            {(aria) => (
+              <Input {...aria} type="url" placeholder="https://" {...form.register("website")} />
+            )}
           </FormField>
           <FormField id="v-visit" label="Visit date" error={errors.visitDate?.message}>
             {(aria) => <Input {...aria} type="date" {...form.register("visitDate")} />}
           </FormField>
         </div>
         <FormField id="v-included" label="What's included" error={errors.included?.message}>
-          {(aria) => <Textarea {...aria} rows={2} placeholder="Tables, chairs, catering, coordinator…" {...form.register("included")} />}
+          {(aria) => (
+            <Textarea
+              {...aria}
+              rows={2}
+              placeholder="Tables, chairs, catering, coordinator…"
+              {...form.register("included")}
+            />
+          )}
         </FormField>
         <div className="grid gap-4 sm:grid-cols-2">
           <FormField id="v-pros" label="Pros" error={errors.pros?.message}>
@@ -531,7 +696,19 @@ function VenueForm({
         </FormField>
         <div className="space-y-2">
           <p className="text-sm font-medium">Photos</p>
-          <Controller control={form.control} name="photoPaths" render={({ field }) => <PhotosField weddingId={weddingId} folder="venues" value={field.value} onChange={field.onChange} disabled={!canEdit} />} />
+          <Controller
+            control={form.control}
+            name="photoPaths"
+            render={({ field }) => (
+              <PhotosField
+                weddingId={weddingId}
+                folder="venues"
+                value={field.value}
+                onChange={field.onChange}
+                disabled={!canEdit}
+              />
+            )}
+          />
         </div>
       </fieldset>
     </form>
@@ -540,8 +717,12 @@ function VenueForm({
   return (
     <>
       <SheetHeader className="border-b px-6 py-4">
-        <SheetTitle className="font-serif text-3xl">{venue ? venue.name : "Add a venue"}</SheetTitle>
-        <SheetDescription>{venue ? VENUE_KIND[venue.kind] : "Only the name is required."}</SheetDescription>
+        <SheetTitle className="font-serif text-3xl">
+          {venue ? venue.name : "Add a venue"}
+        </SheetTitle>
+        <SheetDescription>
+          {venue ? VENUE_KIND[venue.kind] : "Only the name is required."}
+        </SheetDescription>
       </SheetHeader>
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {venue ? (
@@ -549,7 +730,8 @@ function VenueForm({
             <TabsList className="mb-4">
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="checklist">
-                Visit checklist ({venue.checklist.filter((c) => c.done || c.answer).length}/{venue.checklist.length})
+                Visit checklist ({venue.checklist.filter((c) => c.done || c.answer).length}/
+                {venue.checklist.length})
               </TabsTrigger>
             </TabsList>
             <TabsContent value="details">{details}</TabsContent>
@@ -565,7 +747,11 @@ function VenueForm({
         <SheetFooter className="flex-row flex-wrap items-center gap-2 border-t px-6 py-4">
           {venue && (
             <ConfirmDialog
-              trigger={<Button variant="ghost" className="text-destructive mr-auto" disabled={pending}><Trash2 aria-hidden /> Delete</Button>}
+              trigger={
+                <Button variant="ghost" className="text-destructive mr-auto" disabled={pending}>
+                  <Trash2 aria-hidden /> Delete
+                </Button>
+              }
               title={`Delete ${venue.name}?`}
               description="Its photos and checklist are deleted too."
               onConfirm={async () => {
@@ -579,7 +765,9 @@ function VenueForm({
             />
           )}
           <div className="ml-auto flex gap-2">
-            <Button variant="outline" onClick={onClose} disabled={pending}>Close</Button>
+            <Button variant="outline" onClick={onClose} disabled={pending}>
+              Close
+            </Button>
             <Button type="submit" form="venue-form" disabled={pending}>
               {pending && <Loader2 className="animate-spin" aria-hidden />}
               {venue ? "Save" : "Add venue"}
@@ -592,31 +780,58 @@ function VenueForm({
 }
 
 /** Site-visit questions: tick when asked, note the answer (saves as you go). */
-function Checklist({ venueId, items, canEdit }: { venueId: string; items: VenueChecklistRow[]; canEdit: boolean }) {
+function Checklist({
+  venueId,
+  items,
+  canEdit,
+}: {
+  venueId: string;
+  items: VenueChecklistRow[];
+  canEdit: boolean;
+}) {
   const [question, setQuestion] = useState("");
   const [pending, startTransition] = useTransition();
 
   const save = (item: VenueChecklistRow, patch: Partial<{ answer: string; done: boolean }>) =>
     startTransition(async () => {
-      const r = await saveChecklistItem(venueId, { question: item.question, answer: item.answer ?? "", done: item.done, ...patch }, item.id);
+      const r = await saveChecklistItem(
+        venueId,
+        { question: item.question, answer: item.answer ?? "", done: item.done, ...patch },
+        item.id,
+      );
       if (!r.ok) toast.error(r.error);
     });
 
   return (
     <div className="space-y-3">
-      <p className="text-muted-foreground text-sm">Take this with you on your visit. Answers save as you type.</p>
+      <p className="text-muted-foreground text-sm">
+        Take this with you on your visit. Answers save as you type.
+      </p>
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.id} className="rounded-lg border p-3">
             <div className="flex items-start gap-2">
-              <Checkbox className="mt-0.5" checked={item.done} disabled={!canEdit} onCheckedChange={(c) => save(item, { done: c === true })} aria-label={`Asked: ${item.question}`} />
-              <p className={cn("flex-1 text-sm font-medium", item.done && "text-muted-foreground")}>{item.question}</p>
+              <Checkbox
+                className="mt-0.5"
+                checked={item.done}
+                disabled={!canEdit}
+                onCheckedChange={(c) => save(item, { done: c === true })}
+                aria-label={`Asked: ${item.question}`}
+              />
+              <p className={cn("flex-1 text-sm font-medium", item.done && "text-muted-foreground")}>
+                {item.question}
+              </p>
               {canEdit && (
                 <Button
                   variant="ghost"
                   size="icon-xs"
                   aria-label={`Remove question: ${item.question}`}
-                  onClick={() => startTransition(async () => { const r = await deleteChecklistItem(item.id); if (!r.ok) toast.error(r.error); })}
+                  onClick={() =>
+                    startTransition(async () => {
+                      const r = await deleteChecklistItem(item.id);
+                      if (!r.ok) toast.error(r.error);
+                    })
+                  }
                 >
                   <X aria-hidden />
                 </Button>
@@ -629,7 +844,13 @@ function Checklist({ venueId, items, canEdit }: { venueId: string; items: VenueC
               aria-label={`Answer: ${item.question}`}
               disabled={!canEdit}
               maxLength={1000}
-              onBlur={(e) => e.target.value !== (item.answer ?? "") && save(item, { answer: e.target.value, done: item.done || e.target.value.trim() !== "" })}
+              onBlur={(e) =>
+                e.target.value !== (item.answer ?? "") &&
+                save(item, {
+                  answer: e.target.value,
+                  done: item.done || e.target.value.trim() !== "",
+                })
+              }
             />
           </li>
         ))}
@@ -647,7 +868,13 @@ function Checklist({ venueId, items, canEdit }: { venueId: string; items: VenueC
             });
           }}
         >
-          <Input value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="Add your own question" aria-label="New question" maxLength={200} />
+          <Input
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Add your own question"
+            aria-label="New question"
+            maxLength={200}
+          />
           <Button type="submit" variant="outline" disabled={pending || !question.trim()}>
             {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />} Add
           </Button>

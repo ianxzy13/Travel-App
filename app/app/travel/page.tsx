@@ -11,9 +11,16 @@ export default async function Travel() {
   const { wedding, role } = await requireWedding();
   const sb = await createClient();
   const [flights, travellers, guests] = await Promise.all([
-    fetchAll((f, t) => sb.from("flights").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t)),
     fetchAll((f, t) =>
-      sb.from("flight_travellers").select("flight_id, guest_id").eq("wedding_id", wedding.id).order("flight_id").range(f, t),
+      sb.from("flights").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("flight_travellers")
+        .select("flight_id, guest_id")
+        .eq("wedding_id", wedding.id)
+        .order("flight_id")
+        .range(f, t),
     ),
     loadPickerGuests(sb, wedding.id),
   ]);

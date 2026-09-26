@@ -11,7 +11,9 @@ export default async function Hotels() {
   const { wedding, role } = await requireWedding();
   const sb = await createClient();
   const [hotels, stays, guests] = await Promise.all([
-    fetchAll((f, t) => sb.from("hotels").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t)),
+    fetchAll((f, t) =>
+      sb.from("hotels").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t),
+    ),
     fetchAll((f, t) =>
       sb
         .from("hotel_guest_assignments")
@@ -25,7 +27,10 @@ export default async function Hotels() {
 
   return (
     <HotelsPage
-      hotels={hotels.map((h) => ({ ...h, price_per_night: h.price_per_night == null ? null : Number(h.price_per_night) }))}
+      hotels={hotels.map((h) => ({
+        ...h,
+        price_per_night: h.price_per_night == null ? null : Number(h.price_per_night),
+      }))}
       stays={stays}
       guests={guests}
       currency={wedding.currency}

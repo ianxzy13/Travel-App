@@ -17,9 +17,20 @@ export function StarRating({
 }) {
   if (!onChange) {
     return (
-      <span className="inline-flex" role="img" aria-label={value ? `${value} out of 5 stars` : "Not rated"}>
+      <span
+        className="inline-flex"
+        role="img"
+        aria-label={value ? `${value} out of 5 stars` : "Not rated"}
+      >
         {[1, 2, 3, 4, 5].map((n) => (
-          <Star key={n} className={cn(size, n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40")} aria-hidden />
+          <Star
+            key={n}
+            className={cn(
+              size,
+              n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40",
+            )}
+            aria-hidden
+          />
         ))}
       </span>
     );
@@ -36,7 +47,13 @@ export function StarRating({
           onClick={() => onChange(value === n ? null : n)}
           className="focus-visible:ring-ring rounded p-0.5 focus-visible:ring-2 focus-visible:outline-none"
         >
-          <Star className={cn(size, n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/50")} aria-hidden />
+          <Star
+            className={cn(
+              size,
+              n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/50",
+            )}
+            aria-hidden
+          />
         </button>
       ))}
     </div>

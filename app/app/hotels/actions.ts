@@ -21,7 +21,10 @@ function done(): ActionResult {
   return { ok: true };
 }
 
-export async function saveHotel(input: unknown, id?: string): Promise<ActionResult<{ id: string }>> {
+export async function saveHotel(
+  input: unknown,
+  id?: string,
+): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
   if (!ctx) return NO_PERMISSION;
   const parsed = hotelSchema.safeParse(input);
@@ -45,7 +48,11 @@ export async function saveHotel(input: unknown, id?: string): Promise<ActionResu
   };
 
   if (id) {
-    const { error } = await ctx.sb.from("hotels").update(row).eq("id", id).eq("wedding_id", ctx.wedding.id);
+    const { error } = await ctx.sb
+      .from("hotels")
+      .update(row)
+      .eq("id", id)
+      .eq("wedding_id", ctx.wedding.id);
     if (error) return fail("saveHotel", error);
     done();
     return { ok: true, data: { id } };
@@ -63,7 +70,11 @@ export async function saveHotel(input: unknown, id?: string): Promise<ActionResu
 export async function deleteHotel(id: string): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !z.uuid().safeParse(id).success) return NO_PERMISSION;
-  const { error } = await ctx.sb.from("hotels").delete().eq("id", id).eq("wedding_id", ctx.wedding.id);
+  const { error } = await ctx.sb
+    .from("hotels")
+    .delete()
+    .eq("id", id)
+    .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("deleteHotel", error);
   return done();
 }
@@ -80,7 +91,11 @@ export async function setHotelGuests(hotelId: string, input: unknown): Promise<A
   const wid = ctx.wedding.id;
   const keep = parsed.data.map((g) => g.guestId);
 
-  let del = ctx.sb.from("hotel_guest_assignments").delete().eq("hotel_id", hotelId).eq("wedding_id", wid);
+  let del = ctx.sb
+    .from("hotel_guest_assignments")
+    .delete()
+    .eq("hotel_id", hotelId)
+    .eq("wedding_id", wid);
   if (keep.length) del = del.not("guest_id", "in", `(${keep.join(",")})`);
   const { error: delError } = await del;
   if (delError) return fail("setHotelGuests", delError);

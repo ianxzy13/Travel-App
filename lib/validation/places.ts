@@ -1,10 +1,14 @@
 import { z } from "zod";
 
-const text = (max: number) => z.string().trim().max(max, `Please keep this under ${max} characters`);
+const text = (max: number) =>
+  z.string().trim().max(max, `Please keep this under ${max} characters`);
 const money = z.number().finite().min(0, "Amounts can't be negative").max(9_999_999_999).nullable();
 const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")]);
 const count = (max: number) => z.number().int("Whole numbers only").min(0).max(max).nullable();
-const url = z.union([z.literal(""), z.url("Please enter a full web address, e.g. https://…").max(500)]);
+const url = z.union([
+  z.literal(""),
+  z.url("Please enter a full web address, e.g. https://…").max(500),
+]);
 
 export const venueSchema = z.object({
   name: text(120).min(1, "Please enter a name"),
