@@ -159,6 +159,38 @@ export type NotificationRow = WeddingScoped & {
   read_at: string | null;
 };
 
+// ---------- Phase 4: seating ----------
+
+export type SeatingLayoutRow = WeddingScoped & {
+  event_id: string;
+  room_width: number;
+  room_height: number;
+};
+
+export type SeatingObjectRow = Timestamps & {
+  id: string;
+  wedding_id: string;
+  layout_id: string;
+  kind: import("@/lib/seating/types").SeatingKind;
+  label: string | null;
+  number: number | null;
+  x: number;
+  y: number;
+  rotation: number;
+  width: number;
+  height: number;
+  seat_count: number;
+  ends: boolean;
+};
+
+export type SeatAssignmentRow = Timestamps & {
+  layout_id: string;
+  guest_id: string;
+  wedding_id: string;
+  object_id: string;
+  seat_index: number;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -222,6 +254,15 @@ export type Database = {
       rsvp_responses: Table<RsvpResponseRow, "wedding_id" | "guest_id" | "event_id" | "status">;
       email_sends: Table<EmailSendRow, "wedding_id" | "household_id" | "kind" | "to_emails">;
       notifications: Table<NotificationRow, "wedding_id" | "user_id" | "type" | "title">;
+      seating_layouts: Table<SeatingLayoutRow, "wedding_id" | "event_id">;
+      seating_objects: Table<
+        SeatingObjectRow,
+        "id" | "wedding_id" | "layout_id" | "kind" | "width" | "height"
+      >;
+      seat_assignments: Table<
+        SeatAssignmentRow,
+        "layout_id" | "guest_id" | "wedding_id" | "object_id" | "seat_index"
+      >;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -267,6 +308,7 @@ export type Database = {
       };
       get_wedding_public: { Args: { p_slug: string }; Returns: Json };
       find_rsvp_code: { Args: { p_slug: string; p_name: string }; Returns: string | null };
+      apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };
         Returns: undefined;

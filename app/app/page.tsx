@@ -31,7 +31,10 @@ export default async function DashboardPage({
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
-  const rsvp = await rsvpSummary(supabase, wedding.id);
+  const [rsvp, seating] = await Promise.all([
+    rsvpSummary(supabase, wedding.id),
+    seatingSummary(supabase, wedding.id),
+  ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
       .from("wedding_members")
@@ -186,7 +189,28 @@ export default async function DashboardPage({
             empty="No tables yet. Once guests reply, seat them with drag and drop."
             href="/app/seating"
             cta="Open seating chart"
-          />
+          >
+            {seating.tables > 0 && (
+              <div className="space-y-2">
+                <p className="text-sm">
+                  <span className="font-serif text-3xl font-semibold tabular-nums">
+                    {seating.seated}
+                  </span>{" "}
+                  <span className="text-muted-foreground">
+                    of {rsvp.attending} attending guests seated at {seating.tables} tables
+                  </span>
+                </p>
+                <div className="bg-muted h-2 rounded-full">
+                  <div
+                    className="bg-primary h-2 rounded-full"
+                    style={{
+                      width: `${rsvp.attending ? Math.min(100, (seating.seated / rsvp.attending) * 100) : 0}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </SummaryCard>
           <SummaryCard
             icon={ListChecks}
             title="To-dos"
@@ -265,4 +289,23 @@ async function rsvpSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     declined: [...answered].filter((id) => !attending.has(id)).length,
     waiting: [...invited].filter((id) => !answered.has(id)).length,
   };
+}
+
+/** Tables and seated guests across the wedding's seating charts. */
+async function seatingSummary(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  weddingId: string,
+) {
+  const [{ count: tables }, { count: seated }] = await Promise.all([
+    supabase
+      .from("seating_objects")
+      .select("id", { count: "exact", head: true })
+      .eq("wedding_id", weddingId)
+      .in("kind", ["round", "rect", "square", "head", "sweetheart"]),
+    supabase
+      .from("seat_assignments")
+      .select("guest_id", { count: "exact", head: true })
+      .eq("wedding_id", weddingId),
+  ]);
+  return { tables: tables ?? 0, seated: seated ?? 0 };
 }

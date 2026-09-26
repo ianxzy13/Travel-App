@@ -48,6 +48,8 @@ export function AppShell({
   children,
 }: Props) {
   const pathname = usePathname();
+  // The seating chart uses the whole screen width and height.
+  const wide = pathname.startsWith("/app/seating");
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   // Dialogs and menus render outside this component (at the end of <body>),
@@ -159,7 +161,14 @@ export function AppShell({
           collapsed ? "md:pl-[4.5rem]" : "md:pl-64",
         )}
       >
-        <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 md:py-10">{children}</div>
+        <div
+          className={cn(
+            "mx-auto w-full",
+            wide ? "px-3 py-3 md:py-4" : "max-w-6xl px-4 py-6 sm:px-6 md:py-10",
+          )}
+        >
+          {children}
+        </div>
       </main>
 
       {/* ---------- Mobile bottom tab bar ---------- */}

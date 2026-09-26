@@ -6,10 +6,10 @@ together with your partner, family or planner.
 Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and Supabase
 (database, sign-in and file storage). Hosted on Vercel.
 
-> **Status:** Phases 1–3 are done: sign-in, onboarding, dashboard, settings with collaborators and
-> events, the full guest list (households, tags, seating rules, CSV import/export) and RSVPs (private
-> links, meal choices, email invitations and reminders, notifications). The other modules show a
-> "coming soon" page until their phase is built.
+> **Status:** Phases 1–4 are done: sign-in, onboarding, dashboard, settings, the guest list, RSVPs
+> (private links, meals, email invitations) and the seating chart (drag and drop floor plan, rules,
+> auto-arrange, live collaboration, printing). The other modules show a "coming soon" page until
+> their phase is built.
 
 ---
 
@@ -76,6 +76,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    - `20260926000000_foundation.sql` (phase 1: users, weddings, collaborators)
    - `20260927000000_guests_events.sql` (phase 2: events, households, guests, tags)
    - `20260928000000_rsvp.sql` (phase 3: RSVP codes, meals, replies, emails, notifications)
+   - `20260929000000_seating.sql` (phase 4: floor plans, tables, seat assignments)
    - Later phases add more files. Run only the new ones each time.
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more.
 
@@ -167,6 +168,21 @@ Both need the Supabase **secret key**, which bypasses security rules, so keep it
 - **RSVPs → Meals & settings**: deadline, message after the deadline, meal options, and which
   events ask for a meal (usually the reception).
 - Got an answer by phone or on paper? **RSVPs → ⋯ → Record or edit their reply**.
+
+**Seating chart tips**
+
+- Pick the event at the top (it opens on the event that asks for meals, usually the reception).
+- **Add** tables and room items, drag them into place (snap to a 50 cm grid; switch it off in the
+  Room panel). Scroll or pinch to zoom, drag the empty floor to move around.
+- Drag a guest, or a whole household by its header, onto a seat or a table. Drag a seated guest to
+  another seat to move or swap, or back to the list to unseat. On a phone: tap a name, then tap a
+  seat.
+- Red **!** badges mark tables that break a rule (keep apart / together), children without an adult
+  from their household, or declined guests who still have a seat.
+- **Auto-arrange** only fills empty seats; you can keep or undo the result. Ctrl+Z / Ctrl+Y undo
+  and redo (50 steps). Changes save automatically and appear live for collaborators.
+- **Print** gives the floor plan, a table-by-table list, an A–Z "find your seat" list, fold-over
+  place cards and a caterer summary. Choose "Save as PDF" in the print dialog for a PDF.
 
 1. `npm run dev`, open <http://localhost:3000>, click **Get started**.
 2. Enter your email → open the link in the email → you land on **onboarding**.

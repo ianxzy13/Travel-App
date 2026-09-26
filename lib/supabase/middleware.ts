@@ -4,7 +4,7 @@ import type { Database } from "@/lib/database.types";
 import { isSupabaseConfigured, SUPABASE_KEY, SUPABASE_URL } from "./env";
 
 // Pages that require being signed in.
-const PROTECTED_PREFIXES = ["/app", "/onboarding", "/invite"];
+const PROTECTED_PREFIXES = ["/app", "/onboarding", "/invite", "/print"];
 
 /**
  * Runs on every request: refreshes the Supabase session cookie and sends
