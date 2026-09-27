@@ -2,11 +2,13 @@
 
 import { useTransition } from "react";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { acceptInvitation } from "@/app/invite/[token]/actions";
 import { Button } from "@/components/ui/button";
 
 export function AcceptInviteButton({ token }: { token: string }) {
+  const t = useTranslations("invite");
   const [pending, startTransition] = useTransition();
   return (
     <Button
@@ -22,7 +24,7 @@ export function AcceptInviteButton({ token }: { token: string }) {
       }
     >
       {pending && <Loader2 className="animate-spin" aria-hidden />}
-      Accept and start planning
+      {t("accept")}
     </Button>
   );
 }

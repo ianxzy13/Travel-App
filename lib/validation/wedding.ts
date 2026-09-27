@@ -1,24 +1,16 @@
+import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
+/** Currencies couples can plan in (names and symbols come from the browser, in each language). */
 export const CURRENCIES = [
-  { code: "EUR", label: "Euro (€)" },
-  { code: "USD", label: "US dollar ($)" },
-  { code: "GBP", label: "British pound (£)" },
-  { code: "CHF", label: "Swiss franc (CHF)" },
-  { code: "CAD", label: "Canadian dollar (C$)" },
-  { code: "AUD", label: "Australian dollar (A$)" },
-  { code: "NZD", label: "New Zealand dollar (NZ$)" },
-  { code: "SEK", label: "Swedish krona (kr)" },
-  { code: "NOK", label: "Norwegian krone (kr)" },
-  { code: "DKK", label: "Danish krone (kr)" },
-  { code: "PLN", label: "Polish złoty (zł)" },
-  { code: "BRL", label: "Brazilian real (R$)" },
-  { code: "MXN", label: "Mexican peso (MX$)" },
-  { code: "ZAR", label: "South African rand (R)" },
-  { code: "INR", label: "Indian rupee (₹)" },
-  { code: "JPY", label: "Japanese yen (¥)" },
+  "EUR", "USD", "GBP", "CHF", "CAD", "AUD", "NZD", "SEK", "NOK", "DKK", "ISK", "PLN", "CZK",
+  "HUF", "RON", "BGN", "RSD", "BAM", "MKD", "ALL", "TRY", "RUB", "UAH", "GEL", "AED", "SAR",
+  "QAR", "KWD", "BHD", "OMR", "JOD", "ILS", "EGP", "MAD", "TND", "ZAR", "NGN", "KES", "GHS",
+  "INR", "PKR", "BDT", "LKR", "NPR", "CNY", "HKD", "TWD", "JPY", "KRW", "SGD", "MYR", "THB",
+  "IDR", "PHP", "VND", "BRL", "MXN", "ARS", "CLP", "COP", "PEN", "UYU", "DOP", "CRC",
 ] as const;
 
+/** Stored in English in the database; shown translated (see messages "weddingForm.styles"). */
 export const STYLE_TAGS = [
   "Classic",
   "Modern",
@@ -34,32 +26,25 @@ export const STYLE_TAGS = [
   "Intimate",
 ] as const;
 
-export const ACCENTS = [
-  { value: "rose", label: "Dusty rose" },
-  { value: "sage", label: "Sage" },
-] as const;
+export const ACCENTS = ["rose", "sage"] as const;
 
-const currencyCodes = CURRENCIES.map((c) => c.code) as [string, ...string[]];
-const name = z.string().trim().min(1, "Please enter a name").max(80, "That name is a bit long");
+const name = z.string().trim().min(1, v("name")).max(80, v("tooLong", 80));
 
 /** Shared by the onboarding wizard and the settings page (client + server). */
 export const weddingSchema = z.object({
   partnerAName: name,
   partnerBName: name,
   // "" means "we haven't picked a date yet"
-  weddingDate: z.union([
-    z.literal(""),
-    z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Please pick a valid date"),
-  ]),
-  location: z.string().trim().max(200, "Please keep this under 200 characters"),
-  currency: z.enum(currencyCodes, "Please choose a currency"),
+  weddingDate: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]),
+  location: z.string().trim().max(200, v("tooLong", 200)),
+  currency: z.string().regex(/^[A-Z]{3}$/, v("currency")),
   // Kept as text so the input can be empty; converted to a number when saving.
   estimatedGuests: z
     .string()
     .trim()
-    .regex(/^\d{0,4}$/, "Please enter a whole number up to 5000"),
+    .regex(/^\d{0,4}$/, v("guestCount")),
   styleTags: z.array(z.string().max(30)).max(12),
-  accent: z.enum(["rose", "sage"]),
+  accent: z.enum(ACCENTS),
 });
 
 export type WeddingFormValues = z.infer<typeof weddingSchema>;
@@ -91,14 +76,11 @@ export function toWeddingColumns(v: WeddingFormValues) {
 }
 
 export const inviteSchema = z.object({
-  email: z.email("Please enter a valid email address").max(320),
+  email: z.email(v("email")).max(320),
   role: z.enum(["owner", "editor", "viewer"]),
 });
 
 export type InviteFormValues = z.infer<typeof inviteSchema>;
 
-export const ROLE_LABELS = {
-  owner: { label: "Owner", description: "Full access, manages collaborators" },
-  editor: { label: "Editor", description: "Can add and change everything" },
-  viewer: { label: "Viewer", description: "Can look but not change" },
-} as const;
+/** Collaborator roles (labels and descriptions are in messages "roles"). */
+export const ROLES = ["owner", "editor", "viewer"] as const;

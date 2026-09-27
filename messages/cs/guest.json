@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Jazyk",
+    "moreLanguages": "Další jazyky",
+    "yourTime": "{time} u vás"
+  },
+  "site": {
+    "sections": {
+      "home": "Úvod",
+      "story": "Náš příběh",
+      "events": "Program",
+      "travel": "Cesta a ubytování",
+      "rsvp": "Potvrzení účasti",
+      "party": "Svědci",
+      "registry": "Seznam darů",
+      "faq": "Otázky",
+      "gallery": "Galerie"
+    },
+    "nav": "Části webu",
+    "dateTbd": "Datum bude upřesněno",
+    "newTab": "(otevře se na nové kartě)",
+    "rsvpButton": "Potvrdit účast",
+    "countdown": {
+      "days": "{count, plural, one {Zbývá # den} few {Zbývají # dny} many {Zbývá # dne} other {Zbývá # dní}}",
+      "daysWord": "{count, plural, one {den do svatby} few {dny do svatby} many {dne do svatby} other {dní do svatby}}",
+      "today": "Dnes je ten velký den!",
+      "married": "Šťastní novomanželé"
+    },
+    "madeWith": "Vytvořeno ve <link>Vow</link>",
+    "empty": {
+      "events": "Přidejte události v Nastavení → Události a zobrazí se tady.",
+      "travel": "Označte hotely „Zobrazit na webu“ nebo přidejte tipy na cestu v editoru.",
+      "other": "Zatím tu nic není. Přidejte obsah v editoru.",
+      "hidden": "Do té doby zůstane tato část na zveřejněném webu skrytá."
+    },
+    "event": {
+      "date": "Datum",
+      "time": "Čas",
+      "place": "Místo",
+      "dressCode": "Dress code",
+      "openMap": "Otevřít v Google Maps"
+    },
+    "travel": {
+      "airport": "Nejbližší letiště: <b>{code}</b>",
+      "searchFlights": "Hledat lety",
+      "perNight": "Od <b>{price}</b> za noc",
+      "code": "Náš kód: <mono>{code}</mono>",
+      "bookBy": "Rezervujte do <b>{date}</b>",
+      "bookRoom": "Rezervovat pokoj",
+      "bookRoomAt": "Rezervovat pokoj: {name}",
+      "website": "Web",
+      "websiteOf": "Web: {name}",
+      "map": "Mapa",
+      "mapOf": "Mapa: {name}"
+    },
+    "rsvp": {
+      "replyBy": "Prosíme o odpověď do <b>{date}</b>.",
+      "or": "nebo použijte kód z pozvánky"
+    },
+    "registry": {
+      "visit": "Zobrazit"
+    },
+    "gallery": {
+      "alt": "Fotka novomanželů"
+    },
+    "preview": {
+      "bar": "Náhled: dokud web nezveřejníte, vidí ho jen váš svatební tým.",
+      "back": "Zpět do editoru"
+    },
+    "password": {
+      "intro": "Tento web je soukromý. Zadejte heslo z pozvánky.",
+      "label": "Heslo",
+      "enter": "Vstoupit",
+      "wrong": "Heslo není správné. Podívejte se do pozvánky nebo se zeptejte novomanželů."
+    },
+    "meta": {
+      "weddingOf": "Svatba: {couple}",
+      "website": "Svatební web"
+    }
+  },
+  "rsvp": {
+    "title": "Potvrzení účasti",
+    "dateTbd": "Datum bude upřesněno",
+    "weddingOf": "Svatba",
+    "rsvpsBy": "Potvrzení přes <link>Vow</link>",
+    "enterCode": "Zadejte kód z pozvánky (e-mail nebo kartička).",
+    "findIntro": "Najděte svou pozvánku podle jména, jak je uvedeno na pozvánce.",
+    "orCode": "Nebo použijte kód z pozvánky",
+    "notFound": "Pozvánka nenalezena",
+    "notFoundText": "Tento odkaz nebo kód neodpovídá žádné pozvánce. Zkontrolujte ho a zkuste to znovu.",
+    "nothingYet": "Zatím není co potvrzovat. Podívejte se sem později.",
+    "code": {
+      "label": "Váš kód",
+      "continue": "Pokračovat",
+      "invalid": "Kódy mají 6 písmen a číslic, např. K7P2QX."
+    },
+    "find": {
+      "label": "Vaše celé jméno",
+      "placeholder": "Jméno a příjmení",
+      "button": "Hledat",
+      "fullName": "Zadejte jméno a příjmení tak, jak je na pozvánce.",
+      "noMatch": "Toto jméno jsme nenašli. Zkuste pravopis z pozvánky nebo použijte kód z pozvánky.",
+      "failed": "Něco se pokazilo. Zkuste to prosím znovu."
+    },
+    "dear": "Milí {name},",
+    "update": "Své odpovědi můžete upravit níže.",
+    "invite": "Moc rádi bychom věděli, jestli s námi budete.",
+    "replyBy": "Prosíme o odpověď do {date}.",
+    "closed": "Termín pro potvrzení už uplynul.",
+    "closedContact": "Potřebujete něco změnit? {contact}",
+    "closedNoContact": "Potřebujete něco změnit? Obraťte se přímo na novomanžele.",
+    "thanks": "Děkujeme!",
+    "thanksText": "Vaše odpověď byla odeslána: {couple}. Stejným odkazem ji můžete kdykoli změnit.",
+    "thanksTextUntil": "Vaše odpověď byla odeslána: {couple}. Stejným odkazem ji můžete změnit do {date}.",
+    "send": "Odeslat odpověď",
+    "save": "Uložit změny",
+    "change": "Změnit odpovědi",
+    "yourAnswers": "Vaše odpovědi",
+    "attending": "Přijde",
+    "notAttending": "Nepřijde",
+    "noAnswer": "Zatím bez odpovědi",
+    "cantMakeIt": "nemůže přijít",
+    "noAnswerYet": "zatím bez odpovědi",
+    "songRequest": "Přání písně: {song}",
+    "form": {
+      "everyone": "Přijdeme všichni",
+      "none": "Nikdo z nás nemůže přijít",
+      "willAttend": "Přijde {name} na: {event}?",
+      "accept": "S radostí přijímá",
+      "decline": "Bohužel nemůže",
+      "meal": "Výběr menu",
+      "chooseMeal": "Vyberte menu.",
+      "chooseAnswer": "Vyberte odpověď.",
+      "missingMeal": "Vyberte menu pro každého, kdo přijde.",
+      "missingAnswer": "Před odesláním odpovězte za všechny.",
+      "details": "Pár podrobností",
+      "plusOneName": "Jméno vašeho doprovodu (doprovod: {host})",
+      "firstName": "Jméno",
+      "lastName": "Příjmení",
+      "dietary": "Strava nebo alergie: {name}",
+      "dietaryPlaceholder": "např. vegetariánská, alergie na ořechy (nechte prázdné, pokud nic)",
+      "song": "Písnička, při které se roztančíte",
+      "songPlaceholder": "Interpret – skladba",
+      "message": "Vzkaz pro: {couple}",
+      "guestOf": "Doprovod: {name}",
+      "guest": "Host"
+    },
+    "errors": {
+      "rsvp_not_found": "Tuto pozvánku jsme nenašli. Zkontrolujte odkaz nebo kód.",
+      "deadline_passed": "Termín pro potvrzení už uplynul. Obraťte se přímo na novomanžele.",
+      "invalid_guest_or_event": "Něco ve vašich odpovědích neodpovídá pozvánce. Obnovte stránku.",
+      "invalid_status": "U každého uveďte, zda přijde, nebo ne.",
+      "not_allowed": "Nemáte oprávnění zapisovat odpovědi pro tuto svatbu.",
+      "generic": "Odpověď se nepodařilo uložit. Zkuste to za chvíli znovu."
+    }
+  },
+  "board": {
+    "empty": "Tato nástěnka je zatím prázdná.",
+    "photoBy": "Foto: <photographer>{name}</photographer>, <unsplash>Unsplash</unsplash>",
+    "madeWith": "Vytvořeno ve <link>Vow</link>",
+    "title": "Sdílená nástěnka",
+    "fallbackAlt": "Inspirace"
+  },
+  "email": {
+    "previewInvite": "Pozvánka na svatbu: {couple}",
+    "previewReminder": "Připomínka potvrzení účasti na svatbě: {couple}",
+    "eyebrowInvite": "Jste zváni",
+    "eyebrowReminder": "Malá připomínka",
+    "dear": "Milí {name},",
+    "bodyInvite": "Moc rádi bychom tento den oslavili s vámi. Dejte nám prosím vědět přes svůj osobní odkaz, kdo přijde.",
+    "bodyReminder": "Vaši odpověď jsme zatím nedostali a moc rádi bychom věděli, jestli přijdete. Zabere to jen minutu.",
+    "button": "Odpovědět",
+    "replyBy": "Prosíme o odpověď do {date}.",
+    "fallback": "Tlačítko nefunguje? Otevřete {link} nebo zadejte kód {code}.",
+    "love": "S láskou",
+    "personal": "Tento odkaz patří jen vaší domácnosti. Prosíme, nesdílejte ho.",
+    "subjectInvite": "Pozvánka na svatbu: {couple}",
+    "subjectReminder": "Připomínka: potvrďte účast na svatbě: {couple}"
+  }
+}

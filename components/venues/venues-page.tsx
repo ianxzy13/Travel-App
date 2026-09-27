@@ -4,7 +4,6 @@ import { useMemo, useState, useTransition } from "react";
 import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format, parseISO } from "date-fns";
 import {
   AlertTriangle,
   Check,
@@ -18,6 +17,7 @@ import {
   Users,
   X,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   deleteChecklistItem,
@@ -60,7 +60,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import type { VenueChecklistRow, VenueRow } from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
-import { AVAILABILITY, VENUE_KIND, VENUE_STATUS } from "@/lib/places/labels";
+import { fmtDate } from "@/lib/i18n/format";
+import { AVAILABILITY_CLASS, VENUE_KINDS, VENUE_STATUS_CLASS } from "@/lib/places/labels";
 import { mapsSearch } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
 import { venueSchema, type VenueValues } from "@/lib/validation/places";
@@ -82,6 +83,8 @@ type Props = {
 };
 
 export function VenuesPage({ venues, weddingId, currency, location, guestCount, canEdit }: Props) {
+  const t = useTranslations("venues");
+  const p = useTranslations("places");
   const [status, setStatus] = useState("all");
   const [kind, setKind] = useState("all");
   const [compare, setCompare] = useState<string[]>([]);
@@ -108,7 +111,7 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
       c.includes(id)
         ? c.filter((x) => x !== id)
         : c.length >= 4
-          ? (toast.info("Compare up to 4 venues at a time."), c)
+          ? (toast.info(t("compareMax")), c)
           : [...c, id],
     );
   }
@@ -116,22 +119,24 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
   return (
     <>
       <PageHeader
-        title="Venues"
-        description="Compare the places you're considering, and book the one."
+        title={t("title")}
+        description={t("description")}
         actions={
           <>
             <Button asChild variant="outline" size="sm">
               <a
-                href={mapsSearch(`wedding venues near ${location || "me"}`)}
+                href={mapsSearch(
+                  location ? t("mapsQuery", { place: location }) : t("mapsNearMe"),
+                )}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Search aria-hidden /> Find venues{location ? ` near ${location}` : ""}
+                <Search aria-hidden /> {location ? t("findNear", { place: location }) : t("find")}
               </a>
             </Button>
             {canEdit && (
               <Button size="sm" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> Add venue
+                <Plus aria-hidden /> {t("add")}
               </Button>
             )}
           </>
@@ -143,14 +148,11 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
           <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
             <Landmark className="size-7" aria-hidden />
           </span>
-          <h2 className="text-3xl">No venues yet</h2>
-          <p className="text-muted-foreground max-w-sm">
-            Add the places you&apos;re considering. Each one gets a site-visit checklist, and you
-            can compare them side by side.
-          </p>
+          <h2 className="text-3xl">{t("emptyTitle")}</h2>
+          <p className="text-muted-foreground max-w-sm">{t("emptyText")}</p>
           {canEdit && (
             <Button onClick={() => setSheet("new")}>
-              <Plus aria-hidden /> Add your first venue
+              <Plus aria-hidden /> {t("addFirst")}
             </Button>
           )}
         </div>
@@ -158,34 +160,32 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
         <div className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <Select value={status} onValueChange={setStatus}>
-              <SelectTrigger className="w-44" aria-label="Filter by status">
+              <SelectTrigger className="w-44" aria-label={p("byStatus")}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Any status</SelectItem>
-                {Object.entries(VENUE_STATUS).map(([k, v]) => (
+                <SelectItem value="all">{p("anyStatus")}</SelectItem>
+                {Object.keys(VENUE_STATUS_CLASS).map((k) => (
                   <SelectItem key={k} value={k}>
-                    {v.label}
+                    {p(`venueStatus.${k as keyof typeof VENUE_STATUS_CLASS}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={kind} onValueChange={setKind}>
-              <SelectTrigger className="w-52" aria-label="Filter by type">
+              <SelectTrigger className="w-52" aria-label={t("byType")}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Ceremony or reception</SelectItem>
-                {Object.entries(VENUE_KIND).map(([k, v]) => (
+                <SelectItem value="all">{t("anyType")}</SelectItem>
+                {VENUE_KINDS.map((k) => (
                   <SelectItem key={k} value={k}>
-                    {v}
+                    {p(`venueKind.${k}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-muted-foreground self-center text-sm">
-              Tick up to 4 to compare them side by side.
-            </p>
+            <p className="text-muted-foreground self-center text-sm">{t("tickToCompare")}</p>
           </div>
 
           <ul className="grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] gap-4">
@@ -205,16 +205,18 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
       )}
 
       {compare.length >= 2 && (
-        <div className="bg-card fixed inset-x-3 bottom-20 z-40 mx-auto flex max-w-md items-center gap-2 rounded-2xl border p-2 pl-4 shadow-xl md:bottom-6">
-          <span className="flex-1 text-sm font-medium">{compare.length} venues selected</span>
+        <div className="bg-card fixed inset-x-3 bottom-20 z-40 mx-auto flex max-w-md items-center gap-2 rounded-2xl border p-2 ps-4 shadow-xl md:bottom-6">
+          <span className="flex-1 text-sm font-medium">
+            {t("selected", { count: compare.length })}
+          </span>
           <Button size="sm" onClick={() => setComparing(true)}>
-            <Columns3 aria-hidden /> Compare
+            <Columns3 aria-hidden /> {t("compare")}
           </Button>
           <Button
             variant="ghost"
             size="icon-sm"
             onClick={() => setCompare([])}
-            aria-label="Clear comparison"
+            aria-label={t("clearCompare")}
           >
             <X aria-hidden />
           </Button>
@@ -275,6 +277,9 @@ function VenueCard({
   onCompare: () => void;
   onOpen: () => void;
 }) {
+  const t = useTranslations("venues");
+  const p = useTranslations("places");
+  const locale = useLocale();
   const answered = v.checklist.filter((c) => c.done || c.answer).length;
   const tooSmall = v.capacity != null && guestCount != null && v.capacity < guestCount;
   return (
@@ -288,7 +293,7 @@ function VenueCard({
       <button
         type="button"
         onClick={onOpen}
-        className="focus-visible:ring-ring flex flex-1 flex-col text-left focus-visible:ring-2 focus-visible:outline-none"
+        className="focus-visible:ring-ring flex flex-1 flex-col text-start focus-visible:ring-2 focus-visible:outline-none"
       >
         <div className="bg-muted relative aspect-[16/9]">
           {v.coverUrl ? (
@@ -308,28 +313,26 @@ function VenueCard({
         </div>
         <div className="flex flex-1 flex-col gap-2 p-4">
           <div className="flex flex-wrap items-center gap-1.5">
-            <Badge className={VENUE_STATUS[v.status].className}>
-              {VENUE_STATUS[v.status].label}
-            </Badge>
-            <Badge className={AVAILABILITY[v.availability].className}>
-              {AVAILABILITY[v.availability].label}
+            <Badge className={VENUE_STATUS_CLASS[v.status]}>{p(`venueStatus.${v.status}`)}</Badge>
+            <Badge className={AVAILABILITY_CLASS[v.availability]}>
+              {p(`availability.${v.availability}`)}
             </Badge>
           </div>
           <p className="font-serif text-2xl leading-tight font-semibold">{v.name}</p>
-          <p className="text-muted-foreground text-xs">{VENUE_KIND[v.kind]}</p>
+          <p className="text-muted-foreground text-xs">{p(`venueKind.${v.kind}`)}</p>
           <StarRating value={v.rating} size="size-4" />
           <dl className="text-muted-foreground mt-auto grid grid-cols-2 gap-1 pt-2 text-sm">
             <div className={cn("flex items-center gap-1", tooSmall && "text-destructive")}>
               <Users className="size-3.5" aria-hidden />
-              <dt className="sr-only">Capacity</dt>
+              <dt className="sr-only">{t("capacity")}</dt>
               <dd>
                 {v.capacity ?? "–"}
-                {tooSmall && " (too small)"}
+                {tooSmall && t("tooSmall")}
               </dd>
             </div>
             <div>
-              <dt className="sr-only">Price</dt>
-              <dd className="text-foreground text-right font-medium tabular-nums">
+              <dt className="sr-only">{t("price")}</dt>
+              <dd className="text-foreground text-end font-medium tabular-nums">
                 {v.price == null ? "–" : formatMoney(v.price, currency)}
               </dd>
             </div>
@@ -340,14 +343,18 @@ function VenueCard({
             </p>
           )}
           <p className="text-muted-foreground text-xs">
-            Visit checklist: {answered}/{v.checklist.length}
-            {v.visit_date && ` · visit ${format(parseISO(v.visit_date), "d MMM")}`}
+            {t("checklistCount", { done: answered, total: v.checklist.length })}
+            {v.visit_date && t("visitOn", { date: fmtDate(v.visit_date, locale, "medium") })}
           </p>
         </div>
       </button>
-      <label className="bg-card/90 absolute top-2 right-2 flex items-center gap-1.5 rounded-full px-2 py-1 text-xs shadow-sm">
-        <Checkbox checked={compared} onCheckedChange={onCompare} aria-label={`Compare ${v.name}`} />
-        Compare
+      <label className="bg-card/90 absolute end-2 top-2 flex items-center gap-1.5 rounded-full px-2 py-1 text-xs shadow-sm">
+        <Checkbox
+          checked={compared}
+          onCheckedChange={onCompare}
+          aria-label={t("compareName", { name: v.name })}
+        />
+        {t("compare")}
       </label>
     </li>
   );
@@ -368,25 +375,27 @@ function CompareDialog({
   currency: string;
   guestCount: number | null;
 }) {
+  const t = useTranslations("venues");
+  const p = useTranslations("places");
   const questions = [...new Set(venues.flatMap((v) => v.checklist.map((c) => c.question)))];
   const rows: { label: string; cell: (v: VenueItem) => React.ReactNode }[] = [
-    { label: "Type", cell: (v) => VENUE_KIND[v.kind] },
+    { label: t("rows.type"), cell: (v) => p(`venueKind.${v.kind}`) },
     {
-      label: "Status",
+      label: t("rows.status"),
       cell: (v) => (
-        <Badge className={VENUE_STATUS[v.status].className}>{VENUE_STATUS[v.status].label}</Badge>
+        <Badge className={VENUE_STATUS_CLASS[v.status]}>{p(`venueStatus.${v.status}`)}</Badge>
       ),
     },
     {
-      label: "Our date",
+      label: t("rows.ourDate"),
       cell: (v) => (
-        <Badge className={AVAILABILITY[v.availability].className}>
-          {AVAILABILITY[v.availability].label}
+        <Badge className={AVAILABILITY_CLASS[v.availability]}>
+          {p(`availability.${v.availability}`)}
         </Badge>
       ),
     },
     {
-      label: "Capacity",
+      label: t("rows.capacity"),
       cell: (v) => (
         <span
           className={cn(
@@ -399,20 +408,23 @@ function CompareDialog({
           {v.capacity ?? "–"}
           {v.capacity != null && guestCount != null && v.capacity < guestCount && (
             <span className="block text-xs">
-              <AlertTriangle className="mr-1 inline size-3" aria-hidden />
-              Fewer than your {guestCount} guests
+              <AlertTriangle className="me-1 inline size-3" aria-hidden />
+              {t("fewerThan", { count: guestCount })}
             </span>
           )}
         </span>
       ),
     },
-    { label: "Price", cell: (v) => (v.price == null ? "–" : formatMoney(v.price, currency)) },
-    { label: "Rating", cell: (v) => <StarRating value={v.rating} size="size-4" /> },
-    { label: "Included", cell: (v) => v.included },
-    { label: "Pros", cell: (v) => v.pros },
-    { label: "Cons", cell: (v) => v.cons },
     {
-      label: "Contact",
+      label: t("rows.price"),
+      cell: (v) => (v.price == null ? "–" : formatMoney(v.price, currency)),
+    },
+    { label: t("rows.rating"), cell: (v) => <StarRating value={v.rating} size="size-4" /> },
+    { label: t("rows.included"), cell: (v) => v.included },
+    { label: t("rows.pros"), cell: (v) => v.pros },
+    { label: t("rows.cons"), cell: (v) => v.cons },
+    {
+      label: t("rows.contact"),
       cell: (v) => [v.contact_name, v.phone, v.email].filter(Boolean).join(" · "),
     },
     ...questions.map((q) => ({
@@ -423,10 +435,10 @@ function CompareDialog({
         return (
           <span className="flex gap-1">
             {item.done && (
-              <Check className="text-success mt-0.5 size-3.5 shrink-0" aria-label="Checked" />
+              <Check className="text-success mt-0.5 size-3.5 shrink-0" aria-label={t("checked")} />
             )}
             {item.answer ||
-              (item.done ? "" : <span className="text-muted-foreground">Not asked yet</span>)}
+              (item.done ? "" : <span className="text-muted-foreground">{t("notAsked")}</span>)}
           </span>
         );
       },
@@ -437,8 +449,8 @@ function CompareDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[92dvh] overflow-y-auto sm:max-w-5xl">
         <DialogHeader>
-          <DialogTitle className="font-serif text-2xl">Compare venues</DialogTitle>
-          <DialogDescription>Side by side, including your site-visit answers.</DialogDescription>
+          <DialogTitle className="font-serif text-2xl">{t("compareTitle")}</DialogTitle>
+          <DialogDescription>{t("compareText")}</DialogDescription>
         </DialogHeader>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[40rem] table-fixed text-sm">
@@ -446,7 +458,7 @@ function CompareDialog({
               <tr>
                 <th className="w-40" />
                 {venues.map((v) => (
-                  <th key={v.id} className="p-2 text-left align-bottom">
+                  <th key={v.id} className="p-2 text-start align-bottom">
                     {v.coverUrl && (
                       <div className="bg-muted relative mb-2 aspect-[16/9] overflow-hidden rounded-lg">
                         <Image
@@ -469,7 +481,7 @@ function CompareDialog({
                 <tr key={r.label}>
                   <th
                     scope="row"
-                    className="text-muted-foreground p-2 text-left align-top text-xs font-medium"
+                    className="text-muted-foreground p-2 text-start align-top text-xs font-medium"
                   >
                     {r.label}
                   </th>
@@ -528,6 +540,8 @@ function VenueForm({
   onClose: () => void;
   onCreated: (id: string) => void;
 }) {
+  const t = useTranslations("venues");
+  const p = useTranslations("places");
   const [pending, startTransition] = useTransition();
   const form = useForm({ resolver: zodResolver(venueSchema), defaultValues: toValues(venue) });
   const { errors } = form.formState;
@@ -540,11 +554,8 @@ function VenueForm({
         return;
       }
       if (values.status === "booked")
-        toast.success(`${values.name} is booked! 🎉 Add it to your events in Settings → Events.`);
-      else
-        toast.success(
-          venue ? "Venue saved" : "Venue added, with a site-visit checklist to fill in",
-        );
+        toast.success(t("bookedToast", { name: values.name }));
+      else toast.success(venue ? t("saved") : t("added"));
       if (venue) onClose();
       else onCreated(r.data.id);
     }),
@@ -582,32 +593,46 @@ function VenueForm({
   const details = (
     <form id="venue-form" onSubmit={onSubmit} noValidate>
       <fieldset disabled={!canEdit || pending} className="space-y-5">
-        <FormField id="v-name" label="Name" error={errors.name?.message}>
+        <FormField id="v-name" label={p("name")} error={errors.name?.message}>
           {(aria) => <Input {...aria} {...form.register("name")} />}
         </FormField>
         <div className="grid gap-4 sm:grid-cols-2">
           {select(
             "status",
-            "Status",
-            Object.fromEntries(Object.entries(VENUE_STATUS).map(([k, v]) => [k, v.label])),
+            p("status"),
+            Object.fromEntries(
+              Object.keys(VENUE_STATUS_CLASS).map((k) => [
+                k,
+                p(`venueStatus.${k as keyof typeof VENUE_STATUS_CLASS}`),
+              ]),
+            ),
           )}
-          {select("kind", "For", VENUE_KIND)}
+          {select(
+            "kind",
+            t("for"),
+            Object.fromEntries(VENUE_KINDS.map((k) => [k, p(`venueKind.${k}`)])),
+          )}
           {select(
             "availability",
-            "Available on our date?",
-            Object.fromEntries(Object.entries(AVAILABILITY).map(([k, v]) => [k, v.label])),
+            t("available"),
+            Object.fromEntries(
+              Object.keys(AVAILABILITY_CLASS).map((k) => [
+                k,
+                p(`availability.${k as keyof typeof AVAILABILITY_CLASS}`),
+              ]),
+            ),
           )}
           <div className="space-y-2">
-            <span className="text-sm font-medium">Rating</span>
+            <span className="text-sm font-medium">{t("rating")}</span>
             <Controller
               control={form.control}
               name="rating"
               render={({ field }) => (
-                <StarRating value={field.value} onChange={field.onChange} label="Your rating" />
+                <StarRating value={field.value} onChange={field.onChange} label={t("yourRating")} />
               )}
             />
           </div>
-          <FormField id="v-cap" label="Capacity (guests)" error={errors.capacity?.message}>
+          <FormField id="v-cap" label={t("capacityLabel")} error={errors.capacity?.message}>
             {(aria) => (
               <Controller
                 control={form.control}
@@ -626,7 +651,7 @@ function VenueForm({
               />
             )}
           </FormField>
-          <FormField id="v-price" label="Price / quote" error={errors.price?.message}>
+          <FormField id="v-price" label={t("priceLabel")} error={errors.price?.message}>
             {(aria) => (
               <Controller
                 control={form.control}
@@ -644,58 +669,58 @@ function VenueForm({
             )}
           </FormField>
         </div>
-        <FormField id="v-address" label="Address" error={errors.address?.message}>
+        <FormField id="v-address" label={p("address")} error={errors.address?.message}>
           {(aria) => <Input {...aria} {...form.register("address")} />}
         </FormField>
         {venue?.address && (
           <Button asChild variant="outline" size="sm">
             <a href={mapsSearch(venue.address)} target="_blank" rel="noreferrer">
-              <MapPin aria-hidden /> Open in Google Maps
+              <MapPin aria-hidden /> {p("openMaps")}
             </a>
           </Button>
         )}
         <div className="grid gap-4 sm:grid-cols-2">
-          <FormField id="v-contact" label="Contact person" error={errors.contactName?.message}>
+          <FormField id="v-contact" label={t("contact")} error={errors.contactName?.message}>
             {(aria) => <Input {...aria} {...form.register("contactName")} />}
           </FormField>
-          <FormField id="v-phone" label="Phone" error={errors.phone?.message}>
+          <FormField id="v-phone" label={p("phone")} error={errors.phone?.message}>
             {(aria) => <Input {...aria} type="tel" {...form.register("phone")} />}
           </FormField>
-          <FormField id="v-email" label="Email" error={errors.email?.message}>
+          <FormField id="v-email" label={p("email")} error={errors.email?.message}>
             {(aria) => <Input {...aria} type="email" {...form.register("email")} />}
           </FormField>
-          <FormField id="v-web" label="Website" error={errors.website?.message}>
+          <FormField id="v-web" label={p("website")} error={errors.website?.message}>
             {(aria) => (
               <Input {...aria} type="url" placeholder="https://" {...form.register("website")} />
             )}
           </FormField>
-          <FormField id="v-visit" label="Visit date" error={errors.visitDate?.message}>
+          <FormField id="v-visit" label={t("visitDate")} error={errors.visitDate?.message}>
             {(aria) => <Input {...aria} type="date" {...form.register("visitDate")} />}
           </FormField>
         </div>
-        <FormField id="v-included" label="What's included" error={errors.included?.message}>
+        <FormField id="v-included" label={t("included")} error={errors.included?.message}>
           {(aria) => (
             <Textarea
               {...aria}
               rows={2}
-              placeholder="Tables, chairs, catering, coordinator…"
+              placeholder={t("includedPlaceholder")}
               {...form.register("included")}
             />
           )}
         </FormField>
         <div className="grid gap-4 sm:grid-cols-2">
-          <FormField id="v-pros" label="Pros" error={errors.pros?.message}>
+          <FormField id="v-pros" label={t("pros")} error={errors.pros?.message}>
             {(aria) => <Textarea {...aria} rows={3} {...form.register("pros")} />}
           </FormField>
-          <FormField id="v-cons" label="Cons" error={errors.cons?.message}>
+          <FormField id="v-cons" label={t("cons")} error={errors.cons?.message}>
             {(aria) => <Textarea {...aria} rows={3} {...form.register("cons")} />}
           </FormField>
         </div>
-        <FormField id="v-notes" label="Notes" error={errors.notes?.message}>
+        <FormField id="v-notes" label={p("notes")} error={errors.notes?.message}>
           {(aria) => <Textarea {...aria} rows={2} {...form.register("notes")} />}
         </FormField>
         <div className="space-y-2">
-          <p className="text-sm font-medium">Photos</p>
+          <p className="text-sm font-medium">{t("photos")}</p>
           <Controller
             control={form.control}
             name="photoPaths"
@@ -718,20 +743,22 @@ function VenueForm({
     <>
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle className="font-serif text-3xl">
-          {venue ? venue.name : "Add a venue"}
+          {venue ? venue.name : t("addTitle")}
         </SheetTitle>
         <SheetDescription>
-          {venue ? VENUE_KIND[venue.kind] : "Only the name is required."}
+          {venue ? p(`venueKind.${venue.kind}`) : p("onlyName")}
         </SheetDescription>
       </SheetHeader>
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {venue ? (
           <Tabs defaultValue="details">
             <TabsList className="mb-4">
-              <TabsTrigger value="details">Details</TabsTrigger>
+              <TabsTrigger value="details">{p("details")}</TabsTrigger>
               <TabsTrigger value="checklist">
-                Visit checklist ({venue.checklist.filter((c) => c.done || c.answer).length}/
-                {venue.checklist.length})
+                {t("checklistTab", {
+                  done: venue.checklist.filter((c) => c.done || c.answer).length,
+                  total: venue.checklist.length,
+                })}
               </TabsTrigger>
             </TabsList>
             <TabsContent value="details">{details}</TabsContent>
@@ -748,12 +775,12 @@ function VenueForm({
           {venue && (
             <ConfirmDialog
               trigger={
-                <Button variant="ghost" className="text-destructive mr-auto" disabled={pending}>
-                  <Trash2 aria-hidden /> Delete
+                <Button variant="ghost" className="text-destructive me-auto" disabled={pending}>
+                  <Trash2 aria-hidden /> {p("delete")}
                 </Button>
               }
-              title={`Delete ${venue.name}?`}
-              description="Its photos and checklist are deleted too."
+              title={t("deleteTitle", { name: venue.name })}
+              description={t("deleteText")}
               onConfirm={async () => {
                 const r = await deleteVenue(venue.id);
                 if (!r.ok) {
@@ -764,13 +791,13 @@ function VenueForm({
               }}
             />
           )}
-          <div className="ml-auto flex gap-2">
+          <div className="ms-auto flex gap-2">
             <Button variant="outline" onClick={onClose} disabled={pending}>
-              Close
+              {p("close")}
             </Button>
             <Button type="submit" form="venue-form" disabled={pending}>
               {pending && <Loader2 className="animate-spin" aria-hidden />}
-              {venue ? "Save" : "Add venue"}
+              {venue ? p("save") : t("add")}
             </Button>
           </div>
         </SheetFooter>
@@ -789,6 +816,7 @@ function Checklist({
   items: VenueChecklistRow[];
   canEdit: boolean;
 }) {
+  const t = useTranslations("venues");
   const [question, setQuestion] = useState("");
   const [pending, startTransition] = useTransition();
 
@@ -804,9 +832,7 @@ function Checklist({
 
   return (
     <div className="space-y-3">
-      <p className="text-muted-foreground text-sm">
-        Take this with you on your visit. Answers save as you type.
-      </p>
+      <p className="text-muted-foreground text-sm">{t("checklistHint")}</p>
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.id} className="rounded-lg border p-3">
@@ -816,7 +842,7 @@ function Checklist({
                 checked={item.done}
                 disabled={!canEdit}
                 onCheckedChange={(c) => save(item, { done: c === true })}
-                aria-label={`Asked: ${item.question}`}
+                aria-label={t("asked", { question: item.question })}
               />
               <p className={cn("flex-1 text-sm font-medium", item.done && "text-muted-foreground")}>
                 {item.question}
@@ -825,7 +851,7 @@ function Checklist({
                 <Button
                   variant="ghost"
                   size="icon-xs"
-                  aria-label={`Remove question: ${item.question}`}
+                  aria-label={t("removeQuestion", { question: item.question })}
                   onClick={() =>
                     startTransition(async () => {
                       const r = await deleteChecklistItem(item.id);
@@ -840,8 +866,8 @@ function Checklist({
             <Input
               className="mt-2 h-8"
               defaultValue={item.answer ?? ""}
-              placeholder="Answer / notes"
-              aria-label={`Answer: ${item.question}`}
+              placeholder={t("answer")}
+              aria-label={t("answerFor", { question: item.question })}
               disabled={!canEdit}
               maxLength={1000}
               onBlur={(e) =>
@@ -871,12 +897,13 @@ function Checklist({
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Add your own question"
-            aria-label="New question"
+            placeholder={t("ownQuestion")}
+            aria-label={t("newQuestion")}
             maxLength={200}
           />
           <Button type="submit" variant="outline" disabled={pending || !question.trim()}>
-            {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />} Add
+            {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}{" "}
+            {t("addQuestion")}
           </Button>
         </form>
       )}

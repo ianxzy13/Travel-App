@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { emailFrom, getResend } from "@/lib/email/resend";
-import { isLocale } from "@/i18n/locales";
+import { isLocale, type Locale } from "@/i18n/locales";
 import { rsvpErrorKey, type RsvpResult } from "@/lib/rsvp/types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -52,29 +52,39 @@ async function notifyCoupleByEmail(result: RsvpResult) {
 
   const { data: wedding } = await admin
     .from("weddings")
-    .select("partner_a_name, partner_b_name, rsvp_notify_email")
+    .select("partner_a_name, partner_b_name, rsvp_notify_email, languages")
     .eq("id", result.wedding_id)
     .single();
   if (!wedding?.rsvp_notify_email) return;
 
   const { data: members } = await admin
     .from("wedding_members")
-    .select("role, profile:profiles(email)")
+    .select("role, profile:profiles(email, locale)")
     .eq("wedding_id", result.wedding_id)
     .in("role", ["owner", "editor"]);
-  const to = (members ?? []).flatMap((m) => (m.profile?.email ? [m.profile.email] : []));
-  if (to.length === 0) return;
+  // one email per language, so everyone reads it in the app language they chose
+  const fallback: Locale = isLocale(wedding.languages?.[0]) ? wedding.languages[0] : "en";
+  const byLocale = new Map<Locale, string[]>();
+  for (const m of members ?? []) {
+    if (!m.profile?.email) continue;
+    const locale = isLocale(m.profile.locale) ? m.profile.locale : fallback;
+    byLocale.set(locale, [...(byLocale.get(locale) ?? []), m.profile.email]);
+  }
+  if (byLocale.size === 0) return;
 
   const link = `${await getSiteUrl()}/app/rsvp?household=${result.household_id}`;
-  const what = result.updated ? "updated their RSVP" : "replied";
-  const summary = `${result.attending} attending, ${result.declined} not attending`;
-  await resend.emails.send({
-    from: emailFrom("Vow"),
-    to,
-    subject: `${result.household_name} ${what}`,
-    text: `${result.household_name} ${what}: ${summary}.\n\nSee all replies: ${link}`,
-    html: `<p><strong>${escapeHtml(result.household_name)}</strong> ${what}: ${summary}.</p><p><a href="${link}">See all replies</a></p>`,
-  });
+  for (const [locale, to] of byLocale) {
+    const t = await getTranslations({ locale, namespace: "notices.coupleEmail" });
+    const subject = t(result.updated ? "updated" : "replied", { name: result.household_name });
+    const summary = t("summary", { attending: result.attending, declined: result.declined });
+    await resend.emails.send({
+      from: emailFrom("Vow"),
+      to,
+      subject,
+      text: `${subject}: ${summary}.\n\n${t("seeAll")}: ${link}`,
+      html: `<p><strong>${escapeHtml(subject)}</strong>: ${escapeHtml(summary)}.</p><p><a href="${link}">${escapeHtml(t("seeAll"))}</a></p>`,
+    });
+  }
 }
 
 function escapeHtml(s: string) {

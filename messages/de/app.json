@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Übersicht",
+      "tasks": "Aufgaben",
+      "budget": "Budget",
+      "vendors": "Dienstleister",
+      "guests": "Gäste",
+      "rsvp": "Zusagen",
+      "seating": "Sitzplan",
+      "venues": "Locations",
+      "hotels": "Hotels",
+      "travel": "Reisen",
+      "inspiration": "Inspiration",
+      "website": "Website",
+      "schedule": "Tagesablauf",
+      "settings": "Einstellungen",
+      "home": "Start",
+      "groups": {
+        "plan": "Planen",
+        "people": "Menschen",
+        "places": "Orte",
+        "style": "Stil"
+      }
+    },
+    "shell": {
+      "mainNav": "Hauptnavigation",
+      "expand": "Seitenleiste ausklappen",
+      "collapse": "Seitenleiste einklappen",
+      "more": "Mehr",
+      "allTools": "Alle Planungswerkzeuge"
+    },
+    "userMenu": {
+      "account": "Kontomenü",
+      "appearance": "Darstellung",
+      "light": "Hell",
+      "dark": "Dunkel",
+      "system": "System",
+      "language": "Sprache",
+      "signOut": "Abmelden"
+    },
+    "switcher": {
+      "current": "Aktuelle Hochzeit: {name}. Hochzeit wechseln",
+      "yours": "Deine Hochzeiten",
+      "noDate": "Datum folgt",
+      "another": "Weitere Hochzeit planen",
+      "roles": {
+        "owner": "Inhaber",
+        "editor": "Bearbeiter",
+        "viewer": "Leser"
+      }
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "unread": "{count, plural, one {Benachrichtigungen, # ungelesen} other {Benachrichtigungen, # ungelesen}}",
+      "unreadOne": "Ungelesen",
+      "markAll": "Alle als gelesen markieren",
+      "empty": "Noch nichts. Neue Zusagen, Aufgaben für dich und Erinnerungen an Zahlungen und Fristen erscheinen hier."
+    },
+    "countdown": {
+      "today": "Heute ist der große Tag!",
+      "enjoy": "Genießt jeden Moment.",
+      "married": "{count, plural, one {Seit # Tag verheiratet} other {Seit # Tagen verheiratet}}",
+      "congrats": "Herzlichen Glückwunsch!",
+      "daysToGo": "{count, plural, one {Tag bis zur Hochzeit} other {Tage bis zur Hochzeit}}",
+      "hours": "Stunden",
+      "minutes": "Minuten",
+      "seconds": "Sekunden"
+    },
+    "dashboard": {
+      "welcome": "Willkommen in deinem Planer!",
+      "welcomeText": "Hier fängt alles an. Geh die nächsten Schritte in deinem eigenen Tempo durch.",
+      "noDate": "Datum folgt",
+      "setDate": "Lege das Datum fest, um den Countdown zu starten",
+      "nextSteps": "Nächste Schritte",
+      "stepsDone": "{done} von {total} erledigt",
+      "done": "(erledigt)",
+      "toDo": "(offen)",
+      "steps": {
+        "date": "Hochzeitsdatum festlegen",
+        "location": "Ort wählen",
+        "invite": "Partner, Familie oder Hochzeitsplaner einladen",
+        "guests": "Gästeliste anlegen",
+        "guestsSoFar": "{count, plural, one {Gästeliste anlegen (bisher #)} other {Gästeliste anlegen (bisher #)}}",
+        "budget": "Gesamtbudget festlegen",
+        "shortlist": "Locations vormerken",
+        "book": "Location buchen",
+        "inspiration": "Inspirations-Pinnwand starten",
+        "website": "Hochzeitswebsite veröffentlichen",
+        "timeline": "Planungs-Zeitplan erstellen"
+      },
+      "budget": {
+        "title": "Budget",
+        "empty": "Noch kein Budget. Lege eine Summe fest und wir schlagen eine Aufteilung vor.",
+        "cta": "Budget planen",
+        "committed": "verplant",
+        "committedOf": "verplant von {total}",
+        "overdue": "Überfällig: {name}"
+      },
+      "rsvp": {
+        "title": "Zusagen",
+        "empty": "Noch keine Antworten. Füge Gäste hinzu und verschicke die Einladungen.",
+        "cta": "Zusagen ansehen",
+        "attending": "Kommen",
+        "declined": "Abgesagt",
+        "waiting": "Ausstehend"
+      },
+      "seating": {
+        "title": "Sitzplan",
+        "empty": "Noch keine Tische. Sobald Gäste antworten, platzierst du sie per Drag-and-drop.",
+        "cta": "Sitzplan öffnen",
+        "seated": "von {attending} Gästen platziert an {tables, plural, one {# Tisch} other {# Tischen}}"
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "empty": "Noch keine Pins. Sammle Ideen und erstelle daraus eine Farbpalette.",
+        "cta": "Pinnwände öffnen",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Aufgaben",
+        "empty": "Noch keine Aufgaben. Wir erstellen einen Zeitplan ab eurem Hochzeitsdatum.",
+        "cta": "Aufgaben ansehen",
+        "ofDone": "von {total} erledigt",
+        "overdue": "{count} überfällig"
+      }
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "description": "Eure Hochzeitsdaten, Sprachen, Events und wer mitplant."
+    },
+    "translate": {
+      "button": "Übersetzungen",
+      "title": "Übersetzungen: {name}",
+      "hint": "Lass ein Feld leer, um den Text auf {language} zu zeigen.",
+      "draft": "Entwurf",
+      "draftFailed": "Dein Browser konnte dieses Sprachpaar nicht übersetzen. Bitte gib die Übersetzung ein.",
+      "noMachine": "Tipp: Chrome auf dem Computer kann Übersetzungen vorschlagen (dort erscheint ein „Entwurf“-Button).",
+      "save": "Übersetzungen speichern",
+      "saved": "Übersetzungen gespeichert",
+      "fields": {
+        "name": "Name",
+        "venue": "Name der Location",
+        "dressCode": "Dresscode",
+        "description": "Beschreibung",
+        "mealName": "Name des Menüs",
+        "mealDescription": "Beschreibung des Menüs"
+      }
+    },
+    "websiteLang": {
+      "editing": "Sprache",
+      "main": "{language} (eure Sprache)",
+      "hint": "Übersetzung: {language}. Fotos, Reihenfolge und sichtbare Bereiche legst du in der Hauptsprache fest.",
+      "progress": "{done}/{total} übersetzt",
+      "complete": "Übersetzt",
+      "fallback": "Leer: Gäste sehen den Text in der Hauptsprache.",
+      "nothing": "In diesem Bereich gibt es noch nichts zu übersetzen.",
+      "draft": "Alles mit dem Browser-Übersetzer entwerfen",
+      "draftFailed": "Dein Browser konnte dieses Sprachpaar nicht übersetzen. Bitte gib die Übersetzung ein.",
+      "item": "Eintrag {number}",
+      "fields": {
+        "tagline": "Motto",
+        "intro": "Einleitung",
+        "notes": "Hinweise",
+        "date": "Wann",
+        "title": "Titel",
+        "text": "Text",
+        "role": "Rolle",
+        "bio": "Ein paar Worte",
+        "label": "Name",
+        "note": "Notiz",
+        "question": "Frage",
+        "answer": "Antwort",
+        "caption": "Bildunterschrift"
+      }
+    }
+  }
+}

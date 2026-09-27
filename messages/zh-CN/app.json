@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "概览",
+      "tasks": "待办事项",
+      "budget": "预算",
+      "vendors": "供应商",
+      "guests": "宾客",
+      "rsvp": "出席回复",
+      "seating": "座位安排",
+      "venues": "场地",
+      "hotels": "酒店",
+      "travel": "出行",
+      "inspiration": "灵感",
+      "website": "网站",
+      "schedule": "当日流程",
+      "settings": "设置",
+      "home": "首页",
+      "groups": {
+        "plan": "筹备",
+        "people": "人员",
+        "places": "地点",
+        "style": "风格"
+      }
+    },
+    "shell": {
+      "mainNav": "主导航",
+      "expand": "展开侧边栏",
+      "collapse": "收起侧边栏",
+      "more": "更多",
+      "allTools": "全部筹备工具"
+    },
+    "userMenu": {
+      "account": "账户菜单",
+      "appearance": "外观",
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统",
+      "language": "语言",
+      "signOut": "退出登录"
+    },
+    "switcher": {
+      "current": "当前婚礼：{name}。切换婚礼",
+      "yours": "你的婚礼",
+      "noDate": "日期待定",
+      "another": "筹备另一场婚礼",
+      "roles": {
+        "owner": "所有者",
+        "editor": "编辑者",
+        "viewer": "查看者"
+      }
+    },
+    "notifications": {
+      "title": "通知",
+      "unread": "{count, plural, other {通知，# 条未读}}",
+      "unreadOne": "未读",
+      "markAll": "全部标为已读",
+      "empty": "暂无通知。新的出席回复、分配给你的待办以及付款和截止日期提醒会显示在这里。"
+    },
+    "countdown": {
+      "today": "今天就是大喜之日！",
+      "enjoy": "享受每一刻。",
+      "married": "{count, plural, other {已结婚 # 天}}",
+      "congrats": "恭喜！",
+      "daysToGo": "{count, plural, other {天后举行婚礼}}",
+      "hours": "小时",
+      "minutes": "分钟",
+      "seconds": "秒"
+    },
+    "dashboard": {
+      "welcome": "欢迎使用你的婚礼筹备工具！",
+      "welcomeText": "一切从这里开始。按照自己的节奏完成下面的步骤。",
+      "noDate": "日期待定",
+      "setDate": "设定日期，开始倒计时",
+      "nextSteps": "下一步",
+      "stepsDone": "已完成 {done}/{total}",
+      "done": "（已完成）",
+      "toDo": "（待完成）",
+      "steps": {
+        "date": "确定婚礼日期",
+        "location": "选择地点",
+        "invite": "邀请伴侣、家人或婚礼策划师",
+        "guests": "添加宾客名单",
+        "guestsSoFar": "{count, plural, other {添加宾客名单（已有 # 位）}}",
+        "budget": "设定总预算",
+        "shortlist": "筛选候选场地",
+        "book": "预订场地",
+        "inspiration": "创建灵感看板",
+        "website": "发布婚礼网站",
+        "timeline": "制定筹备时间表"
+      },
+      "budget": {
+        "title": "预算",
+        "empty": "还没有预算。设定总额，我们会建议如何分配。",
+        "cta": "规划预算",
+        "committed": "已承诺",
+        "committedOf": "已承诺，共 {total}",
+        "overdue": "逾期：{name}"
+      },
+      "rsvp": {
+        "title": "出席回复",
+        "empty": "还没有回复。先添加宾客，再发送请柬。",
+        "cta": "查看回复",
+        "attending": "出席",
+        "declined": "不出席",
+        "waiting": "待回复"
+      },
+      "seating": {
+        "title": "座位安排",
+        "empty": "还没有桌子。宾客回复后，拖放即可安排座位。",
+        "cta": "打开座位图",
+        "seated": "/ {attending} 位出席宾客已安排在 {tables, plural, other {# 张桌子}}"
+      },
+      "inspiration": {
+        "title": "灵感",
+        "empty": "还没有图钉。收集灵感并从中提取配色。",
+        "cta": "打开看板",
+        "pin": "图钉"
+      },
+      "tasks": {
+        "title": "待办事项",
+        "empty": "还没有待办。我们会根据婚礼日期生成时间表。",
+        "cta": "查看待办",
+        "ofDone": "/ {total} 已完成",
+        "overdue": "{count} 项逾期"
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "description": "婚礼信息、语言、活动以及与你一起筹备的人。"
+    },
+    "translate": {
+      "button": "翻译",
+      "title": "翻译：{name}",
+      "hint": "留空则显示{language}原文。",
+      "draft": "草稿",
+      "draftFailed": "你的浏览器无法翻译这组语言。请手动输入翻译。",
+      "noMachine": "提示：电脑上的 Chrome 可以生成翻译草稿（那里会出现“草稿”按钮）。",
+      "save": "保存翻译",
+      "saved": "翻译已保存",
+      "fields": {
+        "name": "名称",
+        "venue": "场地名称",
+        "dressCode": "着装要求",
+        "description": "描述",
+        "mealName": "餐点名称",
+        "mealDescription": "餐点描述"
+      }
+    },
+    "websiteLang": {
+      "editing": "语言",
+      "main": "{language}（你们的语言）",
+      "hint": "翻译：{language}。照片、顺序和显示的栏目在主要语言中设置。",
+      "progress": "已翻译 {done}/{total}",
+      "complete": "已翻译",
+      "fallback": "留空：宾客将看到主要语言的内容。",
+      "nothing": "这个栏目暂时没有可翻译的内容。",
+      "draft": "用浏览器翻译全部内容",
+      "draftFailed": "你的浏览器无法翻译这组语言。请手动输入翻译。",
+      "item": "第 {number} 项",
+      "fields": {
+        "tagline": "标语",
+        "intro": "简介",
+        "notes": "备注",
+        "date": "时间",
+        "title": "标题",
+        "text": "正文",
+        "role": "身份",
+        "bio": "简短介绍",
+        "label": "名称",
+        "note": "备注",
+        "question": "问题",
+        "answer": "回答",
+        "caption": "图片说明"
+      }
+    }
+  }
+}

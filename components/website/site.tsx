@@ -275,7 +275,7 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
           ))}
         </ul>
         {/* guests pick a language; hidden in the editor preview (it would reload the editor) */}
-        {!ctx.preview && ctx.data.wedding.languages.length > 1 && (
+        {!ctx.preview && (
           <LanguageSwitcher offered={ctx.data.wedding.languages} className="shrink-0" />
         )}
       </div>

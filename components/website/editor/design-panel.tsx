@@ -1,6 +1,7 @@
 "use client";
 
 import { AlertTriangle, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -44,15 +45,18 @@ export function DesignPanel({
   addImage: (path: string, url: string) => void;
   disabled: boolean;
 }) {
+  const tr = useTranslations("websiteEditor.design");
   const t = TEMPLATES[look.template];
   const accent = look.accent_color ?? t.colors.accent;
   const lowContrast = contrast(accent, t.colors.bg) < 4.5;
+  const fontLabel = (f: { name: string; style: string }) =>
+    `${f.name} (${tr(`fontStyles.${f.style}` as "fontStyles.script")})`;
 
   return (
     <div className="space-y-8">
       <fieldset>
-        <legend className="mb-3 text-sm font-medium">Template</legend>
-        <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Template">
+        <legend className="mb-3 text-sm font-medium">{tr("template")}</legend>
+        <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label={tr("template")}>
           {(Object.keys(TEMPLATES) as SiteTemplate[]).map((key) => {
             const tpl = TEMPLATES[key];
             const on = look.template === key;
@@ -74,7 +78,7 @@ export function DesignPanel({
                   })
                 }
                 className={cn(
-                  "focus-visible:ring-ring relative overflow-hidden rounded-xl border text-left transition focus-visible:ring-2 focus-visible:outline-none",
+                  "focus-visible:ring-ring relative overflow-hidden rounded-xl border text-start transition focus-visible:ring-2 focus-visible:outline-none",
                   on ? "ring-primary ring-2 ring-offset-2" : "hover:border-foreground/30",
                 )}
               >
@@ -97,9 +101,12 @@ export function DesignPanel({
                 </div>
                 <div className="bg-card p-2">
                   <p className="flex items-center gap-1 text-sm font-medium">
-                    {tpl.label} {on && <Check className="text-primary size-3.5" aria-hidden />}
+                    {tr(`templates.${key}.label`)}{" "}
+                    {on && <Check className="text-primary size-3.5" aria-hidden />}
                   </p>
-                  <p className="text-muted-foreground line-clamp-2 text-xs">{tpl.description}</p>
+                  <p className="text-muted-foreground line-clamp-2 text-xs">
+                    {tr(`templates.${key}.description`)}
+                  </p>
                 </div>
               </button>
             );
@@ -108,7 +115,7 @@ export function DesignPanel({
       </fieldset>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm font-medium">Accent colour</legend>
+        <legend className="text-sm font-medium">{tr("accent")}</legend>
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -121,7 +128,7 @@ export function DesignPanel({
             )}
           >
             <span className="size-4 rounded-full" style={{ background: t.colors.accent }} />{" "}
-            Template colour
+            {tr("templateColour")}
           </button>
           {ACCENT_SWATCHES.filter((c) => c !== t.colors.accent).map((c) => (
             <button
@@ -130,7 +137,7 @@ export function DesignPanel({
               disabled={disabled}
               onClick={() => onChange({ ...look, accent_color: c })}
               aria-pressed={look.accent_color === c}
-              aria-label={`Accent colour ${c}`}
+              aria-label={tr("accentName", { hex: c })}
               className={cn(
                 "focus-visible:ring-ring size-8 rounded-full border focus-visible:ring-2 focus-visible:outline-none",
                 look.accent_color === c && "ring-primary ring-2 ring-offset-2",
@@ -146,20 +153,19 @@ export function DesignPanel({
               onChange={(e) => onChange({ ...look, accent_color: e.target.value.toLowerCase() })}
               className="size-4 cursor-pointer border-0 bg-transparent p-0"
             />
-            Custom
+            {tr("custom")}
           </label>
         </div>
         {lowContrast && (
           <p className="text-warning flex items-center gap-1.5 text-xs">
-            <AlertTriangle className="size-3.5" aria-hidden /> This colour is light, so small text
-            in it may be hard to read. A darker shade works better.
+            <AlertTriangle className="size-3.5" aria-hidden /> {tr("lowContrast")}
           </p>
         )}
       </fieldset>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="heading-font">Heading font</Label>
+          <Label htmlFor="heading-font">{tr("headingFont")}</Label>
           <Select
             value={look.heading_font ?? DEFAULT}
             disabled={disabled}
@@ -172,18 +178,20 @@ export function DesignPanel({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={DEFAULT}>
-                Default: {HEADING_FONTS[t.heading].label.split(" (")[0]}
+                {tr("default", { name: HEADING_FONTS[t.heading].name })}
               </SelectItem>
               {(Object.keys(HEADING_FONTS) as HeadingFont[]).map((f) => (
                 <SelectItem key={f} value={f}>
-                  <span style={{ fontFamily: HEADING_FONTS[f].css }}>{HEADING_FONTS[f].label}</span>
+                  <span style={{ fontFamily: HEADING_FONTS[f].css }}>
+                    {fontLabel(HEADING_FONTS[f])}
+                  </span>
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="body-font">Text font</Label>
+          <Label htmlFor="body-font">{tr("textFont")}</Label>
           <Select
             value={look.body_font ?? DEFAULT}
             disabled={disabled}
@@ -196,11 +204,11 @@ export function DesignPanel({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value={DEFAULT}>
-                Default: {BODY_FONTS[t.body].label.split(" (")[0]}
+                {tr("default", { name: BODY_FONTS[t.body].name })}
               </SelectItem>
               {(Object.keys(BODY_FONTS) as BodyFont[]).map((f) => (
                 <SelectItem key={f} value={f}>
-                  <span style={{ fontFamily: BODY_FONTS[f].css }}>{BODY_FONTS[f].label}</span>
+                  <span style={{ fontFamily: BODY_FONTS[f].css }}>{fontLabel(BODY_FONTS[f])}</span>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -209,15 +217,13 @@ export function DesignPanel({
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium">Hero photo</p>
-        <p className="text-muted-foreground text-xs">
-          The big photo at the top. Landscape photos work best (at least 1600 px wide).
-        </p>
+        <p className="text-sm font-medium">{tr("hero")}</p>
+        <p className="text-muted-foreground text-xs">{tr("heroHint")}</p>
         <ImageSlot
           weddingId={weddingId}
           path={look.hero_path}
           url={look.hero_path ? images[look.hero_path] : null}
-          label="Upload a photo"
+          label={tr("uploadPhoto")}
           disabled={disabled}
           onChange={(img) => {
             if (img) addImage(img.path, img.url);

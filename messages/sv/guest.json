@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Språk",
+    "moreLanguages": "Fler språk",
+    "yourTime": "{time} din tid"
+  },
+  "site": {
+    "sections": {
+      "home": "Hem",
+      "story": "Vår historia",
+      "events": "Program",
+      "travel": "Resa & boende",
+      "rsvp": "OSA",
+      "party": "Brudfölje",
+      "registry": "Önskelista",
+      "faq": "Frågor & svar",
+      "gallery": "Galleri"
+    },
+    "nav": "Delar av webbplatsen",
+    "dateTbd": "Datum meddelas senare",
+    "newTab": "(öppnas i en ny flik)",
+    "rsvpButton": "OSA",
+    "countdown": {
+      "days": "{count, plural, one {# dag kvar} other {# dagar kvar}}",
+      "daysWord": "{count, plural, one {dag till bröllopet} other {dagar till bröllopet}}",
+      "today": "Idag är den stora dagen!",
+      "married": "Lyckligt gifta"
+    },
+    "madeWith": "Skapad med <link>Vow</link>",
+    "empty": {
+      "events": "Lägg till händelser under Inställningar → Händelser så visas de här.",
+      "travel": "Markera hotell med ”Visa på webbplatsen” eller lägg till resetips i redigeraren.",
+      "other": "Inget här ännu. Lägg till innehåll i redigeraren.",
+      "hidden": "Tills dess är den här delen dold på din publicerade webbplats."
+    },
+    "event": {
+      "date": "Datum",
+      "time": "Tid",
+      "place": "Plats",
+      "dressCode": "Klädkod",
+      "openMap": "Öppna i Google Maps"
+    },
+    "travel": {
+      "airport": "Närmaste flygplats: <b>{code}</b>",
+      "searchFlights": "Sök flyg",
+      "perNight": "Från <b>{price}</b> per natt",
+      "code": "Vår kod: <mono>{code}</mono>",
+      "bookBy": "Boka senast <b>{date}</b>",
+      "bookRoom": "Boka rum",
+      "bookRoomAt": "Boka rum på {name}",
+      "website": "Webbplats",
+      "websiteOf": "Webbplats för {name}",
+      "map": "Karta",
+      "mapOf": "Karta över {name}"
+    },
+    "rsvp": {
+      "replyBy": "OSA senast <b>{date}</b>.",
+      "or": "eller använd koden på din inbjudan"
+    },
+    "registry": {
+      "visit": "Besök"
+    },
+    "gallery": {
+      "alt": "Foto på brudparet"
+    },
+    "preview": {
+      "bar": "Förhandsvisning: bara ert bröllopsteam kan se den tills ni publicerar.",
+      "back": "Tillbaka till redigeraren"
+    },
+    "password": {
+      "intro": "Den här webbplatsen är privat. Ange lösenordet från din inbjudan.",
+      "label": "Lösenord",
+      "enter": "Gå in",
+      "wrong": "Lösenordet stämmer inte. Titta på din inbjudan eller fråga brudparet."
+    },
+    "meta": {
+      "weddingOf": "Bröllopet för {couple}",
+      "website": "Bröllopswebbplats"
+    }
+  },
+  "rsvp": {
+    "title": "OSA",
+    "dateTbd": "Datum meddelas senare",
+    "weddingOf": "Bröllopet för",
+    "rsvpsBy": "OSA via <link>Vow</link>",
+    "enterCode": "Ange koden från din inbjudan (e-post eller kort).",
+    "findIntro": "Hitta din inbjudan genom att skriva ditt namn som det står på inbjudan.",
+    "orCode": "Eller använd koden på din inbjudan",
+    "notFound": "Inbjudan hittades inte",
+    "notFoundText": "Länken eller koden matchar ingen inbjudan. Kontrollera den och försök igen.",
+    "nothingYet": "Det finns inget att svara på ännu. Titta in senare.",
+    "code": {
+      "label": "Din kod",
+      "continue": "Fortsätt",
+      "invalid": "Koder har 6 bokstäver och siffror, t.ex. K7P2QX."
+    },
+    "find": {
+      "label": "Ditt fullständiga namn",
+      "placeholder": "För- och efternamn",
+      "button": "Sök",
+      "fullName": "Skriv ditt för- och efternamn som på inbjudan.",
+      "noMatch": "Vi hittade inte det namnet. Prova stavningen på inbjudan eller använd koden på den.",
+      "failed": "Något gick fel. Försök igen."
+    },
+    "dear": "Kära {name},",
+    "update": "Ändra dina svar nedan.",
+    "invite": "Vi skulle gärna vilja veta om ni kan komma.",
+    "replyBy": "OSA senast {date}.",
+    "closed": "Sista dag för OSA har passerat.",
+    "closedContact": "Behöver du ändra något? {contact}",
+    "closedNoContact": "Behöver du ändra något? Kontakta brudparet direkt.",
+    "thanks": "Tack!",
+    "thanksText": "Ditt svar har skickats till {couple}. Du kan ändra det när som helst med samma länk.",
+    "thanksTextUntil": "Ditt svar har skickats till {couple}. Du kan ändra det fram till {date} med samma länk.",
+    "send": "Skicka vårt svar",
+    "save": "Spara ändringar",
+    "change": "Ändra våra svar",
+    "yourAnswers": "Era svar",
+    "attending": "Kommer",
+    "notAttending": "Kommer inte",
+    "noAnswer": "Inget svar än",
+    "cantMakeIt": "kan inte komma",
+    "noAnswerYet": "inget svar än",
+    "songRequest": "Låtönskemål: {song}",
+    "form": {
+      "everyone": "Alla kommer",
+      "none": "Ingen av oss kan komma",
+      "willAttend": "Kommer {name} till {event}?",
+      "accept": "Tackar gärna ja",
+      "decline": "Måste tyvärr tacka nej",
+      "meal": "Val av meny",
+      "chooseMeal": "Välj en meny.",
+      "chooseAnswer": "Välj ett svar.",
+      "missingMeal": "Välj en meny för alla som kommer.",
+      "missingAnswer": "Svara för alla innan du skickar.",
+      "details": "Några detaljer",
+      "plusOneName": "Namn på din gäst ({host}s sällskap)",
+      "firstName": "Förnamn",
+      "lastName": "Efternamn",
+      "dietary": "Specialkost eller allergier: {name}",
+      "dietaryPlaceholder": "t.ex. vegetarisk, nötallergi (lämna tomt om inget)",
+      "song": "En låt som får dig att dansa",
+      "songPlaceholder": "Artist – låt",
+      "message": "Ett meddelande till {couple}",
+      "guestOf": "{name}s sällskap",
+      "guest": "Gäst"
+    },
+    "errors": {
+      "rsvp_not_found": "Vi hittade inte den inbjudan. Kontrollera länken eller koden.",
+      "deadline_passed": "Sista dag för OSA har passerat. Kontakta brudparet direkt.",
+      "invalid_guest_or_event": "Något i dina svar stämmer inte med din inbjudan. Ladda om sidan.",
+      "invalid_status": "Ange för alla om de kommer eller inte.",
+      "not_allowed": "Du har inte behörighet att registrera svar för det här bröllopet.",
+      "generic": "Vi kunde inte spara ditt svar. Försök igen om en stund."
+    }
+  },
+  "board": {
+    "empty": "Den här tavlan är tom än så länge.",
+    "photoBy": "Foto av <photographer>{name}</photographer> på <unsplash>Unsplash</unsplash>",
+    "madeWith": "Skapad med <link>Vow</link>",
+    "title": "Delad tavla",
+    "fallbackAlt": "Inspiration"
+  },
+  "email": {
+    "previewInvite": "Ni är bjudna till bröllopet för {couple}",
+    "previewReminder": "En påminnelse om att OSA till bröllopet för {couple}",
+    "eyebrowInvite": "Ni är bjudna",
+    "eyebrowReminder": "En vänlig påminnelse",
+    "dear": "Kära {name},",
+    "bodyInvite": "Vi skulle bli så glada att fira med er. Berätta vem som kan komma via er personliga OSA-länk.",
+    "bodyReminder": "Vi har inte fått ert svar än och vill gärna veta om ni kan komma. Det tar bara en minut.",
+    "button": "OSA nu",
+    "replyBy": "OSA senast {date}.",
+    "fallback": "Fungerar inte knappen? Öppna {link} eller ange koden {code}.",
+    "love": "Varma hälsningar,",
+    "personal": "Den här länken är personlig för ert hushåll. Dela den inte.",
+    "subjectInvite": "Ni är bjudna: bröllopet för {couple}",
+    "subjectReminder": "Påminnelse: OSA till bröllopet för {couple}"
+  }
+}

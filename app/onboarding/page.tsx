@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { OnboardingWizard } from "@/components/onboarding/wizard";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { requireLanguageChoice } from "@/lib/i18n/choice";
 import { getWeddingContext } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Create your wedding" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("onboarding"))("metaTitle") };
+}
 
 export default async function OnboardingPage() {
   // Existing users can come here to add another wedding (e.g. planners).
   const ctx = await getWeddingContext();
+  await requireLanguageChoice("/onboarding");
+  const t = await getTranslations("onboarding");
 
   return (
     <main className="bg-muted/40 min-h-dvh">
@@ -17,7 +23,7 @@ export default async function OnboardingPage() {
         <Logo href={ctx ? "/app" : "/"} />
         {ctx && (
           <Button asChild variant="ghost" size="sm">
-            <Link href="/app">Back to dashboard</Link>
+            <Link href="/app">{t("backToDashboard")}</Link>
           </Button>
         )}
       </header>

@@ -22,6 +22,8 @@ export function createObject(
   kind: SeatingKind,
   at: { x: number; y: number },
   id: string,
+  /** the text a new decor item shows (in the viewer's language) */
+  label?: string,
 ): SeatingObject {
   const info = KINDS[kind];
   const seatCount = info.defaultSeats;
@@ -29,7 +31,7 @@ export function createObject(
   return {
     id,
     kind,
-    label: kind === "label" ? "Label" : info.seated ? null : info.label,
+    label: info.seated ? null : (label ?? (kind === "label" ? "Label" : info.label)),
     number: info.seated && kind !== "sweetheart" ? nextTableNumber(state) : null,
     x: at.x,
     y: at.y,

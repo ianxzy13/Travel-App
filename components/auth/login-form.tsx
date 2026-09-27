@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslations } from "next-intl";
 import { Loader2, MailCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -13,10 +14,12 @@ import { FieldError } from "@/components/form-field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { v } from "@/lib/i18n/validation";
 
-const schema = z.object({ email: z.email("Please enter a valid email address") });
+const schema = z.object({ email: z.email(v("email")) });
 
 export function LoginForm({ next, error }: { next: string; error?: string }) {
+  const t = useTranslations("login");
   const [sentTo, setSentTo] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const form = useForm({ resolver: zodResolver(schema), defaultValues: { email: "" } });
@@ -47,22 +50,22 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
         <input type="hidden" name="next" value={next} />
         <Button type="submit" variant="outline" className="w-full">
           <GoogleIcon />
-          Continue with Google
+          {t("google")}
         </Button>
       </form>
 
       <div className="text-muted-foreground flex items-center gap-3 text-xs">
-        <Separator className="flex-1" /> or <Separator className="flex-1" />
+        <Separator className="flex-1" /> {t("or")} <Separator className="flex-1" />
       </div>
 
       <form onSubmit={onSubmit} className="space-y-3" noValidate>
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
             type="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder={t("emailPlaceholder")}
             aria-invalid={!!emailError}
             aria-describedby={emailError ? "email-error" : undefined}
             {...form.register("email")}
@@ -71,7 +74,7 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
         </div>
         <Button type="submit" className="w-full" disabled={pending}>
           {pending && <Loader2 className="animate-spin" aria-hidden />}
-          Email me a sign-in link
+          {t("send")}
         </Button>
       </form>
     </div>
@@ -80,6 +83,7 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
 
 /** "Check your inbox" + a box to type the code from the email instead of clicking the link. */
 function CheckInbox({ email, next, onBack }: { email: string; next: string; onBack: () => void }) {
+  const t = useTranslations("login");
   const router = useRouter();
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -103,15 +107,17 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
     <div className="space-y-5">
       <div className="space-y-2 text-center" role="status">
         <MailCheck className="text-primary mx-auto size-10" aria-hidden />
-        <p className="font-medium">Check your inbox</p>
+        <p className="font-medium">{t("checkInbox")}</p>
         <p className="text-muted-foreground text-sm">
-          We sent an email to <strong className="text-foreground">{email}</strong>. Click the link
-          in it (in this browser), or type the code from the email below.
+          {t.rich("sentTo", {
+            email,
+            b: (c) => <strong className="text-foreground">{c}</strong>,
+          })}
         </p>
       </div>
       <form onSubmit={submit} className="space-y-3" noValidate>
         <div className="space-y-2">
-          <Label htmlFor="code">Code from the email</Label>
+          <Label htmlFor="code">{t("code")}</Label>
           <Input
             id="code"
             inputMode="numeric"
@@ -128,11 +134,11 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
         </div>
         <Button type="submit" className="w-full" disabled={pending || code.length < 6}>
           {pending && <Loader2 className="animate-spin" aria-hidden />}
-          Sign in with code
+          {t("signInWithCode")}
         </Button>
       </form>
       <Button variant="link" className="w-full" onClick={onBack}>
-        Send a new email or use a different address
+        {t("again")}
       </Button>
     </div>
   );

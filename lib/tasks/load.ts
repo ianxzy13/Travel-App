@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import "server-only";
 import type { WeddingRow } from "@/lib/database.types";
 import { fetchAll } from "@/lib/supabase/fetch-all";
@@ -68,6 +69,7 @@ export async function loadProgress(
 
 /** Names of everyone in the wedding (for "assigned to"). */
 export async function loadMembers(sb: Supabase, weddingId: string) {
+  const someone = (await getTranslations("tasks"))("someone");
   const { data } = await sb
     .from("wedding_members")
     .select("user_id, role, profile:profiles(full_name, email)")
@@ -76,6 +78,6 @@ export async function loadMembers(sb: Supabase, weddingId: string) {
   return (data ?? []).map((m) => ({
     id: m.user_id,
     role: m.role,
-    name: m.profile?.full_name || m.profile?.email?.split("@")[0] || "Someone",
+    name: m.profile?.full_name || m.profile?.email?.split("@")[0] || someone,
   }));
 }

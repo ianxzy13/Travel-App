@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteWedding, leaveWedding } from "@/app/app/settings/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -17,26 +18,23 @@ function handle(result: ActionResult | undefined) {
 }
 
 export function DangerZone({ isOwner, weddingName }: { isOwner: boolean; weddingName: string }) {
+  const t = useTranslations("danger");
+  const b = (c: React.ReactNode) => <strong className="text-foreground">{c}</strong>;
   return (
     <Card className="border-destructive/40">
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Danger zone</CardTitle>
-        <CardDescription>These actions can&apos;t be undone.</CardDescription>
+        <CardTitle className="font-serif text-2xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <Row
-          text={
-            <>
-              Stop collaborating on <strong className="text-foreground">{weddingName}</strong>.
-              You&apos;ll need a new invitation to rejoin.
-            </>
-          }
+          text={t.rich("leaveText", { name: weddingName, b })}
         >
           <ConfirmDialog
-            trigger={<Button variant="outline">Leave wedding</Button>}
-            title="Leave this wedding?"
-            description="You'll lose access immediately. An owner can invite you again later."
-            confirmLabel="Leave"
+            trigger={<Button variant="outline">{t("leave")}</Button>}
+            title={t("leaveTitle")}
+            description={t("leaveDialog")}
+            confirmLabel={t("leaveConfirm")}
             onConfirm={async () => handle(await leaveWedding())}
           />
         </Row>
@@ -45,18 +43,13 @@ export function DangerZone({ isOwner, weddingName }: { isOwner: boolean; wedding
           <>
             <Separator />
             <Row
-              text={
-                <>
-                  Permanently delete <strong className="text-foreground">{weddingName}</strong> and
-                  everything in it, for all collaborators.
-                </>
-              }
+              text={t.rich("deleteText", { name: weddingName, b })}
             >
               <ConfirmDialog
-                trigger={<Button variant="destructive">Delete wedding</Button>}
-                title="Delete this wedding?"
-                description={`All guests, budgets, seating charts and other data for ${weddingName} will be permanently deleted for everyone. This can't be undone.`}
-                confirmLabel="Delete forever"
+                trigger={<Button variant="destructive">{t("delete")}</Button>}
+                title={t("deleteTitle")}
+                description={t("deleteDialog", { name: weddingName })}
+                confirmLabel={t("deleteConfirm")}
                 onConfirm={async () => handle(await deleteWedding())}
               />
             </Row>

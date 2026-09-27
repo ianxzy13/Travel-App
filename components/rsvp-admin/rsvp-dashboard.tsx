@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { formatDistanceToNowStrict, parseISO } from "date-fns";
 import {
   Check,
   Copy,
@@ -15,6 +14,7 @@ import {
   Search,
   Send,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/app/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +31,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { normalize } from "@/lib/guests/filter";
+import { relative } from "@/lib/i18n/format";
 import type { DashboardHousehold, RsvpDashboardData } from "@/lib/rsvp/load";
 import { cn } from "@/lib/utils";
 import type { RsvpSettingsValues } from "@/lib/validation/rsvp";
@@ -54,17 +55,22 @@ type Props = {
   focusHouseholdId?: string;
 };
 
-async function copy(text: string, what = "Link") {
-  try {
-    await navigator.clipboard.writeText(text);
-    toast.success(`${what} copied`);
-  } catch {
-    toast.error("Couldn't copy automatically. Please copy it by hand.");
-  }
+function useCopy() {
+  const t = useTranslations("rsvpAdmin");
+  return async (text: string, done = t("linkCopied")) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast.success(done);
+    } catch {
+      toast.error(t("copyFailed"));
+    }
+  };
 }
 
 export function RsvpDashboard(props: Props) {
   const { data, siteUrl, slug, canEdit, emailConfigured } = props;
+  const t = useTranslations("rsvpAdmin");
+  const copy = useCopy();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -118,13 +124,13 @@ export function RsvpDashboard(props: Props) {
   return (
     <>
       <PageHeader
-        title="RSVPs"
-        description="Who's coming, who hasn't replied yet, and what everyone is eating."
+        title={t("title")}
+        description={t("description")}
         actions={
           canEdit && (
             <>
-              <Button variant="outline" size="sm" onClick={() => copy(publicUrl, "RSVP page link")}>
-                <Copy aria-hidden /> Copy RSVP page link
+              <Button variant="outline" size="sm" onClick={() => copy(publicUrl, t("pageLinkCopied"))}>
+                <Copy aria-hidden /> {t("copyPage")}
               </Button>
               <Button
                 size="sm"
@@ -136,7 +142,7 @@ export function RsvpDashboard(props: Props) {
                   })
                 }
               >
-                <Send aria-hidden /> Email everyone who hasn&apos;t replied
+                <Send aria-hidden /> {t("emailWaiting")}
               </Button>
             </>
           )
@@ -145,19 +151,16 @@ export function RsvpDashboard(props: Props) {
 
       <Tabs defaultValue="replies" className="gap-6">
         <TabsList>
-          <TabsTrigger value="replies">Replies</TabsTrigger>
-          <TabsTrigger value="setup">Meals &amp; settings</TabsTrigger>
+          <TabsTrigger value="replies">{t("tabReplies")}</TabsTrigger>
+          <TabsTrigger value="setup">{t("tabSetup")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="replies" className="space-y-6">
           {data.events.length === 0 || invited.length === 0 ? (
             <Card>
               <CardContent className="py-12 text-center">
-                <h2 className="text-3xl">Nothing to RSVP for yet</h2>
-                <p className="text-muted-foreground mx-auto mt-2 max-w-md">
-                  Add guests and invite them to your events on the Guests page. Each household then
-                  gets its own private RSVP link.
-                </p>
+                <h2 className="text-3xl">{t("nothingTitle")}</h2>
+                <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("nothingText")}</p>
               </CardContent>
             </Card>
           ) : (
@@ -168,32 +171,24 @@ export function RsvpDashboard(props: Props) {
               {/* ---------- households ---------- */}
               <Card>
                 <CardHeader className="gap-4">
-                  <CardTitle className="font-serif text-2xl">Households</CardTitle>
+                  <CardTitle className="font-serif text-2xl">{t("households")}</CardTitle>
                   <div className="flex flex-col gap-3 md:flex-row md:items-center">
                     <div className="relative flex-1">
                       <Search
-                        className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+                        className="text-muted-foreground pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2"
                         aria-hidden
                       />
                       <Input
                         type="search"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search households or names…"
-                        aria-label="Search households"
-                        className="pl-9"
+                        placeholder={t("search")}
+                        aria-label={t("searchLabel")}
+                        className="ps-9"
                       />
                     </div>
-                    <div role="radiogroup" aria-label="Show" className="flex flex-wrap gap-1.5">
-                      {(
-                        [
-                          ["all", "All"],
-                          ["waiting", "Not replied"],
-                          ["partial", "Partly"],
-                          ["replied", "Replied"],
-                          ["not_emailed", "Not emailed"],
-                        ] as const
-                      ).map(([value, label]) => (
+                    <div role="radiogroup" aria-label={t("show")} className="flex flex-wrap gap-1.5">
+                      {(["all", "waiting", "partial", "replied", "not_emailed"] as const).map((value) => (
                         <button
                           key={value}
                           type="button"
@@ -207,7 +202,7 @@ export function RsvpDashboard(props: Props) {
                               : "hover:bg-accent",
                           )}
                         >
-                          {label}{" "}
+                          {t(`filters.${value}`)}{" "}
                           <span className="text-muted-foreground tabular-nums">
                             {counts[value]}
                           </span>
@@ -232,32 +227,30 @@ export function RsvpDashboard(props: Props) {
                             setSelected(c === true ? new Set(visible.map((h) => h.id)) : new Set())
                           }
                         />
-                        Select all shown
+                        {t("selectAll")}
                       </label>
                       {selectedIds.length > 0 && (
-                        <div className="ml-auto flex flex-wrap gap-2">
+                        <div className="ms-auto flex flex-wrap gap-2">
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => setEmailing({ ids: selectedIds, kind: "invitation" })}
                           >
-                            <Send aria-hidden /> Send invitation ({selectedIds.length})
+                            <Send aria-hidden /> {t("sendInvitationCount", { count: selectedIds.length })}
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => setEmailing({ ids: selectedIds, kind: "reminder" })}
                           >
-                            <Send aria-hidden /> Send reminder
+                            <Send aria-hidden /> {t("sendReminder")}
                           </Button>
                         </div>
                       )}
                     </div>
                   )}
                   {visible.length === 0 ? (
-                    <p className="text-muted-foreground py-8 text-center text-sm">
-                      No households match.
-                    </p>
+                    <p className="text-muted-foreground py-8 text-center text-sm">{t("noMatch")}</p>
                   ) : (
                     <ul className="divide-y rounded-lg border">
                       {visible.map((h) => (
@@ -293,14 +286,12 @@ export function RsvpDashboard(props: Props) {
               {messages.length > 0 && (
                 <Card>
                   <CardHeader>
-                    <CardTitle className="font-serif text-2xl">
-                      Messages &amp; song requests
-                    </CardTitle>
+                    <CardTitle className="font-serif text-2xl">{t("messages")}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-4">
                       {messages.map((h) => (
-                        <li key={h.id} className="border-primary/40 border-l-2 pl-4">
+                        <li key={h.id} className="border-primary/40 border-s-2 ps-4">
                           <p className="text-sm font-medium">{h.name}</p>
                           {h.message && (
                             <p className="text-muted-foreground text-sm whitespace-pre-line">
@@ -349,6 +340,7 @@ export function RsvpDashboard(props: Props) {
 }
 
 function EventTotalsGrid({ data }: { data: RsvpDashboardData }) {
+  const tr = useTranslations("rsvpAdmin");
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {data.events.map((e) => {
@@ -365,16 +357,16 @@ function EventTotalsGrid({ data }: { data: RsvpDashboardData }) {
                 <span className="font-serif text-5xl font-semibold tabular-nums">
                   {t.attending}
                 </span>{" "}
-                <span className="text-muted-foreground">attending of {t.invited}</span>
+                <span className="text-muted-foreground">{tr("attendingOf", { invited: t.invited })}</span>
               </p>
               <div className="bg-muted flex h-2 overflow-hidden rounded-full" aria-hidden>
                 <div className="bg-primary" style={{ width: pct(t.attending) }} />
                 <div className="bg-foreground/25" style={{ width: pct(t.declined) }} />
               </div>
               <p className="text-muted-foreground flex flex-wrap gap-x-4 text-sm">
-                <span>{t.declined} declined</span>
+                <span>{tr("declined", { count: t.declined })}</span>
                 <span className={cn(t.waiting > 0 && "text-foreground font-medium")}>
-                  {t.waiting} waiting
+                  {tr("waiting", { count: t.waiting })}
                 </span>
               </p>
             </CardContent>
@@ -387,11 +379,12 @@ function EventTotalsGrid({ data }: { data: RsvpDashboardData }) {
 
 function MealCountsCard({ data }: { data: RsvpDashboardData }) {
   const mealEvents = data.events.filter((e) => e.mealChoice && data.meals[e.id]);
+  const t = useTranslations("rsvpAdmin");
   if (mealEvents.length === 0 || data.mealOptions.length === 0) return null;
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Meals for the caterer</CardTitle>
+        <CardTitle className="font-serif text-2xl">{t("mealsTitle")}</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-6 sm:grid-cols-2">
         {mealEvents.map((e) => {
@@ -408,7 +401,7 @@ function MealCountsCard({ data }: { data: RsvpDashboardData }) {
                 ))}
                 {c.noChoice > 0 && (
                   <div className="text-warning flex justify-between px-3 py-2">
-                    <dt>Attending, no meal chosen</dt>
+                    <dt>{t("noMeal")}</dt>
                     <dd className="font-medium tabular-nums">{c.noChoice}</dd>
                   </div>
                 )}
@@ -421,20 +414,11 @@ function MealCountsCard({ data }: { data: RsvpDashboardData }) {
   );
 }
 
-const STATUS_BADGE: Record<
-  DashboardHousehold["reply"]["status"],
-  { label: string; className: string }
-> = {
-  replied: {
-    label: "Replied",
-    className: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
-  },
-  partial: {
-    label: "Partly replied",
-    className: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
-  },
-  waiting: { label: "Not replied", className: "bg-muted text-muted-foreground" },
-  not_invited: { label: "Not invited", className: "bg-muted text-muted-foreground" },
+const STATUS_BADGE: Record<DashboardHousehold["reply"]["status"], string> = {
+  replied: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
+  partial: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
+  waiting: "bg-muted text-muted-foreground",
+  not_invited: "bg-muted text-muted-foreground",
 };
 
 function HouseholdRow({
@@ -456,10 +440,12 @@ function HouseholdRow({
   onRecord: () => void;
   onRemind: () => void;
 }) {
-  const badge = STATUS_BADGE[h.reply.status];
+  const t = useTranslations("rsvpAdmin");
+  const locale = useLocale();
+  const copy = useCopy();
   const hasEmail = h.guests.some((g) => g.email && !g.isPlusOne);
   const whatsapp = `https://wa.me/?text=${encodeURIComponent(
-    `Hi ${h.name}! Please RSVP for ${couple}'s wedding here: ${link}`,
+    t("whatsappText", { name: h.name, couple, link }),
   )}`;
 
   return (
@@ -473,7 +459,7 @@ function HouseholdRow({
         <Checkbox
           checked={selected}
           onCheckedChange={(c) => onSelect(c === true)}
-          aria-label={`Select ${h.name}`}
+          aria-label={t("select", { name: h.name })}
         />
       )}
       <div className="min-w-48 flex-1">
@@ -484,13 +470,13 @@ function HouseholdRow({
       </div>
 
       <div className="flex min-w-40 flex-col gap-1">
-        <Badge className={cn("border-0", badge.className)}>
+        <Badge className={cn("border-0", STATUS_BADGE[h.reply.status])}>
           {h.reply.status === "replied" && <Check aria-hidden />}
-          {badge.label}
+          {t(`status.${h.reply.status}`)}
         </Badge>
         {h.reply.status !== "waiting" && (
           <span className="text-muted-foreground text-xs">
-            {h.reply.attending} coming · {h.reply.declined} not
+            {t("comingNot", { attending: h.reply.attending, declined: h.reply.declined })}
           </span>
         )}
       </div>
@@ -505,56 +491,57 @@ function HouseholdRow({
             ) : (
               <Send className="size-3.5" aria-hidden />
             )}
-            {h.lastEmail.kind === "invitation" ? "Invited" : "Reminded"}{" "}
-            {formatDistanceToNowStrict(parseISO(h.lastEmail.sentAt), { addSuffix: true })}
-            {h.lastEmail.status === "opened" && " · opened"}
-            {h.lastEmail.status === "bounced" && " · bounced"}
-            {h.lastEmail.status === "failed" && " · failed"}
+            {t(h.lastEmail.kind === "invitation" ? "invited" : "reminded", {
+              when: relative(h.lastEmail.sentAt, locale),
+            })}
+            {h.lastEmail.status === "opened" && t("opened")}
+            {h.lastEmail.status === "bounced" && t("bounced")}
+            {h.lastEmail.status === "failed" && t("failed")}
           </span>
         ) : hasEmail ? (
-          "Not emailed yet"
+          t("notEmailed")
         ) : (
-          "No email address"
+          t("noEmail")
         )}
       </div>
 
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ms-auto flex items-center gap-1">
         <Button
           variant="ghost"
           size="icon-sm"
           onClick={() => copy(link)}
-          aria-label={`Copy RSVP link for ${h.name}`}
+          aria-label={t("copyFor", { name: h.name })}
         >
           <Copy aria-hidden />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon-sm" aria-label={`More actions for ${h.name}`}>
+            <Button variant="ghost" size="icon-sm" aria-label={t("moreFor", { name: h.name })}>
               <MoreHorizontal aria-hidden />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem onSelect={() => copy(link)}>
-              <Copy aria-hidden /> Copy RSVP link
+              <Copy aria-hidden /> {t("copyLink")}
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href={whatsapp} target="_blank" rel="noreferrer">
-                <MessageCircle aria-hidden /> Share on WhatsApp
+                <MessageCircle aria-hidden /> {t("whatsapp")}
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href={link} target="_blank" rel="noreferrer">
-                <ExternalLink aria-hidden /> Open their RSVP page
+                <ExternalLink aria-hidden /> {t("open")}
               </a>
             </DropdownMenuItem>
             {canEdit && (
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onSelect={onRecord}>
-                  <PenLine aria-hidden /> Record or edit their reply
+                  <PenLine aria-hidden /> {t("record")}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={onRemind} disabled={!hasEmail}>
-                  <Send aria-hidden /> {h.lastEmail ? "Send reminder" : "Send invitation"}
+                  <Send aria-hidden /> {h.lastEmail ? t("sendReminder") : t("sendInvitation")}
                 </DropdownMenuItem>
               </>
             )}

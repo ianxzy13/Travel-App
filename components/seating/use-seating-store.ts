@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { saveSeatingChanges } from "@/app/app/seating/actions";
 import type { SeatingObjectRow } from "@/lib/database.types";
@@ -36,6 +37,7 @@ export function useSeatingStore(
   /** replaceable for tests; normally the server action */
   save: typeof saveSeatingChanges = saveSeatingChanges,
 ) {
+  const offlineText = useTranslations("errors")("offlineRetrying");
   const [state, setStateRaw] = useState(initial);
   const stateRef = useRef(initial);
   /** last state whose changes are saved or queued (previews during a drag are not) */
@@ -70,7 +72,7 @@ export function useSeatingStore(
 
     const result = await save(layoutId, toPayload(batch)).catch(() => ({
       ok: false as const,
-      error: "You seem to be offline. Retrying…",
+      error: offlineText,
       retry: true,
     }));
     saving.current = false;
@@ -93,7 +95,7 @@ export function useSeatingStore(
     toast.error(result.error);
     // The server state is the truth now: reload it.
     setTimeout(() => window.location.reload(), 1500);
-  }, [layoutId, save]);
+  }, [layoutId, save, offlineText]);
 
   const queueSave = useCallback(
     (changes: SeatingChanges) => {

@@ -1,8 +1,8 @@
-import { format, parseISO } from "date-fns";
+import { fmtDate } from "@/lib/i18n/format";
 
 // Flight times are LOCAL airport times stored without a time zone
-// ("2027-06-10T14:30:00"). parseISO reads them as wall-clock time and format
-// prints the same wall-clock time, so no time-zone shifting ever happens.
+// ("2027-06-10T14:30:00"). Dates are formatted as plain calendar dates, so no
+// time-zone shifting ever happens.
 
 export type BoardFlight = {
   id: string;
@@ -23,7 +23,10 @@ export type BoardDay = {
 };
 
 /** Groups flights by local day, sorted by time; flights without a time go last. */
-export function groupByDay(flights: BoardFlight[]): BoardDay[] {
+export function groupByDay(
+  flights: BoardFlight[],
+  opts: { locale: string; noTime: string } = { locale: "en", noTime: "Time not set" },
+): BoardDay[] {
   const days = new Map<string, BoardFlight[]>();
   for (const f of flights) {
     const key = f.time ? f.time.slice(0, 10) : "";
@@ -33,7 +36,7 @@ export function groupByDay(flights: BoardFlight[]): BoardDay[] {
     .sort(([a], [b]) => (a === "" ? 1 : b === "" ? -1 : a.localeCompare(b)))
     .map(([date, list]) => ({
       date: date || null,
-      label: date ? format(parseISO(date), "EEEE d MMMM") : "Time not set",
+      label: date ? fmtDate(date, opts.locale, "full") : opts.noTime,
       flights: [...list].sort((a, b) => (a.time ?? "").localeCompare(b.time ?? "")),
       people: list.reduce((n, f) => n + Math.max(1, f.travellers.length), 0),
     }));

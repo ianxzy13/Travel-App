@@ -2,15 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { flightSchema } from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = {
-  ok: false as const,
-  error: "You don't have permission to change travel plans.",
-};
 
 async function editor() {
   const { wedding, role } = await requireWedding();
@@ -25,9 +22,9 @@ function done(): ActionResult {
 
 export async function saveFlight(input: unknown, id?: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = flightSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const wid = ctx.wedding.id;
   const row = {
@@ -85,7 +82,7 @@ export async function saveFlight(input: unknown, id?: string): Promise<ActionRes
 
 export async function deleteFlight(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !z.uuid().safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !z.uuid().safeParse(id).success) return noPermission();
   const { error } = await ctx.sb
     .from("flights")
     .delete()
@@ -97,10 +94,10 @@ export async function deleteFlight(id: string): Promise<ActionResult> {
 
 export async function setDestinationAirport(code: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const c = code.trim().toUpperCase();
   if (c && !/^[A-Z]{3}$/.test(c))
-    return { ok: false, error: "Use the 3-letter airport code, e.g. LIS." };
+    return await invalid({ issues: [{ message: "v.airport" }] });
   const { error } = await ctx.sb
     .from("weddings")
     .update({ destination_airport: c || null })

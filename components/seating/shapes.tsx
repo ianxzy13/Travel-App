@@ -1,6 +1,7 @@
 import type React from "react";
 import { initials, isTable, KINDS, SEAT_SIZE, seatPositions } from "@/lib/seating/geometry";
 import type { SeatingGuest, SeatingObject } from "@/lib/seating/types";
+import { useSeatingWords } from "./use-seating-words";
 
 // SVG drawings of tables, seats and decor. Units are centimetres; the
 // floor plan scales everything with zoom. Used by the editor and for printing.
@@ -32,18 +33,19 @@ export function legendItems(
   mode: ColorMode,
   names: { a: string; b: string },
   meals: { id: string; name: string }[],
+  words: { sideOf: (name: string) => string; both: string; noMeal: string },
 ) {
   if (mode === "side") {
     return [
-      { color: SIDE_COLORS.partner_a, label: `${names.a}'s side` },
-      { color: SIDE_COLORS.partner_b, label: `${names.b}'s side` },
-      { color: SIDE_COLORS.both, label: "Both" },
+      { color: SIDE_COLORS.partner_a, label: words.sideOf(names.a) },
+      { color: SIDE_COLORS.partner_b, label: words.sideOf(names.b) },
+      { color: SIDE_COLORS.both, label: words.both },
     ];
   }
   if (mode === "meal") {
     return [
       ...meals.map((m, i) => ({ color: MEAL_COLORS[i % MEAL_COLORS.length], label: m.name })),
-      { color: NO_MEAL, label: "No meal chosen" },
+      { color: NO_MEAL, label: words.noMeal },
     ];
   }
   return [];
@@ -88,6 +90,7 @@ type ShapeProps = {
 
 /** A table (with its seats) or a decor item, positioned and rotated in the room. */
 export function ObjectShape({ object: o, selected, warning, bodyProps, renderSeat }: ShapeProps) {
+  const { t } = useSeatingWords();
   const info = KINDS[o.kind];
   const table = isTable(o.kind);
   const style = DECOR_STYLE[o.kind];
@@ -95,7 +98,7 @@ export function ObjectShape({ object: o, selected, warning, bodyProps, renderSea
   const strokeWidth = selected ? 5 : table ? 1.5 : 2;
   const labelText = table
     ? (o.label ?? (o.number != null ? String(o.number) : ""))
-    : (o.label ?? info.label);
+    : (o.label ?? t(`kinds.${o.kind}`));
   const upright = `rotate(${-o.rotation})`; // keep text readable at any angle
 
   return (

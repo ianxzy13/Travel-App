@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Ngôn ngữ",
+    "moreLanguages": "Ngôn ngữ khác",
+    "yourTime": "{time} theo giờ của bạn"
+  },
+  "site": {
+    "sections": {
+      "home": "Trang chủ",
+      "story": "Chuyện của chúng mình",
+      "events": "Sự kiện",
+      "travel": "Đi lại & Lưu trú",
+      "rsvp": "Xác nhận tham dự",
+      "party": "Phù dâu & Phù rể",
+      "registry": "Danh sách quà",
+      "faq": "Câu hỏi thường gặp",
+      "gallery": "Thư viện ảnh"
+    },
+    "nav": "Các mục của trang",
+    "dateTbd": "Ngày sẽ thông báo sau",
+    "newTab": "(mở trong thẻ mới)",
+    "rsvpButton": "Xác nhận tham dự",
+    "countdown": {
+      "days": "{count, plural, other {Còn # ngày}}",
+      "daysWord": "{count, plural, other {ngày nữa}}",
+      "today": "Chính là hôm nay!",
+      "married": "Đôi vợ chồng mới hạnh phúc"
+    },
+    "madeWith": "Tạo bằng <link>Vow</link>",
+    "empty": {
+      "events": "Thêm sự kiện trong Cài đặt → Sự kiện và chúng sẽ hiện ở đây.",
+      "travel": "Đánh dấu khách sạn là “Hiển thị trên trang” hoặc thêm mẹo đi lại trong trình chỉnh sửa.",
+      "other": "Chưa có gì ở đây. Hãy thêm nội dung trong trình chỉnh sửa.",
+      "hidden": "Cho đến lúc đó, mục này được ẩn trên trang công khai."
+    },
+    "event": {
+      "date": "Ngày",
+      "time": "Giờ",
+      "place": "Địa điểm",
+      "dressCode": "Trang phục",
+      "openMap": "Mở trong Google Maps"
+    },
+    "travel": {
+      "airport": "Sân bay gần nhất: <b>{code}</b>",
+      "searchFlights": "Tìm chuyến bay",
+      "perNight": "Từ <b>{price}</b> mỗi đêm",
+      "code": "Mã giảm giá: <mono>{code}</mono>",
+      "bookBy": "Đặt trước <b>{date}</b>",
+      "bookRoom": "Đặt phòng",
+      "bookRoomAt": "Đặt phòng tại {name}",
+      "website": "Trang web",
+      "websiteOf": "Trang web của {name}",
+      "map": "Bản đồ",
+      "mapOf": "Bản đồ đến {name}"
+    },
+    "rsvp": {
+      "replyBy": "Vui lòng phản hồi trước <b>{date}</b>.",
+      "or": "hoặc dùng mã thiệp mời"
+    },
+    "registry": {
+      "visit": "Xem"
+    },
+    "gallery": {
+      "alt": "Ảnh của cô dâu chú rể"
+    },
+    "preview": {
+      "bar": "Xem trước: chỉ nhóm đám cưới thấy được cho đến khi bạn xuất bản.",
+      "back": "Quay lại trình chỉnh sửa"
+    },
+    "password": {
+      "intro": "Trang này là riêng tư. Nhập mật khẩu trong thiệp mời của bạn.",
+      "label": "Mật khẩu",
+      "enter": "Vào",
+      "wrong": "Sai mật khẩu. Hãy xem lại thiệp mời hoặc hỏi cô dâu chú rể."
+    },
+    "meta": {
+      "weddingOf": "Đám cưới của {couple}",
+      "website": "Trang web đám cưới"
+    }
+  },
+  "rsvp": {
+    "title": "Xác nhận tham dự",
+    "dateTbd": "Ngày sẽ thông báo sau",
+    "weddingOf": "Thiệp mời đám cưới",
+    "rsvpsBy": "Xác nhận tham dự qua <link>Vow</link>",
+    "enterCode": "Nhập mã trong thiệp mời của bạn (email hoặc thiệp giấy).",
+    "findIntro": "Nhập tên đúng như trên thiệp mời để tìm thiệp của bạn.",
+    "orCode": "hoặc dùng mã thiệp mời",
+    "notFound": "Không tìm thấy thiệp mời",
+    "notFoundText": "Không có thiệp mời nào khớp với liên kết hoặc mã này. Hãy kiểm tra lại và thử lần nữa.",
+    "nothingYet": "Hiện chưa có gì để phản hồi. Vui lòng quay lại sau.",
+    "code": {
+      "label": "Mã xác nhận",
+      "continue": "Tiếp tục",
+      "invalid": "Mã gồm 6 chữ cái và chữ số, ví dụ K7P2QX."
+    },
+    "find": {
+      "label": "Họ và tên của bạn",
+      "placeholder": "Họ và tên",
+      "button": "Tìm",
+      "fullName": "Nhập cả họ và tên như trên thiệp mời.",
+      "noMatch": "Không tìm thấy tên của bạn. Hãy thử viết đúng như trên thiệp, hoặc dùng mã thiệp mời.",
+      "failed": "Đã xảy ra lỗi. Vui lòng thử lại."
+    },
+    "dear": "Gửi {name},",
+    "update": "Bạn có thể thay đổi phản hồi bên dưới.",
+    "invite": "Chúng mình rất mong bạn đến chung vui. Hãy cho chúng mình biết nhé.",
+    "replyBy": "Vui lòng phản hồi trước {date}.",
+    "closed": "Đã hết hạn xác nhận tham dự.",
+    "closedContact": "Cần thay đổi? {contact}",
+    "closedNoContact": "Cần thay đổi? Hãy liên hệ trực tiếp với cô dâu chú rể.",
+    "thanks": "Cảm ơn bạn!",
+    "thanksText": "Phản hồi của bạn đã được gửi đến {couple}. Bạn có thể thay đổi bất cứ lúc nào qua cùng liên kết.",
+    "thanksTextUntil": "Phản hồi của bạn đã được gửi đến {couple}. Bạn có thể thay đổi qua cùng liên kết cho đến {date}.",
+    "send": "Gửi phản hồi",
+    "save": "Lưu thay đổi",
+    "change": "Thay đổi phản hồi",
+    "yourAnswers": "Phản hồi của bạn",
+    "attending": "Tham dự",
+    "notAttending": "Không tham dự",
+    "noAnswer": "Chưa trả lời",
+    "cantMakeIt": "Không thể đến",
+    "noAnswerYet": "Chưa có phản hồi",
+    "songRequest": "Bài hát yêu cầu: {song}",
+    "form": {
+      "everyone": "Tất cả sẽ đến",
+      "none": "Không ai đến được",
+      "willAttend": "{name} có tham dự {event} không?",
+      "accept": "Vui vẻ nhận lời",
+      "decline": "Tiếc là không đến được",
+      "meal": "Chọn món",
+      "chooseMeal": "Hãy chọn một món.",
+      "chooseAnswer": "Hãy chọn một câu trả lời.",
+      "missingMeal": "Hãy chọn món cho mỗi khách tham dự.",
+      "missingAnswer": "Hãy trả lời cho tất cả mọi người trước khi gửi.",
+      "details": "Vài chi tiết",
+      "plusOneName": "Tên người đi cùng (người đi cùng của {host})",
+      "firstName": "Tên",
+      "lastName": "Họ",
+      "dietary": "Chế độ ăn hoặc dị ứng: {name}",
+      "dietaryPlaceholder": "ví dụ: ăn chay, dị ứng hạt (để trống nếu không có)",
+      "song": "Bài hát khiến bạn muốn nhảy",
+      "songPlaceholder": "Nghệ sĩ – Tên bài",
+      "message": "Lời nhắn gửi {couple}",
+      "guestOf": "Người đi cùng của {name}",
+      "guest": "Khách"
+    },
+    "errors": {
+      "rsvp_not_found": "Không tìm thấy thiệp mời. Hãy kiểm tra liên kết hoặc mã.",
+      "deadline_passed": "Đã hết hạn xác nhận. Hãy liên hệ trực tiếp với cô dâu chú rể.",
+      "invalid_guest_or_event": "Phản hồi không khớp với thiệp mời của bạn. Hãy tải lại trang.",
+      "invalid_status": "Hãy chọn tham dự hoặc không cho từng người.",
+      "not_allowed": "Bạn không có quyền ghi phản hồi cho đám cưới này.",
+      "generic": "Không thể lưu phản hồi. Vui lòng thử lại sau giây lát."
+    }
+  },
+  "board": {
+    "empty": "Bảng này vẫn còn trống.",
+    "photoBy": "Ảnh của <photographer>{name}</photographer> trên <unsplash>Unsplash</unsplash>",
+    "madeWith": "Tạo bằng <link>Vow</link>",
+    "title": "Bảng chia sẻ",
+    "fallbackAlt": "Cảm hứng"
+  },
+  "email": {
+    "previewInvite": "Bạn được mời đến đám cưới của {couple}",
+    "previewReminder": "Vui lòng xác nhận tham dự đám cưới của {couple}",
+    "eyebrowInvite": "Thư mời",
+    "eyebrowReminder": "Lời nhắc",
+    "dear": "Gửi {name},",
+    "bodyInvite": "Chúng mình rất vui nếu bạn đến chung vui cùng chúng mình. Hãy cho biết ai có thể đến qua liên kết xác nhận riêng của bạn.",
+    "bodyReminder": "Chúng mình chưa nhận được phản hồi của bạn. Rất mong biết bạn có đến được không — chỉ mất một phút thôi.",
+    "button": "Phản hồi ngay",
+    "replyBy": "Vui lòng phản hồi trước {date}.",
+    "fallback": "Nếu nút không hoạt động, hãy mở {link} và nhập mã {code}.",
+    "love": "Thân thương",
+    "personal": "Liên kết này dành riêng cho gia đình bạn. Vui lòng không chia sẻ.",
+    "subjectInvite": "Thư mời: đám cưới của {couple}",
+    "subjectReminder": "Lời nhắc: xác nhận tham dự đám cưới của {couple}"
+  }
+}

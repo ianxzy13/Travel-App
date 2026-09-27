@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { SchedulePage } from "@/components/schedule/schedule-page";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Day-of schedule" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("schedule") };
+}
 
 export default async function Schedule() {
   const { wedding, role } = await requireWedding();

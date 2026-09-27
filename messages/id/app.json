@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Dasbor",
+      "tasks": "Tugas",
+      "budget": "Anggaran",
+      "vendors": "Vendor",
+      "guests": "Tamu",
+      "rsvp": "RSVP",
+      "seating": "Tempat duduk",
+      "venues": "Venue",
+      "hotels": "Hotel",
+      "travel": "Perjalanan",
+      "inspiration": "Inspirasi",
+      "website": "Situs web",
+      "schedule": "Jadwal hari H",
+      "settings": "Pengaturan",
+      "home": "Beranda",
+      "groups": {
+        "plan": "Rencana",
+        "people": "Orang",
+        "places": "Tempat",
+        "style": "Gaya"
+      }
+    },
+    "shell": {
+      "mainNav": "Navigasi utama",
+      "expand": "Buka bilah samping",
+      "collapse": "Tutup bilah samping",
+      "more": "Lainnya",
+      "allTools": "Semua alat perencanaan"
+    },
+    "userMenu": {
+      "account": "Menu akun",
+      "appearance": "Tampilan",
+      "light": "Terang",
+      "dark": "Gelap",
+      "system": "Sistem",
+      "language": "Bahasa",
+      "signOut": "Keluar"
+    },
+    "switcher": {
+      "current": "Pernikahan saat ini: {name}. Ganti pernikahan",
+      "yours": "Pernikahan Anda",
+      "noDate": "Tanggal belum ditentukan",
+      "another": "Rencanakan pernikahan lain",
+      "roles": {
+        "owner": "Pemilik",
+        "editor": "Editor",
+        "viewer": "Pelihat"
+      }
+    },
+    "notifications": {
+      "title": "Notifikasi",
+      "unread": "{count, plural, other {Notifikasi, # belum dibaca}}",
+      "unreadOne": "Belum dibaca",
+      "markAll": "Tandai semua sudah dibaca",
+      "empty": "Belum ada apa-apa. RSVP baru, tugas untuk Anda, serta pengingat pembayaran dan tenggat akan muncul di sini."
+    },
+    "countdown": {
+      "today": "Hari ini harinya!",
+      "enjoy": "Nikmati setiap momennya.",
+      "married": "{count, plural, other {Sudah menikah # hari}}",
+      "congrats": "Selamat!",
+      "daysToGo": "{count, plural, other {hari lagi}}",
+      "hours": "jam",
+      "minutes": "menit",
+      "seconds": "detik"
+    },
+    "dashboard": {
+      "welcome": "Selamat datang di perencana pernikahan Anda!",
+      "welcomeText": "Semuanya dimulai dari sini. Kerjakan langkah berikut sesuai kecepatan Anda.",
+      "noDate": "Tanggal belum ditentukan",
+      "setDate": "Tentukan tanggal untuk memulai hitung mundur",
+      "nextSteps": "Langkah berikutnya",
+      "stepsDone": "{done} dari {total} selesai",
+      "done": "(selesai)",
+      "toDo": "(belum)",
+      "steps": {
+        "date": "Tentukan tanggal pernikahan",
+        "location": "Pilih lokasi",
+        "invite": "Undang pasangan, keluarga, atau perencana",
+        "guests": "Tambahkan daftar tamu",
+        "guestsSoFar": "{count, plural, other {Tambahkan daftar tamu (sejauh ini #)}}",
+        "budget": "Tentukan total anggaran",
+        "shortlist": "Pilih kandidat venue",
+        "book": "Pesan venue",
+        "inspiration": "Mulai papan inspirasi",
+        "website": "Terbitkan situs pernikahan",
+        "timeline": "Buat jadwal persiapan"
+      },
+      "budget": {
+        "title": "Anggaran",
+        "empty": "Belum ada anggaran. Tentukan totalnya dan kami akan menyarankan pembagiannya.",
+        "cta": "Rencanakan anggaran",
+        "committed": "terikat",
+        "committedOf": "terikat dari {total}",
+        "overdue": "Terlambat: {name}"
+      },
+      "rsvp": {
+        "title": "RSVP",
+        "empty": "Belum ada jawaban. Tambahkan tamu dan kirim undangan.",
+        "cta": "Lihat RSVP",
+        "attending": "Hadir",
+        "declined": "Menolak",
+        "waiting": "Menunggu"
+      },
+      "seating": {
+        "title": "Tempat duduk",
+        "empty": "Belum ada meja. Setelah tamu menjawab, seret mereka ke tempat duduk.",
+        "cta": "Buka denah tempat duduk",
+        "seated": "dari {attending} tamu hadir sudah duduk di {tables, plural, other {# meja}}"
+      },
+      "inspiration": {
+        "title": "Inspirasi",
+        "empty": "Belum ada pin. Kumpulkan ide dan buat palet warna.",
+        "cta": "Buka papan",
+        "pin": "pin"
+      },
+      "tasks": {
+        "title": "Tugas",
+        "empty": "Belum ada tugas. Kami akan membuat jadwal dari tanggal pernikahan Anda.",
+        "cta": "Lihat tugas",
+        "ofDone": "dari {total} selesai",
+        "overdue": "{count} terlambat"
+      }
+    },
+    "settings": {
+      "title": "Pengaturan",
+      "description": "Detail pernikahan, bahasa, acara, dan siapa yang merencanakan bersama Anda."
+    },
+    "translate": {
+      "button": "Terjemahan",
+      "title": "Terjemahan: {name}",
+      "hint": "Kosongkan untuk menampilkan teks dalam {language}.",
+      "draft": "Draf",
+      "draftFailed": "Browser tidak dapat menerjemahkan pasangan bahasa ini. Ketik terjemahannya sendiri.",
+      "noMachine": "Tips: Chrome di komputer dapat membuat draf terjemahan (tombol “Draf” akan muncul).",
+      "save": "Simpan terjemahan",
+      "saved": "Terjemahan disimpan",
+      "fields": {
+        "name": "Nama",
+        "venue": "Nama venue",
+        "dressCode": "Kode busana",
+        "description": "Deskripsi",
+        "mealName": "Nama hidangan",
+        "mealDescription": "Deskripsi hidangan"
+      }
+    },
+    "websiteLang": {
+      "editing": "Bahasa",
+      "main": "{language} (bahasa Anda)",
+      "hint": "Menerjemahkan ke: {language}. Foto, urutan, dan bagian yang ditampilkan diatur dalam bahasa utama.",
+      "progress": "{done}/{total} diterjemahkan",
+      "complete": "Diterjemahkan",
+      "fallback": "Kosong: tamu melihat teks dalam bahasa utama.",
+      "nothing": "Bagian ini belum memiliki teks untuk diterjemahkan.",
+      "draft": "Buat draf semuanya dengan terjemahan browser",
+      "draftFailed": "Browser tidak dapat menerjemahkan pasangan bahasa ini. Ketik terjemahannya sendiri.",
+      "item": "Item {number}",
+      "fields": {
+        "tagline": "Slogan",
+        "intro": "Pengantar",
+        "notes": "Catatan",
+        "date": "Kapan",
+        "title": "Judul",
+        "text": "Teks",
+        "role": "Peran",
+        "bio": "Bio singkat",
+        "label": "Nama",
+        "note": "Catatan",
+        "question": "Pertanyaan",
+        "answer": "Jawaban",
+        "caption": "Keterangan"
+      }
+    }
+  }
+}

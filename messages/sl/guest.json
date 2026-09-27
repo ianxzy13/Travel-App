@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Jezik",
+    "moreLanguages": "Več jezikov",
+    "yourTime": "{time} po vašem času"
+  },
+  "site": {
+    "sections": {
+      "home": "Domov",
+      "story": "Najina zgodba",
+      "events": "Program",
+      "travel": "Pot in nastanitev",
+      "rsvp": "Potrditev udeležbe",
+      "party": "Priči",
+      "registry": "Seznam daril",
+      "faq": "Vprašanja",
+      "gallery": "Galerija"
+    },
+    "nav": "Razdelki spletne strani",
+    "dateTbd": "Datum bo določen",
+    "newTab": "(odpre se v novem zavihku)",
+    "rsvpButton": "Potrdi udeležbo",
+    "countdown": {
+      "days": "{count, plural, one {Še # dan} two {Še # dneva} few {Še # dnevi} other {Še # dni}}",
+      "daysWord": "{count, plural, one {dan do poroke} two {dneva do poroke} few {dnevi do poroke} other {dni do poroke}}",
+      "today": "Danes je veliki dan!",
+      "married": "Srečno poročena"
+    },
+    "madeWith": "Ustvarjeno z <link>Vow</link>",
+    "empty": {
+      "events": "Dodajte dogodke v Nastavitve → Dogodki in pojavili se bodo tukaj.",
+      "travel": "Označite hotele z »Prikaži na spletni strani« ali dodajte nasvete za pot v urejevalniku.",
+      "other": "Tukaj še ni ničesar. Dodajte vsebino v urejevalniku.",
+      "hidden": "Do takrat ostane ta razdelek na objavljeni strani skrit."
+    },
+    "event": {
+      "date": "Datum",
+      "time": "Ura",
+      "place": "Kraj",
+      "dressCode": "Oblačilni kodeks",
+      "openMap": "Odpri v Google Zemljevidih"
+    },
+    "travel": {
+      "airport": "Najbližje letališče: <b>{code}</b>",
+      "searchFlights": "Poišči lete",
+      "perNight": "Od <b>{price}</b> na noč",
+      "code": "Naša koda: <mono>{code}</mono>",
+      "bookBy": "Rezervirajte do <b>{date}</b>",
+      "bookRoom": "Rezerviraj sobo",
+      "bookRoomAt": "Rezerviraj sobo: {name}",
+      "website": "Spletna stran",
+      "websiteOf": "Spletna stran: {name}",
+      "map": "Zemljevid",
+      "mapOf": "Zemljevid: {name}"
+    },
+    "rsvp": {
+      "replyBy": "Prosimo, odgovorite do <b>{date}</b>.",
+      "or": "ali uporabite kodo z vabila"
+    },
+    "registry": {
+      "visit": "Obišči"
+    },
+    "gallery": {
+      "alt": "Fotografija para"
+    },
+    "preview": {
+      "bar": "Predogled: dokler strani ne objavite, jo vidi le vaša poročna ekipa.",
+      "back": "Nazaj v urejevalnik"
+    },
+    "password": {
+      "intro": "Ta spletna stran je zasebna. Vnesite geslo z vabila.",
+      "label": "Geslo",
+      "enter": "Vstopi",
+      "wrong": "Geslo ni pravilno. Preverite vabilo ali vprašajte par."
+    },
+    "meta": {
+      "weddingOf": "Poroka: {couple}",
+      "website": "Poročna spletna stran"
+    }
+  },
+  "rsvp": {
+    "title": "Potrditev udeležbe",
+    "dateTbd": "Datum bo določen",
+    "weddingOf": "Poroka",
+    "rsvpsBy": "Potrditve prek <link>Vow</link>",
+    "enterCode": "Vnesite kodo z vabila (e-pošta ali kartica).",
+    "findIntro": "Poiščite svoje vabilo tako, da vpišete ime, kot je napisano na vabilu.",
+    "orCode": "Ali uporabite kodo z vabila",
+    "notFound": "Vabila ni mogoče najti",
+    "notFoundText": "Ta povezava ali koda ne ustreza nobenemu vabilu. Preverite jo in poskusite znova.",
+    "nothingYet": "Zaenkrat še ni česa potrditi. Preverite kasneje.",
+    "code": {
+      "label": "Vaša koda",
+      "continue": "Nadaljuj",
+      "invalid": "Kode imajo 6 črk in številk, npr. K7P2QX."
+    },
+    "find": {
+      "label": "Vaše polno ime",
+      "placeholder": "Ime in priimek",
+      "button": "Poišči",
+      "fullName": "Vpišite ime in priimek, kot sta na vabilu.",
+      "noMatch": "Tega imena nismo našli. Poskusite z zapisom z vabila ali uporabite kodo z vabila.",
+      "failed": "Nekaj je šlo narobe. Poskusite znova."
+    },
+    "dear": "Dragi {name},",
+    "update": "Spodaj lahko spremenite odgovore.",
+    "invite": "Zelo bi nas veselilo izvedeti, ali boste z nami.",
+    "replyBy": "Prosimo, odgovorite do {date}.",
+    "closed": "Rok za potrditev udeležbe je potekel.",
+    "closedContact": "Bi radi kaj spremenili? {contact}",
+    "closedNoContact": "Bi radi kaj spremenili? Obrnite se neposredno na par.",
+    "thanks": "Hvala!",
+    "thanksText": "Vaš odgovor smo poslali: {couple}. Z isto povezavo ga lahko kadar koli spremenite.",
+    "thanksTextUntil": "Vaš odgovor smo poslali: {couple}. Z isto povezavo ga lahko spremenite do {date}.",
+    "send": "Pošlji odgovor",
+    "save": "Shrani spremembe",
+    "change": "Spremeni odgovore",
+    "yourAnswers": "Vaši odgovori",
+    "attending": "Pride",
+    "notAttending": "Ne pride",
+    "noAnswer": "Še brez odgovora",
+    "cantMakeIt": "ne more priti",
+    "noAnswerYet": "še brez odgovora",
+    "songRequest": "Želena pesem: {song}",
+    "form": {
+      "everyone": "Pridemo vsi",
+      "none": "Nihče od nas ne more priti",
+      "willAttend": "Ali bo {name} prišel na: {event}?",
+      "accept": "Z veseljem pride",
+      "decline": "Žal ne more",
+      "meal": "Izbira menija",
+      "chooseMeal": "Izberite meni.",
+      "chooseAnswer": "Izberite odgovor.",
+      "missingMeal": "Izberite meni za vsakogar, ki pride.",
+      "missingAnswer": "Pred pošiljanjem odgovorite za vse.",
+      "details": "Nekaj podrobnosti",
+      "plusOneName": "Ime vašega spremljevalca (spremljevalec: {host})",
+      "firstName": "Ime",
+      "lastName": "Priimek",
+      "dietary": "Prehrana ali alergije: {name}",
+      "dietaryPlaceholder": "npr. vegetarijanska, alergija na oreščke (pustite prazno, če nič)",
+      "song": "Pesem, ob kateri boste zaplesali",
+      "songPlaceholder": "Izvajalec – pesem",
+      "message": "Sporočilo za: {couple}",
+      "guestOf": "Spremljevalec: {name}",
+      "guest": "Gost"
+    },
+    "errors": {
+      "rsvp_not_found": "Tega vabila nismo našli. Preverite povezavo ali kodo.",
+      "deadline_passed": "Rok za potrditev je potekel. Obrnite se neposredno na par.",
+      "invalid_guest_or_event": "Nekaj v odgovorih se ne ujema z vabilom. Znova naložite stran.",
+      "invalid_status": "Za vsakogar označite, ali pride ali ne.",
+      "not_allowed": "Nimate dovoljenja za vpis odgovorov za to poroko.",
+      "generic": "Odgovora nismo mogli shraniti. Poskusite znova čez trenutek."
+    }
+  },
+  "board": {
+    "empty": "Ta tabla je zaenkrat prazna.",
+    "photoBy": "Fotografija: <photographer>{name}</photographer>, <unsplash>Unsplash</unsplash>",
+    "madeWith": "Ustvarjeno z <link>Vow</link>",
+    "title": "Deljena tabla",
+    "fallbackAlt": "Navdih"
+  },
+  "email": {
+    "previewInvite": "Vabilo na poroko: {couple}",
+    "previewReminder": "Opomnik za potrditev udeležbe na poroki: {couple}",
+    "eyebrowInvite": "Vabljeni ste",
+    "eyebrowReminder": "Prijazen opomnik",
+    "dear": "Dragi {name},",
+    "bodyInvite": "Zelo bi bili veseli, če bi praznovali z nami. Prek svoje osebne povezave nam sporočite, kdo bo prišel.",
+    "bodyReminder": "Vašega odgovora še nismo prejeli, zelo pa bi radi vedeli, ali boste z nami. Vzame le minuto.",
+    "button": "Odgovori zdaj",
+    "replyBy": "Prosimo, odgovorite do {date}.",
+    "fallback": "Gumb ne deluje? Odprite {link} ali vnesite kodo {code}.",
+    "love": "Z ljubeznijo,",
+    "personal": "Ta povezava je namenjena samo vašemu gospodinjstvu. Prosimo, ne delite je.",
+    "subjectInvite": "Vabilo na poroko: {couple}",
+    "subjectReminder": "Opomnik: potrdite udeležbo na poroki: {couple}"
+  }
+}

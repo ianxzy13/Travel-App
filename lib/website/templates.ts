@@ -1,22 +1,30 @@
 import type { BodyFont, HeadingFont, SiteTemplate } from "@/lib/database.types";
 
-export const HEADING_FONTS: Record<HeadingFont, { label: string; css: string }> = {
-  cormorant: { label: "Cormorant (elegant serif)", css: "var(--font-cormorant), Georgia, serif" },
-  playfair: { label: "Playfair (classic serif)", css: "var(--font-playfair), Georgia, serif" },
-  fraunces: { label: "Fraunces (soft serif)", css: "var(--font-fraunces), Georgia, serif" },
-  josefin: { label: "Josefin (airy sans)", css: "var(--font-josefin), system-ui, sans-serif" },
-  inter: { label: "Inter (bold modern)", css: "var(--font-inter), system-ui, sans-serif" },
-  "great-vibes": { label: "Great Vibes (script)", css: "var(--font-great-vibes), cursive" },
+// name: the font's own name; style: a key in messages "websiteEditor.design.fontStyles"
+type FontInfo = { name: string; style: string; css: string };
+
+export const HEADING_FONTS: Record<HeadingFont, FontInfo> = {
+  cormorant: {
+    name: "Cormorant",
+    style: "elegantSerif",
+    css: "var(--font-cormorant), Georgia, serif",
+  },
+  playfair: { name: "Playfair", style: "classicSerif", css: "var(--font-playfair), Georgia, serif" },
+  fraunces: { name: "Fraunces", style: "softSerif", css: "var(--font-fraunces), Georgia, serif" },
+  josefin: { name: "Josefin", style: "airySans", css: "var(--font-josefin), system-ui, sans-serif" },
+  inter: { name: "Inter", style: "boldModern", css: "var(--font-inter), system-ui, sans-serif" },
+  "great-vibes": { name: "Great Vibes", style: "script", css: "var(--font-great-vibes), cursive" },
 };
 
-export const BODY_FONTS: Record<BodyFont, { label: string; css: string }> = {
-  inter: { label: "Inter (clean sans)", css: "var(--font-inter), system-ui, sans-serif" },
-  lora: { label: "Lora (book serif)", css: "var(--font-lora), Georgia, serif" },
+export const BODY_FONTS: Record<BodyFont, FontInfo> = {
+  inter: { name: "Inter", style: "cleanSans", css: "var(--font-inter), system-ui, sans-serif" },
+  lora: { name: "Lora", style: "bookSerif", css: "var(--font-lora), Georgia, serif" },
   nunito: {
-    label: "Nunito Sans (friendly sans)",
+    name: "Nunito Sans",
+    style: "friendlySans",
     css: "var(--font-nunito), system-ui, sans-serif",
   },
-  josefin: { label: "Josefin (airy sans)", css: "var(--font-josefin), system-ui, sans-serif" },
+  josefin: { name: "Josefin", style: "airySans", css: "var(--font-josefin), system-ui, sans-serif" },
 };
 
 export type TemplateStyle = {

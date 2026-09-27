@@ -57,7 +57,10 @@ export function shiftFrom<T extends TimedItem>(items: T[], fromId: string, delta
     .map((i) => ({ id: i.id, start_time: fromMinutes(toMinutes(i.start_time) + delta) }));
 }
 
-/** A typical wedding day, relative to the ceremony start (minutes). */
+/**
+ * A typical wedding day, relative to the ceremony start (minutes). Titles and
+ * owners are keys in messages "schedule.template" / "schedule.owners".
+ */
 export const DAY_TEMPLATE: {
   offset: number;
   duration: number;
@@ -65,30 +68,19 @@ export const DAY_TEMPLATE: {
   owner?: string;
   location?: "ceremony" | "reception";
 }[] = [
-  { offset: -300, duration: 180, title: "Hair & makeup", owner: "Hair & makeup artist" },
-  {
-    offset: -180,
-    duration: 120,
-    title: "Photographer arrives: getting-ready photos",
-    owner: "Photographer",
-  },
-  { offset: -90, duration: 30, title: "Get dressed", owner: "Wedding party" },
-  { offset: -60, duration: 30, title: "First look & couple photos", owner: "Photographer" },
-  { offset: -30, duration: 30, title: "Guests arrive", location: "ceremony" },
-  { offset: 0, duration: 45, title: "Ceremony", owner: "Officiant", location: "ceremony" },
-  {
-    offset: 45,
-    duration: 75,
-    title: "Drinks reception & family photos",
-    owner: "Photographer",
-    location: "reception",
-  },
-  { offset: 120, duration: 15, title: "Guests take their seats", location: "reception" },
-  { offset: 135, duration: 10, title: "Grand entrance", owner: "DJ / band", location: "reception" },
-  { offset: 145, duration: 90, title: "Dinner", owner: "Caterer", location: "reception" },
-  { offset: 235, duration: 30, title: "Speeches", location: "reception" },
-  { offset: 265, duration: 15, title: "Cake cutting", location: "reception" },
-  { offset: 280, duration: 10, title: "First dance", owner: "DJ / band", location: "reception" },
-  { offset: 290, duration: 180, title: "Party!", owner: "DJ / band", location: "reception" },
-  { offset: 470, duration: 15, title: "Send-off", location: "reception" },
+  { offset: -300, duration: 180, title: "hair", owner: "hairArtist" },
+  { offset: -180, duration: 120, title: "photographer", owner: "photographer" },
+  { offset: -90, duration: 30, title: "dressed", owner: "party" },
+  { offset: -60, duration: 30, title: "firstLook", owner: "photographer" },
+  { offset: -30, duration: 30, title: "guestsArrive", location: "ceremony" },
+  { offset: 0, duration: 45, title: "ceremony", owner: "officiant", location: "ceremony" },
+  { offset: 45, duration: 75, title: "drinks", owner: "photographer", location: "reception" },
+  { offset: 120, duration: 15, title: "seats", location: "reception" },
+  { offset: 135, duration: 10, title: "entrance", owner: "dj", location: "reception" },
+  { offset: 145, duration: 90, title: "dinner", owner: "caterer", location: "reception" },
+  { offset: 235, duration: 30, title: "speeches", location: "reception" },
+  { offset: 265, duration: 15, title: "cake", location: "reception" },
+  { offset: 280, duration: 10, title: "firstDance", owner: "dj", location: "reception" },
+  { offset: 290, duration: 180, title: "party", owner: "dj", location: "reception" },
+  { offset: 470, duration: 15, title: "sendOff", location: "reception" },
 ];

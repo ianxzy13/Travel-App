@@ -32,9 +32,7 @@ export function PasswordGate({
       style={siteVars(look)}
       className="flex min-h-dvh items-center justify-center bg-[var(--site-bg)] px-5 font-[family-name:var(--site-body)] text-[var(--site-fg)] [color-scheme:light]"
     >
-      {languages.length > 1 && (
-        <LanguageSwitcher offered={languages} className="absolute end-4 top-4" />
-      )}
+      <LanguageSwitcher offered={languages} className="absolute end-4 top-4" />
       <main className="w-full max-w-sm text-center">
         <Lock className="mx-auto size-6 text-[var(--site-accent)]" aria-hidden />
         <h1 className="mt-4 font-[family-name:var(--site-heading)] text-4xl">{couple}</h1>

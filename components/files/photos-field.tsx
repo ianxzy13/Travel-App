@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ImagePlus, Loader2, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { discardUpload } from "@/app/app/file-actions";
 import { createClient } from "@/lib/supabase/client";
@@ -53,6 +54,7 @@ export function PhotosField({
   max?: number;
   disabled?: boolean;
 }) {
+  const t = useTranslations("files");
   const input = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(0);
   const fresh = useRef(new Set<string>());
@@ -61,11 +63,11 @@ export function PhotosField({
   async function upload(files: File[]) {
     const room = max - value.length;
     const chosen = files.slice(0, room);
-    if (files.length > room) toast.warning(`Only ${room} more photo(s) fit.`);
+    if (files.length > room) toast.warning(t("onlyFit", { count: room }));
     const ok = chosen.filter((f) => {
       if (!TYPES.includes(f.type))
-        toast.error(`${f.name}: please choose a JPG, PNG, WebP, GIF or HEIC image.`);
-      else if (f.size > MAX_BYTES) toast.error(`${f.name} is larger than 10 MB.`);
+        toast.error(t("notImage", { name: f.name }));
+      else if (f.size > MAX_BYTES) toast.error(t("imageTooBig", { name: f.name }));
       else return true;
       return false;
     });
@@ -76,7 +78,7 @@ export function PhotosField({
     for (const f of ok) {
       const path = `${weddingId}/${folder}/${crypto.randomUUID()}-${f.name.replace(/[^\w.\-]+/g, "_").slice(-60)}`;
       const { error } = await sb.storage.from(BUCKET).upload(path, f, { contentType: f.type });
-      if (error) toast.error(`Couldn't upload ${f.name}. Is the file storage set up (see README)?`);
+      if (error) toast.error(t("photoFailed", { name: f.name }));
       else {
         added.push(path);
         fresh.current.add(path);
@@ -115,7 +117,7 @@ export function PhotosField({
             {urls[p] ? (
               <Image
                 src={urls[p]}
-                alt={`Photo ${i + 1}`}
+                alt={t("photo", { n: i + 1 })}
                 fill
                 sizes="150px"
                 className="object-cover"
@@ -130,8 +132,8 @@ export function PhotosField({
               <button
                 type="button"
                 onClick={() => remove(p)}
-                aria-label={`Remove photo ${i + 1}`}
-                className="focus-visible:ring-ring absolute top-1 right-1 rounded-full bg-black/60 p-1 text-white focus-visible:ring-2 focus-visible:outline-none"
+                aria-label={t("removePhoto", { n: i + 1 })}
+                className="focus-visible:ring-ring absolute end-1 top-1 rounded-full bg-black/60 p-1 text-white focus-visible:ring-2 focus-visible:outline-none"
               >
                 <X className="size-3.5" aria-hidden />
               </button>
@@ -153,13 +155,13 @@ export function PhotosField({
               ) : (
                 <ImagePlus className="size-5" aria-hidden />
               )}
-              {uploading ? `Uploading ${uploading}…` : "Add photos"}
+              {uploading ? t("uploadingCount", { count: uploading }) : t("addPhotos")}
             </button>
           </li>
         )}
       </ul>
       <p className="text-muted-foreground text-xs">
-        Up to {max} photos, 10 MB each. Only people planning your wedding can see them.
+        {t("photosHint", { max })}
       </p>
     </div>
   );

@@ -4,11 +4,12 @@ import { useTransition } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteExpense, saveExpense } from "@/app/app/budget/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { FileField } from "@/components/files/file-field";
-import { FormField } from "@/components/form-field";
+import { FormField, useValidationText } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -74,6 +75,8 @@ function ExpenseForm({
   readOnly,
 }: Props & { mode: NonNullable<ExpenseSheetMode> }) {
   const editing = mode.kind === "edit" ? mode.expense : null;
+  const t = useTranslations("budget.sheet");
+  const vt = useValidationText();
   const [pending, startTransition] = useTransition();
 
   const defaults: ExpenseValues = editing
@@ -85,7 +88,7 @@ function ExpenseForm({
         actual: editing.actual,
         notes: editing.notes ?? "",
         receipt: editing.receiptPath
-          ? { path: editing.receiptPath, name: editing.receiptName ?? "Receipt" }
+          ? { path: editing.receiptPath, name: editing.receiptName ?? t("receiptName") }
           : null,
         payments: payments
           .filter((p) => p.expenseId === editing.id)
@@ -122,7 +125,7 @@ function ExpenseForm({
     startTransition(async () => {
       const result = await saveExpense(values, editing?.id);
       if (result.ok) {
-        toast.success(editing ? "Expense saved" : "Expense added");
+        toast.success(editing ? t("saved") : t("added"));
         onClose();
       } else toast.error(result.error);
     }),
@@ -132,11 +135,9 @@ function ExpenseForm({
     <>
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle className="font-serif text-3xl">
-          {editing ? editing.name : "Add an expense"}
+          {editing ? editing.name : t("addTitle")}
         </SheetTitle>
-        <SheetDescription>
-          Use the estimate while you&apos;re planning; add the actual price once it&apos;s agreed.
-        </SheetDescription>
+        <SheetDescription>{t("hint")}</SheetDescription>
       </SheetHeader>
 
       <form
@@ -146,12 +147,14 @@ function ExpenseForm({
         noValidate
       >
         <fieldset disabled={readOnly || pending} className="space-y-6">
-          <FormField id="e-name" label="What is it?" error={errors.name?.message}>
-            {(aria) => <Input {...aria} placeholder="e.g. Venue hire" {...form.register("name")} />}
+          <FormField id="e-name" label={t("what")} error={errors.name?.message}>
+            {(aria) => (
+              <Input {...aria} placeholder={t("whatPlaceholder")} {...form.register("name")} />
+            )}
           </FormField>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField id="e-cat" label="Category" error={errors.categoryId?.message}>
+            <FormField id="e-cat" label={t("category")} error={errors.categoryId?.message}>
               {(aria) => (
                 <Controller
                   control={form.control}
@@ -159,7 +162,7 @@ function ExpenseForm({
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger {...aria} className="w-full">
-                        <SelectValue placeholder="Choose…" />
+                        <SelectValue placeholder={t("choose")} />
                       </SelectTrigger>
                       <SelectContent>
                         {categories.map((c) => (
@@ -173,7 +176,7 @@ function ExpenseForm({
                 />
               )}
             </FormField>
-            <FormField id="e-vendor" label="Vendor">
+            <FormField id="e-vendor" label={t("vendor")}>
               {(aria) => (
                 <Controller
                   control={form.control}
@@ -187,7 +190,7 @@ function ExpenseForm({
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="none">No vendor</SelectItem>
+                        <SelectItem value="none">{t("noVendor")}</SelectItem>
                         {vendors.map((v) => (
                           <SelectItem key={v.id} value={v.id}>
                             {v.name}
@@ -199,7 +202,7 @@ function ExpenseForm({
                 />
               )}
             </FormField>
-            <FormField id="e-est" label="Estimated cost" error={errors.estimated?.message}>
+            <FormField id="e-est" label={t("estimated")} error={errors.estimated?.message}>
               {(aria) => (
                 <Controller
                   control={form.control}
@@ -217,8 +220,8 @@ function ExpenseForm({
             </FormField>
             <FormField
               id="e-act"
-              label="Actual cost"
-              hint="Leave empty until you know it."
+              label={t("actual")}
+              hint={t("actualHint")}
               error={errors.actual?.message}
             >
               {(aria) => (
@@ -242,17 +245,14 @@ function ExpenseForm({
           {/* ---------- payment schedule ---------- */}
           <section className="space-y-3">
             <div className="flex items-baseline justify-between gap-2">
-              <h3 className="text-xl">Payments</h3>
+              <h3 className="text-xl">{t("payments")}</h3>
               <p className="text-muted-foreground text-xs tabular-nums">
-                Paid {money(paid)} of {money(cost)}
-                {scheduled !== cost && cost > 0 && ` · ${money(scheduled)} scheduled`}
+                {t("paidOf", { paid: money(paid), cost: money(cost) })}
+                {scheduled !== cost && cost > 0 && t("scheduled", { amount: money(scheduled) })}
               </p>
             </div>
             {fields.length === 0 && (
-              <p className="text-muted-foreground text-sm">
-                Add deposits and instalments with their due dates. You&apos;ll see upcoming ones on
-                the budget page.
-              </p>
+              <p className="text-muted-foreground text-sm">{t("paymentsHint")}</p>
             )}
             <ul className="space-y-2">
               {fields.map((f, i) => (
@@ -268,20 +268,20 @@ function ExpenseForm({
                         currency={currency}
                         value={field.value}
                         onChange={(v) => field.onChange(v ?? 0)}
-                        aria-label={`Payment ${i + 1} amount`}
+                        aria-label={t("amount", { n: i + 1 })}
                         aria-invalid={!!errors.payments?.[i]?.amount}
                       />
                     )}
                   />
                   <Input
                     type="date"
-                    aria-label={`Payment ${i + 1} due date`}
+                    aria-label={t("due", { n: i + 1 })}
                     className="max-sm:col-start-1"
                     {...form.register(`payments.${i}.dueDate`)}
                   />
                   <Input
-                    placeholder="Note (e.g. deposit)"
-                    aria-label={`Payment ${i + 1} note`}
+                    placeholder={t("notePlaceholder")}
+                    aria-label={t("note", { n: i + 1 })}
                     className="max-sm:col-span-2"
                     {...form.register(`payments.${i}.note`)}
                   />
@@ -295,7 +295,7 @@ function ExpenseForm({
                             checked={field.value}
                             onCheckedChange={(c) => field.onChange(c === true)}
                           />
-                          Paid
+                          {t("paid")}
                         </label>
                       )}
                     />
@@ -304,14 +304,14 @@ function ExpenseForm({
                       variant="ghost"
                       size="icon-sm"
                       onClick={() => remove(i)}
-                      aria-label={`Remove payment ${i + 1}`}
+                      aria-label={t("remove", { n: i + 1 })}
                     >
                       <Trash2 aria-hidden />
                     </Button>
                   </div>
                   {errors.payments?.[i]?.amount && (
                     <p className="text-destructive col-span-full text-xs">
-                      {errors.payments[i]?.amount?.message}
+                      {vt(errors.payments[i]?.amount?.message)}
                     </p>
                   )}
                 </li>
@@ -332,7 +332,7 @@ function ExpenseForm({
                   })
                 }
               >
-                <Plus aria-hidden /> Add payment
+                <Plus aria-hidden /> {t("addPayment")}
               </Button>
               {fields.length === 0 && cost > 0 && (
                 <Button
@@ -345,22 +345,22 @@ function ExpenseForm({
                       dueDate: "",
                       paid: true,
                       paidOn: "",
-                      note: "Paid in full",
+                      note: t("paidInFull"),
                     })
                   }
                 >
-                  Mark as paid in full
+                  {t("markFull")}
                 </Button>
               )}
             </div>
           </section>
 
-          <FormField id="e-notes" label="Notes" error={errors.notes?.message}>
+          <FormField id="e-notes" label={t("notes")} error={errors.notes?.message}>
             {(aria) => <Textarea {...aria} rows={3} {...form.register("notes")} />}
           </FormField>
 
           <div className="space-y-2">
-            <p className="text-sm font-medium">Receipt or invoice</p>
+            <p className="text-sm font-medium">{t("receipt")}</p>
             <Controller
               control={form.control}
               name="receipt"
@@ -371,7 +371,7 @@ function ExpenseForm({
                   value={field.value}
                   onChange={field.onChange}
                   disabled={readOnly}
-                  label="Upload receipt"
+                  label={t("upload")}
                 />
               )}
             />
@@ -384,30 +384,30 @@ function ExpenseForm({
           {editing && (
             <ConfirmDialog
               trigger={
-                <Button variant="ghost" className="text-destructive mr-auto" disabled={pending}>
-                  <Trash2 aria-hidden /> Delete
+                <Button variant="ghost" className="text-destructive me-auto" disabled={pending}>
+                  <Trash2 aria-hidden /> {t("delete")}
                 </Button>
               }
-              title={`Delete “${editing.name}”?`}
-              description="Its payments and receipt will be deleted too."
+              title={t("deleteTitle", { name: editing.name })}
+              description={t("deleteText")}
               onConfirm={async () => {
                 const r = await deleteExpense(editing.id);
                 if (!r.ok) {
                   toast.error(r.error);
                   return false;
                 }
-                toast.success("Expense deleted");
+                toast.success(t("deleted"));
                 onClose();
               }}
             />
           )}
-          <div className="ml-auto flex gap-2">
+          <div className="ms-auto flex gap-2">
             <Button variant="outline" onClick={onClose} disabled={pending}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button type="submit" form="expense-form" disabled={pending}>
               {pending && <Loader2 className="animate-spin" aria-hidden />}
-              {editing ? "Save" : "Add expense"}
+              {editing ? t("save") : t("add")}
             </Button>
           </div>
         </SheetFooter>

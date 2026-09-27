@@ -3,10 +3,12 @@ import { cookies, headers } from "next/headers";
 import { getRequestConfig } from "next-intl/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
-import { APP_LOCALE_COOKIE, DEFAULT_LOCALE, GUEST_LOCALE_COOKIE, type Locale } from "./locales";
-import { resolveAppLocale, resolveGuestLocale, withFallback } from "./resolve";
+import { APP_LOCALE_COOKIE, GUEST_LOCALE_COOKIE, type Locale } from "./locales";
+import { loadMessages } from "./messages";
+import { resolveAppLocale, resolveGuestLocale } from "./resolve";
 
-type Messages = typeof import("../messages/en.json");
+/** Guests' pages (website, RSVP, shared boards). */
+export const isGuestPath = (path: string) => /^\/(w|rsvp|r|b)(\/|$)/.test(path);
 
 /** Public pages guests open; their language depends on the wedding. */
 function publicPage(path: string): { kind: "site" | "rsvp" | "board"; key: string | null } | null {
@@ -43,18 +45,6 @@ export const requestLocale = cache(async (): Promise<Locale> => {
     weddingLanguages: info?.languages,
   });
 });
-
-/** Messages for a language, with English filling any gaps. */
-export async function loadMessages(locale: string): Promise<Messages> {
-  const en = (await import("../messages/en.json")).default as Messages;
-  if (locale === DEFAULT_LOCALE) return en;
-  try {
-    const own = (await import(`../messages/${locale}.json`)).default as Partial<Messages>;
-    return withFallback(own, en);
-  } catch {
-    return en;
-  }
-}
 
 export default getRequestConfig(async () => {
   const locale = await requestLocale();

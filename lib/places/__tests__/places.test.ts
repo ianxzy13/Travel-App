@@ -30,7 +30,11 @@ describe("arrivals board", () => {
     expect(days.map((d) => d.date)).toEqual(["2027-06-10", "2027-06-11", null]);
     expect(days[1].flights.map((x) => x.id)).toEqual(["early", "late"]);
     expect(days[1].people).toBe(3); // 1 (nobody linked) + 2
-    expect(days[0].label).toBe("Thursday 10 June");
+    expect(days[0].label).toBe("Thursday, June 10, 2027");
+    expect(days[2].label).toBe("Time not set");
+    expect(groupByDay([f("x", "2027-06-10T13:00:00")], { locale: "sl", noTime: "" })[0].label).toBe(
+      "četrtek, 10. junij 2027",
+    );
     expect(timeOf("2027-06-11T06:05:00")).toBe("06:05");
   });
 });

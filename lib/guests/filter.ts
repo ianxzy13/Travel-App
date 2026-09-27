@@ -11,6 +11,8 @@ export type GuestFilters = {
   list: GuestList | "all";
   /** RSVP answer, for the chosen event (or any invited event when "all") */
   rsvp: "all" | "attending" | "declined" | "waiting";
+  /** "all" or a language code (the household's, or the couple's when not set) */
+  language: string;
 };
 
 export const DEFAULT_FILTERS: GuestFilters = {
@@ -22,11 +24,12 @@ export const DEFAULT_FILTERS: GuestFilters = {
   ageGroup: "all",
   list: "all",
   rsvp: "all",
+  language: "all",
 };
 
 /** How many filters (besides search) are active, for the "Filters (2)" badge. */
 export function activeFilterCount(f: GuestFilters) {
-  return (["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp"] as const).filter(
+  return (["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp", "language"] as const).filter(
     (k) => f[k] !== "all",
   ).length;
 }
@@ -40,7 +43,11 @@ export function normalize(text: string) {
     .trim();
 }
 
-export function filterGuests(guests: GuestView[], f: GuestFilters): GuestView[] {
+export function filterGuests(
+  guests: GuestView[],
+  f: GuestFilters,
+  coupleLanguage = "en",
+): GuestView[] {
   const words = normalize(f.search).split(/\s+/).filter(Boolean);
 
   return guests.filter((g) => {
@@ -54,6 +61,9 @@ export function filterGuests(guests: GuestView[], f: GuestFilters): GuestView[] 
       return false;
     }
     if (f.rsvp !== "all" && !matchesRsvp(g, f)) return false;
+    if (f.language !== "all" && (g.householdLanguage || coupleLanguage) !== f.language) {
+      return false;
+    }
     if (words.length) {
       // every search word must appear somewhere in the guest's details
       const haystack = normalize([g.name, g.householdName, g.email ?? "", g.phone ?? ""].join(" "));

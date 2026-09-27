@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { RsvpDashboard } from "@/components/rsvp-admin/rsvp-dashboard";
 import { isEmailConfigured } from "@/lib/email/resend";
 import { loadRsvpDashboard } from "@/lib/rsvp/load";
@@ -6,7 +7,9 @@ import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, coupleName, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "RSVPs" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("rsvpAdmin"))("title") };
+}
 
 export default async function RsvpPage({
   searchParams,

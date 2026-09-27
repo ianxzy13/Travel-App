@@ -15,9 +15,9 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { normalize } from "@/lib/guests/filter";
 import type { PartnerNames } from "@/lib/guests/model";
-import { tableName } from "@/lib/seating/geometry";
 import type { SeatingGuest, SeatingState } from "@/lib/seating/types";
 import { cn } from "@/lib/utils";
+import { useSeatingWords } from "./use-seating-words";
 
 export type Picked = { guestIds: string[]; label: string } | null;
 
@@ -53,6 +53,7 @@ export function GuestPanel({
   const [side, setSide] = useState("all");
   const [tag, setTag] = useState("all");
   const { setNodeRef, isOver } = useDroppable({ id: "panel", disabled: !canEdit });
+  const { t } = useSeatingWords();
 
   const attending = guests.filter((g) => g.rsvp === "attending");
   const seatedAttending = attending.filter((g) => state.assignments[g.id]).length;
@@ -93,46 +94,46 @@ export function GuestPanel({
     >
       <div className="space-y-3 border-b p-3">
         <div className="flex items-baseline justify-between">
-          <h2 className="font-serif text-2xl">Guests</h2>
+          <h2 className="font-serif text-2xl">{t("guests")}</h2>
           <p className="text-muted-foreground text-xs" aria-live="polite">
-            {seatedAttending} of {attending.length} attending seated
+            {t("panel.seatedOf", { seated: seatedAttending, attending: attending.length })}
           </p>
         </div>
         <div className="relative">
           <Search
-            className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+            className="text-muted-foreground pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2"
             aria-hidden
           />
           <Input
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search guests…"
-            aria-label="Search guests"
-            className="h-8 pl-9"
+            placeholder={t("panel.search")}
+            aria-label={t("panel.searchLabel")}
+            className="h-8 ps-9"
           />
         </div>
         <div className="grid grid-cols-2 gap-2">
           <Select value={side} onValueChange={setSide}>
-            <SelectTrigger size="sm" className="w-full" aria-label="Filter by side">
+            <SelectTrigger size="sm" className="w-full" aria-label={t("panel.bySide")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Both sides</SelectItem>
-              <SelectItem value="partner_a">{names.a}&apos;s side</SelectItem>
-              <SelectItem value="partner_b">{names.b}&apos;s side</SelectItem>
-              <SelectItem value="both">Shared</SelectItem>
+              <SelectItem value="all">{t("panel.bothSides")}</SelectItem>
+              <SelectItem value="partner_a">{t("sideOf", { name: names.a })}</SelectItem>
+              <SelectItem value="partner_b">{t("sideOf", { name: names.b })}</SelectItem>
+              <SelectItem value="both">{t("panel.shared")}</SelectItem>
             </SelectContent>
           </Select>
           <Select value={tag} onValueChange={setTag}>
-            <SelectTrigger size="sm" className="w-full" aria-label="Filter by tag">
+            <SelectTrigger size="sm" className="w-full" aria-label={t("panel.byTag")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All tags</SelectItem>
-              {tags.map((t) => (
-                <SelectItem key={t.id} value={t.id}>
-                  {t.name}
+              <SelectItem value="all">{t("panel.allTags")}</SelectItem>
+              {tags.map((tag) => (
+                <SelectItem key={tag.id} value={tag.id}>
+                  {tag.name}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -140,11 +141,11 @@ export function GuestPanel({
         </div>
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs">
           <Label className="text-xs font-normal">
-            <Switch checked={unseatedOnly} onCheckedChange={setUnseatedOnly} /> Not seated only
+            <Switch checked={unseatedOnly} onCheckedChange={setUnseatedOnly} /> {t("panel.unseatedOnly")}
           </Label>
           <Label className="text-xs font-normal">
             <Switch checked={!attendingOnly} onCheckedChange={(v) => setAttendingOnly(!v)} />{" "}
-            Include not replied
+            {t("panel.includeNotReplied")}
           </Label>
         </div>
         {picked && (
@@ -153,12 +154,12 @@ export function GuestPanel({
             className="bg-primary-soft flex items-center gap-2 rounded-lg px-3 py-2 text-sm"
           >
             <span className="flex-1">
-              Tap a seat or table for <strong>{picked.label}</strong>
+              {t.rich("tapFor", { name: picked.label, b: (c) => <strong>{c}</strong> })}
             </span>
             <button
               type="button"
               onClick={() => onPick(null)}
-              aria-label="Cancel"
+              aria-label={t("cancel")}
               className="hover:bg-background rounded p-0.5"
             >
               <X className="size-4" aria-hidden />
@@ -171,10 +172,10 @@ export function GuestPanel({
         {groups.length === 0 ? (
           <p className="text-muted-foreground p-4 text-center text-sm">
             {attending.length === 0
-              ? "Nobody has RSVP'd yes to this event yet. Switch on “Include not replied” to plan ahead."
+              ? t("panel.noYes")
               : unseatedOnly
-                ? "Everyone matching is seated. 🎉"
-                : "No guests match."}
+                ? t("panel.allSeated")
+                : t("panel.noMatch")}
           </p>
         ) : (
           <ul className="space-y-2">
@@ -196,8 +197,7 @@ export function GuestPanel({
       </div>
       {canEdit && (
         <p className="text-muted-foreground border-t px-3 py-2 text-[0.7rem]">
-          Drag onto a seat or table, or tap a name then tap a seat. Drag a seated guest here to
-          unseat.
+          {t("panel.help")}
         </p>
       )}
     </div>
@@ -224,6 +224,7 @@ function HouseholdGroup({
   onPick: (p: Picked) => void;
 }) {
   const unseated = guests.filter((g) => !state.assignments[g.id]).map((g) => g.id);
+  const { t, tableName } = useSeatingWords();
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `household:${id}`,
     data: { guestIds: unseated.length ? unseated : guests.map((g) => g.id), label: name },
@@ -241,7 +242,7 @@ function HouseholdGroup({
           {...listeners}
           {...attributes}
           onClick={() => canEdit && onPick(isPicked ? null : { guestIds: ids, label: pickLabel })}
-          aria-label={`${name}, ${guests.length} guests. Drag or tap to seat together`}
+          aria-label={t("panel.householdAria", { name, count: guests.length })}
           className={cn(
             "bg-muted/50 flex cursor-grab items-center gap-1.5 rounded-t-lg px-2 py-1.5 text-xs font-medium",
             isPicked && "bg-primary text-primary-foreground",
@@ -257,7 +258,7 @@ function HouseholdGroup({
           <GuestRow
             key={g.id}
             guest={g}
-            seatLabel={seatLabel(state, g.id)}
+            seatLabel={seatLabel(state, g.id, tableName)}
             meal={g.mealOptionId ? mealLookup.get(g.mealOptionId) : undefined}
             canEdit={canEdit}
             picked={picked?.guestIds.length === 1 && picked.guestIds[0] === g.id}
@@ -269,7 +270,11 @@ function HouseholdGroup({
   );
 }
 
-function seatLabel(state: SeatingState, guestId: string) {
+function seatLabel(
+  state: SeatingState,
+  guestId: string,
+  tableName: (o: SeatingState["objects"][string]) => string,
+) {
   const a = state.assignments[guestId];
   const t = a && state.objects[a.objectId];
   return t ? tableName(t) : null;
@@ -295,6 +300,7 @@ function GuestRow({
     data: { guestIds: [g.id], label: g.name },
     disabled: !canEdit,
   });
+  const { t } = useSeatingWords();
 
   // The drag handle (role="button") sits inside the <li>, so the list stays a proper list.
   return (
@@ -304,7 +310,11 @@ function GuestRow({
         {...listeners}
         {...attributes}
         onClick={() => canEdit && onPick(picked ? null : { guestIds: [g.id], label: g.name })}
-        aria-label={`${g.name}${seatLabel ? `, seated at ${seatLabel}` : ", not seated"}. Drag or tap to seat`}
+        aria-label={
+          seatLabel
+            ? t("panel.guestSeated", { name: g.name, table: seatLabel })
+            : t("panel.guestNotSeated", { name: g.name })
+        }
         className={cn(
           "flex cursor-grab items-center gap-2 px-2 py-1.5 text-sm",
           picked ? "bg-primary text-primary-foreground" : "hover:bg-accent",
@@ -322,7 +332,11 @@ function GuestRow({
                 picked ? "opacity-80" : "text-muted-foreground",
               )}
             >
-              {g.rsvp === "declined" ? "Declined" : g.rsvp === null ? "No reply yet" : meal}
+              {g.rsvp === "declined"
+                ? t("panel.declined")
+                : g.rsvp === null
+                  ? t("panel.noReply")
+                  : meal}
             </span>
           )}
         </span>
@@ -330,14 +344,14 @@ function GuestRow({
           <Utensils
             className="size-3.5 shrink-0 opacity-60"
             role="img"
-            aria-label={`Dietary: ${g.dietary}`}
+            aria-label={t("panel.dietary", { text: g.dietary })}
           />
         )}
         {g.accessibility && (
           <Accessibility
             className="size-3.5 shrink-0 opacity-60"
             role="img"
-            aria-label={`Accessibility: ${g.accessibility}`}
+            aria-label={t("panel.accessibility", { text: g.accessibility })}
           />
         )}
         {seatLabel && (

@@ -2,6 +2,7 @@
 
 import { Controller, type UseFormReturn } from "react-hook-form";
 import { Check } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { FormField } from "@/components/form-field";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { currencyLabel } from "@/lib/i18n/format";
 import { cn } from "@/lib/utils";
 import { ACCENTS, CURRENCIES, STYLE_TAGS, type WeddingFormValues } from "@/lib/validation/wedding";
 
@@ -20,25 +22,26 @@ import { ACCENTS, CURRENCIES, STYLE_TAGS, type WeddingFormValues } from "@/lib/v
 type Props = { form: UseFormReturn<WeddingFormValues>; disabled?: boolean };
 
 export function NamesFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
   const { errors } = form.formState;
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <FormField id="partnerAName" label="Partner one" error={errors.partnerAName?.message}>
+      <FormField id="partnerAName" label={t("partnerA")} error={errors.partnerAName?.message}>
         {(aria) => (
           <Input
             {...aria}
             autoComplete="given-name"
-            placeholder="e.g. Ian"
+            placeholder={t("partnerAPlaceholder")}
             disabled={disabled}
             {...form.register("partnerAName")}
           />
         )}
       </FormField>
-      <FormField id="partnerBName" label="Partner two" error={errors.partnerBName?.message}>
+      <FormField id="partnerBName" label={t("partnerB")} error={errors.partnerBName?.message}>
         {(aria) => (
           <Input
             {...aria}
-            placeholder="e.g. Maria"
+            placeholder={t("partnerBPlaceholder")}
             disabled={disabled}
             {...form.register("partnerBName")}
           />
@@ -49,13 +52,14 @@ export function NamesFields({ form, disabled }: Props) {
 }
 
 export function DateLocationFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
   const { errors } = form.formState;
   return (
     <div className="grid gap-4">
       <FormField
         id="weddingDate"
-        label="Wedding date"
-        hint="Not decided yet? Leave it empty and add it later."
+        label={t("date")}
+        hint={t("dateHint")}
         error={errors.weddingDate?.message}
       >
         {(aria) => (
@@ -64,14 +68,14 @@ export function DateLocationFields({ form, disabled }: Props) {
       </FormField>
       <FormField
         id="location"
-        label="Location"
-        hint="City, region or venue, whatever you know so far."
+        label={t("location")}
+        hint={t("locationHint")}
         error={errors.location?.message}
       >
         {(aria) => (
           <Input
             {...aria}
-            placeholder="e.g. Sintra, Portugal"
+            placeholder={t("locationPlaceholder")}
             disabled={disabled}
             {...form.register("location")}
           />
@@ -82,26 +86,28 @@ export function DateLocationFields({ form, disabled }: Props) {
 }
 
 export function GuestsCurrencyFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
+  const locale = useLocale();
   const { errors } = form.formState;
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <FormField
         id="estimatedGuests"
-        label="Estimated guests"
-        hint="A rough guess is fine."
+        label={t("guests")}
+        hint={t("guestsHint")}
         error={errors.estimatedGuests?.message}
       >
         {(aria) => (
           <Input
             {...aria}
             inputMode="numeric"
-            placeholder="e.g. 120"
+            placeholder={t("guestsPlaceholder")}
             disabled={disabled}
             {...form.register("estimatedGuests")}
           />
         )}
       </FormField>
-      <FormField id="currency" label="Currency" error={errors.currency?.message}>
+      <FormField id="currency" label={t("currency")} error={errors.currency?.message}>
         {(aria) => (
           <Controller
             control={form.control}
@@ -109,14 +115,16 @@ export function GuestsCurrencyFields({ form, disabled }: Props) {
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange} disabled={disabled}>
                 <SelectTrigger {...aria} className="w-full">
-                  <SelectValue placeholder="Choose a currency" />
+                  <SelectValue placeholder={t("chooseCurrency")} />
                 </SelectTrigger>
                 <SelectContent>
-                  {CURRENCIES.map((c) => (
-                    <SelectItem key={c.code} value={c.code}>
-                      {c.label}
-                    </SelectItem>
-                  ))}
+                  {CURRENCIES.map((c) => ({ code: c, label: currencyLabel(c, locale) }))
+                    .sort((a, b) => a.label.localeCompare(b.label, locale))
+                    .map((c) => (
+                      <SelectItem key={c.code} value={c.code}>
+                        {c.label}
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             )}
@@ -128,10 +136,11 @@ export function GuestsCurrencyFields({ form, disabled }: Props) {
 }
 
 export function StyleFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
   return (
     <div className="grid gap-6">
       <fieldset className="space-y-3">
-        <legend className="text-sm font-medium">Style (pick any that feel like you)</legend>
+        <legend className="text-sm font-medium">{t("style")}</legend>
         <Controller
           control={form.control}
           name="styleTags"
@@ -158,7 +167,7 @@ export function StyleFields({ form, disabled }: Props) {
                     )}
                   >
                     {selected && <Check className="size-3.5" aria-hidden />}
-                    {tag}
+                    {t(`styles.${tag}`)}
                   </button>
                 );
               })}
@@ -168,32 +177,32 @@ export function StyleFields({ form, disabled }: Props) {
       </fieldset>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm font-medium">Accent colour for the app</legend>
+        <legend className="text-sm font-medium">{t("accent")}</legend>
         <Controller
           control={form.control}
           name="accent"
           render={({ field }) => (
-            <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Accent colour">
+            <div className="flex flex-wrap gap-3" role="radiogroup" aria-label={t("accent")}>
               {ACCENTS.map((a) => (
                 <label
-                  key={a.value}
-                  data-accent={a.value}
+                  key={a}
+                  data-accent={a}
                   className={cn(
                     "has-[:focus-visible]:ring-ring flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2 text-sm has-[:focus-visible]:ring-[3px]",
-                    field.value === a.value && "border-primary bg-primary-soft",
+                    field.value === a && "border-primary bg-primary-soft",
                   )}
                 >
                   <input
                     type="radio"
                     name={field.name}
-                    value={a.value}
-                    checked={field.value === a.value}
-                    onChange={() => field.onChange(a.value)}
+                    value={a}
+                    checked={field.value === a}
+                    onChange={() => field.onChange(a)}
                     disabled={disabled}
                     className="sr-only"
                   />
                   <span className="bg-primary size-5 rounded-full" aria-hidden />
-                  {a.label}
+                  {t(`accents.${a}`)}
                 </label>
               ))}
             </div>

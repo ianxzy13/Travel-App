@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { saveEventTranslations } from "@/app/app/settings/language-actions";
 import { TranslationsDialog } from "@/components/translations-dialog";
 import { useState, useTransition } from "react";
@@ -46,7 +46,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { EventRow } from "@/lib/database.types";
-import { formatEventWhen } from "@/lib/format";
+import { fmtEventWhen } from "@/lib/i18n/format";
 import { eventSchema, type EventFormValues } from "@/lib/validation/guest";
 
 export type EventItem = EventRow & { invitedCount: number };
@@ -66,6 +66,8 @@ export function EventsCard({
   languages?: string[];
 }) {
   const tt = useTranslations("app.translate");
+  const t = useTranslations("events");
+  const locale = useLocale();
   const [editing, setEditing] = useState<EventItem | "new" | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -81,14 +83,12 @@ export function EventsCard({
   return (
     <Card id="events" className="scroll-mt-20">
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Events</CardTitle>
-        <CardDescription>
-          Welcome drinks, ceremony, reception, brunch… Each guest can be invited to some or all.
-        </CardDescription>
+        <CardTitle className="font-serif text-2xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
         {!readOnly && events.length > 0 && (
           <CardAction>
             <Button size="sm" onClick={() => setEditing("new")}>
-              <Plus aria-hidden /> Add event
+              <Plus aria-hidden /> {t("add")}
             </Button>
           </CardAction>
         )}
@@ -97,9 +97,7 @@ export function EventsCard({
         {events.length === 0 ? (
           <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-8 text-center">
             <CalendarDays className="text-primary size-8" aria-hidden />
-            <p className="text-muted-foreground text-sm">
-              No events yet. Most couples start with a ceremony and a reception.
-            </p>
+            <p className="text-muted-foreground text-sm">{t("empty")}</p>
             {!readOnly && (
               <div className="flex flex-wrap justify-center gap-2">
                 <Button
@@ -107,16 +105,16 @@ export function EventsCard({
                   onClick={() =>
                     startTransition(async () => {
                       const result = await addDefaultEvents();
-                      if (result.ok) toast.success("Ceremony and reception added");
+                      if (result.ok) toast.success(t("defaultsAdded"));
                       else toast.error(result.error);
                     })
                   }
                 >
                   {pending && <Loader2 className="animate-spin" aria-hidden />}
-                  Add ceremony &amp; reception
+                  {t("addDefaults")}
                 </Button>
                 <Button variant="outline" onClick={() => setEditing("new")}>
-                  Add a different event
+                  {t("addOther")}
                 </Button>
               </div>
             )}
@@ -130,7 +128,7 @@ export function EventsCard({
                   <div className="text-muted-foreground mt-1 space-y-0.5 text-sm">
                     <p className="flex items-center gap-1.5">
                       <CalendarDays className="size-3.5" aria-hidden />
-                      {formatEventWhen(event)}
+                      {fmtEventWhen(event, locale, t("noDate"))}
                     </p>
                     {(event.venue_name || event.address) && (
                       <p className="flex items-center gap-1.5">
@@ -145,7 +143,7 @@ export function EventsCard({
                       </p>
                     )}
                     <p>
-                      {event.invitedCount} guest{event.invitedCount === 1 ? "" : "s"} invited
+                      {t("invited", { count: event.invitedCount })}
                     </p>
                   </div>
                 </div>
@@ -176,7 +174,7 @@ export function EventsCard({
                       size="icon"
                       disabled={i === 0 || pending}
                       onClick={() => move(i, -1)}
-                      aria-label={`Move ${event.name} up`}
+                      aria-label={t("moveUp", { name: event.name })}
                     >
                       <ArrowUp aria-hidden />
                     </Button>
@@ -185,7 +183,7 @@ export function EventsCard({
                       size="icon"
                       disabled={i === events.length - 1 || pending}
                       onClick={() => move(i, 1)}
-                      aria-label={`Move ${event.name} down`}
+                      aria-label={t("moveDown", { name: event.name })}
                     >
                       <ArrowDown aria-hidden />
                     </Button>
@@ -193,25 +191,25 @@ export function EventsCard({
                       variant="ghost"
                       size="icon"
                       onClick={() => setEditing(event)}
-                      aria-label={`Edit ${event.name}`}
+                      aria-label={t("editName", { name: event.name })}
                     >
                       <Pencil aria-hidden />
                     </Button>
                     <ConfirmDialog
                       trigger={
-                        <Button variant="ghost" size="icon" aria-label={`Delete ${event.name}`}>
+                        <Button variant="ghost" size="icon" aria-label={t("deleteName", { name: event.name })}>
                           <Trash2 aria-hidden />
                         </Button>
                       }
-                      title={`Delete ${event.name}?`}
-                      description={`${event.invitedCount} guest invitation(s) to this event will be removed too.`}
+                      title={t("deleteTitle", { name: event.name })}
+                      description={t("deleteText", { count: event.invitedCount })}
                       onConfirm={async () => {
                         const result = await deleteEvent(event.id);
                         if (!result.ok) {
                           toast.error(result.error);
                           return false;
                         }
-                        toast.success(`${event.name} deleted`);
+                        toast.success(t("deleted", { name: event.name }));
                       }}
                     />
                   </div>
@@ -256,6 +254,8 @@ function EventDialog({
   bookedVenues: BookedVenue[];
 }) {
   const existing = event && event !== "new" ? event : null;
+  const t = useTranslations("events");
+  const ui = useTranslations("ui");
   const [pending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(eventSchema),
@@ -267,7 +267,7 @@ function EventDialog({
     startTransition(async () => {
       const result = await saveEvent(values, existing?.id);
       if (result.ok) {
-        toast.success(existing ? "Event updated" : "Event added");
+        toast.success(existing ? t("updated") : t("added"));
         onClose();
       } else {
         toast.error(result.error);
@@ -280,15 +280,13 @@ function EventDialog({
       <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl">
-            {existing ? `Edit ${existing.name}` : "Add an event"}
+            {existing ? t("dialogEdit", { name: existing.name }) : t("dialogNew")}
           </DialogTitle>
-          <DialogDescription>
-            These details appear on invitations and your wedding website.
-          </DialogDescription>
+          <DialogDescription>{t("dialogText")}</DialogDescription>
         </DialogHeader>
         {bookedVenues.length > 0 && (
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-muted-foreground">Use a booked venue:</span>
+            <span className="text-muted-foreground">{t("useVenue")}</span>
             {bookedVenues.map((v) => (
               <Button
                 key={v.id}
@@ -306,54 +304,54 @@ function EventDialog({
           </div>
         )}
         <form id="event-form" onSubmit={onSubmit} className="grid gap-4" noValidate>
-          <FormField id="ev-name" label="Name" error={errors.name?.message}>
+          <FormField id="ev-name" label={t("name")} error={errors.name?.message}>
             {(aria) => (
-              <Input {...aria} placeholder="e.g. Welcome drinks" {...form.register("name")} />
+              <Input {...aria} placeholder={t("namePlaceholder")} {...form.register("name")} />
             )}
           </FormField>
           <div className="grid gap-4 sm:grid-cols-3">
-            <FormField id="ev-date" label="Date" error={errors.eventDate?.message}>
+            <FormField id="ev-date" label={t("date")} error={errors.eventDate?.message}>
               {(aria) => <Input {...aria} type="date" {...form.register("eventDate")} />}
             </FormField>
-            <FormField id="ev-start" label="Starts" error={errors.startTime?.message}>
+            <FormField id="ev-start" label={t("starts")} error={errors.startTime?.message}>
               {(aria) => <Input {...aria} type="time" {...form.register("startTime")} />}
             </FormField>
-            <FormField id="ev-end" label="Ends" error={errors.endTime?.message}>
+            <FormField id="ev-end" label={t("ends")} error={errors.endTime?.message}>
               {(aria) => <Input {...aria} type="time" {...form.register("endTime")} />}
             </FormField>
           </div>
-          <FormField id="ev-venue" label="Venue" error={errors.venueName?.message}>
+          <FormField id="ev-venue" label={t("venue")} error={errors.venueName?.message}>
             {(aria) => (
               <Input
                 {...aria}
-                placeholder="e.g. Quinta da Regaleira"
+                placeholder={t("venuePlaceholder")}
                 {...form.register("venueName")}
               />
             )}
           </FormField>
-          <FormField id="ev-address" label="Address" error={errors.address?.message}>
+          <FormField id="ev-address" label={t("address")} error={errors.address?.message}>
             {(aria) => <Input {...aria} {...form.register("address")} />}
           </FormField>
-          <FormField id="ev-dress" label="Dress code" error={errors.dressCode?.message}>
+          <FormField id="ev-dress" label={t("dressCode")} error={errors.dressCode?.message}>
             {(aria) => (
               <Input
                 {...aria}
-                placeholder="e.g. Black tie optional"
+                placeholder={t("dressCodePlaceholder")}
                 {...form.register("dressCode")}
               />
             )}
           </FormField>
-          <FormField id="ev-desc" label="Notes for guests" error={errors.description?.message}>
+          <FormField id="ev-desc" label={t("notes")} error={errors.description?.message}>
             {(aria) => <Textarea {...aria} rows={3} {...form.register("description")} />}
           </FormField>
         </form>
         <DialogFooter>
           <Button variant="outline" onClick={onClose} disabled={pending}>
-            Cancel
+            {ui("cancel")}
           </Button>
           <Button type="submit" form="event-form" disabled={pending}>
             {pending && <Loader2 className="animate-spin" aria-hidden />}
-            {existing ? "Save changes" : "Add event"}
+            {existing ? t("save") : t("add")}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Download, Plus, Tags, Upload, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { PageHeader } from "@/components/app/page-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +28,9 @@ import type { GuestPageData } from "./types";
 
 /** The whole /app/guests screen. Filtering and sorting happen in the browser. */
 export function GuestManager(data: GuestPageData) {
-  const { guests, households, events, tags, names, canEdit, emailConfigured } = data;
+  const { guests, households, events, tags, names, canEdit, emailConfigured, coupleLanguage } =
+    data;
+  const t = useTranslations("guests");
 
   const [filters, setFilters] = useState<GuestFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortState>({ key: "name", dir: "asc" });
@@ -45,6 +48,11 @@ export function GuestManager(data: GuestPageData) {
     for (const g of guests) for (const t of g.tagIds) usage.set(t, (usage.get(t) ?? 0) + 1);
     return usage;
   }, [guests]);
+  // languages the households speak (for the filter and the flags in the list)
+  const languages = useMemo(
+    () => [...new Set(households.map((h) => h.language || coupleLanguage))],
+    [households, coupleLanguage],
+  );
 
   // Counters follow only the A/B list switch, not the other filters.
   const stats = useMemo(
@@ -54,8 +62,8 @@ export function GuestManager(data: GuestPageData) {
   );
 
   const visible = useMemo(
-    () => sortGuests(filterGuests(guests, filters), sort),
-    [guests, filters, sort],
+    () => sortGuests(filterGuests(guests, filters, coupleLanguage), sort),
+    [guests, filters, sort, coupleLanguage],
   );
   const groups: GuestGroup[] = useMemo(
     () => (grouped ? groupByHousehold(visible) : [{ id: "all", name: "", guests: visible }]),
@@ -88,7 +96,7 @@ export function GuestManager(data: GuestPageData) {
       {canEdit && (
         <Button asChild variant="outline" size="sm">
           <Link href="/app/guests/import">
-            <Upload aria-hidden /> Import
+            <Upload aria-hidden /> {t("importButton")}
           </Link>
         </Button>
       )}
@@ -96,18 +104,18 @@ export function GuestManager(data: GuestPageData) {
         <Button asChild variant="outline" size="sm">
           {/* a normal link: the browser downloads the CSV file */}
           <a href="/app/guests/export" download>
-            <Download aria-hidden /> Export
+            <Download aria-hidden /> {t("export")}
           </a>
         </Button>
       )}
       {canEdit && (
         <Button variant="outline" size="sm" onClick={() => setTagsOpen(true)}>
-          <Tags aria-hidden /> Tags
+          <Tags aria-hidden /> {t("tags")}
         </Button>
       )}
       {canEdit && (
         <Button size="sm" onClick={() => setSheet({ kind: "new" })}>
-          <Plus aria-hidden /> Add guest
+          <Plus aria-hidden /> {t("add")}
         </Button>
       )}
     </>
@@ -115,31 +123,25 @@ export function GuestManager(data: GuestPageData) {
 
   return (
     <>
-      <PageHeader
-        title="Guests"
-        description="Everyone you're inviting, grouped into households."
-        actions={actions}
-      />
+      <PageHeader title={t("title")} description={t("description")} actions={actions} />
 
       {guests.length === 0 ? (
         <div className="bg-card flex flex-col items-center rounded-2xl border border-dashed px-6 py-16 text-center">
           <span className="bg-primary-soft text-primary mb-4 inline-flex size-14 items-center justify-center rounded-full">
             <Users className="size-7" aria-hidden />
           </span>
-          <h2 className="text-3xl">No guests yet</h2>
+          <h2 className="text-3xl">{t("emptyTitle")}</h2>
           <p className="text-muted-foreground mt-2 max-w-sm">
-            {canEdit
-              ? "Add your first one, or import the spreadsheet you've already started."
-              : "Once the couple adds guests, they'll appear here."}
+            {canEdit ? t("emptyEditor") : t("emptyViewer")}
           </p>
           {canEdit && (
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               <Button onClick={() => setSheet({ kind: "new" })}>
-                <Plus aria-hidden /> Add a guest
+                <Plus aria-hidden /> {t("addFirst")}
               </Button>
               <Button asChild variant="outline">
                 <Link href="/app/guests/import">
-                  <Upload aria-hidden /> Import a spreadsheet
+                  <Upload aria-hidden /> {t("importSheet")}
                 </Link>
               </Button>
             </div>
@@ -158,14 +160,15 @@ export function GuestManager(data: GuestPageData) {
             tags={tags}
             households={households}
             names={names}
+            languages={languages}
             resultCount={visible.length}
           />
 
           {visible.length === 0 ? (
             <div className="rounded-xl border border-dashed p-10 text-center">
-              <p className="text-muted-foreground">No guests match your search and filters.</p>
+              <p className="text-muted-foreground">{t("noMatch")}</p>
               <Button variant="link" onClick={() => setFilters(DEFAULT_FILTERS)}>
-                Clear search and filters
+                {t("clearAll")}
               </Button>
             </div>
           ) : (
@@ -182,11 +185,12 @@ export function GuestManager(data: GuestPageData) {
               tags={tagsById}
               events={events}
               names={names}
+              coupleLanguage={coupleLanguage}
               canEdit={canEdit}
             />
           )}
           <p className="text-muted-foreground text-center text-sm">
-            Showing {visible.length} of {guests.length} guests
+            {t("showing", { shown: visible.length, total: guests.length })}
           </p>
         </div>
       )}
@@ -199,6 +203,8 @@ export function GuestManager(data: GuestPageData) {
           events={events}
           tags={tags}
           names={names}
+          coupleLanguage={coupleLanguage}
+          languages={languages}
         />
       )}
 
@@ -213,6 +219,8 @@ export function GuestManager(data: GuestPageData) {
       <TagsDialog open={tagsOpen} onOpenChange={setTagsOpen} tags={tags} usage={tagUsage} />
       <HouseholdDialog
         household={households.find((h) => h.id === householdId) ?? null}
+        coupleLanguage={coupleLanguage}
+        languages={languages}
         onClose={() => setHouseholdId(null)}
       />
     </>

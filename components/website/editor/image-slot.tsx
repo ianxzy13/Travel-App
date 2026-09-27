@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- temporary private links and local previews */
 import { useRef, useState } from "react";
 import { ImagePlus, Loader2, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
@@ -17,13 +18,17 @@ export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
  * local preview link. Pictures only become visible to guests once the site
  * is published.
  */
-export async function uploadSiteImage(weddingId: string, file: File) {
+export async function uploadSiteImage(
+  weddingId: string,
+  file: File,
+  errors: { wrongType: string; tooBig: string; failed: string },
+) {
   if (!IMAGE_TYPES.includes(file.type)) {
-    toast.error("Please choose a JPG, PNG or WebP photo.");
+    toast.error(errors.wrongType);
     return null;
   }
   if (file.size > MAX_BYTES) {
-    toast.error("That photo is larger than 10 MB. Please choose a smaller one.");
+    toast.error(errors.tooBig);
     return null;
   }
   const safeName = file.name.replace(/[^\w.\-]+/g, "_").slice(-60);
@@ -33,10 +38,16 @@ export async function uploadSiteImage(weddingId: string, file: File) {
     .upload(path, file, { contentType: file.type, upsert: false });
   if (error) {
     console.error(error);
-    toast.error("Upload failed. Is file storage set up (see README)? Please try again.");
+    toast.error(errors.failed);
     return null;
   }
   return { path, url: URL.createObjectURL(file) };
+}
+
+/** The upload error texts in the person's language. */
+export function useImageErrors() {
+  const t = useTranslations("websiteEditor.image");
+  return { wrongType: t("wrongType"), tooBig: t("tooBig"), failed: t("failed") };
 }
 
 /** One picture: shows it, and lets you upload, replace or remove it. */
@@ -57,12 +68,14 @@ export function ImageSlot({
   aspect?: string;
   disabled?: boolean;
 }) {
+  const t = useTranslations("websiteEditor.image");
+  const errors = useImageErrors();
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
 
   async function pick(file: File) {
     setBusy(true);
-    const r = await uploadSiteImage(weddingId, file);
+    const r = await uploadSiteImage(weddingId, file, errors);
     setBusy(false);
     if (r) onChange(r);
   }
@@ -97,7 +110,7 @@ export function ImageSlot({
             ) : (
               <ImagePlus className="size-5" aria-hidden />
             )}
-            {busy ? "Uploading…" : label}
+            {busy ? t("uploading") : label}
           </button>
         )}
       </div>
@@ -111,7 +124,7 @@ export function ImageSlot({
             onClick={() => input.current?.click()}
           >
             {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />}{" "}
-            Replace
+            {t("replace")}
           </Button>
           <Button
             type="button"
@@ -120,7 +133,7 @@ export function ImageSlot({
             disabled={disabled || busy}
             onClick={() => onChange(null)}
           >
-            <Trash2 aria-hidden /> Remove
+            <Trash2 aria-hidden /> {t("remove")}
           </Button>
         </div>
       )}

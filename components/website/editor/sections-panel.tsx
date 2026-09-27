@@ -23,8 +23,6 @@ import { Switch } from "@/components/ui/switch";
 import { useTranslations } from "next-intl";
 import { translationProgress } from "@/lib/i18n/content";
 import {
-  SECTION_HINT,
-  SECTION_LABEL,
   isSectionEmpty,
   type Section,
   type SiteData,
@@ -167,7 +165,8 @@ function SectionRow({
 }) {
   const s = useSortable({ id: section.id, disabled: !sortable });
   // (the open section is closed when a drag starts, so every row is small and easy to move)
-  const label = SECTION_LABEL[section.kind];
+  const ts = useTranslations("websiteEditor.sections");
+  const label = ts(`labels.${section.kind}`);
   const panelId = `section-panel-${section.kind}`;
   return (
     <li
@@ -182,7 +181,7 @@ function SectionRow({
             ref={s.setActivatorNodeRef}
             {...s.attributes}
             {...s.listeners}
-            aria-label={`Reorder ${label}`}
+            aria-label={ts("reorder", { name: label })}
             className="text-muted-foreground hover:text-foreground focus-visible:ring-ring flex size-8 shrink-0 cursor-grab touch-none items-center justify-center rounded-md focus-visible:ring-2 focus-visible:outline-none"
           >
             <GripVertical className="size-4" aria-hidden />
@@ -195,7 +194,7 @@ function SectionRow({
           onClick={onToggleOpen}
           aria-expanded={open}
           aria-controls={panelId}
-          className="focus-visible:ring-ring flex min-w-0 flex-1 items-center gap-2 rounded-md px-1 py-1 text-left focus-visible:ring-2 focus-visible:outline-none"
+          className="focus-visible:ring-ring flex min-w-0 flex-1 items-center gap-2 rounded-md px-1 py-1 text-start focus-visible:ring-2 focus-visible:outline-none"
         >
           <span className="min-w-0 flex-1">
             <span
@@ -208,8 +207,8 @@ function SectionRow({
             </span>
             <span className="text-muted-foreground block truncate text-xs">
               {section.visible && empty
-                ? "Hidden until it has content"
-                : SECTION_HINT[section.kind]}
+                ? ts("hiddenEmpty")
+                : ts(`hints.${section.kind}`)}
             </span>
             {badge && (
               <span
@@ -235,7 +234,7 @@ function SectionRow({
             checked={section.visible}
             disabled={disabled}
             onCheckedChange={(visible) => onChange({ ...section, visible })}
-            aria-label={`Show ${label} on the website`}
+            aria-label={ts("show", { name: label })}
           />
         )}
       </div>

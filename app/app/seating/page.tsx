@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Armchair } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/app/page-header";
 import { SeatingEditor } from "@/components/seating/seating-editor";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,9 @@ import { getOrCreateLayout, loadSeatingData } from "@/lib/seating/load";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Seating chart" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("seating"))("title") };
+}
 
 export default async function SeatingPage({
   searchParams,
@@ -17,6 +20,7 @@ export default async function SeatingPage({
 }) {
   const { wedding, role } = await requireWedding();
   const editable = canEdit(role);
+  const t = await getTranslations("seating");
   const supabase = await createClient();
   const { data: events } = await supabase
     .from("events")
@@ -27,10 +31,10 @@ export default async function SeatingPage({
   if (!events?.length) {
     return (
       <>
-        <PageHeader title="Seating chart" />
-        <Empty text="Add an event (like your reception) first, then plan its seating here.">
+        <PageHeader title={t("title")} />
+        <Empty text={t("noEvents")}>
           <Button asChild>
-            <Link href="/app/settings#events">Add events</Link>
+            <Link href="/app/settings#events">{t("addEvents")}</Link>
           </Button>
         </Empty>
       </>
@@ -48,8 +52,8 @@ export default async function SeatingPage({
   if (!layout) {
     return (
       <>
-        <PageHeader title="Seating chart" />
-        <Empty text="The couple hasn't started the seating chart for this event yet." />
+        <PageHeader title={t("title")} />
+        <Empty text={t("notStarted")} />
       </>
     );
   }

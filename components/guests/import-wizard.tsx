@@ -12,6 +12,7 @@ import {
   Loader2,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { importGuests, type ImportSummary } from "@/app/app/guests/actions";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ import {
   type ImportFieldKey,
 } from "@/lib/guests/csv";
 import { fullName, sideLabel, type PartnerNames } from "@/lib/guests/model";
+import { LanguageName } from "@/components/language-select";
 import { cn } from "@/lib/utils";
 import { MAX_IMPORT_ROWS } from "@/lib/validation/guest";
 
@@ -38,14 +40,10 @@ type Step = "upload" | "map" | "preview" | "done";
 type Parsed = { fileName: string; headers: string[]; rows: Record<string, string>[] };
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024;
-const STEPS: { id: Step; label: string }[] = [
-  { id: "upload", label: "Upload" },
-  { id: "map", label: "Match columns" },
-  { id: "preview", label: "Preview" },
-  { id: "done", label: "Done" },
-];
+const STEPS: Step[] = ["upload", "map", "preview", "done"];
 
 export function ImportWizard({ names, eventNames }: { names: PartnerNames; eventNames: string[] }) {
+  const t = useTranslations("guests.import");
   const [step, setStep] = useState<Step>("upload");
   const [parsed, setParsed] = useState<Parsed | null>(null);
   const [mapping, setMapping] = useState<ColumnMapping>({});
@@ -53,13 +51,13 @@ export function ImportWizard({ names, eventNames }: { names: PartnerNames; event
 
   return (
     <div className="space-y-6">
-      <ol className="flex flex-wrap gap-2 text-sm" aria-label="Import steps">
+      <ol className="flex flex-wrap gap-2 text-sm" aria-label={t("steps.label")}>
         {STEPS.map((s, i) => {
-          const current = s.id === step;
-          const done = STEPS.findIndex((x) => x.id === step) > i;
+          const current = s === step;
+          const done = STEPS.indexOf(step) > i;
           return (
             <li
-              key={s.id}
+              key={s}
               aria-current={current ? "step" : undefined}
               className={cn(
                 "flex items-center gap-2 rounded-full border px-3 py-1",
@@ -67,7 +65,7 @@ export function ImportWizard({ names, eventNames }: { names: PartnerNames; event
                 done && "text-muted-foreground",
               )}
             >
-              <span className="tabular-nums">{i + 1}.</span> {s.label}
+              <span className="tabular-nums">{i + 1}.</span> {t(`steps.${s}`)}
             </li>
           );
         })}
@@ -121,6 +119,8 @@ export function ImportWizard({ names, eventNames }: { names: PartnerNames; event
 // ---------------------------------------------------------------------------
 
 function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
+  const t = useTranslations("guests.import");
+  const c = useTranslations("guests.csv");
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -128,13 +128,11 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
     setError(null);
     if (!file) return;
     if (!file.name.toLowerCase().endsWith(".csv") && file.type !== "text/csv") {
-      setError(
-        "Please choose a .csv file. In Excel or Google Sheets use File → Download / Save as → CSV.",
-      );
+      setError(t("notCsv"));
       return;
     }
     if (file.size > MAX_FILE_BYTES) {
-      setError("That file is larger than 5 MB. Please split it into smaller files.");
+      setError(t("tooBig"));
       return;
     }
     Papa.parse<Record<string, string>>(file, {
@@ -144,30 +142,70 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
       complete: (result) => {
         const headers = (result.meta.fields ?? []).filter(Boolean);
         if (headers.length === 0 || result.data.length === 0) {
-          setError("We couldn't find any rows. Make sure the first row has column names.");
+          setError(t("noRows"));
           return;
         }
         if (result.data.length > MAX_IMPORT_ROWS) {
-          setError(
-            `That file has ${result.data.length} rows. Please import at most ${MAX_IMPORT_ROWS} at a time.`,
-          );
+          setError(t("tooManyRows", { count: result.data.length, max: MAX_IMPORT_ROWS }));
           return;
         }
         onParsed({ fileName: file.name, headers, rows: result.data });
       },
-      error: () => setError("We couldn't read that file. Is it a valid CSV?"),
+      error: () => setError(t("unreadable")),
     });
   }
 
   function downloadTemplate() {
-    const header =
-      "First name,Last name,Household,Side,Age group,Email,Phone,Address line 1,City,Postal code,Country,Events,Tags,Dietary,Plus-one allowed,Plus-one name\r\n";
+    // headers in the person's language (the importer recognises them), plus an example row
+    const header = Papa.unparse([
+      [
+        c("firstName"),
+        c("lastName"),
+        c("household"),
+        c("side"),
+        c("ageGroup"),
+        c("email"),
+        c("phone"),
+        c("line1"),
+        c("city"),
+        c("postalCode"),
+        c("country"),
+        c("events"),
+        c("tags"),
+        c("dietary"),
+        c("plusOneAllowed"),
+        c("plusOneName"),
+        c("language"),
+      ],
+    ]);
     const example =
-      'Ann,Smith,The Smith Family,Both,Adult,ann@example.com,,1 Main St,Lisbon,1000-001,Portugal,"Ceremony, Reception",Family,Vegetarian,Yes,Tom Jones\r\n';
+      "\r\n" +
+      Papa.unparse([
+        [
+          "Ann",
+          "Smith",
+          "The Smith Family",
+          "Both",
+          "Adult",
+          "ann@example.com",
+          "",
+          "1 Main St",
+          "Lisbon",
+          "1000-001",
+          "Portugal",
+          "Ceremony, Reception",
+          "Family",
+          "Vegetarian",
+          c("yes"),
+          "Tom Jones",
+          "English",
+        ],
+      ]) +
+      "\r\n";
     const url = URL.createObjectURL(new Blob(["﻿" + header + example], { type: "text/csv" }));
     const a = document.createElement("a");
     a.href = url;
-    a.download = "guest-list-template.csv";
+    a.download = t("templateFile");
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -192,9 +230,9 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
           )}
         >
           <Upload className="text-primary size-8" aria-hidden />
-          <span className="font-medium">Drop your CSV file here, or click to choose</span>
+          <span className="font-medium">{t("drop")}</span>
           <span className="text-muted-foreground text-sm">
-            Excel / Numbers / Google Sheets: save or download as <strong>CSV (UTF-8)</strong> first.
+            {t.rich("saveAs", { b: (x) => <strong>{x}</strong> })}
           </span>
           <input
             type="file"
@@ -209,11 +247,11 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
           </p>
         )}
         <p className="text-muted-foreground text-sm">
-          Not sure how to lay it out?{" "}
+          {t("notSure")}{" "}
           <Button variant="link" className="h-auto p-0" onClick={downloadTemplate}>
-            Download a template
+            {t("template")}
           </Button>
-          . One row per person; people with the same <em>Household</em> share one invitation.
+          . {t.rich("templateHint", { em: (x) => <em>{x}</em> })}
         </p>
       </CardContent>
     </Card>
@@ -235,6 +273,7 @@ function MapStep({
   onBack: () => void;
   onNext: () => void;
 }) {
+  const t = useTranslations("guests.import");
   const used = new Set(Object.values(mapping));
   const hasName = used.has("first_name") || used.has("last_name") || used.has("full_name");
 
@@ -254,19 +293,17 @@ function MapStep({
         <div className="flex items-center gap-2 text-sm">
           <FileSpreadsheet className="text-primary size-5" aria-hidden />
           <strong>{parsed.fileName}</strong>
-          <span className="text-muted-foreground">· {parsed.rows.length} rows</span>
+          <span className="text-muted-foreground">· {t("rows", { count: parsed.rows.length })}</span>
         </div>
-        <p className="text-muted-foreground text-sm">
-          We guessed what each column contains. Check the matches and change any that are wrong.
-        </p>
+        <p className="text-muted-foreground text-sm">{t("guessed")}</p>
 
         <div className="overflow-x-auto rounded-lg border">
           <table className="w-full text-sm">
-            <thead className="bg-muted/50 text-muted-foreground text-left text-xs">
+            <thead className="bg-muted/50 text-muted-foreground text-start text-xs">
               <tr>
-                <th className="px-3 py-2 font-medium">Your column</th>
-                <th className="px-3 py-2 font-medium">Example</th>
-                <th className="px-3 py-2 font-medium">Import as</th>
+                <th className="px-3 py-2 text-start font-medium">{t("yourColumn")}</th>
+                <th className="px-3 py-2 text-start font-medium">{t("example")}</th>
+                <th className="px-3 py-2 text-start font-medium">{t("importAs")}</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -287,14 +324,14 @@ function MapStep({
                         value={mapping[h] ?? "ignore"}
                         onValueChange={(v) => setField(h, v as ImportFieldKey | "ignore")}
                       >
-                        <SelectTrigger className="w-56" aria-label={`Import column ${h} as`}>
+                        <SelectTrigger className="w-56" aria-label={t("importColumnAs", { name: h })}>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="ignore">Don&apos;t import</SelectItem>
+                          <SelectItem value="ignore">{t("dontImport")}</SelectItem>
                           {IMPORT_FIELDS.map((f) => (
                             <SelectItem key={f.key} value={f.key}>
-                              {f.label}
+                              {t(`fields.${f.key}`)}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -308,23 +345,18 @@ function MapStep({
         </div>
 
         {!hasName && (
-          <Notice tone="error">
-            Please match at least one column to First name, Last name or Full name.
-          </Notice>
+          <Notice tone="error">{t("needName")}</Notice>
         )}
         {hasName && !used.has("household") && (
-          <Notice tone="info">
-            No household column: each person gets their own household (and their own RSVP link). Map
-            a column like “Family” or “Group” to keep families together.
-          </Notice>
+          <Notice tone="info">{t("noHousehold")}</Notice>
         )}
 
         <div className="flex justify-between">
           <Button variant="ghost" onClick={onBack}>
-            <ArrowLeft aria-hidden /> Choose another file
+            <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("chooseAnother")}
           </Button>
           <Button onClick={onNext} disabled={!hasName}>
-            Preview <ArrowRight aria-hidden />
+            {t("preview")} <ArrowRight className="rtl:rotate-180" aria-hidden />
           </Button>
         </div>
       </CardContent>
@@ -349,6 +381,8 @@ function PreviewStep({
   onBack: () => void;
   onDone: (s: ImportSummary) => void;
 }) {
+  const t = useTranslations("guests.import");
+  const g = useTranslations("guests");
   const [pending, startTransition] = useTransition();
   const result = useMemo(() => mapRows(parsed.rows, mapping, names), [parsed, mapping, names]);
   const { guests, errors } = result;
@@ -373,68 +407,71 @@ function PreviewStep({
     <Card>
       <CardContent className="space-y-5 p-6">
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Figure label="Guests" value={guests.length} />
-          <Figure label="Households" value={households} />
-          <Figure label="With a plus-one" value={extraPlusOnes} />
-          <Figure label="Rows skipped" value={errors.length} />
+          <Figure label={t("guests")} value={guests.length} />
+          <Figure label={t("households")} value={households} />
+          <Figure label={t("withPlusOne")} value={extraPlusOnes} />
+          <Figure label={t("skipped")} value={errors.length} />
         </dl>
 
         {errors.length > 0 && (
           <Notice tone="warning">
-            {errors.length} row{errors.length === 1 ? "" : "s"} will be skipped:{" "}
+            {t("willSkip", { count: errors.length })}{" "}
             {errors
               .slice(0, 8)
-              .map((e) => `row ${e.row} (${e.message.toLowerCase()})`)
+              .map((e) => t("rowNoName", { row: e.row }))
               .join(", ")}
             {errors.length > 8 && "…"}
           </Notice>
         )}
         {unknownEvents.length > 0 && (
           <Notice tone="warning">
-            These events don&apos;t exist yet and will be ignored: {unknownEvents.join(", ")}. Add
-            them in{" "}
-            <Link href="/app/settings#events" className="underline">
-              Settings → Events
-            </Link>{" "}
-            first if you need them.
+            {t.rich("unknownEvents", {
+              events: unknownEvents.join(", "),
+              link: (x) => (
+                <Link href="/app/settings#events" className="underline">
+                  {x}
+                </Link>
+              ),
+            })}
           </Notice>
         )}
-        <Notice tone="info">
-          Guests are added to your list; existing guests are not changed. Households with the same
-          name as an existing one are merged into it.
-        </Notice>
+        <Notice tone="info">{t("merged")}</Notice>
 
         <div className="overflow-x-auto rounded-lg border">
           <table className="w-full text-sm">
-            <thead className="bg-muted/50 text-muted-foreground text-left text-xs">
+            <thead className="bg-muted/50 text-muted-foreground text-start text-xs">
               <tr>
-                <th className="px-3 py-2 font-medium">Name</th>
-                <th className="px-3 py-2 font-medium">Household</th>
-                <th className="px-3 py-2 font-medium">Side</th>
-                <th className="px-3 py-2 font-medium">Email</th>
-                <th className="px-3 py-2 font-medium">Events</th>
-                <th className="px-3 py-2 font-medium">Tags</th>
+                <th className="px-3 py-2 text-start font-medium">{g("list.name")}</th>
+                <th className="px-3 py-2 text-start font-medium">{g("list.household")}</th>
+                <th className="px-3 py-2 text-start font-medium">{g("list.side")}</th>
+                <th className="px-3 py-2 text-start font-medium">{t("fields.email")}</th>
+                <th className="px-3 py-2 text-start font-medium">{g("list.events")}</th>
+                <th className="px-3 py-2 text-start font-medium">{g("list.tags")}</th>
+                <th className="px-3 py-2 text-start font-medium">{t("fields.language")}</th>
               </tr>
             </thead>
             <tbody className="divide-y">
-              {preview.map((g, i) => (
+              {preview.map((row, i) => (
                 <tr key={i}>
                   <td className="px-3 py-2 font-medium whitespace-nowrap">
-                    {fullName(g.firstName, g.lastName)}
-                    {g.plusOneAllowed && (
+                    {fullName(row.firstName, row.lastName)}
+                    {row.plusOneAllowed && (
                       <span className="text-muted-foreground font-normal">
                         {" "}
-                        +{g.plusOneName || "1"}
+                        +{row.plusOneName || "1"}
                       </span>
                     )}
                   </td>
-                  <td className="px-3 py-2">{g.household}</td>
-                  <td className="px-3 py-2 whitespace-nowrap">{sideLabel(g.side, names)}</td>
-                  <td className="px-3 py-2">{g.email}</td>
+                  <td className="px-3 py-2">{row.household}</td>
+                  <td className="px-3 py-2 whitespace-nowrap">{sideLabel(row.side, names, g)}</td>
+                  <td className="px-3 py-2">{row.email}</td>
                   <td className="px-3 py-2">
-                    {g.events.join(", ") || <span className="text-muted-foreground">—</span>}
+                    {row.events.join(", ") || <span className="text-muted-foreground">—</span>}
                   </td>
-                  <td className="px-3 py-2">{g.tags.join(", ")}</td>
+                  <td className="px-3 py-2">{row.tags.join(", ")}</td>
+                  <td className="px-3 py-2">
+                    {row.language ? <LanguageName code={row.language} /> : null}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -442,17 +479,17 @@ function PreviewStep({
         </div>
         {guests.length > preview.length && (
           <p className="text-muted-foreground text-sm">
-            …and {guests.length - preview.length} more.
+            {t("andMore", { count: guests.length - preview.length })}
           </p>
         )}
 
         <div className="flex justify-between">
           <Button variant="ghost" onClick={onBack} disabled={pending}>
-            <ArrowLeft aria-hidden /> Back
+            <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("back")}
           </Button>
           <Button onClick={runImport} disabled={pending || guests.length === 0}>
             {pending && <Loader2 className="animate-spin" aria-hidden />}
-            Import {guests.length} guest{guests.length === 1 ? "" : "s"}
+            {t("run", { count: guests.length })}
           </Button>
         </div>
       </CardContent>
@@ -463,29 +500,27 @@ function PreviewStep({
 // ---------------------------------------------------------------------------
 
 function DoneStep({ summary, onAgain }: { summary: ImportSummary; onAgain: () => void }) {
+  const t = useTranslations("guests.import");
   return (
     <Card>
       <CardContent className="flex flex-col items-center gap-3 p-10 text-center" role="status">
         <CheckCircle2 className="text-success size-12" aria-hidden />
-        <h2 className="text-3xl">Import complete</h2>
+        <h2 className="text-3xl">{t("complete")}</h2>
         <p className="text-muted-foreground">
-          Added {summary.guests} guest{summary.guests === 1 ? "" : "s"} (including plus-ones) in{" "}
-          {summary.households} new household{summary.households === 1 ? "" : "s"}
-          {summary.tagsCreated > 0 &&
-            `, and created ${summary.tagsCreated} new tag${summary.tagsCreated === 1 ? "" : "s"}`}
-          .
+          {t("added", { guests: summary.guests, households: summary.households })}{" "}
+          {summary.tagsCreated > 0 && t("tagsCreated", { count: summary.tagsCreated })}
         </p>
         {summary.unknownEvents.length > 0 && (
           <p className="text-warning text-sm">
-            Ignored unknown events: {summary.unknownEvents.join(", ")}
+            {t("ignored", { events: summary.unknownEvents.join(", ") })}
           </p>
         )}
         <div className="mt-2 flex flex-wrap justify-center gap-2">
           <Button asChild>
-            <Link href="/app/guests">Go to guest list</Link>
+            <Link href="/app/guests">{t("toList")}</Link>
           </Button>
           <Button variant="outline" onClick={onAgain}>
-            Import another file
+            {t("again")}
           </Button>
         </div>
       </CardContent>

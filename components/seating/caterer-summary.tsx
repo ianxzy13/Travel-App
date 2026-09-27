@@ -1,5 +1,6 @@
 import { Utensils } from "lucide-react";
-import { isTable, tableName } from "@/lib/seating/geometry";
+import { isTable, tableName as englishName } from "@/lib/seating/geometry";
+import { useSeatingWords } from "./use-seating-words";
 import type { SeatingGuest, SeatingObject, SeatingState } from "@/lib/seating/types";
 
 // No "use client": used by the editor and by the server-rendered print pages.
@@ -8,7 +9,8 @@ export function sortedTables(state: SeatingState) {
   return Object.values(state.objects)
     .filter((o) => isTable(o.kind))
     .sort(
-      (a, b) => (a.number ?? 9999) - (b.number ?? 9999) || tableName(a).localeCompare(tableName(b)),
+      (a, b) =>
+        (a.number ?? 9999) - (b.number ?? 9999) || englishName(a).localeCompare(englishName(b)),
     );
 }
 
@@ -48,29 +50,30 @@ export function CatererSummary({
     }
     return { t, counts, dietary };
   });
-  const cols = [...mealOptions, { id: "none", name: "Not chosen" }];
+  const { t: tr, tableName } = useSeatingWords();
+  const cols = [...mealOptions, { id: "none", name: tr("caterer.notChosen") }];
 
   return (
     <section className="bg-card overflow-x-auto rounded-xl border p-4">
       <h3 className="mb-3 flex items-center gap-2 text-2xl">
-        <Utensils className="text-primary size-5" aria-hidden /> Meals per table
+        <Utensils className="text-primary size-5" aria-hidden /> {tr("caterer.title")}
       </h3>
       <table className="w-full text-sm">
-        <thead className="text-muted-foreground text-left text-xs">
+        <thead className="text-muted-foreground text-start text-xs">
           <tr>
-            <th className="py-1 pr-3 font-medium">Table</th>
+            <th className="py-1 pe-3 text-start font-medium">{tr("caterer.table")}</th>
             {cols.map((c) => (
               <th key={c.id} className="px-2 py-1 text-right font-medium">
                 {c.name}
               </th>
             ))}
-            <th className="px-2 py-1 text-right font-medium">Special diets</th>
+            <th className="px-2 py-1 text-end font-medium">{tr("caterer.special")}</th>
           </tr>
         </thead>
         <tbody className="divide-y">
           {rows.map(({ t, counts, dietary }) => (
             <tr key={t.id}>
-              <td className="py-1.5 pr-3">{tableName(t)}</td>
+              <td className="py-1.5 pe-3">{tableName(t)}</td>
               {cols.map((c) => (
                 <td key={c.id} className="px-2 text-right tabular-nums">
                   {counts.get(c.id) || ""}
@@ -80,7 +83,7 @@ export function CatererSummary({
             </tr>
           ))}
           <tr className="font-medium">
-            <td className="py-1.5 pr-3">Total</td>
+            <td className="py-1.5 pe-3">{tr("caterer.total")}</td>
             {cols.map((c) => (
               <td key={c.id} className="px-2 text-right tabular-nums">
                 {totals.get(c.id) ?? 0}

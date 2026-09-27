@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { PrintControls } from "@/components/seating/print-controls";
 import { PrintSeatingView, VIEWS, type ViewKey } from "@/components/seating/print-view";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,9 @@ import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { coupleName, requireUser } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Print seating", robots: { index: false } };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("seating.printPage"))("title"), robots: { index: false } };
+}
 
 /** Printable versions of a seating chart. Use the browser's print dialog to save as PDF. */
 export default async function PrintSeatingPage({
@@ -23,7 +26,8 @@ export default async function PrintSeatingPage({
   await requireUser();
   const { layoutId } = await params;
   const requested = (await searchParams).view;
-  const view: ViewKey = requested && requested in VIEWS ? (requested as ViewKey) : "plan";
+  const view: ViewKey = VIEWS.includes(requested as ViewKey) ? (requested as ViewKey) : "plan";
+  const t = await getTranslations("seating");
 
   const supabase = await createClient();
   // RLS: only members of this wedding can see the layout
@@ -55,11 +59,11 @@ export default async function PrintSeatingPage({
       <div className="mb-6 flex flex-wrap items-center gap-2 print:hidden">
         <Button asChild variant="ghost" size="sm">
           <Link href={`/app/seating?event=${layout.event_id}`}>
-            <ArrowLeft aria-hidden /> Back to seating
+            <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("printPage.back")}
           </Link>
         </Button>
-        <nav className="flex flex-wrap gap-1" aria-label="What to print">
-          {(Object.keys(VIEWS) as ViewKey[]).map((v) => (
+        <nav className="flex flex-wrap gap-1" aria-label={t("printPage.what")}>
+          {VIEWS.map((v) => (
             <Link
               key={v}
               href={`?view=${v}`}
@@ -69,11 +73,11 @@ export default async function PrintSeatingPage({
                 v === view ? "border-stone-900 bg-stone-900 text-white" : "hover:bg-stone-100",
               )}
             >
-              {VIEWS[v]}
+              {t(`printViews.${v}`)}
             </Link>
           ))}
         </nav>
-        <div className="ml-auto">
+        <div className="ms-auto">
           <PrintControls />
         </div>
       </div>

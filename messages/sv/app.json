@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Översikt",
+      "tasks": "Att göra",
+      "budget": "Budget",
+      "vendors": "Leverantörer",
+      "guests": "Gäster",
+      "rsvp": "OSA",
+      "seating": "Placering",
+      "venues": "Lokaler",
+      "hotels": "Hotell",
+      "travel": "Resor",
+      "inspiration": "Inspiration",
+      "website": "Webbplats",
+      "schedule": "Dagsschema",
+      "settings": "Inställningar",
+      "home": "Hem",
+      "groups": {
+        "plan": "Planera",
+        "people": "Personer",
+        "places": "Platser",
+        "style": "Stil"
+      }
+    },
+    "shell": {
+      "mainNav": "Huvudnavigering",
+      "expand": "Fäll ut sidopanelen",
+      "collapse": "Fäll in sidopanelen",
+      "more": "Mer",
+      "allTools": "Alla planeringsverktyg"
+    },
+    "userMenu": {
+      "account": "Kontomeny",
+      "appearance": "Utseende",
+      "light": "Ljust",
+      "dark": "Mörkt",
+      "system": "System",
+      "language": "Språk",
+      "signOut": "Logga ut"
+    },
+    "switcher": {
+      "current": "Aktuellt bröllop: {name}. Byt bröllop",
+      "yours": "Dina bröllop",
+      "noDate": "Datum meddelas senare",
+      "another": "Planera ett till bröllop",
+      "roles": {
+        "owner": "ägare",
+        "editor": "redaktör",
+        "viewer": "läsare"
+      }
+    },
+    "notifications": {
+      "title": "Aviseringar",
+      "unread": "{count, plural, one {Aviseringar, # oläst} other {Aviseringar, # olästa}}",
+      "unreadOne": "Oläst",
+      "markAll": "Markera alla som lästa",
+      "empty": "Inget än. Nya OSA-svar, uppgifter till dig och påminnelser om betalningar och tidsfrister visas här."
+    },
+    "countdown": {
+      "today": "Idag är den stora dagen!",
+      "enjoy": "Njut av varje ögonblick.",
+      "married": "{count, plural, one {Gifta i # dag} other {Gifta i # dagar}}",
+      "congrats": "Grattis!",
+      "daysToGo": "{count, plural, one {dag till bröllopet} other {dagar till bröllopet}}",
+      "hours": "timmar",
+      "minutes": "minuter",
+      "seconds": "sekunder"
+    },
+    "dashboard": {
+      "welcome": "Välkommen till din planerare!",
+      "welcomeText": "Här börjar allt. Ta nästa steg i din egen takt.",
+      "noDate": "Datum meddelas senare",
+      "setDate": "Välj datum för att starta nedräkningen",
+      "nextSteps": "Nästa steg",
+      "stepsDone": "{done} av {total} klara",
+      "done": "(klart)",
+      "toDo": "(att göra)",
+      "steps": {
+        "date": "Välj bröllopsdatum",
+        "location": "Välj plats",
+        "invite": "Bjud in din partner, familj eller bröllopsplanerare",
+        "guests": "Lägg till gästlistan",
+        "guestsSoFar": "{count, plural, one {Lägg till gästlistan (# hittills)} other {Lägg till gästlistan (# hittills)}}",
+        "budget": "Sätt din totala budget",
+        "shortlist": "Välj ut lokaler",
+        "book": "Boka lokalen",
+        "inspiration": "Starta en inspirationstavla",
+        "website": "Publicera bröllopswebbplatsen",
+        "timeline": "Skapa din planeringstidslinje"
+      },
+      "budget": {
+        "title": "Budget",
+        "empty": "Ingen budget än. Ange en summa så föreslår vi en fördelning.",
+        "cta": "Planera budget",
+        "committed": "bundet",
+        "committedOf": "bundet av {total}",
+        "overdue": "Förfallen: {name}"
+      },
+      "rsvp": {
+        "title": "OSA",
+        "empty": "Inga svar än. Lägg till gäster och skicka inbjudningarna.",
+        "cta": "Visa OSA",
+        "attending": "Kommer",
+        "declined": "Kommer inte",
+        "waiting": "Väntar"
+      },
+      "seating": {
+        "title": "Placering",
+        "empty": "Inga bord än. När gästerna svarat placerar du dem genom att dra och släppa.",
+        "cta": "Öppna placeringen",
+        "seated": "av {attending} gäster placerade vid {tables, plural, one {# bord} other {# bord}}"
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "empty": "Inga pins än. Samla idéer och ta fram en färgpalett ur dem.",
+        "cta": "Öppna tavlor",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Att göra",
+        "empty": "Inga uppgifter än. Vi skapar en tidslinje utifrån bröllopsdatumet.",
+        "cta": "Visa uppgifter",
+        "ofDone": "av {total} klara",
+        "overdue": "{count} försenade"
+      }
+    },
+    "settings": {
+      "title": "Inställningar",
+      "description": "Era bröllopsuppgifter, språk, händelser och vilka som planerar med er."
+    },
+    "translate": {
+      "button": "Översättningar",
+      "title": "Översättningar: {name}",
+      "hint": "Lämna en ruta tom för att visa texten på {language}.",
+      "draft": "Utkast",
+      "draftFailed": "Din webbläsare kunde inte översätta det här språkparet. Skriv översättningen själv.",
+      "noMachine": "Tips: Chrome på en dator kan ta fram ett översättningsutkast (där visas knappen ”Utkast”).",
+      "save": "Spara översättningar",
+      "saved": "Översättningarna sparade",
+      "fields": {
+        "name": "Namn",
+        "venue": "Lokalens namn",
+        "dressCode": "Klädkod",
+        "description": "Beskrivning",
+        "mealName": "Menyns namn",
+        "mealDescription": "Menyns beskrivning"
+      }
+    },
+    "websiteLang": {
+      "editing": "Språk",
+      "main": "{language} (ert språk)",
+      "hint": "Översättning: {language}. Foton, ordning och synliga delar ställs in på huvudspråket.",
+      "progress": "{done}/{total} översatt",
+      "complete": "Översatt",
+      "fallback": "Tomt: gästerna ser texten på huvudspråket.",
+      "nothing": "Inget att översätta i den här delen än.",
+      "draft": "Översätt allt med webbläsarens översättare",
+      "draftFailed": "Din webbläsare kunde inte översätta det här språkparet. Skriv översättningen själv.",
+      "item": "Post {number}",
+      "fields": {
+        "tagline": "Motto",
+        "intro": "Inledning",
+        "notes": "Anteckningar",
+        "date": "När",
+        "title": "Rubrik",
+        "text": "Text",
+        "role": "Roll",
+        "bio": "Några ord",
+        "label": "Namn",
+        "note": "Anteckning",
+        "question": "Fråga",
+        "answer": "Svar",
+        "caption": "Bildtext"
+      }
+    }
+  }
+}

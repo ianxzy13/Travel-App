@@ -2,15 +2,16 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import type { VenueKind } from "@/lib/database.types";
 import { isOwnFile, removeFiles } from "@/lib/files";
-import { DEFAULT_VISIT_QUESTIONS } from "@/lib/places/labels";
+import { contentTranslations } from "@/lib/i18n/content-locale";
+import { VISIT_QUESTION_KEYS } from "@/lib/places/labels";
 import { createClient } from "@/lib/supabase/server";
 import { checklistItemSchema, venueSchema } from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change venues." };
 const idSchema = z.uuid();
 
 async function editor() {
@@ -50,12 +51,12 @@ export async function saveVenue(
   id?: string,
 ): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = venueSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const wid = ctx.wedding.id;
-  if (!v.photoPaths.every((p) => isOwnFile(p, wid))) return NO_PERMISSION;
+  if (!v.photoPaths.every((p) => isOwnFile(p, wid))) return noPermission();
 
   const row = {
     name: v.name,
@@ -86,7 +87,7 @@ export async function saveVenue(
       .eq("id", venueId)
       .eq("wedding_id", wid)
       .maybeSingle();
-    if (!old) return { ok: false, error: "This venue no longer exists." };
+    if (!old) return await err("notFound");
     const { error } = await ctx.sb
       .from("venues")
       .update(row)
@@ -105,12 +106,13 @@ export async function saveVenue(
       .single();
     if (error) return fail("saveVenue", error);
     venueId = data.id;
-    // start every venue with a useful site-visit checklist
+    // start every venue with a useful site-visit checklist, in the couple's language
+    const q = await contentTranslations(ctx.wedding, "places");
     await ctx.sb.from("venue_checklist_items").insert(
-      DEFAULT_VISIT_QUESTIONS.map((question, i) => ({
+      VISIT_QUESTION_KEYS.map((key, i) => ({
         wedding_id: wid,
         venue_id: venueId!,
-        question,
+        question: q(`visitQuestions.${key}`),
         sort_order: i,
       })),
     );
@@ -124,7 +126,7 @@ export async function saveVenue(
 export async function setVenueStatus(id: string, status: string): Promise<ActionResult> {
   const ctx = await editor();
   const parsed = venueSchema.shape.status.safeParse(status);
-  if (!ctx || !idSchema.safeParse(id).success || !parsed.success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success || !parsed.success) return noPermission();
   const { data, error } = await ctx.sb
     .from("venues")
     .update({ status: parsed.data })
@@ -139,7 +141,7 @@ export async function setVenueStatus(id: string, status: string): Promise<Action
 
 export async function deleteVenue(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success) return noPermission();
   const { data, error } = await ctx.sb
     .from("venues")
     .delete()
@@ -162,9 +164,9 @@ export async function saveChecklistItem(
   id?: string,
 ): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(venueId).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(venueId).success) return noPermission();
   const parsed = checklistItemSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const row = {
     question: parsed.data.question,
     answer: parsed.data.answer || null,
@@ -194,7 +196,7 @@ export async function saveChecklistItem(
 
 export async function deleteChecklistItem(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success) return noPermission();
   const { error } = await ctx.sb
     .from("venue_checklist_items")
     .delete()

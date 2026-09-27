@@ -1,4 +1,5 @@
 import "server-only";
+import { getTranslations } from "next-intl/server";
 import type { PinStatus } from "@/lib/database.types";
 import { FILES_BUCKET } from "@/lib/files";
 import { fetchAll } from "@/lib/supabase/fetch-all";
@@ -62,6 +63,7 @@ export async function signPaths(sb: Supabase, paths: string[]) {
 }
 
 export async function loadInspiration(sb: Supabase, weddingId: string): Promise<InspirationData> {
+  const someone = (await getTranslations("inspiration"))("someone");
   const [boards, pins, comments, reactions, palette, members] = await Promise.all([
     fetchAll((f, t) =>
       sb.from("boards").select("*").eq("wedding_id", weddingId).order("sort_order").range(f, t),
@@ -101,7 +103,7 @@ export async function loadInspiration(sb: Supabase, weddingId: string): Promise<
 
   const names: Record<string, string> = {};
   for (const m of members.data ?? [])
-    names[m.user_id] = m.profile?.full_name || m.profile?.email?.split("@")[0] || "Someone";
+    names[m.user_id] = m.profile?.full_name || m.profile?.email?.split("@")[0] || someone;
 
   const signed = await signPaths(
     sb,
@@ -140,7 +142,7 @@ export async function loadInspiration(sb: Supabase, weddingId: string): Promise<
         .map((c) => ({
           id: c.id,
           userId: c.user_id,
-          name: names[c.user_id] ?? "Someone",
+          name: names[c.user_id] ?? someone,
           body: c.body,
           createdAt: c.created_at,
         })),

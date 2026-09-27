@@ -1,0 +1,31 @@
+{
+  "notices": {
+    "rsvpReplied": { "title": "{name} replied", "body": "{attending} attending, {declined} not attending" },
+    "rsvpUpdated": {
+      "title": "{name} updated their RSVP",
+      "body": "{attending} attending, {declined} not attending"
+    },
+    "taskAssigned": { "title": "{who} gave you a to-do", "body": "{title}", "bodyDue": "{title} · due {date}" },
+    "someone": "Someone",
+    "paymentSoon": { "title": "Payment due soon: {name}", "body": "{amount} · due {date}" },
+    "paymentLate": { "title": "Payment overdue: {name}", "body": "{amount} · due {date}" },
+    "hotelCutoff": {
+      "title": "Room block cut-off soon: {name}",
+      "body": "Guests must book by {date}",
+      "bodyRooms": "Guests must book by {date} · {booked} of {held} rooms booked"
+    },
+    "taskDueToday": { "title": "Due today: {title}" },
+    "taskDue": { "title": "Due {date}: {title}" },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# to-do is overdue} other {# to-dos are overdue}}",
+      "body": "{title}",
+      "bodyMore": "{title} and more"
+    },
+    "coupleEmail": {
+      "replied": "{name} replied",
+      "updated": "{name} updated their RSVP",
+      "summary": "{attending} attending, {declined} not attending",
+      "seeAll": "See all replies"
+    }
+  }
+}

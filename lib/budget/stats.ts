@@ -147,7 +147,11 @@ export function upcomingPayments(
 }
 
 /** Top categories for the donut: the biggest `max` plus everything else as "Other". */
-export function donutSlices(summary: BudgetSummary, max = 7) {
+export function donutSlices(
+  summary: BudgetSummary,
+  max = 7,
+  otherLabel: (count: number) => string = (n) => `Other (${n})`,
+) {
   const withSpend = summary.categories
     .filter((c) => c.totals.committed > 0)
     .sort((a, b) => b.totals.committed - a.totals.committed);
@@ -158,7 +162,7 @@ export function donutSlices(summary: BudgetSummary, max = 7) {
   if (rest.length) {
     top.push({
       id: "other",
-      name: `Other (${rest.length})`,
+      name: otherLabel(rest.length),
       value: fromCents(rest.reduce((n, c) => n + toCents(c.totals.committed), 0)),
     });
   }

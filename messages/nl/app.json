@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Overzicht",
+      "tasks": "Taken",
+      "budget": "Budget",
+      "vendors": "Leveranciers",
+      "guests": "Gasten",
+      "rsvp": "Aanmeldingen",
+      "seating": "Tafelindeling",
+      "venues": "Locaties",
+      "hotels": "Hotels",
+      "travel": "Reizen",
+      "inspiration": "Inspiratie",
+      "website": "Website",
+      "schedule": "Dagplanning",
+      "settings": "Instellingen",
+      "home": "Home",
+      "groups": {
+        "plan": "Plannen",
+        "people": "Mensen",
+        "places": "Plaatsen",
+        "style": "Stijl"
+      }
+    },
+    "shell": {
+      "mainNav": "Hoofdnavigatie",
+      "expand": "Zijbalk uitklappen",
+      "collapse": "Zijbalk inklappen",
+      "more": "Meer",
+      "allTools": "Alle planningstools"
+    },
+    "userMenu": {
+      "account": "Accountmenu",
+      "appearance": "Weergave",
+      "light": "Licht",
+      "dark": "Donker",
+      "system": "Systeem",
+      "language": "Taal",
+      "signOut": "Uitloggen"
+    },
+    "switcher": {
+      "current": "Huidige bruiloft: {name}. Van bruiloft wisselen",
+      "yours": "Jouw bruiloften",
+      "noDate": "Datum volgt",
+      "another": "Nog een bruiloft plannen",
+      "roles": {
+        "owner": "eigenaar",
+        "editor": "bewerker",
+        "viewer": "lezer"
+      }
+    },
+    "notifications": {
+      "title": "Meldingen",
+      "unread": "{count, plural, one {Meldingen, # ongelezen} other {Meldingen, # ongelezen}}",
+      "unreadOne": "Ongelezen",
+      "markAll": "Alles als gelezen markeren",
+      "empty": "Nog niets. Nieuwe aanmeldingen, taken voor jou en herinneringen aan betalingen en deadlines verschijnen hier."
+    },
+    "countdown": {
+      "today": "Vandaag is de grote dag!",
+      "enjoy": "Geniet van elk moment.",
+      "married": "{count, plural, one {# dag getrouwd} other {# dagen getrouwd}}",
+      "congrats": "Gefeliciteerd!",
+      "daysToGo": "{count, plural, one {dag tot de bruiloft} other {dagen tot de bruiloft}}",
+      "hours": "uur",
+      "minutes": "minuten",
+      "seconds": "seconden"
+    },
+    "dashboard": {
+      "welcome": "Welkom in je planner!",
+      "welcomeText": "Hier begint alles. Werk de volgende stappen in je eigen tempo af.",
+      "noDate": "Datum volgt",
+      "setDate": "Kies de datum om het aftellen te starten",
+      "nextSteps": "Volgende stappen",
+      "stepsDone": "{done} van {total} klaar",
+      "done": "(klaar)",
+      "toDo": "(te doen)",
+      "steps": {
+        "date": "Trouwdatum kiezen",
+        "location": "Plaats kiezen",
+        "invite": "Partner, familie of weddingplanner uitnodigen",
+        "guests": "Gastenlijst toevoegen",
+        "guestsSoFar": "{count, plural, one {Gastenlijst toevoegen (# tot nu toe)} other {Gastenlijst toevoegen (# tot nu toe)}}",
+        "budget": "Totaalbudget vastleggen",
+        "shortlist": "Locaties selecteren",
+        "book": "Locatie boeken",
+        "inspiration": "Inspiratiebord starten",
+        "website": "Trouwwebsite publiceren",
+        "timeline": "Planning maken"
+      },
+      "budget": {
+        "title": "Budget",
+        "empty": "Nog geen budget. Stel een totaal in en we stellen een verdeling voor.",
+        "cta": "Budget plannen",
+        "committed": "vastgelegd",
+        "committedOf": "vastgelegd van {total}",
+        "overdue": "Te laat: {name}"
+      },
+      "rsvp": {
+        "title": "Aanmeldingen",
+        "empty": "Nog geen antwoorden. Voeg gasten toe en verstuur je uitnodigingen.",
+        "cta": "Aanmeldingen bekijken",
+        "attending": "Komen",
+        "declined": "Komen niet",
+        "waiting": "Wachten"
+      },
+      "seating": {
+        "title": "Tafelindeling",
+        "empty": "Nog geen tafels. Zodra gasten reageren, plaats je ze met slepen.",
+        "cta": "Tafelindeling openen",
+        "seated": "van {attending} gasten geplaatst aan {tables, plural, one {# tafel} other {# tafels}}"
+      },
+      "inspiration": {
+        "title": "Inspiratie",
+        "empty": "Nog geen pins. Verzamel ideeën en haal er een kleurenpalet uit.",
+        "cta": "Borden openen",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Taken",
+        "empty": "Nog geen taken. We maken een planning vanaf je trouwdatum.",
+        "cta": "Taken bekijken",
+        "ofDone": "van {total} klaar",
+        "overdue": "{count} te laat"
+      }
+    },
+    "settings": {
+      "title": "Instellingen",
+      "description": "Jullie trouwgegevens, talen, onderdelen en wie er meeplant."
+    },
+    "translate": {
+      "button": "Vertalingen",
+      "title": "Vertalingen: {name}",
+      "hint": "Laat een vak leeg om de tekst in het {language} te tonen.",
+      "draft": "Concept",
+      "draftFailed": "Je browser kon deze talencombinatie niet vertalen. Typ de vertaling zelf.",
+      "noMachine": "Tip: Chrome op een computer kan een conceptvertaling maken (daar verschijnt een knop ‘Concept’).",
+      "save": "Vertalingen opslaan",
+      "saved": "Vertalingen opgeslagen",
+      "fields": {
+        "name": "Naam",
+        "venue": "Naam van de locatie",
+        "dressCode": "Dresscode",
+        "description": "Beschrijving",
+        "mealName": "Naam van het menu",
+        "mealDescription": "Beschrijving van het menu"
+      }
+    },
+    "websiteLang": {
+      "editing": "Taal",
+      "main": "{language} (jullie taal)",
+      "hint": "Vertaling: {language}. Foto’s, volgorde en zichtbare onderdelen stel je in de hoofdtaal in.",
+      "progress": "{done}/{total} vertaald",
+      "complete": "Vertaald",
+      "fallback": "Leeg: gasten zien de tekst in de hoofdtaal.",
+      "nothing": "In dit onderdeel valt nog niets te vertalen.",
+      "draft": "Alles vertalen met de browservertaler",
+      "draftFailed": "Je browser kon deze talencombinatie niet vertalen. Typ de vertaling zelf.",
+      "item": "Item {number}",
+      "fields": {
+        "tagline": "Motto",
+        "intro": "Inleiding",
+        "notes": "Notities",
+        "date": "Wanneer",
+        "title": "Titel",
+        "text": "Tekst",
+        "role": "Rol",
+        "bio": "Een paar woorden",
+        "label": "Naam",
+        "note": "Notitie",
+        "question": "Vraag",
+        "answer": "Antwoord",
+        "caption": "Bijschrift"
+      }
+    }
+  }
+}

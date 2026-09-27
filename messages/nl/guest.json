@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Taal",
+    "moreLanguages": "Meer talen",
+    "yourTime": "{time} bij jou"
+  },
+  "site": {
+    "sections": {
+      "home": "Home",
+      "story": "Ons verhaal",
+      "events": "Programma",
+      "travel": "Reis & verblijf",
+      "rsvp": "Aanmelden",
+      "party": "Getuigen",
+      "registry": "Cadeaulijst",
+      "faq": "Vragen",
+      "gallery": "Galerij"
+    },
+    "nav": "Onderdelen van de website",
+    "dateTbd": "Datum volgt",
+    "newTab": "(opent in een nieuw tabblad)",
+    "rsvpButton": "Laat het ons weten",
+    "countdown": {
+      "days": "{count, plural, one {Nog # dag} other {Nog # dagen}}",
+      "daysWord": "{count, plural, one {dag tot de bruiloft} other {dagen tot de bruiloft}}",
+      "today": "Vandaag is de grote dag!",
+      "married": "Gelukkig getrouwd"
+    },
+    "madeWith": "Gemaakt met <link>Vow</link>",
+    "empty": {
+      "events": "Voeg onderdelen toe in Instellingen → Onderdelen, dan verschijnen ze hier.",
+      "travel": "Markeer hotels met ‘Tonen op website’ of voeg reistips toe in de editor.",
+      "other": "Hier staat nog niets. Voeg inhoud toe in de editor.",
+      "hidden": "Tot die tijd blijft dit onderdeel verborgen op je gepubliceerde website."
+    },
+    "event": {
+      "date": "Datum",
+      "time": "Tijd",
+      "place": "Locatie",
+      "dressCode": "Dresscode",
+      "openMap": "Openen in Google Maps"
+    },
+    "travel": {
+      "airport": "Dichtstbijzijnde luchthaven: <b>{code}</b>",
+      "searchFlights": "Vluchten zoeken",
+      "perNight": "Vanaf <b>{price}</b> per nacht",
+      "code": "Onze code: <mono>{code}</mono>",
+      "bookBy": "Boek vóór <b>{date}</b>",
+      "bookRoom": "Kamer boeken",
+      "bookRoomAt": "Kamer boeken bij {name}",
+      "website": "Website",
+      "websiteOf": "Website van {name}",
+      "map": "Kaart",
+      "mapOf": "Kaart van {name}"
+    },
+    "rsvp": {
+      "replyBy": "Laat het ons weten vóór <b>{date}</b>.",
+      "or": "of gebruik de code op je uitnodiging"
+    },
+    "registry": {
+      "visit": "Bekijken"
+    },
+    "gallery": {
+      "alt": "Foto van het bruidspaar"
+    },
+    "preview": {
+      "bar": "Voorbeeld: alleen jullie trouwteam kan dit zien tot je het publiceert.",
+      "back": "Terug naar de editor"
+    },
+    "password": {
+      "intro": "Deze website is privé. Vul het wachtwoord van je uitnodiging in.",
+      "label": "Wachtwoord",
+      "enter": "Openen",
+      "wrong": "Dat wachtwoord klopt niet. Kijk op je uitnodiging of vraag het aan het bruidspaar."
+    },
+    "meta": {
+      "weddingOf": "De bruiloft van {couple}",
+      "website": "Trouwwebsite"
+    }
+  },
+  "rsvp": {
+    "title": "Aanmelden",
+    "dateTbd": "Datum volgt",
+    "weddingOf": "De bruiloft van",
+    "rsvpsBy": "Aanmeldingen via <link>Vow</link>",
+    "enterCode": "Vul de code van je uitnodiging (e-mail of kaart) in.",
+    "findIntro": "Zoek je uitnodiging door je naam te typen zoals die op de uitnodiging staat.",
+    "orCode": "Of gebruik de code op je uitnodiging",
+    "notFound": "Uitnodiging niet gevonden",
+    "notFoundText": "Deze link of code hoort niet bij een uitnodiging. Controleer hem en probeer het opnieuw.",
+    "nothingYet": "Er is nog niets om op te reageren. Kom later terug.",
+    "code": {
+      "label": "Je code",
+      "continue": "Verder",
+      "invalid": "Codes hebben 6 letters en cijfers, zoals K7P2QX."
+    },
+    "find": {
+      "label": "Je volledige naam",
+      "placeholder": "Voor- en achternaam",
+      "button": "Zoeken",
+      "fullName": "Vul je voor- en achternaam in zoals op je uitnodiging.",
+      "noMatch": "We konden die naam niet vinden. Probeer de spelling van je uitnodiging of gebruik de code die erop staat.",
+      "failed": "Er ging iets mis. Probeer het opnieuw."
+    },
+    "dear": "Lieve {name},",
+    "update": "Pas je antwoorden hieronder aan.",
+    "invite": "We horen graag of jullie erbij kunnen zijn.",
+    "replyBy": "Laat het ons weten vóór {date}.",
+    "closed": "De aanmeldtermijn is verlopen.",
+    "closedContact": "Iets wijzigen? {contact}",
+    "closedNoContact": "Iets wijzigen? Neem direct contact op met het bruidspaar.",
+    "thanks": "Dank je wel!",
+    "thanksText": "Je antwoord is naar {couple} gestuurd. Met deze link kun je het altijd wijzigen.",
+    "thanksTextUntil": "Je antwoord is naar {couple} gestuurd. Met deze link kun je het tot {date} wijzigen.",
+    "send": "Antwoord versturen",
+    "save": "Wijzigingen opslaan",
+    "change": "Antwoorden wijzigen",
+    "yourAnswers": "Jullie antwoorden",
+    "attending": "Komt",
+    "notAttending": "Komt niet",
+    "noAnswer": "Nog geen antwoord",
+    "cantMakeIt": "kan niet komen",
+    "noAnswerYet": "nog geen antwoord",
+    "songRequest": "Verzoeknummer: {song}",
+    "form": {
+      "everyone": "We komen allemaal",
+      "none": "Niemand van ons kan komen",
+      "willAttend": "Komt {name} naar {event}?",
+      "accept": "Komt graag",
+      "decline": "Kan helaas niet",
+      "meal": "Menukeuze",
+      "chooseMeal": "Kies een menu.",
+      "chooseAnswer": "Kies een antwoord.",
+      "missingMeal": "Kies een menu voor iedereen die komt.",
+      "missingAnswer": "Beantwoord voor iedereen voordat je verstuurt.",
+      "details": "Een paar details",
+      "plusOneName": "Naam van je introducé (introducé van {host})",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "dietary": "Dieetwensen of allergieën: {name}",
+      "dietaryPlaceholder": "bijv. vegetarisch, notenallergie (leeg laten als niets)",
+      "song": "Een nummer waar je op gaat dansen",
+      "songPlaceholder": "Artiest – nummer",
+      "message": "Een bericht voor {couple}",
+      "guestOf": "Introducé van {name}",
+      "guest": "Gast"
+    },
+    "errors": {
+      "rsvp_not_found": "We konden die uitnodiging niet vinden. Controleer de link of code.",
+      "deadline_passed": "De aanmeldtermijn is verlopen. Neem direct contact op met het bruidspaar.",
+      "invalid_guest_or_event": "Iets in je antwoorden past niet bij je uitnodiging. Laad de pagina opnieuw.",
+      "invalid_status": "Geef voor iedereen aan of die komt of niet.",
+      "not_allowed": "Je mag geen antwoorden invoeren voor deze bruiloft.",
+      "generic": "We konden je antwoord niet opslaan. Probeer het zo opnieuw."
+    }
+  },
+  "board": {
+    "empty": "Dit bord is nog leeg.",
+    "photoBy": "Foto door <photographer>{name}</photographer> op <unsplash>Unsplash</unsplash>",
+    "madeWith": "Gemaakt met <link>Vow</link>",
+    "title": "Gedeeld bord",
+    "fallbackAlt": "Inspiratie"
+  },
+  "email": {
+    "previewInvite": "Jullie zijn uitgenodigd voor de bruiloft van {couple}",
+    "previewReminder": "Een herinnering om te reageren op de bruiloft van {couple}",
+    "eyebrowInvite": "Jullie zijn uitgenodigd",
+    "eyebrowReminder": "Een kleine herinnering",
+    "dear": "Lieve {name},",
+    "bodyInvite": "We zouden het geweldig vinden om met jullie te vieren. Laat via jullie persoonlijke link weten wie er komt.",
+    "bodyReminder": "We hebben jullie antwoord nog niet ontvangen en horen graag of jullie erbij zijn. Het kost maar een minuut.",
+    "button": "Nu reageren",
+    "replyBy": "Laat het ons weten vóór {date}.",
+    "fallback": "Werkt de knop niet? Open {link} of vul de code {code} in.",
+    "love": "Liefs,",
+    "personal": "Deze link is persoonlijk voor jullie huishouden. Deel hem alsjeblieft niet.",
+    "subjectInvite": "Uitnodiging: de bruiloft van {couple}",
+    "subjectReminder": "Herinnering: laat ons weten of je komt naar de bruiloft van {couple}"
+  }
+}

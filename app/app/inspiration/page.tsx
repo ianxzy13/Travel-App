@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { InspirationPage } from "@/components/inspiration/inspiration-page";
 import { loadInspiration } from "@/lib/inspiration/load";
 import { isUnsplashConfigured } from "@/lib/inspiration/unsplash";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Inspiration" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("inspiration") };
+}
 
 export default async function Inspiration() {
   const user = await requireUser();

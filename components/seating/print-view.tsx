@@ -1,19 +1,14 @@
-import { tableName } from "@/lib/seating/geometry";
 import { seatMap } from "@/lib/seating/state";
 import type { SeatingGuest, SeatingState } from "@/lib/seating/types";
 import { CatererSummary, guestsAtTable, sortedTables } from "./caterer-summary";
 import { guestColor, ObjectShape, SeatingDefs, StaticSeat } from "./shapes";
+import { useSeatingWords } from "./use-seating-words";
 
 // No "use client": rendered on the server for the print pages.
 
-export const VIEWS = {
-  plan: "Floor plan",
-  tables: "Table by table",
-  alpha: "Find your seat (A–Z)",
-  cards: "Place cards",
-  caterer: "Caterer summary",
-} as const;
-export type ViewKey = keyof typeof VIEWS;
+/** What can be printed (labels in messages "seating.printViews"). */
+export const VIEWS = ["plan", "tables", "alpha", "cards", "caterer"] as const;
+export type ViewKey = (typeof VIEWS)[number];
 
 /** The printable content for one view of a seating chart. */
 export function PrintSeatingView({
@@ -29,6 +24,7 @@ export function PrintSeatingView({
   guests: SeatingGuest[];
   mealOptions: { id: string; name: string }[];
 }) {
+  const { t, tableName } = useSeatingWords();
   const guestsById = new Map(guests.map((g) => [g.id, g]));
   const meals = new Map(mealOptions.map((m) => [m.id, m.name]));
   const tables = sortedTables(state);
@@ -38,7 +34,7 @@ export function PrintSeatingView({
     <>
       {view !== "cards" && (
         <header className="mb-6">
-          <p className="text-sm tracking-widest text-stone-500 uppercase">{VIEWS[view]}</p>
+          <p className="text-sm tracking-widest text-stone-500 uppercase">{t(`printViews.${view}`)}</p>
           <h1 className="text-4xl">{title}</h1>
         </header>
       )}
@@ -138,9 +134,7 @@ export function PrintSeatingView({
       )}
 
       {tables.length === 0 && (
-        <p className="py-10 text-center text-stone-500">
-          There are no tables in this seating chart yet.
-        </p>
+        <p className="py-10 text-center text-stone-500">{t("printPage.noTables")}</p>
       )}
     </>
   );
@@ -157,6 +151,7 @@ function PlaceCardText({ guest, table }: { guest: SeatingGuest; table: string })
 
 /** Alphabetical escort list: "Smith, Ann ...... Table 3". */
 function FindYourSeat({ state, guests }: { state: SeatingState; guests: SeatingGuest[] }) {
+  const { tableName } = useSeatingWords();
   const rows = guests
     .filter((g) => state.assignments[g.id])
     .map((g) => {

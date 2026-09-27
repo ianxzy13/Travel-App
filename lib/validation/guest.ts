@@ -1,12 +1,17 @@
+import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 import { isLocale } from "@/i18n/locales";
 
 const text = (max: number) =>
-  z.string().trim().max(max, `Please keep this under ${max} characters`);
+  z.string().trim().max(max, v("tooLong", max));
 
 const sideSchema = z.enum(["partner_a", "partner_b", "both"]);
 const ageGroupSchema = z.enum(["adult", "child", "infant"]);
 const listSchema = z.enum(["a", "b"]);
+// "" = the couple's own language
+const languageSchema = z
+  .string()
+  .refine((l): boolean => l === "" || isLocale(l), v("language"));
 
 export const addressSchema = z.object({
   line1: text(200),
@@ -36,10 +41,11 @@ export const guestFormSchema = z
     /** "new" to create a household, otherwise an existing household id */
     householdId: z.union([z.literal("new"), z.uuid()]),
     householdName: text(120),
+    householdLanguage: languageSchema,
     address: addressSchema,
     firstName: text(80),
     lastName: text(80),
-    email: z.union([z.literal(""), z.email("Please enter a valid email address").max(320)]),
+    email: z.union([z.literal(""), z.email(v("email")).max(320)]),
     phone: text(50),
     side: sideSchema,
     ageGroup: ageGroupSchema,
@@ -54,19 +60,15 @@ export const guestFormSchema = z
   })
   .refine((v) => v.isPlusOne || v.firstName || v.lastName, {
     path: ["firstName"],
-    message: "Please enter a first or last name",
+    message: v("firstOrLast"),
   });
 
 export type GuestFormValues = z.infer<typeof guestFormSchema>;
 
 export const householdSchema = z.object({
-  name: text(120).min(1, "Please enter a household name"),
+  name: text(120).min(1, v("householdName")),
   address: addressSchema,
-  // "" = the wedding's main language
-  language: z
-    .string()
-    .refine((v) => v === "" || isLocale(v), "Unknown language")
-    .optional(),
+  language: languageSchema.optional(),
 });
 
 export type HouseholdFormValues = z.infer<typeof householdSchema>;
@@ -74,7 +76,7 @@ export type HouseholdFormValues = z.infer<typeof householdSchema>;
 export const TAG_COLORS = ["stone", "rose", "sage", "sky", "amber", "violet"] as const;
 
 export const tagSchema = z.object({
-  name: text(40).min(1, "Please enter a tag name"),
+  name: text(40).min(1, v("tagName")),
   color: z.enum(TAG_COLORS),
 });
 
@@ -84,7 +86,7 @@ export const bulkPatchSchema = z
 
 export const relationshipSchema = z.object({
   guestA: z.uuid(),
-  guestB: z.uuid("Please choose a guest"),
+  guestB: z.uuid(v("chooseGuest")),
   type: z.enum(["keep_together", "keep_apart"]),
   note: text(300),
 });
@@ -113,21 +115,23 @@ export const importGuestSchema = z.object({
   plusOneName: text(160),
   plusOneOf: text(160),
   list: listSchema,
+  /** language code for the household ("" = the couple's) */
+  language: languageSchema.catch(""),
 });
 
 export const MAX_IMPORT_ROWS = 2000;
 export const importSchema = z
   .array(importGuestSchema)
-  .min(1, "There are no guests to import")
-  .max(MAX_IMPORT_ROWS, `Please import at most ${MAX_IMPORT_ROWS} guests at a time`);
+  .min(1, v("noImport"))
+  .max(MAX_IMPORT_ROWS, v("tooManyImport", MAX_IMPORT_ROWS));
 
 // ---------- events ----------
 
 export const eventSchema = z.object({
-  name: text(100).min(1, "Please enter a name"),
-  eventDate: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")]),
-  startTime: z.union([z.literal(""), z.string().regex(/^\d{2}:\d{2}$/, "Invalid time")]),
-  endTime: z.union([z.literal(""), z.string().regex(/^\d{2}:\d{2}$/, "Invalid time")]),
+  name: text(100).min(1, v("name")),
+  eventDate: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]),
+  startTime: z.union([z.literal(""), z.string().regex(/^\d{2}:\d{2}$/, v("time"))]),
+  endTime: z.union([z.literal(""), z.string().regex(/^\d{2}:\d{2}$/, v("time"))]),
   venueName: text(200),
   address: text(300),
   dressCode: text(200),

@@ -4,6 +4,7 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { updateWedding } from "@/app/app/settings/actions";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ export function WeddingDetailsForm({
   defaultValues: WeddingFormValues;
   readOnly: boolean;
 }) {
+  const t = useTranslations("weddingForm");
   const [pending, startTransition] = useTransition();
   const form = useForm({ resolver: zodResolver(weddingSchema), defaultValues });
 
@@ -31,7 +33,7 @@ export function WeddingDetailsForm({
     startTransition(async () => {
       const result = await updateWedding(values);
       if (result.ok) {
-        toast.success("Wedding details saved");
+        toast.success(t("saved"));
         form.reset(values); // clears the "unsaved changes" state
       } else {
         toast.error(result.error);
@@ -44,11 +46,9 @@ export function WeddingDetailsForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Wedding details</CardTitle>
+        <CardTitle className="font-serif text-2xl">{t("detailsTitle")}</CardTitle>
         <CardDescription>
-          {readOnly
-            ? "You have view-only access. Ask an owner if you need to make changes."
-            : "Names, date, location and style. Changes apply everywhere in the app."}
+          {readOnly ? t("detailsViewOnly") : t("detailsText")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -62,7 +62,7 @@ export function WeddingDetailsForm({
             <div className="flex justify-end">
               <Button type="submit" disabled={pending || !form.formState.isDirty}>
                 {pending && <Loader2 className="animate-spin" aria-hidden />}
-                Save changes
+                {t("saveChanges")}
               </Button>
             </div>
           )}

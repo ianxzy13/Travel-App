@@ -4,6 +4,7 @@ import { useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteScheduleItem, saveScheduleItem } from "@/app/app/schedule/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -50,6 +51,7 @@ export function ItemSheet({
   canEdit: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const t = useTranslations("schedule.sheet");
   const [pending, startTransition] = useTransition();
   const form = useForm<ScheduleItemValues>({
     resolver: zodResolver(scheduleItemSchema),
@@ -83,7 +85,7 @@ export function ItemSheet({
     startTransition(async () => {
       const r = await saveScheduleItem(item?.id ?? null, values);
       if (!r.ok) return void toast.error(r.error);
-      toast.success(item ? "Saved" : "Added to the schedule");
+      toast.success(item ? t("saved") : t("added"));
       onOpenChange(false);
     }),
   );
@@ -95,29 +97,27 @@ export function ItemSheet({
         <form onSubmit={submit} className="flex h-full flex-col">
           <SheetHeader>
             <SheetTitle>
-              {item ? (canEdit ? "Edit item" : "Schedule item") : "Add to the schedule"}
+              {item ? (canEdit ? t("edit") : t("view")) : t("new")}
             </SheetTitle>
-            <SheetDescription>
-              What happens, when, where, and who&apos;s in charge.
-            </SheetDescription>
+            <SheetDescription>{t("hint")}</SheetDescription>
           </SheetHeader>
           <fieldset disabled={!canEdit} className="flex-1 space-y-4 px-4">
-            <FormField id="item-title" label="What" error={errors.title?.message}>
+            <FormField id="item-title" label={t("what")} error={errors.title?.message}>
               {(a) => (
                 <Input
                   {...a}
                   {...form.register("title")}
                   maxLength={150}
-                  placeholder="e.g. First dance"
+                  placeholder={t("whatPlaceholder")}
                   autoFocus={!item}
                 />
               )}
             </FormField>
             <div className="grid grid-cols-3 gap-3">
-              <FormField id="item-start" label="Starts" error={errors.start_time?.message}>
+              <FormField id="item-start" label={t("starts")} error={errors.start_time?.message}>
                 {(a) => <Input {...a} type="time" {...form.register("start_time")} />}
               </FormField>
-              <FormField id="item-duration" label="Minutes" error={errors.duration_min?.message}>
+              <FormField id="item-duration" label={t("minutes")} error={errors.duration_min?.message}>
                 {(a) => (
                   <Input
                     {...a}
@@ -130,22 +130,22 @@ export function ItemSheet({
                   />
                 )}
               </FormField>
-              <FormField id="item-day" label="Day" error={errors.day?.message}>
+              <FormField id="item-day" label={t("day")} error={errors.day?.message}>
                 {(a) => <Input {...a} type="date" {...form.register("day")} />}
               </FormField>
             </div>
-            <FormField id="item-location" label="Where">
+            <FormField id="item-location" label={t("where")}>
               {(a) => <Input {...a} {...form.register("location")} maxLength={200} />}
             </FormField>
             <FormField
               id="item-owner"
-              label="Who's in charge"
-              hint="e.g. Photographer, or Anna (maid of honour)"
+              label={t("owner")}
+              hint={t("ownerHint")}
             >
               {(a) => <Input {...a} {...form.register("owner")} maxLength={120} />}
             </FormField>
             <div className="space-y-2">
-              <Label htmlFor="item-vendor">Vendor (their phone shows on the print-out)</Label>
+              <Label htmlFor="item-vendor">{t("vendor")}</Label>
               <Select
                 value={form.watch("vendor_id") || NONE}
                 onValueChange={(v) =>
@@ -157,7 +157,7 @@ export function ItemSheet({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={NONE}>None</SelectItem>
+                  <SelectItem value={NONE}>{t("none")}</SelectItem>
                   {vendors.map((v) => (
                     <SelectItem key={v.id} value={v.id}>
                       {v.name}
@@ -166,14 +166,14 @@ export function ItemSheet({
                 </SelectContent>
               </Select>
             </div>
-            <FormField id="item-notes" label="Notes">
+            <FormField id="item-notes" label={t("notes")}>
               {(a) => (
                 <Textarea
                   {...a}
                   {...form.register("notes")}
                   rows={4}
                   maxLength={2000}
-                  placeholder="e.g. Song: At Last – Etta James"
+                  placeholder={t("notesPlaceholder")}
                 />
               )}
             </FormField>
@@ -184,10 +184,10 @@ export function ItemSheet({
                 <ConfirmDialog
                   trigger={
                     <Button type="button" variant="ghost" className="text-destructive">
-                      <Trash2 aria-hidden /> Delete
+                      <Trash2 aria-hidden /> {t("delete")}
                     </Button>
                   }
-                  title="Remove from the schedule?"
+                  title={t("deleteTitle")}
                   description={item.title}
                   onConfirm={async () => {
                     const r = await deleteScheduleItem(item.id);
@@ -203,7 +203,7 @@ export function ItemSheet({
               )}
               <Button type="submit" disabled={pending}>
                 {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
-                {item ? "Save" : "Add"}
+                {item ? t("save") : t("add")}
               </Button>
             </SheetFooter>
           )}

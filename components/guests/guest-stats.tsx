@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { GuestStats } from "@/lib/guests/stats";
 import type { PartnerNames } from "@/lib/guests/model";
 import { SideDot } from "./badges";
@@ -13,20 +14,19 @@ export function GuestStatsBar({
   events: EventOption[];
   names: PartnerNames;
 }) {
+  const t = useTranslations("guests.stats");
+  const g = useTranslations("guests");
   return (
     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-      <Stat label="Guests" value={stats.total}>
-        {stats.households} household{stats.households === 1 ? "" : "s"}
-        {stats.plusOnes > 0 &&
-          ` · ${stats.plusOnes} plus-one${stats.plusOnes === 1 ? "" : "s"}${
-            stats.unnamedPlusOnes ? ` (${stats.unnamedPlusOnes} unnamed)` : ""
-          }`}
+      <Stat label={t("guests")} value={stats.total}>
+        {t("households", { count: stats.households })}
+        {stats.plusOnes > 0 && <> · {t("plusOnes", { count: stats.plusOnes })}</>}
+        {stats.unnamedPlusOnes > 0 && <> {t("unnamed", { count: stats.unnamedPlusOnes })}</>}
       </Stat>
-      <Stat label="Adults" value={stats.adults}>
-        {stats.children} child{stats.children === 1 ? "" : "ren"} · {stats.infants} infant
-        {stats.infants === 1 ? "" : "s"}
+      <Stat label={t("adults")} value={stats.adults}>
+        {t("children", { count: stats.children })} · {t("infants", { count: stats.infants })}
       </Stat>
-      <Stat label="By side">
+      <Stat label={t("bySide")}>
         <span className="flex flex-col gap-0.5">
           <span className="flex items-center gap-1.5">
             <SideDot side="partner_a" /> {names.a}: {stats.bySide.partner_a}
@@ -35,13 +35,13 @@ export function GuestStatsBar({
             <SideDot side="partner_b" /> {names.b}: {stats.bySide.partner_b}
           </span>
           <span className="flex items-center gap-1.5">
-            <SideDot side="both" /> Both: {stats.bySide.both}
+            <SideDot side="both" /> {g("both")}: {stats.bySide.both}
           </span>
         </span>
       </Stat>
-      <Stat label="By event">
+      <Stat label={t("byEvent")}>
         {events.length === 0 ? (
-          "No events yet"
+          t("noEvents")
         ) : (
           <span className="flex flex-col gap-0.5">
             {events.map((e) => (
@@ -53,7 +53,7 @@ export function GuestStatsBar({
               </span>
             ))}
             {stats.uninvited > 0 && (
-              <span className="text-warning">{stats.uninvited} not invited to any event</span>
+              <span className="text-warning">{t("uninvited", { count: stats.uninvited })}</span>
             )}
           </span>
         )}

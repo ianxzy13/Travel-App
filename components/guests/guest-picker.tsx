@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { normalize } from "@/lib/guests/filter";
@@ -26,6 +27,7 @@ export function GuestPicker({
   onChange: (ids: string[]) => void;
   maxHeight?: string;
 }) {
+  const t = useTranslations("guests.picker");
   const [search, setSearch] = useState("");
   const chosen = new Set(selected);
 
@@ -60,21 +62,21 @@ export function GuestPicker({
     <div className="rounded-lg border">
       <div className="relative border-b p-2">
         <Search
-          className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2"
+          className="text-muted-foreground pointer-events-none absolute start-4 top-1/2 size-4 -translate-y-1/2"
           aria-hidden
         />
         <Input
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search guests…"
-          aria-label="Search guests"
-          className="h-8 pl-8"
+          placeholder={t("search")}
+          aria-label={t("searchLabel")}
+          className="h-8 ps-8"
         />
       </div>
       <div className="overflow-y-auto p-1" style={{ maxHeight }}>
         {groups.length === 0 ? (
-          <p className="text-muted-foreground p-3 text-center text-sm">No guests match.</p>
+          <p className="text-muted-foreground p-3 text-center text-sm">{t("none")}</p>
         ) : (
           groups.map((h) => {
             const ids = h.guests.map((g) => g.id);
@@ -85,14 +87,14 @@ export function GuestPicker({
                   <Checkbox
                     checked={n === 0 ? false : n === ids.length ? true : "indeterminate"}
                     onCheckedChange={(c) => set(ids, c === true)}
-                    aria-label={`Select everyone in ${h.name}`}
+                    aria-label={t("selectHousehold", { name: h.name })}
                   />
                   {h.name}
                 </label>
                 {h.guests.map((g) => (
                   <label
                     key={g.id}
-                    className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1 pl-7 text-sm"
+                    className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1 ps-7 text-sm"
                   >
                     <Checkbox
                       checked={chosen.has(g.id)}
@@ -110,7 +112,7 @@ export function GuestPicker({
         )}
       </div>
       <p className="text-muted-foreground border-t px-3 py-1.5 text-xs" aria-live="polite">
-        {selected.length} selected
+        {t("selected", { count: selected.length })}
       </p>
     </div>
   );

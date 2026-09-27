@@ -3,7 +3,7 @@
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import type { GuestRow, TagColor, TagRow } from "@/lib/database.types";
 import { splitFullName, type ImportGuest } from "@/lib/guests/csv";
 import { fullName } from "@/lib/guests/model";
@@ -17,12 +17,13 @@ import {
   tagSchema,
   type AddressValues,
 } from "@/lib/validation/guest";
+import { localeSchema } from "@/lib/validation/languages";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
 // All writes are also protected by Row Level Security in the database;
 // the checks here are for clear error messages.
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change guests." };
 const idsSchema = z.array(z.uuid()).min(1).max(5000);
 
 type Supabase = Awaited<ReturnType<typeof createClient>>;
@@ -46,8 +47,8 @@ async function editor() {
 }
 
 function done(): ActionResult {
-  revalidatePath("/app/guests");
-  revalidatePath("/app");
+  // household languages feed the wedding's language list (settings, website editor)
+  revalidatePath("/app", "layout");
   return { ok: true };
 }
 
@@ -148,11 +149,11 @@ export async function saveGuest(
   guestId?: string,
 ): Promise<ActionResult<{ id: string; householdId: string }>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { supabase: sb, weddingId } = ctx;
 
   const parsed = guestFormSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
 
   try {
@@ -165,7 +166,7 @@ export async function saveGuest(
         .eq("id", guestId)
         .eq("wedding_id", weddingId)
         .maybeSingle();
-      if (!data) return { ok: false, error: "This guest no longer exists." };
+      if (!data) return await err("notFound");
       existing = data;
     }
 
@@ -179,6 +180,7 @@ export async function saveGuest(
         .insert({
           wedding_id: weddingId,
           name: v.householdName || fullName(v.firstName, v.lastName),
+          preferred_language: v.householdLanguage || null,
           ...addressColumns(v.address),
         })
         .select("id")
@@ -190,6 +192,7 @@ export async function saveGuest(
         .from("households")
         .update({
           ...(v.householdName ? { name: v.householdName } : {}),
+          preferred_language: v.householdLanguage || null,
           ...addressColumns(v.address),
         })
         .eq("id", householdId)
@@ -251,14 +254,14 @@ export async function saveGuest(
     done();
     return { ok: true, data: { id, householdId } };
   } catch (error) {
-    return fail("saveGuest", error, "We couldn't save this guest. Please try again.");
+    return fail("saveGuest", error, "guestNotSaved");
   }
 }
 
 export async function deleteGuests(ids: string[]): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
-  if (!idsSchema.safeParse(ids).success) return { ok: false, error: "No guests selected." };
+  if (!ctx) return noPermission();
+  if (!idsSchema.safeParse(ids).success) return await err("noGuestsSelected");
 
   // Their plus-ones, invites, tags and seating rules are removed automatically (cascade).
   const error = await inBatches(ids, (batch) =>
@@ -273,10 +276,10 @@ export async function deleteGuests(ids: string[]): Promise<ActionResult> {
 /** Change side / list / age group of many guests at once. */
 export async function bulkUpdateGuests(ids: string[], patch: unknown): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsedPatch = bulkPatchSchema.safeParse(patch);
   if (!idsSchema.safeParse(ids).success || !parsedPatch.success) {
-    return { ok: false, error: "Nothing to update." };
+    return await err("nothingToUpdate");
   }
   const error = await inBatches(ids, (batch) =>
     ctx.supabase
@@ -296,9 +299,9 @@ export async function bulkSetEvent(
   invited: boolean,
 ): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   if (!idsSchema.safeParse(ids).success || !z.uuid().safeParse(eventId).success) {
-    return { ok: false, error: "Nothing to update." };
+    return await err("nothingToUpdate");
   }
   const sb = ctx.supabase;
 
@@ -332,9 +335,9 @@ export async function bulkSetTag(
   add: boolean,
 ): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   if (!idsSchema.safeParse(ids).success || !z.uuid().safeParse(tagId).success) {
-    return { ok: false, error: "Nothing to update." };
+    return await err("nothingToUpdate");
   }
   const error = add
     ? (
@@ -352,12 +355,46 @@ export async function bulkSetTag(
 
 // ---------- households ----------
 
+const languageSchema = z.union([z.literal(""), localeSchema]);
+
+/** Set the language of the households of the selected guests ("" = the couple's). */
+export async function bulkSetHouseholdLanguage(
+  ids: string[],
+  language: string,
+): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const lang = languageSchema.safeParse(language);
+  if (!idsSchema.safeParse(ids).success || !lang.success) return await err("nothingToUpdate");
+  const householdIds = new Set<string>();
+  const readError = await inBatches(ids, async (batch) => {
+    const { data, error } = await ctx.supabase
+      .from("guests")
+      .select("household_id")
+      .in("id", batch)
+      .eq("wedding_id", ctx.weddingId);
+    for (const g of data ?? []) householdIds.add(g.household_id);
+    return { error };
+  });
+  if (readError) return fail("bulkSetHouseholdLanguage", readError);
+  const error = await inBatches([...householdIds], (batch) =>
+    ctx.supabase
+      .from("households")
+      .update({ preferred_language: lang.data || null })
+      .in("id", batch)
+      .eq("wedding_id", ctx.weddingId),
+  );
+  if (error) return fail("bulkSetHouseholdLanguage", error);
+  revalidatePath("/app", "layout");
+  return { ok: true };
+}
+
 export async function updateHousehold(id: string, input: unknown): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = householdSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
-  if (!z.uuid().safeParse(id).success) return NO_PERMISSION;
+  if (!parsed.success) return await invalid(parsed.error);
+  if (!z.uuid().safeParse(id).success) return noPermission();
 
   const { error } = await ctx.supabase
     .from("households")
@@ -380,9 +417,9 @@ const DUPLICATE = "23505"; // Postgres "unique violation" error code
 
 export async function createTag(input: unknown): Promise<ActionResult<{ tag: TagRow }>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = tagSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
 
   const { data, error } = await ctx.supabase
     .from("tags")
@@ -390,7 +427,7 @@ export async function createTag(input: unknown): Promise<ActionResult<{ tag: Tag
     .select("*")
     .single();
   if (error?.code === DUPLICATE)
-    return { ok: false, error: "A tag with that name already exists." };
+    return await err("tagExists");
   if (error) return fail("createTag", error);
   revalidatePath("/app/guests");
   return { ok: true, data: { tag: data } };
@@ -398,9 +435,9 @@ export async function createTag(input: unknown): Promise<ActionResult<{ tag: Tag
 
 export async function updateTag(id: string, input: unknown): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = tagSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
 
   const { error } = await ctx.supabase
     .from("tags")
@@ -408,14 +445,14 @@ export async function updateTag(id: string, input: unknown): Promise<ActionResul
     .eq("id", id)
     .eq("wedding_id", ctx.weddingId);
   if (error?.code === DUPLICATE)
-    return { ok: false, error: "A tag with that name already exists." };
+    return await err("tagExists");
   if (error) return fail("updateTag", error);
   return done();
 }
 
 export async function deleteTag(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { error } = await ctx.supabase
     .from("tags")
     .delete()
@@ -429,11 +466,11 @@ export async function deleteTag(id: string): Promise<ActionResult> {
 
 export async function addRelationship(input: unknown): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = relationshipSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
-  if (v.guestA === v.guestB) return { ok: false, error: "Please choose a different guest." };
+  if (v.guestA === v.guestB) return await err("differentGuest");
 
   const { error } = await ctx.supabase.from("guest_relationships").insert({
     wedding_id: ctx.weddingId,
@@ -443,7 +480,7 @@ export async function addRelationship(input: unknown): Promise<ActionResult> {
     note: v.note || null,
   });
   if (error?.code === DUPLICATE) {
-    return { ok: false, error: "These two guests already have a seating rule." };
+    return await err("ruleExists");
   }
   if (error) return fail("addRelationship", error);
   return done();
@@ -451,7 +488,7 @@ export async function addRelationship(input: unknown): Promise<ActionResult> {
 
 export async function removeRelationship(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { error } = await ctx.supabase
     .from("guest_relationships")
     .delete()
@@ -478,9 +515,9 @@ export type ImportSummary = {
  */
 export async function importGuests(input: unknown): Promise<ActionResult<ImportSummary>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = importSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const rows: ImportGuest[] = parsed.data;
   const { supabase: sb, weddingId } = ctx;
   const key = (s: string) => s.trim().toLowerCase();
@@ -520,6 +557,7 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
     region: string | null;
     postal_code: string | null;
     country: string | null;
+    preferred_language: string | null;
   }[] = [];
 
   const guestRows: GuestRow[] = [];
@@ -542,6 +580,7 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
         region: r.region || null,
         postal_code: r.postalCode || null,
         country: r.country || null,
+        preferred_language: r.language || null,
       });
     }
     return householdId;
@@ -658,11 +697,7 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
     await inBatches(guestIds, (batch) => sb.from("guests").delete().in("id", batch));
     await inBatches(newHouseholdIds, (batch) => sb.from("households").delete().in("id", batch));
     await inBatches(newTagIds, (batch) => sb.from("tags").delete().in("id", batch));
-    return fail(
-      "importGuests",
-      error,
-      "The import failed and nothing was saved. Please check the file and try again.",
-    );
+    return fail("importGuests", error, "importFailed");
   }
 
   done();

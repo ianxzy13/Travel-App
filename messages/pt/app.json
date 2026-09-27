@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Painel",
+      "tasks": "Tarefas",
+      "budget": "Orçamento",
+      "vendors": "Fornecedores",
+      "guests": "Convidados",
+      "rsvp": "Confirmações",
+      "seating": "Mesas",
+      "venues": "Locais",
+      "hotels": "Hotéis",
+      "travel": "Viagens",
+      "inspiration": "Inspiração",
+      "website": "Site",
+      "schedule": "Programa do dia",
+      "settings": "Definições",
+      "home": "Início",
+      "groups": {
+        "plan": "Planear",
+        "people": "Pessoas",
+        "places": "Locais",
+        "style": "Estilo"
+      }
+    },
+    "shell": {
+      "mainNav": "Navegação principal",
+      "expand": "Expandir barra lateral",
+      "collapse": "Recolher barra lateral",
+      "more": "Mais",
+      "allTools": "Todas as ferramentas"
+    },
+    "userMenu": {
+      "account": "Menu da conta",
+      "appearance": "Aparência",
+      "light": "Claro",
+      "dark": "Escuro",
+      "system": "Sistema",
+      "language": "Idioma",
+      "signOut": "Terminar sessão"
+    },
+    "switcher": {
+      "current": "Casamento atual: {name}. Mudar de casamento",
+      "yours": "Os seus casamentos",
+      "noDate": "Data a definir",
+      "another": "Planear outro casamento",
+      "roles": {
+        "owner": "proprietário",
+        "editor": "editor",
+        "viewer": "leitor"
+      }
+    },
+    "notifications": {
+      "title": "Notificações",
+      "unread": "{count, plural, one {Notificações, # por ler} other {Notificações, # por ler}}",
+      "unreadOne": "Por ler",
+      "markAll": "Marcar tudo como lido",
+      "empty": "Ainda nada. Aqui aparecem as novas confirmações, as suas tarefas e os lembretes de pagamentos e prazos."
+    },
+    "countdown": {
+      "today": "Hoje é o grande dia!",
+      "enjoy": "Aproveitem cada momento.",
+      "married": "{count, plural, one {Casados há # dia} other {Casados há # dias}}",
+      "congrats": "Parabéns!",
+      "daysToGo": "{count, plural, one {dia para o casamento} other {dias para o casamento}}",
+      "hours": "horas",
+      "minutes": "minutos",
+      "seconds": "segundos"
+    },
+    "dashboard": {
+      "welcome": "Bem-vindos ao vosso planeador!",
+      "welcomeText": "Tudo começa aqui. Avancem pelos próximos passos ao vosso ritmo.",
+      "noDate": "Data a definir",
+      "setDate": "Escolham a data para começar a contagem decrescente",
+      "nextSteps": "Próximos passos",
+      "stepsDone": "{done} de {total} feitos",
+      "done": "(feito)",
+      "toDo": "(por fazer)",
+      "steps": {
+        "date": "Escolher a data do casamento",
+        "location": "Escolher o local",
+        "invite": "Convidar o par, a família ou o wedding planner",
+        "guests": "Adicionar a lista de convidados",
+        "guestsSoFar": "{count, plural, one {Adicionar a lista de convidados (# até agora)} other {Adicionar a lista de convidados (# até agora)}}",
+        "budget": "Definir o orçamento total",
+        "shortlist": "Pré-selecionar locais",
+        "book": "Reservar o local",
+        "inspiration": "Criar um quadro de inspiração",
+        "website": "Publicar o site do casamento",
+        "timeline": "Criar o calendário de preparativos"
+      },
+      "budget": {
+        "title": "Orçamento",
+        "empty": "Ainda sem orçamento. Definam um total e sugerimos como o dividir.",
+        "cta": "Planear orçamento",
+        "committed": "comprometido",
+        "committedOf": "comprometido de {total}",
+        "overdue": "Em atraso: {name}"
+      },
+      "rsvp": {
+        "title": "Confirmações",
+        "empty": "Ainda sem respostas. Adicionem convidados e enviem os convites.",
+        "cta": "Ver confirmações",
+        "attending": "Vão",
+        "declined": "Não vão",
+        "waiting": "Pendentes"
+      },
+      "seating": {
+        "title": "Mesas",
+        "empty": "Ainda sem mesas. Quando os convidados responderem, sentem-nos arrastando e largando.",
+        "cta": "Abrir plano de mesas",
+        "seated": "de {attending} convidados presentes, sentados em {tables, plural, one {# mesa} other {# mesas}}"
+      },
+      "inspiration": {
+        "title": "Inspiração",
+        "empty": "Ainda sem pins. Juntem ideias e tirem delas uma paleta de cores.",
+        "cta": "Abrir quadros",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Tarefas",
+        "empty": "Ainda sem tarefas. Criamos um calendário a partir da data do casamento.",
+        "cta": "Ver tarefas",
+        "ofDone": "de {total} feitas",
+        "overdue": "{count} em atraso"
+      }
+    },
+    "settings": {
+      "title": "Definições",
+      "description": "Os dados do casamento, idiomas, eventos e quem planeia convosco."
+    },
+    "translate": {
+      "button": "Traduções",
+      "title": "Traduções: {name}",
+      "hint": "Deixe uma caixa vazia para mostrar o texto em {language}.",
+      "draft": "Rascunho",
+      "draftFailed": "O seu navegador não conseguiu traduzir este par de idiomas. Escreva a tradução.",
+      "noMachine": "Dica: o Chrome num computador pode preparar um rascunho de tradução (aparece lá um botão “Rascunho”).",
+      "save": "Guardar traduções",
+      "saved": "Traduções guardadas",
+      "fields": {
+        "name": "Nome",
+        "venue": "Nome do local",
+        "dressCode": "Traje",
+        "description": "Descrição",
+        "mealName": "Nome da refeição",
+        "mealDescription": "Descrição da refeição"
+      }
+    },
+    "websiteLang": {
+      "editing": "Idioma",
+      "main": "{language} (o vosso idioma)",
+      "hint": "Tradução: {language}. As fotos, a ordem e as secções visíveis definem-se no idioma principal.",
+      "progress": "{done}/{total} traduzido",
+      "complete": "Traduzido",
+      "fallback": "Vazio: os convidados veem o texto no idioma principal.",
+      "nothing": "Ainda não há nada para traduzir nesta secção.",
+      "draft": "Traduzir tudo com o tradutor do navegador",
+      "draftFailed": "O seu navegador não conseguiu traduzir este par de idiomas. Escreva a tradução.",
+      "item": "Item {number}",
+      "fields": {
+        "tagline": "Lema",
+        "intro": "Introdução",
+        "notes": "Notas",
+        "date": "Quando",
+        "title": "Título",
+        "text": "Texto",
+        "role": "Papel",
+        "bio": "Algumas palavras",
+        "label": "Nome",
+        "note": "Nota",
+        "question": "Pergunta",
+        "answer": "Resposta",
+        "caption": "Legenda"
+      }
+    }
+  }
+}

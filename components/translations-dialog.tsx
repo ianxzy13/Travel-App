@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from "react";
 import { Languages, Loader2, Wand2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { LanguageName } from "@/components/language-select";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -120,7 +121,7 @@ export function TranslationsDialog({
           {languages.map((lang) => (
             <fieldset key={lang} className="space-y-3 rounded-lg border p-3" lang={lang}>
               <legend className="flex w-full items-center justify-between gap-2 px-1 text-sm font-medium">
-                {localeInfo(lang).native}
+                <LanguageName code={lang} />
                 {machine && (
                   <Button
                     type="button"

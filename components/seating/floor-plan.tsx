@@ -4,7 +4,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { Maximize, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { initials, isTable, SEAT_SIZE, tableName } from "@/lib/seating/geometry";
+import { initials, isTable, SEAT_SIZE } from "@/lib/seating/geometry";
+import { useSeatingWords } from "./use-seating-words";
 import type { TableIssue } from "@/lib/seating/rules";
 import { seatMap } from "@/lib/seating/state";
 import type { SeatingGuest, SeatingObject, SeatingState } from "@/lib/seating/types";
@@ -47,6 +48,7 @@ const MAX_SCALE = 4;
 
 export function FloorPlan(props: Props) {
   const { state, canEdit, onSelect } = props;
+  const { t } = useSeatingWords();
   const containerRef = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<View>({ s: 0.4, tx: 20, ty: 20 });
   const viewRef = useRef(view);
@@ -239,7 +241,7 @@ export function FloorPlan(props: Props) {
       className="bg-muted/40 relative size-full overflow-hidden rounded-xl border select-none"
       style={{ touchAction: "none" }}
     >
-      <svg className="absolute inset-0 size-full" role="application" aria-label="Floor plan">
+      <svg className="absolute inset-0 size-full" role="application" aria-label={t("floorPlanLabel")}>
         <SeatingDefs />
         <defs>
           <pattern
@@ -304,7 +306,7 @@ export function FloorPlan(props: Props) {
           variant="ghost"
           size="icon-sm"
           onClick={() => props.apiRef.current?.zoomBy(1 / 1.25)}
-          aria-label="Zoom out"
+          aria-label={t("zoomOut")}
         >
           <Minus aria-hidden />
         </Button>
@@ -313,11 +315,11 @@ export function FloorPlan(props: Props) {
           variant="ghost"
           size="icon-sm"
           onClick={() => props.apiRef.current?.zoomBy(1.25)}
-          aria-label="Zoom in"
+          aria-label={t("zoomIn")}
         >
           <Plus aria-hidden />
         </Button>
-        <Button variant="ghost" size="icon-sm" onClick={fit} aria-label="Fit room to screen">
+        <Button variant="ghost" size="icon-sm" onClick={fit} aria-label={t("fit")}>
           <Maximize aria-hidden />
         </Button>
       </div>
@@ -348,6 +350,7 @@ function PlacedObject({
   });
   const seated = [...seats.entries()].filter(([k]) => k.startsWith(`${o.id}:`)).length;
   const issues = props.issuesByTable[o.id] ?? [];
+  const { t, tableName } = useSeatingWords();
 
   return (
     <ObjectShape
@@ -363,7 +366,8 @@ function PlacedObject({
         role: "button",
         tabIndex: 0,
         "aria-label": table
-          ? `${tableName(o)}, ${seated} of ${o.seatCount} seats taken${issues.length ? `, ${issues.length} warning(s)` : ""}`
+          ? t("tableAria", { name: tableName(o), seated, total: o.seatCount }) +
+            (issues.length ? t("tableWarnings", { count: issues.length }) : "")
           : tableName(o),
         onKeyDown: (e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -419,12 +423,17 @@ function SeatNode({
   const selected =
     props.selectedSeat?.objectId === objectId && props.selectedSeat.seatIndex === index;
   const r = SEAT_SIZE / 2;
+  const { t } = useSeatingWords();
   const meal = guest?.mealOptionId ? props.mealLookup.get(guest.mealOptionId) : null;
   const details = guest
-    ? [guest.name, meal && `Meal: ${meal}`, guest.dietary && `Dietary: ${guest.dietary}`]
+    ? [
+        guest.name,
+        meal && t("mealLine", { meal }),
+        guest.dietary && t("dietaryLine", { text: guest.dietary }),
+      ]
         .filter(Boolean)
         .join("\n")
-    : `Empty seat ${index + 1} at ${tableLabel}`;
+    : t("emptySeat", { n: index + 1, table: tableLabel });
 
   return (
     <g

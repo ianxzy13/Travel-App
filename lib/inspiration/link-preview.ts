@@ -41,22 +41,43 @@ export function isPrivateIp(ip: string): boolean {
   );
 }
 
+/** Why a link couldn't be used (messages "inspiration.linkErrors"). */
+export type LinkErrorKey =
+  | "notUrl"
+  | "protocol"
+  | "password"
+  | "port"
+  | "private"
+  | "status"
+  | "redirects"
+  | "notImage"
+  | "noImage";
+
+export class LinkError extends Error {
+  constructor(
+    public key: LinkErrorKey,
+    public status?: number,
+  ) {
+    super(key);
+  }
+}
+
 async function assertPublicUrl(raw: string) {
   let url: URL;
   try {
     url = new URL(raw);
   } catch {
-    throw new Error("That doesn't look like a web address.");
+    throw new LinkError("notUrl");
   }
   if (url.protocol !== "http:" && url.protocol !== "https:")
-    throw new Error("Only http and https links work.");
-  if (url.username || url.password) throw new Error("Links with passwords aren't supported.");
+    throw new LinkError("protocol");
+  if (url.username || url.password) throw new LinkError("password");
   if (url.port && !["80", "443"].includes(url.port))
-    throw new Error("That link uses an unusual port.");
+    throw new LinkError("port");
   const host = url.hostname.replace(/^\[|\]$/g, "");
   const addresses = isIP(host) ? [host] : (await lookup(host, { all: true })).map((a) => a.address);
   if (!addresses.length || addresses.some(isPrivateIp))
-    throw new Error("That address can't be reached.");
+    throw new LinkError("private");
   return url;
 }
 
@@ -78,10 +99,10 @@ async function safeFetch(raw: string) {
       url = await assertPublicUrl(new URL(res.headers.get("location")!, url).toString());
       continue;
     }
-    if (!res.ok) throw new Error(`The site answered with an error (${res.status}).`);
+    if (!res.ok) throw new LinkError("status", res.status);
     return { res, url };
   }
-  throw new Error("Too many redirects.");
+  throw new LinkError("redirects");
 }
 
 async function readText(res: Response) {
@@ -154,11 +175,8 @@ export async function getLinkPreview(raw: string): Promise<LinkPreview> {
     await res.body?.cancel().catch(() => {});
     return { imageUrl: url.toString(), title: null, sourceUrl: null };
   }
-  if (!type.includes("html")) throw new Error("That link isn't an image or a web page.");
+  if (!type.includes("html")) throw new LinkError("notImage");
   const { image, title } = parseOpenGraph(await readText(res), url.toString());
-  if (!image)
-    throw new Error(
-      "We couldn't find an image on that page. Try right-clicking the image and copying its address.",
-    );
+  if (!image) throw new LinkError("noImage");
   return { imageUrl: image, title, sourceUrl: url.toString() };
 }

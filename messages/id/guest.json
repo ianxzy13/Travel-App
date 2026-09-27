@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Bahasa",
+    "moreLanguages": "Bahasa lainnya",
+    "yourTime": "{time} waktu Anda"
+  },
+  "site": {
+    "sections": {
+      "home": "Beranda",
+      "story": "Kisah Kami",
+      "events": "Acara",
+      "travel": "Perjalanan & Menginap",
+      "rsvp": "RSVP",
+      "party": "Pendamping Pengantin",
+      "registry": "Daftar Hadiah",
+      "faq": "Tanya Jawab",
+      "gallery": "Galeri"
+    },
+    "nav": "Bagian situs",
+    "dateTbd": "Tanggal menyusul",
+    "newTab": "(terbuka di tab baru)",
+    "rsvpButton": "Konfirmasi kehadiran",
+    "countdown": {
+      "days": "{count, plural, other {# hari lagi}}",
+      "daysWord": "{count, plural, other {hari lagi}}",
+      "today": "Hari ini harinya!",
+      "married": "Pengantin baru yang bahagia"
+    },
+    "madeWith": "Dibuat dengan <link>Vow</link>",
+    "empty": {
+      "events": "Tambahkan acara di Pengaturan → Acara dan acara itu akan muncul di sini.",
+      "travel": "Tandai hotel sebagai “Tampilkan di situs” atau tambahkan tips perjalanan di editor.",
+      "other": "Belum ada apa-apa di sini. Tambahkan konten di editor.",
+      "hidden": "Sampai saat itu, bagian ini disembunyikan di situs publik."
+    },
+    "event": {
+      "date": "Tanggal",
+      "time": "Waktu",
+      "place": "Tempat",
+      "dressCode": "Kode busana",
+      "openMap": "Buka di Google Maps"
+    },
+    "travel": {
+      "airport": "Bandara terdekat: <b>{code}</b>",
+      "searchFlights": "Cari penerbangan",
+      "perNight": "Mulai <b>{price}</b> per malam",
+      "code": "Kode diskon: <mono>{code}</mono>",
+      "bookBy": "Pesan sebelum <b>{date}</b>",
+      "bookRoom": "Pesan kamar",
+      "bookRoomAt": "Pesan kamar di {name}",
+      "website": "Situs web",
+      "websiteOf": "Situs web {name}",
+      "map": "Peta",
+      "mapOf": "Peta {name}"
+    },
+    "rsvp": {
+      "replyBy": "Mohon konfirmasi sebelum <b>{date}</b>.",
+      "or": "atau gunakan kode undangan"
+    },
+    "registry": {
+      "visit": "Kunjungi"
+    },
+    "gallery": {
+      "alt": "Foto pasangan"
+    },
+    "preview": {
+      "bar": "Pratinjau: hanya tim pernikahan yang dapat melihatnya sampai Anda menerbitkannya.",
+      "back": "Kembali ke editor"
+    },
+    "password": {
+      "intro": "Situs ini bersifat pribadi. Masukkan kata sandi dari undangan Anda.",
+      "label": "Kata sandi",
+      "enter": "Masuk",
+      "wrong": "Kata sandi salah. Periksa undangan Anda atau tanyakan kepada pasangan."
+    },
+    "meta": {
+      "weddingOf": "Pernikahan {couple}",
+      "website": "Situs pernikahan"
+    }
+  },
+  "rsvp": {
+    "title": "RSVP",
+    "dateTbd": "Tanggal menyusul",
+    "weddingOf": "Undangan pernikahan",
+    "rsvpsBy": "RSVP melalui <link>Vow</link>",
+    "enterCode": "Masukkan kode dari undangan Anda (email atau kartu).",
+    "findIntro": "Masukkan nama Anda seperti tertulis di undangan untuk menemukannya.",
+    "orCode": "atau gunakan kode undangan",
+    "notFound": "Undangan tidak ditemukan",
+    "notFoundText": "Tidak ada undangan yang cocok dengan tautan atau kode ini. Periksa kembali lalu coba lagi.",
+    "nothingYet": "Belum ada yang perlu dikonfirmasi. Silakan cek kembali nanti.",
+    "code": {
+      "label": "Kode RSVP",
+      "continue": "Lanjut",
+      "invalid": "Kode terdiri dari 6 huruf dan angka, misalnya K7P2QX."
+    },
+    "find": {
+      "label": "Nama lengkap Anda",
+      "placeholder": "Nama depan dan belakang",
+      "button": "Cari",
+      "fullName": "Masukkan nama depan dan belakang seperti di undangan.",
+      "noMatch": "Nama Anda tidak ditemukan. Coba ejaan persis seperti di undangan, atau gunakan kode undangan.",
+      "failed": "Terjadi kesalahan. Silakan coba lagi."
+    },
+    "dear": "Yth. {name}",
+    "update": "Anda dapat mengubah jawaban di bawah ini.",
+    "invite": "Kami sangat berharap Anda dapat hadir. Mohon beri tahu kami.",
+    "replyBy": "Mohon konfirmasi sebelum {date}.",
+    "closed": "RSVP sudah ditutup.",
+    "closedContact": "Perlu perubahan? {contact}",
+    "closedNoContact": "Perlu perubahan? Hubungi pasangan secara langsung.",
+    "thanks": "Terima kasih!",
+    "thanksText": "Jawaban Anda telah dikirim kepada {couple}. Anda dapat mengubahnya kapan saja melalui tautan yang sama.",
+    "thanksTextUntil": "Jawaban Anda telah dikirim kepada {couple}. Anda dapat mengubahnya melalui tautan yang sama hingga {date}.",
+    "send": "Kirim RSVP",
+    "save": "Simpan perubahan",
+    "change": "Ubah jawaban",
+    "yourAnswers": "Jawaban Anda",
+    "attending": "Hadir",
+    "notAttending": "Tidak hadir",
+    "noAnswer": "Belum menjawab",
+    "cantMakeIt": "Tidak bisa hadir",
+    "noAnswerYet": "Belum ada jawaban",
+    "songRequest": "Permintaan lagu: {song}",
+    "form": {
+      "everyone": "Semua hadir",
+      "none": "Tidak ada yang bisa hadir",
+      "willAttend": "Apakah {name} akan menghadiri {event}?",
+      "accept": "Dengan senang hati hadir",
+      "decline": "Dengan menyesal tidak hadir",
+      "meal": "Pilihan hidangan",
+      "chooseMeal": "Pilih hidangan.",
+      "chooseAnswer": "Pilih jawaban.",
+      "missingMeal": "Pilih hidangan untuk setiap tamu yang hadir.",
+      "missingAnswer": "Jawab untuk semua orang sebelum mengirim.",
+      "details": "Beberapa detail",
+      "plusOneName": "Nama pendamping (pendamping {host})",
+      "firstName": "Nama depan",
+      "lastName": "Nama belakang",
+      "dietary": "Pantangan makanan atau alergi: {name}",
+      "dietaryPlaceholder": "misalnya vegetarian, alergi kacang (kosongkan jika tidak ada)",
+      "song": "Lagu yang pasti membuat Anda berdansa",
+      "songPlaceholder": "Artis – Judul",
+      "message": "Pesan untuk {couple}",
+      "guestOf": "Pendamping {name}",
+      "guest": "Tamu"
+    },
+    "errors": {
+      "rsvp_not_found": "Undangan tidak ditemukan. Periksa tautan atau kode Anda.",
+      "deadline_passed": "RSVP sudah ditutup. Silakan hubungi pasangan secara langsung.",
+      "invalid_guest_or_event": "Jawaban tidak sesuai dengan undangan Anda. Muat ulang halaman.",
+      "invalid_status": "Pilih hadir atau tidak hadir untuk setiap orang.",
+      "not_allowed": "Anda tidak diizinkan mencatat jawaban untuk pernikahan ini.",
+      "generic": "Jawaban Anda tidak dapat disimpan. Coba lagi sebentar lagi."
+    }
+  },
+  "board": {
+    "empty": "Papan ini masih kosong.",
+    "photoBy": "Foto oleh <photographer>{name}</photographer> di <unsplash>Unsplash</unsplash>",
+    "madeWith": "Dibuat dengan <link>Vow</link>",
+    "title": "Papan bersama",
+    "fallbackAlt": "Inspirasi"
+  },
+  "email": {
+    "previewInvite": "Anda diundang ke pernikahan {couple}",
+    "previewReminder": "Mohon konfirmasi kehadiran di pernikahan {couple}",
+    "eyebrowInvite": "Anda diundang",
+    "eyebrowReminder": "Pengingat",
+    "dear": "Yth. {name}",
+    "bodyInvite": "Kami akan sangat senang jika Anda ikut merayakan bersama kami. Beri tahu kami siapa yang dapat hadir melalui tautan RSVP pribadi Anda.",
+    "bodyReminder": "Kami belum menerima jawaban Anda. Kami sangat ingin tahu apakah Anda dapat hadir — hanya butuh satu menit.",
+    "button": "Konfirmasi sekarang",
+    "replyBy": "Mohon konfirmasi sebelum {date}.",
+    "fallback": "Jika tombol tidak berfungsi, buka {link} dan masukkan kode {code}.",
+    "love": "Dengan cinta",
+    "personal": "Tautan ini khusus untuk keluarga Anda. Mohon jangan dibagikan.",
+    "subjectInvite": "Anda diundang: pernikahan {couple}",
+    "subjectReminder": "Pengingat: konfirmasi kehadiran di pernikahan {couple}"
+  }
+}

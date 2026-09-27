@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Controller, useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Link2, Loader2, Plus, Trash2, Unlink } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   addRelationship,
@@ -14,6 +15,7 @@ import {
 } from "@/app/app/guests/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { FormField } from "@/components/form-field";
+import { LanguageSelect } from "@/components/language-select";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -37,7 +39,8 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import type { RelationshipType } from "@/lib/database.types";
-import { AGE_GROUP_LABELS, fullName, type GuestView, type PartnerNames } from "@/lib/guests/model";
+import { localeInfo } from "@/i18n/locales";
+import { AGE_GROUPS, fullName, type GuestView, type PartnerNames } from "@/lib/guests/model";
 import { cn } from "@/lib/utils";
 import { emptyAddress, guestFormSchema, type GuestFormValues } from "@/lib/validation/guest";
 import { TAG_COLOR_CLASSES } from "./badges";
@@ -56,6 +59,7 @@ type Props = {
   tags: TagOption[];
   relationships: RelationshipItem[];
   names: PartnerNames;
+  coupleLanguage: string;
 };
 
 export function GuestSheet(props: Props) {
@@ -84,6 +88,7 @@ function defaultValues(mode: NonNullable<SheetMode>, p: Props): GuestFormValues 
       isPlusOne: false,
       householdId: h?.id ?? "new",
       householdName: h?.name ?? "",
+      householdLanguage: h?.language ?? "",
       address: h?.address ?? emptyAddress,
       firstName: "",
       lastName: "",
@@ -108,6 +113,7 @@ function defaultValues(mode: NonNullable<SheetMode>, p: Props): GuestFormValues 
     isPlusOne: !!g.plusOneOf,
     householdId: g.householdId,
     householdName: h?.name ?? "",
+    householdLanguage: h?.language ?? "",
     address: h?.address ?? emptyAddress,
     firstName: g.firstName,
     lastName: g.lastName,
@@ -127,7 +133,10 @@ function defaultValues(mode: NonNullable<SheetMode>, p: Props): GuestFormValues 
 }
 
 function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
-  const { mode, onModeChange, households, events, names, guests } = props;
+  const { mode, onModeChange, households, events, names, guests, coupleLanguage } = props;
+  const t = useTranslations("guests.sheet");
+  const g = useTranslations("guests");
+  const usedLanguages = [...new Set(households.map((h) => h.language).filter(Boolean))];
   const editing = mode.kind === "edit" ? mode.guest : null;
   const isPlusOne = !!editing?.plusOneOf;
   const host = isPlusOne ? guests.find((g) => g.id === editing?.plusOneOf) : null;
@@ -149,8 +158,8 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
           toast.error(result.error);
           return;
         }
-        const name = fullName(values.firstName, values.lastName) || "Guest";
-        toast.success(editing ? `${name} saved` : `${name} added`);
+        const name = fullName(values.firstName, values.lastName) || t("guest");
+        toast.success(editing ? t("saved", { name }) : t("added", { name }));
         onModeChange(addAnother ? { kind: "new", householdId: result.data.householdId } : null);
       }),
     )();
@@ -160,12 +169,15 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
     <>
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle className="font-serif text-3xl">
-          {editing ? editing.name : "Add a guest"}
+          {editing ? editing.name : t("addTitle")}
         </SheetTitle>
         <SheetDescription>
           {isPlusOne
-            ? `Plus-one of ${host?.name ?? "a guest"}. Household, side and events follow ${host?.firstName || "them"}.`
-            : "Only a name is required. You can fill in the rest later."}
+            ? t("plusOneOf", {
+                host: host?.name ?? g("aGuest"),
+                first: host?.firstName || t("them"),
+              })
+            : t("onlyName")}
         </SheetDescription>
       </SheetHeader>
 
@@ -179,20 +191,20 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         noValidate
       >
         {/* ---------- name & contact ---------- */}
-        <Section title="Name & contact">
+        <Section title={t("nameContact")}>
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField id="g-first" label="First name" error={errors.firstName?.message}>
+            <FormField id="g-first" label={t("firstName")} error={errors.firstName?.message}>
               {(aria) => <Input {...aria} autoFocus={!editing} {...form.register("firstName")} />}
             </FormField>
-            <FormField id="g-last" label="Last name" error={errors.lastName?.message}>
+            <FormField id="g-last" label={t("lastName")} error={errors.lastName?.message}>
               {(aria) => <Input {...aria} {...form.register("lastName")} />}
             </FormField>
-            <FormField id="g-email" label="Email" error={errors.email?.message}>
+            <FormField id="g-email" label={t("email")} error={errors.email?.message}>
               {(aria) => (
                 <Input {...aria} type="email" autoComplete="off" {...form.register("email")} />
               )}
             </FormField>
-            <FormField id="g-phone" label="Phone" error={errors.phone?.message}>
+            <FormField id="g-phone" label={t("phone")} error={errors.phone?.message}>
               {(aria) => (
                 <Input {...aria} type="tel" autoComplete="off" {...form.register("phone")} />
               )}
@@ -203,11 +215,11 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         {/* ---------- household ---------- */}
         {!isPlusOne && (
           <Section
-            title="Household"
-            hint="Invitations and RSVP links go to a household, e.g. “The Smith Family”."
+            title={t("household")}
+            hint={t("householdHint")}
           >
             <div className="grid gap-4 sm:grid-cols-2">
-              <FormField id="g-household" label="Household">
+              <FormField id="g-household" label={t("household")}>
                 {(aria) => (
                   <Controller
                     control={form.control}
@@ -220,13 +232,14 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
                           const h = households.find((x) => x.id === value);
                           form.setValue("householdName", h?.name ?? "");
                           form.setValue("address", h?.address ?? emptyAddress);
+                          form.setValue("householdLanguage", h?.language ?? "");
                         }}
                       >
                         <SelectTrigger {...aria} className="w-full">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="new">+ New household</SelectItem>
+                          <SelectItem value="new">{t("newHousehold")}</SelectItem>
                           {[...households]
                             .sort((a, b) => a.name.localeCompare(b.name))
                             .map((h) => (
@@ -242,28 +255,48 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
               </FormField>
               <FormField
                 id="g-household-name"
-                label={householdId === "new" ? "New household name" : "Household name"}
-                hint={householdId === "new" ? "Leave empty to use the guest's name." : undefined}
+                label={householdId === "new" ? t("newHouseholdName") : t("householdName")}
+                hint={householdId === "new" ? t("householdNameHint") : undefined}
                 error={errors.householdName?.message}
               >
                 {(aria) => (
                   <Input
                     {...aria}
-                    placeholder="e.g. The Smith Family"
+                    placeholder={t("householdPlaceholder")}
                     {...form.register("householdName")}
                   />
                 )}
               </FormField>
             </div>
+            <FormField id="g-household-language" label={t("language")} hint={t("languageHint")}>
+              {(aria) => (
+                <Controller
+                  control={form.control}
+                  name="householdLanguage"
+                  render={({ field }) => (
+                    <LanguageSelect
+                      id={aria.id}
+                      label={t("language")}
+                      value={field.value}
+                      onChange={field.onChange}
+                      featured={usedLanguages.filter((l) => l !== coupleLanguage)}
+                      empty={{
+                        label: t("sameAsOurs", { language: localeInfo(coupleLanguage).native }),
+                      }}
+                    />
+                  )}
+                />
+              )}
+            </FormField>
             <AddressFields form={form} />
           </Section>
         )}
 
         {/* ---------- invitation ---------- */}
-        <Section title="Invitation">
+        <Section title={t("invitation")}>
           {!isPlusOne && (
             <fieldset className="space-y-2">
-              <legend className="text-sm font-medium">Whose side?</legend>
+              <legend className="text-sm font-medium">{t("whoseSide")}</legend>
               <Controller
                 control={form.control}
                 name="side"
@@ -277,7 +310,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
                       [
                         ["partner_a", names.a],
                         ["partner_b", names.b],
-                        ["both", "Both"],
+                        ["both", g("both")],
                       ] as const
                     ).map(([value, label]) => (
                       <label key={value} className="flex items-center gap-2 text-sm">
@@ -291,7 +324,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
           )}
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField id="g-age" label="Age group">
+            <FormField id="g-age" label={t("ageGroup")}>
               {(aria) => (
                 <Controller
                   control={form.control}
@@ -302,9 +335,9 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {Object.entries(AGE_GROUP_LABELS).map(([value, label]) => (
+                        {AGE_GROUPS.map((value) => (
                           <SelectItem key={value} value={value}>
-                            {label}
+                            {g(`ageGroups.${value}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -314,7 +347,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
               )}
             </FormField>
             {!isPlusOne && (
-              <FormField id="g-list" label="List" hint="B-list guests are invited if space allows.">
+              <FormField id="g-list" label={t("list")} hint={t("listHint")}>
                 {(aria) => (
                   <Controller
                     control={form.control}
@@ -325,8 +358,8 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="a">A-list</SelectItem>
-                          <SelectItem value="b">B-list (waitlist)</SelectItem>
+                          <SelectItem value="a">{t("aList")}</SelectItem>
+                          <SelectItem value="b">{t("bList")}</SelectItem>
                         </SelectContent>
                       </Select>
                     )}
@@ -338,7 +371,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
 
           {!isPlusOne && events.length > 0 && (
             <fieldset className="space-y-2">
-              <legend className="text-sm font-medium">Invited to</legend>
+              <legend className="text-sm font-medium">{t("invitedTo")}</legend>
               <Controller
                 control={form.control}
                 name="eventIds"
@@ -366,7 +399,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
           {!isPlusOne && (
             <div className="space-y-3 rounded-lg border p-4">
               <label className="flex items-center justify-between gap-4 text-sm font-medium">
-                Allow a plus-one
+                {t("allowPlusOne")}
                 <Controller
                   control={form.control}
                   name="plusOneAllowed"
@@ -378,8 +411,8 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
               {plusOneAllowed && (
                 <FormField
                   id="g-plus-one"
-                  label="Plus-one's name"
-                  hint="Leave empty if you don't know it yet."
+                  label={t("plusOneName")}
+                  hint={t("plusOneHint")}
                   error={errors.plusOneName?.message}
                 >
                   {(aria) => <Input {...aria} {...form.register("plusOneName")} />}
@@ -390,43 +423,43 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         </Section>
 
         {/* ---------- tags ---------- */}
-        <Section title="Tags">
+        <Section title={t("tags")}>
           <TagPicker form={form} tags={props.tags} />
         </Section>
 
         {/* ---------- needs & notes ---------- */}
-        <Section title="Needs & notes">
-          <FormField id="g-diet" label="Dietary restrictions" error={errors.dietary?.message}>
+        <Section title={t("needs")}>
+          <FormField id="g-diet" label={t("dietary")} error={errors.dietary?.message}>
             {(aria) => (
               <Input
                 {...aria}
-                placeholder="e.g. Vegetarian, nut allergy"
+                placeholder={t("dietaryPlaceholder")}
                 {...form.register("dietary")}
               />
             )}
           </FormField>
           <FormField
             id="g-access"
-            label="Accessibility needs"
+            label={t("accessibility")}
             error={errors.accessibility?.message}
           >
             {(aria) => (
               <Input
                 {...aria}
-                placeholder="e.g. Wheelchair user"
+                placeholder={t("accessibilityPlaceholder")}
                 {...form.register("accessibility")}
               />
             )}
           </FormField>
-          <FormField id="g-notes" label="Notes" error={errors.notes?.message}>
+          <FormField id="g-notes" label={t("notes")} error={errors.notes?.message}>
             {(aria) => <Textarea {...aria} rows={3} {...form.register("notes")} />}
           </FormField>
         </Section>
 
         {editing && (
           <Section
-            title="Seating rules"
-            hint="Used by the seating chart to warn you and to auto-arrange tables."
+            title={t("rules")}
+            hint={t("rulesHint")}
           >
             <RelationshipsEditor
               guest={editing}
@@ -441,32 +474,32 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         {editing && (
           <ConfirmDialog
             trigger={
-              <Button variant="ghost" className="text-destructive mr-auto" disabled={pending}>
-                <Trash2 aria-hidden /> Delete
+              <Button variant="ghost" className="text-destructive me-auto" disabled={pending}>
+                <Trash2 aria-hidden /> {t("delete")}
               </Button>
             }
-            title={`Delete ${editing.name}?`}
-            description="Their plus-one, invitations, tags and seating rules will be deleted too."
+            title={t("deleteTitle", { name: editing.name })}
+            description={t("deleteText")}
             onConfirm={async () => {
               const result = await deleteGuests([editing.id]);
               if (!result.ok) {
                 toast.error(result.error);
                 return false;
               }
-              toast.success(`${editing.name} deleted`);
+              toast.success(t("deleted", { name: editing.name }));
               onModeChange(null);
             }}
           />
         )}
-        <div className="ml-auto flex flex-wrap gap-2">
+        <div className="ms-auto flex flex-wrap gap-2">
           {!editing && (
             <Button type="button" variant="outline" disabled={pending} onClick={() => submit(true)}>
-              Save &amp; add to household
+              {t("saveAndAdd")}
             </Button>
           )}
           <Button type="submit" form="guest-form" disabled={pending}>
             {pending && <Loader2 className="animate-spin" aria-hidden />}
-            {editing ? "Save changes" : "Add guest"}
+            {editing ? t("save") : t("addGuest")}
           </Button>
         </div>
       </SheetFooter>
@@ -495,17 +528,18 @@ function Section({
 }
 
 function AddressFields({ form }: { form: UseFormReturn<GuestFormValues> }) {
+  const t = useTranslations("guests.sheet");
   const e = form.formState.errors.address;
   return (
     <details className="group rounded-lg border p-4 [&[open]]:pb-5">
       <summary className="cursor-pointer text-sm font-medium">
-        Mailing address{" "}
-        <span className="text-muted-foreground font-normal">(for the household)</span>
+        {t("mailing")}{" "}
+        <span className="text-muted-foreground font-normal">{t("forHousehold")}</span>
       </summary>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <FormField
           id="a-1"
-          label="Address line 1"
+          label={t("line1")}
           error={e?.line1?.message}
           className="sm:col-span-2"
         >
@@ -513,24 +547,24 @@ function AddressFields({ form }: { form: UseFormReturn<GuestFormValues> }) {
         </FormField>
         <FormField
           id="a-2"
-          label="Address line 2"
+          label={t("line2")}
           error={e?.line2?.message}
           className="sm:col-span-2"
         >
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.line2")} />}
         </FormField>
-        <FormField id="a-city" label="City" error={e?.city?.message}>
+        <FormField id="a-city" label={t("city")} error={e?.city?.message}>
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.city")} />}
         </FormField>
-        <FormField id="a-region" label="State / region" error={e?.region?.message}>
+        <FormField id="a-region" label={t("region")} error={e?.region?.message}>
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.region")} />}
         </FormField>
-        <FormField id="a-zip" label="Postal code" error={e?.postalCode?.message}>
+        <FormField id="a-zip" label={t("postalCode")} error={e?.postalCode?.message}>
           {(aria) => (
             <Input {...aria} autoComplete="off" {...form.register("address.postalCode")} />
           )}
         </FormField>
-        <FormField id="a-country" label="Country" error={e?.country?.message}>
+        <FormField id="a-country" label={t("country")} error={e?.country?.message}>
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.country")} />}
         </FormField>
       </div>
@@ -540,6 +574,7 @@ function AddressFields({ form }: { form: UseFormReturn<GuestFormValues> }) {
 
 /** Toggle existing tags, or type a new one. */
 function TagPicker({ form, tags }: { form: UseFormReturn<GuestFormValues>; tags: TagOption[] }) {
+  const t = useTranslations("guests.sheet");
   const [newTag, setNewTag] = useState("");
   const [pending, startTransition] = useTransition();
 
@@ -567,27 +602,27 @@ function TagPicker({ form, tags }: { form: UseFormReturn<GuestFormValues>; tags:
         <div className="space-y-3">
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {tags.map((t) => {
-                const on = field.value.includes(t.id);
+              {tags.map((tag) => {
+                const on = field.value.includes(tag.id);
                 return (
                   <button
-                    key={t.id}
+                    key={tag.id}
                     type="button"
                     aria-pressed={on}
                     onClick={() =>
                       field.onChange(
-                        on ? field.value.filter((id) => id !== t.id) : [...field.value, t.id],
+                        on ? field.value.filter((id) => id !== tag.id) : [...field.value, tag.id],
                       )
                     }
                     className={cn(
                       "focus-visible:ring-ring inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm transition focus-visible:ring-2 focus-visible:outline-none",
                       on
-                        ? TAG_COLOR_CLASSES[t.color] + " ring-foreground/30 ring-1"
+                        ? TAG_COLOR_CLASSES[tag.color] + " ring-foreground/30 ring-1"
                         : "bg-muted text-muted-foreground hover:text-foreground",
                     )}
                   >
                     {on && <Check className="size-3.5" aria-hidden />}
-                    {t.name}
+                    {tag.name}
                   </button>
                 );
               })}
@@ -603,8 +638,8 @@ function TagPicker({ form, tags }: { form: UseFormReturn<GuestFormValues>; tags:
                   create();
                 }
               }}
-              placeholder={tags.length ? "New tag…" : "Create your first tag, e.g. Family"}
-              aria-label="New tag name"
+              placeholder={tags.length ? t("newTag") : t("firstTag")}
+              aria-label={t("newTagName")}
               maxLength={40}
             />
             <Button
@@ -614,7 +649,7 @@ function TagPicker({ form, tags }: { form: UseFormReturn<GuestFormValues>; tags:
               disabled={pending || !newTag.trim()}
             >
               {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}
-              Add
+              {t("add")}
             </Button>
           </div>
         </div>
@@ -633,6 +668,7 @@ function RelationshipsEditor({
   guests: GuestView[];
   relationships: RelationshipItem[];
 }) {
+  const t = useTranslations("guests.sheet");
   const [type, setType] = useState<RelationshipType>("keep_apart");
   const [other, setOther] = useState("");
   const [pending, startTransition] = useTransition();
@@ -666,15 +702,15 @@ function RelationshipsEditor({
             const otherGuest = byId.get(r.guestA === guest.id ? r.guestB : r.guestA);
             const together = r.type === "keep_together";
             return (
-              <li key={r.id} className="flex items-center gap-2 p-2 pl-3 text-sm">
+              <li key={r.id} className="flex items-center gap-2 p-2 ps-3 text-sm">
                 {together ? (
                   <Link2 className="text-success size-4" aria-hidden />
                 ) : (
                   <Unlink className="text-destructive size-4" aria-hidden />
                 )}
                 <span className="flex-1">
-                  {together ? "Keep together with " : "Keep apart from "}
-                  <strong>{otherGuest?.name ?? "a removed guest"}</strong>
+                  {together ? t("keepTogether") : t("keepApart")}{" "}
+                  <strong>{otherGuest?.name ?? t("removedGuest")}</strong>
                 </span>
                 <Button
                   type="button"
@@ -682,7 +718,7 @@ function RelationshipsEditor({
                   size="icon-sm"
                   disabled={pending}
                   onClick={() => remove(r.id)}
-                  aria-label="Remove rule"
+                  aria-label={t("removeRule")}
                 >
                   <Trash2 aria-hidden />
                 </Button>
@@ -695,25 +731,25 @@ function RelationshipsEditor({
       <div className="grid gap-2 sm:grid-cols-[10rem_1fr_auto]">
         <div>
           <Label htmlFor="rel-type" className="sr-only">
-            Rule
+            {t("rule")}
           </Label>
           <Select value={type} onValueChange={(v) => setType(v as RelationshipType)}>
             <SelectTrigger id="rel-type" className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="keep_apart">Keep apart from</SelectItem>
-              <SelectItem value="keep_together">Keep together with</SelectItem>
+              <SelectItem value="keep_apart">{t("keepApart")}</SelectItem>
+              <SelectItem value="keep_together">{t("keepTogether")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div>
           <Label htmlFor="rel-guest" className="sr-only">
-            Guest
+            {t("guestLabel")}
           </Label>
           <Select value={other} onValueChange={setOther}>
             <SelectTrigger id="rel-guest" className="w-full">
-              <SelectValue placeholder="Choose a guest" />
+              <SelectValue placeholder={t("chooseGuest")} />
             </SelectTrigger>
             <SelectContent>
               {options.map((g) => (
@@ -726,7 +762,7 @@ function RelationshipsEditor({
         </div>
         <Button type="button" variant="outline" onClick={add} disabled={!other || pending}>
           {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}
-          Add rule
+          {t("addRule")}
         </Button>
       </div>
     </div>

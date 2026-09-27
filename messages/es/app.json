@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Panel",
+      "tasks": "Tareas",
+      "budget": "Presupuesto",
+      "vendors": "Proveedores",
+      "guests": "Invitados",
+      "rsvp": "Confirmaciones",
+      "seating": "Mesas",
+      "venues": "Lugares",
+      "hotels": "Hoteles",
+      "travel": "Viajes",
+      "inspiration": "Inspiración",
+      "website": "Sitio web",
+      "schedule": "Programa del día",
+      "settings": "Ajustes",
+      "home": "Inicio",
+      "groups": {
+        "plan": "Planificar",
+        "people": "Personas",
+        "places": "Lugares",
+        "style": "Estilo"
+      }
+    },
+    "shell": {
+      "mainNav": "Navegación principal",
+      "expand": "Expandir barra lateral",
+      "collapse": "Contraer barra lateral",
+      "more": "Más",
+      "allTools": "Todas las herramientas"
+    },
+    "userMenu": {
+      "account": "Menú de la cuenta",
+      "appearance": "Apariencia",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema",
+      "language": "Idioma",
+      "signOut": "Cerrar sesión"
+    },
+    "switcher": {
+      "current": "Boda actual: {name}. Cambiar de boda",
+      "yours": "Tus bodas",
+      "noDate": "Fecha por confirmar",
+      "another": "Planificar otra boda",
+      "roles": {
+        "owner": "propietario",
+        "editor": "editor",
+        "viewer": "lector"
+      }
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "unread": "{count, plural, one {Notificaciones, # sin leer} other {Notificaciones, # sin leer}}",
+      "unreadOne": "Sin leer",
+      "markAll": "Marcar todo como leído",
+      "empty": "Nada todavía. Aquí aparecerán las nuevas confirmaciones, tus tareas y los recordatorios de pagos y plazos."
+    },
+    "countdown": {
+      "today": "¡Hoy es el gran día!",
+      "enjoy": "Disfrutad cada momento.",
+      "married": "{count, plural, one {Casados hace # día} other {Casados hace # días}}",
+      "congrats": "¡Enhorabuena!",
+      "daysToGo": "{count, plural, one {día para la boda} other {días para la boda}}",
+      "hours": "horas",
+      "minutes": "minutos",
+      "seconds": "segundos"
+    },
+    "dashboard": {
+      "welcome": "¡Te damos la bienvenida a tu planificador!",
+      "welcomeText": "Todo empieza aquí. Avanza con los siguientes pasos a tu ritmo.",
+      "noDate": "Fecha por confirmar",
+      "setDate": "Elige la fecha para iniciar la cuenta atrás",
+      "nextSteps": "Próximos pasos",
+      "stepsDone": "{done} de {total} hechos",
+      "done": "(hecho)",
+      "toDo": "(pendiente)",
+      "steps": {
+        "date": "Elige la fecha de la boda",
+        "location": "Elige un lugar",
+        "invite": "Invita a tu pareja, familia o wedding planner",
+        "guests": "Añade tu lista de invitados",
+        "guestsSoFar": "{count, plural, one {Añade tu lista de invitados (# por ahora)} other {Añade tu lista de invitados (# por ahora)}}",
+        "budget": "Fija tu presupuesto total",
+        "shortlist": "Preselecciona lugares",
+        "book": "Reserva el lugar",
+        "inspiration": "Empieza un tablero de inspiración",
+        "website": "Publica tu sitio web de boda",
+        "timeline": "Crea tu calendario de preparativos"
+      },
+      "budget": {
+        "title": "Presupuesto",
+        "empty": "Aún no hay presupuesto. Fija un total y te sugeriremos cómo repartirlo.",
+        "cta": "Planificar presupuesto",
+        "committed": "comprometido",
+        "committedOf": "comprometido de {total}",
+        "overdue": "Vencido: {name}"
+      },
+      "rsvp": {
+        "title": "Confirmaciones",
+        "empty": "Aún no hay respuestas. Añade invitados y envía las invitaciones.",
+        "cta": "Ver confirmaciones",
+        "attending": "Asisten",
+        "declined": "No asisten",
+        "waiting": "Pendientes"
+      },
+      "seating": {
+        "title": "Mesas",
+        "empty": "Aún no hay mesas. Cuando respondan los invitados, siéntalos arrastrando y soltando.",
+        "cta": "Abrir plano de mesas",
+        "seated": "de {attending} invitados que asisten, sentados en {tables, plural, one {# mesa} other {# mesas}}"
+      },
+      "inspiration": {
+        "title": "Inspiración",
+        "empty": "Aún no hay pines. Reúne ideas y saca de ellas una paleta de colores.",
+        "cta": "Abrir tableros",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Tareas",
+        "empty": "Aún no hay tareas. Crearemos un calendario a partir de la fecha de tu boda.",
+        "cta": "Ver tareas",
+        "ofDone": "de {total} hechas",
+        "overdue": "{count} vencidas"
+      }
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Los datos de tu boda, idiomas, eventos y quién planifica contigo."
+    },
+    "translate": {
+      "button": "Traducciones",
+      "title": "Traducciones: {name}",
+      "hint": "Deja una casilla vacía para mostrar el texto en {language}.",
+      "draft": "Borrador",
+      "draftFailed": "Tu navegador no pudo traducir esta combinación de idiomas. Escribe la traducción.",
+      "noMachine": "Consejo: Chrome en un ordenador puede preparar un borrador de traducción (allí aparece un botón «Borrador»).",
+      "save": "Guardar traducciones",
+      "saved": "Traducciones guardadas",
+      "fields": {
+        "name": "Nombre",
+        "venue": "Nombre del lugar",
+        "dressCode": "Código de vestimenta",
+        "description": "Descripción",
+        "mealName": "Nombre del menú",
+        "mealDescription": "Descripción del menú"
+      }
+    },
+    "websiteLang": {
+      "editing": "Idioma",
+      "main": "{language} (tu idioma)",
+      "hint": "Traducción: {language}. Las fotos, el orden y las secciones visibles se configuran en el idioma principal.",
+      "progress": "{done}/{total} traducido",
+      "complete": "Traducido",
+      "fallback": "Vacío: los invitados ven el texto en el idioma principal.",
+      "nothing": "Todavía no hay nada que traducir en esta sección.",
+      "draft": "Traducir todo con el traductor del navegador",
+      "draftFailed": "Tu navegador no pudo traducir esta combinación de idiomas. Escribe la traducción.",
+      "item": "Elemento {number}",
+      "fields": {
+        "tagline": "Lema",
+        "intro": "Introducción",
+        "notes": "Notas",
+        "date": "Cuándo",
+        "title": "Título",
+        "text": "Texto",
+        "role": "Papel",
+        "bio": "Unas palabras",
+        "label": "Nombre",
+        "note": "Nota",
+        "question": "Pregunta",
+        "answer": "Respuesta",
+        "caption": "Pie de foto"
+      }
+    }
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "tasks": "À faire",
+      "budget": "Budget",
+      "vendors": "Prestataires",
+      "guests": "Invités",
+      "rsvp": "Réponses",
+      "seating": "Plan de table",
+      "venues": "Lieux",
+      "hotels": "Hôtels",
+      "travel": "Voyages",
+      "inspiration": "Inspiration",
+      "website": "Site web",
+      "schedule": "Déroulé du jour J",
+      "settings": "Paramètres",
+      "home": "Accueil",
+      "groups": {
+        "plan": "Organiser",
+        "people": "Personnes",
+        "places": "Lieux",
+        "style": "Style"
+      }
+    },
+    "shell": {
+      "mainNav": "Navigation principale",
+      "expand": "Déplier la barre latérale",
+      "collapse": "Replier la barre latérale",
+      "more": "Plus",
+      "allTools": "Tous les outils"
+    },
+    "userMenu": {
+      "account": "Menu du compte",
+      "appearance": "Apparence",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système",
+      "language": "Langue",
+      "signOut": "Se déconnecter"
+    },
+    "switcher": {
+      "current": "Mariage actuel : {name}. Changer de mariage",
+      "yours": "Vos mariages",
+      "noDate": "Date à confirmer",
+      "another": "Organiser un autre mariage",
+      "roles": {
+        "owner": "propriétaire",
+        "editor": "éditeur",
+        "viewer": "lecteur"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "unread": "{count, plural, one {Notifications, # non lue} other {Notifications, # non lues}}",
+      "unreadOne": "Non lue",
+      "markAll": "Tout marquer comme lu",
+      "empty": "Rien pour l’instant. Les nouvelles réponses, vos tâches et les rappels de paiements et d’échéances apparaîtront ici."
+    },
+    "countdown": {
+      "today": "C’est le grand jour !",
+      "enjoy": "Profitez de chaque instant.",
+      "married": "{count, plural, one {Mariés depuis # jour} other {Mariés depuis # jours}}",
+      "congrats": "Félicitations !",
+      "daysToGo": "{count, plural, one {jour avant le mariage} other {jours avant le mariage}}",
+      "hours": "heures",
+      "minutes": "minutes",
+      "seconds": "secondes"
+    },
+    "dashboard": {
+      "welcome": "Bienvenue dans votre organisateur !",
+      "welcomeText": "Tout commence ici. Suivez les prochaines étapes à votre rythme.",
+      "noDate": "Date à confirmer",
+      "setDate": "Choisissez la date pour lancer le compte à rebours",
+      "nextSteps": "Prochaines étapes",
+      "stepsDone": "{done} sur {total} faites",
+      "done": "(fait)",
+      "toDo": "(à faire)",
+      "steps": {
+        "date": "Choisir la date du mariage",
+        "location": "Choisir un lieu",
+        "invite": "Inviter votre partenaire, votre famille ou votre wedding planner",
+        "guests": "Ajouter votre liste d’invités",
+        "guestsSoFar": "{count, plural, one {Ajouter votre liste d’invités (# pour l’instant)} other {Ajouter votre liste d’invités (# pour l’instant)}}",
+        "budget": "Fixer votre budget total",
+        "shortlist": "Présélectionner des lieux",
+        "book": "Réserver votre lieu",
+        "inspiration": "Commencer un tableau d’inspiration",
+        "website": "Publier votre site de mariage",
+        "timeline": "Créer votre calendrier de préparation"
+      },
+      "budget": {
+        "title": "Budget",
+        "empty": "Pas encore de budget. Fixez un total et nous vous proposerons une répartition.",
+        "cta": "Planifier le budget",
+        "committed": "engagé",
+        "committedOf": "engagé sur {total}",
+        "overdue": "En retard : {name}"
+      },
+      "rsvp": {
+        "title": "Réponses",
+        "empty": "Pas encore de réponses. Ajoutez des invités, puis envoyez vos invitations.",
+        "cta": "Voir les réponses",
+        "attending": "Présents",
+        "declined": "Absents",
+        "waiting": "En attente"
+      },
+      "seating": {
+        "title": "Plan de table",
+        "empty": "Pas encore de tables. Quand les invités auront répondu, placez-les par glisser-déposer.",
+        "cta": "Ouvrir le plan de table",
+        "seated": "sur {attending} invités présents, placés à {tables, plural, one {# table} other {# tables}}"
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "empty": "Pas encore d’épingles. Rassemblez des idées et tirez-en une palette de couleurs.",
+        "cta": "Ouvrir les tableaux",
+        "pin": "Épingle"
+      },
+      "tasks": {
+        "title": "À faire",
+        "empty": "Pas encore de tâches. Nous créerons un calendrier à partir de la date de votre mariage.",
+        "cta": "Voir les tâches",
+        "ofDone": "sur {total} faites",
+        "overdue": "{count} en retard"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Les détails de votre mariage, les langues, les événements et qui organise avec vous."
+    },
+    "translate": {
+      "button": "Traductions",
+      "title": "Traductions : {name}",
+      "hint": "Laissez une case vide pour afficher le texte en {language}.",
+      "draft": "Brouillon",
+      "draftFailed": "Votre navigateur n’a pas pu traduire cette paire de langues. Saisissez la traduction.",
+      "noMachine": "Astuce : Chrome sur ordinateur peut préparer un brouillon de traduction (un bouton « Brouillon » y apparaît).",
+      "save": "Enregistrer les traductions",
+      "saved": "Traductions enregistrées",
+      "fields": {
+        "name": "Nom",
+        "venue": "Nom du lieu",
+        "dressCode": "Tenue",
+        "description": "Description",
+        "mealName": "Nom du menu",
+        "mealDescription": "Description du menu"
+      }
+    },
+    "websiteLang": {
+      "editing": "Langue",
+      "main": "{language} (votre langue)",
+      "hint": "Traduction : {language}. Les photos, l’ordre et les sections visibles se règlent dans la langue principale.",
+      "progress": "{done}/{total} traduit",
+      "complete": "Traduit",
+      "fallback": "Vide : les invités voient le texte dans la langue principale.",
+      "nothing": "Rien à traduire dans cette section pour l’instant.",
+      "draft": "Tout traduire avec le traducteur du navigateur",
+      "draftFailed": "Votre navigateur n’a pas pu traduire cette paire de langues. Saisissez la traduction.",
+      "item": "Élément {number}",
+      "fields": {
+        "tagline": "Accroche",
+        "intro": "Introduction",
+        "notes": "Notes",
+        "date": "Quand",
+        "title": "Titre",
+        "text": "Texte",
+        "role": "Rôle",
+        "bio": "Quelques mots",
+        "label": "Nom",
+        "note": "Note",
+        "question": "Question",
+        "answer": "Réponse",
+        "caption": "Légende"
+      }
+    }
+  }
+}

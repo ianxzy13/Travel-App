@@ -39,12 +39,14 @@ export function negotiate(
 }
 
 /**
- * Which language a public page (website, RSVP, shared board) opens in:
- * 1. what the guest explicitly asked for (?lang=… or the switcher), any supported language
- * 2. their earlier choice (cookie), if the couple offers it
- * 3. the household's preferred language (RSVP links), if the couple offers it
- * 4. the browser's language, if the couple offers it
- * 5. the wedding's main language
+ * Which language a public page (website, RSVP, shared board) opens in. Every
+ * language Vow speaks is allowed: buttons and dates are always translated, and
+ * the couple's texts fall back to their own language where not translated.
+ * 1. what the guest explicitly asked for (?lang=… or the switcher)
+ * 2. their earlier choice (cookie)
+ * 3. the household's language (set by the couple, or chosen on the RSVP page)
+ * 4. the browser's language
+ * 5. the couple's language
  */
 export function resolveGuestLocale(opts: {
   asked?: string | null;
@@ -55,12 +57,9 @@ export function resolveGuestLocale(opts: {
 }): Locale {
   const offered = (opts.weddingLanguages ?? []).filter(isLocale);
   if (isLocale(opts.asked)) return opts.asked;
-  if (isLocale(opts.cookie) && (offered.includes(opts.cookie) || !offered.length))
-    return opts.cookie;
-  if (isLocale(opts.preferred) && offered.includes(opts.preferred)) return opts.preferred;
-  const fromBrowser = negotiate(opts.acceptLanguage, offered.length ? offered : LOCALE_CODES);
-  if (fromBrowser) return fromBrowser;
-  return offered[0] ?? DEFAULT_LOCALE;
+  if (isLocale(opts.cookie)) return opts.cookie;
+  if (isLocale(opts.preferred)) return opts.preferred;
+  return negotiate(opts.acceptLanguage, LOCALE_CODES) ?? offered[0] ?? DEFAULT_LOCALE;
 }
 
 /** The app's language: explicit choice (cookie), else the browser's, else English. */

@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "대시보드",
+      "tasks": "할 일",
+      "budget": "예산",
+      "vendors": "업체",
+      "guests": "하객",
+      "rsvp": "참석 회신",
+      "seating": "좌석 배치",
+      "venues": "웨딩홀",
+      "hotels": "호텔",
+      "travel": "여행",
+      "inspiration": "영감",
+      "website": "웹사이트",
+      "schedule": "당일 일정",
+      "settings": "설정",
+      "home": "홈",
+      "groups": {
+        "plan": "계획",
+        "people": "사람",
+        "places": "장소",
+        "style": "스타일"
+      }
+    },
+    "shell": {
+      "mainNav": "주 메뉴",
+      "expand": "사이드바 펼치기",
+      "collapse": "사이드바 접기",
+      "more": "더 보기",
+      "allTools": "모든 준비 도구"
+    },
+    "userMenu": {
+      "account": "계정 메뉴",
+      "appearance": "화면 모드",
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템",
+      "language": "언어",
+      "signOut": "로그아웃"
+    },
+    "switcher": {
+      "current": "현재 결혼식: {name}. 결혼식 전환",
+      "yours": "내 결혼식",
+      "noDate": "날짜 미정",
+      "another": "다른 결혼식 준비하기",
+      "roles": {
+        "owner": "소유자",
+        "editor": "편집자",
+        "viewer": "보기 전용"
+      }
+    },
+    "notifications": {
+      "title": "알림",
+      "unread": "{count, plural, other {알림, 읽지 않음 #개}}",
+      "unreadOne": "읽지 않음",
+      "markAll": "모두 읽음으로 표시",
+      "empty": "아직 알림이 없습니다. 새 참석 회신, 나에게 배정된 할 일, 결제 및 마감 알림이 여기에 표시됩니다."
+    },
+    "countdown": {
+      "today": "바로 오늘입니다!",
+      "enjoy": "모든 순간을 즐기세요.",
+      "married": "{count, plural, other {결혼한 지 #일}}",
+      "congrats": "축하합니다!",
+      "daysToGo": "{count, plural, other {일 남음}}",
+      "hours": "시간",
+      "minutes": "분",
+      "seconds": "초"
+    },
+    "dashboard": {
+      "welcome": "웨딩 플래너에 오신 것을 환영합니다!",
+      "welcomeText": "모든 것은 여기서 시작됩니다. 다음 단계를 원하는 속도로 진행하세요.",
+      "noDate": "날짜 미정",
+      "setDate": "날짜를 정하고 카운트다운을 시작하세요",
+      "nextSteps": "다음 단계",
+      "stepsDone": "{total}개 중 {done}개 완료",
+      "done": "(완료)",
+      "toDo": "(미완료)",
+      "steps": {
+        "date": "결혼식 날짜 정하기",
+        "location": "지역 정하기",
+        "invite": "배우자, 가족 또는 플래너 초대하기",
+        "guests": "하객 명단 추가하기",
+        "guestsSoFar": "{count, plural, other {하객 명단 추가하기(현재 #명)}}",
+        "budget": "총예산 정하기",
+        "shortlist": "웨딩홀 후보 정하기",
+        "book": "웨딩홀 예약하기",
+        "inspiration": "영감 보드 시작하기",
+        "website": "결혼식 웹사이트 공개하기",
+        "timeline": "준비 일정 만들기"
+      },
+      "budget": {
+        "title": "예산",
+        "empty": "아직 예산이 없습니다. 총액을 정하면 배분을 제안해 드립니다.",
+        "cta": "예산 계획하기",
+        "committed": "확정됨",
+        "committedOf": "확정됨(총 {total})",
+        "overdue": "기한 지남: {name}"
+      },
+      "rsvp": {
+        "title": "참석 회신",
+        "empty": "아직 회신이 없습니다. 하객을 추가하고 초대장을 보내세요.",
+        "cta": "회신 보기",
+        "attending": "참석",
+        "declined": "불참",
+        "waiting": "대기 중"
+      },
+      "seating": {
+        "title": "좌석 배치",
+        "empty": "아직 테이블이 없습니다. 하객이 회신하면 드래그해 자리를 정하세요.",
+        "cta": "좌석 배치도 열기",
+        "seated": "/ 참석자 {attending}명, {tables, plural, other {테이블 #개}}에 배치됨"
+      },
+      "inspiration": {
+        "title": "영감",
+        "empty": "아직 핀이 없습니다. 아이디어를 모아 색상 팔레트를 만들어 보세요.",
+        "cta": "보드 열기",
+        "pin": "핀"
+      },
+      "tasks": {
+        "title": "할 일",
+        "empty": "아직 할 일이 없습니다. 결혼식 날짜로 일정을 만들어 드립니다.",
+        "cta": "할 일 보기",
+        "ofDone": "/ {total}개 완료",
+        "overdue": "{count}개 기한 지남"
+      }
+    },
+    "settings": {
+      "title": "설정",
+      "description": "결혼식 정보, 언어, 이벤트, 함께 준비하는 사람."
+    },
+    "translate": {
+      "button": "번역",
+      "title": "번역: {name}",
+      "hint": "비워 두면 {language} 문구가 표시됩니다.",
+      "draft": "초안",
+      "draftFailed": "브라우저가 이 언어 조합을 번역하지 못했습니다. 번역을 직접 입력하세요.",
+      "noMachine": "팁: 컴퓨터의 Chrome에서는 번역 초안을 만들 수 있습니다(‘초안’ 버튼이 나타납니다).",
+      "save": "번역 저장",
+      "saved": "번역이 저장되었습니다",
+      "fields": {
+        "name": "이름",
+        "venue": "장소 이름",
+        "dressCode": "드레스 코드",
+        "description": "설명",
+        "mealName": "요리 이름",
+        "mealDescription": "요리 설명"
+      }
+    },
+    "websiteLang": {
+      "editing": "언어",
+      "main": "{language}(두 사람의 언어)",
+      "hint": "번역 언어: {language}. 사진, 순서, 표시할 섹션은 기본 언어에서 설정합니다.",
+      "progress": "{done}/{total} 번역됨",
+      "complete": "번역 완료",
+      "fallback": "비어 있음: 하객에게 기본 언어 문구가 표시됩니다.",
+      "nothing": "이 섹션에는 아직 번역할 내용이 없습니다.",
+      "draft": "브라우저 번역으로 모두 초안 작성",
+      "draftFailed": "브라우저가 이 언어 조합을 번역하지 못했습니다. 번역을 직접 입력하세요.",
+      "item": "항목 {number}",
+      "fields": {
+        "tagline": "한 줄 소개",
+        "intro": "소개",
+        "notes": "메모",
+        "date": "언제",
+        "title": "제목",
+        "text": "본문",
+        "role": "역할",
+        "bio": "소개글",
+        "label": "이름",
+        "note": "메모",
+        "question": "질문",
+        "answer": "답변",
+        "caption": "캡션"
+      }
+    }
+  }
+}

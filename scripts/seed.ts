@@ -19,7 +19,8 @@ import { createClient } from "@supabase/supabase-js";
 import { addDays, differenceInCalendarDays, format, nextSaturday, subDays } from "date-fns";
 import type { AgeGroup, Database, GuestSide } from "@/lib/database.types";
 import { SUGGESTED_CATEGORIES } from "@/lib/budget/suggested";
-import { DEFAULT_VISIT_QUESTIONS } from "@/lib/places/labels";
+import { EN } from "@/i18n/messages";
+import { VISIT_QUESTION_KEYS } from "@/lib/places/labels";
 import { DAY_TEMPLATE, fromMinutes } from "@/lib/schedule/time";
 import { tableSize } from "@/lib/seating/geometry";
 import { missingSuggestions } from "@/lib/tasks/timeline";
@@ -1176,7 +1177,7 @@ async function main() {
     "visit checklists",
     await sb.from("venue_checklist_items").insert(
       venues.flatMap((v) =>
-        DEFAULT_VISIT_QUESTIONS.map((question, i) => ({
+        VISIT_QUESTION_KEYS.map((k) => EN.places.visitQuestions[k]).map((question, i) => ({
           wedding_id: wid,
           venue_id: v.id,
           question,

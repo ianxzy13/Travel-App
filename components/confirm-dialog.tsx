@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -22,7 +23,7 @@ export function ConfirmDialog({
   trigger,
   title,
   description,
-  confirmLabel = "Delete",
+  confirmLabel,
   destructive = true,
   onConfirm,
 }: {
@@ -33,6 +34,7 @@ export function ConfirmDialog({
   destructive?: boolean;
   onConfirm: () => Promise<boolean | void> | boolean | void;
 }) {
+  const t = useTranslations("ui");
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
 
@@ -45,7 +47,7 @@ export function ConfirmDialog({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={pending}>{t("cancel")}</AlertDialogCancel>
           <Button
             variant={destructive ? "destructive" : "default"}
             disabled={pending}
@@ -57,7 +59,7 @@ export function ConfirmDialog({
             }
           >
             {pending && <Loader2 className="animate-spin" aria-hidden />}
-            {confirmLabel}
+            {confirmLabel ?? t("delete")}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { RsvpEmail, type RsvpEmailProps } from "@/emails/rsvp-email";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { emailFrom, getResend } from "@/lib/email/resend";
 import { isLocale, isRtl, type Locale } from "@/i18n/locales";
 import { localized } from "@/lib/i18n/content";
@@ -20,8 +20,8 @@ import {
   sendEmailSchema,
 } from "@/lib/validation/rsvp";
 import { canEdit, coupleName, requireUser, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to do that." };
 
 async function editor() {
   const { wedding, role } = await requireWedding();
@@ -38,9 +38,9 @@ function done(): ActionResult {
 
 export async function updateRsvpSettings(input: unknown): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = rsvpSettingsSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const { error } = await ctx.supabase
     .from("weddings")
@@ -57,9 +57,9 @@ export async function updateRsvpSettings(input: unknown): Promise<ActionResult> 
 
 export async function saveMealOption(input: unknown, id?: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = mealOptionSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const row = { name: parsed.data.name, description: parsed.data.description || null };
 
   const { error } = id
@@ -76,7 +76,7 @@ export async function saveMealOption(input: unknown, id?: string): Promise<Actio
 
 export async function deleteMealOption(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { error } = await ctx.supabase
     .from("meal_options")
     .delete()
@@ -88,7 +88,7 @@ export async function deleteMealOption(id: string): Promise<ActionResult> {
 
 export async function setEventMealChoice(eventId: string, on: boolean): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { error } = await ctx.supabase
     .from("events")
     .update({ meal_choice: on })
@@ -104,7 +104,7 @@ export async function loadHouseholdRsvp(code: string): Promise<ActionResult<Rsvp
   await requireWedding();
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("get_rsvp", { p_code: code });
-  if (error || !data) return fail("loadHouseholdRsvp", error, "We couldn't load this household.");
+  if (error || !data) return fail("loadHouseholdRsvp", error, "householdNotLoaded");
   return { ok: true, data: data as RsvpData };
 }
 
@@ -113,9 +113,9 @@ export async function recordRsvp(
   payload: unknown,
 ): Promise<ActionResult<RsvpResult>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = rsvpPayloadSchema.safeParse(payload);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const { data, error } = await ctx.supabase.rpc("submit_rsvp", {
     p_code: code,
     p_payload: parsed.data,
@@ -198,7 +198,7 @@ export async function previewRsvpEmail(
     wedding,
     kind,
     note.slice(0, 1000),
-    { name: "The Smith Family", code: "K7P2QX" },
+    { name: (await getTranslations("rsvpAdmin.email"))("sampleHousehold"), code: "K7P2QX" },
     await getSiteUrl(),
   );
   const html = await render(RsvpEmail(props));
@@ -216,12 +216,12 @@ export type SendSummary = {
 export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendSummary>> {
   const user = await requireUser();
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = sendEmailSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const resend = getResend();
   if (!resend)
-    return { ok: false, error: "Email isn't set up yet. Add RESEND_API_KEY (see the README)." };
+    return await err("emailNotSetUp");
 
   const { householdIds, kind, note } = parsed.data;
   const { wedding, supabase } = ctx;
@@ -318,11 +318,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
 
   revalidatePath("/app/rsvp");
   if (sent === 0 && failed > 0) {
-    return {
-      ok: false,
-      error:
-        "Resend refused the emails. Without a verified domain you can only send to your own email address (see the README).",
-    };
+    return { ok: false, error: (await getTranslations("rsvpAdmin.email"))("refused") };
   }
   return { ok: true, data: { sent, failed, noEmail } };
 }
@@ -340,7 +336,7 @@ export async function markNotificationsRead(ids?: string[]): Promise<ActionResul
     .eq("wedding_id", wedding.id)
     .is("read_at", null);
   if (ids) {
-    if (!z.array(z.uuid()).max(100).safeParse(ids).success) return NO_PERMISSION;
+    if (!z.array(z.uuid()).max(100).safeParse(ids).success) return noPermission();
     query = query.in("id", ids);
   }
   const { error } = await query;

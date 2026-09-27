@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LanguageSelect } from "@/components/language-select";
 import { localeInfo, type Locale } from "@/i18n/locales";
 import { EVENT_TEXT_FIELDS, localizeContent, localized } from "@/lib/i18n/content";
 import { useLocaleMessages } from "@/lib/i18n/use-messages";
@@ -51,6 +52,7 @@ export function WebsiteEditor(props: Props) {
   const mainLanguage = languages[0] ?? "en";
   const [editLang, setEditLang] = useState(mainLanguage);
   const tl = useTranslations("app.websiteLang");
+  const t = useTranslations("websiteEditor");
   const previewMessages = useLocaleMessages(editLang);
   const [published, setPub] = useState(props.settings.published);
   const [hasPassword, setHasPassword] = useState(props.hasPassword);
@@ -75,6 +77,7 @@ export function WebsiteEditor(props: Props) {
   const latest = useRef({ look, sections });
   latest.current = { look, sections };
 
+  const offlineText = t("offline");
   const saveNow = useCallback(async () => {
     const v = version.current;
     setSave("saving");
@@ -89,7 +92,7 @@ export function WebsiteEditor(props: Props) {
       })),
     }).catch(() => ({
       ok: false as const,
-      error: "Couldn’t reach the server. Check your connection; we’ll keep your changes here.",
+      error: offlineText,
     }));
     if (!r.ok) {
       setSave("error");
@@ -98,7 +101,7 @@ export function WebsiteEditor(props: Props) {
     }
     // more edits may have arrived while saving; they'll trigger another save
     if (v === version.current) setSave("saved");
-  }, []);
+  }, [offlineText]);
 
   useEffect(() => {
     if (first.current) {
@@ -149,27 +152,27 @@ export function WebsiteEditor(props: Props) {
           <label htmlFor="edit-language" className="text-sm font-medium">
             {tl("editing")}
           </label>
-          <select
-            id="edit-language"
-            value={editLang}
-            onChange={(e) => setEditLang(e.target.value)}
-            className="border-input bg-background h-9 flex-1 rounded-md border px-2 text-sm"
-          >
-            {languages.map((l) => (
-              <option key={l} value={l}>
-                {l === mainLanguage
-                  ? tl("main", { language: localeInfo(l).native })
-                  : localeInfo(l).native}
-              </option>
-            ))}
-          </select>
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <LanguageSelect
+              id="edit-language"
+              label={tl("editing")}
+              value={editLang}
+              onChange={(code) => code && setEditLang(code)}
+              only={languages}
+            />
+          </div>
+          {editLang === mainLanguage && (
+            <span className="text-muted-foreground hidden text-xs sm:inline">
+              {tl("main", { language: localeInfo(mainLanguage).native })}
+            </span>
+          )}
         </div>
       )}
       <Tabs defaultValue="sections">
         <TabsList className="w-full">
-          <TabsTrigger value="design">Design</TabsTrigger>
-          <TabsTrigger value="sections">Sections</TabsTrigger>
-          <TabsTrigger value="publish">Publish</TabsTrigger>
+          <TabsTrigger value="design">{t("tabs.design")}</TabsTrigger>
+          <TabsTrigger value="sections">{t("tabs.sections")}</TabsTrigger>
+          <TabsTrigger value="publish">{t("tabs.publish")}</TabsTrigger>
         </TabsList>
         <TabsContent value="design" className="pt-4">
           <DesignPanel look={look} onChange={setLook} {...common} />
@@ -207,18 +210,18 @@ export function WebsiteEditor(props: Props) {
   return (
     <>
       <PageHeader
-        title="Wedding website"
+        title={t("title")}
         description={
           <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
             <span
               className={cn("inline-flex items-center gap-1.5", published ? "text-success" : "")}
             >
               <Globe className="size-4" aria-hidden />
-              {published ? "Published" : "Not published yet"}
+              {published ? t("published") : t("notPublished")}
               {hasPassword && (
                 <>
                   {" "}
-                  · <Lock className="size-3.5" aria-hidden /> password
+                  · <Lock className="size-3.5" aria-hidden /> {t("password")}
                 </>
               )}
             </span>
@@ -228,23 +231,21 @@ export function WebsiteEditor(props: Props) {
         actions={
           <Button asChild variant="outline" size="sm">
             <a href={`/w/${slug}`} target="_blank" rel="noreferrer">
-              <ExternalLink aria-hidden /> {published ? "View site" : "Open preview"}
+              <ExternalLink aria-hidden /> {published ? t("viewSite") : t("openPreview")}
             </a>
           </Button>
         }
       />
 
       {!canEdit && (
-        <p className="bg-muted mb-4 rounded-lg px-4 py-3 text-sm">
-          Only owners and editors can change the website. Here&apos;s how it looks.
-        </p>
+        <p className="bg-muted mb-4 rounded-lg px-4 py-3 text-sm">{t("viewOnly")}</p>
       )}
 
       {/* Phones: switch between editing and the preview */}
       <div
         className="mb-4 grid grid-cols-2 gap-1 rounded-lg border p-1 lg:hidden"
         role="tablist"
-        aria-label="View"
+        aria-label={t("view")}
       >
         {(["edit", "preview"] as const).map((v) => (
           <button
@@ -263,7 +264,7 @@ export function WebsiteEditor(props: Props) {
             ) : (
               <Eye className="size-4" aria-hidden />
             )}
-            {v === "edit" ? "Edit" : "Preview"}
+            {v === "edit" ? t("edit") : t("preview")}
           </button>
         ))}
       </div>
@@ -280,10 +281,9 @@ export function WebsiteEditor(props: Props) {
         >
           <div className="mb-3 flex items-center justify-between gap-2">
             <p className="text-muted-foreground text-sm">
-              Live preview · {visibleWithContent} section{visibleWithContent === 1 ? "" : "s"}{" "}
-              showing
+              {t("livePreview", { count: visibleWithContent })}
             </p>
-            <div className="flex rounded-lg border p-0.5" role="group" aria-label="Preview size">
+            <div className="flex rounded-lg border p-0.5" role="group" aria-label={t("previewSize")}>
               {(["desktop", "phone"] as const).map((d) => (
                 <Button
                   key={d}
@@ -294,7 +294,7 @@ export function WebsiteEditor(props: Props) {
                 >
                   {d === "desktop" ? <Monitor aria-hidden /> : <Smartphone aria-hidden />}
                   <span className="sr-only sm:not-sr-only">
-                    {d === "desktop" ? "Desktop" : "Phone"}
+                    {d === "desktop" ? t("desktop") : t("phone")}
                   </span>
                 </Button>
               ))}
@@ -316,6 +316,7 @@ export function WebsiteEditor(props: Props) {
 }
 
 function SaveBadge({ state, onRetry }: { state: SaveState; onRetry: () => void }) {
+  const t = useTranslations("websiteEditor");
   if (state === "error")
     return (
       <button
@@ -323,7 +324,7 @@ function SaveBadge({ state, onRetry }: { state: SaveState; onRetry: () => void }
         onClick={onRetry}
         className="text-destructive inline-flex items-center gap-1 text-sm underline underline-offset-2"
       >
-        <TriangleAlert className="size-3.5" aria-hidden /> Not saved, try again
+        <TriangleAlert className="size-3.5" aria-hidden /> {t("notSavedRetry")}
       </button>
     );
   return (
@@ -337,7 +338,7 @@ function SaveBadge({ state, onRetry }: { state: SaveState; onRetry: () => void }
       ) : (
         <Loader2 className="size-3.5 animate-spin" aria-hidden />
       )}
-      {state === "saved" ? "All changes saved" : "Saving…"}
+      {state === "saved" ? t("allSaved") : t("saving")}
     </span>
   );
 }
@@ -359,6 +360,7 @@ function PublishPanel({
   onPassword: (on: boolean) => void;
   canEdit: boolean;
 }) {
+  const t = useTranslations("websiteEditor.publish");
   const [slugDraft, setSlugDraft] = useState(slug);
   const [slugError, setSlugError] = useState<string>();
   const [password, setPassword] = useState("");
@@ -373,23 +375,19 @@ function PublishPanel({
       <section className="space-y-3 rounded-xl border p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-xl">Publish</h3>
-            <p className="text-muted-foreground text-sm">
-              {published
-                ? "Anyone with the link can see your website."
-                : "Only your wedding team can see it for now."}
-            </p>
+            <h3 className="text-xl">{t("title")}</h3>
+            <p className="text-muted-foreground text-sm">{published ? t("on") : t("off")}</p>
           </div>
           <Switch
             checked={published}
             disabled={!canEdit || pending}
-            aria-label="Publish the website"
+            aria-label={t("toggle")}
             onCheckedChange={(on) =>
               startTransition(async () => {
                 const r = await setPublished(on);
                 if (!r.ok) return void toast.error(r.error);
                 onPublished(on);
-                toast.success(on ? "Your website is live!" : "Website unpublished");
+                toast.success(on ? t("live") : t("unpublished"));
               })
             }
           />
@@ -398,15 +396,15 @@ function PublishPanel({
           <Input
             readOnly
             value={link}
-            aria-label="Website link"
+            aria-label={t("link")}
             onFocus={(e) => e.currentTarget.select()}
           />
           <Button
             variant="outline"
             size="icon"
-            aria-label="Copy link"
+            aria-label={t("copy")}
             onClick={() =>
-              navigator.clipboard?.writeText(link).then(() => toast.success("Link copied"))
+              navigator.clipboard?.writeText(link).then(() => toast.success(t("copied")))
             }
           >
             <Copy aria-hidden />
@@ -424,16 +422,16 @@ function PublishPanel({
             if (!r.ok) return setSlugError(r.error);
             onSlug(r.data!.slug);
             setSlugDraft(r.data!.slug);
-            toast.success("Web address saved");
+            toast.success(t("addressSaved"));
           });
         }}
       >
-        <h3 className="text-xl">Web address</h3>
+        <h3 className="text-xl">{t("address")}</h3>
         <FormField
           id="site-slug"
-          label="Your address"
+          label={t("yourAddress")}
           error={slugError}
-          hint="Changing it breaks links you've already shared (including the RSVP page)."
+          hint={t("addressHint")}
         >
           {(a) => (
             <div className="flex items-center gap-1">
@@ -454,7 +452,7 @@ function PublishPanel({
           variant="secondary"
           disabled={!canEdit || pending || slugDraft === slug}
         >
-          Save address
+          {t("saveAddress")}
         </Button>
       </form>
 
@@ -468,27 +466,22 @@ function PublishPanel({
             if (!r.ok) return setPwError(r.error);
             onPassword(true);
             setPassword("");
-            toast.success(
-              "Password set. Guests who already entered the old one will be asked again.",
-            );
+            toast.success(t("passwordSet"));
           });
         }}
       >
         <h3 className="flex items-center gap-2 text-xl">
-          <Lock className="size-4" aria-hidden /> Password{" "}
+          <Lock className="size-4" aria-hidden /> {t("passwordTitle")}{" "}
           {hasPassword ? (
-            <span className="text-success font-sans text-sm font-normal">on</span>
+            <span className="text-success font-sans text-sm font-normal">{t("on2")}</span>
           ) : (
-            <span className="text-muted-foreground font-sans text-sm font-normal">off</span>
+            <span className="text-muted-foreground font-sans text-sm font-normal">{t("off2")}</span>
           )}
         </h3>
-        <p className="text-muted-foreground text-sm">
-          Guests type it once (it&apos;s remembered for 30 days). Your wedding team never needs it.
-          Put it on your invitations.
-        </p>
+        <p className="text-muted-foreground text-sm">{t("passwordText")}</p>
         <FormField
           id="site-password-new"
-          label={hasPassword ? "New password" : "Password"}
+          label={hasPassword ? t("newPassword") : t("passwordLabel")}
           error={pwError}
         >
           {(a) => (
@@ -501,7 +494,7 @@ function PublishPanel({
               minLength={4}
               maxLength={100}
               disabled={!canEdit}
-              placeholder="e.g. sunflower2027"
+              placeholder={t("passwordPlaceholder")}
             />
           )}
         </FormField>
@@ -512,7 +505,7 @@ function PublishPanel({
             variant="secondary"
             disabled={!canEdit || pending || password.trim().length < 4}
           >
-            {hasPassword ? "Change password" : "Set password"}
+            {hasPassword ? t("change") : t("set")}
           </Button>
           {hasPassword && (
             <Button
@@ -525,11 +518,11 @@ function PublishPanel({
                   const r = await setSitePassword(null);
                   if (!r.ok) return void toast.error(r.error);
                   onPassword(false);
-                  toast.success("Password removed");
+                  toast.success(t("removed"));
                 })
               }
             >
-              Remove password
+              {t("remove")}
             </Button>
           )}
         </div>

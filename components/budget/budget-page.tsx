@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import dynamic from "next/dynamic";
-import { format, parseISO } from "date-fns";
 import {
   AlertTriangle,
   CalendarClock,
@@ -18,6 +17,7 @@ import {
   Trash2,
   Wallet,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   addSuggestedCategories,
@@ -55,6 +55,7 @@ import {
   type BudgetCategory,
   type CategorySummary,
 } from "@/lib/budget/stats";
+import { fmtDate } from "@/lib/i18n/format";
 import { cn } from "@/lib/utils";
 import { ExpenseSheet, type ExpenseSheetMode } from "./expense-sheet";
 import { MoneyInput } from "./money-input";
@@ -75,6 +76,7 @@ type Props = BudgetData & {
 
 export function BudgetPage(props: Props) {
   const { currency, canEdit } = props;
+  const t = useTranslations("budget");
   const summary = summarizeBudget(props.total, props.categories, props.expenses, props.payments);
   const upcoming = upcomingPayments(props.payments, props.expenses, props.categories, props.today);
   const money = (v: number) => formatMoney(v, currency);
@@ -97,17 +99,17 @@ export function BudgetPage(props: Props) {
       {props.expenses.length > 0 && (
         <Button asChild variant="outline" size="sm">
           <a href="/app/budget/export" download>
-            <Download aria-hidden /> Export CSV
+            <Download aria-hidden /> {t("exportCsv")}
           </a>
         </Button>
       )}
       {canEdit && props.categories.length > 0 && (
         <>
           <Button variant="outline" size="sm" onClick={() => setCategoryDialog("new")}>
-            <Plus aria-hidden /> Category
+            <Plus aria-hidden /> {t("category")}
           </Button>
           <Button size="sm" onClick={() => setSheet({ kind: "new" })}>
-            <Plus aria-hidden /> Expense
+            <Plus aria-hidden /> {t("expense")}
           </Button>
         </>
       )}
@@ -117,8 +119,8 @@ export function BudgetPage(props: Props) {
   return (
     <>
       <PageHeader
-        title="Budget"
-        description="Plan, track and pay for everything in one place."
+        title={t("title")}
+        description={t("description")}
         actions={actions}
       />
 
@@ -131,11 +133,9 @@ export function BudgetPage(props: Props) {
               <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
                 <Wallet className="size-7" aria-hidden />
               </span>
-              <h2 className="text-3xl">Let&apos;s plan your budget</h2>
+              <h2 className="text-3xl">{t("startTitle")}</h2>
               <p className="text-muted-foreground max-w-md">
-                {summary.total
-                  ? "Start with 16 common categories. We'll split your total the way most couples do, and you can change everything."
-                  : "Set your total above, then start with 16 common categories (we'll suggest how to split it), or build your own."}
+                {summary.total ? t("startWithTotal") : t("startNoTotal")}
               </p>
               {canEdit && (
                 <div className="flex flex-wrap justify-center gap-2">
@@ -153,10 +153,10 @@ export function BudgetPage(props: Props) {
                     ) : (
                       <Sparkles aria-hidden />
                     )}
-                    Use suggested categories
+                    {t("useSuggested")}
                   </Button>
                   <Button variant="outline" onClick={() => setCategoryDialog("new")}>
-                    Start from scratch
+                    {t("fromScratch")}
                   </Button>
                 </div>
               )}
@@ -170,7 +170,7 @@ export function BudgetPage(props: Props) {
 
             <section aria-labelledby="categories-title" className="space-y-3">
               <h2 id="categories-title" className="text-3xl">
-                Categories
+                {t("categories")}
               </h2>
               <ul className="space-y-2">
                 {summary.categories.map((c) => (
@@ -198,8 +198,8 @@ export function BudgetPage(props: Props) {
                   )}
                 >
                   {summary.unallocated > 0
-                    ? `${money(summary.unallocated)} of your total isn't allocated to a category yet.`
-                    : `Your categories add up to ${money(-summary.unallocated)} more than your total budget.`}
+                    ? t("unallocated", { amount: money(summary.unallocated) })
+                    : t("overAllocated", { amount: money(-summary.unallocated) })}
                 </p>
               )}
             </section>
@@ -237,6 +237,7 @@ function SummaryTiles({
   currency: string;
   canEdit: boolean;
 }) {
+  const t = useTranslations("budget");
   const money = (v: number) => formatMoney(v, currency);
   const { totals, total, remaining } = summary;
   const base = Math.max(total ?? 0, totals.committed, 1);
@@ -248,28 +249,28 @@ function SummaryTiles({
         <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <div>
             <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-              Total budget
+              {t("total")}
             </dt>
             <dd className="flex items-center gap-1">
               <span className="font-serif text-3xl font-semibold tabular-nums sm:text-4xl">
-                {total == null ? "Not set" : money(total)}
+                {total == null ? t("notSet") : money(total)}
               </span>
               {canEdit && <TotalEditor total={total} currency={currency} />}
             </dd>
           </div>
           <Tile
-            label="Committed"
+            label={t("committed")}
             value={money(totals.committed)}
-            hint="Actual prices, or estimates where not known"
+            hint={t("committedHint")}
           />
           <Tile
-            label="Paid"
+            label={t("paid")}
             value={money(totals.paid)}
-            hint={`${money(totals.outstanding)} still to pay`}
+            hint={t("toPay", { amount: money(totals.outstanding) })}
           />
           <div>
             <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-              Remaining
+              {t("remaining")}
             </dt>
             <dd>
               <span
@@ -282,7 +283,7 @@ function SummaryTiles({
               </span>
               {remaining != null && remaining < 0 && (
                 <span className="text-destructive flex items-center gap-1 text-xs">
-                  <AlertTriangle className="size-3.5" aria-hidden /> Over budget
+                  <AlertTriangle className="size-3.5" aria-hidden /> {t("overBudget")}
                 </span>
               )}
             </dd>
@@ -293,24 +294,31 @@ function SummaryTiles({
           <div
             className="bg-muted flex h-3 overflow-hidden rounded-full"
             role="img"
-            aria-label={`Paid ${money(totals.paid)}, committed ${money(totals.committed)}${total != null ? ` of ${money(total)}` : ""}`}
+            aria-label={
+              total != null
+                ? t("barLabelOf", {
+                    paid: money(totals.paid),
+                    committed: money(totals.committed),
+                    total: money(total),
+                  })
+                : t("barLabel", { paid: money(totals.paid), committed: money(totals.committed) })
+            }
           >
             <div className="bg-primary" style={{ width: pct(totals.paid) }} />
             <div
-              className="bg-primary/40 border-card border-l-2"
+              className="bg-primary/40 border-card border-s-2"
               style={{ width: pct(Math.max(0, totals.committed - totals.paid)) }}
             />
           </div>
           <ul className="text-muted-foreground mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs">
             <li className="flex items-center gap-1.5">
-              <span className="bg-primary size-2.5 rounded-sm" aria-hidden /> Paid
+              <span className="bg-primary size-2.5 rounded-sm" aria-hidden /> {t("legendPaid")}
             </li>
             <li className="flex items-center gap-1.5">
-              <span className="bg-primary/40 size-2.5 rounded-sm" aria-hidden /> Committed, not paid
-              yet
+              <span className="bg-primary/40 size-2.5 rounded-sm" aria-hidden /> {t("legendCommitted")}
             </li>
             <li className="flex items-center gap-1.5">
-              <span className="bg-muted size-2.5 rounded-sm border" aria-hidden /> Not committed
+              <span className="bg-muted size-2.5 rounded-sm border" aria-hidden /> {t("legendFree")}
             </li>
           </ul>
         </div>
@@ -332,6 +340,7 @@ function Tile({ label, value, hint }: { label: string; value: string; hint?: str
 }
 
 function TotalEditor({ total, currency }: { total: number | null; currency: string }) {
+  const t = useTranslations("budget");
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<number | null>(total);
   const [pending, startTransition] = useTransition();
@@ -344,26 +353,26 @@ function TotalEditor({ total, currency }: { total: number | null; currency: stri
           setValue(total);
           setOpen(true);
         }}
-        aria-label="Change total budget"
+        aria-label={t("changeTotal")}
       >
         <Pencil aria-hidden />
       </Button>
       <DialogContent className="sm:max-w-sm">
         <DialogHeader>
-          <DialogTitle className="font-serif text-2xl">Total budget</DialogTitle>
-          <DialogDescription>Everything you plan to spend, all in.</DialogDescription>
+          <DialogTitle className="font-serif text-2xl">{t("total")}</DialogTitle>
+          <DialogDescription>{t("totalHint")}</DialogDescription>
         </DialogHeader>
         <MoneyInput
           currency={currency}
           allowEmpty
           value={value}
           onChange={setValue}
-          aria-label="Total budget"
+          aria-label={t("total")}
           autoFocus
         />
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancel
+            {t("cancel")}
           </Button>
           <Button
             disabled={pending}
@@ -375,7 +384,7 @@ function TotalEditor({ total, currency }: { total: number | null; currency: stri
               })
             }
           >
-            {pending && <Loader2 className="animate-spin" aria-hidden />} Save
+            {pending && <Loader2 className="animate-spin" aria-hidden />} {t("save")}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -392,6 +401,8 @@ function UpcomingPayments({
   currency: string;
   canEdit: boolean;
 }) {
+  const t = useTranslations("budget");
+  const locale = useLocale();
   const [pending, startTransition] = useTransition();
   if (list.length === 0) return null;
   const shown = list.slice(0, 8);
@@ -399,7 +410,7 @@ function UpcomingPayments({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-serif text-2xl">
-          <CalendarClock className="text-primary size-5" aria-hidden /> Upcoming payments
+          <CalendarClock className="text-primary size-5" aria-hidden /> {t("upcoming")}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -413,9 +424,9 @@ function UpcomingPayments({
                 )}
               >
                 {p.overdue && (
-                  <AlertTriangle className="mr-1 inline size-3.5" aria-label="Overdue" />
+                  <AlertTriangle className="me-1 inline size-3.5" aria-label={t("overdue")} />
                 )}
-                {format(parseISO(p.dueDate!), "d MMM yyyy")}
+                {fmtDate(p.dueDate!, locale, "medium")}
               </span>
               <span className="min-w-40 flex-1">
                 {p.expenseName}
@@ -428,15 +439,15 @@ function UpcomingPayments({
               <span className="font-medium tabular-nums">{formatMoney(p.amount, currency)}</span>
               <span
                 className={cn(
-                  "w-24 text-right text-xs",
+                  "w-24 text-end text-xs",
                   p.overdue ? "text-destructive" : "text-muted-foreground",
                 )}
               >
                 {p.overdue
-                  ? `${-p.days} days overdue`
+                  ? t("daysOverdue", { count: -p.days })
                   : p.days === 0
-                    ? "Due today"
-                    : `in ${p.days} days`}
+                    ? t("dueToday")
+                    : t("inDays", { count: p.days })}
               </span>
               {canEdit && (
                 <Button
@@ -446,12 +457,13 @@ function UpcomingPayments({
                   onClick={() =>
                     startTransition(async () => {
                       const r = await setPaymentPaid(p.id, true);
-                      if (r.ok) toast.success(`Marked ${formatMoney(p.amount, currency)} as paid`);
+                      if (r.ok)
+                        toast.success(t("markedPaid", { amount: formatMoney(p.amount, currency) }));
                       else toast.error(r.error);
                     })
                   }
                 >
-                  <Check aria-hidden /> Paid
+                  <Check aria-hidden /> {t("markPaid")}
                 </Button>
               )}
             </li>
@@ -459,7 +471,7 @@ function UpcomingPayments({
         </ul>
         {list.length > shown.length && (
           <p className="text-muted-foreground mt-2 text-xs">
-            and {list.length - shown.length} more
+            {t("andMore", { count: list.length - shown.length })}
           </p>
         )}
       </CardContent>
@@ -492,6 +504,8 @@ function CategoryRow({
   onAddExpense: () => void;
   onEditCategory: () => void;
 }) {
+  const t = useTranslations("budget");
+  const locale = useLocale();
   const money = (v: number) => formatMoney(v, currency);
   const over = c.allocated > 0 && c.over > 0;
   const fill =
@@ -511,7 +525,7 @@ function CategoryRow({
           onClick={onToggle}
           aria-expanded={open}
           aria-controls={panelId}
-          className="focus-visible:ring-ring flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-2 rounded text-left focus-visible:ring-2 focus-visible:outline-none"
+          className="focus-visible:ring-ring flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-2 rounded text-start focus-visible:ring-2 focus-visible:outline-none"
         >
           <ChevronDown
             className={cn("size-4 shrink-0 transition-transform", open && "rotate-180")}
@@ -520,8 +534,8 @@ function CategoryRow({
           <span className="min-w-32 flex-1">
             <span className="block font-medium">{c.name}</span>
             <span className="text-muted-foreground text-xs">
-              {c.expenses.length} expense{c.expenses.length === 1 ? "" : "s"}
-              {c.totals.paid > 0 && ` · ${money(c.totals.paid)} paid`}
+              {t("expenses", { count: c.expenses.length })}
+              {c.totals.paid > 0 && t("paidAmount", { amount: money(c.totals.paid) })}
             </span>
           </span>
           <span className="w-full max-w-64 min-w-40 flex-1 sm:w-auto">
@@ -529,7 +543,7 @@ function CategoryRow({
               <span className={cn(over && "text-destructive font-medium")}>
                 {money(c.totals.committed)}
               </span>
-              <span className="text-muted-foreground">of {money(c.allocated)}</span>
+              <span className="text-muted-foreground">{t("of", { amount: money(c.allocated) })}</span>
             </span>
             <span className="bg-muted mt-1 block h-1.5 rounded-full">
               <span
@@ -539,7 +553,7 @@ function CategoryRow({
             </span>
             {over && (
               <span className="text-destructive mt-0.5 flex items-center gap-1 text-xs">
-                <AlertTriangle className="size-3" aria-hidden /> {money(c.over)} over
+                <AlertTriangle className="size-3" aria-hidden /> {t("over", { amount: money(c.over) })}
               </span>
             )}
           </span>
@@ -547,16 +561,16 @@ function CategoryRow({
         {canEdit && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon-sm" aria-label={`Options for ${c.name}`}>
+              <Button variant="ghost" size="icon-sm" aria-label={t("optionsFor", { name: c.name })}>
                 <MoreHorizontal aria-hidden />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem onSelect={onAddExpense}>
-                <Plus aria-hidden /> Add expense
+                <Plus aria-hidden /> {t("addExpense")}
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={onEditCategory}>
-                <Pencil aria-hidden /> Rename / change amount
+                <Pencil aria-hidden /> {t("rename")}
               </DropdownMenuItem>
               <DeleteCategoryItem category={c} />
             </DropdownMenuContent>
@@ -567,7 +581,7 @@ function CategoryRow({
       {open && (
         <div id={panelId} className="border-t px-3 pb-3 sm:px-4">
           {c.expenses.length === 0 ? (
-            <p className="text-muted-foreground py-4 text-sm">No expenses yet.</p>
+            <p className="text-muted-foreground py-4 text-sm">{t("noExpenses")}</p>
           ) : (
             <ul className="divide-y">
               {c.expenses.map((e) => {
@@ -581,7 +595,7 @@ function CategoryRow({
                     <button
                       type="button"
                       onClick={() => onEditExpense(e)}
-                      className="hover:bg-accent focus-visible:ring-ring flex w-full flex-wrap items-center gap-x-4 gap-y-1 rounded px-1 py-2.5 text-left text-sm focus-visible:ring-2 focus-visible:outline-none"
+                      className="hover:bg-accent focus-visible:ring-ring flex w-full flex-wrap items-center gap-x-4 gap-y-1 rounded px-1 py-2.5 text-start text-sm focus-visible:ring-2 focus-visible:outline-none"
                     >
                       <span className="min-w-40 flex-1">
                         <span className="flex items-center gap-1.5 font-medium">
@@ -589,7 +603,7 @@ function CategoryRow({
                           {e.receiptPath && (
                             <Paperclip
                               className="text-muted-foreground size-3.5"
-                              aria-label="Has receipt"
+                              aria-label={t("hasReceipt")}
                             />
                           )}
                         </span>
@@ -599,14 +613,14 @@ function CategoryRow({
                           </span>
                         )}
                       </span>
-                      <span className="text-right tabular-nums">
+                      <span className="text-end tabular-nums">
                         {money(committedCost(e))}
                         <span className="text-muted-foreground block text-xs">
-                          {e.actual == null ? "estimate" : "actual"}
+                          {e.actual == null ? t("estimate") : t("actual")}
                         </span>
                       </span>
-                      <span className="w-32 text-right text-xs tabular-nums">
-                        {paid > 0 ? `${money(paid)} paid` : "Nothing paid"}
+                      <span className="w-32 text-end text-xs tabular-nums">
+                        {paid > 0 ? t("paidShort", { amount: money(paid) }) : t("nothingPaid")}
                         {next && (
                           <span
                             className={cn(
@@ -614,7 +628,10 @@ function CategoryRow({
                               next.dueDate! < today ? "text-destructive" : "text-muted-foreground",
                             )}
                           >
-                            {money(next.amount)} due {format(parseISO(next.dueDate!), "d MMM")}
+                            {t("dueOn", {
+                              amount: money(next.amount),
+                              date: fmtDate(next.dueDate!, locale, "medium"),
+                            })}
                           </span>
                         )}
                       </span>
@@ -626,7 +643,7 @@ function CategoryRow({
           )}
           {canEdit && (
             <Button variant="ghost" size="sm" className="mt-1" onClick={onAddExpense}>
-              <Plus aria-hidden /> Add expense
+              <Plus aria-hidden /> {t("addExpense")}
             </Button>
           )}
         </div>
@@ -636,19 +653,16 @@ function CategoryRow({
 }
 
 function DeleteCategoryItem({ category: c }: { category: CategorySummary }) {
+  const t = useTranslations("budget");
   return (
     <ConfirmDialog
       trigger={
         <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-destructive">
-          <Trash2 aria-hidden /> Delete category
+          <Trash2 aria-hidden /> {t("deleteCategory")}
         </DropdownMenuItem>
       }
-      title={`Delete “${c.name}”?`}
-      description={
-        c.expenses.length
-          ? `Its ${c.expenses.length} expense(s), their payments and receipts will be deleted too.`
-          : "This category has no expenses."
-      }
+      title={t("deleteCategoryTitle", { name: c.name })}
+      description={t("deleteCategoryText", { count: c.expenses.length })}
       onConfirm={async () => {
         const r = await deleteCategory(c.id);
         if (!r.ok) {
@@ -695,6 +709,7 @@ function CategoryForm({
   currency: string;
   onClose: () => void;
 }) {
+  const t = useTranslations("budget");
   const [name, setName] = useState(existing?.name ?? "");
   const [allocated, setAllocated] = useState<number | null>(existing?.allocated ?? 0);
   const [pending, startTransition] = useTransition();
@@ -712,12 +727,12 @@ function CategoryForm({
     >
       <DialogHeader>
         <DialogTitle className="font-serif text-2xl">
-          {existing ? "Edit category" : "New category"}
+          {existing ? t("editCategory") : t("newCategory")}
         </DialogTitle>
-        <DialogDescription>How much do you plan to spend on it?</DialogDescription>
+        <DialogDescription>{t("categoryHint")}</DialogDescription>
       </DialogHeader>
       <div className="space-y-1.5">
-        <Label htmlFor="cat-name">Name</Label>
+        <Label htmlFor="cat-name">{t("name")}</Label>
         <Input
           id="cat-name"
           value={name}
@@ -727,15 +742,15 @@ function CategoryForm({
         />
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="cat-amount">Planned amount</Label>
+        <Label htmlFor="cat-amount">{t("planned")}</Label>
         <MoneyInput id="cat-amount" currency={currency} value={allocated} onChange={setAllocated} />
       </div>
       <DialogFooter>
         <Button type="button" variant="outline" onClick={onClose}>
-          Cancel
+          {t("cancel")}
         </Button>
         <Button type="submit" disabled={pending || !name.trim()}>
-          {pending && <Loader2 className="animate-spin" aria-hidden />} Save
+          {pending && <Loader2 className="animate-spin" aria-hidden />} {t("save")}
         </Button>
       </DialogFooter>
     </form>

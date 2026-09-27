@@ -255,10 +255,17 @@ export function initials(name: string) {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
+/** Words for table names in the viewer's language (English by default). */
+export type SeatingWords = { table: (n: number) => string; kind: (k: SeatingKind) => string };
+const EN_WORDS: SeatingWords = { table: (n) => `Table ${n}`, kind: (k) => KINDS[k].label };
+
 /** "Table 3", "Paris", or "Paris (3)". */
-export function tableName(o: Pick<SeatingObject, "label" | "number" | "kind">) {
+export function tableName(
+  o: Pick<SeatingObject, "label" | "number" | "kind">,
+  words: SeatingWords = EN_WORDS,
+) {
   if (o.label && o.number != null) return `${o.label} (${o.number})`;
   if (o.label) return o.label;
-  if (o.number != null) return `Table ${o.number}`;
-  return KINDS[o.kind].label;
+  if (o.number != null) return words.table(o.number);
+  return words.kind(o.kind);
 }

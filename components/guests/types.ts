@@ -2,7 +2,7 @@ import type { RelationshipType, TagColor } from "@/lib/database.types";
 import type { GuestView, PartnerNames } from "@/lib/guests/model";
 import type { AddressValues } from "@/lib/validation/guest";
 
-/** language: the household's preferred language code, "" = the wedding's main language */
+/** language: the household's language code, "" = the couple's own language */
 export type HouseholdOption = {
   id: string;
   name: string;
@@ -27,6 +27,8 @@ export type GuestPageData = {
   tags: TagOption[];
   relationships: RelationshipItem[];
   names: PartnerNames;
+  /** the language the couple writes in (households with "" use it) */
+  coupleLanguage: string;
   canEdit: boolean;
   emailConfigured: boolean;
 };

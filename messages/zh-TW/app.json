@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "總覽",
+      "tasks": "待辦事項",
+      "budget": "預算",
+      "vendors": "廠商",
+      "guests": "賓客",
+      "rsvp": "出席回覆",
+      "seating": "座位安排",
+      "venues": "場地",
+      "hotels": "飯店",
+      "travel": "交通",
+      "inspiration": "靈感",
+      "website": "網站",
+      "schedule": "當日流程",
+      "settings": "設定",
+      "home": "首頁",
+      "groups": {
+        "plan": "籌備",
+        "people": "人員",
+        "places": "地點",
+        "style": "風格"
+      }
+    },
+    "shell": {
+      "mainNav": "主要導覽",
+      "expand": "展開側邊欄",
+      "collapse": "收合側邊欄",
+      "more": "更多",
+      "allTools": "所有籌備工具"
+    },
+    "userMenu": {
+      "account": "帳戶選單",
+      "appearance": "外觀",
+      "light": "淺色",
+      "dark": "深色",
+      "system": "依照系統",
+      "language": "語言",
+      "signOut": "登出"
+    },
+    "switcher": {
+      "current": "目前的婚禮：{name}。切換婚禮",
+      "yours": "你的婚禮",
+      "noDate": "日期待定",
+      "another": "籌備另一場婚禮",
+      "roles": {
+        "owner": "擁有者",
+        "editor": "編輯者",
+        "viewer": "檢視者"
+      }
+    },
+    "notifications": {
+      "title": "通知",
+      "unread": "{count, plural, other {通知，# 則未讀}}",
+      "unreadOne": "未讀",
+      "markAll": "全部標為已讀",
+      "empty": "目前沒有通知。新的出席回覆、指派給你的待辦以及付款和截止日期提醒會顯示在這裡。"
+    },
+    "countdown": {
+      "today": "今天就是大喜之日！",
+      "enjoy": "好好享受每一刻。",
+      "married": "{count, plural, other {已結婚 # 天}}",
+      "congrats": "恭喜！",
+      "daysToGo": "{count, plural, other {天後舉行婚禮}}",
+      "hours": "小時",
+      "minutes": "分鐘",
+      "seconds": "秒"
+    },
+    "dashboard": {
+      "welcome": "歡迎使用你的婚禮籌備工具！",
+      "welcomeText": "一切從這裡開始。依照自己的步調完成下面的步驟。",
+      "noDate": "日期待定",
+      "setDate": "設定日期，開始倒數",
+      "nextSteps": "下一步",
+      "stepsDone": "已完成 {done}/{total}",
+      "done": "（已完成）",
+      "toDo": "（待完成）",
+      "steps": {
+        "date": "確定婚禮日期",
+        "location": "選擇地點",
+        "invite": "邀請伴侶、家人或婚禮顧問",
+        "guests": "新增賓客名單",
+        "guestsSoFar": "{count, plural, other {新增賓客名單（目前 # 位）}}",
+        "budget": "設定總預算",
+        "shortlist": "挑選候選場地",
+        "book": "預訂場地",
+        "inspiration": "建立靈感看板",
+        "website": "發佈婚禮網站",
+        "timeline": "制定籌備時間表"
+      },
+      "budget": {
+        "title": "預算",
+        "empty": "還沒有預算。設定總額，我們會建議如何分配。",
+        "cta": "規劃預算",
+        "committed": "已確定",
+        "committedOf": "已確定，共 {total}",
+        "overdue": "逾期：{name}"
+      },
+      "rsvp": {
+        "title": "出席回覆",
+        "empty": "還沒有回覆。先新增賓客，再寄出喜帖。",
+        "cta": "查看回覆",
+        "attending": "出席",
+        "declined": "不出席",
+        "waiting": "待回覆"
+      },
+      "seating": {
+        "title": "座位安排",
+        "empty": "還沒有桌子。賓客回覆後，拖放即可安排座位。",
+        "cta": "開啟座位圖",
+        "seated": "/ {attending} 位出席賓客已安排在 {tables, plural, other {# 張桌子}}"
+      },
+      "inspiration": {
+        "title": "靈感",
+        "empty": "還沒有圖釘。收集靈感並從中挑選配色。",
+        "cta": "開啟看板",
+        "pin": "圖釘"
+      },
+      "tasks": {
+        "title": "待辦事項",
+        "empty": "還沒有待辦。我們會依婚禮日期產生時間表。",
+        "cta": "查看待辦",
+        "ofDone": "/ {total} 已完成",
+        "overdue": "{count} 項逾期"
+      }
+    },
+    "settings": {
+      "title": "設定",
+      "description": "婚禮資訊、語言、活動以及與你一起籌備的人。"
+    },
+    "translate": {
+      "button": "翻譯",
+      "title": "翻譯：{name}",
+      "hint": "留空則顯示{language}原文。",
+      "draft": "草稿",
+      "draftFailed": "你的瀏覽器無法翻譯這組語言。請手動輸入翻譯。",
+      "noMachine": "提示：電腦上的 Chrome 可以產生翻譯草稿（那裡會出現「草稿」按鈕）。",
+      "save": "儲存翻譯",
+      "saved": "翻譯已儲存",
+      "fields": {
+        "name": "名稱",
+        "venue": "場地名稱",
+        "dressCode": "服裝要求",
+        "description": "說明",
+        "mealName": "餐點名稱",
+        "mealDescription": "餐點說明"
+      }
+    },
+    "websiteLang": {
+      "editing": "語言",
+      "main": "{language}（你們的語言）",
+      "hint": "翻譯：{language}。照片、順序和顯示的單元在主要語言中設定。",
+      "progress": "已翻譯 {done}/{total}",
+      "complete": "已翻譯",
+      "fallback": "留空：賓客會看到主要語言的內容。",
+      "nothing": "這個單元目前沒有可翻譯的內容。",
+      "draft": "用瀏覽器翻譯全部內容",
+      "draftFailed": "你的瀏覽器無法翻譯這組語言。請手動輸入翻譯。",
+      "item": "第 {number} 項",
+      "fields": {
+        "tagline": "標語",
+        "intro": "簡介",
+        "notes": "備註",
+        "date": "時間",
+        "title": "標題",
+        "text": "內文",
+        "role": "身分",
+        "bio": "簡短介紹",
+        "label": "名稱",
+        "note": "備註",
+        "question": "問題",
+        "answer": "回答",
+        "caption": "圖片說明"
+      }
+    }
+  }
+}

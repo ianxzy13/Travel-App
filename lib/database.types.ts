@@ -176,6 +176,8 @@ export type NotificationRow = WeddingScoped & {
   link: string | null;
   read_at: string | null;
   dedupe_key: string | null;
+  /** what it's about ({ kind, ...values }), shown in the reader's language */
+  data: Json | null;
 };
 
 // ---------- Phase 4: seating ----------

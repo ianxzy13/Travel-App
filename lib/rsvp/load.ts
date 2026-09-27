@@ -1,6 +1,7 @@
 import "server-only";
 import type { Translations } from "@/lib/database.types";
 import type { EmailKind, EmailStatus, WeddingRow } from "@/lib/database.types";
+import { nameLabels } from "@/lib/guests/labels";
 import { guestDisplayName } from "@/lib/guests/model";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import type { createClient } from "@/lib/supabase/server";
@@ -51,6 +52,7 @@ export async function loadRsvpDashboard(
   wedding: WeddingRow,
 ): Promise<RsvpDashboardData> {
   const wid = wedding.id;
+  const labels = await nameLabels();
   const [households, guests, invites, responses, events, mealOptions, emails] = await Promise.all([
     fetchAll((f, t) =>
       sb
@@ -135,7 +137,7 @@ export async function loadRsvpDashboard(
         message: h.rsvp_message,
         guests: members.map((g) => ({
           id: g.id,
-          name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null),
+          name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null, labels),
           email: g.email,
           isPlusOne: !!g.plus_one_of,
         })),

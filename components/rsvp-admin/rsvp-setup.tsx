@@ -69,6 +69,7 @@ function SettingsCard({
   readOnly: boolean;
   canNotify: boolean;
 }) {
+  const t = useTranslations("rsvpAdmin.setup");
   const [pending, startTransition] = useTransition();
   const form = useForm({ resolver: zodResolver(rsvpSettingsSchema), defaultValues: settings });
   const { errors } = form.formState;
@@ -77,7 +78,7 @@ function SettingsCard({
     startTransition(async () => {
       const result = await updateRsvpSettings(values);
       if (result.ok) {
-        toast.success("RSVP settings saved");
+        toast.success(t("saved"));
         form.reset(values);
       } else toast.error(result.error);
     }),
@@ -86,15 +87,15 @@ function SettingsCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">RSVP settings</CardTitle>
-        <CardDescription>What guests see on their RSVP page.</CardDescription>
+        <CardTitle className="font-serif text-2xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-5" noValidate>
           <FormField
             id="rsvp-deadline"
-            label="Reply by"
-            hint="After this date guests can't change their answers online."
+            label={t("deadline")}
+            hint={t("deadlineHint")}
             error={errors.deadline?.message}
           >
             {(aria) => (
@@ -103,8 +104,8 @@ function SettingsCard({
           </FormField>
           <FormField
             id="rsvp-contact"
-            label="After the deadline, tell guests…"
-            hint="e.g. “Message Maria on +351 912 345 678”"
+            label={t("contact")}
+            hint={t("contactHint")}
             error={errors.contact?.message}
           >
             {(aria) => (
@@ -112,7 +113,7 @@ function SettingsCard({
             )}
           </FormField>
           <Toggle
-            label="Ask for a song request"
+            label={t("askSong")}
             control={
               <Controller
                 control={form.control}
@@ -128,12 +129,8 @@ function SettingsCard({
             }
           />
           <Toggle
-            label="Email me when someone replies"
-            hint={
-              canNotify
-                ? "Sent to owners and editors, in addition to the bell in the app."
-                : "Needs Resend and the Supabase secret key (see README). You'll still get in-app notifications."
-            }
+            label={t("notify")}
+            hint={canNotify ? t("notifyOn") : t("notifyOff")}
             control={
               <Controller
                 control={form.control}
@@ -152,7 +149,7 @@ function SettingsCard({
             <div className="flex justify-end">
               <Button type="submit" disabled={pending || !form.formState.isDirty}>
                 {pending && <Loader2 className="animate-spin" aria-hidden />}
-                Save settings
+                {t("save")}
               </Button>
             </div>
           )}
@@ -192,23 +189,19 @@ function MealsCard({
   languages: string[];
 }) {
   const tt = useTranslations("app.translate");
+  const t = useTranslations("rsvpAdmin.setup");
   const [editing, setEditing] = useState<string | "new" | null>(null);
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Meal options</CardTitle>
-        <CardDescription>
-          Guests choose one when they accept an event that asks for meals.
-        </CardDescription>
+        <CardTitle className="font-serif text-2xl">{t("mealsTitle")}</CardTitle>
+        <CardDescription>{t("mealsText")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         {mealOptions.length === 0 && editing !== "new" && (
           <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-6 text-center">
             <UtensilsCrossed className="text-primary size-6" aria-hidden />
-            <p className="text-muted-foreground text-sm">
-              No meal options yet, so guests won&apos;t be asked. Add e.g. “Beef”, “Fish”,
-              “Vegetarian”, “Children&apos;s menu”.
-            </p>
+            <p className="text-muted-foreground text-sm">{t("noMeals")}</p>
           </div>
         )}
         <ul className="divide-y rounded-lg border empty:hidden">
@@ -244,18 +237,18 @@ function MealsCard({
                       variant="ghost"
                       size="icon-sm"
                       onClick={() => setEditing(m.id)}
-                      aria-label={`Edit ${m.name}`}
+                      aria-label={t("edit", { name: m.name })}
                     >
                       <Pencil aria-hidden />
                     </Button>
                     <ConfirmDialog
                       trigger={
-                        <Button variant="ghost" size="icon-sm" aria-label={`Delete ${m.name}`}>
+                        <Button variant="ghost" size="icon-sm" aria-label={t("delete", { name: m.name })}>
                           <Trash2 aria-hidden />
                         </Button>
                       }
-                      title={`Delete “${m.name}”?`}
-                      description="Guests who picked it will keep their RSVP but lose the meal choice."
+                      title={t("deleteTitle", { name: m.name })}
+                      description={t("deleteText")}
                       onConfirm={async () => {
                         const r = await deleteMealOption(m.id);
                         if (!r.ok) {
@@ -275,7 +268,7 @@ function MealsCard({
             <MealForm onDone={() => setEditing(null)} />
           ) : (
             <Button variant="outline" size="sm" onClick={() => setEditing("new")}>
-              <Plus aria-hidden /> Add meal option
+              <Plus aria-hidden /> {t("addMeal")}
             </Button>
           ))}
       </CardContent>
@@ -284,6 +277,7 @@ function MealsCard({
 }
 
 function MealForm({ meal, onDone }: { meal?: Meal; onDone: () => void }) {
+  const t = useTranslations("rsvpAdmin.setup");
   const [name, setName] = useState(meal?.name ?? "");
   const [description, setDescription] = useState(meal?.description ?? "");
   const [pending, startTransition] = useTransition();
@@ -302,25 +296,25 @@ function MealForm({ meal, onDone }: { meal?: Meal; onDone: () => void }) {
       <Input
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Name, e.g. Fish"
-        aria-label="Meal name"
+        placeholder={t("mealName")}
+        aria-label={t("mealNameLabel")}
         maxLength={80}
         autoFocus
       />
       <Input
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description (optional)"
-        aria-label="Meal description"
+        placeholder={t("mealDescription")}
+        aria-label={t("mealDescriptionLabel")}
         maxLength={300}
       />
       <div className="flex gap-1">
         <Button type="submit" size="sm" className="h-9" disabled={pending || !name.trim()}>
           {pending && <Loader2 className="animate-spin" aria-hidden />}
-          Save
+          {t("save2")}
         </Button>
         <Button type="button" size="sm" variant="ghost" className="h-9" onClick={onDone}>
-          Cancel
+          {t("cancel")}
         </Button>
       </div>
     </form>
@@ -336,18 +330,17 @@ function MealEventsCard({
   readOnly: boolean;
   hasMeals: boolean;
 }) {
+  const t = useTranslations("rsvpAdmin.setup");
   const [pending, startTransition] = useTransition();
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Which events ask for a meal?</CardTitle>
-        <CardDescription>
-          {hasMeals ? "Usually just the reception dinner." : "Add meal options first."}
-        </CardDescription>
+        <CardTitle className="font-serif text-2xl">{t("mealEvents")}</CardTitle>
+        <CardDescription>{hasMeals ? t("mealEventsHint") : t("addMealsFirst")}</CardDescription>
       </CardHeader>
       <CardContent>
         {events.length === 0 ? (
-          <p className="text-muted-foreground text-sm">No events yet. Add them in Settings.</p>
+          <p className="text-muted-foreground text-sm">{t("noEvents")}</p>
         ) : (
           <ul className="divide-y rounded-lg border">
             {events.map((e) => (
@@ -356,7 +349,7 @@ function MealEventsCard({
                 <Switch
                   checked={e.mealChoice}
                   disabled={readOnly || pending}
-                  aria-label={`Ask for a meal choice at ${e.name}`}
+                  aria-label={t("askAt", { name: e.name })}
                   onCheckedChange={(on) =>
                     startTransition(async () => {
                       const r = await setEventMealChoice(e.id, on);

@@ -1,13 +1,14 @@
+import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
 const money = z
   .number()
   .finite()
-  .min(0, "Amounts can't be negative")
-  .max(9_999_999_999, "That amount is too large");
+  .min(0, v("negative"))
+  .max(9_999_999_999, v("tooLarge"));
 const text = (max: number) =>
-  z.string().trim().max(max, `Please keep this under ${max} characters`);
-const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")]);
+  z.string().trim().max(max, v("tooLong", max));
+const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]);
 
 /** A file already uploaded to storage: its path and original name. */
 export const fileRefSchema = z
@@ -16,12 +17,12 @@ export const fileRefSchema = z
 export type FileRef = z.infer<typeof fileRefSchema>;
 
 export const categorySchema = z.object({
-  name: text(60).min(1, "Please enter a name"),
+  name: text(60).min(1, v("name")),
   allocated: money,
 });
 
 export const paymentSchema = z.object({
-  amount: z.number().finite().positive("Payments must be more than 0").max(9_999_999_999),
+  amount: z.number().finite().positive(v("positive")).max(9_999_999_999),
   dueDate: date,
   paid: z.boolean(),
   paidOn: date,
@@ -30,9 +31,9 @@ export const paymentSchema = z.object({
 export type PaymentValues = z.infer<typeof paymentSchema>;
 
 export const expenseSchema = z.object({
-  categoryId: z.uuid("Please choose a category"),
+  categoryId: z.uuid(v("category")),
   vendorId: z.uuid().nullable(),
-  name: text(120).min(1, "Please enter a name"),
+  name: text(120).min(1, v("name")),
   estimated: money,
   actual: money.nullable(),
   notes: text(4000),
@@ -50,14 +51,14 @@ export const VENDOR_STATUS_VALUES = [
 ] as const;
 
 export const vendorSchema = z.object({
-  name: text(120).min(1, "Please enter a name"),
+  name: text(120).min(1, v("name")),
   categoryId: z.uuid().nullable(),
   contactName: text(120),
-  email: z.union([z.literal(""), z.email("Please enter a valid email").max(320)]),
+  email: z.union([z.literal(""), z.email(v("email")).max(320)]),
   phone: text(50),
   website: z.union([
     z.literal(""),
-    z.url("Please enter a full web address, e.g. https://…").max(300),
+    z.url(v("url")).max(300),
   ]),
   instagram: text(100),
   address: text(300),

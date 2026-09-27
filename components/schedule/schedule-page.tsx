@@ -2,7 +2,6 @@
 
 import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import { format, parseISO } from "date-fns";
 import {
   CalendarPlus,
   Clock,
@@ -16,6 +15,7 @@ import {
   Sparkles,
   User,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { addTemplateDay, importEvents, shiftSchedule } from "@/app/app/schedule/actions";
 import { PageHeader } from "@/components/app/page-header";
@@ -30,6 +30,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { ScheduleItemRow } from "@/lib/database.types";
+import { fmtDate, fmtTime } from "@/lib/i18n/format";
 import { endTime, overlaps, sortByTime } from "@/lib/schedule/time";
 import { cn } from "@/lib/utils";
 import { ItemSheet } from "./item-sheet";
@@ -46,6 +47,9 @@ type Props = {
 const WEDDING = "";
 
 export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: Props) {
+  const t = useTranslations("schedule");
+  const locale = useLocale();
+  const time = (hhmm: string | null) => fmtTime(hhmm, locale);
   // Days to show: the wedding day, days that already have items, and other event days.
   const days = useMemo(() => {
     const set = new Set<string>([WEDDING]);
@@ -70,7 +74,10 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
   const dayItems = sortByTime(dayItemsRaw());
   const clash = overlaps(dayItems);
   const vendorById = new Map(vendors.map((v) => [v.id, v]));
-  const ceremony = events.find((e) => /ceremon/i.test(e.name) && e.start_time);
+  // the ceremony: named so in English or the couple's language, else the first timed event
+  const ceremony =
+    events.find((e) => (/ceremon/i.test(e.name) || e.name === t("template.ceremony")) && e.start_time) ??
+    events.find((e) => e.start_time);
   const [ceremonyTime, setCeremonyTime] = useState(ceremony?.start_time?.slice(0, 5) ?? "15:00");
   // events of this day that aren't on the schedule yet (linked, or an item with the same name)
   const dayEvents = events.filter(
@@ -87,8 +94,10 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
   function label(d: string) {
     const date = dateOf(d);
     if (d === WEDDING)
-      return date ? `Wedding day · ${format(parseISO(date), "EEE d MMM")}` : "Wedding day";
-    return format(parseISO(d), "EEE d MMM");
+      return date
+        ? t("weddingDayOn", { date: fmtDate(date, locale, "medium") })
+        : t("weddingDay");
+    return fmtDate(d, locale, "medium");
   }
 
   function run(p: Promise<{ ok: boolean; error?: string }>, success?: string) {
@@ -106,18 +115,18 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
   return (
     <>
       <PageHeader
-        title="Day-of schedule"
-        description="A minute-by-minute run sheet for you, your wedding party and your vendors."
+        title={t("title")}
+        description={t("description")}
         actions={
           <>
             <Button asChild variant="outline" size="sm">
               <Link href={`/print/schedule${serverDay ? `?day=${serverDay}` : ""}`} target="_blank">
-                <Printer aria-hidden /> Print
+                <Printer aria-hidden /> {t("print")}
               </Link>
             </Button>
             {canEdit && (
               <Button size="sm" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> Add item
+                <Plus aria-hidden /> {t("add")}
               </Button>
             )}
           </>
@@ -126,7 +135,7 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
 
       <div className="-mx-4 mb-6 overflow-x-auto px-4 sm:mx-0 sm:px-0">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2" role="tablist" aria-label="Day">
+          <div className="flex items-center gap-2" role="tablist" aria-label={t("day")}>
             {allDays.map((d) => (
               <button
                 key={d || "wedding"}
@@ -148,11 +157,11 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
           {canEdit && (
             <label className="text-muted-foreground hover:bg-accent flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full border border-dashed px-3 text-sm">
               <CalendarPlus className="size-4" aria-hidden />
-              <span>Another day</span>
+              <span>{t("anotherDay")}</span>
               <input
                 type="date"
                 className="w-0 opacity-0"
-                aria-label="Plan another day"
+                aria-label={t("planAnother")}
                 onChange={(e) => {
                   if (!e.target.value) return;
                   const d = e.target.value === weddingDate ? WEDDING : e.target.value;
@@ -168,18 +177,15 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
       {canEdit && dayEvents.length > 0 && (
         <div className="bg-primary-soft mb-4 flex flex-wrap items-center gap-3 rounded-xl px-4 py-3 text-sm">
           <span className="flex-1">
-            {dayEvents.length === 1
-              ? `“${dayEvents[0].name}” is`
-              : `${dayEvents.length} events are`}{" "}
-            on this day. Add them to the schedule?
+            {t("eventsToAdd", { count: dayEvents.length, name: dayEvents[0].name })}
           </span>
           <Button
             size="sm"
             variant="secondary"
             disabled={busy}
-            onClick={() => run(importEvents(serverDay), "Events added")}
+            onClick={() => run(importEvents(serverDay), t("eventsAdded"))}
           >
-            <Download aria-hidden /> Add events
+            <Download aria-hidden /> {t("addEvents")}
           </Button>
         </div>
       )}
@@ -187,24 +193,18 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
       {dayItems.length === 0 ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
           <Clock className="text-primary mx-auto size-10" aria-hidden />
-          <h2 className="mt-4 text-2xl">Nothing planned for this day yet</h2>
-          <p className="text-muted-foreground mx-auto mt-2 max-w-md">
-            Start from a typical wedding day (getting ready, ceremony, drinks, dinner, speeches,
-            party), timed around your ceremony. Then change anything.
-          </p>
+          <h2 className="mt-4 text-2xl">{t("emptyTitle")}</h2>
+          <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("emptyText")}</p>
           {canEdit && (
             <form
               className="mt-6 flex flex-wrap items-end justify-center gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
-                run(
-                  addTemplateDay(serverDay, ceremonyTime),
-                  "Your day is sketched out. Adjust away!",
-                );
+                run(addTemplateDay(serverDay, ceremonyTime), t("sketched"));
               }}
             >
-              <div className="space-y-1 text-left">
-                <Label htmlFor="ceremony-time">Ceremony starts at</Label>
+              <div className="space-y-1 text-start">
+                <Label htmlFor="ceremony-time">{t("ceremonyAt")}</Label>
                 <Input
                   id="ceremony-time"
                   type="time"
@@ -216,26 +216,28 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
               </div>
               <Button type="submit" disabled={busy}>
                 {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Sparkles aria-hidden />}{" "}
-                Use the template
+                {t("useTemplate")}
               </Button>
               <Button type="button" variant="outline" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> Start from scratch
+                <Plus aria-hidden /> {t("fromScratch")}
               </Button>
             </form>
           )}
         </div>
       ) : (
         <>
-          <ol className="before:bg-border relative space-y-3 before:absolute before:top-2 before:bottom-2 before:left-[4.25rem] before:w-px sm:before:left-[5.25rem]">
+          <ol className="before:bg-border relative space-y-3 before:absolute before:start-[4.25rem] before:top-2 before:bottom-2 before:w-px sm:before:start-[5.25rem]">
             {dayItems.map((item) => {
               const end = endTime(item.start_time, item.duration_min);
               const vendor = item.vendor_id ? vendorById.get(item.vendor_id) : undefined;
               const overlapWith = clash.get(item.id);
               return (
                 <li key={item.id} className="relative flex gap-3 sm:gap-5">
-                  <div className="w-14 shrink-0 pt-3 text-right sm:w-16">
-                    <p className="font-medium tabular-nums">{item.start_time.slice(0, 5)}</p>
-                    {end && <p className="text-muted-foreground text-xs tabular-nums">{end}</p>}
+                  <div className="w-14 shrink-0 pt-3 text-end sm:w-16">
+                    <p className="font-medium tabular-nums">{time(item.start_time)}</p>
+                    {end && (
+                      <p className="text-muted-foreground text-xs tabular-nums">{time(end)}</p>
+                    )}
                   </div>
                   <span
                     className="bg-primary ring-background relative z-10 mt-4 size-2.5 shrink-0 rounded-full ring-4"
@@ -246,12 +248,12 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
                       <button
                         type="button"
                         onClick={() => setSheet(item.id)}
-                        className="focus-visible:ring-ring min-w-0 flex-1 rounded text-left font-medium hover:underline focus-visible:ring-2 focus-visible:outline-none"
+                        className="focus-visible:ring-ring min-w-0 flex-1 rounded text-start font-medium hover:underline focus-visible:ring-2 focus-visible:outline-none"
                       >
                         {item.title}
                         {item.duration_min ? (
-                          <span className="text-muted-foreground ml-2 text-xs font-normal">
-                            {item.duration_min} min
+                          <span className="text-muted-foreground ms-2 text-xs font-normal">
+                            {t("minutes", { count: item.duration_min })}
                           </span>
                         ) : null}
                       </button>
@@ -261,14 +263,14 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
                             <Button
                               variant="ghost"
                               size="icon-sm"
-                              aria-label={`More for ${item.title}`}
+                              aria-label={t("moreFor", { title: item.title })}
                             >
                               <MoreHorizontal aria-hidden />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem onSelect={() => setSheet(item.id)}>
-                              Edit
+                              {t("edit")}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             {[15, -15, 30, -30].map((d) => (
@@ -278,12 +280,13 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
                                 onSelect={() =>
                                   run(
                                     shiftSchedule(item.id, serverDay, d),
-                                    d > 0 ? `Moved ${d} min later` : `Moved ${-d} min earlier`,
+                                    d > 0
+                                      ? t("movedLater", { count: d })
+                                      : t("movedEarlier", { count: -d }),
                                   )
                                 }
                               >
-                                {d > 0 ? `${d} min later` : `${-d} min earlier`}, with everything
-                                after
+                                {d > 0 ? t("later", { count: d }) : t("earlier", { count: -d })}
                               </DropdownMenuItem>
                             ))}
                           </DropdownMenuContent>
@@ -319,8 +322,9 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
                     {item.notes && <p className="mt-1 text-sm whitespace-pre-wrap">{item.notes}</p>}
                     {overlapWith && (
                       <p className="text-muted-foreground mt-1 text-xs">
-                        Overlaps with “{dayItems.find((i) => i.id === overlapWith)?.title}”. Fine if
-                        they happen side by side.
+                        {t("overlaps", {
+                          title: dayItems.find((i) => i.id === overlapWith)?.title ?? "",
+                        })}
                       </p>
                     )}
                   </div>
@@ -329,7 +333,9 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
             })}
           </ol>
           {lastEnd && (
-            <p className="text-muted-foreground mt-4 text-sm">Day ends around {lastEnd}.</p>
+            <p className="text-muted-foreground mt-4 text-sm">
+              {t("dayEnds", { time: time(lastEnd) })}
+            </p>
           )}
         </>
       )}

@@ -4,6 +4,7 @@ import { useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteTask, saveTask } from "@/app/app/tasks/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -48,6 +49,7 @@ export function TaskSheet({
   canEdit: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const t = useTranslations("tasks.sheet");
   const [pending, startTransition] = useTransition();
   const form = useForm<TaskValues>({
     resolver: zodResolver(taskSchema),
@@ -69,7 +71,7 @@ export function TaskSheet({
     startTransition(async () => {
       const r = await saveTask(task?.id ?? null, values);
       if (!r.ok) return void toast.error(r.error);
-      toast.success(task ? "To-do saved" : "To-do added");
+      toast.success(task ? t("saved") : t("added"));
       onOpenChange(false);
     }),
   );
@@ -80,21 +82,21 @@ export function TaskSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-md">
         <form onSubmit={submit} className="flex h-full flex-col">
           <SheetHeader>
-            <SheetTitle>{task ? (canEdit ? "Edit to-do" : "To-do") : "New to-do"}</SheetTitle>
-            <SheetDescription>Give it a due date and a person, so nothing slips.</SheetDescription>
+            <SheetTitle>{task ? (canEdit ? t("edit") : t("view")) : t("new")}</SheetTitle>
+            <SheetDescription>{t("hint")}</SheetDescription>
           </SheetHeader>
           <fieldset disabled={!canEdit} className="flex-1 space-y-4 px-4">
-            <FormField id="task-title" label="What needs doing?" error={errors.title?.message}>
+            <FormField id="task-title" label={t("what")} error={errors.title?.message}>
               {(a) => (
                 <Input {...a} {...form.register("title")} maxLength={200} autoFocus={!task} />
               )}
             </FormField>
             <div className="grid grid-cols-2 gap-3">
-              <FormField id="task-due" label="Due date" error={errors.due_date?.message}>
+              <FormField id="task-due" label={t("due")} error={errors.due_date?.message}>
                 {(a) => <Input {...a} type="date" {...form.register("due_date")} />}
               </FormField>
               <div className="space-y-2">
-                <Label htmlFor="task-assignee">Who</Label>
+                <Label htmlFor="task-assignee">{t("who")}</Label>
                 <Select
                   value={form.watch("assignee_id") || NOBODY}
                   onValueChange={(v) =>
@@ -106,7 +108,7 @@ export function TaskSheet({
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={NOBODY}>Nobody yet</SelectItem>
+                    <SelectItem value={NOBODY}>{t("nobodyYet")}</SelectItem>
                     {members.map((m) => (
                       <SelectItem key={m.id} value={m.id}>
                         {m.name}
@@ -118,8 +120,8 @@ export function TaskSheet({
             </div>
             <FormField
               id="task-category"
-              label="Category (optional)"
-              hint="e.g. Guests, Vendors, Attire"
+              label={t("category")}
+              hint={t("categoryHint")}
             >
               {(a) => (
                 <Input
@@ -135,7 +137,7 @@ export function TaskSheet({
                 <option key={c} value={c} />
               ))}
             </datalist>
-            <FormField id="task-notes" label="Notes">
+            <FormField id="task-notes" label={t("notes")}>
               {(a) => <Textarea {...a} {...form.register("notes")} rows={5} maxLength={4000} />}
             </FormField>
           </fieldset>
@@ -145,10 +147,10 @@ export function TaskSheet({
                 <ConfirmDialog
                   trigger={
                     <Button type="button" variant="ghost" className="text-destructive">
-                      <Trash2 aria-hidden /> Delete
+                      <Trash2 aria-hidden /> {t("delete")}
                     </Button>
                   }
-                  title="Delete this to-do?"
+                  title={t("deleteTitle")}
                   description={task.title}
                   onConfirm={async () => {
                     const r = await deleteTask(task.id);
@@ -156,7 +158,7 @@ export function TaskSheet({
                       toast.error(r.error);
                       return false;
                     }
-                    toast.success("To-do deleted");
+                    toast.success(t("deleted"));
                     onOpenChange(false);
                   }}
                 />
@@ -165,7 +167,7 @@ export function TaskSheet({
               )}
               <Button type="submit" disabled={pending}>
                 {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
-                {task ? "Save" : "Add to-do"}
+                {task ? t("save") : t("add")}
               </Button>
             </SheetFooter>
           )}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { loadHouseholdRsvp, recordRsvp } from "@/app/app/rsvp/actions";
 import { RsvpForm } from "@/components/rsvp/rsvp-form";
@@ -23,6 +24,7 @@ export function RecordReplyDialog({
   household: { name: string; code: string } | null;
   onClose: () => void;
 }) {
+  const t = useTranslations("rsvpAdmin.recordReply");
   const [data, setData] = useState<RsvpData | null>(null);
   const [state, setState] = useState<RsvpFormState | null>(null);
 
@@ -50,19 +52,17 @@ export function RecordReplyDialog({
     <Dialog open={!!household} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-h-[92dvh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="font-serif text-2xl">RSVP for {household?.name}</DialogTitle>
-          <DialogDescription>
-            Record a reply you got by phone, card or message. Deadlines don&apos;t apply to you.
-          </DialogDescription>
+          <DialogTitle className="font-serif text-2xl">
+            {t("title", { name: household?.name ?? "" })}
+          </DialogTitle>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         {!data || !state ? (
           <div className="flex justify-center py-12">
-            <Loader2 className="text-muted-foreground animate-spin" aria-label="Loading" />
+            <Loader2 className="text-muted-foreground animate-spin" aria-label={t("loading")} />
           </div>
         ) : data.invites.length === 0 ? (
-          <p className="text-muted-foreground py-6 text-center">
-            Nobody in this household is invited to an event yet. Invite them from the Guests page.
-          </p>
+          <p className="text-muted-foreground py-6 text-center">{t("nobody")}</p>
         ) : (
           <RsvpForm
             data={data}
@@ -70,10 +70,10 @@ export function RecordReplyDialog({
             onStateChange={setState}
             onSubmit={(payload) => recordRsvp(data.household.code, payload)}
             onSaved={() => {
-              toast.success(`RSVP saved for ${data.household.name}`);
+              toast.success(t("saved", { name: data.household.name }));
               onClose();
             }}
-            submitLabel="Save RSVP"
+            submitLabel={t("save")}
           />
         )}
       </DialogContent>

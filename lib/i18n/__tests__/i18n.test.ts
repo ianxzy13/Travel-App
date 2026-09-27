@@ -1,7 +1,7 @@
 import { IntlMessageFormat } from "intl-messageformat";
 import { describe, expect, it } from "vitest";
-import en from "@/messages/en.json";
 import { LOCALES } from "@/i18n/locales";
+import { EN as en, PARTS } from "@/i18n/messages";
 import { negotiate, resolveAppLocale, resolveGuestLocale, withFallback } from "@/i18n/resolve";
 import { localizeContent, localized, pruneTranslation, translationProgress } from "../content";
 import { fmtDate, fmtEventWhen, fmtMoney, fmtTime, zonedToInstant } from "../format";
@@ -17,18 +17,17 @@ describe("choosing a language", () => {
     expect(negotiate("de,en", ["en", "sl"])).toBe("en");
   });
 
-  it("guests: explicit choice > earlier choice > household > browser > wedding default", () => {
+  it("guests: explicit choice > earlier choice > household > browser > couple's language", () => {
     const wedding = ["sl", "en"];
     expect(resolveGuestLocale({ asked: "ja", weddingLanguages: wedding })).toBe("ja");
-    expect(resolveGuestLocale({ cookie: "en", preferred: "sl", weddingLanguages: wedding })).toBe(
-      "en",
-    );
-    // an earlier choice the couple doesn't offer is ignored
     expect(resolveGuestLocale({ cookie: "de", preferred: "sl", weddingLanguages: wedding })).toBe(
-      "sl",
+      "de",
     );
-    expect(resolveGuestLocale({ acceptLanguage: "en-US", weddingLanguages: wedding })).toBe("en");
-    expect(resolveGuestLocale({ acceptLanguage: "de-DE", weddingLanguages: wedding })).toBe("sl");
+    expect(resolveGuestLocale({ preferred: "it", acceptLanguage: "en", weddingLanguages: wedding })).toBe(
+      "it",
+    );
+    expect(resolveGuestLocale({ acceptLanguage: "de-DE", weddingLanguages: wedding })).toBe("de");
+    expect(resolveGuestLocale({ acceptLanguage: "xx", weddingLanguages: wedding })).toBe("sl");
     expect(resolveGuestLocale({})).toBe("en");
   });
 
@@ -67,7 +66,10 @@ describe("every language file", () => {
 
   for (const { code } of LOCALES) {
     it(`${code}: same keys, placeholders and tags as English`, async () => {
-      const messages = (await import(`@/messages/${code}.json`)).default;
+      const parts = await Promise.all(
+        PARTS.map(async (p) => (await import(`@/messages/${code}/${p}.json`)).default),
+      );
+      const messages = Object.assign({}, ...parts);
       expect(keys(messages).sort()).toEqual([...enKeys].sort());
       for (const k of enKeys) {
         const source = String(get(en, k));

@@ -2,13 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { isOwnFile, removeFiles } from "@/lib/files";
 import { createClient } from "@/lib/supabase/server";
 import { vendorSchema } from "@/lib/validation/budget";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change vendors." };
 
 async function editor() {
   const { wedding, role } = await requireWedding();
@@ -27,12 +27,12 @@ export async function saveVendor(
   id?: string,
 ): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = vendorSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const wid = ctx.wedding.id;
-  if (!isOwnFile(v.contract?.path, wid)) return NO_PERMISSION;
+  if (!isOwnFile(v.contract?.path, wid)) return noPermission();
 
   const row = {
     name: v.name,
@@ -57,7 +57,7 @@ export async function saveVendor(
       .eq("id", id)
       .eq("wedding_id", wid)
       .maybeSingle();
-    if (!old) return { ok: false, error: "This vendor no longer exists." };
+    if (!old) return await err("notFound");
     const { error } = await ctx.sb.from("vendors").update(row).eq("id", id).eq("wedding_id", wid);
     if (error) return fail("saveVendor", error);
     if (old.contract_path && old.contract_path !== row.contract_path)
@@ -78,7 +78,7 @@ export async function saveVendor(
 
 export async function deleteVendor(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !z.uuid().safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !z.uuid().safeParse(id).success) return noPermission();
   // Linked expenses stay in the budget (their vendor is cleared).
   const { data, error } = await ctx.sb
     .from("vendors")
@@ -97,16 +97,16 @@ export async function deleteVendor(id: string): Promise<ActionResult> {
 /** Turns a vendor's quote into a budget expense in the vendor's category. */
 export async function addQuoteToBudget(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !z.uuid().safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !z.uuid().safeParse(id).success) return noPermission();
   const { data: vendor } = await ctx.sb
     .from("vendors")
     .select("name, category_id, quote")
     .eq("id", id)
     .eq("wedding_id", ctx.wedding.id)
     .maybeSingle();
-  if (!vendor) return { ok: false, error: "This vendor no longer exists." };
+  if (!vendor) return await err("notFound");
   if (!vendor.category_id)
-    return { ok: false, error: "Choose a budget category for this vendor first." };
+    return await err("vendorNeedsCategory");
 
   const { error } = await ctx.sb.from("expenses").insert({
     wedding_id: ctx.wedding.id,

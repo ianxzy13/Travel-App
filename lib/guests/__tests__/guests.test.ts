@@ -20,6 +20,7 @@ function guest(overrides: Partial<GuestView>): GuestView {
     id: "g",
     householdId: "h",
     householdName: "Household",
+    householdLanguage: "",
     firstName: "",
     lastName: "",
     name: "",
@@ -101,7 +102,7 @@ describe("CSV import mapping", () => {
     } as const;
     const result = mapRows(rows, mapping, names);
 
-    expect(result.errors).toEqual([{ row: 4, message: "No name, row skipped" }]);
+    expect(result.errors).toEqual([{ row: 4, problem: "noName" }]);
     expect(result.guests).toHaveLength(2);
     expect(result.guests[0]).toMatchObject({
       firstName: "Ann",
@@ -276,7 +277,7 @@ describe("buildGuestViews", () => {
         { ...base, id: "1", first_name: "Ann", last_name: "Smith", plus_one_of: null },
         { ...base, id: "2", first_name: "", last_name: "", plus_one_of: "1" },
       ],
-      households: [{ id: "h", name: "Smiths" }],
+      households: [{ id: "h", name: "Smiths", preferred_language: null }],
       invites: [{ guest_id: "1", event_id: "e" }],
       guestTags: [],
     });

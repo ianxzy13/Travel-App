@@ -3,6 +3,7 @@
 import { SortableContext, horizontalListSortingStrategy, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import type { BoardView } from "@/lib/inspiration/load";
 import { cn } from "@/lib/utils";
@@ -30,8 +31,9 @@ export function BoardBar({
   onSelect: (id: string) => void;
   onNew: () => void;
 }) {
+  const t = useTranslations("inspiration");
   return (
-    <nav aria-label="Boards" className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+    <nav aria-label={t("boards")} className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
       <ul className="flex items-center gap-2">
         <li>
           <button
@@ -45,7 +47,7 @@ export function BoardBar({
                 : "hover:bg-accent",
             )}
           >
-            All pins{" "}
+            {t("allPins")}{" "}
             <span className={selected === "all" ? undefined : "text-muted-foreground"}>
               {total}
             </span>
@@ -68,7 +70,7 @@ export function BoardBar({
         {canEdit && (
           <li>
             <Button variant="ghost" size="sm" onClick={onNew} className="rounded-full">
-              <Plus aria-hidden /> New board
+              <Plus aria-hidden /> {t("newBoard")}
             </Button>
           </li>
         )}
@@ -88,6 +90,7 @@ function BoardChip({
   canEdit: boolean;
   onSelect: () => void;
 }) {
+  const t = useTranslations("inspiration");
   const s = useSortable({ id: `board:${board.id}`, disabled: !canEdit });
   // Only pins count as "dropping onto" a board (not other boards being sorted).
   const pinOver = s.isOver && String(s.active?.id).startsWith("pin:");
@@ -108,9 +111,9 @@ function BoardChip({
           ref={s.setActivatorNodeRef}
           {...s.attributes}
           {...s.listeners}
-          aria-label={`Reorder ${board.name}`}
+          aria-label={t("reorder", { name: board.name })}
           className={cn(
-            "focus-visible:ring-ring relative z-10 -mr-7 flex h-9 w-7 cursor-grab touch-none items-center justify-end rounded-l-full pr-0.5 focus-visible:ring-2 focus-visible:outline-none",
+            "focus-visible:ring-ring relative z-10 -me-7 flex h-9 w-7 cursor-grab touch-none items-center justify-end rounded-s-full pe-0.5 focus-visible:ring-2 focus-visible:outline-none",
             active ? "text-primary-foreground/80" : "text-muted-foreground hover:text-foreground",
           )}
         >
@@ -123,7 +126,7 @@ function BoardChip({
         aria-current={active ? "page" : undefined}
         className={cn(
           chip,
-          canEdit && "pl-7",
+          canEdit && "ps-7",
           active ? "bg-primary text-primary-foreground border-primary" : "hover:bg-accent",
         )}
       >

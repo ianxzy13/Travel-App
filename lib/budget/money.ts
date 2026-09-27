@@ -12,10 +12,14 @@ export function sumMoney(amounts: (number | string | null | undefined)[]) {
 }
 
 /** "€1,234.50" – uses the viewer's locale and the wedding's currency. */
-export function formatMoney(amount: number, currency: string, opts: { cents?: boolean } = {}) {
+export function formatMoney(
+  amount: number,
+  currency: string,
+  opts: { cents?: boolean; locale?: string } = {},
+) {
   const cents = opts.cents ?? !Number.isInteger(amount);
   try {
-    return new Intl.NumberFormat(undefined, {
+    return new Intl.NumberFormat(opts.locale, {
       style: "currency",
       currency,
       minimumFractionDigits: cents ? 2 : 0,

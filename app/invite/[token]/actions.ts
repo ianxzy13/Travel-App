@@ -1,9 +1,10 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser, setCurrentWedding } from "@/lib/wedding";
+import { fail } from "@/lib/errors";
 
 export async function acceptInvitation(token: string): Promise<ActionResult> {
   await requireUser();
@@ -13,7 +14,7 @@ export async function acceptInvitation(token: string): Promise<ActionResult> {
   });
 
   if (error || !weddingId) {
-    return fail("acceptInvitation", error, "This invitation is invalid or has expired.");
+    return fail("acceptInvitation", error, "invitationInvalid");
   }
 
   await setCurrentWedding(weddingId);

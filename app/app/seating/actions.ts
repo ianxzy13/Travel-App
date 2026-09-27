@@ -1,5 +1,6 @@
 "use server";
 
+import { err } from "@/lib/errors";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
@@ -43,11 +44,11 @@ export async function saveSeatingChanges(
   payload: unknown,
 ): Promise<ActionResult | { ok: false; error: string; retry: boolean }> {
   const { role } = await requireWedding();
-  if (!canEdit(role)) return { ok: false, error: "You have view-only access.", retry: false };
+  if (!canEdit(role)) return { ...(await err("viewOnly")), retry: false };
 
   const parsed = payloadSchema.safeParse(payload);
   if (!parsed.success || !z.uuid().safeParse(layoutId).success) {
-    return { ok: false, error: "That change couldn't be saved.", retry: false };
+    return { ...(await err("notSaved")), retry: false };
   }
 
   const supabase = await createClient();
@@ -64,10 +65,7 @@ export async function saveSeatingChanges(
         error.message.includes(m),
       );
     return {
-      ok: false,
-      error: rejected
-        ? "Someone else changed the seating at the same time. Reloading the latest version."
-        : "Couldn't save. Retrying…",
+      ...(await err(rejected ? "seatingConflict" : "saveRetrying")),
       retry: !rejected,
     };
   }

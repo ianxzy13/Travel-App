@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDays, format, parseISO } from "date-fns";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Car,
   ExternalLink,
@@ -46,7 +47,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import type { FlightRow } from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
-import { FLIGHT_CATEGORY, FLIGHT_DIRECTION } from "@/lib/places/labels";
+import { fmtDate, fmtTime } from "@/lib/i18n/format";
+import { FLIGHT_CATEGORIES, FLIGHT_DIRECTIONS } from "@/lib/places/labels";
 import {
   flightSearchLinks,
   groupByDay,
@@ -80,10 +82,11 @@ export function TravelPage({
   currency,
   canEdit,
 }: Props) {
+  const t = useTranslations("travel");
   const [sheet, setSheet] = useState<string | { new: FlightValues["category"] } | null>(null);
   const guestName = new Map(guests.map((g) => [g.id, g.name]));
   const travellers = (f: FlightItem) => [
-    ...f.travellerIds.map((id) => guestName.get(id) ?? "Guest"),
+    ...f.travellerIds.map((id) => guestName.get(id) ?? t("guestFallback")),
     ...(f.other_travellers ? [f.other_travellers] : []),
   ];
   const toBoard = (f: FlightItem, dir: "arrival" | "departure"): BoardFlight => ({
@@ -108,12 +111,12 @@ export function TravelPage({
   return (
     <>
       <PageHeader
-        title="Travel"
-        description="Flights for your guests, for the two of you, and the honeymoon."
+        title={t("title")}
+        description={t("description")}
         actions={
           canEdit && (
             <Button size="sm" onClick={() => setSheet({ new: "guest" })}>
-              <Plus aria-hidden /> Add flight
+              <Plus aria-hidden /> {t("add")}
             </Button>
           )
         }
@@ -129,15 +132,15 @@ export function TravelPage({
         <Tabs defaultValue="arrivals" className="gap-4">
           <TabsList className="flex-wrap">
             <TabsTrigger value="arrivals">
-              <PlaneLanding aria-hidden /> Arrivals ({arrivals.length})
+              <PlaneLanding aria-hidden /> {t("arrivals", { count: arrivals.length })}
             </TabsTrigger>
             <TabsTrigger value="departures">
-              <PlaneTakeoff aria-hidden /> Departures ({departures.length})
+              <PlaneTakeoff aria-hidden /> {t("departures", { count: departures.length })}
             </TabsTrigger>
             <TabsTrigger value="ours">
-              <Plane aria-hidden /> Us &amp; honeymoon ({ours.length})
+              <Plane aria-hidden /> {t("ours", { count: ours.length })}
             </TabsTrigger>
-            <TabsTrigger value="all">All flights ({flights.length})</TabsTrigger>
+            <TabsTrigger value="all">{t("all", { count: flights.length })}</TabsTrigger>
           </TabsList>
           <TabsContent value="arrivals">
             <Board
@@ -167,10 +170,10 @@ export function TravelPage({
             {canEdit && (
               <div className="mt-3 flex flex-wrap gap-2">
                 <Button variant="outline" size="sm" onClick={() => setSheet({ new: "couple" })}>
-                  <Plus aria-hidden /> Our flight
+                  <Plus aria-hidden /> {t("ourFlight")}
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => setSheet({ new: "honeymoon" })}>
-                  <Plus aria-hidden /> Honeymoon flight
+                  <Plus aria-hidden /> {t("honeymoonFlight")}
                 </Button>
               </div>
             )}
@@ -215,6 +218,7 @@ function SearchFlights({
   weddingDate: string | null;
   canEdit: boolean;
 }) {
+  const t = useTranslations("travel");
   const shift = (d: string | null, n: number) =>
     d ? format(addDays(parseISO(d), n), "yyyy-MM-dd") : "";
   const [from, setFrom] = useState("");
@@ -227,45 +231,42 @@ function SearchFlights({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Search flights</CardTitle>
-        <p className="text-muted-foreground text-sm">
-          Opens Google Flights or Skyscanner with your trip filled in. Use 3-letter airport codes
-          (e.g. LHR, LIS).
-        </p>
+        <CardTitle className="font-serif text-2xl">{t("search")}</CardTitle>
+        <p className="text-muted-foreground text-sm">{t("searchHint")}</p>
       </CardHeader>
       <CardContent>
         <div className="grid gap-3 sm:grid-cols-[1fr_1fr_1fr_1fr]">
           <div className="space-y-1.5">
-            <Label htmlFor="sf-from">From</Label>
+            <Label htmlFor="sf-from">{t("from")}</Label>
             <Input
               id="sf-from"
               value={from}
               maxLength={3}
-              placeholder="e.g. LHR"
+              placeholder={t("fromPlaceholder")}
               onChange={(e) => setFrom(e.target.value.toUpperCase())}
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="sf-to">To (your wedding)</Label>
+            <Label htmlFor="sf-to">{t("to")}</Label>
             <div className="flex gap-1">
               <Input
                 id="sf-to"
                 value={to}
                 maxLength={3}
-                placeholder="e.g. LIS"
+                placeholder={t("toPlaceholder")}
                 onChange={(e) => setTo(e.target.value.toUpperCase())}
               />
               {canEdit && iata(to) && iata(to) !== destinationAirport && (
                 <Button
                   variant="ghost"
                   size="icon"
-                  aria-label="Save as our airport"
-                  title="Save as our airport"
+                  aria-label={t("saveAirport")}
+                  title={t("saveAirport")}
                   disabled={pending}
                   onClick={() =>
                     startTransition(async () => {
                       const r = await setDestinationAirport(to);
-                      if (r.ok) toast.success(`${to} saved as your airport`);
+                      if (r.ok) toast.success(t("airportSaved", { code: to }));
                       else toast.error(r.error);
                     })
                   }
@@ -276,7 +277,7 @@ function SearchFlights({
             </div>
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="sf-depart">Out</Label>
+            <Label htmlFor="sf-depart">{t("out")}</Label>
             <Input
               id="sf-depart"
               type="date"
@@ -285,7 +286,7 @@ function SearchFlights({
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="sf-ret">Back</Label>
+            <Label htmlFor="sf-ret">{t("back")}</Label>
             <Input id="sf-ret" type="date" value={ret} onChange={(e) => setRet(e.target.value)} />
           </div>
         </div>
@@ -310,7 +311,7 @@ function SearchFlights({
                 <ExternalLink aria-hidden /> Skyscanner
               </a>
             ) : (
-              <span>Skyscanner (needs codes + date)</span>
+              <span>{t("skyscannerNeeds")}</span>
             )}
           </Button>
         </div>
@@ -332,16 +333,17 @@ function Board({
   canEdit: boolean;
   onAdd: () => void;
 }) {
+  const t = useTranslations("travel");
+  const locale = useLocale();
   if (flights.length === 0) {
     return (
       <div className="bg-card rounded-xl border border-dashed p-10 text-center">
         <p className="text-muted-foreground">
-          No {direction === "arrival" ? "arrivals" : "departures"} yet. Add guests&apos; flights to
-          plan airport pickups and shuttles.
+          {direction === "arrival" ? t("noArrivals") : t("noDepartures")}
         </p>
         {canEdit && (
           <Button className="mt-4" size="sm" onClick={onAdd}>
-            <Plus aria-hidden /> Add a flight
+            <Plus aria-hidden /> {t("addAFlight")}
           </Button>
         )}
       </div>
@@ -349,14 +351,14 @@ function Board({
   }
   return (
     <div className="space-y-4">
-      {groupByDay(flights).map((day) => (
+      {groupByDay(flights, { locale, noTime: t("noTime") }).map((day) => (
         <section key={day.date ?? "none"} className="bg-card overflow-hidden rounded-xl border">
           <h3 className="bg-muted/50 flex items-baseline justify-between px-4 py-2 font-sans text-sm font-medium">
             {day.label}
             <span className="text-muted-foreground text-xs font-normal">
-              {day.flights.length} flight{day.flights.length === 1 ? "" : "s"} · {day.people} people
+              {t("dayLine", { flights: day.flights.length, people: day.people })}
               {day.flights.some((f) => f.needsPickup) &&
-                ` · ${day.flights.filter((f) => f.needsPickup).length} need pickup`}
+                t("needPickup", { count: day.flights.filter((f) => f.needsPickup).length })}
             </span>
           </h3>
           <ul className="divide-y">
@@ -366,33 +368,35 @@ function Board({
                   type="button"
                   onClick={() => onOpen(f.id)}
                   className={cn(
-                    "hover:bg-accent focus-visible:ring-ring flex w-full flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-left focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset",
+                    "hover:bg-accent focus-visible:ring-ring flex w-full flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-start focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset",
                     f.status === "considering" && "opacity-70",
                   )}
                 >
                   <span className="w-14 font-serif text-2xl font-semibold tabular-nums">
-                    {timeOf(f.time) || "–"}
+                    {fmtTime(timeOf(f.time) || null, locale) || "–"}
                   </span>
                   <span className="w-28 text-sm">
-                    <span className="block font-medium">{f.flightNumber ?? "Flight"}</span>
+                    <span className="block font-medium">{f.flightNumber ?? t("flight")}</span>
                     <span className="text-muted-foreground text-xs">
-                      {direction === "arrival" ? "from" : "to"} {f.airport ?? "?"}
+                      {t(direction === "arrival" ? "fromAirport" : "toAirport", {
+                        code: f.airport ?? "?",
+                      })}
                     </span>
                   </span>
                   <span className="min-w-40 flex-1 text-sm">
                     {f.travellers.join(", ") || (
-                      <span className="text-muted-foreground">No travellers added</span>
+                      <span className="text-muted-foreground">{t("noTravellers")}</span>
                     )}
                   </span>
                   <span className="flex gap-1.5">
                     {f.needsPickup && (
                       <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-950 dark:text-amber-200">
-                        <Car className="mr-1 inline size-3" aria-hidden />
-                        Pickup
+                        <Car className="me-1 inline size-3" aria-hidden />
+                        {t("pickup")}
                       </span>
                     )}
                     {f.status === "considering" && (
-                      <span className="bg-muted rounded-full px-2 py-0.5 text-xs">Not booked</span>
+                      <span className="bg-muted rounded-full px-2 py-0.5 text-xs">{t("notBooked")}</span>
                     )}
                   </span>
                 </button>
@@ -416,10 +420,13 @@ function FlightList({
   currency: string;
   onOpen: (id: string) => void;
 }) {
+  const t = useTranslations("travel");
+  const p = useTranslations("places");
+  const locale = useLocale();
   if (flights.length === 0)
     return (
       <p className="text-muted-foreground bg-card rounded-xl border border-dashed p-8 text-center text-sm">
-        No flights here yet.
+        {t("noFlights")}
       </p>
     );
   const sorted = [...flights].sort((a, b) =>
@@ -432,20 +439,25 @@ function FlightList({
           <button
             type="button"
             onClick={() => onOpen(f.id)}
-            className="hover:bg-accent flex w-full flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-left text-sm"
+            className="hover:bg-accent flex w-full flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-start text-sm"
           >
             <span className="w-32">
               <span className="block font-medium">
-                {f.from_airport ?? "?"} → {f.to_airport ?? "?"}
+                {f.from_airport ?? "?"} <span className="rtl:hidden">→</span>
+                <span className="hidden rtl:inline">←</span> {f.to_airport ?? "?"}
               </span>
               <span className="text-muted-foreground text-xs">
-                {f.depart_at ? format(parseISO(f.depart_at), "d MMM HH:mm") : "Date not set"}
+                {f.depart_at
+                  ? `${fmtDate(f.depart_at, locale, "medium")} ${fmtTime(timeOf(f.depart_at), locale)}`
+                  : t("dateNotSet")}
               </span>
             </span>
             <span className="w-24">{[f.airline, f.flight_number].filter(Boolean).join(" ")}</span>
             <span className="min-w-40 flex-1 truncate">{travellers(f).join(", ")}</span>
-            <span className="text-muted-foreground text-xs">{FLIGHT_CATEGORY[f.category]}</span>
-            <span className="w-20 text-right tabular-nums">
+            <span className="text-muted-foreground text-xs">
+              {p(`flightCategory.${f.category}`)}
+            </span>
+            <span className="w-20 text-end tabular-nums">
               {f.price != null ? formatMoney(f.price, currency) : ""}
             </span>
           </button>
@@ -472,6 +484,8 @@ function FlightForm({
   canEdit: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("travel");
+  const p = useTranslations("places");
   const [pending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(flightSchema),
@@ -505,7 +519,7 @@ function FlightForm({
         toast.error(r.error);
         return;
       }
-      toast.success(flight ? "Flight saved" : "Flight added");
+      toast.success(flight ? t("saved") : t("added"));
       onClose();
     }),
   );
@@ -544,12 +558,10 @@ function FlightForm({
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle className="font-serif text-3xl">
           {flight
-            ? [flight.airline, flight.flight_number].filter(Boolean).join(" ") || "Flight"
-            : "Add a flight"}
+            ? [flight.airline, flight.flight_number].filter(Boolean).join(" ") || t("flight")
+            : t("addTitle")}
         </SheetTitle>
-        <SheetDescription>
-          Times are local at each airport, as shown on the ticket.
-        </SheetDescription>
+        <SheetDescription>{t("localTimes")}</SheetDescription>
       </SheetHeader>
       <form
         id="flight-form"
@@ -559,37 +571,45 @@ function FlightForm({
       >
         <fieldset disabled={!canEdit || pending} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-3">
-            {choose("category", "For", { guest: "Guests", couple: "Us", honeymoon: "Honeymoon" })}
-            {choose("direction", "Direction", FLIGHT_DIRECTION)}
-            {choose("status", "Status", { booked: "Booked", considering: "Considering" })}
+            {choose(
+              "category",
+              t("for"),
+              Object.fromEntries(FLIGHT_CATEGORIES.map((c) => [c, p(`flightCategory.${c}`)])),
+            )}
+            {choose(
+              "direction",
+              t("direction"),
+              Object.fromEntries(FLIGHT_DIRECTIONS.map((d) => [d, p(`flightDirection.${d}`)])),
+            )}
+            {choose("status", t("status"), { booked: t("booked"), considering: t("considering") })}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <FormField id="f-airline" label="Airline" error={errors.airline?.message}>
+            <FormField id="f-airline" label={t("airline")} error={errors.airline?.message}>
               {(aria) => <Input {...aria} {...form.register("airline")} />}
             </FormField>
-            <FormField id="f-number" label="Flight number" error={errors.flightNumber?.message}>
+            <FormField id="f-number" label={t("number")} error={errors.flightNumber?.message}>
               {(aria) => (
-                <Input {...aria} placeholder="e.g. TP1351" {...form.register("flightNumber")} />
+                <Input {...aria} placeholder={t("numberPlaceholder")} {...form.register("flightNumber")} />
               )}
             </FormField>
-            <FormField id="f-from" label="From (airport)" error={errors.fromAirport?.message}>
+            <FormField id="f-from" label={t("fromLabel")} error={errors.fromAirport?.message}>
               {(aria) => (
-                <Input {...aria} placeholder="e.g. LHR" {...form.register("fromAirport")} />
+                <Input {...aria} placeholder={t("fromPlaceholder")} {...form.register("fromAirport")} />
               )}
             </FormField>
-            <FormField id="f-to" label="To (airport)" error={errors.toAirport?.message}>
-              {(aria) => <Input {...aria} placeholder="e.g. LIS" {...form.register("toAirport")} />}
+            <FormField id="f-to" label={t("toLabel")} error={errors.toAirport?.message}>
+              {(aria) => <Input {...aria} placeholder={t("toPlaceholder")} {...form.register("toAirport")} />}
             </FormField>
-            <FormField id="f-dep" label="Departs (local time)" error={errors.departAt?.message}>
+            <FormField id="f-dep" label={t("departs")} error={errors.departAt?.message}>
               {(aria) => <Input {...aria} type="datetime-local" {...form.register("departAt")} />}
             </FormField>
-            <FormField id="f-arr" label="Arrives (local time)" error={errors.arriveAt?.message}>
+            <FormField id="f-arr" label={t("arrives")} error={errors.arriveAt?.message}>
               {(aria) => <Input {...aria} type="datetime-local" {...form.register("arriveAt")} />}
             </FormField>
-            <FormField id="f-ref" label="Booking reference" error={errors.bookingRef?.message}>
+            <FormField id="f-ref" label={t("reference")} error={errors.bookingRef?.message}>
               {(aria) => <Input {...aria} {...form.register("bookingRef")} />}
             </FormField>
-            <FormField id="f-price" label="Price" error={errors.price?.message}>
+            <FormField id="f-price" label={t("price")} error={errors.price?.message}>
               {(aria) => (
                 <Controller
                   control={form.control}
@@ -607,17 +627,17 @@ function FlightForm({
               )}
             </FormField>
           </div>
-          <FormField id="f-bag" label="Baggage" error={errors.baggage?.message}>
+          <FormField id="f-bag" label={t("baggage")} error={errors.baggage?.message}>
             {(aria) => (
               <Input
                 {...aria}
-                placeholder="e.g. 1 × 23 kg + dress bag"
+                placeholder={t("baggagePlaceholder")}
                 {...form.register("baggage")}
               />
             )}
           </FormField>
           <div className="space-y-2">
-            <p className="text-sm font-medium">Travellers from your guest list</p>
+            <p className="text-sm font-medium">{t("travellersFromList")}</p>
             <Controller
               control={form.control}
               name="travellerIds"
@@ -633,14 +653,14 @@ function FlightForm({
           </div>
           <FormField
             id="f-other"
-            label={category === "guest" ? "Other travellers" : "Travellers"}
-            hint={category === "guest" ? "People not on the guest list." : "e.g. Ian & Maria"}
+            label={category === "guest" ? t("otherTravellers") : t("travellers")}
+            hint={category === "guest" ? t("otherHint") : t("travellersHint")}
             error={errors.otherTravellers?.message}
           >
             {(aria) => <Input {...aria} {...form.register("otherTravellers")} />}
           </FormField>
           <Label className="justify-between font-normal">
-            Needs an airport pickup
+            {t("pickupNeeded")}
             <Controller
               control={form.control}
               name="needsPickup"
@@ -649,7 +669,7 @@ function FlightForm({
               )}
             />
           </Label>
-          <FormField id="f-notes" label="Notes" error={errors.notes?.message}>
+          <FormField id="f-notes" label={p("notes")} error={errors.notes?.message}>
             {(aria) => <Textarea {...aria} rows={2} {...form.register("notes")} />}
           </FormField>
         </fieldset>
@@ -659,12 +679,12 @@ function FlightForm({
           {flight && (
             <ConfirmDialog
               trigger={
-                <Button variant="ghost" className="text-destructive mr-auto" disabled={pending}>
-                  <Trash2 aria-hidden /> Delete
+                <Button variant="ghost" className="text-destructive me-auto" disabled={pending}>
+                  <Trash2 aria-hidden /> {p("delete")}
                 </Button>
               }
-              title="Delete this flight?"
-              description="This can't be undone."
+              title={t("deleteTitle")}
+              description={t("deleteText")}
               onConfirm={async () => {
                 const r = await deleteFlight(flight.id);
                 if (!r.ok) {
@@ -675,13 +695,13 @@ function FlightForm({
               }}
             />
           )}
-          <div className="ml-auto flex gap-2">
+          <div className="ms-auto flex gap-2">
             <Button variant="outline" onClick={onClose} disabled={pending}>
-              Cancel
+              {p("cancel")}
             </Button>
             <Button type="submit" form="flight-form" disabled={pending}>
               {pending && <Loader2 className="animate-spin" aria-hidden />}
-              {flight ? "Save" : "Add flight"}
+              {flight ? p("save") : t("add")}
             </Button>
           </div>
         </SheetFooter>

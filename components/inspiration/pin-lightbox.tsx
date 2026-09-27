@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { formatDistanceToNow, parseISO } from "date-fns";
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,6 +11,7 @@ import {
   Send,
   Trash2,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   addComment,
@@ -36,10 +36,11 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { relative } from "@/lib/i18n/format";
 import { extractPalette, textOn } from "@/lib/inspiration/layout";
 import type { BoardView, PinView } from "@/lib/inspiration/load";
 import { cn } from "@/lib/utils";
-import { STATUS_LABEL } from "./pin-card";
+import { STATUS_KEY } from "./pin-card";
 import { PinImage, sized } from "./pin-image";
 
 type Option = { id: string; name: string };
@@ -90,24 +91,28 @@ export function PinLightbox({
   onHeart: (pin: PinView) => void;
   onMove: (pin: PinView, boardId: string) => void;
 }) {
+  const t = useTranslations("inspiration.lightbox");
+  const i = useTranslations("inspiration");
   // Arrow keys step through pins (but not while typing).
   useEffect(() => {
     if (!pin) return;
     function key(e: KeyboardEvent) {
-      const t = e.target as HTMLElement;
+      const target = e.target as HTMLElement;
       if (
-        t.closest("input, textarea, select, [role=combobox], [role=listbox]") ||
-        t.isContentEditable
+        target.closest("input, textarea, select, [role=combobox], [role=listbox]") ||
+        target.isContentEditable
       )
         return;
-      if (e.key === "ArrowLeft" && hasPrev) onPrev();
-      if (e.key === "ArrowRight" && hasNext) onNext();
+      // in right-to-left languages the arrows point the other way
+      const rtl = document.documentElement.dir === "rtl";
+      if (e.key === (rtl ? "ArrowRight" : "ArrowLeft") && hasPrev) onPrev();
+      if (e.key === (rtl ? "ArrowLeft" : "ArrowRight") && hasNext) onNext();
     }
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   }, [pin, hasPrev, hasNext, onPrev, onNext]);
 
-  const label = pin?.title || "Untitled pin";
+  const label = pin?.title || i("untitledPin");
   return (
     <Dialog open={!!pin} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-h-[92dvh] gap-0 overflow-y-auto p-0 sm:max-w-5xl">
@@ -130,9 +135,9 @@ export function PinLightbox({
                   className="rounded-full shadow"
                   onClick={onPrev}
                   disabled={!hasPrev}
-                  aria-label="Previous pin"
+                  aria-label={t("prev")}
                 >
-                  <ChevronLeft aria-hidden />
+                  <ChevronLeft className="rtl:rotate-180" aria-hidden />
                 </Button>
                 <Button
                   variant="secondary"
@@ -140,38 +145,41 @@ export function PinLightbox({
                   className="rounded-full shadow"
                   onClick={onNext}
                   disabled={!hasNext}
-                  aria-label="Next pin"
+                  aria-label={t("next")}
                 >
-                  <ChevronRight aria-hidden />
+                  <ChevronRight className="rtl:rotate-180" aria-hidden />
                 </Button>
               </div>
             </div>
             <div className="space-y-5 p-5">
-              <div className="pr-8">
+              <div className="pe-8">
                 <DialogTitle className="font-serif text-2xl leading-tight">{label}</DialogTitle>
-                <DialogDescription className="sr-only">
-                  Details, colours and comments for this pin.
-                </DialogDescription>
+                <DialogDescription className="sr-only">{t("details")}</DialogDescription>
                 {pin.creditName && (
                   <p className="text-muted-foreground mt-1 text-xs">
-                    Photo by{" "}
-                    <a
-                      href={pin.creditUrl ?? undefined}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline"
-                    >
-                      {pin.creditName}
-                    </a>{" "}
-                    on{" "}
-                    <a
-                      href={pin.sourceUrl ?? undefined}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline"
-                    >
-                      Unsplash
-                    </a>
+                    {i.rich("add.credit", {
+                      name: pin.creditName,
+                      photographer: (c) => (
+                        <a
+                          href={pin.creditUrl ?? undefined}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline"
+                        >
+                          {c}
+                        </a>
+                      ),
+                      unsplash: (c) => (
+                        <a
+                          href={pin.sourceUrl ?? undefined}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline"
+                        >
+                          {c}
+                        </a>
+                      ),
+                    })}
                   </p>
                 )}
               </div>
@@ -187,16 +195,16 @@ export function PinLightbox({
                     className={cn(pin.hearts.includes(userId) && "fill-current")}
                     aria-hidden
                   />
-                  {pin.hearts.length || ""} {pin.hearts.includes(userId) ? "Loved" : "Love"}
+                  {pin.hearts.length || ""} {pin.hearts.includes(userId) ? t("loved") : t("love")}
                 </Button>
                 {pin.sourceUrl && !pin.creditName && (
                   <Button asChild variant="outline" size="sm">
                     <a href={pin.sourceUrl} target="_blank" rel="noreferrer">
-                      <ExternalLink aria-hidden /> Open source
+                      <ExternalLink aria-hidden /> {t("openSource")}
                     </a>
                   </Button>
                 )}
-                {pin.status && <Badge variant="secondary">{STATUS_LABEL[pin.status]}</Badge>}
+                {pin.status && <Badge variant="secondary">{i(STATUS_KEY[pin.status])}</Badge>}
               </div>
 
               {canEdit ? (
@@ -210,7 +218,7 @@ export function PinLightbox({
               {canEdit && (
                 <div className="flex flex-wrap items-end gap-2">
                   <div className="min-w-40 flex-1 space-y-2">
-                    <Label htmlFor="pin-board">Board</Label>
+                    <Label htmlFor="pin-board">{t("board")}</Label>
                     <Select value={pin.boardId} onValueChange={(b) => onMove(pin, b)}>
                       <SelectTrigger id="pin-board" className="w-full">
                         <SelectValue />
@@ -226,19 +234,19 @@ export function PinLightbox({
                   </div>
                   <ConfirmDialog
                     trigger={
-                      <Button variant="outline" size="icon" aria-label="Delete pin">
+                      <Button variant="outline" size="icon" aria-label={t("delete")}>
                         <Trash2 aria-hidden />
                       </Button>
                     }
-                    title="Delete this pin?"
-                    description="It's removed from the board for everyone. Uploaded images are deleted too."
+                    title={t("deleteTitle")}
+                    description={t("deleteText")}
                     onConfirm={async () => {
                       const r = await deletePin(pin.id);
                       if (!r.ok) {
                         toast.error(r.error);
                         return false;
                       }
-                      toast.success("Pin deleted");
+                      toast.success(t("deleted"));
                       onClose();
                     }}
                   />
@@ -264,6 +272,7 @@ function ReadOnlyDetails({
   categories: Option[];
   vendors: Option[];
 }) {
+  const t = useTranslations("inspiration.lightbox");
   const category = categories.find((c) => c.id === pin.budgetCategoryId);
   const vendor = vendors.find((v) => v.id === pin.vendorId);
   return (
@@ -278,8 +287,8 @@ function ReadOnlyDetails({
           ))}
         </div>
       )}
-      {category && <p className="text-muted-foreground">Budget: {category.name}</p>}
-      {vendor && <p className="text-muted-foreground">Vendor: {vendor.name}</p>}
+      {category && <p className="text-muted-foreground">{t("budget", { name: category.name })}</p>}
+      {vendor && <p className="text-muted-foreground">{t("vendor", { name: vendor.name })}</p>}
     </div>
   );
 }
@@ -293,6 +302,8 @@ function PinForm({
   categories: Option[];
   vendors: Option[];
 }) {
+  const t = useTranslations("inspiration.lightbox");
+  const i = useTranslations("inspiration");
   const [title, setTitle] = useState(pin.title ?? "");
   const [note, setNote] = useState(pin.note ?? "");
   const [tags, setTags] = useState(pin.tags.join(", "));
@@ -314,19 +325,19 @@ function PinForm({
         budgetCategoryId: category === NONE ? null : category,
         vendorId: vendor === NONE ? null : vendor,
       });
-      if (r.ok) toast.success("Pin saved");
+      if (r.ok) toast.success(t("saved"));
       else toast.error(r.error);
     });
   }
 
   return (
     <form onSubmit={save} className="space-y-3">
-      <FormField id="pin-title" label="Title">
+      <FormField id="pin-title" label={t("title")}>
         {(a) => (
           <Input {...a} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />
         )}
       </FormField>
-      <FormField id="pin-note" label="Notes">
+      <FormField id="pin-note" label={t("notes")}>
         {(a) => (
           <Textarea
             {...a}
@@ -334,35 +345,35 @@ function PinForm({
             onChange={(e) => setNote(e.target.value)}
             rows={2}
             maxLength={2000}
-            placeholder="What do you love about it?"
+            placeholder={t("notesPlaceholder")}
           />
         )}
       </FormField>
-      <FormField id="pin-tags" label="Tags" hint="Separate with commas, e.g. peonies, blush">
+      <FormField id="pin-tags" label={t("tags")} hint={t("tagsHint")}>
         {(a) => <Input {...a} value={tags} onChange={(e) => setTags(e.target.value)} />}
       </FormField>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
-          <Label htmlFor="pin-status">Verdict</Label>
+          <Label htmlFor="pin-status">{t("verdict")}</Label>
           <Select value={status} onValueChange={setStatus}>
             <SelectTrigger id="pin-status" className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={NONE}>Not decided</SelectItem>
-              <SelectItem value="love">Love it</SelectItem>
-              <SelectItem value="maybe">Maybe</SelectItem>
+              <SelectItem value={NONE}>{t("undecided")}</SelectItem>
+              <SelectItem value="love">{i("loveIt")}</SelectItem>
+              <SelectItem value="maybe">{i("maybe")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="pin-category">Budget category</Label>
+          <Label htmlFor="pin-category">{t("category")}</Label>
           <Select value={category} onValueChange={setCategory}>
             <SelectTrigger id="pin-category" className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={NONE}>None</SelectItem>
+              <SelectItem value={NONE}>{t("none")}</SelectItem>
               {categories.map((c) => (
                 <SelectItem key={c.id} value={c.id}>
                   {c.name}
@@ -373,13 +384,13 @@ function PinForm({
         </div>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="pin-vendor">Vendor</Label>
+        <Label htmlFor="pin-vendor">{t("vendorLabel")}</Label>
         <Select value={vendor} onValueChange={setVendor}>
           <SelectTrigger id="pin-vendor" className="w-full">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value={NONE}>None</SelectItem>
+            <SelectItem value={NONE}>{t("none")}</SelectItem>
             {vendors.map((v) => (
               <SelectItem key={v.id} value={v.id}>
                 {v.name}
@@ -388,7 +399,7 @@ function PinForm({
           </SelectContent>
         </Select>
       </div>
-      <FormField id="pin-source" label="Link">
+      <FormField id="pin-source" label={t("link")}>
         {(a) => (
           <Input
             {...a}
@@ -400,13 +411,14 @@ function PinForm({
         )}
       </FormField>
       <Button type="submit" size="sm" disabled={pending}>
-        {pending && <Loader2 className="animate-spin" aria-hidden />} Save changes
+        {pending && <Loader2 className="animate-spin" aria-hidden />} {t("saveChanges")}
       </Button>
     </form>
   );
 }
 
 function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
+  const t = useTranslations("inspiration.lightbox");
   const [colours, setColours] = useState<string[] | null>(null);
   const [picked, setPicked] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
@@ -420,9 +432,7 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
       setColours(c);
       setPicked(c);
     } catch {
-      toast.error(
-        "This website doesn't let us read the image's colours. Try an uploaded or Unsplash image.",
-      );
+      toast.error(t("noColours"));
     } finally {
       setBusy(false);
     }
@@ -431,17 +441,17 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-sm font-medium">Colours</h3>
+        <h3 className="text-sm font-medium">{t("colours")}</h3>
         {!colours && (
           <Button variant="outline" size="sm" onClick={find} disabled={busy || !pin.src}>
-            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Palette aria-hidden />} Find
-            colours
+            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Palette aria-hidden />}{" "}
+            {t("findColours")}
           </Button>
         )}
       </div>
       {colours && (
         <>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Colours in this image">
+          <div className="flex flex-wrap gap-2" role="group" aria-label={t("inImage")}>
             {colours.map((hex) => {
               const on = picked.includes(hex);
               return (
@@ -472,13 +482,13 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
               onClick={() =>
                 startTransition(async () => {
                   const r = await addPaletteColors(picked, pin.id);
-                  if (r.ok) toast.success("Added to your wedding palette");
+                  if (r.ok) toast.success(t("addedToPalette"));
                   else toast.error(r.error);
                 })
               }
             >
               {pending && <Loader2 className="animate-spin" aria-hidden />}
-              Add {picked.length} to palette
+              {t("addToPalette", { count: picked.length })}
             </Button>
           )}
         </>
@@ -488,14 +498,16 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
 }
 
 function Comments({ pin, userId }: { pin: PinView; userId: string }) {
+  const t = useTranslations("inspiration.lightbox");
+  const locale = useLocale();
   const [body, setBody] = useState("");
   const [pending, startTransition] = useTransition();
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-medium">Comments</h3>
+      <h3 className="text-sm font-medium">{t("commentsTitle")}</h3>
       {pin.comments.length === 0 && (
-        <p className="text-muted-foreground text-sm">No comments yet.</p>
+        <p className="text-muted-foreground text-sm">{t("noComments")}</p>
       )}
       <ul className="space-y-3">
         {pin.comments.map((c) => (
@@ -503,7 +515,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
             <p>
               <span className="font-medium">{c.name}</span>{" "}
               <span className="text-muted-foreground text-xs">
-                {formatDistanceToNow(parseISO(c.createdAt), { addSuffix: true })}
+                {relative(c.createdAt, locale)}
               </span>
             </p>
             <p className="whitespace-pre-wrap">{c.body}</p>
@@ -518,7 +530,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
                   })
                 }
               >
-                Delete
+                {t("deleteComment")}
               </button>
             )}
           </li>
@@ -537,7 +549,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
         }}
       >
         <Label htmlFor="pin-comment" className="sr-only">
-          Add a comment
+          {t("addComment")}
         </Label>
         <Textarea
           id="pin-comment"
@@ -545,7 +557,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
           onChange={(e) => setBody(e.target.value)}
           rows={1}
           maxLength={2000}
-          placeholder="Add a comment…"
+          placeholder={t("commentPlaceholder")}
           className="min-h-9"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
@@ -558,7 +570,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
           type="submit"
           size="icon"
           disabled={pending || !body.trim()}
-          aria-label="Post comment"
+          aria-label={t("post")}
         >
           {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
         </Button>

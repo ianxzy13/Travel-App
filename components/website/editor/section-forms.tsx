@@ -3,12 +3,13 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUp, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { safeUrl, type Section, type SectionContent } from "@/lib/website/content";
-import { IMAGE_TYPES, ImageSlot, uploadSiteImage } from "./image-slot";
+import { IMAGE_TYPES, ImageSlot, uploadSiteImage, useImageErrors } from "./image-slot";
 
 type Images = Record<string, string>;
 type Common = {
@@ -33,13 +34,22 @@ export function SectionForm({
   eventCount: number;
   hotelCount: number;
 }) {
+  const t = useTranslations("websiteEditor.forms");
+  const link = (href: string) => {
+    const L = (c: React.ReactNode) => (
+      <Link href={href} className="underline underline-offset-2">
+        {c}
+      </Link>
+    );
+    return L;
+  };
   const id = section.kind;
   switch (section.kind) {
     case "home": {
       const c = section.content;
       return (
         <div className="space-y-3">
-          <FormField id={`${id}-tagline`} label="Tagline" hint="A short line above your names.">
+          <FormField id={`${id}-tagline`} label={t("tagline")} hint={t("taglineHint")}>
             {(a) => (
               <Input
                 {...a}
@@ -51,11 +61,7 @@ export function SectionForm({
             )}
           </FormField>
           <p className="text-muted-foreground text-sm">
-            Names, date and place come from{" "}
-            <Link href="/app/settings" className="underline underline-offset-2">
-              Settings
-            </Link>
-            . The hero photo is under Design.
+            {t.rich("homeNote", { link: link("/app/settings") })}
           </p>
         </div>
       );
@@ -64,7 +70,7 @@ export function SectionForm({
       const c = section.content;
       return (
         <div className="space-y-4">
-          <FormField id={`${id}-intro`} label="How it all began">
+          <FormField id={`${id}-intro`} label={t("began")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -72,14 +78,14 @@ export function SectionForm({
                 value={c.intro}
                 maxLength={3000}
                 disabled={common.disabled}
-                placeholder="We met at…"
+                placeholder={t("beganPlaceholder")}
                 onChange={(e) => onChange({ ...c, intro: e.target.value })}
               />
             )}
           </FormField>
           <ListEditor
-            label="Milestones"
-            addLabel="Add milestone"
+            label={t("milestones")}
+            addLabel={t("addMilestone")}
             items={c.milestones}
             disabled={common.disabled}
             onChange={(milestones) => onChange({ ...c, milestones })}
@@ -90,16 +96,16 @@ export function SectionForm({
                 <div className="space-y-2">
                   <div className="grid grid-cols-[7rem_1fr] gap-2">
                     <Input
-                      aria-label="When"
-                      placeholder="e.g. June 2019"
+                      aria-label={t("when")}
+                      placeholder={t("whenPlaceholder")}
                       value={m.date}
                       maxLength={40}
                       disabled={common.disabled}
                       onChange={(e) => set({ ...m, date: e.target.value })}
                     />
                     <Input
-                      aria-label="Title"
-                      placeholder="First date"
+                      aria-label={t("title")}
+                      placeholder={t("titlePlaceholder")}
                       value={m.title}
                       maxLength={120}
                       disabled={common.disabled}
@@ -107,7 +113,7 @@ export function SectionForm({
                     />
                   </div>
                   <Textarea
-                    aria-label="What happened"
+                    aria-label={t("happened")}
                     rows={2}
                     value={m.text}
                     maxLength={1500}
@@ -119,7 +125,7 @@ export function SectionForm({
                   weddingId={common.weddingId}
                   path={m.photo}
                   url={m.photo ? common.images[m.photo] : null}
-                  label="Photo"
+                  label={t("photo")}
                   aspect="aspect-[4/3]"
                   disabled={common.disabled}
                   onChange={(img) => {
@@ -136,7 +142,7 @@ export function SectionForm({
     case "events":
       return (
         <div className="space-y-3">
-          <FormField id={`${id}-intro`} label="Introduction (optional)">
+          <FormField id={`${id}-intro`} label={t("intro")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -149,11 +155,7 @@ export function SectionForm({
             )}
           </FormField>
           <p className="text-muted-foreground text-sm">
-            {eventCount} event{eventCount === 1 ? "" : "s"} from{" "}
-            <Link href="/app/settings#events" className="underline underline-offset-2">
-              Settings → Events
-            </Link>{" "}
-            (times, places, dress code, with a map link).
+            {t.rich("eventsNote", { count: eventCount, link: link("/app/settings#events") })}
           </p>
         </div>
       );
@@ -161,7 +163,7 @@ export function SectionForm({
       const c = section.content;
       return (
         <div className="space-y-3">
-          <FormField id={`${id}-intro`} label="Introduction (optional)">
+          <FormField id={`${id}-intro`} label={t("intro")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -174,20 +176,16 @@ export function SectionForm({
             )}
           </FormField>
           <p className="text-muted-foreground text-sm">
-            {hotelCount} hotel{hotelCount === 1 ? "" : "s"} shown (tick “Show on website” in{" "}
-            <Link href="/app/hotels" className="underline underline-offset-2">
-              Hotels
-            </Link>
-            ). The nearest airport comes from{" "}
-            <Link href="/app/travel" className="underline underline-offset-2">
-              Travel
-            </Link>
-            .
+            {t.rich("travelNote", {
+              count: hotelCount,
+              hotels: link("/app/hotels"),
+              travel: link("/app/travel"),
+            })}
           </p>
           <FormField
             id={`${id}-notes`}
-            label="Getting around"
-            hint="Taxis, parking, shuttles, weather…"
+            label={t("gettingAround")}
+            hint={t("gettingAroundHint")}
           >
             {(a) => (
               <Textarea
@@ -206,7 +204,7 @@ export function SectionForm({
     case "rsvp":
       return (
         <div className="space-y-3">
-          <FormField id={`${id}-intro`} label="Message above the form">
+          <FormField id={`${id}-intro`} label={t("rsvpMessage")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -219,11 +217,7 @@ export function SectionForm({
             )}
           </FormField>
           <p className="text-muted-foreground text-sm">
-            Guests find their invitation by name or code. The deadline and meals are set in{" "}
-            <Link href="/app/rsvp" className="underline underline-offset-2">
-              RSVPs
-            </Link>
-            .
+            {t.rich("rsvpNote", { link: link("/app/rsvp") })}
           </p>
         </div>
       );
@@ -231,8 +225,8 @@ export function SectionForm({
       const c = section.content;
       return (
         <ListEditor
-          label="People"
-          addLabel="Add person"
+          label={t("people")}
+          addLabel={t("addPerson")}
           items={c.people}
           disabled={common.disabled}
           onChange={(people) => onChange({ people })}
@@ -244,7 +238,7 @@ export function SectionForm({
                 weddingId={common.weddingId}
                 path={p.photo}
                 url={p.photo ? common.images[p.photo] : null}
-                label="Photo"
+                label={t("photo")}
                 aspect="aspect-square"
                 disabled={common.disabled}
                 onChange={(img) => {
@@ -255,16 +249,16 @@ export function SectionForm({
               <div className="space-y-2">
                 <div className="grid gap-2 sm:grid-cols-2">
                   <Input
-                    aria-label="Name"
-                    placeholder="Name"
+                    aria-label={t("name")}
+                    placeholder={t("name")}
                     value={p.name}
                     maxLength={80}
                     disabled={common.disabled}
                     onChange={(e) => set({ ...p, name: e.target.value })}
                   />
                   <Input
-                    aria-label="Role"
-                    placeholder="Maid of honour"
+                    aria-label={t("role")}
+                    placeholder={t("rolePlaceholder")}
                     value={p.role}
                     maxLength={80}
                     disabled={common.disabled}
@@ -272,8 +266,8 @@ export function SectionForm({
                   />
                 </div>
                 <Textarea
-                  aria-label="A few words"
-                  placeholder="A few words (optional)"
+                  aria-label={t("fewWords")}
+                  placeholder={t("fewWordsPlaceholder")}
                   rows={2}
                   value={p.bio}
                   maxLength={500}
@@ -292,8 +286,8 @@ export function SectionForm({
         <div className="space-y-4">
           <FormField
             id={`${id}-intro`}
-            label="Introduction (optional)"
-            hint="e.g. “Your presence is the best gift, but if you'd like…”"
+            label={t("intro")}
+            hint={t("registryHint")}
           >
             {(a) => (
               <Textarea
@@ -307,8 +301,8 @@ export function SectionForm({
             )}
           </FormField>
           <ListEditor
-            label="Links"
-            addLabel="Add link"
+            label={t("links")}
+            addLabel={t("addLink")}
             items={c.links}
             disabled={common.disabled}
             onChange={(links) => onChange({ ...c, links })}
@@ -318,15 +312,15 @@ export function SectionForm({
               <div className="space-y-2">
                 <div className="grid gap-2 sm:grid-cols-2">
                   <Input
-                    aria-label="Name"
-                    placeholder="Honeymoon fund"
+                    aria-label={t("name")}
+                    placeholder={t("linkNamePlaceholder")}
                     value={l.label}
                     maxLength={100}
                     disabled={common.disabled}
                     onChange={(e) => set({ ...l, label: e.target.value })}
                   />
                   <Input
-                    aria-label="Web address"
+                    aria-label={t("webAddress")}
                     placeholder="https://…"
                     value={l.url}
                     maxLength={500}
@@ -337,13 +331,11 @@ export function SectionForm({
                   />
                 </div>
                 {!!l.url.trim() && !safeUrl(l.url) && (
-                  <p className="text-destructive text-xs">
-                    That doesn&apos;t look like a web address.
-                  </p>
+                  <p className="text-destructive text-xs">{t("badUrl")}</p>
                 )}
                 <Input
-                  aria-label="Note"
-                  placeholder="Note (optional)"
+                  aria-label={t("note")}
+                  placeholder={t("notePlaceholder")}
                   value={l.note}
                   maxLength={300}
                   disabled={common.disabled}
@@ -359,9 +351,9 @@ export function SectionForm({
       const c = section.content;
       return (
         <ListEditor
-          label="Questions"
-          addLabel="Add question"
-          hint="Questions without an answer are hidden on the site."
+          label={t("questions")}
+          addLabel={t("addQuestion")}
+          hint={t("questionsHint")}
           items={c.items}
           disabled={common.disabled}
           onChange={(items) => onChange({ items })}
@@ -370,16 +362,16 @@ export function SectionForm({
           render={(q, set) => (
             <div className="space-y-2">
               <Input
-                aria-label="Question"
-                placeholder="Question"
+                aria-label={t("question")}
+                placeholder={t("question")}
                 value={q.question}
                 maxLength={200}
                 disabled={common.disabled}
                 onChange={(e) => set({ ...q, question: e.target.value })}
               />
               <Textarea
-                aria-label="Answer"
-                placeholder="Answer"
+                aria-label={t("answer")}
+                placeholder={t("answer")}
                 rows={2}
                 value={q.answer}
                 maxLength={2000}
@@ -407,6 +399,8 @@ function GalleryForm({
   content: SectionContent["gallery"];
   onChange: (c: SectionContent["gallery"]) => void;
 }) {
+  const t = useTranslations("websiteEditor.forms");
+  const errors = useImageErrors();
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<string | null>(null);
 
@@ -415,8 +409,8 @@ function GalleryForm({
     const list = files.slice(0, room);
     const added: SectionContent["gallery"]["photos"] = [];
     for (let i = 0; i < list.length; i++) {
-      setBusy(`Uploading ${i + 1} of ${list.length}…`);
-      const r = await uploadSiteImage(weddingId, list[i]);
+      setBusy(t("uploading", { n: i + 1, total: list.length }));
+      const r = await uploadSiteImage(weddingId, list[i], errors);
       if (r) {
         addImage(r.path, r.url);
         added.push({ id: newId(), path: r.path, caption: "" });
@@ -428,7 +422,7 @@ function GalleryForm({
 
   return (
     <ListEditor
-      label="Photos"
+      label={t("photos")}
       items={content.photos}
       disabled={disabled}
       onChange={(photos) => onChange({ photos })}
@@ -442,7 +436,7 @@ function GalleryForm({
             accept={IMAGE_TYPES.join(",")}
             className="sr-only"
             tabIndex={-1}
-            aria-label="Add photos"
+            aria-label={t("addPhotos")}
             onChange={(e) => {
               const f = [...(e.target.files ?? [])];
               e.target.value = "";
@@ -457,7 +451,7 @@ function GalleryForm({
             onClick={() => input.current?.click()}
           >
             {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />}{" "}
-            {busy ?? "Add photos"}
+            {busy ?? t("addPhotos")}
           </Button>
         </>
       }
@@ -470,8 +464,8 @@ function GalleryForm({
             className="bg-muted aspect-square w-full rounded-md object-cover"
           />
           <Input
-            aria-label="Caption"
-            placeholder="Caption (optional)"
+            aria-label={t("caption")}
+            placeholder={t("captionPlaceholder")}
             value={p.caption}
             maxLength={200}
             disabled={disabled}
@@ -507,6 +501,7 @@ function ListEditor<T extends { id: string }>({
   disabled: boolean;
   footer?: React.ReactNode;
 }) {
+  const t = useTranslations("websiteEditor.forms");
   const move = (i: number, d: number) => {
     const next = [...items];
     [next[i], next[i + d]] = [next[i + d], next[i]];
@@ -528,7 +523,7 @@ function ListEditor<T extends { id: string }>({
                   size="icon-sm"
                   disabled={i === 0}
                   onClick={() => move(i, -1)}
-                  aria-label={`Move item ${i + 1} up`}
+                  aria-label={t("moveUp", { n: i + 1 })}
                 >
                   <ArrowUp aria-hidden />
                 </Button>
@@ -538,7 +533,7 @@ function ListEditor<T extends { id: string }>({
                   size="icon-sm"
                   disabled={i === items.length - 1}
                   onClick={() => move(i, 1)}
-                  aria-label={`Move item ${i + 1} down`}
+                  aria-label={t("moveDown", { n: i + 1 })}
                 >
                   <ArrowDown aria-hidden />
                 </Button>
@@ -547,7 +542,7 @@ function ListEditor<T extends { id: string }>({
                   variant="ghost"
                   size="icon-sm"
                   onClick={() => onChange(items.filter((x) => x.id !== item.id))}
-                  aria-label={`Remove item ${i + 1}`}
+                  aria-label={t("remove", { n: i + 1 })}
                 >
                   <Trash2 aria-hidden />
                 </Button>

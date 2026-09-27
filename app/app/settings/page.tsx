@@ -45,6 +45,10 @@ export default async function SettingsPage() {
     .select("id, name, address")
     .eq("wedding_id", wedding.id)
     .eq("status", "booked");
+  const { data: householdLangs } = await supabase
+    .from("households")
+    .select("preferred_language")
+    .eq("wedding_id", wedding.id);
   const { data: events } = await supabase
     .from("events")
     .select("*")
@@ -64,6 +68,11 @@ export default async function SettingsPage() {
   const siteUrl = await getSiteUrl();
   // before the languages migration has run the column is missing; don't crash
   const languages = wedding.languages?.length ? wedding.languages : ["en"];
+  const householdCounts: Record<string, number> = {};
+  for (const h of householdLangs ?? []) {
+    const code = h.preferred_language ?? languages[0];
+    householdCounts[code] = (householdCounts[code] ?? 0) + 1;
+  }
 
   const values: WeddingFormValues = {
     partnerAName: wedding.partner_a_name,
@@ -89,6 +98,7 @@ export default async function SettingsPage() {
         <LanguagesCard
           key={`lang-${wedding.id}`}
           languages={languages}
+          householdCounts={householdCounts}
           timeZone={wedding.time_zone ?? null}
           translations={wedding.translations ?? {}}
           location={wedding.location}

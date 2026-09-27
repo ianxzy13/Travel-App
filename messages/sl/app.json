@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Pregled",
+      "tasks": "Opravila",
+      "budget": "Proračun",
+      "vendors": "Ponudniki",
+      "guests": "Gostje",
+      "rsvp": "Potrditve",
+      "seating": "Razpored sedežev",
+      "venues": "Prizorišča",
+      "hotels": "Hoteli",
+      "travel": "Potovanja",
+      "inspiration": "Navdih",
+      "website": "Spletna stran",
+      "schedule": "Potek dneva",
+      "settings": "Nastavitve",
+      "home": "Domov",
+      "groups": {
+        "plan": "Načrtovanje",
+        "people": "Ljudje",
+        "places": "Kraji",
+        "style": "Slog"
+      }
+    },
+    "shell": {
+      "mainNav": "Glavna navigacija",
+      "expand": "Razširi stransko vrstico",
+      "collapse": "Skrči stransko vrstico",
+      "more": "Več",
+      "allTools": "Vsa orodja"
+    },
+    "userMenu": {
+      "account": "Meni računa",
+      "appearance": "Videz",
+      "light": "Svetlo",
+      "dark": "Temno",
+      "system": "Sistemsko",
+      "language": "Jezik",
+      "signOut": "Odjava"
+    },
+    "switcher": {
+      "current": "Trenutna poroka: {name}. Zamenjaj poroko",
+      "yours": "Vaše poroke",
+      "noDate": "Datum bo določen",
+      "another": "Načrtuj novo poroko",
+      "roles": {
+        "owner": "lastnik",
+        "editor": "urejevalec",
+        "viewer": "bralec"
+      }
+    },
+    "notifications": {
+      "title": "Obvestila",
+      "unread": "{count, plural, one {Obvestila, # neprebrano} two {Obvestila, # neprebrani} few {Obvestila, # neprebrana} other {Obvestila, # neprebranih}}",
+      "unreadOne": "Neprebrano",
+      "markAll": "Označi vse kot prebrano",
+      "empty": "Zaenkrat nič. Tukaj se bodo pojavile nove potrditve, opravila zate in opomniki za plačila in roke."
+    },
+    "countdown": {
+      "today": "Danes je veliki dan!",
+      "enjoy": "Uživajta v vsakem trenutku.",
+      "married": "{count, plural, one {Poročena # dan} two {Poročena # dneva} few {Poročena # dni} other {Poročena # dni}}",
+      "congrats": "Čestitke!",
+      "daysToGo": "{count, plural, one {dan do poroke} two {dneva do poroke} few {dnevi do poroke} other {dni do poroke}}",
+      "hours": "ur",
+      "minutes": "minut",
+      "seconds": "sekund"
+    },
+    "dashboard": {
+      "welcome": "Dobrodošli v svojem načrtovalniku!",
+      "welcomeText": "Tukaj se vse začne. Naslednje korake opravite v svojem ritmu.",
+      "noDate": "Datum bo določen",
+      "setDate": "Določite datum in zaženite odštevanje",
+      "nextSteps": "Naslednji koraki",
+      "stepsDone": "Opravljeno {done} od {total}",
+      "done": "(opravljeno)",
+      "toDo": "(za narediti)",
+      "steps": {
+        "date": "Določite datum poroke",
+        "location": "Izberite kraj",
+        "invite": "Povabite partnerja, družino ali poročnega načrtovalca",
+        "guests": "Dodajte seznam gostov",
+        "guestsSoFar": "{count, plural, one {Dodajte seznam gostov (zaenkrat #)} two {Dodajte seznam gostov (zaenkrat #)} few {Dodajte seznam gostov (zaenkrat #)} other {Dodajte seznam gostov (zaenkrat #)}}",
+        "budget": "Določite skupni proračun",
+        "shortlist": "Izberite prizorišča v ožji izbor",
+        "book": "Rezervirajte prizorišče",
+        "inspiration": "Začnite tablo navdiha",
+        "website": "Objavite poročno spletno stran",
+        "timeline": "Ustvarite načrt priprav"
+      },
+      "budget": {
+        "title": "Proračun",
+        "empty": "Proračuna še ni. Določite znesek in predlagali bomo razdelitev.",
+        "cta": "Načrtuj proračun",
+        "committed": "dogovorjeno",
+        "committedOf": "dogovorjeno od {total}",
+        "overdue": "Zapadlo: {name}"
+      },
+      "rsvp": {
+        "title": "Potrditve",
+        "empty": "Odgovorov še ni. Dodajte goste in pošljite vabila.",
+        "cta": "Poglej potrditve",
+        "attending": "Pridejo",
+        "declined": "Ne pridejo",
+        "waiting": "Čakamo"
+      },
+      "seating": {
+        "title": "Razpored sedežev",
+        "empty": "Miz še ni. Ko gostje odgovorijo, jih posedite s povleci in spusti.",
+        "cta": "Odpri razpored sedežev",
+        "seated": "od {attending} gostov posedenih za {tables, plural, one {# mizo} two {# mizama} few {# mizami} other {# mizami}}"
+      },
+      "inspiration": {
+        "title": "Navdih",
+        "empty": "Pripetih slik še ni. Zbirajte ideje in iz njih izberite barvno paleto.",
+        "cta": "Odpri table",
+        "pin": "Slika"
+      },
+      "tasks": {
+        "title": "Opravila",
+        "empty": "Opravil še ni. Načrt bomo pripravili glede na datum poroke.",
+        "cta": "Poglej opravila",
+        "ofDone": "od {total} opravljenih",
+        "overdue": "zamujenih: {count}"
+      }
+    },
+    "settings": {
+      "title": "Nastavitve",
+      "description": "Podatki o poroki, jeziki, dogodki in kdo načrtuje z vama."
+    },
+    "translate": {
+      "button": "Prevodi",
+      "title": "Prevodi: {name}",
+      "hint": "Pustite polje prazno, da se prikaže besedilo v jeziku: {language}.",
+      "draft": "Osnutek",
+      "draftFailed": "Brskalnik ne zna prevesti tega para jezikov. Vpišite prevod.",
+      "noMachine": "Nasvet: Chrome na računalniku lahko pripravi osnutek prevoda (tam se pojavi gumb »Osnutek«).",
+      "save": "Shrani prevode",
+      "saved": "Prevodi shranjeni",
+      "fields": {
+        "name": "Ime",
+        "venue": "Ime prizorišča",
+        "dressCode": "Oblačilni kodeks",
+        "description": "Opis",
+        "mealName": "Ime menija",
+        "mealDescription": "Opis menija"
+      }
+    },
+    "websiteLang": {
+      "editing": "Jezik",
+      "main": "{language} (vaš jezik)",
+      "hint": "Prevod: {language}. Fotografije, vrstni red in vidni razdelki se nastavijo v glavnem jeziku.",
+      "progress": "Prevedeno {done}/{total}",
+      "complete": "Prevedeno",
+      "fallback": "Prazno: gostje vidijo besedilo v glavnem jeziku.",
+      "nothing": "V tem razdelku še ni česa prevesti.",
+      "draft": "Prevedi vse s prevajalnikom brskalnika",
+      "draftFailed": "Brskalnik ne zna prevesti tega para jezikov. Vpišite prevod.",
+      "item": "Postavka {number}",
+      "fields": {
+        "tagline": "Geslo",
+        "intro": "Uvod",
+        "notes": "Opombe",
+        "date": "Kdaj",
+        "title": "Naslov",
+        "text": "Besedilo",
+        "role": "Vloga",
+        "bio": "Nekaj besed",
+        "label": "Ime",
+        "note": "Opomba",
+        "question": "Vprašanje",
+        "answer": "Odgovor",
+        "caption": "Napis"
+      }
+    }
+  }
+}

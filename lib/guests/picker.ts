@@ -1,4 +1,5 @@
 import "server-only";
+import { nameLabels } from "@/lib/guests/labels";
 import { guestDisplayName } from "@/lib/guests/model";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import type { createClient } from "@/lib/supabase/server";
@@ -29,13 +30,14 @@ export async function loadPickerGuests(sb: Supabase, weddingId: string) {
         .range(f, t),
     ),
   ]);
+  const labels = await nameLabels();
   const householdName = new Map(households.map((h) => [h.id, h.name]));
   const firstName = new Map(guests.map((g) => [g.id, g.first_name]));
   const yes = new Set(attending.map((a) => a.guest_id));
   return guests
     .map((g) => ({
       id: g.id,
-      name: guestDisplayName(g, g.plus_one_of ? firstName.get(g.plus_one_of) : null),
+      name: guestDisplayName(g, g.plus_one_of ? firstName.get(g.plus_one_of) : null, labels),
       householdId: g.household_id,
       householdName: householdName.get(g.household_id) ?? "",
       attending: yes.has(g.id),

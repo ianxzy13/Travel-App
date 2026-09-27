@@ -5,7 +5,8 @@ import { useTheme } from "next-themes";
 import { Check, Languages, LogOut, Monitor, Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { setAppLanguage } from "@/app/app/settings/language-actions";
-import { LOCALES } from "@/i18n/locales";
+import { Flag } from "@/components/flag";
+import { LOCALES, localeInfo } from "@/i18n/locales";
 import { signOut } from "@/app/login/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -79,17 +80,19 @@ export function UserMenu({ user, showName = true }: { user: CurrentUser; showNam
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Languages aria-hidden /> {t("language")}
-            <span className="text-muted-foreground ms-auto text-xs">
-              {LOCALES.find((l) => l.code === locale)?.native}
+            <span className="text-muted-foreground ms-auto inline-flex items-center gap-1.5 text-xs">
+              <Flag locale={locale} />
+              {localeInfo(locale).native}
             </span>
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="max-h-80 overflow-y-auto">
+          <DropdownMenuSubContent className="max-h-80 w-60 overflow-y-auto">
             {LOCALES.map((l) => (
               <DropdownMenuItem
                 key={l.code}
                 lang={l.code}
                 onSelect={() => startTransition(() => void setAppLanguage(l.code))}
               >
+                <Flag locale={l.code} />
                 <span className="flex-1">{l.native}</span>
                 {l.code === locale && <Check aria-hidden />}
               </DropdownMenuItem>

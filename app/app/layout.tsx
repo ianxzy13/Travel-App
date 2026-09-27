@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app/app-shell";
 import { SIDEBAR_COOKIE } from "@/components/app/nav-items";
+import { requireLanguageChoice } from "@/lib/i18n/choice";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser, requireWedding } from "@/lib/wedding";
@@ -13,6 +14,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (!isSupabaseConfigured) redirect("/login");
 
   const user = await requireUser();
+  // first visit: ask which language the app should speak
+  await requireLanguageChoice("/app");
   const { wedding, weddings } = await requireWedding();
 
   const supabase = await createClient();
@@ -25,7 +28,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     supabase.from("profiles").select("full_name, avatar_url").eq("id", user.id).maybeSingle(),
     supabase
       .from("notifications")
-      .select("id, type, title, body, link, read_at, created_at")
+      .select("id, type, title, body, link, data, read_at, created_at")
       .eq("user_id", user.id)
       .eq("wedding_id", wedding.id)
       .order("created_at", { ascending: false })
@@ -55,6 +58,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           title: n.title,
           body: n.body,
           link: n.link,
+          data: (n.data as Record<string, unknown> | null) ?? null,
           readAt: n.read_at,
           createdAt: n.created_at,
         })),

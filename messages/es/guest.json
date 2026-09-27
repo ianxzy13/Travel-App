@@ -1,0 +1,180 @@
+{
+  "common": {
+    "language": "Idioma",
+    "moreLanguages": "Más idiomas",
+    "yourTime": "{time} en tu hora"
+  },
+  "site": {
+    "sections": {
+      "home": "Inicio",
+      "story": "Nuestra historia",
+      "events": "Programa",
+      "travel": "Viaje y alojamiento",
+      "rsvp": "Confirmar asistencia",
+      "party": "Cortejo nupcial",
+      "registry": "Lista de regalos",
+      "faq": "Preguntas",
+      "gallery": "Galería"
+    },
+    "nav": "Secciones del sitio",
+    "dateTbd": "Fecha por confirmar",
+    "newTab": "(se abre en una pestaña nueva)",
+    "rsvpButton": "Confirmar asistencia",
+    "countdown": {
+      "days": "{count, plural, one {Falta # día} other {Faltan # días}}",
+      "daysWord": "{count, plural, one {día para la boda} other {días para la boda}}",
+      "today": "¡Hoy es el gran día!",
+      "married": "Felizmente casados"
+    },
+    "madeWith": "Hecho con <link>Vow</link>",
+    "empty": {
+      "events": "Añade eventos en Ajustes → Eventos y aparecerán aquí.",
+      "travel": "Marca hoteles con «Mostrar en el sitio web» o añade consejos de viaje en el editor.",
+      "other": "Aún no hay nada aquí. Añade contenido en el editor.",
+      "hidden": "Esta sección permanece oculta en tu sitio publicado hasta entonces."
+    },
+    "event": {
+      "date": "Fecha",
+      "time": "Hora",
+      "place": "Lugar",
+      "dressCode": "Código de vestimenta",
+      "openMap": "Abrir en Google Maps"
+    },
+    "travel": {
+      "airport": "Aeropuerto más cercano: <b>{code}</b>",
+      "searchFlights": "Buscar vuelos",
+      "perNight": "Desde <b>{price}</b> por noche",
+      "code": "Nuestro código: <mono>{code}</mono>",
+      "bookBy": "Reserva antes del <b>{date}</b>",
+      "bookRoom": "Reservar habitación",
+      "bookRoomAt": "Reservar habitación en {name}",
+      "website": "Sitio web",
+      "websiteOf": "Sitio web de {name}",
+      "map": "Mapa",
+      "mapOf": "Mapa de {name}"
+    },
+    "rsvp": {
+      "replyBy": "Por favor, responde antes del <b>{date}</b>.",
+      "or": "o usa el código de tu invitación"
+    },
+    "registry": {
+      "visit": "Visitar"
+    },
+    "gallery": {
+      "alt": "Foto de la pareja"
+    },
+    "preview": {
+      "bar": "Vista previa: solo tu equipo de boda puede verla hasta que la publiques.",
+      "back": "Volver al editor"
+    },
+    "password": {
+      "intro": "Este sitio web es privado. Introduce la contraseña de tu invitación.",
+      "label": "Contraseña",
+      "enter": "Entrar",
+      "wrong": "La contraseña no es correcta. Revisa tu invitación o pregunta a la pareja."
+    },
+    "meta": {
+      "weddingOf": "La boda de {couple}",
+      "website": "Sitio web de la boda"
+    }
+  },
+  "rsvp": {
+    "title": "Confirmar asistencia",
+    "dateTbd": "Fecha por confirmar",
+    "weddingOf": "La boda de",
+    "rsvpsBy": "Confirmaciones con <link>Vow</link>",
+    "enterCode": "Introduce el código de tu invitación (correo o tarjeta).",
+    "findIntro": "Encuentra tu invitación escribiendo tu nombre tal como aparece en ella.",
+    "orCode": "O usa el código de tu invitación",
+    "notFound": "Invitación no encontrada",
+    "notFoundText": "Ese enlace o código no corresponde a ninguna invitación. Revísalo e inténtalo de nuevo.",
+    "nothingYet": "Todavía no hay nada que confirmar. Vuelve a consultar más adelante.",
+    "code": {
+      "label": "Tu código de confirmación",
+      "continue": "Continuar",
+      "invalid": "Los códigos tienen 6 letras y números, por ejemplo K7P2QX."
+    },
+    "find": {
+      "label": "Tu nombre completo",
+      "placeholder": "Nombre y apellido",
+      "button": "Buscar",
+      "fullName": "Escribe tu nombre y apellido tal como aparecen en la invitación.",
+      "noMatch": "No encontramos ese nombre. Prueba con la ortografía de tu invitación o usa el código que aparece en ella.",
+      "failed": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "dear": "Queridos {name}:",
+    "update": "Actualiza tus respuestas a continuación.",
+    "invite": "Nos encantaría saber si podéis acompañarnos.",
+    "replyBy": "Por favor, responde antes del {date}.",
+    "closed": "El plazo para confirmar ha terminado.",
+    "closedContact": "¿Necesitas cambiar algo? {contact}",
+    "closedNoContact": "¿Necesitas cambiar algo? Ponte en contacto directamente con la pareja.",
+    "thanks": "¡Gracias!",
+    "thanksText": "Tu respuesta se ha enviado a {couple}. Puedes cambiarla cuando quieras con este mismo enlace.",
+    "thanksTextUntil": "Tu respuesta se ha enviado a {couple}. Puedes cambiarla hasta el {date} con este mismo enlace.",
+    "send": "Enviar nuestra respuesta",
+    "save": "Guardar cambios",
+    "change": "Cambiar nuestras respuestas",
+    "yourAnswers": "Tus respuestas",
+    "attending": "Asiste",
+    "notAttending": "No asiste",
+    "noAnswer": "Sin respuesta",
+    "cantMakeIt": "no puede asistir",
+    "noAnswerYet": "sin respuesta todavía",
+    "songRequest": "Canción pedida: {song}",
+    "form": {
+      "everyone": "Vamos todos",
+      "none": "Ninguno de nosotros puede ir",
+      "willAttend": "¿Asistirá {name} a {event}?",
+      "accept": "Acepta con alegría",
+      "decline": "Lamenta no poder asistir",
+      "meal": "Elección de menú",
+      "chooseMeal": "Elige un menú.",
+      "chooseAnswer": "Elige una respuesta.",
+      "missingMeal": "Elige un menú para cada persona que asiste.",
+      "missingAnswer": "Responde por todas las personas antes de enviar.",
+      "details": "Algunos detalles",
+      "plusOneName": "Nombre de tu acompañante (acompañante de {host})",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "dietary": "Necesidades alimentarias o alergias: {name}",
+      "dietaryPlaceholder": "p. ej. vegetariano, alergia a los frutos secos (déjalo vacío si no hay)",
+      "song": "Una canción que te haga bailar",
+      "songPlaceholder": "Artista – canción",
+      "message": "Un mensaje para {couple}",
+      "guestOf": "Acompañante de {name}",
+      "guest": "Invitado"
+    },
+    "errors": {
+      "rsvp_not_found": "No encontramos esa invitación. Revisa el enlace o el código.",
+      "deadline_passed": "El plazo para confirmar ha terminado. Ponte en contacto directamente con la pareja.",
+      "invalid_guest_or_event": "Algo en tus respuestas no coincide con tu invitación. Vuelve a cargar la página.",
+      "invalid_status": "Indica para cada persona si asiste o no.",
+      "not_allowed": "No tienes permiso para registrar respuestas de esta boda.",
+      "generic": "No pudimos guardar tu respuesta. Inténtalo de nuevo en un momento."
+    }
+  },
+  "board": {
+    "empty": "Este tablero está vacío por ahora.",
+    "photoBy": "Foto de <photographer>{name}</photographer> en <unsplash>Unsplash</unsplash>",
+    "madeWith": "Hecho con <link>Vow</link>",
+    "title": "Tablero compartido",
+    "fallbackAlt": "Inspiración"
+  },
+  "email": {
+    "previewInvite": "Estás invitado a la boda de {couple}",
+    "previewReminder": "Un recordatorio para confirmar tu asistencia a la boda de {couple}",
+    "eyebrowInvite": "Estás invitado",
+    "eyebrowReminder": "Un pequeño recordatorio",
+    "dear": "Queridos {name}:",
+    "bodyInvite": "Nos haría muy felices celebrarlo con vosotros. Contadnos quién puede venir usando vuestro enlace personal de confirmación.",
+    "bodyReminder": "Todavía no hemos recibido vuestra respuesta y nos encantaría saber si podéis acompañarnos. Solo lleva un minuto.",
+    "button": "Confirmar ahora",
+    "replyBy": "Por favor, responde antes del {date}.",
+    "fallback": "¿No funciona el botón? Abre {link} o introduce el código {code}.",
+    "love": "Con cariño,",
+    "personal": "Este enlace es personal para tu hogar. Por favor, no lo compartas.",
+    "subjectInvite": "Estás invitado: la boda de {couple}",
+    "subjectReminder": "Recordatorio: confirma tu asistencia a la boda de {couple}"
+  }
+}

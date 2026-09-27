@@ -4,37 +4,32 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import type { MemberRole } from "@/lib/database.types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import { inviteSchema, toWeddingColumns, weddingSchema } from "@/lib/validation/wedding";
 import { canEdit, requireUser, requireWedding, WEDDING_COOKIE } from "@/lib/wedding";
+import { fail, invalid, noPermission, err } from "@/lib/errors";
 
 // Every action re-checks permissions here for friendly messages, but the real
 // protection is the Row Level Security policies in the database.
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to do that." };
 const idSchema = z.uuid();
 const roleSchema = z.enum(["owner", "editor", "viewer"]);
 
 /** Translate the "last owner" database rule into plain English. */
 function ownerError(context: string, error: { message: string }) {
-  if (error.message.includes("at least one owner")) {
-    return {
-      ok: false as const,
-      error: "Every wedding needs at least one owner. Make someone else an owner first.",
-    };
-  }
+  if (error.message.includes("at least one owner")) return err("lastOwner");
   return fail(context, error);
 }
 
 export async function updateWedding(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return NO_PERMISSION;
+  if (!canEdit(role)) return noPermission();
 
   const parsed = weddingSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -44,7 +39,7 @@ export async function updateWedding(input: unknown): Promise<ActionResult> {
     .select("id");
 
   if (error) return fail("updateWedding", error);
-  if (!data.length) return NO_PERMISSION;
+  if (!data.length) return noPermission();
 
   revalidatePath("/app", "layout");
   return { ok: true };
@@ -53,10 +48,10 @@ export async function updateWedding(input: unknown): Promise<ActionResult> {
 export async function inviteCollaborator(input: unknown): Promise<ActionResult<{ link: string }>> {
   const user = await requireUser();
   const { wedding, role } = await requireWedding();
-  if (role !== "owner") return NO_PERMISSION;
+  if (role !== "owner") return noPermission();
 
   const parsed = inviteSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -79,7 +74,7 @@ export async function inviteCollaborator(input: unknown): Promise<ActionResult<{
 
 export async function revokeInvitation(invitationId: string): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (role !== "owner" || !idSchema.safeParse(invitationId).success) return NO_PERMISSION;
+  if (role !== "owner" || !idSchema.safeParse(invitationId).success) return noPermission();
 
   const supabase = await createClient();
   const { error } = await supabase
@@ -98,9 +93,9 @@ export async function updateMemberRole(
   newRole: MemberRole,
 ): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (role !== "owner") return NO_PERMISSION;
+  if (role !== "owner") return noPermission();
   if (!idSchema.safeParse(memberId).success || !roleSchema.safeParse(newRole).success) {
-    return NO_PERMISSION;
+    return noPermission();
   }
 
   const supabase = await createClient();
@@ -112,7 +107,7 @@ export async function updateMemberRole(
     .select("id");
 
   if (error) return ownerError("updateMemberRole", error);
-  if (!data.length) return NO_PERMISSION;
+  if (!data.length) return noPermission();
 
   revalidatePath("/app", "layout");
   return { ok: true };
@@ -120,7 +115,7 @@ export async function updateMemberRole(
 
 export async function removeMember(memberId: string): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (role !== "owner" || !idSchema.safeParse(memberId).success) return NO_PERMISSION;
+  if (role !== "owner" || !idSchema.safeParse(memberId).success) return noPermission();
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -131,7 +126,7 @@ export async function removeMember(memberId: string): Promise<ActionResult> {
     .select("id");
 
   if (error) return ownerError("removeMember", error);
-  if (!data.length) return NO_PERMISSION;
+  if (!data.length) return noPermission();
 
   revalidatePath("/app/settings");
   return { ok: true };
@@ -157,7 +152,7 @@ export async function leaveWedding(): Promise<ActionResult> {
 
 export async function deleteWedding(): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (role !== "owner") return NO_PERMISSION;
+  if (role !== "owner") return noPermission();
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -167,7 +162,7 @@ export async function deleteWedding(): Promise<ActionResult> {
     .select("id");
 
   if (error) return fail("deleteWedding", error);
-  if (!data.length) return NO_PERMISSION;
+  if (!data.length) return noPermission();
 
   (await cookies()).delete(WEDDING_COOKIE);
   redirect("/app");

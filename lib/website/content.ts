@@ -62,29 +62,7 @@ export function parseContent<K extends SiteSectionKind>(kind: K, raw: unknown): 
   return (r.success ? r.data : sectionSchemas[kind].parse({})) as SectionContent[K];
 }
 
-export const SECTION_LABEL: Record<SiteSectionKind, string> = {
-  home: "Home",
-  story: "Our story",
-  events: "Schedule",
-  travel: "Travel & stay",
-  rsvp: "RSVP",
-  party: "Wedding party",
-  registry: "Registry",
-  faq: "Q & A",
-  gallery: "Gallery",
-};
-
-export const SECTION_HINT: Record<SiteSectionKind, string> = {
-  home: "Your names, date, countdown and hero photo.",
-  story: "How you met, with a timeline of milestones.",
-  events: "Comes from Settings → Events: times, places, dress code.",
-  travel: "Hotels marked “Show on website” plus your own tips.",
-  rsvp: "Guests find their invitation by name or code.",
-  party: "Bridesmaids, groomsmen, officiant… with photos.",
-  registry: "Links to your gift lists or honeymoon fund.",
-  faq: "Answers to the questions guests always ask.",
-  gallery: "Your favourite photos.",
-};
+// Section names and hints are in messages "websiteEditor.sections".
 
 /** Only http(s) links are ever shown (blocks javascript: and friends). */
 export function safeUrl(raw: string | null | undefined) {

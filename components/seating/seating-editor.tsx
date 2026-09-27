@@ -31,6 +31,7 @@ import {
   Users,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useSeatingWords } from "./use-seating-words";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -53,7 +54,7 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { PartnerNames } from "@/lib/guests/model";
 import { autoArrange } from "@/lib/seating/auto-arrange";
-import { isTable, KINDS, tableName } from "@/lib/seating/geometry";
+import { isTable, KINDS } from "@/lib/seating/geometry";
 import { allIssues, analyzeSeating } from "@/lib/seating/rules";
 import {
   addObject,
@@ -121,6 +122,7 @@ export function SeatingEditor(props: Props) {
   const { guests, relationships, canEdit, names } = props;
   const router = useRouter();
   const store = useSeatingStore(props.layoutId, props.initial, canEdit, props.saveChanges);
+  const { t, words, tableName, issueText } = useSeatingWords();
   const { state, commit } = store;
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -147,7 +149,8 @@ export function SeatingEditor(props: Props) {
     () => analyzeSeating(state, guestsById, relationships),
     [state, guestsById, relationships],
   );
-  const issues = useMemo(() => allIssues(state, analysis), [state, analysis]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const issues = useMemo(() => allIssues(state, analysis, words), [state, analysis]);
 
   const select = useCallback((id: string | null) => {
     setSelectedId(id);
@@ -159,7 +162,13 @@ export function SeatingEditor(props: Props) {
   function add(kind: SeatingKind) {
     const c = apiRef.current?.center() ?? { x: state.room.width / 2, y: state.room.height / 2 };
     const at = snap ? { x: Math.round(c.x / GRID) * GRID, y: Math.round(c.y / GRID) * GRID } : c;
-    const obj = createObject(state, kind, at, crypto.randomUUID());
+    const obj = createObject(
+      state,
+      kind,
+      at,
+      crypto.randomUUID(),
+      kind === "label" ? t("newLabel") : t(`kinds.${kind}`),
+    );
     commit(addObject(state, obj));
     select(obj.id);
     setView("plan");
@@ -168,7 +177,11 @@ export function SeatingEditor(props: Props) {
   function reportUnplaced(unplaced: string[], table: string) {
     if (unplaced.length) {
       toast.warning(
-        `${unplaced.length} didn't fit at ${table}: ${unplaced.map((id) => guestsById.get(id)?.name).join(", ")}`,
+        t("notFit", {
+          count: unplaced.length,
+          table,
+          names: unplaced.map((id) => guestsById.get(id)?.name).join(", "),
+        }),
       );
     }
   }
@@ -221,12 +234,12 @@ export function SeatingEditor(props: Props) {
   function runAutoArrange() {
     const candidates = guests.filter((g) => g.rsvp === "attending" && !state.assignments[g.id]);
     if (candidates.length === 0) {
-      toast.info("Everyone who's attending already has a seat.");
+      toast.info(t("allSeated"));
       return;
     }
     const r = autoArrange(state, candidates, guestsById, relationships);
     if (r.placed.length === 0) {
-      toast.warning("There are no free seats that fit. Add tables or seats first.");
+      toast.warning(t("noFreeSeats"));
       return;
     }
     commit(r.state);
@@ -274,9 +287,9 @@ export function SeatingEditor(props: Props) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement;
+      const target = e.target as HTMLElement;
       if (
-        t.closest(
+        target.closest(
           "input, textarea, select, [contenteditable=true], [role=dialog], [role=listbox], [role=menu]",
         )
       )
@@ -305,7 +318,7 @@ export function SeatingEditor(props: Props) {
         e.preventDefault();
         commit(deleteObject(s, o.id));
         select(null);
-        toast("Deleted. Press Ctrl+Z to undo.");
+        toast(t("deletedUndo"));
       } else if (mod && e.key.toLowerCase() === "d") {
         e.preventDefault();
         const id = crypto.randomUUID();
@@ -325,6 +338,7 @@ export function SeatingEditor(props: Props) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId, canEdit, commit, select, store]);
 
   // ---------- rendering ----------
@@ -334,10 +348,19 @@ export function SeatingEditor(props: Props) {
   // More seats (or attending guests) than the booked venue holds?
   const venueOver =
     props.venue && Math.max(totals.seats, totals.attending) > props.venue.capacity
-      ? `${props.venue.name} holds ${props.venue.capacity}, but you have ${totals.seats} seats and ${totals.attending} attending guests.`
+      ? t("venueOver", {
+          venue: props.venue.name,
+          capacity: props.venue.capacity,
+          seats: totals.seats,
+          attending: totals.attending,
+        })
       : null;
   const warningCount = issues.length + (venueOver ? 1 : 0) + (totals.seatsShort > 0 ? 1 : 0);
-  const legend = legendItems(colorMode, names, props.mealOptions);
+  const legend = legendItems(colorMode, names, props.mealOptions, {
+    sideOf: (name) => t("sideOf", { name }),
+    both: t("legendBoth"),
+    noMeal: t("legendNoMeal"),
+  });
 
   const panel = (
     <GuestPanel
@@ -379,7 +402,7 @@ export function SeatingEditor(props: Props) {
       }}
       onMoveGuest={(g) => {
         pick({ guestIds: [g.id], label: g.name });
-        toast.info(`Now tap a seat for ${g.name}`);
+        toast.info(t("tapSeatFor", { name: g.name }));
       }}
     />
   );
@@ -397,12 +420,12 @@ export function SeatingEditor(props: Props) {
       <div className="flex h-[calc(100dvh-8.5rem)] min-h-[30rem] flex-col gap-3 md:h-[calc(100dvh-2rem)]">
         {/* ---------- header ---------- */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <h1 className="text-3xl sm:text-4xl">Seating</h1>
+          <h1 className="text-3xl sm:text-4xl">{t("heading")}</h1>
           <Select
             value={props.eventId}
             onValueChange={(id) => router.push(`/app/seating?event=${id}`)}
           >
-            <SelectTrigger size="sm" className="w-auto min-w-36" aria-label="Event">
+            <SelectTrigger size="sm" className="w-auto min-w-36" aria-label={t("event")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -414,18 +437,20 @@ export function SeatingEditor(props: Props) {
             </SelectContent>
           </Select>
           <p className="text-muted-foreground text-sm">
-            {totals.tables} tables · {totals.seats} seats ·{" "}
+            {t("totals", { tables: totals.tables, seats: totals.seats })}{" "}
             <span className={cn(totals.unseatedAttending > 0 && "text-foreground font-medium")}>
-              {totals.attending - totals.unseatedAttending}/{totals.attending} attending seated
+              {t("seatedOf", {
+                seated: totals.attending - totals.unseatedAttending,
+                attending: totals.attending,
+              })}
             </span>
             {totals.seatsShort > 0 && (
               <span className="text-destructive font-medium">
-                {" "}
-                · {totals.seatsShort} seats short
+                {t("seatsShort", { count: totals.seatsShort })}
               </span>
             )}
             {venueOver && (
-              <span className="text-destructive font-medium"> · over venue capacity</span>
+              <span className="text-destructive font-medium">{t("overCapacity")}</span>
             )}
           </p>
           <SaveIndicator status={store.saveStatus} canEdit={canEdit} />
@@ -439,7 +464,7 @@ export function SeatingEditor(props: Props) {
             className="lg:hidden"
             onClick={() => setGuestSheet(true)}
           >
-            <Users aria-hidden /> Guests
+            <Users aria-hidden /> {t("guests")}
             {totals.unseatedAttending > 0 && (
               <span className="bg-primary text-primary-foreground rounded-full px-1.5 text-xs">
                 {totals.unseatedAttending}
@@ -450,24 +475,24 @@ export function SeatingEditor(props: Props) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="sm">
-                  <Plus aria-hidden /> Add
+                  <Plus aria-hidden /> {t("add")}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                <DropdownMenuLabel>Tables</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("tables")}</DropdownMenuLabel>
                 {TABLE_KINDS.map((k) => (
                   <DropdownMenuItem key={k} onSelect={() => add(k)}>
-                    {KINDS[k].label}
-                    <span className="text-muted-foreground ml-auto text-xs">
-                      {KINDS[k].defaultSeats} seats
+                    {t(`kinds.${k}`)}
+                    <span className="text-muted-foreground ms-auto text-xs">
+                      {t("seatsCount", { count: KINDS[k].defaultSeats })}
                     </span>
                   </DropdownMenuItem>
                 ))}
                 <DropdownMenuSeparator />
-                <DropdownMenuLabel>Room</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("room")}</DropdownMenuLabel>
                 {DECOR_KINDS.map((k) => (
                   <DropdownMenuItem key={k} onSelect={() => add(k)}>
-                    {KINDS[k].label}
+                    {t(`kinds.${k}`)}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -480,7 +505,7 @@ export function SeatingEditor(props: Props) {
                 size="icon-sm"
                 onClick={store.undo}
                 disabled={!store.canUndo}
-                aria-label="Undo (Ctrl+Z)"
+                aria-label={t("undo")}
               >
                 <Undo2 aria-hidden />
               </Button>
@@ -489,21 +514,21 @@ export function SeatingEditor(props: Props) {
                 size="icon-sm"
                 onClick={store.redo}
                 disabled={!store.canRedo}
-                aria-label="Redo (Ctrl+Y)"
+                aria-label={t("redo")}
               >
                 <Redo2 aria-hidden />
               </Button>
               <Button variant="outline" size="sm" onClick={runAutoArrange}>
-                <Sparkles aria-hidden /> Auto-arrange
+                <Sparkles aria-hidden /> {t("autoArrange")}
               </Button>
             </>
           )}
 
-          <div className="bg-muted flex rounded-lg p-0.5" role="radiogroup" aria-label="View">
+          <div className="bg-muted flex rounded-lg p-0.5" role="radiogroup" aria-label={t("view")}>
             {(
               [
-                ["plan", "Floor plan", LayoutGrid],
-                ["list", "List", List],
+                ["plan", t("floorPlan"), LayoutGrid],
+                ["list", t("list"), List],
               ] as const
             ).map(([v, label, Icon]) => (
               <button
@@ -527,7 +552,7 @@ export function SeatingEditor(props: Props) {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
                 <CircleDashed aria-hidden />{" "}
-                <span className="sr-only sm:not-sr-only">Colour by</span>
+                <span className="sr-only sm:not-sr-only">{t("colourBy")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -535,9 +560,9 @@ export function SeatingEditor(props: Props) {
                 value={colorMode}
                 onValueChange={(v) => setColorMode(v as ColorMode)}
               >
-                <DropdownMenuRadioItem value="side">Side</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="meal">Meal</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="none">One colour</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="side">{t("side")}</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="meal">{t("meal")}</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="none">{t("oneColour")}</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -548,36 +573,35 @@ export function SeatingEditor(props: Props) {
                 variant="ghost"
                 size="sm"
                 className={cn(warningCount > 0 && "text-destructive")}
-                aria-label={`${warningCount} warnings`}
+                aria-label={t("warningsCount", { count: warningCount })}
               >
                 <AlertTriangle aria-hidden /> {warningCount}
               </Button>
             </PopoverTrigger>
             <PopoverContent align="end" className="w-80">
-              <p className="mb-2 font-medium">Warnings</p>
+              <p className="mb-2 font-medium">{t("warnings")}</p>
               {issues.length === 0 && totals.seatsShort === 0 && !venueOver ? (
-                <p className="text-muted-foreground text-sm">Everything looks good.</p>
+                <p className="text-muted-foreground text-sm">{t("allGood")}</p>
               ) : (
                 <ul className="max-h-80 space-y-2 overflow-y-auto text-sm">
                   {venueOver && <li className="text-destructive">{venueOver}</li>}
                   {totals.seatsShort > 0 && (
                     <li className="text-destructive">
-                      {totals.attending} guests are attending but there are only {totals.seats}{" "}
-                      seats.
+                      {t("shortSeats", { attending: totals.attending, seats: totals.seats })}
                     </li>
                   )}
                   {issues.map((i, n) => (
                     <li key={n}>
                       <button
                         type="button"
-                        className="hover:bg-accent w-full rounded p-1 text-left"
+                        className="hover:bg-accent w-full rounded p-1 text-start"
                         onClick={() => {
                           select(i.tableId);
                           setView("plan");
                         }}
                       >
                         <span className="text-muted-foreground block text-xs">{i.tableName}</span>
-                        {i.message}
+                        {issueText(i)}
                       </button>
                     </li>
                   ))}
@@ -589,26 +613,18 @@ export function SeatingEditor(props: Props) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
-                <Printer aria-hidden /> <span className="sr-only sm:not-sr-only">Print</span>
+                <Printer aria-hidden /> <span className="sr-only sm:not-sr-only">{t("print")}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {(
-                [
-                  ["plan", "Floor plan"],
-                  ["tables", "Table-by-table list"],
-                  ["alpha", "Find your seat (A–Z)"],
-                  ["cards", "Place cards"],
-                  ["caterer", "Caterer summary"],
-                ] as const
-              ).map(([v, label]) => (
+              {(["plan", "tables", "alpha", "cards", "caterer"] as const).map((v) => (
                 <DropdownMenuItem key={v} asChild>
                   <a
                     href={`/print/seating/${props.layoutId}?view=${v}`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {label}
+                    {t(`printViews.${v}`)}
                   </a>
                 </DropdownMenuItem>
               ))}
@@ -621,7 +637,7 @@ export function SeatingEditor(props: Props) {
             className="lg:hidden"
             onClick={() => setDetailSheet(true)}
           >
-            <SlidersHorizontal aria-hidden /> {selectedId || selectedSeat ? "Details" : "Room"}
+            <SlidersHorizontal aria-hidden /> {selectedId || selectedSeat ? t("details") : t("room")}
           </Button>
         </div>
 
@@ -632,12 +648,12 @@ export function SeatingEditor(props: Props) {
           >
             <Sparkles className="text-primary size-4" aria-hidden />
             <span className="flex-1">
-              Auto-arrange seated <strong>{proposal.placed}</strong> guests
-              {proposal.unplaced > 0 && `; ${proposal.unplaced} didn't fit (add tables or seats)`}.
-              Check the result, then keep it or undo.
+              {t.rich("arranged", { count: proposal.placed, b: (c) => <strong>{c}</strong> })}{" "}
+              {proposal.unplaced > 0 && t("arrangedMissing", { count: proposal.unplaced })}{" "}
+              {t("checkResult")}
             </span>
             <Button size="sm" onClick={() => setProposal(null)}>
-              <Check aria-hidden /> Keep
+              <Check aria-hidden /> {t("keep")}
             </Button>
             <Button
               size="sm"
@@ -647,14 +663,14 @@ export function SeatingEditor(props: Props) {
                 setProposal(null);
               }}
             >
-              <Undo2 aria-hidden /> Undo
+              <Undo2 aria-hidden /> {t("undoShort")}
             </Button>
           </div>
         )}
 
         {/* ---------- main area ---------- */}
         <div className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[17rem_1fr_17rem]">
-          <aside className="hidden min-h-0 lg:block" aria-label="Guests to seat">
+          <aside className="hidden min-h-0 lg:block" aria-label={t("guestsToSeat")}>
             {panel}
           </aside>
           <div className="min-h-0">
@@ -685,15 +701,13 @@ export function SeatingEditor(props: Props) {
                 {Object.keys(state.objects).length === 0 && (
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-6">
                     <div className="bg-card/95 pointer-events-auto max-w-sm rounded-xl border p-6 text-center shadow-sm">
-                      <p className="font-serif text-2xl">An empty room</p>
+                      <p className="font-serif text-2xl">{t("emptyRoom")}</p>
                       <p className="text-muted-foreground mt-1 text-sm">
-                        {canEdit
-                          ? "Add tables with “Add”, drag them into place, then drag guests onto the seats."
-                          : "The couple hasn't added any tables yet."}
+                        {canEdit ? t("emptyEditor") : t("emptyViewer")}
                       </p>
                       {canEdit && (
                         <Button className="mt-4" size="sm" onClick={() => add("round")}>
-                          <Plus aria-hidden /> Add a round table
+                          <Plus aria-hidden /> {t("addRound")}
                         </Button>
                       )}
                     </div>
@@ -702,10 +716,10 @@ export function SeatingEditor(props: Props) {
                 {picked && (
                   <div
                     role="status"
-                    className="bg-primary text-primary-foreground absolute top-3 left-1/2 flex max-w-[90%] -translate-x-1/2 items-center gap-2 rounded-full py-1.5 pr-1.5 pl-4 text-sm shadow-lg"
+                    className="bg-primary text-primary-foreground absolute top-3 left-1/2 flex max-w-[90%] -translate-x-1/2 items-center gap-2 rounded-full py-1.5 ps-4 pe-1.5 text-sm shadow-lg"
                   >
                     <span className="truncate">
-                      Tap a seat or table for <strong>{picked.label}</strong>
+                      {t.rich("tapFor", { name: picked.label, b: (c) => <strong>{c}</strong> })}
                     </span>
                     <Button
                       size="sm"
@@ -713,12 +727,12 @@ export function SeatingEditor(props: Props) {
                       className="h-7 rounded-full"
                       onClick={() => setPicked(null)}
                     >
-                      Cancel
+                      {t("cancel")}
                     </Button>
                   </div>
                 )}
                 {legend.length > 0 && (
-                  <ul className="bg-card/95 absolute bottom-3 left-3 flex max-w-[60%] flex-wrap gap-x-3 gap-y-1 rounded-lg border px-3 py-1.5 text-xs shadow-sm">
+                  <ul className="bg-card/95 absolute start-3 bottom-3 flex max-w-[60%] flex-wrap gap-x-3 gap-y-1 rounded-lg border px-3 py-1.5 text-xs shadow-sm">
                     {legend.map((l) => (
                       <li key={l.label} className="flex items-center gap-1.5">
                         <span
@@ -746,7 +760,7 @@ export function SeatingEditor(props: Props) {
               />
             )}
           </div>
-          <aside className="hidden min-h-0 lg:block" aria-label="Selection details">
+          <aside className="hidden min-h-0 lg:block" aria-label={t("selection")}>
             {inspector}
           </aside>
         </div>
@@ -756,7 +770,7 @@ export function SeatingEditor(props: Props) {
       <Sheet open={guestSheet} onOpenChange={setGuestSheet}>
         <SheetContent side="left" className="w-[88vw] max-w-sm p-2">
           <SheetHeader className="sr-only">
-            <SheetTitle>Guests</SheetTitle>
+            <SheetTitle>{t("guests")}</SheetTitle>
           </SheetHeader>
           {panel}
         </SheetContent>
@@ -764,7 +778,7 @@ export function SeatingEditor(props: Props) {
       <Sheet open={detailSheet} onOpenChange={setDetailSheet}>
         <SheetContent side="bottom" className="max-h-[70dvh] p-2 lg:hidden">
           <SheetHeader className="sr-only">
-            <SheetTitle>Details</SheetTitle>
+            <SheetTitle>{t("details")}</SheetTitle>
           </SheetHeader>
           <div className="h-[60dvh]">{inspector}</div>
         </SheetContent>
@@ -782,32 +796,33 @@ export function SeatingEditor(props: Props) {
 }
 
 function SaveIndicator({ status, canEdit }: { status: SaveStatus; canEdit: boolean }) {
-  if (!canEdit) return <span className="text-muted-foreground text-xs">View only</span>;
+  const { t } = useSeatingWords();
+  if (!canEdit) return <span className="text-muted-foreground text-xs">{t("viewOnly")}</span>;
   const map = {
     saved: {
       icon: <Check className="size-3.5" aria-hidden />,
-      text: "All changes saved",
+      text: t("saved"),
       cls: "text-muted-foreground",
     },
     saving: {
       icon: <Loader2 className="size-3.5 animate-spin" aria-hidden />,
-      text: "Saving…",
+      text: t("saving"),
       cls: "text-muted-foreground",
     },
     retrying: {
       icon: <CloudOff className="size-3.5" aria-hidden />,
-      text: "Offline, retrying…",
+      text: t("retrying"),
       cls: "text-warning",
     },
     error: {
       icon: <AlertTriangle className="size-3.5" aria-hidden />,
-      text: "Not saved",
+      text: t("notSaved"),
       cls: "text-destructive",
     },
   }[status];
   return (
     <span
-      className={cn("ml-auto flex items-center gap-1 text-xs", map.cls)}
+      className={cn("ms-auto flex items-center gap-1 text-xs", map.cls)}
       role="status"
       aria-live="polite"
     >

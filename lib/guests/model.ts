@@ -14,6 +14,8 @@ export type GuestView = {
   id: string;
   householdId: string;
   householdName: string;
+  /** the household's language ("" = the couple's language) */
+  householdLanguage: string;
   firstName: string;
   lastName: string;
   /** "Ann Smith", or "Ann's guest" for an unnamed plus-one */
@@ -37,17 +39,22 @@ export type GuestView = {
 
 export type PartnerNames = { a: string; b: string };
 
-export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
-  adult: "Adult",
-  child: "Child",
-  infant: "Infant",
-};
+/** Words used in guest names, in the viewer's language (see messages "guests"). */
+export type NameLabels = { guestOf: (host: string) => string; unnamed: string };
+const EN_LABELS: NameLabels = { guestOf: (h) => `${h}'s guest`, unnamed: "Unnamed guest" };
 
-export function sideLabel(side: GuestSide, names: PartnerNames) {
-  if (side === "partner_a") return `${names.a}'s side`;
-  if (side === "partner_b") return `${names.b}'s side`;
-  return "Both";
+/** "Ian's side" / "Both", given the translated words. */
+export function sideLabel(
+  side: GuestSide,
+  names: PartnerNames,
+  t: (key: "sideOf" | "both", values?: { name: string }) => string,
+) {
+  if (side === "partner_a") return t("sideOf", { name: names.a });
+  if (side === "partner_b") return t("sideOf", { name: names.b });
+  return t("both");
 }
+
+export const AGE_GROUPS: AgeGroup[] = ["adult", "child", "infant"];
 
 export function fullName(first: string, last: string) {
   return `${first} ${last}`.trim();
@@ -57,21 +64,26 @@ export function fullName(first: string, last: string) {
 export function guestDisplayName(
   g: Pick<GuestRow, "first_name" | "last_name">,
   hostFirstName?: string | null,
+  labels: NameLabels = EN_LABELS,
 ) {
   const name = fullName(g.first_name, g.last_name);
   if (name) return name;
-  return hostFirstName ? `${hostFirstName}'s guest` : "Unnamed guest";
+  return hostFirstName ? labels.guestOf(hostFirstName) : labels.unnamed;
 }
 
 /** Joins the raw database rows into GuestView objects. */
 export function buildGuestViews(data: {
   guests: GuestRow[];
-  households: Pick<HouseholdRow, "id" | "name">[];
+  households: Pick<HouseholdRow, "id" | "name" | "preferred_language">[];
   invites: Pick<GuestEventInviteRow, "guest_id" | "event_id">[];
   guestTags: Pick<GuestTagRow, "guest_id" | "tag_id">[];
   responses?: { guest_id: string; event_id: string; status: RsvpStatus }[];
+  labels?: NameLabels;
 }): GuestView[] {
   const householdNames = new Map(data.households.map((h) => [h.id, h.name]));
+  const householdLanguages = new Map(
+    data.households.map((h) => [h.id, h.preferred_language ?? ""]),
+  );
   const firstNames = new Map(data.guests.map((g) => [g.id, g.first_name]));
   const eventsByGuest = groupIds(data.invites, "guest_id", "event_id");
   const tagsByGuest = groupIds(data.guestTags, "guest_id", "tag_id");
@@ -84,9 +96,10 @@ export function buildGuestViews(data: {
     id: g.id,
     householdId: g.household_id,
     householdName: householdNames.get(g.household_id) ?? "",
+    householdLanguage: householdLanguages.get(g.household_id) ?? "",
     firstName: g.first_name,
     lastName: g.last_name,
-    name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null),
+    name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null, data.labels),
     email: g.email,
     phone: g.phone,
     side: g.side,

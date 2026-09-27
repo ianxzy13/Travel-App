@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { VendorsPage } from "@/components/vendors/vendors-page";
 import { loadBudget } from "@/lib/budget/load";
 import { sumMoney } from "@/lib/budget/money";
@@ -6,7 +7,9 @@ import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Vendors" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("vendors") };
+}
 
 export default async function Vendors() {
   const { wedding, role } = await requireWedding();

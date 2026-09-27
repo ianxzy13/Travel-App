@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { Copy, ExternalLink, Loader2, Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   createBoard,
@@ -40,6 +41,7 @@ export function BoardDialog({
   onSaved: (id: string) => void;
   onDeleted: () => void;
 }) {
+  const t = useTranslations("inspiration.board");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState<string>();
@@ -65,7 +67,7 @@ export function BoardDialog({
         if (!r.ok) return setError(r.error);
         id = r.data?.id;
       }
-      toast.success(board ? "Board saved" : "Board created");
+      toast.success(board ? t("saved") : t("created"));
       onSaved(id ?? "all");
       onOpenChange(false);
     });
@@ -76,12 +78,10 @@ export function BoardDialog({
       <DialogContent className="sm:max-w-md">
         <form onSubmit={save} className="space-y-4">
           <DialogHeader>
-            <DialogTitle>{board ? "Edit board" : "New board"}</DialogTitle>
-            <DialogDescription>
-              Boards group your ideas, e.g. Flowers, Dress, Tablescape.
-            </DialogDescription>
+            <DialogTitle>{board ? t("editTitle") : t("newTitle")}</DialogTitle>
+            <DialogDescription>{t("hint")}</DialogDescription>
           </DialogHeader>
-          <FormField id="board-name" label="Name" error={error}>
+          <FormField id="board-name" label={t("name")} error={error}>
             {(a) => (
               <Input
                 {...a}
@@ -93,7 +93,7 @@ export function BoardDialog({
               />
             )}
           </FormField>
-          <FormField id="board-description" label="Description (optional)">
+          <FormField id="board-description" label={t("description")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -109,18 +109,18 @@ export function BoardDialog({
               <ConfirmDialog
                 trigger={
                   <Button type="button" variant="ghost" className="text-destructive">
-                    <Trash2 aria-hidden /> Delete board
+                    <Trash2 aria-hidden /> {t("delete")}
                   </Button>
                 }
-                title={`Delete "${board.name}"?`}
-                description={`Its ${board.count} pin${board.count === 1 ? "" : "s"}, comments and uploaded images are deleted for everyone. This can't be undone.`}
+                title={t("deleteTitle", { name: board.name })}
+                description={t("deleteText", { count: board.count })}
                 onConfirm={async () => {
                   const r = await deleteBoard(board.id);
                   if (!r.ok) {
                     toast.error(r.error);
                     return false;
                   }
-                  toast.success("Board deleted");
+                  toast.success(t("deleted"));
                   onOpenChange(false);
                   onDeleted();
                 }}
@@ -130,7 +130,7 @@ export function BoardDialog({
             )}
             <Button type="submit" disabled={pending}>
               {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
-              {board ? "Save" : "Create board"}
+              {board ? t("save") : t("create")}
             </Button>
           </DialogFooter>
         </form>
@@ -149,6 +149,7 @@ export function ShareDialog({
   canEdit: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const t = useTranslations("inspiration.shareDialog");
   const [shareId, setShareId] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   useEffect(() => setShareId(board?.shareId ?? null), [board]);
@@ -161,7 +162,7 @@ export function ShareDialog({
       const r = await setBoardSharing(board.id, on);
       if (!r.ok) return void toast.error(r.error);
       setShareId(r.data?.shareId ?? null);
-      toast.success(on ? "Link created" : "Link turned off. The old link no longer works.");
+      toast.success(on ? t("created") : t("off"));
     });
   }
 
@@ -169,14 +170,11 @@ export function ShareDialog({
     <Dialog open={!!board} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Share &ldquo;{board?.name}&rdquo;</DialogTitle>
-          <DialogDescription>
-            Anyone with the link can look at this board (not change it), e.g. your florist or
-            hairdresser. They don&apos;t see comments or anything else in your wedding.
-          </DialogDescription>
+          <DialogTitle>{t("title", { name: board?.name ?? "" })}</DialogTitle>
+          <DialogDescription>{t("text")}</DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-between gap-3 rounded-lg border p-3">
-          <Label htmlFor="share-switch">Share with a link</Label>
+          <Label htmlFor="share-switch">{t("toggle")}</Label>
           <Switch
             id="share-switch"
             checked={!!shareId}
@@ -186,7 +184,7 @@ export function ShareDialog({
         </div>
         {shareId && (
           <div className="space-y-2">
-            <Label htmlFor="share-link">Link</Label>
+            <Label htmlFor="share-link">{t("link")}</Label>
             <div className="flex gap-2">
               <Input
                 id="share-link"
@@ -197,15 +195,15 @@ export function ShareDialog({
               <Button
                 variant="outline"
                 size="icon"
-                aria-label="Copy link"
+                aria-label={t("copy")}
                 onClick={() =>
-                  navigator.clipboard?.writeText(link).then(() => toast.success("Link copied"))
+                  navigator.clipboard?.writeText(link).then(() => toast.success(t("copied")))
                 }
               >
                 <Copy aria-hidden />
               </Button>
               <Button asChild variant="outline" size="icon">
-                <a href={link} target="_blank" rel="noreferrer" aria-label="Open shared board">
+                <a href={link} target="_blank" rel="noreferrer" aria-label={t("open")}>
                   <ExternalLink aria-hidden />
                 </a>
               </Button>

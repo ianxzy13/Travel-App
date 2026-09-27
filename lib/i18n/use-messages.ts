@@ -1,30 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import en from "@/messages/en.json";
-import { withFallback } from "@/i18n/resolve";
-
-type Messages = typeof en;
+import { EN, loadMessages, type Messages } from "@/i18n/messages";
 
 /** Loads one language's texts in the browser (e.g. for the website preview), English filling gaps. */
 export function useLocaleMessages(locale: string): Messages {
   const [messages, setMessages] = useState<{ locale: string; messages: Messages }>({
     locale: "en",
-    messages: en,
+    messages: EN,
   });
   useEffect(() => {
-    if (locale === "en") return setMessages({ locale, messages: en });
     let cancelled = false;
-    import(`@/messages/${locale}.json`)
-      .then(
-        (m) =>
-          !cancelled &&
-          setMessages({ locale, messages: withFallback(m.default as Partial<Messages>, en) }),
-      )
-      .catch(() => !cancelled && setMessages({ locale, messages: en }));
+    loadMessages(locale).then((m) => !cancelled && setMessages({ locale, messages: m }));
     return () => {
       cancelled = true;
     };
   }, [locale]);
-  return messages.locale === locale ? messages.messages : en;
+  return messages.locale === locale ? messages.messages : EN;
 }

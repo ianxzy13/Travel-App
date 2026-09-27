@@ -1,5 +1,6 @@
 import "server-only";
 import type { SeatingLayoutRow, SeatingObjectRow, SeatAssignmentRow } from "@/lib/database.types";
+import { nameLabels } from "@/lib/guests/labels";
 import { guestDisplayName } from "@/lib/guests/model";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import type { createClient } from "@/lib/supabase/server";
@@ -76,6 +77,7 @@ export async function loadSeatingData(
   layout: SeatingLayoutRow,
 ): Promise<SeatingData> {
   const wid = layout.wedding_id;
+  const labels = await nameLabels();
   const [
     objects,
     assignments,
@@ -166,7 +168,7 @@ export async function loadSeatingData(
       .filter((g) => invited.has(g.id) || seated.has(g.id))
       .map((g) => ({
         id: g.id,
-        name: guestDisplayName(g, g.plus_one_of ? firstName.get(g.plus_one_of) : null),
+        name: guestDisplayName(g, g.plus_one_of ? firstName.get(g.plus_one_of) : null, labels),
         firstName: g.first_name,
         lastName: g.last_name,
         householdId: g.household_id,

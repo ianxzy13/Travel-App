@@ -1,9 +1,10 @@
-import { isTable, tableName } from "./geometry";
+import { isTable, tableName, type SeatingWords } from "./geometry";
 import type { SeatingGuest, SeatingRelationship, SeatingState } from "./types";
 
 export type IssueType = "keep_apart" | "keep_together" | "child_alone" | "not_attending";
 
-export type TableIssue = { type: IssueType; message: string; guestIds: string[] };
+/** names: the guests involved, for the message (see messages "seating.issues") */
+export type TableIssue = { type: IssueType; names: string[]; guestIds: string[] };
 
 export type SeatingAnalysis = {
   /** table id → problems at that table */
@@ -28,7 +29,7 @@ export function analyzeSeating(
 ): SeatingAnalysis {
   const byTable: Record<string, TableIssue[]> = {};
   const add = (tableId: string, issue: TableIssue) => (byTable[tableId] ??= []).push(issue);
-  const name = (id: string) => guests.get(id)?.name ?? "A guest";
+  const name = (id: string) => guests.get(id)?.name ?? "";
   const tableOf = (id: string) => state.assignments[id]?.objectId;
 
   // keep apart / keep together
@@ -39,14 +40,14 @@ export function analyzeSeating(
     if (r.type === "keep_apart" && ta === tb) {
       add(ta, {
         type: "keep_apart",
-        message: `${name(r.guestA)} and ${name(r.guestB)} should be kept apart`,
+        names: [name(r.guestA), name(r.guestB)],
         guestIds: [r.guestA, r.guestB],
       });
     }
     if (r.type === "keep_together" && ta !== tb) {
       const issue: TableIssue = {
         type: "keep_together",
-        message: `${name(r.guestA)} and ${name(r.guestB)} should sit together`,
+        names: [name(r.guestA), name(r.guestB)],
         guestIds: [r.guestA, r.guestB],
       };
       add(ta, issue);
@@ -72,7 +73,7 @@ export function analyzeSeating(
         if (!hasAdult) {
           add(tableId, {
             type: "child_alone",
-            message: `${g.name} is seated without an adult from their household`,
+            names: [g.name],
             guestIds: [g.id],
           });
         }
@@ -80,7 +81,7 @@ export function analyzeSeating(
       if (g.rsvp === "declined") {
         add(tableId, {
           type: "not_attending",
-          message: `${g.name} declined but still has a seat`,
+          names: [g.name],
           guestIds: [g.id],
         });
       }
@@ -104,7 +105,7 @@ export function analyzeSeating(
 }
 
 /** Flat list of all problems, one entry per issue (for the warnings panel). */
-export function allIssues(state: SeatingState, analysis: SeatingAnalysis) {
+export function allIssues(state: SeatingState, analysis: SeatingAnalysis, words?: SeatingWords) {
   const seen = new Set<string>();
   const list: (TableIssue & { tableId: string; tableName: string })[] = [];
   for (const [tableId, issues] of Object.entries(analysis.byTable)) {
@@ -114,7 +115,7 @@ export function allIssues(state: SeatingState, analysis: SeatingAnalysis) {
       const key = `${issue.type}:${[...issue.guestIds].sort().join(",")}`;
       if (seen.has(key)) continue;
       seen.add(key);
-      list.push({ ...issue, tableId, tableName: t ? tableName(t) : "" });
+      list.push({ ...issue, tableId, tableName: t ? tableName(t, words) : "" });
     }
   }
   return list;

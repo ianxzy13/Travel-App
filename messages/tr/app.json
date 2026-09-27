@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Genel bakış",
+      "tasks": "Yapılacaklar",
+      "budget": "Bütçe",
+      "vendors": "Tedarikçiler",
+      "guests": "Misafirler",
+      "rsvp": "Katılım",
+      "seating": "Oturma düzeni",
+      "venues": "Mekânlar",
+      "hotels": "Oteller",
+      "travel": "Seyahat",
+      "inspiration": "İlham",
+      "website": "Web sitesi",
+      "schedule": "Günün akışı",
+      "settings": "Ayarlar",
+      "home": "Ana sayfa",
+      "groups": {
+        "plan": "Planlama",
+        "people": "Kişiler",
+        "places": "Yerler",
+        "style": "Tarz"
+      }
+    },
+    "shell": {
+      "mainNav": "Ana gezinme",
+      "expand": "Kenar çubuğunu genişlet",
+      "collapse": "Kenar çubuğunu daralt",
+      "more": "Daha fazla",
+      "allTools": "Tüm planlama araçları"
+    },
+    "userMenu": {
+      "account": "Hesap menüsü",
+      "appearance": "Görünüm",
+      "light": "Açık",
+      "dark": "Koyu",
+      "system": "Sistem",
+      "language": "Dil",
+      "signOut": "Çıkış yap"
+    },
+    "switcher": {
+      "current": "Mevcut düğün: {name}. Düğün değiştir",
+      "yours": "Düğünleriniz",
+      "noDate": "Tarih daha sonra belirlenecek",
+      "another": "Başka bir düğün planla",
+      "roles": {
+        "owner": "sahip",
+        "editor": "düzenleyici",
+        "viewer": "görüntüleyici"
+      }
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "unread": "{count, plural, one {Bildirimler, # okunmamış} other {Bildirimler, # okunmamış}}",
+      "unreadOne": "Okunmamış",
+      "markAll": "Tümünü okundu işaretle",
+      "empty": "Henüz bir şey yok. Yeni katılım yanıtları, size atanan görevler ve ödeme ile son tarih hatırlatmaları burada görünür."
+    },
+    "countdown": {
+      "today": "Bugün o büyük gün!",
+      "enjoy": "Her anın tadını çıkarın.",
+      "married": "{count, plural, one {# gündür evli} other {# gündür evli}}",
+      "congrats": "Tebrikler!",
+      "daysToGo": "{count, plural, one {gün kaldı} other {gün kaldı}}",
+      "hours": "saat",
+      "minutes": "dakika",
+      "seconds": "saniye"
+    },
+    "dashboard": {
+      "welcome": "Planlayıcınıza hoş geldiniz!",
+      "welcomeText": "Her şey burada başlıyor. Sonraki adımları kendi hızınızda tamamlayın.",
+      "noDate": "Tarih daha sonra belirlenecek",
+      "setDate": "Geri sayımı başlatmak için tarihi belirleyin",
+      "nextSteps": "Sonraki adımlar",
+      "stepsDone": "{total} adımdan {done} tamamlandı",
+      "done": "(tamamlandı)",
+      "toDo": "(yapılacak)",
+      "steps": {
+        "date": "Düğün tarihini belirleyin",
+        "location": "Bir yer seçin",
+        "invite": "Partnerinizi, ailenizi veya düğün planlayıcınızı davet edin",
+        "guests": "Misafir listenizi ekleyin",
+        "guestsSoFar": "{count, plural, one {Misafir listenizi ekleyin (şu ana kadar #)} other {Misafir listenizi ekleyin (şu ana kadar #)}}",
+        "budget": "Toplam bütçenizi belirleyin",
+        "shortlist": "Mekânları kısa listeye alın",
+        "book": "Mekânı ayırtın",
+        "inspiration": "Bir ilham panosu başlatın",
+        "website": "Düğün sitenizi yayınlayın",
+        "timeline": "Planlama takviminizi oluşturun"
+      },
+      "budget": {
+        "title": "Bütçe",
+        "empty": "Henüz bütçe yok. Bir toplam belirleyin, dağılımını önerelim.",
+        "cta": "Bütçeyi planla",
+        "committed": "ayrıldı",
+        "committedOf": "{total} tutarının ayrılan kısmı",
+        "overdue": "Gecikmiş: {name}"
+      },
+      "rsvp": {
+        "title": "Katılım",
+        "empty": "Henüz yanıt yok. Misafir ekleyin ve davetiyelerinizi gönderin.",
+        "cta": "Katılımları gör",
+        "attending": "Katılıyor",
+        "declined": "Katılmıyor",
+        "waiting": "Bekleniyor"
+      },
+      "seating": {
+        "title": "Oturma düzeni",
+        "empty": "Henüz masa yok. Misafirler yanıt verince onları sürükleyip bırakarak yerleştirin.",
+        "cta": "Oturma planını aç",
+        "seated": "/ {attending} katılan misafir, {tables, plural, one {# masaya} other {# masaya}} yerleştirildi"
+      },
+      "inspiration": {
+        "title": "İlham",
+        "empty": "Henüz pin yok. Fikir toplayın ve onlardan bir renk paleti çıkarın.",
+        "cta": "Panoları aç",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Yapılacaklar",
+        "empty": "Henüz görev yok. Düğün tarihinize göre bir takvim oluşturacağız.",
+        "cta": "Görevleri gör",
+        "ofDone": "/ {total} tamamlandı",
+        "overdue": "{count} gecikmiş"
+      }
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "description": "Düğün bilgileriniz, diller, etkinlikler ve sizinle birlikte planlayanlar."
+    },
+    "translate": {
+      "button": "Çeviriler",
+      "title": "Çeviriler: {name}",
+      "hint": "Metni {language} dilinde göstermek için alanı boş bırakın.",
+      "draft": "Taslak",
+      "draftFailed": "Tarayıcınız bu dil çiftini çeviremedi. Lütfen çeviriyi yazın.",
+      "noMachine": "İpucu: Bilgisayardaki Chrome çeviri taslağı hazırlayabilir (orada “Taslak” düğmesi görünür).",
+      "save": "Çevirileri kaydet",
+      "saved": "Çeviriler kaydedildi",
+      "fields": {
+        "name": "Ad",
+        "venue": "Mekân adı",
+        "dressCode": "Kıyafet kuralı",
+        "description": "Açıklama",
+        "mealName": "Menü adı",
+        "mealDescription": "Menü açıklaması"
+      }
+    },
+    "websiteLang": {
+      "editing": "Dil",
+      "main": "{language} (sizin diliniz)",
+      "hint": "Çeviri: {language}. Fotoğraflar, sıra ve görünen bölümler ana dilde ayarlanır.",
+      "progress": "{done}/{total} çevrildi",
+      "complete": "Çevrildi",
+      "fallback": "Boş: misafirler ana dildeki metni görür.",
+      "nothing": "Bu bölümde henüz çevrilecek bir şey yok.",
+      "draft": "Tümünü tarayıcı çevirmeniyle çevir",
+      "draftFailed": "Tarayıcınız bu dil çiftini çeviremedi. Lütfen çeviriyi yazın.",
+      "item": "Öğe {number}",
+      "fields": {
+        "tagline": "Slogan",
+        "intro": "Giriş",
+        "notes": "Notlar",
+        "date": "Ne zaman",
+        "title": "Başlık",
+        "text": "Metin",
+        "role": "Rol",
+        "bio": "Birkaç söz",
+        "label": "Ad",
+        "note": "Not",
+        "question": "Soru",
+        "answer": "Yanıt",
+        "caption": "Açıklama"
+      }
+    }
+  }
+}

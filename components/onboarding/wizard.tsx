@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { createWedding } from "@/app/onboarding/actions";
 import { Button } from "@/components/ui/button";
@@ -19,38 +20,18 @@ import { emptyWedding, weddingSchema, type WeddingFormValues } from "@/lib/valid
 
 // Each step lists the fields it validates before moving on.
 const STEPS = [
-  {
-    title: "Who's getting married?",
-    text: "Congratulations! Let's start with your names.",
-    fields: ["partnerAName", "partnerBName"],
-    Fields: NamesFields,
-  },
-  {
-    title: "When and where?",
-    text: "It's fine if you don't know yet.",
-    fields: ["weddingDate", "location"],
-    Fields: DateLocationFields,
-  },
-  {
-    title: "How big is the party?",
-    text: "This helps us plan your budget and seating.",
-    fields: ["estimatedGuests", "currency"],
-    Fields: GuestsCurrencyFields,
-  },
-  {
-    title: "What's your vibe?",
-    text: "We'll use this for inspiration and website suggestions.",
-    fields: ["styleTags", "accent"],
-    Fields: StyleFields,
-  },
+  { key: "names", fields: ["partnerAName", "partnerBName"], Fields: NamesFields },
+  { key: "when", fields: ["weddingDate", "location"], Fields: DateLocationFields },
+  { key: "size", fields: ["estimatedGuests", "currency"], Fields: GuestsCurrencyFields },
+  { key: "style", fields: ["styleTags", "accent"], Fields: StyleFields },
 ] as const satisfies readonly {
-  title: string;
-  text: string;
+  key: string;
   fields: readonly (keyof WeddingFormValues)[];
   Fields: unknown;
 }[];
 
 export function OnboardingWizard() {
+  const t = useTranslations("onboarding");
   const [step, setStep] = useState(0);
   const [pending, startTransition] = useTransition();
   const form = useForm({ resolver: zodResolver(weddingSchema), defaultValues: emptyWedding });
@@ -76,15 +57,19 @@ export function OnboardingWizard() {
   return (
     <div data-accent={accent}>
       {/* progress */}
-      <ol className="mb-6 flex gap-2" aria-label="Progress">
+      <ol className="mb-6 flex gap-2" aria-label={t("progress")}>
         {STEPS.map((s, i) => (
           <li
-            key={s.title}
+            key={s.key}
             aria-current={i === step ? "step" : undefined}
             className={cn("h-1.5 flex-1 rounded-full", i <= step ? "bg-primary" : "bg-border")}
           >
             <span className="sr-only">
-              Step {i + 1} of {STEPS.length}: {s.title}
+              {t("stepOfTitle", {
+                step: i + 1,
+                total: STEPS.length,
+                title: t(`steps.${s.key}.title`),
+              })}
             </span>
           </li>
         ))}
@@ -101,10 +86,10 @@ export function OnboardingWizard() {
             noValidate
           >
             <p className="text-muted-foreground text-sm">
-              Step {step + 1} of {STEPS.length}
+              {t("stepOf", { step: step + 1, total: STEPS.length })}
             </p>
-            <h1 className="mt-1 text-4xl">{current.title}</h1>
-            <p className="text-muted-foreground mt-2 mb-8">{current.text}</p>
+            <h1 className="mt-1 text-4xl">{t(`steps.${current.key}.title`)}</h1>
+            <p className="text-muted-foreground mt-2 mb-8">{t(`steps.${current.key}.text`)}</p>
 
             <current.Fields form={form} disabled={pending} />
 
@@ -116,12 +101,12 @@ export function OnboardingWizard() {
                 className={cn(step === 0 && "invisible")}
                 disabled={pending}
               >
-                <ArrowLeft aria-hidden /> Back
+                <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("back")}
               </Button>
               <Button type="submit" disabled={pending}>
                 {pending && <Loader2 className="animate-spin" aria-hidden />}
-                {isLast ? "Create our wedding" : "Continue"}
-                {!isLast && <ArrowRight aria-hidden />}
+                {isLast ? t("create") : t("continue")}
+                {!isLast && <ArrowRight className="rtl:rotate-180" aria-hidden />}
               </Button>
             </div>
           </form>

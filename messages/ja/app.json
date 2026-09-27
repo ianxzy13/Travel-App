@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "ダッシュボード",
+      "tasks": "やること",
+      "budget": "予算",
+      "vendors": "業者",
+      "guests": "ゲスト",
+      "rsvp": "出欠回答",
+      "seating": "席次",
+      "venues": "会場",
+      "hotels": "ホテル",
+      "travel": "移動",
+      "inspiration": "インスピレーション",
+      "website": "ウェブサイト",
+      "schedule": "当日の進行",
+      "settings": "設定",
+      "home": "ホーム",
+      "groups": {
+        "plan": "準備",
+        "people": "人",
+        "places": "場所",
+        "style": "スタイル"
+      }
+    },
+    "shell": {
+      "mainNav": "メインナビゲーション",
+      "expand": "サイドバーを開く",
+      "collapse": "サイドバーを閉じる",
+      "more": "その他",
+      "allTools": "すべての準備ツール"
+    },
+    "userMenu": {
+      "account": "アカウントメニュー",
+      "appearance": "表示",
+      "light": "ライト",
+      "dark": "ダーク",
+      "system": "システム設定",
+      "language": "言語",
+      "signOut": "ログアウト"
+    },
+    "switcher": {
+      "current": "現在の結婚式：{name}。結婚式を切り替える",
+      "yours": "あなたの結婚式",
+      "noDate": "日程未定",
+      "another": "別の結婚式を準備する",
+      "roles": {
+        "owner": "オーナー",
+        "editor": "編集者",
+        "viewer": "閲覧者"
+      }
+    },
+    "notifications": {
+      "title": "お知らせ",
+      "unread": "{count, plural, other {お知らせ、未読 # 件}}",
+      "unreadOne": "未読",
+      "markAll": "すべて既読にする",
+      "empty": "まだありません。新しい出欠回答、あなた宛てのやること、支払いや期限のリマインダーがここに表示されます。"
+    },
+    "countdown": {
+      "today": "今日がその日です！",
+      "enjoy": "一瞬一瞬を楽しんで。",
+      "married": "{count, plural, other {結婚して # 日}}",
+      "congrats": "おめでとうございます！",
+      "daysToGo": "{count, plural, other {日後に結婚式}}",
+      "hours": "時間",
+      "minutes": "分",
+      "seconds": "秒"
+    },
+    "dashboard": {
+      "welcome": "ウェディングプランナーへようこそ！",
+      "welcomeText": "すべてはここから。次のステップを自分のペースで進めましょう。",
+      "noDate": "日程未定",
+      "setDate": "日付を設定してカウントダウンを始めましょう",
+      "nextSteps": "次のステップ",
+      "stepsDone": "{total} 件中 {done} 件完了",
+      "done": "（完了）",
+      "toDo": "（未完了）",
+      "steps": {
+        "date": "結婚式の日付を決める",
+        "location": "場所を選ぶ",
+        "invite": "パートナー・家族・プランナーを招待する",
+        "guests": "ゲストリストを追加する",
+        "guestsSoFar": "{count, plural, other {ゲストリストを追加する（現在 # 名）}}",
+        "budget": "総予算を決める",
+        "shortlist": "会場の候補を絞る",
+        "book": "会場を予約する",
+        "inspiration": "インスピレーションボードを始める",
+        "website": "結婚式のサイトを公開する",
+        "timeline": "準備のスケジュールを作る"
+      },
+      "budget": {
+        "title": "予算",
+        "empty": "まだ予算がありません。総額を設定すると、配分をご提案します。",
+        "cta": "予算を計画する",
+        "committed": "確定済み",
+        "committedOf": "確定済み（総額 {total}）",
+        "overdue": "期限切れ：{name}"
+      },
+      "rsvp": {
+        "title": "出欠回答",
+        "empty": "まだ回答がありません。ゲストを追加して招待状を送りましょう。",
+        "cta": "回答を見る",
+        "attending": "出席",
+        "declined": "欠席",
+        "waiting": "未回答"
+      },
+      "seating": {
+        "title": "席次",
+        "empty": "まだテーブルがありません。ゲストが回答したら、ドラッグして席を決めましょう。",
+        "cta": "席次表を開く",
+        "seated": "/ 出席 {attending} 名が {tables, plural, other {# 卓}} に着席"
+      },
+      "inspiration": {
+        "title": "インスピレーション",
+        "empty": "まだピンがありません。アイデアを集めて、カラーパレットを作りましょう。",
+        "cta": "ボードを開く",
+        "pin": "ピン"
+      },
+      "tasks": {
+        "title": "やること",
+        "empty": "まだやることがありません。結婚式の日付からスケジュールを作成します。",
+        "cta": "やることを見る",
+        "ofDone": "/ {total} 件完了",
+        "overdue": "期限切れ {count} 件"
+      }
+    },
+    "settings": {
+      "title": "設定",
+      "description": "結婚式の詳細、言語、イベント、一緒に準備するメンバー。"
+    },
+    "translate": {
+      "button": "翻訳",
+      "title": "翻訳：{name}",
+      "hint": "空欄のままにすると{language}の文章が表示されます。",
+      "draft": "下書き",
+      "draftFailed": "ブラウザーでこの言語の組み合わせを翻訳できませんでした。翻訳を入力してください。",
+      "noMachine": "ヒント：パソコンの Chrome なら翻訳の下書きを作れます（「下書き」ボタンが表示されます）。",
+      "save": "翻訳を保存",
+      "saved": "翻訳を保存しました",
+      "fields": {
+        "name": "名前",
+        "venue": "会場名",
+        "dressCode": "ドレスコード",
+        "description": "説明",
+        "mealName": "料理名",
+        "mealDescription": "料理の説明"
+      }
+    },
+    "websiteLang": {
+      "editing": "言語",
+      "main": "{language}（おふたりの言語）",
+      "hint": "翻訳：{language}。写真・順番・表示するセクションはメインの言語で設定します。",
+      "progress": "{done}/{total} 翻訳済み",
+      "complete": "翻訳済み",
+      "fallback": "空欄：ゲストにはメインの言語の文章が表示されます。",
+      "nothing": "このセクションにはまだ翻訳する内容がありません。",
+      "draft": "ブラウザーの翻訳ですべて下書き",
+      "draftFailed": "ブラウザーでこの言語の組み合わせを翻訳できませんでした。翻訳を入力してください。",
+      "item": "項目 {number}",
+      "fields": {
+        "tagline": "キャッチコピー",
+        "intro": "はじめに",
+        "notes": "メモ",
+        "date": "いつ",
+        "title": "タイトル",
+        "text": "本文",
+        "role": "役割",
+        "bio": "ひとこと",
+        "label": "名前",
+        "note": "メモ",
+        "question": "質問",
+        "answer": "回答",
+        "caption": "キャプション"
+      }
+    }
+  }
+}

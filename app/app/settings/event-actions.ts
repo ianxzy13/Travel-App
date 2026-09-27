@@ -2,12 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { eventSchema } from "@/lib/validation/guest";
 import { canEdit, requireWedding } from "@/lib/wedding";
-
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change events." };
+import { fail, invalid, noPermission } from "@/lib/errors";
+import { contentTranslations } from "@/lib/i18n/content-locale";
 
 async function editor() {
   const { wedding, role } = await requireWedding();
@@ -22,9 +22,9 @@ function done(): ActionResult {
 
 export async function saveEvent(input: unknown, eventId?: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = eventSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
 
   const row = {
@@ -64,7 +64,7 @@ export async function saveEvent(input: unknown, eventId?: string): Promise<Actio
 
 export async function deleteEvent(eventId: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   // Invitations to this event are removed automatically (cascade).
   const { error } = await ctx.supabase
     .from("events")
@@ -78,8 +78,8 @@ export async function deleteEvent(eventId: string): Promise<ActionResult> {
 /** Saves a new order, e.g. after moving an event up or down. */
 export async function reorderEvents(orderedIds: string[]): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
-  if (!z.array(z.uuid()).max(50).safeParse(orderedIds).success) return NO_PERMISSION;
+  if (!ctx) return noPermission();
+  if (!z.array(z.uuid()).max(50).safeParse(orderedIds).success) return noPermission();
 
   const results = await Promise.all(
     orderedIds.map((id, index) =>
@@ -98,11 +98,12 @@ export async function reorderEvents(orderedIds: string[]): Promise<ActionResult>
 /** One click to add the usual Ceremony + Reception (for weddings created before events existed). */
 export async function addDefaultEvents(): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const date = ctx.wedding.wedding_date;
+  const names = await contentTranslations(ctx.wedding, "onboarding");
   const { error } = await ctx.supabase.from("events").insert([
-    { wedding_id: ctx.wedding.id, name: "Ceremony", event_date: date, sort_order: 0 },
-    { wedding_id: ctx.wedding.id, name: "Reception", event_date: date, sort_order: 1 },
+    { wedding_id: ctx.wedding.id, name: names("defaults.ceremony"), event_date: date, sort_order: 0 },
+    { wedding_id: ctx.wedding.id, name: names("defaults.reception"), event_date: date, sort_order: 1 },
   ]);
   if (error) return fail("addDefaultEvents", error);
   return done();

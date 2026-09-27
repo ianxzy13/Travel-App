@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Site } from "@/components/website/site";
 import type { SiteData } from "@/lib/website/content";
 
@@ -19,6 +20,7 @@ export function SitePreview({
   device: "desktop" | "phone";
   fontClass: string;
 }) {
+  const t = useTranslations("websiteEditor");
   const box = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
@@ -56,7 +58,7 @@ export function SitePreview({
               transformOrigin: "0 0",
               overflowY: "auto",
             }}
-            aria-label="Website preview"
+            aria-label={t("previewLabel")}
             role="region"
             tabIndex={0}
           >

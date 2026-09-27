@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "tasks": "To-dos",
+      "budget": "Budget",
+      "vendors": "Vendors",
+      "guests": "Guests",
+      "rsvp": "RSVPs",
+      "seating": "Seating",
+      "venues": "Venues",
+      "hotels": "Hotels",
+      "travel": "Travel",
+      "inspiration": "Inspiration",
+      "website": "Website",
+      "schedule": "Day-of schedule",
+      "settings": "Settings",
+      "home": "Home",
+      "groups": {
+        "plan": "Plan",
+        "people": "People",
+        "places": "Places",
+        "style": "Style"
+      }
+    },
+    "shell": {
+      "mainNav": "Main navigation",
+      "expand": "Expand sidebar",
+      "collapse": "Collapse sidebar",
+      "more": "More",
+      "allTools": "All planning tools"
+    },
+    "userMenu": {
+      "account": "Account menu",
+      "appearance": "Appearance",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System",
+      "language": "Language",
+      "signOut": "Sign out"
+    },
+    "switcher": {
+      "current": "Current wedding: {name}. Switch wedding",
+      "yours": "Your weddings",
+      "noDate": "Date to be decided",
+      "another": "Plan another wedding",
+      "roles": {
+        "owner": "owner",
+        "editor": "editor",
+        "viewer": "viewer"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "unread": "{count, plural, one {Notifications, # unread} other {Notifications, # unread}}",
+      "unreadOne": "Unread",
+      "markAll": "Mark all read",
+      "empty": "Nothing yet. New RSVPs, to-dos for you and reminders about payments and deadlines show up here."
+    },
+    "countdown": {
+      "today": "Today’s the day!",
+      "enjoy": "Enjoy every moment.",
+      "married": "{count, plural, one {Married # day} other {Married # days}}",
+      "congrats": "Congratulations!",
+      "daysToGo": "{count, plural, one {day to go} other {days to go}}",
+      "hours": "hours",
+      "minutes": "minutes",
+      "seconds": "seconds"
+    },
+    "dashboard": {
+      "welcome": "Welcome to your planner!",
+      "welcomeText": "Everything starts here. Work through the next steps below at your own pace.",
+      "noDate": "Date to be decided",
+      "setDate": "Set your date to start the countdown",
+      "nextSteps": "Next steps",
+      "stepsDone": "{done} of {total} done",
+      "done": "(done)",
+      "toDo": "(to do)",
+      "steps": {
+        "date": "Set your wedding date",
+        "location": "Choose a location",
+        "invite": "Invite your partner, family or planner",
+        "guests": "Add your guest list",
+        "guestsSoFar": "{count, plural, one {Add your guest list (# so far)} other {Add your guest list (# so far)}}",
+        "budget": "Set your total budget",
+        "shortlist": "Shortlist venues",
+        "book": "Book your venue",
+        "inspiration": "Start an inspiration board",
+        "website": "Publish your wedding website",
+        "timeline": "Create your planning timeline"
+      },
+      "budget": {
+        "title": "Budget",
+        "empty": "No budget yet. Set a total and we’ll suggest how to split it.",
+        "cta": "Plan budget",
+        "committed": "committed",
+        "committedOf": "committed of {total}",
+        "overdue": "Overdue: {name}"
+      },
+      "rsvp": {
+        "title": "RSVPs",
+        "empty": "No replies yet. Add guests, then send your invitations.",
+        "cta": "View RSVPs",
+        "attending": "Attending",
+        "declined": "Declined",
+        "waiting": "Waiting"
+      },
+      "seating": {
+        "title": "Seating",
+        "empty": "No tables yet. Once guests reply, seat them with drag and drop.",
+        "cta": "Open seating chart",
+        "seated": "of {attending} attending guests seated at {tables, plural, one {# table} other {# tables}}"
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "empty": "No pins yet. Collect ideas and pull a colour palette from them.",
+        "cta": "Open boards",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "To-dos",
+        "empty": "No to-dos yet. We’ll build a timeline from your wedding date.",
+        "cta": "See to-dos",
+        "ofDone": "of {total} done",
+        "overdue": "{count} overdue"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Your wedding details, languages, events and who’s planning with you."
+    },
+    "translate": {
+      "button": "Translations",
+      "title": "Translations: {name}",
+      "hint": "Leave a box empty to show the {language} text instead.",
+      "draft": "Draft",
+      "draftFailed": "Your browser couldn’t translate this language pair. Please type the translation.",
+      "noMachine": "Tip: Chrome on a computer can draft translations for you (a “Draft” button appears there).",
+      "save": "Save translations",
+      "saved": "Translations saved",
+      "fields": {
+        "name": "Name",
+        "venue": "Venue name",
+        "dressCode": "Dress code",
+        "description": "Description",
+        "mealName": "Meal name",
+        "mealDescription": "Meal description"
+      }
+    },
+    "websiteLang": {
+      "editing": "Language",
+      "main": "{language} (your language)",
+      "hint": "You’re translating into {language}. Photos, order and which sections show are set in the main language.",
+      "progress": "{done}/{total} translated",
+      "complete": "Translated",
+      "fallback": "Empty: guests see the main-language text.",
+      "nothing": "Nothing to translate in this section yet.",
+      "draft": "Draft all with the browser translator",
+      "draftFailed": "Your browser couldn’t translate this language pair. Please type the translation.",
+      "item": "Item {number}",
+      "fields": {
+        "tagline": "Tagline",
+        "intro": "Introduction",
+        "notes": "Notes",
+        "date": "When",
+        "title": "Title",
+        "text": "Text",
+        "role": "Role",
+        "bio": "A few words",
+        "label": "Name",
+        "note": "Note",
+        "question": "Question",
+        "answer": "Answer",
+        "caption": "Caption"
+      }
+    }
+  }
+}

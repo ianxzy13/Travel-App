@@ -2,34 +2,40 @@
  * Suggested budget categories with a typical share of the total (sums to 100%).
  * Only a starting point: couples can rename, delete and re-allocate freely.
  */
-export const SUGGESTED_CATEGORIES: { name: string; percent: number }[] = [
-  { name: "Venue", percent: 20 },
-  { name: "Catering", percent: 25 },
-  { name: "Photography", percent: 10 },
-  { name: "Videography", percent: 5 },
-  { name: "Attire", percent: 7 },
-  { name: "Flowers", percent: 6 },
-  { name: "Music / DJ", percent: 5 },
-  { name: "Decor", percent: 4 },
-  { name: "Stationery", percent: 2 },
-  { name: "Rings", percent: 3 },
-  { name: "Hair & Makeup", percent: 2 },
-  { name: "Transportation", percent: 2 },
-  { name: "Accommodation", percent: 2 },
-  { name: "Favors", percent: 1 },
-  { name: "Honeymoon", percent: 4 },
-  { name: "Miscellaneous", percent: 2 },
-];
+export const SUGGESTED_CATEGORIES = [
+  { key: "venue", name: "Venue", percent: 20 },
+  { key: "catering", name: "Catering", percent: 25 },
+  { key: "photography", name: "Photography", percent: 10 },
+  { key: "videography", name: "Videography", percent: 5 },
+  { key: "attire", name: "Attire", percent: 7 },
+  { key: "flowers", name: "Flowers", percent: 6 },
+  { key: "music", name: "Music / DJ", percent: 5 },
+  { key: "decor", name: "Decor", percent: 4 },
+  { key: "stationery", name: "Stationery", percent: 2 },
+  { key: "rings", name: "Rings", percent: 3 },
+  { key: "beauty", name: "Hair & Makeup", percent: 2 },
+  { key: "transport", name: "Transportation", percent: 2 },
+  { key: "accommodation", name: "Accommodation", percent: 2 },
+  { key: "favors", name: "Favors", percent: 1 },
+  { key: "honeymoon", name: "Honeymoon", percent: 4 },
+  { key: "misc", name: "Miscellaneous", percent: 2 },
+] as const;
+export type SuggestedKey = (typeof SUGGESTED_CATEGORIES)[number]["key"];
 
 /**
  * Splits a total across the suggested categories, rounding to whole units.
  * Any rounding difference goes to the largest category so the parts add up.
  */
-export function suggestedAllocations(total: number | null) {
+export function suggestedAllocations(
+  total: number | null,
+  /** the category names in the couple's language (English by default) */
+  nameOf: (key: SuggestedKey) => string = (k) =>
+    SUGGESTED_CATEGORIES.find((c) => c.key === k)!.name,
+) {
   if (!total || total <= 0)
-    return SUGGESTED_CATEGORIES.map((c) => ({ name: c.name, allocated: 0 }));
+    return SUGGESTED_CATEGORIES.map((c) => ({ name: nameOf(c.key), allocated: 0 }));
   const parts = SUGGESTED_CATEGORIES.map((c) => ({
-    name: c.name,
+    name: nameOf(c.key),
     allocated: Math.floor((total * c.percent) / 100),
   }));
   const diff = Math.round(total - parts.reduce((n, p) => n + p.allocated, 0));
@@ -38,19 +44,11 @@ export function suggestedAllocations(total: number | null) {
   return parts;
 }
 
-export const VENDOR_STATUSES = {
-  researching: { label: "Researching", className: "bg-muted text-muted-foreground" },
-  contacted: {
-    label: "Contacted",
-    className: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-200",
-  },
-  quoted: {
-    label: "Quote received",
-    className: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
-  },
-  booked: {
-    label: "Booked",
-    className: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
-  },
-  rejected: { label: "Not chosen", className: "bg-muted text-muted-foreground line-through" },
+/** Badge colours per vendor status (labels are in messages "vendors.statuses"). */
+export const VENDOR_STATUS_CLASSES = {
+  researching: "bg-muted text-muted-foreground",
+  contacted: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-200",
+  quoted: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
+  booked: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
+  rejected: "bg-muted text-muted-foreground line-through",
 } as const;

@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney } from "@/lib/budget/money";
 import { donutSlices, type BudgetSummary } from "@/lib/budget/stats";
@@ -21,7 +22,8 @@ import { donutSlices, type BudgetSummary } from "@/lib/budget/stats";
 const SLOT = (i: number) => `var(--chart-${i + 1})`;
 
 export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; currency: string }) {
-  const slices = donutSlices(summary, 7);
+  const t = useTranslations("budget");
+  const slices = donutSlices(summary, 7, (count) => t("other", { count }));
   const total = slices.reduce((n, s) => n + s.value, 0);
   const bars = summary.categories
     .filter((c) => c.allocated > 0 || c.totals.committed > 0)
@@ -34,19 +36,17 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
     <div className="grid items-start gap-4 lg:grid-cols-2">
       <Card>
         <CardHeader>
-          <CardTitle className="font-serif text-2xl">Spending by category</CardTitle>
+          <CardTitle className="font-serif text-2xl">{t("charts.byCategory")}</CardTitle>
         </CardHeader>
         <CardContent>
           {slices.length === 0 ? (
-            <p className="text-muted-foreground text-sm">
-              Add expenses to see where the money goes.
-            </p>
+            <p className="text-muted-foreground text-sm">{t("charts.noSpend")}</p>
           ) : (
             <div className="flex flex-col items-center gap-6 sm:flex-row">
               <div
                 className="size-48 shrink-0"
                 role="img"
-                aria-label="Donut chart of spending by category. Amounts are listed beside it."
+                aria-label={t("charts.donutLabel")}
               >
                 <ResponsiveContainer>
                   <PieChart>
@@ -79,7 +79,7 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
                     />
                     <span className="min-w-0 flex-1 truncate">{s.name}</span>
                     <span className="tabular-nums">{money(s.value)}</span>
-                    <span className="text-muted-foreground w-10 text-right text-xs tabular-nums">
+                    <span className="text-muted-foreground w-10 text-end text-xs tabular-nums">
                       {Math.round((s.value / total) * 100)}%
                     </span>
                   </li>
@@ -92,15 +92,15 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
 
       <Card>
         <CardHeader>
-          <CardTitle className="font-serif text-2xl">Planned vs committed</CardTitle>
-          <ul className="text-muted-foreground flex gap-4 text-xs" aria-label="Legend">
+          <CardTitle className="font-serif text-2xl">{t("charts.plannedVsCommitted")}</CardTitle>
+          <ul className="text-muted-foreground flex gap-4 text-xs" aria-label={t("charts.legend")}>
             <li className="flex items-center gap-1.5">
               <span className="size-2.5 rounded-sm" style={{ background: SLOT(0) }} aria-hidden />{" "}
-              Planned
+              {t("charts.planned")}
             </li>
             <li className="flex items-center gap-1.5">
               <span className="size-2.5 rounded-sm" style={{ background: SLOT(1) }} aria-hidden />{" "}
-              Committed
+              {t("charts.committed")}
             </li>
           </ul>
         </CardHeader>
@@ -108,7 +108,7 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
           <div
             style={{ height: Math.max(160, bars.length * 44 + 30) }}
             role="img"
-            aria-label="Bar chart of planned and committed amounts per category. The category list below has the same numbers."
+            aria-label={t("charts.barLabel")}
           >
             <ResponsiveContainer>
               <BarChart
@@ -140,14 +140,14 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
                 />
                 <Bar
                   dataKey="planned"
-                  name="Planned"
+                  name={t("charts.planned")}
                   fill={SLOT(0)}
                   radius={[0, 4, 4, 0]}
                   isAnimationActive={false}
                 />
                 <Bar
                   dataKey="committed"
-                  name="Committed"
+                  name={t("charts.committed")}
                   fill={SLOT(1)}
                   radius={[0, 4, 4, 0]}
                   isAnimationActive={false}
@@ -179,7 +179,7 @@ function ChartTooltip({ active, payload, label, format, total }: TooltipProps) {
         <p key={i} className="flex items-center gap-2">
           <span className="size-2 rounded-sm" style={{ background: p.color }} aria-hidden />
           {label && <span className="text-muted-foreground">{p.name}</span>}
-          <span className="ml-auto tabular-nums">
+          <span className="ms-auto tabular-nums">
             {format(p.value ?? 0)}
             {total ? ` · ${Math.round(((p.value ?? 0) / total) * 100)}%` : ""}
           </span>

@@ -1,14 +1,25 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Label } from "@/components/ui/label";
+import { validationText } from "@/lib/i18n/validation";
 import { cn } from "@/lib/utils";
 
-/** Red helper text under an input. Renders nothing when there's no error. */
+/** Red helper text under an input (form-check codes are shown in the person's language). */
 export function FieldError({ id, message }: { id?: string; message?: string }) {
+  const t = useTranslations("validation");
   if (!message) return null;
   return (
     <p id={id} className="text-destructive text-sm">
-      {message}
+      {validationText(t as never, message)}
     </p>
   );
+}
+
+/** Translates a form-check code (for places that show errors without FieldError). */
+export function useValidationText() {
+  const t = useTranslations("validation");
+  return (message: string | undefined) => validationText(t as never, message);
 }
 
 /**

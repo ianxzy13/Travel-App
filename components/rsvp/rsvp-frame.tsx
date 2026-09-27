@@ -18,7 +18,7 @@ export async function RsvpFrame({
   couple?: string;
   date?: string | null;
   location?: string | null;
-  /** the wedding's languages: shows a language picker when there are several */
+  /** the wedding's languages (listed first in the language picker) */
   languages?: string[];
   /** RSVP code, so the household's language choice is remembered */
   code?: string;
@@ -31,7 +31,7 @@ export async function RsvpFrame({
         className="from-primary-soft absolute inset-x-0 top-0 h-96 bg-gradient-to-b to-transparent"
         aria-hidden
       />
-      {languages && languages.length > 1 && (
+      {languages && (
         <div className="relative flex justify-end px-4 pt-4">
           <RsvpLanguageSwitcher offered={languages} code={code} />
         </div>

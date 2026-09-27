@@ -1,3 +1,4 @@
+import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
 /** Shape of the answers sent to submit_rsvp() (the database re-checks everything). */
@@ -16,21 +17,21 @@ export const rsvpPayloadSchema = z.object({
     .array(
       z.object({
         id: z.uuid(),
-        dietary: z.string().max(500, "Dietary notes can be up to 500 characters"),
+        dietary: z.string().max(500, v("tooLong", 500)),
         first_name: z.string().max(80).optional(),
         last_name: z.string().max(80).optional(),
       }),
     )
     .max(100),
-  song_request: z.string().max(200, "Song requests can be up to 200 characters"),
-  message: z.string().max(2000, "Messages can be up to 2000 characters"),
+  song_request: z.string().max(200, v("tooLong", 200)),
+  message: z.string().max(2000, v("tooLong", 2000)),
 });
 
 export type RsvpPayload = z.infer<typeof rsvpPayloadSchema>;
 
 export const rsvpSettingsSchema = z.object({
-  deadline: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")]),
-  contact: z.string().trim().max(300, "Please keep this under 300 characters"),
+  deadline: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]),
+  contact: z.string().trim().max(300, v("tooLong", 300)),
   askSong: z.boolean(),
   notifyEmail: z.boolean(),
 });
@@ -38,12 +39,12 @@ export const rsvpSettingsSchema = z.object({
 export type RsvpSettingsValues = z.infer<typeof rsvpSettingsSchema>;
 
 export const mealOptionSchema = z.object({
-  name: z.string().trim().min(1, "Please enter a name").max(80),
+  name: z.string().trim().min(1, v("name")).max(80),
   description: z.string().trim().max(300),
 });
 
 export const sendEmailSchema = z.object({
-  householdIds: z.array(z.uuid()).min(1, "Please choose at least one household").max(1000),
+  householdIds: z.array(z.uuid()).min(1, v("chooseHousehold")).max(1000),
   kind: z.enum(["invitation", "reminder"]),
-  note: z.string().trim().max(1000, "Please keep the note under 1000 characters"),
+  note: z.string().trim().max(1000, v("tooLong", 1000)),
 });

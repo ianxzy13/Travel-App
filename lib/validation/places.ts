@@ -1,24 +1,25 @@
+import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
 const text = (max: number) =>
-  z.string().trim().max(max, `Please keep this under ${max} characters`);
-const money = z.number().finite().min(0, "Amounts can't be negative").max(9_999_999_999).nullable();
-const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date")]);
-const count = (max: number) => z.number().int("Whole numbers only").min(0).max(max).nullable();
+  z.string().trim().max(max, v("tooLong", max));
+const money = z.number().finite().min(0, v("negative")).max(9_999_999_999).nullable();
+const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]);
+const count = (max: number) => z.number().int(v("wholeNumber")).min(0).max(max).nullable();
 const url = z.union([
   z.literal(""),
-  z.url("Please enter a full web address, e.g. https://…").max(500),
+  z.url(v("url")).max(500),
 ]);
 
 export const venueSchema = z.object({
-  name: text(120).min(1, "Please enter a name"),
+  name: text(120).min(1, v("name")),
   kind: z.enum(["ceremony", "reception", "both"]),
   status: z.enum(["researching", "contacted", "visited", "shortlisted", "booked", "rejected"]),
   availability: z.enum(["unknown", "available", "tentative", "unavailable"]),
   address: text(300),
   contactName: text(120),
   phone: text(50),
-  email: z.union([z.literal(""), z.email("Please enter a valid email").max(320)]),
+  email: z.union([z.literal(""), z.email(v("email")).max(320)]),
   website: url,
   capacity: count(100000),
   price: money,
@@ -28,18 +29,18 @@ export const venueSchema = z.object({
   notes: text(4000),
   rating: z.number().int().min(1).max(5).nullable(),
   visitDate: date,
-  photoPaths: z.array(z.string().max(500)).max(12, "Up to 12 photos"),
+  photoPaths: z.array(z.string().max(500)).max(12, v("photos", 12)),
 });
 export type VenueValues = z.infer<typeof venueSchema>;
 
 export const checklistItemSchema = z.object({
-  question: text(200).min(1, "Please enter a question"),
+  question: text(200).min(1, v("question")),
   answer: text(1000),
   done: z.boolean(),
 });
 
 export const hotelSchema = z.object({
-  name: text(120).min(1, "Please enter a name"),
+  name: text(120).min(1, v("name")),
   status: z.enum(["considering", "contacted", "block_confirmed", "rejected"]),
   address: text(300),
   distance: text(100),
@@ -67,12 +68,12 @@ export const hotelGuestsSchema = z
   )
   .max(2000)
   .refine((list) => list.every((g) => !g.checkIn || !g.checkOut || g.checkOut >= g.checkIn), {
-    message: "Check-out can't be before check-in",
+    message: v("checkOut"),
   });
 
 const localDateTime = z.union([
   z.literal(""),
-  z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, "Invalid date/time"),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/, v("dateTime")),
 ]);
 
 export const flightSchema = z
@@ -96,6 +97,6 @@ export const flightSchema = z
   })
   .refine((f) => !f.departAt || !f.arriveAt || f.arriveAt >= f.departAt.slice(0, 10), {
     path: ["arriveAt"],
-    message: "Arrival looks earlier than departure",
+    message: v("arrival"),
   });
 export type FlightValues = z.infer<typeof flightSchema>;

@@ -2,16 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
+import { contentTranslations } from "@/lib/i18n/content-locale";
 import { missingSuggestions } from "@/lib/tasks/timeline";
 import { taskSchema } from "@/lib/validation/tasks";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = {
-  ok: false as const,
-  error: "You don't have permission to change the to-dos.",
-};
 const id = z.uuid();
 
 async function editor() {
@@ -31,9 +29,9 @@ const today = () => new Date().toISOString().slice(0, 10);
 export async function saveTask(taskId: string | null, input: unknown): Promise<ActionResult> {
   const user = await requireUser();
   const ctx = await editor();
-  if (!ctx || (taskId && !id.safeParse(taskId).success)) return NO_PERMISSION;
+  if (!ctx || (taskId && !id.safeParse(taskId).success)) return noPermission();
   const parsed = taskSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const row = {
     title: v.title,
@@ -52,7 +50,7 @@ export async function saveTask(taskId: string | null, input: unknown): Promise<A
       return fail(
         "saveTask",
         error,
-        error.code === "23514" ? "That person isn't part of this wedding." : undefined,
+        error.code === "23514" ? "notMember" : undefined,
       );
   } else {
     // new to-dos go to the end of their day's list
@@ -72,7 +70,7 @@ export async function saveTask(taskId: string | null, input: unknown): Promise<A
 
 export async function setTaskDone(taskId: string, isDone: boolean): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(taskId).success) return NO_PERMISSION;
+  if (!ctx || !id.safeParse(taskId).success) return noPermission();
   const { error } = await ctx.sb
     .from("tasks")
     .update({ done: isDone })
@@ -84,7 +82,7 @@ export async function setTaskDone(taskId: string, isDone: boolean): Promise<Acti
 
 export async function deleteTask(taskId: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(taskId).success) return NO_PERMISSION;
+  if (!ctx || !id.safeParse(taskId).success) return noPermission();
   const { error } = await ctx.sb
     .from("tasks")
     .delete()
@@ -97,7 +95,7 @@ export async function deleteTask(taskId: string): Promise<ActionResult> {
 /** Saves a new position after drag and drop (one row). */
 export async function moveTask(taskId: string, sortOrder: number): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(taskId).success || !Number.isFinite(sortOrder)) return NO_PERMISSION;
+  if (!ctx || !id.safeParse(taskId).success || !Number.isFinite(sortOrder)) return noPermission();
   const { error } = await ctx.sb
     .from("tasks")
     .update({ sort_order: sortOrder })
@@ -111,22 +109,21 @@ export async function moveTask(taskId: string, sortOrder: number): Promise<Actio
 export async function addSuggestedTasks(): Promise<ActionResult<{ added: number }>> {
   const user = await requireUser();
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   if (!ctx.wedding.wedding_date)
-    return {
-      ok: false,
-      error: "Set your wedding date in Settings first, so we can plan backwards from it.",
-    };
+    return await err("setDateFirst");
   const { data: existing, error: readError } = await ctx.sb
     .from("tasks")
     .select("suggestion_key")
     .eq("wedding_id", ctx.wedding.id)
     .not("suggestion_key", "is", null);
   if (readError) return fail("addSuggestedTasks", readError);
+  const t = await contentTranslations(ctx.wedding, "tasks");
   const rows = missingSuggestions(
     new Set((existing ?? []).map((r) => r.suggestion_key!)),
     ctx.wedding.wedding_date,
     today(),
+    { title: (k) => t(`suggestions.${k}`), category: (c) => t(`categories.${c}`) },
   );
   if (!rows.length) return { ok: true, data: { added: 0 } };
   const { error } = await ctx.sb.from("tasks").upsert(

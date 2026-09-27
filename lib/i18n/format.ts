@@ -53,6 +53,23 @@ export function fmtMoney(amount: number, currency: string, locale: string, cents
   }).format(amount);
 }
 
+/** "Euro (€)", "Švicarski frank (CHF)": a currency's name and symbol in that language. */
+export function currencyLabel(code: string, locale: string) {
+  let name = code;
+  let symbol = code;
+  try {
+    name = new Intl.DisplayNames([locale], { type: "currency" }).of(code) ?? code;
+    symbol =
+      new Intl.NumberFormat(locale, { style: "currency", currency: code, currencyDisplay: "narrowSymbol" })
+        .formatToParts(0)
+        .find((p) => p.type === "currency")?.value ?? code;
+  } catch {
+    // unknown to this browser: show the code
+  }
+  const label = name.charAt(0).toLocaleUpperCase(locale) + name.slice(1);
+  return symbol === code || label.includes(symbol) ? `${label} (${code})` : `${label} (${symbol})`;
+}
+
 /** Minutes the zone is ahead of UTC at that moment (e.g. +120 for Ljubljana in summer). */
 function zoneOffset(instant: number, timeZone: string) {
   const parts = dtf("en-US", {

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { TravelPage } from "@/components/travel/travel-page";
 import { loadPickerGuests } from "@/lib/guests/picker";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Travel" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("travel") };
+}
 
 export default async function Travel() {
   const { wedding, role } = await requireWedding();

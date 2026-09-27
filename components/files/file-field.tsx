@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { ExternalLink, FileText, Loader2, Paperclip, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { discardUpload } from "@/app/app/file-actions";
 import { Button } from "@/components/ui/button";
@@ -20,13 +21,13 @@ const ALLOWED = [
 ];
 
 /** Opens a private file in a new tab using a link that expires after 5 minutes. */
-export async function openFile(path: string) {
+export async function openFile(path: string, failedText = "Couldn't open the file. Please try again.") {
   // open the tab first (inside the click) so pop-up blockers allow it
   const tab = window.open("", "_blank");
   const { data, error } = await createClient().storage.from(BUCKET).createSignedUrl(path, 300);
   if (error || !data) {
     tab?.close();
-    toast.error("Couldn't open the file. Please try again.");
+    toast.error(failedText);
     return;
   }
   if (tab) tab.location.href = data.signedUrl;
@@ -44,7 +45,7 @@ export function FileField({
   value,
   onChange,
   disabled,
-  label = "Attach file",
+  label,
 }: {
   weddingId: string;
   folder: "receipts" | "contracts" | "venues";
@@ -53,6 +54,7 @@ export function FileField({
   disabled?: boolean;
   label?: string;
 }) {
+  const t = useTranslations("files");
   const input = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   // files uploaded in this form but not saved yet: safe to delete if replaced
@@ -60,11 +62,11 @@ export function FileField({
 
   async function upload(file: File) {
     if (!ALLOWED.includes(file.type)) {
-      toast.error("Please choose a PDF or an image (JPG, PNG, WebP, GIF, HEIC).");
+      toast.error(t("wrongType"));
       return;
     }
     if (file.size > MAX_BYTES) {
-      toast.error("That file is larger than 10 MB. Please choose a smaller one.");
+      toast.error(t("tooBig"));
       return;
     }
     setUploading(true);
@@ -77,7 +79,7 @@ export function FileField({
     setUploading(false);
     if (error) {
       console.error(error);
-      toast.error("Upload failed. Is the file storage set up (see README)? Please try again.");
+      toast.error(t("failed"));
       return;
     }
     replace({ path, name: file.name.slice(0, 200) });
@@ -112,7 +114,7 @@ export function FileField({
             type="button"
             variant="outline"
             size="sm"
-            onClick={() => openFile(value.path)}
+            onClick={() => openFile(value.path, t("openFailed"))}
             className="max-w-60"
           >
             <FileText aria-hidden />
@@ -125,7 +127,7 @@ export function FileField({
               variant="ghost"
               size="icon-sm"
               onClick={() => replace(null)}
-              aria-label={`Remove ${value.name}`}
+              aria-label={t("remove", { name: value.name })}
             >
               <X aria-hidden />
             </Button>
@@ -140,10 +142,10 @@ export function FileField({
           onClick={() => input.current?.click()}
         >
           {uploading ? <Loader2 className="animate-spin" aria-hidden /> : <Paperclip aria-hidden />}
-          {uploading ? "Uploading…" : label}
+          {uploading ? t("uploading") : (label ?? t("attach"))}
         </Button>
       )}
-      {!value && <span className="text-muted-foreground text-xs">PDF or image, up to 10 MB</span>}
+      {!value && <span className="text-muted-foreground text-xs">{t("hint")}</span>}
     </div>
   );
 }

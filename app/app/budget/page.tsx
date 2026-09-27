@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { BudgetPage } from "@/components/budget/budget-page";
 import { loadBudget } from "@/lib/budget/load";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Budget" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("budget"))("title") };
+}
 
 export default async function Budget() {
   const { wedding, role } = await requireWedding();

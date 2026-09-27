@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import {
   ArrowUpRight,
   CalendarClock,
@@ -30,6 +30,7 @@ import {
   StickyNote,
   Wand2,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { addSuggestedTasks, moveTask, setTaskDone } from "@/app/app/tasks/actions";
 import { PageHeader } from "@/components/app/page-header";
@@ -43,6 +44,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { TaskRow } from "@/lib/database.types";
+import { fmtDate } from "@/lib/i18n/format";
 import { orderBetween } from "@/lib/inspiration/layout";
 import { PHASES, dueState, phaseOf, type DueState } from "@/lib/tasks/timeline";
 import { cn } from "@/lib/utils";
@@ -68,6 +70,8 @@ const todayIso = () => format(new Date(), "yyyy-MM-dd");
 
 export function TasksPage(props: Props) {
   const { canEdit, members, userId, weddingDate, looksDone } = props;
+  const t = useTranslations("tasks");
+  const locale = useLocale();
   const [tasks, setTasks] = useState(props.tasks);
   useEffect(() => setTasks(props.tasks), [props.tasks]);
 
@@ -102,21 +106,22 @@ export function TasksPage(props: Props) {
   const groups = useMemo(() => {
     const out: { key: string; label: string; items: TaskRow[] }[] = [];
     const overdue = visible.filter((t) => dueState(t.due_date, today, t.done) === "overdue");
-    if (overdue.length) out.push({ key: "overdue", label: "Overdue", items: overdue });
+    if (overdue.length) out.push({ key: "overdue", label: t("overdue"), items: overdue });
     for (const p of PHASES) {
       const items = visible.filter(
-        (t) =>
-          dueState(t.due_date, today, t.done) !== "overdue" &&
-          phaseOf(t.due_date, weddingDate) === p.key,
+        (task) =>
+          dueState(task.due_date, today, task.done) !== "overdue" &&
+          phaseOf(task.due_date, weddingDate) === p,
       );
       if (items.length)
         out.push({
-          key: p.key,
-          label: weddingDate || p.key === "none" ? p.label : "With a due date",
+          key: p,
+          label: weddingDate || p === "none" ? t(`phases.${p}`) : t("withDue"),
           items,
         });
     }
     return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, today, weddingDate]);
 
   const total = tasks.length;
@@ -135,7 +140,7 @@ export function TasksPage(props: Props) {
 
   // Put things back as the server has them, if a save fails (e.g. no connection).
   const undo = () => {
-    toast.error("Couldn’t save that. Check your connection and try again.");
+    toast.error(t("offline"));
     setTasks(props.tasks);
   };
 
@@ -146,7 +151,7 @@ export function TasksPage(props: Props) {
         if (!r.ok) {
           toast.error(r.error);
           setTasks(props.tasks);
-        } else if (done) toast.success("Done!", { description: task.title });
+        } else if (done) toast.success(t("done"), { description: task.title });
       })
       .catch(undo);
   }
@@ -174,11 +179,7 @@ export function TasksPage(props: Props) {
     startAdding(async () => {
       const r = await addSuggestedTasks();
       if (!r.ok) return void toast.error(r.error);
-      toast.success(
-        r.data?.added
-          ? `Added ${r.data.added} to-dos to your timeline`
-          : "Your timeline is already complete",
-      );
+      toast.success(t("added", { count: r.data?.added ?? 0 }));
     });
   }
 
@@ -187,8 +188,8 @@ export function TasksPage(props: Props) {
   return (
     <>
       <PageHeader
-        title="To-dos"
-        description="Your planning timeline, from a year out to the thank-you notes."
+        title={t("title")}
+        description={t("description")}
         actions={
           canEdit && (
             <>
@@ -199,11 +200,11 @@ export function TasksPage(props: Props) {
                   ) : (
                     <Wand2 aria-hidden />
                   )}{" "}
-                  Add missing suggestions
+                  {t("addMissing")}
                 </Button>
               )}
               <Button size="sm" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> Add to-do
+                <Plus aria-hidden /> {t("add")}
               </Button>
             </>
           )
@@ -213,11 +214,11 @@ export function TasksPage(props: Props) {
       {total === 0 ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
           <ListChecks className="text-primary mx-auto size-10" aria-hidden />
-          <h2 className="mt-4 text-2xl">Plan backwards from the big day</h2>
+          <h2 className="mt-4 text-2xl">{t("emptyTitle")}</h2>
           <p className="text-muted-foreground mx-auto mt-2 max-w-md">
             {weddingDate
-              ? `We'll add about 45 to-dos with due dates counted back from ${format(parseISO(weddingDate), "d MMMM yyyy")}. Change or delete any of them.`
-              : "Set your wedding date in Settings first, then we can suggest a timeline. Or add your own to-dos."}
+              ? t("emptyWithDate", { date: fmtDate(weddingDate, locale, "long") })
+              : t("emptyNoDate")}
           </p>
           {canEdit && (
             <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -228,26 +229,26 @@ export function TasksPage(props: Props) {
                   ) : (
                     <Sparkles aria-hidden />
                   )}{" "}
-                  Create my timeline
+                  {t("create")}
                 </Button>
               ) : (
                 <Button asChild>
-                  <Link href="/app/settings">Set the date</Link>
+                  <Link href="/app/settings">{t("setDate")}</Link>
                 </Button>
               )}
               <Button variant="outline" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> Add my own
+                <Plus aria-hidden /> {t("addOwn")}
               </Button>
             </div>
           )}
         </div>
       ) : (
         <>
-          <section aria-label="Progress" className="mb-6 grid gap-3 sm:grid-cols-3">
+          <section aria-label={t("progress")} className="mb-6 grid gap-3 sm:grid-cols-3">
             <div className="bg-card rounded-xl border p-4 sm:col-span-1">
               <p className="text-sm">
                 <span className="font-serif text-3xl font-semibold tabular-nums">{doneCount}</span>{" "}
-                <span className="text-muted-foreground">of {total} done</span>
+                <span className="text-muted-foreground">{t("ofDone", { total })}</span>
               </p>
               <div
                 className="bg-muted mt-2 h-2 rounded-full"
@@ -255,7 +256,7 @@ export function TasksPage(props: Props) {
                 aria-valuemin={0}
                 aria-valuemax={total}
                 aria-valuenow={doneCount}
-                aria-label="To-dos done"
+                aria-label={t("doneLabel")}
               >
                 <div
                   className="bg-primary h-2 rounded-full transition-all"
@@ -267,7 +268,7 @@ export function TasksPage(props: Props) {
               type="button"
               onClick={() => setShow("overdue")}
               className={cn(
-                "bg-card hover:bg-accent rounded-xl border p-4 text-left",
+                "bg-card hover:bg-accent rounded-xl border p-4 text-start",
                 overdueCount > 0 && "border-destructive/40",
               )}
             >
@@ -279,24 +280,17 @@ export function TasksPage(props: Props) {
               >
                 {overdueCount}
               </span>{" "}
-              <span className="text-muted-foreground text-sm">overdue</span>
+              <span className="text-muted-foreground text-sm">{t("overdueCount")}</span>
             </button>
             <div className="bg-card rounded-xl border p-4">
               <span className="font-serif text-3xl font-semibold tabular-nums">{weekCount}</span>{" "}
-              <span className="text-muted-foreground text-sm">due this week</span>
+              <span className="text-muted-foreground text-sm">{t("thisWeek")}</span>
             </div>
           </section>
 
           <div className="mb-5 flex flex-wrap items-center gap-2">
-            <div className="flex rounded-lg border p-0.5" role="group" aria-label="Show">
-              {(
-                [
-                  ["open", "To do"],
-                  ["overdue", "Overdue"],
-                  ["done", "Done"],
-                  ["all", "All"],
-                ] as const
-              ).map(([key, label]) => (
+            <div className="flex rounded-lg border p-0.5" role="group" aria-label={t("show")}>
+              {(["open", "overdue", "done", "all"] as const).map((key) => (
                 <Button
                   key={key}
                   size="sm"
@@ -304,18 +298,18 @@ export function TasksPage(props: Props) {
                   aria-pressed={show === key}
                   onClick={() => setShow(key)}
                 >
-                  {label}
+                  {t(`filters.${key}`)}
                 </Button>
               ))}
             </div>
             <Select value={who} onValueChange={setWho}>
-              <SelectTrigger size="sm" className="w-44" aria-label="Whose to-dos">
+              <SelectTrigger size="sm" className="w-44" aria-label={t("whose")}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="everyone">Everyone</SelectItem>
-                <SelectItem value="me">Assigned to me</SelectItem>
-                <SelectItem value="nobody">Not assigned</SelectItem>
+                <SelectItem value="everyone">{t("everyone")}</SelectItem>
+                <SelectItem value="me">{t("mine")}</SelectItem>
+                <SelectItem value="nobody">{t("nobody")}</SelectItem>
                 {members
                   .filter((m) => m.id !== userId)
                   .map((m) => (
@@ -330,10 +324,10 @@ export function TasksPage(props: Props) {
           {groups.length === 0 ? (
             <p className="text-muted-foreground rounded-2xl border border-dashed p-10 text-center">
               {show === "overdue"
-                ? "Nothing overdue. Well done!"
+                ? t("nothingOverdue")
                 : show === "done"
-                  ? "Nothing ticked off yet."
-                  : "Nothing here with these filters."}
+                  ? t("nothingDone")
+                  : t("nothingHere")}
             </p>
           ) : (
             <div className="space-y-8">
@@ -358,22 +352,27 @@ export function TasksPage(props: Props) {
                     onDragEnd={(e) => onDragEnd(g.items, e)}
                   >
                     <SortableContext
-                      items={g.items.map((t) => t.id)}
+                      items={g.items.map((task) => task.id)}
                       strategy={verticalListSortingStrategy}
                     >
                       <ul className="bg-card divide-y rounded-xl border">
-                        {g.items.map((t) => (
+                        {g.items.map((task) => (
                           <TaskItem
-                            key={t.id}
-                            task={t}
+                            key={task.id}
+                            task={task}
                             today={today}
+                            locale={locale}
                             canEdit={canEdit}
                             sortable={canEdit && g.items.length > 1}
-                            assignee={t.assignee_id ? (names.get(t.assignee_id) ?? null) : null}
-                            isMine={t.assignee_id === userId}
-                            looksDone={t.suggestion_key ? looksDone[t.suggestion_key] : undefined}
-                            onToggle={(d) => toggle(t, d)}
-                            onOpen={() => setSheet(t.id)}
+                            assignee={
+                              task.assignee_id ? (names.get(task.assignee_id) ?? null) : null
+                            }
+                            isMine={task.assignee_id === userId}
+                            looksDone={
+                              task.suggestion_key ? looksDone[task.suggestion_key] : undefined
+                            }
+                            onToggle={(d) => toggle(task, d)}
+                            onOpen={() => setSheet(task.id)}
                           />
                         ))}
                       </ul>
@@ -408,6 +407,7 @@ const DUE_STYLE: Record<NonNullable<DueState>, string> = {
 function TaskItem({
   task,
   today,
+  locale,
   canEdit,
   sortable,
   assignee,
@@ -418,6 +418,7 @@ function TaskItem({
 }: {
   task: TaskRow;
   today: string;
+  locale: string;
   canEdit: boolean;
   sortable: boolean;
   assignee: string | null;
@@ -426,9 +427,10 @@ function TaskItem({
   onToggle: (done: boolean) => void;
   onOpen: () => void;
 }) {
+  const t = useTranslations("tasks");
   const s = useSortable({ id: task.id, disabled: !sortable });
   const state = dueState(task.due_date, today, task.done);
-  const due = task.due_date ? format(parseISO(task.due_date), "EEE d MMM") : null;
+  const due = task.due_date ? fmtDate(task.due_date, locale, "medium") : null;
 
   return (
     <li
@@ -445,8 +447,8 @@ function TaskItem({
           ref={s.setActivatorNodeRef}
           {...s.attributes}
           {...s.listeners}
-          aria-label={`Reorder "${task.title}"`}
-          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring -ml-1 flex h-6 w-5 shrink-0 cursor-grab touch-none items-center justify-center rounded focus-visible:ring-2 focus-visible:outline-none"
+          aria-label={t("reorder", { title: task.title })}
+          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring -ms-1 flex h-6 w-5 shrink-0 cursor-grab touch-none items-center justify-center rounded focus-visible:ring-2 focus-visible:outline-none"
         >
           <GripVertical className="size-4" aria-hidden />
         </button>
@@ -457,7 +459,9 @@ function TaskItem({
         checked={task.done}
         disabled={!canEdit}
         onCheckedChange={(v) => onToggle(v === true)}
-        aria-label={task.done ? `Mark "${task.title}" as not done` : `Mark "${task.title}" as done`}
+        aria-label={
+          task.done ? t("markUndone", { title: task.title }) : t("markDone", { title: task.title })
+        }
         className="mt-0.5 size-5"
       />
       <div className="min-w-0 flex-1">
@@ -465,7 +469,7 @@ function TaskItem({
           type="button"
           onClick={onOpen}
           className={cn(
-            "focus-visible:ring-ring rounded text-left leading-snug hover:underline focus-visible:ring-2 focus-visible:outline-none",
+            "focus-visible:ring-ring rounded text-start leading-snug hover:underline focus-visible:ring-2 focus-visible:outline-none",
             task.done && "text-muted-foreground line-through",
           )}
         >
@@ -480,7 +484,11 @@ function TaskItem({
               )}
             >
               <CalendarClock className="size-3.5" aria-hidden />
-              {state === "overdue" ? `Overdue · ${due}` : state === "today" ? "Due today" : due}
+              {state === "overdue"
+                ? t("overdueOn", { date: due })
+                : state === "today"
+                  ? t("dueToday")
+                  : due}
             </span>
           )}
           {task.category && <span className="text-muted-foreground">{task.category}</span>}
@@ -491,31 +499,31 @@ function TaskItem({
                 isMine ? "bg-primary-soft text-foreground" : "bg-muted",
               )}
             >
-              {isMine ? "You" : assignee}
+              {isMine ? t("you") : assignee}
             </span>
           )}
           {task.notes && (
-            <StickyNote className="text-muted-foreground size-3.5" aria-label="Has notes" />
+            <StickyNote className="text-muted-foreground size-3.5" aria-label={t("hasNotes")} />
           )}
           {task.link && (
             <Link
               href={task.link}
               className="text-primary inline-flex items-center gap-0.5 underline-offset-2 hover:underline"
             >
-              Open <ArrowUpRight className="size-3" aria-hidden />
-              <span className="sr-only">page for {task.title}</span>
+              {t("open")} <ArrowUpRight className="size-3 rtl:-scale-x-100" aria-hidden />
+              <span className="sr-only">{t("pageFor", { title: task.title })}</span>
             </Link>
           )}
         </div>
         {looksDone && !task.done && canEdit && (
           <p className="text-success mt-1 flex flex-wrap items-center gap-2 text-xs">
-            <Sparkles className="size-3.5" aria-hidden /> Looks done: {looksDone}
+            <Sparkles className="size-3.5" aria-hidden /> {t("looksDone", { reason: looksDone })}
             <button
               type="button"
               onClick={() => onToggle(true)}
               className="font-medium underline underline-offset-2"
             >
-              Tick it off
+              {t("tickOff")}
             </button>
           </p>
         )}

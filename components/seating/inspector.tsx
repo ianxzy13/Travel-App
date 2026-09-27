@@ -18,7 +18,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { isTable, KINDS, tableName } from "@/lib/seating/geometry";
+import { useTranslations } from "next-intl";
+import { isTable, KINDS } from "@/lib/seating/geometry";
+import { useSeatingWords } from "./use-seating-words";
 import type { TableIssue } from "@/lib/seating/rules";
 import type { Room, SeatingGuest, SeatingObject, SeatingState } from "@/lib/seating/types";
 
@@ -68,6 +70,7 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 }
 
 function RoomCard({ state, canEdit, snap, onSnapChange, onRoomChange }: Props) {
+  const { t } = useSeatingWords();
   const [w, setW] = useState(String(state.room.width / 100));
   const [h, setH] = useState(String(state.room.height / 100));
   const save = () => {
@@ -78,13 +81,11 @@ function RoomCard({ state, canEdit, snap, onSnapChange, onRoomChange }: Props) {
     if (width !== state.room.width || height !== state.room.height) onRoomChange({ width, height });
   };
   return (
-    <Panel title="Room">
-      <p className="text-muted-foreground text-sm">
-        Select a table to edit it. Tap the empty floor to come back here.
-      </p>
+    <Panel title={t("inspector.room")}>
+      <p className="text-muted-foreground text-sm">{t("inspector.roomHint")}</p>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <Label htmlFor="room-w">Width (m)</Label>
+          <Label htmlFor="room-w">{t("inspector.width")}</Label>
           <Input
             id="room-w"
             inputMode="decimal"
@@ -96,7 +97,7 @@ function RoomCard({ state, canEdit, snap, onSnapChange, onRoomChange }: Props) {
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="room-h">Length (m)</Label>
+          <Label htmlFor="room-h">{t("inspector.length")}</Label>
           <Input
             id="room-h"
             inputMode="decimal"
@@ -109,14 +110,14 @@ function RoomCard({ state, canEdit, snap, onSnapChange, onRoomChange }: Props) {
         </div>
       </div>
       <Label className="justify-between font-normal">
-        Snap to grid (50 cm)
+        {t("inspector.snap")}
         <Switch checked={snap} onCheckedChange={onSnapChange} />
       </Label>
       <div className="text-muted-foreground space-y-1 border-t pt-4 text-xs">
-        <p className="text-foreground font-medium">Shortcuts</p>
-        <p>Arrow keys: move · R: rotate · Ctrl+D: duplicate · Delete: remove</p>
-        <p>Ctrl+Z / Ctrl+Y: undo / redo · Esc: cancel</p>
-        <p>Scroll or pinch to zoom · drag the empty floor to move around</p>
+        <p className="text-foreground font-medium">{t("inspector.shortcuts")}</p>
+        <p>{t("inspector.keys1")}</p>
+        <p>{t("inspector.keys2")}</p>
+        <p>{t("inspector.keys3")}</p>
       </div>
     </Panel>
   );
@@ -134,6 +135,7 @@ function ObjectCard({
   onUnseat,
   onMoveGuest,
 }: Props & { object: SeatingObject }) {
+  const { t, tableName, issueText } = useSeatingWords();
   const info = KINDS[o.kind];
   const table = isTable(o.kind);
   const [label, setLabel] = useState(o.label ?? "");
@@ -158,14 +160,14 @@ function ObjectCard({
 
   return (
     <Panel title={tableName(o)}>
-      <p className="text-muted-foreground -mt-2 text-sm">{info.label}</p>
+      <p className="text-muted-foreground -mt-2 text-sm">{t(`kinds.${o.kind}`)}</p>
 
       {issues.length > 0 && (
         <ul className="bg-destructive/10 space-y-1 rounded-lg p-3 text-sm">
           {issues.map((i, n) => (
             <li key={n} className="flex gap-2">
               <AlertTriangle className="text-destructive mt-0.5 size-4 shrink-0" aria-hidden />
-              {i.message}
+              {issueText(i)}
             </li>
           ))}
         </ul>
@@ -173,13 +175,15 @@ function ObjectCard({
 
       <div className="grid grid-cols-[1fr_5rem] gap-3">
         <div className="space-y-1.5">
-          <Label htmlFor="obj-label">{table ? "Name (optional)" : "Label"}</Label>
+          <Label htmlFor="obj-label">
+            {table ? t("inspector.nameOptional") : t("inspector.label")}
+          </Label>
           <Input
             id="obj-label"
             value={label}
             maxLength={60}
             disabled={!canEdit}
-            placeholder={table ? "e.g. Paris" : ""}
+            placeholder={table ? t("inspector.namePlaceholder") : ""}
             onChange={(e) => setLabel(e.target.value)}
             onBlur={saveLabel}
             onKeyDown={(e) => e.key === "Enter" && saveLabel()}
@@ -187,7 +191,7 @@ function ObjectCard({
         </div>
         {table && (
           <div className="space-y-1.5">
-            <Label htmlFor="obj-number">Number</Label>
+            <Label htmlFor="obj-number">{t("inspector.number")}</Label>
             <Input
               id="obj-number"
               inputMode="numeric"
@@ -203,14 +207,14 @@ function ObjectCard({
 
       {table && info.maxSeats > info.minSeats && (
         <div className="space-y-1.5">
-          <Label>Seats</Label>
+          <Label>{t("inspector.seats")}</Label>
           <div className="flex items-center gap-2">
             <Button
               variant="outline"
               size="icon-sm"
               disabled={!canEdit || o.seatCount <= info.minSeats}
               onClick={() => onChange(o.id, { seatCount: o.seatCount - 1 })}
-              aria-label="One seat fewer"
+              aria-label={t("inspector.fewer")}
             >
               <Minus aria-hidden />
             </Button>
@@ -222,7 +226,7 @@ function ObjectCard({
               size="icon-sm"
               disabled={!canEdit || o.seatCount >= info.maxSeats}
               onClick={() => onChange(o.id, { seatCount: o.seatCount + 1 })}
-              aria-label="One seat more"
+              aria-label={t("inspector.more")}
             >
               <Plus aria-hidden />
             </Button>
@@ -234,7 +238,7 @@ function ObjectCard({
                 disabled={!canEdit || o.seatCount < 4}
                 onCheckedChange={(v) => onChange(o.id, { ends: v === true })}
               />
-              A seat at each end
+              {t("inspector.ends")}
             </Label>
           )}
         </div>
@@ -243,13 +247,13 @@ function ObjectCard({
       {!table && o.kind !== "pillar" && (
         <div className="grid grid-cols-2 gap-3">
           <SizeInput
-            label="Width (cm)"
+            label={t("inspector.widthCm")}
             value={o.width}
             disabled={!canEdit}
             onCommit={(width) => onChange(o.id, { width })}
           />
           <SizeInput
-            label="Depth (cm)"
+            label={t("inspector.depthCm")}
             value={o.height}
             disabled={!canEdit}
             onCommit={(height) => onChange(o.id, { height })}
@@ -258,14 +262,14 @@ function ObjectCard({
       )}
 
       <div className="space-y-1.5">
-        <Label>Rotation</Label>
+        <Label>{t("inspector.rotation")}</Label>
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
             size="icon-sm"
             disabled={!canEdit}
             onClick={() => rotate(-15)}
-            aria-label="Rotate 15° left"
+            aria-label={t("inspector.rotateLeft")}
           >
             <RotateCcw aria-hidden />
           </Button>
@@ -275,7 +279,7 @@ function ObjectCard({
             size="icon-sm"
             disabled={!canEdit}
             onClick={() => rotate(15)}
-            aria-label="Rotate 15° right"
+            aria-label={t("inspector.rotateRight")}
           >
             <RotateCw aria-hidden />
           </Button>
@@ -285,7 +289,7 @@ function ObjectCard({
             disabled={!canEdit || o.rotation === 0}
             onClick={() => onChange(o.id, { rotation: 0 })}
           >
-            Reset
+            {t("inspector.reset")}
           </Button>
         </div>
       </div>
@@ -293,19 +297,19 @@ function ObjectCard({
       {canEdit && (
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm" onClick={() => onDuplicate(o.id)}>
-            <Copy aria-hidden /> Duplicate
+            <Copy aria-hidden /> {t("inspector.duplicate")}
           </Button>
           <ConfirmDialog
             trigger={
               <Button variant="outline" size="sm" className="text-destructive">
-                <Trash2 aria-hidden /> Delete
+                <Trash2 aria-hidden /> {t("inspector.delete")}
               </Button>
             }
-            title={`Delete ${tableName(o)}?`}
+            title={t("inspector.deleteTitle", { name: tableName(o) })}
             description={
               seated.length
-                ? `${seated.length} guest(s) sitting here will be unseated. You can undo this.`
-                : "You can undo this."
+                ? t("inspector.deleteSeated", { count: seated.length })
+                : t("inspector.canUndo")
             }
             onConfirm={() => onDelete(o.id)}
           />
@@ -315,10 +319,10 @@ function ObjectCard({
       {table && (
         <div className="space-y-2 border-t pt-4">
           <p className="text-sm font-medium">
-            Seated here ({seated.length}/{o.seatCount})
+            {t("inspector.seatedHere", { seated: seated.length, total: o.seatCount })}
           </p>
           {seated.length === 0 ? (
-            <p className="text-muted-foreground text-sm">Nobody yet. Drag guests onto the seats.</p>
+            <p className="text-muted-foreground text-sm">{t("inspector.nobody")}</p>
           ) : (
             <ul className="space-y-1">
               {seated.map((g) => (
@@ -330,7 +334,7 @@ function ObjectCard({
                         variant="ghost"
                         size="icon-xs"
                         onClick={() => onMoveGuest(g)}
-                        aria-label={`Move ${g.name}`}
+                        aria-label={t("inspector.move", { name: g.name })}
                       >
                         <MoveRight aria-hidden />
                       </Button>
@@ -338,7 +342,7 @@ function ObjectCard({
                         variant="ghost"
                         size="icon-xs"
                         onClick={() => onUnseat([g.id])}
-                        aria-label={`Unseat ${g.name}`}
+                        aria-label={t("inspector.unseat", { name: g.name })}
                       >
                         <UserMinus aria-hidden />
                       </Button>
@@ -350,7 +354,7 @@ function ObjectCard({
           )}
           {canEdit && seated.length > 1 && (
             <Button variant="ghost" size="sm" onClick={() => onUnseat(seated.map((g) => g.id))}>
-              Clear table
+              {t("inspector.clear")}
             </Button>
           )}
         </div>
@@ -402,41 +406,40 @@ function SeatCard({
   onUnseat,
   onMoveGuest,
 }: Props & { guest: SeatingGuest; table: SeatingObject; seatIndex: number }) {
+  const { t, tableName } = useSeatingWords();
+  const g = useTranslations("guests");
   const meal = guest.mealOptionId ? mealLookup.get(guest.mealOptionId) : null;
   return (
     <Panel title={guest.name}>
       <p className="text-muted-foreground -mt-2 text-sm">
-        {tableName(table)} · seat {seatIndex + 1}
+        {t("inspector.seatN", { table: tableName(table), n: seatIndex + 1 })}
       </p>
       <dl className="space-y-2 text-sm">
-        <Row label="Household" value={guest.householdName} />
+        <Row label={t("inspector.household")} value={guest.householdName} />
         <Row
-          label="RSVP"
+          label={t("inspector.rsvp")}
           value={
             guest.rsvp === "attending"
-              ? "Attending"
+              ? t("inspector.attending")
               : guest.rsvp === "declined"
-                ? "Declined"
-                : "No reply yet"
+                ? t("inspector.declined")
+                : t("inspector.noReply")
           }
         />
-        <Row label="Meal" value={meal ?? "Not chosen"} />
-        <Row label="Dietary" value={guest.dietary ?? "None"} />
-        {guest.accessibility && <Row label="Accessibility" value={guest.accessibility} />}
-        <Row
-          label="Age"
-          value={
-            guest.ageGroup === "adult" ? "Adult" : guest.ageGroup === "child" ? "Child" : "Infant"
-          }
-        />
+        <Row label={t("inspector.meal")} value={meal ?? t("inspector.notChosen")} />
+        <Row label={t("inspector.dietary")} value={guest.dietary ?? t("inspector.none")} />
+        {guest.accessibility && (
+          <Row label={t("inspector.accessibility")} value={guest.accessibility} />
+        )}
+        <Row label={t("inspector.age")} value={g(`ageGroups.${guest.ageGroup}`)} />
       </dl>
       {canEdit && (
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm" onClick={() => onMoveGuest(guest)}>
-            <MoveRight aria-hidden /> Move
+            <MoveRight aria-hidden /> {t("inspector.moveShort")}
           </Button>
           <Button variant="outline" size="sm" onClick={() => onUnseat([guest.id])}>
-            <UserMinus aria-hidden /> Remove from seat
+            <UserMinus aria-hidden /> {t("inspector.removeSeat")}
           </Button>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { LOCALES } from "@/i18n/locales";
 import type { AgeGroup, GuestList, GuestSide } from "@/lib/database.types";
 import { fullName, type PartnerNames } from "./model";
 
@@ -5,99 +6,84 @@ import { fullName, type PartnerNames } from "./model";
 // Import: spreadsheet columns → guest fields
 // ---------------------------------------------------------------------------
 
-/** Every guest field a CSV column can be mapped to, with common header names. */
+/**
+ * Every guest field a CSV column can be mapped to, with common header names
+ * (English and the most common words in other languages). Labels are in
+ * messages "guests.import.fields".
+ */
 export const IMPORT_FIELDS = [
   {
     key: "first_name",
-    label: "First name",
-    synonyms: ["first name", "firstname", "first", "given name", "forename", "name first"],
+    synonyms: ["first name", "firstname", "first", "given name", "forename", "name first", "ime", "nombre", "nome", "prénom", "prenom", "vorname", "voornaam", "imię", "jméno", "förnamn", "όνομα", "ad", "имя", "ім'я", "名", "이름", "nama depan", "tên", "ชื่อ"],
   },
   {
     key: "last_name",
-    label: "Last name",
-    synonyms: ["last name", "lastname", "last", "surname", "family name", "name last"],
+    synonyms: ["last name", "lastname", "last", "surname", "family name", "name last", "priimek", "prezime", "apellido", "apellidos", "sobrenome", "apelido", "cognome", "nom", "nom de famille", "nachname", "achternaam", "nazwisko", "příjmení", "efternamn", "επώνυμο", "soyad", "фамилия", "прізвище", "姓", "성", "nama belakang", "họ", "นามสกุล"],
   },
   {
     key: "full_name",
-    label: "Full name",
-    synonyms: ["full name", "name", "guest", "guest name", "fullname"],
+    synonyms: ["full name", "name", "guest", "guest name", "fullname", "ime in priimek", "gost", "nombre completo", "invitado", "nome completo", "convidado", "ospite", "nom complet", "invité", "gast", "gość", "host", "gäst", "姓名", "名前", "tamu", "khách"],
   },
   {
     key: "household",
-    label: "Household / group",
-    synonyms: [
-      "household",
-      "group",
-      "family",
-      "party",
-      "invitation",
-      "household name",
-      "group name",
-    ],
+    synonyms: ["household", "group", "family", "party", "invitation", "household name", "group name", "gospodinjstvo", "družina", "skupina", "obitelj", "familia", "grupo", "família", "famiglia", "gruppo", "famille", "groupe", "familie", "haushalt", "gruppe", "gezin", "groep", "rodzina", "grupa", "rodina", "skupina", "familj", "grupp", "οικογένεια", "aile", "семья", "сім'я", "家庭", "家族", "가족", "keluarga", "gia đình", "ครอบครัว"],
   },
-  { key: "email", label: "Email", synonyms: ["email", "e mail", "email address", "mail"] },
+  { key: "email", synonyms: ["email", "e mail", "email address", "mail", "e pošta", "correo", "correo electrónico", "posta elettronica", "courriel", "e post", "e-mail", "邮箱", "メール", "이메일"] },
   {
     key: "phone",
-    label: "Phone",
-    synonyms: ["phone", "mobile", "phone number", "cell", "telephone", "tel"],
+    synonyms: ["phone", "mobile", "phone number", "cell", "telephone", "tel", "telefon", "telefono", "teléfono", "telefone", "téléphone", "portable", "handy", "telefoon", "mobil", "gsm", "τηλέφωνο", "телефон", "电话", "電話", "전화", "telepon", "điện thoại", "โทรศัพท์"],
   },
-  { key: "side", label: "Side", synonyms: ["side", "bride or groom", "whose side", "guest of"] },
-  { key: "age_group", label: "Age group", synonyms: ["age group", "age", "adult child", "type"] },
+  { key: "side", synonyms: ["side", "bride or groom", "whose side", "guest of", "stran", "lado", "lato", "côté", "seite", "kant", "strona", "strana", "sida"] },
+  { key: "age_group", synonyms: ["age group", "age", "adult child", "type", "starost", "edad", "idade", "età", "âge", "alter", "leeftijd", "wiek", "věk", "ålder"] },
   {
     key: "address_line1",
-    label: "Address line 1",
-    synonyms: ["address", "address 1", "address line 1", "street", "street address"],
+    synonyms: ["address", "address 1", "address line 1", "street", "street address", "naslov", "ulica", "adresa", "dirección", "calle", "endereço", "morada", "indirizzo", "via", "adresse", "rue", "straße", "strasse", "adres", "straat", "adress", "gata", "διεύθυνση", "адрес", "адреса", "地址", "住所", "주소", "alamat", "địa chỉ", "ที่อยู่"],
   },
   {
     key: "address_line2",
-    label: "Address line 2",
     synonyms: ["address 2", "address line 2", "apt", "apartment", "suite"],
   },
-  { key: "city", label: "City", synonyms: ["city", "town"] },
-  { key: "region", label: "State / region", synonyms: ["state", "region", "province", "county"] },
+  { key: "city", synonyms: ["city", "town", "mesto", "kraj", "grad", "ciudad", "cidade", "città", "ville", "stadt", "ort", "stad", "plaats", "miasto", "město", "πόλη", "şehir", "город", "місто", "城市", "市", "도시", "kota", "thành phố", "เมือง"] },
+  { key: "region", synonyms: ["state", "region", "province", "county", "regija", "provincia", "estado", "région", "bundesland", "provincie", "województwo", "kraj", "län"] },
   {
     key: "postal_code",
-    label: "Postal code",
-    synonyms: ["zip", "zip code", "postal code", "postcode", "post code"],
+    synonyms: ["zip", "zip code", "postal code", "postcode", "post code", "poštna številka", "pošta", "código postal", "cap", "code postal", "plz", "postleitzahl", "kod pocztowy", "psč", "postnummer", "邮编", "郵便番号", "우편번호", "kode pos"],
   },
-  { key: "country", label: "Country", synonyms: ["country"] },
+  { key: "country", synonyms: ["country", "država", "drzava", "país", "pais", "paese", "pays", "land", "kraj", "země", "χώρα", "ülke", "страна", "країна", "国家", "国", "국가", "negara", "quốc gia", "ประเทศ"] },
   {
     key: "tags",
-    label: "Tags (comma separated)",
-    synonyms: ["tags", "tag", "labels", "category", "relationship"],
+    synonyms: ["tags", "tag", "labels", "category", "relationship", "oznake", "etiquetas", "etichette", "étiquettes", "schlagwörter", "tagi", "štítky", "taggar"],
   },
   {
     key: "events",
-    label: "Events (comma separated)",
-    synonyms: ["events", "event", "invited to", "invited events"],
+    synonyms: ["events", "event", "invited to", "invited events", "dogodki", "eventos", "eventi", "événements", "veranstaltungen", "evenementen", "wydarzenia", "události", "evenemang"],
   },
   {
     key: "dietary",
-    label: "Dietary restrictions",
-    synonyms: ["dietary", "diet", "dietary restrictions", "allergies", "food"],
+    synonyms: ["dietary", "diet", "dietary restrictions", "allergies", "food", "prehrana", "alergije", "dieta", "alergias", "alimentação", "allergie", "régime", "ernährung", "allergien", "dieet", "strava", "kost"],
   },
   {
     key: "accessibility",
-    label: "Accessibility needs",
-    synonyms: ["accessibility", "access needs", "mobility"],
+    synonyms: ["accessibility", "access needs", "mobility", "dostopnost", "accesibilidad", "acessibilidade", "accessibilità", "accessibilité", "barrierefreiheit"],
   },
-  { key: "notes", label: "Notes", synonyms: ["notes", "note", "comments", "comment"] },
+  { key: "notes", synonyms: ["notes", "note", "comments", "comment", "opombe", "bilješke", "notas", "note", "remarques", "notizen", "bemerkungen", "notities", "uwagi", "poznámky", "anteckningar"] },
   {
     key: "plus_one_allowed",
-    label: "Plus-one allowed",
-    synonyms: ["plus one", "plus one allowed", "plus 1", "guest allowed", "plusone"],
+    synonyms: ["plus one", "plus one allowed", "plus 1", "guest allowed", "plusone", "spremljevalec", "acompañante", "acompanhante", "accompagnatore", "accompagnant", "begleitung", "partner"],
   },
   {
     key: "plus_one_name",
-    label: "Plus-one name",
     synonyms: ["plus one name", "plus 1 name", "guest of guest", "partner name"],
   },
   {
     key: "plus_one_of",
-    label: "Plus-one of (host's full name)",
     synonyms: ["plus one of", "plus 1 of", "plusone of"],
   },
-  { key: "list", label: "A / B list", synonyms: ["list", "a b list", "priority", "tier"] },
+  { key: "list", synonyms: ["list", "a b list", "priority", "tier", "seznam", "lista", "liste", "lijst"] },
+  {
+    key: "language",
+    synonyms: ["language", "lang", "preferred language", "jezik", "idioma", "língua", "lingua", "langue", "sprache", "taal", "język", "jazyk", "språk", "γλώσσα", "dil", "язык", "мова", "语言", "語言", "言語", "언어", "bahasa", "ngôn ngữ", "ภาษา"],
+  },
 ] as const;
 
 export type ImportFieldKey = (typeof IMPORT_FIELDS)[number]["key"];
@@ -129,12 +115,15 @@ export type ImportGuest = {
   /** full name of the guest who brings this person (rows exported by Vow) */
   plusOneOf: string;
   list: GuestList;
+  /** the household's language code ("" = the couple's) */
+  language: string;
 };
 
+// letters of any alphabet are kept (headers can be "Priimek", "Nom", "名前"…)
 const simplify = (s: string) =>
   s
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/[^\p{L}\p{N}']+/gu, " ")
     .trim();
 
 /** Guesses which field each CSV column holds, based on its header. */
@@ -184,6 +173,22 @@ export function parseList(value: string): GuestList {
   return v === "b" || v.startsWith("b list") || v.includes("wait") || v === "2" ? "b" : "a";
 }
 
+/** "sl", "Slovenian", "Slovenščina", "zh-TW"… → a language code ("" if unknown). */
+export function parseLanguage(value: string) {
+  const v = value.trim().toLowerCase();
+  if (!v) return "";
+  const hit = LOCALES.find(
+    (l) =>
+      l.code.toLowerCase() === v ||
+      l.english.toLowerCase() === v ||
+      l.native.toLowerCase() === v ||
+      l.english.toLowerCase().split(" (")[0] === v,
+  );
+  if (hit) return hit.code;
+  const base = LOCALES.find((l) => l.code === v.split(/[-_]/)[0]);
+  return base?.code ?? "";
+}
+
 export function splitList(value: string) {
   return value
     .split(/[,;|]/)
@@ -201,7 +206,7 @@ export function splitFullName(name: string): [string, string] {
 export type MapResult = {
   guests: ImportGuest[];
   /** 1-based spreadsheet row numbers (header = row 1) with a problem */
-  errors: { row: number; message: string }[];
+  errors: { row: number; problem: "noName" }[];
 };
 
 /** Turns parsed CSV rows into guests using the chosen mapping. */
@@ -234,7 +239,7 @@ export function mapRows(
     // An unnamed plus-one row is recreated from its host's "plus-one allowed".
     if (!firstName && !lastName && get("plus_one_of")) return;
     if (!firstName && !lastName) {
-      errors.push({ row: i + 2, message: "No name, row skipped" });
+      errors.push({ row: i + 2, problem: "noName" });
       return;
     }
 
@@ -263,6 +268,7 @@ export function mapRows(
       plusOneName,
       plusOneOf: get("plus_one_of"),
       list: parseList(get("list")),
+      language: parseLanguage(get("language")),
     });
   });
 

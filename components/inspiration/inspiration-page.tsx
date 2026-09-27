@@ -14,6 +14,7 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { Heart, Lightbulb, Loader2, Pencil, Plus, Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { createBoard, movePin, reorderBoards, toggleHeart } from "@/app/app/inspiration/actions";
 import { PageHeader } from "@/components/app/page-header";
@@ -47,18 +48,12 @@ type Props = InspirationData & {
   unsplashEnabled: boolean;
 };
 
-const STARTER_BOARDS = [
-  "Dress & attire",
-  "Flowers",
-  "Decor & tablescape",
-  "Cake",
-  "Hair & makeup",
-  "Venue & ceremony",
-];
+const STARTER_BOARDS = ["attire", "flowers", "decor", "cake", "beauty", "venue"] as const;
 type Filter = "all" | "love" | "maybe" | "hearted";
 
 export function InspirationPage(props: Props) {
   const { canEdit, userId } = props;
+  const t = useTranslations("inspiration");
   // Local copies so moves and hearts show instantly; the server refresh replaces them.
   const [boards, setBoards] = useState(props.boards);
   const [pins, setPins] = useState(props.pins);
@@ -125,7 +120,7 @@ export function InspirationPage(props: Props) {
     if (pin.boardId === boardId) return;
     const top = Math.min(1, ...pins.filter((p) => p.boardId === boardId).map((p) => p.sortOrder));
     move(pin, boardId, top - 1);
-    toast.success(`Moved to ${boards.find((b) => b.id === boardId)?.name}`);
+    toast.success(t("movedTo", { name: boards.find((b) => b.id === boardId)?.name ?? "" }));
   }
 
   function heart(pin: PinView) {
@@ -181,13 +176,13 @@ export function InspirationPage(props: Props) {
   return (
     <>
       <PageHeader
-        title="Inspiration"
-        description="Collect ideas, decide together, and build your colour palette."
+        title={t("title")}
+        description={t("description")}
         actions={
           canEdit &&
           !empty && (
             <Button size="sm" onClick={() => setAdding(true)}>
-              <Plus aria-hidden /> Add pins
+              <Plus aria-hidden /> {t("addPins")}
             </Button>
           )
         }
@@ -196,7 +191,7 @@ export function InspirationPage(props: Props) {
       {props.palette.length > 0 && (
         <section aria-labelledby="palette-heading" className="mb-6">
           <h2 id="palette-heading" className="text-muted-foreground mb-2 text-sm font-medium">
-            Your palette <span className="font-normal">(click a colour to copy it)</span>
+            {t("palette")} <span className="font-normal">{t("paletteHint")}</span>
           </h2>
           <PaletteStrip colors={props.palette} canEdit={canEdit} />
         </section>
@@ -205,33 +200,31 @@ export function InspirationPage(props: Props) {
       {empty ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
           <Lightbulb className="text-primary mx-auto size-10" aria-hidden />
-          <h2 className="mt-4 text-2xl">Start your first board</h2>
+          <h2 className="mt-4 text-2xl">{t("startTitle")}</h2>
           <p className="text-muted-foreground mx-auto mt-2 max-w-md">
-            {canEdit
-              ? "Boards are like folders for ideas. Pick one to start with. You can rename it any time."
-              : "No boards yet. Once the couple adds some, they'll appear here."}
+            {canEdit ? t("startEditor") : t("startViewer")}
           </p>
           {canEdit && (
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {STARTER_BOARDS.map((name) => (
+              {STARTER_BOARDS.map((key) => (
                 <Button
-                  key={name}
+                  key={key}
                   variant="outline"
                   disabled={starting}
                   onClick={() =>
                     startTransition(async () => {
-                      const r = await createBoard({ name, description: "" });
+                      const r = await createBoard({ name: t(`starters.${key}`), description: "" });
                       if (!r.ok) toast.error(r.error);
                       else setSelected(r.data!.id);
                     })
                   }
                 >
-                  {name}
+                  {t(`starters.${key}`)}
                 </Button>
               ))}
               <Button onClick={() => setBoardDialog("new")} disabled={starting}>
                 {starting ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}{" "}
-                Your own
+                {t("yourOwn")}
               </Button>
             </div>
           )}
@@ -263,26 +256,26 @@ export function InspirationPage(props: Props) {
                   )}
                 </>
               ) : (
-                <h2 className="text-2xl">All pins</h2>
+                <h2 className="text-2xl">{t("allPins")}</h2>
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <Select value={filter} onValueChange={(v) => setFilter(v as Filter)}>
-                <SelectTrigger size="sm" className="w-36" aria-label="Show">
+                <SelectTrigger size="sm" className="w-36" aria-label={t("show")}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All pins</SelectItem>
-                  <SelectItem value="love">Love it</SelectItem>
-                  <SelectItem value="maybe">Maybe</SelectItem>
+                  <SelectItem value="all">{t("allPins")}</SelectItem>
+                  <SelectItem value="love">{t("loveIt")}</SelectItem>
+                  <SelectItem value="maybe">{t("maybe")}</SelectItem>
                   <SelectItem value="hearted">
-                    <Heart aria-hidden /> My hearts
+                    <Heart aria-hidden /> {t("myHearts")}
                   </SelectItem>
                 </SelectContent>
               </Select>
               {board && (canEdit || board.shareId) && (
                 <Button variant="outline" size="sm" onClick={() => setSharing(board)}>
-                  <Share2 aria-hidden /> {board.shareId ? "Shared" : "Share"}
+                  <Share2 aria-hidden /> {board.shareId ? t("shared") : t("share")}
                 </Button>
               )}
               {board && canEdit && (
@@ -290,28 +283,28 @@ export function InspirationPage(props: Props) {
                   variant="outline"
                   size="sm"
                   onClick={() => setBoardDialog("edit")}
-                  aria-label={`Edit ${board.name}`}
+                  aria-label={t("editName", { name: board.name })}
                 >
-                  <Pencil aria-hidden /> Edit
+                  <Pencil aria-hidden /> {t("edit")}
                 </Button>
               )}
             </div>
           </div>
 
           {tags.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-1.5" role="group" aria-label="Filter by tag">
-              {tags.map((t) => (
+            <div className="mb-4 flex flex-wrap gap-1.5" role="group" aria-label={t("byTag")}>
+              {tags.map((x) => (
                 <button
-                  key={t}
+                  key={x}
                   type="button"
-                  aria-pressed={tag === t}
-                  onClick={() => setTag(tag === t ? null : t)}
+                  aria-pressed={tag === x}
+                  onClick={() => setTag(tag === x ? null : x)}
                   className={cn(
                     "focus-visible:ring-ring rounded-full border px-2.5 py-0.5 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
-                    tag === t ? "bg-foreground text-background" : "hover:bg-accent",
+                    tag === x ? "bg-foreground text-background" : "hover:bg-accent",
                   )}
                 >
-                  #{t}
+                  #{x}
                 </button>
               ))}
             </div>
@@ -321,23 +314,22 @@ export function InspirationPage(props: Props) {
             <div className="text-muted-foreground rounded-2xl border border-dashed p-10 text-center">
               {boardPins.length === 0 ? (
                 <>
-                  <p>No pins here yet.</p>
+                  <p>{t("noPins")}</p>
                   {canEdit && (
                     <Button className="mt-4" onClick={() => setAdding(true)}>
-                      <Plus aria-hidden /> Add your first pin
+                      <Plus aria-hidden /> {t("addFirst")}
                     </Button>
                   )}
                 </>
               ) : (
-                <p>No pins match this filter.</p>
+                <p>{t("noMatch")}</p>
               )}
             </div>
           ) : (
             <>
               {canEdit && (
                 <p className="text-muted-foreground mb-3 hidden text-xs sm:block">
-                  Tip: drag a pin onto a board above to move it
-                  {board ? ", or onto another pin to change the order" : ""}.
+                  {board ? t("tipBoard") : t("tipAll")}
                 </p>
               )}
               <Masonry
@@ -361,7 +353,7 @@ export function InspirationPage(props: Props) {
               <div className="w-40 rotate-2 overflow-hidden rounded-xl shadow-2xl">
                 <PinImage
                   src={dragging.src}
-                  alt={dragging.title || "Pin"}
+                  alt={dragging.title || t("pin")}
                   width={dragging.width}
                   height={dragging.height}
                   size={300}

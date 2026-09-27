@@ -4,6 +4,7 @@ import type { ActionResult } from "@/lib/action-result";
 import { isOwnFile, removeFiles } from "@/lib/files";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { err } from "@/lib/errors";
 
 /**
  * Removes a file that was uploaded in a form but then replaced or cancelled.
@@ -11,7 +12,7 @@ import { canEdit, requireWedding } from "@/lib/wedding";
  */
 export async function discardUpload(path: string): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role) || !isOwnFile(path, wedding.id)) return { ok: false, error: "Not allowed." };
+  if (!canEdit(role) || !isOwnFile(path, wedding.id)) return await err("noPermission");
   const sb = await createClient();
   const [{ count: e }, { count: v }, { count: p }, { count: pin }] = await Promise.all([
     sb.from("expenses").select("id", { count: "exact", head: true }).eq("receipt_path", path),

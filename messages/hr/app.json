@@ -1,0 +1,178 @@
+{
+  "app": {
+    "nav": {
+      "dashboard": "Pregled",
+      "tasks": "Zadaci",
+      "budget": "Proračun",
+      "vendors": "Dobavljači",
+      "guests": "Gosti",
+      "rsvp": "Potvrde",
+      "seating": "Raspored sjedenja",
+      "venues": "Lokacije",
+      "hotels": "Hoteli",
+      "travel": "Putovanja",
+      "inspiration": "Inspiracija",
+      "website": "Web stranica",
+      "schedule": "Plan dana",
+      "settings": "Postavke",
+      "home": "Početna",
+      "groups": {
+        "plan": "Planiranje",
+        "people": "Ljudi",
+        "places": "Mjesta",
+        "style": "Stil"
+      }
+    },
+    "shell": {
+      "mainNav": "Glavna navigacija",
+      "expand": "Proširi bočnu traku",
+      "collapse": "Sažmi bočnu traku",
+      "more": "Više",
+      "allTools": "Svi alati"
+    },
+    "userMenu": {
+      "account": "Izbornik računa",
+      "appearance": "Izgled",
+      "light": "Svijetlo",
+      "dark": "Tamno",
+      "system": "Sustav",
+      "language": "Jezik",
+      "signOut": "Odjava"
+    },
+    "switcher": {
+      "current": "Trenutno vjenčanje: {name}. Promijeni vjenčanje",
+      "yours": "Vaša vjenčanja",
+      "noDate": "Datum će biti određen",
+      "another": "Planiraj novo vjenčanje",
+      "roles": {
+        "owner": "vlasnik",
+        "editor": "urednik",
+        "viewer": "čitatelj"
+      }
+    },
+    "notifications": {
+      "title": "Obavijesti",
+      "unread": "{count, plural, one {Obavijesti, # nepročitana} few {Obavijesti, # nepročitane} other {Obavijesti, # nepročitanih}}",
+      "unreadOne": "Nepročitano",
+      "markAll": "Označi sve kao pročitano",
+      "empty": "Još ništa. Ovdje će se pojaviti nove potvrde, zadaci za vas i podsjetnici za plaćanja i rokove."
+    },
+    "countdown": {
+      "today": "Danas je veliki dan!",
+      "enjoy": "Uživajte u svakom trenutku.",
+      "married": "{count, plural, one {Vjenčani # dan} few {Vjenčani # dana} other {Vjenčani # dana}}",
+      "congrats": "Čestitamo!",
+      "daysToGo": "{count, plural, one {dan do vjenčanja} few {dana do vjenčanja} other {dana do vjenčanja}}",
+      "hours": "sati",
+      "minutes": "minuta",
+      "seconds": "sekundi"
+    },
+    "dashboard": {
+      "welcome": "Dobro došli u svoj planer!",
+      "welcomeText": "Ovdje sve počinje. Prođite sljedeće korake svojim tempom.",
+      "noDate": "Datum će biti određen",
+      "setDate": "Odredite datum i pokrenite odbrojavanje",
+      "nextSteps": "Sljedeći koraci",
+      "stepsDone": "Gotovo {done} od {total}",
+      "done": "(gotovo)",
+      "toDo": "(za napraviti)",
+      "steps": {
+        "date": "Odredite datum vjenčanja",
+        "location": "Odaberite mjesto",
+        "invite": "Pozovite partnera, obitelj ili planera vjenčanja",
+        "guests": "Dodajte popis gostiju",
+        "guestsSoFar": "{count, plural, one {Dodajte popis gostiju (zasad #)} few {Dodajte popis gostiju (zasad #)} other {Dodajte popis gostiju (zasad #)}}",
+        "budget": "Odredite ukupni proračun",
+        "shortlist": "Suzite izbor lokacija",
+        "book": "Rezervirajte lokaciju",
+        "inspiration": "Započnite ploču inspiracije",
+        "website": "Objavite svadbenu stranicu",
+        "timeline": "Izradite plan pripreme"
+      },
+      "budget": {
+        "title": "Proračun",
+        "empty": "Još nema proračuna. Odredite iznos i predložit ćemo raspodjelu.",
+        "cta": "Planiraj proračun",
+        "committed": "dogovoreno",
+        "committedOf": "dogovoreno od {total}",
+        "overdue": "Dospjelo: {name}"
+      },
+      "rsvp": {
+        "title": "Potvrde",
+        "empty": "Još nema odgovora. Dodajte goste i pošaljite pozivnice.",
+        "cta": "Pogledaj potvrde",
+        "attending": "Dolaze",
+        "declined": "Ne dolaze",
+        "waiting": "Čeka se"
+      },
+      "seating": {
+        "title": "Raspored sjedenja",
+        "empty": "Još nema stolova. Kad gosti odgovore, rasporedite ih povlačenjem.",
+        "cta": "Otvori raspored sjedenja",
+        "seated": "od {attending} gostiju smješteno za {tables, plural, one {# stol} few {# stola} other {# stolova}}"
+      },
+      "inspiration": {
+        "title": "Inspiracija",
+        "empty": "Još nema pinova. Skupljajte ideje i iz njih izvucite paletu boja.",
+        "cta": "Otvori ploče",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Zadaci",
+        "empty": "Još nema zadataka. Izradit ćemo plan prema datumu vjenčanja.",
+        "cta": "Pogledaj zadatke",
+        "ofDone": "od {total} gotovo",
+        "overdue": "kasni: {count}"
+      }
+    },
+    "settings": {
+      "title": "Postavke",
+      "description": "Podaci o vjenčanju, jezici, događaji i tko planira s vama."
+    },
+    "translate": {
+      "button": "Prijevodi",
+      "title": "Prijevodi: {name}",
+      "hint": "Ostavite polje prazno za prikaz teksta na jeziku: {language}.",
+      "draft": "Nacrt",
+      "draftFailed": "Preglednik ne može prevesti ovaj par jezika. Upišite prijevod.",
+      "noMachine": "Savjet: Chrome na računalu može pripremiti nacrt prijevoda (ondje se pojavi gumb „Nacrt”).",
+      "save": "Spremi prijevode",
+      "saved": "Prijevodi spremljeni",
+      "fields": {
+        "name": "Naziv",
+        "venue": "Naziv lokacije",
+        "dressCode": "Pravila odijevanja",
+        "description": "Opis",
+        "mealName": "Naziv jela",
+        "mealDescription": "Opis jela"
+      }
+    },
+    "websiteLang": {
+      "editing": "Jezik",
+      "main": "{language} (vaš jezik)",
+      "hint": "Prijevod: {language}. Fotografije, redoslijed i vidljivi dijelovi postavljaju se na glavnom jeziku.",
+      "progress": "Prevedeno {done}/{total}",
+      "complete": "Prevedeno",
+      "fallback": "Prazno: gosti vide tekst na glavnom jeziku.",
+      "nothing": "U ovom dijelu još nema ničega za prevesti.",
+      "draft": "Prevedi sve prevoditeljem preglednika",
+      "draftFailed": "Preglednik ne može prevesti ovaj par jezika. Upišite prijevod.",
+      "item": "Stavka {number}",
+      "fields": {
+        "tagline": "Moto",
+        "intro": "Uvod",
+        "notes": "Napomene",
+        "date": "Kada",
+        "title": "Naslov",
+        "text": "Tekst",
+        "role": "Uloga",
+        "bio": "Nekoliko riječi",
+        "label": "Naziv",
+        "note": "Bilješka",
+        "question": "Pitanje",
+        "answer": "Odgovor",
+        "caption": "Opis slike"
+      }
+    }
+  }
+}

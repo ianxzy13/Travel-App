@@ -2,16 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
+import { contentTranslations } from "@/lib/i18n/content-locale";
 import { DAY_TEMPLATE, fromMinutes, shiftFrom, toMinutes } from "@/lib/schedule/time";
 import { createClient } from "@/lib/supabase/server";
 import { scheduleItemSchema } from "@/lib/validation/tasks";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = {
-  ok: false as const,
-  error: "You don't have permission to change the schedule.",
-};
 const id = z.uuid();
 const day = z.union([z.null(), z.iso.date()]);
 
@@ -31,9 +29,9 @@ export async function saveScheduleItem(
   input: unknown,
 ): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || (itemId && !id.safeParse(itemId).success)) return NO_PERMISSION;
+  if (!ctx || (itemId && !id.safeParse(itemId).success)) return noPermission();
   const parsed = scheduleItemSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const row = {
     // the wedding day is stored as "no date", so it follows the date if that changes
@@ -59,7 +57,7 @@ export async function saveScheduleItem(
 
 export async function deleteScheduleItem(itemId: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(itemId).success) return NO_PERMISSION;
+  if (!ctx || !id.safeParse(itemId).success) return noPermission();
   const { error } = await ctx.sb
     .from("schedule_items")
     .delete()
@@ -92,7 +90,7 @@ export async function shiftSchedule(
     !Number.isInteger(delta) ||
     Math.abs(delta) > 720
   ) {
-    return NO_PERMISSION;
+    return noPermission();
   }
   const updates = shiftFrom(await itemsOfDay(ctx, forDay), itemId, delta);
   const results = await Promise.all(
@@ -114,9 +112,9 @@ export async function importEvents(
   forDay: string | null,
 ): Promise<ActionResult<{ added: number }>> {
   const ctx = await editor();
-  if (!ctx || !day.safeParse(forDay).success) return NO_PERMISSION;
+  if (!ctx || !day.safeParse(forDay).success) return noPermission();
   const date = forDay ?? ctx.wedding.wedding_date;
-  if (!date) return { ok: false, error: "Set your wedding date first." };
+  if (!date) return await err("setDateFirst");
   const [{ data: events }, existing] = await Promise.all([
     ctx.sb
       .from("events")
@@ -161,12 +159,9 @@ export async function addTemplateDay(
 ): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !day.safeParse(forDay).success || !/^([01]\d|2[0-3]):[0-5]\d$/.test(ceremonyTime))
-    return NO_PERMISSION;
+    return noPermission();
   if ((await itemsOfDay(ctx, forDay)).length)
-    return {
-      ok: false,
-      error: "This day already has items. The template only fills an empty day.",
-    };
+    return await err("scheduleNotEmpty");
   const [{ data: events }, { data: venues }] = await Promise.all([
     ctx.sb.from("events").select("name, venue_name").eq("wedding_id", ctx.wedding.id),
     ctx.sb
@@ -181,15 +176,16 @@ export async function addTemplateDay(
     events?.find((e) => e.name.toLowerCase().includes(role))?.venue_name ??
     null;
   const at = toMinutes(ceremonyTime);
+  const t = await contentTranslations(ctx.wedding, "schedule");
   const { error } = await ctx.sb.from("schedule_items").insert(
-    DAY_TEMPLATE.map((t) => ({
+    DAY_TEMPLATE.map((x) => ({
       wedding_id: ctx.wedding.id,
       day: forDay,
-      start_time: fromMinutes(at + t.offset),
-      duration_min: t.duration,
-      title: t.title,
-      owner: t.owner ?? null,
-      location: t.location ? venueFor(t.location) : null,
+      start_time: fromMinutes(at + x.offset),
+      duration_min: x.duration,
+      title: t(`template.${x.title}` as "template.hair"),
+      owner: x.owner ? t(`owners.${x.owner}` as "owners.dj") : null,
+      location: x.location ? venueFor(x.location) : null,
     })),
   );
   if (error) return fail("addTemplateDay", error);

@@ -2,17 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { fail, type ActionResult } from "@/lib/action-result";
+import type { ActionResult } from "@/lib/action-result";
 import { suggestedAllocations } from "@/lib/budget/suggested";
+import { contentTranslations } from "@/lib/i18n/content-locale";
 import { isOwnFile, removeFiles } from "@/lib/files";
 import { createClient } from "@/lib/supabase/server";
 import { categorySchema, expenseSchema } from "@/lib/validation/budget";
 import { canEdit, requireWedding } from "@/lib/wedding";
+import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-const NO_PERMISSION = {
-  ok: false as const,
-  error: "You don't have permission to change the budget.",
-};
 const idSchema = z.uuid();
 
 async function editor() {
@@ -32,9 +30,9 @@ const today = () => new Date().toISOString().slice(0, 10);
 
 export async function setBudgetTotal(total: number | null): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   if (total !== null && !(Number.isFinite(total) && total >= 0 && total < 1e10)) {
-    return { ok: false, error: "Please enter a valid amount." };
+    return await err("badAmount");
   }
   const { error } = await ctx.sb
     .from("weddings")
@@ -47,14 +45,15 @@ export async function setBudgetTotal(total: number | null): Promise<ActionResult
 /** Adds the suggested categories that don't exist yet, split across the total. */
 export async function addSuggestedCategories(): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const { data: existing } = await ctx.sb
     .from("budget_categories")
     .select("name")
     .eq("wedding_id", ctx.wedding.id);
   const have = new Set((existing ?? []).map((c) => c.name.toLowerCase()));
   const total = ctx.wedding.budget_total == null ? null : Number(ctx.wedding.budget_total);
-  const rows = suggestedAllocations(total)
+  const t = await contentTranslations(ctx.wedding, "budget");
+  const rows = suggestedAllocations(total, (k) => t(`suggested.${k}`))
     .map((c, i) => ({
       wedding_id: ctx.wedding.id,
       name: c.name,
@@ -70,9 +69,9 @@ export async function addSuggestedCategories(): Promise<ActionResult> {
 
 export async function saveCategory(input: unknown, id?: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = categorySchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
 
   if (id) {
     const { error } = await ctx.sb
@@ -97,7 +96,7 @@ export async function saveCategory(input: unknown, id?: string): Promise<ActionR
 /** Deletes a category with its expenses and payments (and their receipt files). */
 export async function deleteCategory(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success) return noPermission();
   const { data: receipts } = await ctx.sb
     .from("expenses")
     .select("receipt_path")
@@ -122,12 +121,12 @@ export async function saveExpense(
   id?: string,
 ): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
-  if (!ctx) return NO_PERMISSION;
+  if (!ctx) return noPermission();
   const parsed = expenseSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
   const wid = ctx.wedding.id;
-  if (!isOwnFile(v.receipt?.path, wid)) return NO_PERMISSION;
+  if (!isOwnFile(v.receipt?.path, wid)) return noPermission();
 
   const row = {
     category_id: v.categoryId,
@@ -149,7 +148,7 @@ export async function saveExpense(
       .eq("id", expenseId)
       .eq("wedding_id", wid)
       .maybeSingle();
-    if (!old) return { ok: false, error: "This expense no longer exists." };
+    if (!old) return await err("notFound");
     oldReceipt = old.receipt_path;
     const { error } = await ctx.sb
       .from("expenses")
@@ -192,7 +191,7 @@ export async function saveExpense(
 
 export async function deleteExpense(id: string): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success) return noPermission();
   const { data, error } = await ctx.sb
     .from("expenses")
     .delete()
@@ -209,7 +208,7 @@ export async function deleteExpense(id: string): Promise<ActionResult> {
 
 export async function setPaymentPaid(id: string, paid: boolean): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !idSchema.safeParse(id).success) return NO_PERMISSION;
+  if (!ctx || !idSchema.safeParse(id).success) return noPermission();
   const { error } = await ctx.sb
     .from("payments")
     .update({ paid, paid_on: paid ? today() : null })

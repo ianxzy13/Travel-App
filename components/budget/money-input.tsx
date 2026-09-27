@@ -52,7 +52,7 @@ export function MoneyInput({
 
   return (
     <div className={cn("relative", className)}>
-      <span className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-xs">
+      <span className="text-muted-foreground pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 text-xs">
         {currency}
       </span>
       <Input
@@ -67,7 +67,7 @@ export function MoneyInput({
           if (e.key === "Enter") commit();
           rest.onKeyDown?.(e);
         }}
-        className="pl-12 text-right tabular-nums"
+        className="ps-12 text-end tabular-nums"
       />
     </div>
   );
