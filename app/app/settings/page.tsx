@@ -62,6 +62,8 @@ export default async function SettingsPage() {
   );
 
   const siteUrl = await getSiteUrl();
+  // before the languages migration has run the column is missing; don't crash
+  const languages = wedding.languages?.length ? wedding.languages : ["en"];
 
   const values: WeddingFormValues = {
     partnerAName: wedding.partner_a_name,
@@ -86,15 +88,15 @@ export default async function SettingsPage() {
         />
         <LanguagesCard
           key={`lang-${wedding.id}`}
-          languages={wedding.languages}
-          timeZone={wedding.time_zone}
-          translations={wedding.translations}
+          languages={languages}
+          timeZone={wedding.time_zone ?? null}
+          translations={wedding.translations ?? {}}
           location={wedding.location}
           rsvpContact={wedding.rsvp_contact}
           readOnly={!canEdit(role)}
         />
         <EventsCard
-          languages={wedding.languages}
+          languages={languages}
           readOnly={!canEdit(role)}
           events={(events ?? []).map((e, i) => ({ ...e, invitedCount: invitedCounts[i] }))}
           bookedVenues={bookedVenues ?? []}
