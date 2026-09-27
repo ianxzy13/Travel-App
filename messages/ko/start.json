@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – 함께 준비하는 결혼식",
+    "metaDescription": "하객, 참석 여부, 좌석 배치도, 예산, 식장, 여행, 영감, 청첩장 웹사이트까지. 모든 것을 한곳에서, 내 언어로 차분하게.",
+    "signIn": "로그인",
+    "getStarted": "시작하기",
+    "eyebrow": "함께 준비하는 결혼식",
+    "title": "결혼식의 모든 것을 차분한 한곳에.",
+    "intro": "하객, 참석 여부, 좌석, 예산, 식장, 여행을 파트너, 가족과 함께 휴대폰이나 노트북으로 준비하세요.",
+    "start": "무료로 준비 시작하기",
+    "seeInside": "기능 살펴보기",
+    "featuresTitle": "스프레드시트 12개 대신 앱 하나",
+    "featuresText": "계획의 모든 부분이 서로 연결됩니다. 참석 여부는 좌석 배치도로, 예약한 식장은 웹사이트로 이어집니다.",
+    "features": {
+      "guests": {
+        "title": "하객 명단",
+        "text": "가족, 신랑·신부 측, 식이 요구 사항, CSV 가져오기까지 몇 분 만에."
+      },
+      "rsvp": {
+        "title": "참석 여부",
+        "text": "가족마다 개인 링크 하나. 답변은 실시간으로 도착합니다."
+      },
+      "seating": {
+        "title": "좌석 배치도",
+        "text": "하객을 자리로 끌어다 놓으세요. 가족은 함께, 전 애인은 멀리."
+      },
+      "budget": {
+        "title": "예산",
+        "text": "카테고리, 계약금, 납부일까지. 뜻밖의 지출 없이."
+      },
+      "venues": {
+        "title": "식장과 업체",
+        "text": "나란히 비교하고 자신 있게 예약하세요."
+      },
+      "travel": {
+        "title": "호텔과 여행",
+        "text": "객실 블록, 항공편, 픽업을 위한 도착 현황판."
+      },
+      "inspiration": {
+        "title": "영감",
+        "text": "아이디어를 핀하고, 색상 팔레트를 만들고, 함께 결정하세요."
+      },
+      "website": {
+        "title": "결혼식 웹사이트",
+        "text": "참석 여부 기능이 포함된 아름다운 템플릿 5가지."
+      },
+      "timeline": {
+        "title": "타임라인",
+        "text": "12개월 전부터 결혼식 날까지의 할 일 계획."
+      },
+      "languages": {
+        "title": "25개 언어",
+        "text": "나는 내 언어로 준비하고, 하객은 각자의 언어로 웹사이트, 참석 여부 페이지, 이메일을 받습니다."
+      }
+    },
+    "closingTitle": "스트레스는 줄이고, 설렘은 그대로.",
+    "closingText": "파트너, 부모님, 플래너를 초대해 실시간으로 함께 준비하세요.",
+    "create": "결혼식 만들기",
+    "footer": "사랑을 담아 · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · 리스본",
+      "daysToGo": "일 남음",
+      "attending": "참석",
+      "declined": "불참",
+      "waiting": "대기 중",
+      "budget": "예산",
+      "budgetOf": "{spent} / {total}"
+    }
+  },
+  "login": {
+    "title": "로그인",
+    "welcome": "환영합니다",
+    "intro": "로그인하거나 계정을 만드세요. 비밀번호는 필요 없습니다.",
+    "errorLink": "로그인 링크가 만료되었거나 이미 사용되었습니다. 새 링크를 요청해 주세요.",
+    "errorGoogle": "지금은 Google 로그인을 사용할 수 없습니다. 이메일을 이용해 주세요.",
+    "google": "Google로 계속하기",
+    "or": "또는",
+    "email": "이메일",
+    "emailPlaceholder": "you@example.com",
+    "send": "로그인 링크를 이메일로 받기",
+    "checkInbox": "받은편지함을 확인하세요",
+    "sentTo": "<b>{email}</b>(으)로 이메일을 보냈습니다. 이메일의 링크를 (이 브라우저에서) 클릭하거나 아래에 이메일의 코드를 입력하세요.",
+    "code": "이메일의 코드",
+    "signInWithCode": "코드로 로그인",
+    "again": "이메일 다시 보내기 또는 다른 주소 사용",
+    "setupTitle": "거의 다 됐습니다: Supabase가 아직 연결되지 않았습니다.",
+    "setupText": "Supabase URL과 공개 키가 담긴 <code>.env.local</code> 파일을 만들고(<code>.env.example</code>과 README 참고) <code>npm run dev</code>를 다시 시작하세요."
+  },
+  "welcome": {
+    "title": "언어를 선택하세요",
+    "intro": "Vow는 모든 곳에서 이 언어를 사용합니다. 계정 메뉴에서 언제든지 바꿀 수 있습니다.",
+    "suggested": "추천",
+    "continue": "{language}(으)로 계속하기",
+    "guestsNote": "하객은 웹사이트, 참석 여부 페이지, 이메일을 자신의 언어로 봅니다. 언어는 가족별로 설정합니다."
+  },
+  "onboarding": {
+    "metaTitle": "결혼식 만들기",
+    "backToDashboard": "대시보드로 돌아가기",
+    "progress": "진행 상황",
+    "stepOf": "{total}단계 중 {step}단계",
+    "stepOfTitle": "{total}단계 중 {step}단계: {title}",
+    "back": "뒤로",
+    "continue": "계속",
+    "create": "우리 결혼식 만들기",
+    "steps": {
+      "names": {
+        "title": "누가 결혼하나요?",
+        "text": "축하합니다! 먼저 두 분의 이름부터 알려 주세요."
+      },
+      "when": {
+        "title": "언제, 어디서?",
+        "text": "아직 모르셔도 괜찮습니다."
+      },
+      "size": {
+        "title": "규모는 어느 정도인가요?",
+        "text": "예산과 좌석 계획에 도움이 됩니다."
+      },
+      "style": {
+        "title": "어떤 분위기를 좋아하세요?",
+        "text": "영감과 웹사이트 추천에 활용합니다."
+      }
+    },
+    "defaults": {
+      "ceremony": "예식",
+      "reception": "피로연",
+      "tagline": "저희 결혼합니다",
+      "rsvpIntro": "함께 축하할 날을 기다리고 있습니다. 참석 가능 여부를 알려 주세요.",
+      "faqChildren": "아이와 함께 가도 되나요?",
+      "faqParking": "식장에 주차할 수 있나요?",
+      "faqWear": "무엇을 입어야 하나요?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "파트너 1",
+    "partnerB": "파트너 2",
+    "partnerAPlaceholder": "예: Ian",
+    "partnerBPlaceholder": "예: Maria",
+    "date": "결혼식 날짜",
+    "dateHint": "아직 정하지 않았나요? 비워 두고 나중에 추가하세요.",
+    "location": "장소",
+    "locationHint": "도시, 지역, 식장 등 지금 아는 정보면 됩니다.",
+    "locationPlaceholder": "예: 포르투갈 신트라",
+    "guests": "예상 하객 수",
+    "guestsHint": "대략적인 숫자면 됩니다.",
+    "guestsPlaceholder": "예: 120",
+    "currency": "통화",
+    "chooseCurrency": "통화 선택",
+    "style": "스타일(마음에 드는 것을 모두 선택)",
+    "accent": "앱 강조 색상",
+    "accents": {
+      "rose": "더스티 로즈",
+      "sage": "세이지"
+    },
+    "styles": {
+      "Classic": "클래식",
+      "Modern": "모던",
+      "Romantic": "로맨틱",
+      "Rustic": "러스틱",
+      "Boho": "보헤미안",
+      "Garden": "가든",
+      "Beach": "비치",
+      "Glam": "글램",
+      "Minimal": "미니멀",
+      "Vintage": "빈티지",
+      "Destination": "데스티네이션",
+      "Intimate": "스몰 웨딩"
+    },
+    "detailsTitle": "결혼식 정보",
+    "detailsViewOnly": "보기 전용 권한입니다. 변경이 필요하면 소유자에게 요청하세요.",
+    "detailsText": "이름, 날짜, 장소, 스타일. 변경 사항은 앱 전체에 적용됩니다.",
+    "saveChanges": "변경 사항 저장",
+    "saved": "결혼식 정보를 저장했습니다"
+  },
+  "roles": {
+    "owner": {
+      "label": "소유자",
+      "description": "모든 권한, 협업자 관리"
+    },
+    "editor": {
+      "label": "편집자",
+      "description": "모든 것을 추가하고 변경할 수 있음"
+    },
+    "viewer": {
+      "label": "뷰어",
+      "description": "볼 수는 있지만 변경할 수 없음"
+    }
+  },
+  "invite": {
+    "metaTitle": "초대받으셨습니다",
+    "used": "이미 사용된 초대입니다",
+    "invalid": "유효하지 않은 초대입니다",
+    "expired": "만료되었습니다. 커플에게 새 링크를 요청하세요.",
+    "askNew": "아직 접근이 필요하다면 커플에게 새 링크를 요청하세요.",
+    "dashboard": "내 대시보드로 가기",
+    "title": "{couple}의 결혼식 준비 돕기",
+    "as": "<b>{role}</b>(으)로 초대받았습니다: {description}.",
+    "signedInAs": "{email}(으)로 로그인됨",
+    "accept": "수락하고 준비 시작하기"
+  }
+}

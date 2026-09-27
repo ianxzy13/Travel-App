@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} a répondu",
+      "body": "{attending} présents, {declined} absents"
+    },
+    "rsvpUpdated": {
+      "title": "{name} a modifié sa réponse",
+      "body": "{attending} présents, {declined} absents"
+    },
+    "taskAssigned": {
+      "title": "{who} vous a confié une tâche",
+      "body": "{title}",
+      "bodyDue": "{title} · échéance le {date}"
+    },
+    "someone": "Quelqu’un",
+    "paymentSoon": {
+      "title": "Paiement bientôt dû : {name}",
+      "body": "{amount} · échéance le {date}"
+    },
+    "paymentLate": {
+      "title": "Paiement en retard : {name}",
+      "body": "{amount} · échéance le {date}"
+    },
+    "hotelCutoff": {
+      "title": "Date limite du bloc de chambres proche : {name}",
+      "body": "Les invités doivent réserver avant le {date}",
+      "bodyRooms": "Les invités doivent réserver avant le {date} · {booked} chambres réservées sur {held}"
+    },
+    "taskDueToday": {
+      "title": "À faire aujourd’hui : {title}"
+    },
+    "taskDue": {
+      "title": "Échéance le {date} : {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# tâche en retard} other {# tâches en retard}}",
+      "body": "{title}",
+      "bodyMore": "{title} et d’autres"
+    },
+    "coupleEmail": {
+      "replied": "{name} a répondu",
+      "updated": "{name} a modifié sa réponse",
+      "summary": "{attending} présents, {declined} absents",
+      "seeAll": "Voir toutes les réponses"
+    }
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – rencanakan pernikahan Anda bersama",
+    "metaDescription": "Tamu, RSVP, denah tempat duduk, anggaran, venue, perjalanan, inspirasi, dan situs pernikahan Anda – semuanya di satu tempat yang tenang, dalam bahasa Anda.",
+    "signIn": "Masuk",
+    "getStarted": "Mulai",
+    "eyebrow": "Merencanakan pernikahan, bersama",
+    "title": "Semua untuk pernikahan Anda, di satu tempat yang tenang.",
+    "intro": "Rencanakan tamu, RSVP, tempat duduk, anggaran, venue, dan perjalanan bersama pasangan dan keluarga, dari ponsel atau laptop Anda.",
+    "start": "Mulai merencanakan gratis",
+    "seeInside": "Lihat isinya",
+    "featuresTitle": "Satu aplikasi, bukan dua belas spreadsheet",
+    "featuresText": "Setiap bagian rencana Anda saling terhubung. RSVP mengalir ke denah tempat duduk, venue yang dipesan mengalir ke situs Anda.",
+    "features": {
+      "guests": {
+        "title": "Daftar tamu",
+        "text": "Keluarga, pihak, kebutuhan makanan, dan impor CSV dalam hitungan menit."
+      },
+      "rsvp": {
+        "title": "RSVP",
+        "text": "Satu tautan pribadi per keluarga. Jawaban masuk secara langsung."
+      },
+      "seating": {
+        "title": "Denah tempat duduk",
+        "text": "Seret tamu ke kursi. Keluarga tetap bersama, mantan tetap berjauhan."
+      },
+      "budget": {
+        "title": "Anggaran",
+        "text": "Kategori, uang muka, dan tenggat, tanpa kejutan."
+      },
+      "venues": {
+        "title": "Venue & vendor",
+        "text": "Bandingkan berdampingan, lalu pesan dengan yakin."
+      },
+      "travel": {
+        "title": "Hotel & perjalanan",
+        "text": "Blok kamar, penerbangan, dan papan kedatangan untuk penjemputan."
+      },
+      "inspiration": {
+        "title": "Inspirasi",
+        "text": "Sematkan ide, ambil palet warna, dan putuskan bersama."
+      },
+      "website": {
+        "title": "Situs pernikahan",
+        "text": "Lima templat cantik dengan RSVP bawaan."
+      },
+      "timeline": {
+        "title": "Linimasa",
+        "text": "Rencana tugas dari dua belas bulan sebelumnya hingga hari besar."
+      },
+      "languages": {
+        "title": "25 bahasa",
+        "text": "Anda merencanakan dalam bahasa Anda; setiap tamu mendapat situs, RSVP, dan email dalam bahasa mereka."
+      }
+    },
+    "closingTitle": "Katakan ya untuk lebih sedikit stres.",
+    "closingText": "Undang pasangan, orang tua, atau perencana Anda, dan rencanakan semuanya bersama secara real time.",
+    "create": "Buat pernikahan Anda",
+    "footer": "Dibuat dengan cinta · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · Lisbon",
+      "daysToGo": "hari lagi",
+      "attending": "hadir",
+      "declined": "tidak hadir",
+      "waiting": "menunggu",
+      "budget": "Anggaran",
+      "budgetOf": "{spent} dari {total}"
+    }
+  },
+  "login": {
+    "title": "Masuk",
+    "welcome": "Selamat datang",
+    "intro": "Masuk atau buat akun Anda. Tidak perlu kata sandi.",
+    "errorLink": "Tautan masuk itu sudah kedaluwarsa atau sudah digunakan. Silakan minta yang baru.",
+    "errorGoogle": "Masuk dengan Google sedang tidak tersedia. Silakan gunakan email Anda.",
+    "google": "Lanjutkan dengan Google",
+    "or": "atau",
+    "email": "Email",
+    "emailPlaceholder": "anda@contoh.com",
+    "send": "Kirimi saya tautan masuk",
+    "checkInbox": "Periksa kotak masuk Anda",
+    "sentTo": "Kami mengirim email ke <b>{email}</b>. Klik tautan di dalamnya (di browser ini), atau ketik kode dari email di bawah.",
+    "code": "Kode dari email",
+    "signInWithCode": "Masuk dengan kode",
+    "again": "Kirim email baru atau gunakan alamat lain",
+    "setupTitle": "Hampir selesai: Supabase belum terhubung.",
+    "setupText": "Buat file <code>.env.local</code> dengan URL Supabase dan kunci publikasi Anda (lihat <code>.env.example</code> dan README), lalu mulai ulang <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Pilih bahasa Anda",
+    "intro": "Vow akan menggunakan bahasa ini di mana saja. Anda dapat mengubahnya kapan saja di menu akun.",
+    "suggested": "Disarankan",
+    "continue": "Lanjutkan dalam {language}",
+    "guestsNote": "Tamu Anda akan melihat situs, halaman RSVP, dan email dalam bahasa mereka sendiri — Anda mengaturnya untuk setiap keluarga."
+  },
+  "onboarding": {
+    "metaTitle": "Buat pernikahan Anda",
+    "backToDashboard": "Kembali ke dasbor",
+    "progress": "Kemajuan",
+    "stepOf": "Langkah {step} dari {total}",
+    "stepOfTitle": "Langkah {step} dari {total}: {title}",
+    "back": "Kembali",
+    "continue": "Lanjut",
+    "create": "Buat pernikahan kami",
+    "steps": {
+      "names": {
+        "title": "Siapa yang akan menikah?",
+        "text": "Selamat! Mari mulai dengan nama Anda berdua."
+      },
+      "when": {
+        "title": "Kapan dan di mana?",
+        "text": "Tidak apa-apa jika Anda belum tahu."
+      },
+      "size": {
+        "title": "Seberapa besar acaranya?",
+        "text": "Ini membantu kami merencanakan anggaran dan tempat duduk Anda."
+      },
+      "style": {
+        "title": "Seperti apa suasananya?",
+        "text": "Kami akan menggunakannya untuk inspirasi dan saran situs."
+      }
+    },
+    "defaults": {
+      "ceremony": "Akad / Pemberkatan",
+      "reception": "Resepsi",
+      "tagline": "Kami akan menikah",
+      "rsvpIntro": "Kami tak sabar merayakan bersama Anda. Mohon beri tahu kami apakah Anda dapat hadir.",
+      "faqChildren": "Apakah anak-anak boleh datang?",
+      "faqParking": "Apakah ada tempat parkir di venue?",
+      "faqWear": "Apa yang sebaiknya saya kenakan?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Pasangan pertama",
+    "partnerB": "Pasangan kedua",
+    "partnerAPlaceholder": "mis. Ian",
+    "partnerBPlaceholder": "mis. Maria",
+    "date": "Tanggal pernikahan",
+    "dateHint": "Belum ditentukan? Biarkan kosong dan tambahkan nanti.",
+    "location": "Lokasi",
+    "locationHint": "Kota, wilayah, atau venue, apa pun yang sudah Anda ketahui.",
+    "locationPlaceholder": "mis. Sintra, Portugal",
+    "guests": "Perkiraan jumlah tamu",
+    "guestsHint": "Perkiraan kasar sudah cukup.",
+    "guestsPlaceholder": "mis. 120",
+    "currency": "Mata uang",
+    "chooseCurrency": "Pilih mata uang",
+    "style": "Gaya (pilih yang terasa cocok)",
+    "accent": "Warna aksen aplikasi",
+    "accents": {
+      "rose": "Dusty rose",
+      "sage": "Sage"
+    },
+    "styles": {
+      "Classic": "Klasik",
+      "Modern": "Modern",
+      "Romantic": "Romantis",
+      "Rustic": "Rustik",
+      "Boho": "Boho",
+      "Garden": "Taman",
+      "Beach": "Pantai",
+      "Glam": "Glamor",
+      "Minimal": "Minimalis",
+      "Vintage": "Vintage",
+      "Destination": "Destinasi",
+      "Intimate": "Intim"
+    },
+    "detailsTitle": "Detail pernikahan",
+    "detailsViewOnly": "Anda hanya memiliki akses lihat. Minta pemilik jika Anda perlu melakukan perubahan.",
+    "detailsText": "Nama, tanggal, lokasi, dan gaya. Perubahan berlaku di seluruh aplikasi.",
+    "saveChanges": "Simpan perubahan",
+    "saved": "Detail pernikahan disimpan"
+  },
+  "roles": {
+    "owner": {
+      "label": "Pemilik",
+      "description": "Akses penuh, mengelola kolaborator"
+    },
+    "editor": {
+      "label": "Editor",
+      "description": "Dapat menambah dan mengubah semuanya"
+    },
+    "viewer": {
+      "label": "Pelihat",
+      "description": "Dapat melihat tetapi tidak mengubah"
+    }
+  },
+  "invite": {
+    "metaTitle": "Anda diundang",
+    "used": "Undangan ini sudah digunakan",
+    "invalid": "Undangan ini tidak valid",
+    "expired": "Undangan sudah kedaluwarsa. Minta pasangan mengirimkan tautan baru.",
+    "askNew": "Minta pasangan mengirimkan tautan baru jika Anda masih membutuhkan akses.",
+    "dashboard": "Ke dasbor saya",
+    "title": "Bantu rencanakan pernikahan {couple}",
+    "as": "Anda diundang sebagai <b>{role}</b>: {description}.",
+    "signedInAs": "Masuk sebagai {email}",
+    "accept": "Terima dan mulai merencanakan"
+  }
+}

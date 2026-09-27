@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} odpověděl(a)",
+      "body": "přijde: {attending}, nepřijde: {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name} změnil(a) odpověď",
+      "body": "přijde: {attending}, nepřijde: {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who} vám zadal(a) úkol",
+      "body": "{title}",
+      "bodyDue": "{title} · termín {date}"
+    },
+    "someone": "Někdo",
+    "paymentSoon": {
+      "title": "Blíží se platba: {name}",
+      "body": "{amount} · splatnost {date}"
+    },
+    "paymentLate": {
+      "title": "Platba po splatnosti: {name}",
+      "body": "{amount} · splatnost {date}"
+    },
+    "hotelCutoff": {
+      "title": "Blíží se termín bloku pokojů: {name}",
+      "body": "Hosté musí rezervovat do {date}",
+      "bodyRooms": "Hosté musí rezervovat do {date} · rezervováno {booked} z {held} pokojů"
+    },
+    "taskDueToday": {
+      "title": "Termín dnes: {title}"
+    },
+    "taskDue": {
+      "title": "Termín {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# úkol je po termínu} few {# úkoly jsou po termínu} other {# úkolů je po termínu}}",
+      "body": "{title}",
+      "bodyMore": "{title} a další"
+    },
+    "coupleEmail": {
+      "replied": "{name} odpověděl(a)",
+      "updated": "{name} změnil(a) odpověď",
+      "summary": "přijde: {attending}, nepřijde: {declined}",
+      "seeAll": "Zobrazit všechny odpovědi"
+    }
+  }
+}

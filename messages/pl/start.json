@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – planujcie ślub razem",
+    "metaDescription": "Goście, potwierdzenia, rozsadzenie, budżet, sale, podróże, inspiracje i strona Waszego ślubu – wszystko w jednym spokojnym miejscu, w Twoim języku.",
+    "signIn": "Zaloguj się",
+    "getStarted": "Zacznij",
+    "eyebrow": "Planowanie ślubu, razem",
+    "title": "Wszystko dla Waszego ślubu, w jednym spokojnym miejscu.",
+    "intro": "Planuj gości, potwierdzenia, rozsadzenie, budżet, sale i podróże z partnerem i rodziną, na telefonie lub laptopie.",
+    "start": "Zacznij planować za darmo",
+    "seeInside": "Zobacz, co jest w środku",
+    "featuresTitle": "Jedna aplikacja zamiast dwunastu arkuszy",
+    "featuresText": "Każda część planu rozmawia z pozostałymi. Potwierdzenia trafiają do rozsadzenia, a zarezerwowane sale na Waszą stronę.",
+    "features": {
+      "guests": {
+        "title": "Lista gości",
+        "text": "Gospodarstwa, strony, diety i import CSV w kilka minut."
+      },
+      "rsvp": {
+        "title": "Potwierdzenia",
+        "text": "Jeden prywatny link na gospodarstwo. Odpowiedzi przychodzą na żywo."
+      },
+      "seating": {
+        "title": "Rozsadzenie",
+        "text": "Przeciągaj gości na miejsca. Rodziny razem, byli osobno."
+      },
+      "budget": {
+        "title": "Budżet",
+        "text": "Kategorie, zaliczki i terminy, bez niespodzianek."
+      },
+      "venues": {
+        "title": "Sale i usługodawcy",
+        "text": "Porównaj obok siebie i rezerwuj bez obaw."
+      },
+      "travel": {
+        "title": "Hotele i podróże",
+        "text": "Pule pokoi, loty i tablica przylotów do odbiorów."
+      },
+      "inspiration": {
+        "title": "Inspiracje",
+        "text": "Przypinaj pomysły, twórz palety kolorów i decydujcie razem."
+      },
+      "website": {
+        "title": "Strona ślubna",
+        "text": "Pięć pięknych szablonów z wbudowanym potwierdzaniem."
+      },
+      "timeline": {
+        "title": "Harmonogram",
+        "text": "Plan zadań od dwunastu miesięcy przed do wielkiego dnia."
+      },
+      "languages": {
+        "title": "25 języków",
+        "text": "Ty planujesz w swoim języku; każdy gość dostaje stronę, potwierdzenie i e-maile w swoim."
+      }
+    },
+    "closingTitle": "Powiedz tak mniejszemu stresowi.",
+    "closingText": "Zaproś partnera, rodziców lub konsultanta ślubnego i planujcie wszystko razem na bieżąco.",
+    "create": "Utwórz swój ślub",
+    "footer": "Zrobione z miłością · © {year} Vow",
+    "preview": {
+      "couple": "Ian i Maria · Lizbona",
+      "daysToGo": "dni do ślubu",
+      "attending": "będzie",
+      "declined": "odmówiło",
+      "waiting": "czeka",
+      "budget": "Budżet",
+      "budgetOf": "{spent} z {total}"
+    }
+  },
+  "login": {
+    "title": "Zaloguj się",
+    "welcome": "Witaj",
+    "intro": "Zaloguj się lub załóż konto. Hasło nie jest potrzebne.",
+    "errorLink": "Ten link do logowania wygasł lub został już użyty. Poproś o nowy.",
+    "errorGoogle": "Logowanie przez Google jest teraz niedostępne. Użyj e-maila.",
+    "google": "Kontynuuj z Google",
+    "or": "lub",
+    "email": "E-mail",
+    "emailPlaceholder": "ty@przyklad.pl",
+    "send": "Wyślij mi link do logowania",
+    "checkInbox": "Sprawdź skrzynkę",
+    "sentTo": "Wysłaliśmy e-mail na <b>{email}</b>. Kliknij link w wiadomości (w tej przeglądarce) lub wpisz poniżej kod z e-maila.",
+    "code": "Kod z e-maila",
+    "signInWithCode": "Zaloguj się kodem",
+    "again": "Wyślij nowy e-mail lub użyj innego adresu",
+    "setupTitle": "Prawie gotowe: Supabase nie jest jeszcze połączony.",
+    "setupText": "Utwórz plik <code>.env.local</code> z adresem URL i kluczem publicznym Supabase (zobacz <code>.env.example</code> i README), a potem uruchom ponownie <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Wybierz swój język",
+    "intro": "Vow będzie wszędzie mówić w tym języku. Możesz go zmienić w każdej chwili w menu konta.",
+    "suggested": "Proponowany",
+    "continue": "Kontynuuj: {language}",
+    "guestsNote": "Twoi goście zobaczą stronę, potwierdzenie i e-maile we własnym języku — ustawiasz to dla każdego gospodarstwa."
+  },
+  "onboarding": {
+    "metaTitle": "Utwórz swój ślub",
+    "backToDashboard": "Wróć do pulpitu",
+    "progress": "Postęp",
+    "stepOf": "Krok {step} z {total}",
+    "stepOfTitle": "Krok {step} z {total}: {title}",
+    "back": "Wstecz",
+    "continue": "Dalej",
+    "create": "Utwórz nasz ślub",
+    "steps": {
+      "names": {
+        "title": "Kto się pobiera?",
+        "text": "Gratulacje! Zacznijmy od Waszych imion."
+      },
+      "when": {
+        "title": "Kiedy i gdzie?",
+        "text": "Nic nie szkodzi, jeśli jeszcze nie wiecie."
+      },
+      "size": {
+        "title": "Jak duże będzie przyjęcie?",
+        "text": "To pomoże nam zaplanować budżet i rozsadzenie."
+      },
+      "style": {
+        "title": "Jaki jest Wasz styl?",
+        "text": "Wykorzystamy to w inspiracjach i propozycjach strony."
+      }
+    },
+    "defaults": {
+      "ceremony": "Ceremonia",
+      "reception": "Przyjęcie weselne",
+      "tagline": "Bierzemy ślub",
+      "rsvpIntro": "Nie możemy się doczekać, by świętować razem z Wami. Dajcie znać, czy przyjdziecie.",
+      "faqChildren": "Czy dzieci są mile widziane?",
+      "faqParking": "Czy jest parking przy sali?",
+      "faqWear": "Co mam na siebie włożyć?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Pierwsza osoba",
+    "partnerB": "Druga osoba",
+    "partnerAPlaceholder": "np. Ian",
+    "partnerBPlaceholder": "np. Maria",
+    "date": "Data ślubu",
+    "dateHint": "Jeszcze nie ustalona? Zostaw puste i dodaj później.",
+    "location": "Miejsce",
+    "locationHint": "Miasto, region lub sala – co już wiecie.",
+    "locationPlaceholder": "np. Kraków, Polska",
+    "guests": "Szacowana liczba gości",
+    "guestsHint": "Wystarczy przybliżona liczba.",
+    "guestsPlaceholder": "np. 120",
+    "currency": "Waluta",
+    "chooseCurrency": "Wybierz walutę",
+    "style": "Styl (wybierz to, co do Was pasuje)",
+    "accent": "Kolor akcentu aplikacji",
+    "accents": {
+      "rose": "Pudrowy róż",
+      "sage": "Szałwia"
+    },
+    "styles": {
+      "Classic": "Klasyczny",
+      "Modern": "Nowoczesny",
+      "Romantic": "Romantyczny",
+      "Rustic": "Rustykalny",
+      "Boho": "Boho",
+      "Garden": "Ogrodowy",
+      "Beach": "Na plaży",
+      "Glam": "Glamour",
+      "Minimal": "Minimalistyczny",
+      "Vintage": "Vintage",
+      "Destination": "Za granicą",
+      "Intimate": "Kameralny"
+    },
+    "detailsTitle": "Szczegóły ślubu",
+    "detailsViewOnly": "Masz dostęp tylko do podglądu. Poproś właściciela, jeśli chcesz coś zmienić.",
+    "detailsText": "Imiona, data, miejsce i styl. Zmiany obowiązują w całej aplikacji.",
+    "saveChanges": "Zapisz zmiany",
+    "saved": "Szczegóły ślubu zapisane"
+  },
+  "roles": {
+    "owner": {
+      "label": "Właściciel",
+      "description": "Pełny dostęp, zarządza współpracownikami"
+    },
+    "editor": {
+      "label": "Edytor",
+      "description": "Może dodawać i zmieniać wszystko"
+    },
+    "viewer": {
+      "label": "Obserwator",
+      "description": "Może oglądać, ale nie zmieniać"
+    }
+  },
+  "invite": {
+    "metaTitle": "Masz zaproszenie",
+    "used": "To zaproszenie zostało już użyte",
+    "invalid": "To zaproszenie jest nieważne",
+    "expired": "Wygasło. Poproś parę o nowy link.",
+    "askNew": "Poproś parę o nowy link, jeśli nadal potrzebujesz dostępu.",
+    "dashboard": "Przejdź do mojego pulpitu",
+    "title": "Pomóż zaplanować ślub: {couple}",
+    "as": "Zaproszono Cię jako <b>{role}</b>: {description}.",
+    "signedInAs": "Zalogowano jako {email}",
+    "accept": "Akceptuj i zacznij planować"
+  }
+}

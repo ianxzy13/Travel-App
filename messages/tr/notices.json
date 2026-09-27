@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} yanıt verdi",
+      "body": "{attending} katılıyor, {declined} katılmıyor"
+    },
+    "rsvpUpdated": {
+      "title": "{name} yanıtını güncelledi",
+      "body": "{attending} katılıyor, {declined} katılmıyor"
+    },
+    "taskAssigned": {
+      "title": "{who} size bir görev verdi",
+      "body": "{title}",
+      "bodyDue": "{title} · son tarih {date}"
+    },
+    "someone": "Biri",
+    "paymentSoon": {
+      "title": "Yaklaşan ödeme: {name}",
+      "body": "{amount} · son tarih {date}"
+    },
+    "paymentLate": {
+      "title": "Geciken ödeme: {name}",
+      "body": "{amount} · son tarih {date}"
+    },
+    "hotelCutoff": {
+      "title": "Oda bloğu son tarihi yaklaşıyor: {name}",
+      "body": "Misafirler {date} tarihine kadar rezervasyon yapmalı",
+      "bodyRooms": "Misafirler {date} tarihine kadar rezervasyon yapmalı · {held} odadan {booked} tanesi ayrıldı"
+    },
+    "taskDueToday": {
+      "title": "Bugün son gün: {title}"
+    },
+    "taskDue": {
+      "title": "Son tarih {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# görev gecikti} other {# görev gecikti}}",
+      "body": "{title}",
+      "bodyMore": "{title} ve diğerleri"
+    },
+    "coupleEmail": {
+      "replied": "{name} yanıt verdi",
+      "updated": "{name} yanıtını güncelledi",
+      "summary": "{attending} katılıyor, {declined} katılmıyor",
+      "seeAll": "Tüm yanıtları gör"
+    }
+  }
+}

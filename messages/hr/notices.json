@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} je odgovorio/la",
+      "body": "{attending} dolazi, {declined} ne dolazi"
+    },
+    "rsvpUpdated": {
+      "title": "{name} je promijenio/la potvrdu",
+      "body": "{attending} dolazi, {declined} ne dolazi"
+    },
+    "taskAssigned": {
+      "title": "{who} vam je dodijelio/la zadatak",
+      "body": "{title}",
+      "bodyDue": "{title} · rok {date}"
+    },
+    "someone": "Netko",
+    "paymentSoon": {
+      "title": "Uplata uskoro dospijeva: {name}",
+      "body": "{amount} · rok {date}"
+    },
+    "paymentLate": {
+      "title": "Uplata kasni: {name}",
+      "body": "{amount} · rok {date}"
+    },
+    "hotelCutoff": {
+      "title": "Rok za blok soba se bliži: {name}",
+      "body": "Gosti moraju rezervirati do {date}",
+      "bodyRooms": "Gosti moraju rezervirati do {date} · rezervirano {booked} od {held} soba"
+    },
+    "taskDueToday": {
+      "title": "Rok danas: {title}"
+    },
+    "taskDue": {
+      "title": "Rok {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# zadatak kasni} few {# zadatka kasne} other {# zadataka kasni}}",
+      "body": "{title}",
+      "bodyMore": "{title} i još"
+    },
+    "coupleEmail": {
+      "replied": "{name} je odgovorio/la",
+      "updated": "{name} je promijenio/la potvrdu",
+      "summary": "{attending} dolazi, {declined} ne dolazi",
+      "seeAll": "Pogledaj sve odgovore"
+    }
+  }
+}

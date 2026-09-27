@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} telah membalas",
+      "body": "{attending} hadir, {declined} tidak hadir"
+    },
+    "rsvpUpdated": {
+      "title": "{name} memperbarui RSVP mereka",
+      "body": "{attending} hadir, {declined} tidak hadir"
+    },
+    "taskAssigned": {
+      "title": "{who} memberi Anda tugas",
+      "body": "{title}",
+      "bodyDue": "{title} · tenggat {date}"
+    },
+    "someone": "Seseorang",
+    "paymentSoon": {
+      "title": "Pembayaran segera jatuh tempo: {name}",
+      "body": "{amount} · jatuh tempo {date}"
+    },
+    "paymentLate": {
+      "title": "Pembayaran terlambat: {name}",
+      "body": "{amount} · jatuh tempo {date}"
+    },
+    "hotelCutoff": {
+      "title": "Batas blok kamar segera: {name}",
+      "body": "Tamu harus memesan sebelum {date}",
+      "bodyRooms": "Tamu harus memesan sebelum {date} · {booked} dari {held} kamar dipesan"
+    },
+    "taskDueToday": {
+      "title": "Tenggat hari ini: {title}"
+    },
+    "taskDue": {
+      "title": "Tenggat {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, other {# tugas terlambat}}",
+      "body": "{title}",
+      "bodyMore": "{title} dan lainnya"
+    },
+    "coupleEmail": {
+      "replied": "{name} telah membalas",
+      "updated": "{name} memperbarui RSVP mereka",
+      "summary": "{attending} hadir, {declined} tidak hadir",
+      "seeAll": "Lihat semua balasan"
+    }
+  }
+}

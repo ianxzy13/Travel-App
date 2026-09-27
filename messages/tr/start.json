@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – düğününüzü birlikte planlayın",
+    "metaDescription": "Misafirler, katılım yanıtları, oturma düzeni, bütçe, mekânlar, seyahat, ilham ve düğün siteniz – hepsi tek bir sakin yerde, kendi dilinizde.",
+    "signIn": "Giriş yap",
+    "getStarted": "Başlayın",
+    "eyebrow": "Düğün planlama, birlikte",
+    "title": "Düğününüz için her şey, tek bir sakin yerde.",
+    "intro": "Misafirleri, yanıtları, oturma düzenini, bütçeyi, mekânları ve seyahati partnerinizle ve ailenizle, telefondan veya bilgisayardan planlayın.",
+    "start": "Ücretsiz planlamaya başlayın",
+    "seeInside": "İçinde neler var görün",
+    "featuresTitle": "On iki tablo yerine tek uygulama",
+    "featuresText": "Planınızın her parçası diğerleriyle konuşur. Yanıtlar oturma düzenine, rezerve edilen mekânlar sitenize akar.",
+    "features": {
+      "guests": {
+        "title": "Misafir listesi",
+        "text": "Haneler, taraflar, beslenme ihtiyaçları ve dakikalar içinde CSV içe aktarma."
+      },
+      "rsvp": {
+        "title": "Katılım yanıtları",
+        "text": "Her haneye özel bir bağlantı. Yanıtlar anında gelir."
+      },
+      "seating": {
+        "title": "Oturma düzeni",
+        "text": "Misafirleri koltuklara sürükleyin. Aileler bir arada, eski sevgililer uzakta."
+      },
+      "budget": {
+        "title": "Bütçe",
+        "text": "Kategoriler, kaporalar ve son ödeme tarihleri, sürprizsiz."
+      },
+      "venues": {
+        "title": "Mekânlar ve tedarikçiler",
+        "text": "Yan yana karşılaştırın, sonra gönül rahatlığıyla rezerve edin."
+      },
+      "travel": {
+        "title": "Oteller ve seyahat",
+        "text": "Oda blokları, uçuşlar ve karşılama için bir varış panosu."
+      },
+      "inspiration": {
+        "title": "İlham",
+        "text": "Fikirleri iğneleyin, renk paletleri çıkarın ve birlikte karar verin."
+      },
+      "website": {
+        "title": "Düğün sitesi",
+        "text": "Katılım yanıtı dahil beş güzel şablon."
+      },
+      "timeline": {
+        "title": "Zaman çizelgesi",
+        "text": "On iki ay öncesinden büyük güne kadar bir yapılacaklar planı."
+      },
+      "languages": {
+        "title": "25 dil",
+        "text": "Siz kendi dilinizde planlarsınız; her misafir siteyi, yanıt sayfasını ve e-postaları kendi dilinde alır."
+      }
+    },
+    "closingTitle": "Daha az strese evet deyin.",
+    "closingText": "Partnerinizi, ailenizi veya düğün planlayıcınızı davet edin ve her şeyi gerçek zamanlı olarak birlikte planlayın.",
+    "create": "Düğününüzü oluşturun",
+    "footer": "Sevgiyle yapıldı · © {year} Vow",
+    "preview": {
+      "couple": "Ian ve Maria · Lizbon",
+      "daysToGo": "gün kaldı",
+      "attending": "katılıyor",
+      "declined": "katılmıyor",
+      "waiting": "bekliyor",
+      "budget": "Bütçe",
+      "budgetOf": "{spent} / {total}"
+    }
+  },
+  "login": {
+    "title": "Giriş yap",
+    "welcome": "Hoş geldiniz",
+    "intro": "Giriş yapın veya hesap oluşturun. Şifre gerekmez.",
+    "errorLink": "Bu giriş bağlantısının süresi dolmuş veya zaten kullanılmış. Lütfen yeni bir tane isteyin.",
+    "errorGoogle": "Google ile giriş şu anda kullanılamıyor. Lütfen e-postanızı kullanın.",
+    "google": "Google ile devam et",
+    "or": "veya",
+    "email": "E-posta",
+    "emailPlaceholder": "siz@ornek.com",
+    "send": "Bana giriş bağlantısı gönder",
+    "checkInbox": "Gelen kutunuzu kontrol edin",
+    "sentTo": "<b>{email}</b> adresine bir e-posta gönderdik. İçindeki bağlantıya (bu tarayıcıda) tıklayın veya e-postadaki kodu aşağıya yazın.",
+    "code": "E-postadaki kod",
+    "signInWithCode": "Kodla giriş yap",
+    "again": "Yeni e-posta gönder veya başka adres kullan",
+    "setupTitle": "Neredeyse hazır: Supabase henüz bağlı değil.",
+    "setupText": "Supabase URL’niz ve herkese açık anahtarınızla bir <code>.env.local</code> dosyası oluşturun (<code>.env.example</code> ve README’ye bakın), ardından <code>npm run dev</code> komutunu yeniden başlatın."
+  },
+  "welcome": {
+    "title": "Dilinizi seçin",
+    "intro": "Vow her yerde bu dili konuşacak. İstediğiniz zaman hesap menüsünden değiştirebilirsiniz.",
+    "suggested": "Önerilen",
+    "continue": "{language} ile devam et",
+    "guestsNote": "Misafirleriniz siteyi, yanıt sayfasını ve e-postaları kendi dillerinde görür — bunu her hane için ayarlarsınız."
+  },
+  "onboarding": {
+    "metaTitle": "Düğününüzü oluşturun",
+    "backToDashboard": "Panele dön",
+    "progress": "İlerleme",
+    "stepOf": "Adım {step} / {total}",
+    "stepOfTitle": "Adım {step} / {total}: {title}",
+    "back": "Geri",
+    "continue": "Devam",
+    "create": "Düğünümüzü oluştur",
+    "steps": {
+      "names": {
+        "title": "Kim evleniyor?",
+        "text": "Tebrikler! İsimlerinizle başlayalım."
+      },
+      "when": {
+        "title": "Ne zaman ve nerede?",
+        "text": "Henüz bilmiyorsanız sorun değil."
+      },
+      "size": {
+        "title": "Kutlama ne kadar büyük olacak?",
+        "text": "Bu, bütçe ve oturma düzeni planlamamıza yardımcı olur."
+      },
+      "style": {
+        "title": "Tarzınız ne?",
+        "text": "Bunu ilham ve site önerileri için kullanacağız."
+      }
+    },
+    "defaults": {
+      "ceremony": "Nikâh töreni",
+      "reception": "Düğün yemeği",
+      "tagline": "Evleniyoruz",
+      "rsvpIntro": "Sizinle kutlamak için sabırsızlanıyoruz. Gelip gelemeyeceğinizi bize bildirin.",
+      "faqChildren": "Çocuklar davetli mi?",
+      "faqParking": "Mekânda otopark var mı?",
+      "faqWear": "Ne giymeliyim?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Birinci partner",
+    "partnerB": "İkinci partner",
+    "partnerAPlaceholder": "ör. Ian",
+    "partnerBPlaceholder": "ör. Maria",
+    "date": "Düğün tarihi",
+    "dateHint": "Henüz karar vermediniz mi? Boş bırakın, sonra ekleyin.",
+    "location": "Yer",
+    "locationHint": "Şehir, bölge veya mekân; şimdiye kadar ne biliyorsanız.",
+    "locationPlaceholder": "ör. Bodrum, Türkiye",
+    "guests": "Tahmini misafir sayısı",
+    "guestsHint": "Kaba bir tahmin yeterli.",
+    "guestsPlaceholder": "ör. 120",
+    "currency": "Para birimi",
+    "chooseCurrency": "Para birimi seçin",
+    "style": "Tarz (size uyanları seçin)",
+    "accent": "Uygulamanın vurgu rengi",
+    "accents": {
+      "rose": "Pudra pembe",
+      "sage": "Adaçayı"
+    },
+    "styles": {
+      "Classic": "Klasik",
+      "Modern": "Modern",
+      "Romantic": "Romantik",
+      "Rustic": "Rustik",
+      "Boho": "Boho",
+      "Garden": "Bahçe",
+      "Beach": "Plaj",
+      "Glam": "Göz alıcı",
+      "Minimal": "Minimal",
+      "Vintage": "Vintage",
+      "Destination": "Yurt dışında",
+      "Intimate": "Samimi"
+    },
+    "detailsTitle": "Düğün ayrıntıları",
+    "detailsViewOnly": "Yalnızca görüntüleme erişiminiz var. Değişiklik gerekiyorsa bir sahipten isteyin.",
+    "detailsText": "İsimler, tarih, yer ve tarz. Değişiklikler uygulamanın her yerinde geçerli olur.",
+    "saveChanges": "Değişiklikleri kaydet",
+    "saved": "Düğün ayrıntıları kaydedildi"
+  },
+  "roles": {
+    "owner": {
+      "label": "Sahip",
+      "description": "Tam erişim, iş arkadaşlarını yönetir"
+    },
+    "editor": {
+      "label": "Düzenleyici",
+      "description": "Her şeyi ekleyip değiştirebilir"
+    },
+    "viewer": {
+      "label": "İzleyici",
+      "description": "Görebilir ama değiştiremez"
+    }
+  },
+  "invite": {
+    "metaTitle": "Davet edildiniz",
+    "used": "Bu davet zaten kullanılmış",
+    "invalid": "Bu davet geçerli değil",
+    "expired": "Süresi dolmuş. Çiftten yeni bir bağlantı isteyin.",
+    "askNew": "Hâlâ erişime ihtiyacınız varsa çiftten yeni bir bağlantı isteyin.",
+    "dashboard": "Panelime git",
+    "title": "{couple} düğününü planlamaya yardım edin",
+    "as": "<b>{role}</b> olarak davet edildiniz: {description}.",
+    "signedInAs": "{email} olarak giriş yapıldı",
+    "accept": "Kabul et ve planlamaya başla"
+  }
+}

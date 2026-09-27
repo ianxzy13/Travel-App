@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} đã trả lời",
+      "body": "{attending} tham dự, {declined} không tham dự"
+    },
+    "rsvpUpdated": {
+      "title": "{name} đã cập nhật xác nhận",
+      "body": "{attending} tham dự, {declined} không tham dự"
+    },
+    "taskAssigned": {
+      "title": "{who} đã giao cho bạn một việc",
+      "body": "{title}",
+      "bodyDue": "{title} · hạn {date}"
+    },
+    "someone": "Ai đó",
+    "paymentSoon": {
+      "title": "Sắp đến hạn thanh toán: {name}",
+      "body": "{amount} · hạn {date}"
+    },
+    "paymentLate": {
+      "title": "Quá hạn thanh toán: {name}",
+      "body": "{amount} · hạn {date}"
+    },
+    "hotelCutoff": {
+      "title": "Sắp hết hạn khối phòng: {name}",
+      "body": "Khách phải đặt trước {date}",
+      "bodyRooms": "Khách phải đặt trước {date} · đã đặt {booked} / {held} phòng"
+    },
+    "taskDueToday": {
+      "title": "Hạn hôm nay: {title}"
+    },
+    "taskDue": {
+      "title": "Hạn {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, other {# việc đã quá hạn}}",
+      "body": "{title}",
+      "bodyMore": "{title} và các việc khác"
+    },
+    "coupleEmail": {
+      "replied": "{name} đã trả lời",
+      "updated": "{name} đã cập nhật xác nhận",
+      "summary": "{attending} tham dự, {declined} không tham dự",
+      "seeAll": "Xem tất cả câu trả lời"
+    }
+  }
+}

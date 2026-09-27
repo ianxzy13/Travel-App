@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} heeft gereageerd",
+      "body": "{attending} komen, {declined} komen niet"
+    },
+    "rsvpUpdated": {
+      "title": "{name} heeft de reactie gewijzigd",
+      "body": "{attending} komen, {declined} komen niet"
+    },
+    "taskAssigned": {
+      "title": "{who} heeft je een taak gegeven",
+      "body": "{title}",
+      "bodyDue": "{title} · deadline {date}"
+    },
+    "someone": "Iemand",
+    "paymentSoon": {
+      "title": "Betaling binnenkort: {name}",
+      "body": "{amount} · vóór {date}"
+    },
+    "paymentLate": {
+      "title": "Betaling te laat: {name}",
+      "body": "{amount} · vóór {date}"
+    },
+    "hotelCutoff": {
+      "title": "Deadline kamerblok nadert: {name}",
+      "body": "Gasten moeten vóór {date} boeken",
+      "bodyRooms": "Gasten moeten vóór {date} boeken · {booked} van {held} kamers geboekt"
+    },
+    "taskDueToday": {
+      "title": "Vandaag: {title}"
+    },
+    "taskDue": {
+      "title": "Deadline {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# taak is te laat} other {# taken zijn te laat}}",
+      "body": "{title}",
+      "bodyMore": "{title} en meer"
+    },
+    "coupleEmail": {
+      "replied": "{name} heeft gereageerd",
+      "updated": "{name} heeft de reactie gewijzigd",
+      "summary": "{attending} komen, {declined} komen niet",
+      "seeAll": "Alle reacties bekijken"
+    }
+  }
+}

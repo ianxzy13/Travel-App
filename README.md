@@ -100,18 +100,20 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    A quick way to copy a file in PowerShell:
    `Get-Content supabase\migrations\20260926000000_foundation.sql -Raw | Set-Clipboard`
 
-   | File                                | Creates                                                |
-   | ----------------------------------- | ------------------------------------------------------ |
-   | `20260926000000_foundation.sql`     | users, weddings, collaborators & invites               |
-   | `20260927000000_guests_events.sql`  | events, households, guests, tags, seating rules        |
-   | `20260928000000_rsvp.sql`           | RSVP codes, meals, replies, emails, notifications      |
-   | `20260929000000_seating.sql`        | floor plans, tables, seat assignments (+ live updates) |
-   | `20260930000000_budget_vendors.sql` | budget, payments, vendors, private file storage        |
-   | `20261001000000_venues_travel.sql`  | venues, visit checklists, hotels, flights              |
-   | `20261002000000_inspiration.sql`    | boards, pins, comments, hearts, palette, shared boards |
-   | `20261003000000_website.sql`        | wedding website, sections, password protection         |
-   | `20261004000000_tasks_schedule.sql` | to-dos, day-of schedule, reminders                     |
-   | `20261005000000_languages.sql`      | wedding languages, time zone, translations             |
+   | File                                     | Creates                                                |
+   | ---------------------------------------- | ------------------------------------------------------ |
+   | `20260926000000_foundation.sql`          | users, weddings, collaborators & invites               |
+   | `20260927000000_guests_events.sql`       | events, households, guests, tags, seating rules        |
+   | `20260928000000_rsvp.sql`                | RSVP codes, meals, replies, emails, notifications      |
+   | `20260929000000_seating.sql`             | floor plans, tables, seat assignments (+ live updates) |
+   | `20260930000000_budget_vendors.sql`      | budget, payments, vendors, private file storage        |
+   | `20261001000000_venues_travel.sql`       | venues, visit checklists, hotels, flights              |
+   | `20261002000000_inspiration.sql`         | boards, pins, comments, hearts, palette, shared boards |
+   | `20261003000000_website.sql`             | wedding website, sections, password protection         |
+   | `20261004000000_tasks_schedule.sql`      | to-dos, day-of schedule, reminders                     |
+   | `20261005000000_languages.sql`           | wedding languages, time zone, translations             |
+   | `20261006000000_household_languages.sql` | a language for each household                          |
+   | `20261007000000_notification_data.sql`   | notifications in each reader’s language                |
 
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more,
    and **Storage** should show a private bucket called `wedding-files`.
@@ -339,19 +341,22 @@ everything), **viewer** (read only; can still heart and comment on pins).
 - Vow speaks 25 languages: English, Spanish, Portuguese, French, German, Italian, Dutch, Polish,
   Czech, Slovenian, Croatian, Swedish, Greek, Turkish, Russian, Ukrainian, Arabic (right-to-left),
   Hindi, Chinese (Simplified and Traditional), Japanese, Korean, Indonesian, Vietnamese and Thai.
-- **Settings → Languages & region**: pick your wedding's languages (the first is the main one) and
-  the venue's time zone. Guests see the website and RSVP pages in their browser's language (or the
-  one set on their household), and can switch with the globe menu. Guests abroad also see event
-  times in their own time.
-- Write your texts in the main language, then add translations: **Website → Language** (per
-  section), **Translations** on each event and meal, and in Languages & region for the location.
-  Anything not translated shows in the main language. In desktop Chrome a **Draft** button can
-  pre-fill a translation for you to check.
-- Invitation emails go out in each household's language (**Guests → edit household → Language**).
-- Your own app language: **account menu → Language**. The guest pages and main screens are
-  translated; some planning screens are still English for now.
-- **Add a language:** copy `messages/en.json` to `messages/<code>.json`, translate the values, add
-  the code to `i18n/locales.ts`, and run `npm test` (it checks nothing is missing or broken).
+- **First visit:** a welcome screen with flags asks which language you want. Everything in the
+  app (menus, buttons, messages, emails to you) then uses it. Change it any time in the
+  **account menu → Language**; each collaborator picks their own.
+- **Each household has its own language** (**Guests → edit household → Language**, or select
+  several guests → **Language**). That household gets the website, RSVP page and emails in it, and
+  can switch with the flag menu on the RSVP page (their choice is saved on the household).
+- **Settings → Languages & region** shows your language, the languages your guests speak (worked
+  out from the households) and the venue’s time zone. Guests abroad also see event times in their
+  own time.
+- Write your texts in your language, then add translations: **Website → Language** (per section),
+  **Translations** on each event and meal, and in Languages & region for the location. Anything
+  not translated shows in your language. In desktop Chrome a **Draft** button can pre-fill a
+  translation for you to check.
+- **Add a language:** add it (with its flag’s country code) to `i18n/locales.ts`, copy the folder
+  `messages/en/` to `messages/<code>/`, translate the values, and run `npm test` (it checks
+  nothing is missing or broken).
 
 ---
 

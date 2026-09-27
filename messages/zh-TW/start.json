@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – 一起籌備你們的婚禮",
+    "metaDescription": "賓客、回覆、座位表、預算、場地、行程、靈感和婚禮網站——全都在一個安靜的地方，用你們的語言。",
+    "signIn": "登入",
+    "getStarted": "開始使用",
+    "eyebrow": "一起籌備婚禮",
+    "title": "婚禮所需的一切，都在一個安靜的地方。",
+    "intro": "和另一半、家人一起規劃賓客、回覆、座位、預算、場地和行程，手機電腦都能用。",
+    "start": "免費開始籌備",
+    "seeInside": "看看有什麼",
+    "featuresTitle": "一個應用程式，取代十二張試算表",
+    "featuresText": "計畫的每個部分都互相連結。回覆會同步到座位表，已預訂的場地會顯示在你們的網站上。",
+    "features": {
+      "guests": {
+        "title": "賓客名單",
+        "text": "家庭、男女方、飲食需求，幾分鐘匯入 CSV。"
+      },
+      "rsvp": {
+        "title": "出席回覆",
+        "text": "每個家庭一個專屬連結，回覆即時送達。"
+      },
+      "seating": {
+        "title": "座位表",
+        "text": "把賓客拖到座位上。家人坐一起，前任分開坐。"
+      },
+      "budget": {
+        "title": "預算",
+        "text": "類別、訂金和付款期限，不再有意外。"
+      },
+      "venues": {
+        "title": "場地與廠商",
+        "text": "並排比較，安心預訂。"
+      },
+      "travel": {
+        "title": "飯店與行程",
+        "text": "團體房、航班，以及接機用的抵達看板。"
+      },
+      "inspiration": {
+        "title": "靈感",
+        "text": "收藏點子，擷取配色，一起決定。"
+      },
+      "website": {
+        "title": "婚禮網站",
+        "text": "五款精美範本，內建出席回覆。"
+      },
+      "timeline": {
+        "title": "時間軸",
+        "text": "從提前十二個月到大日子的待辦計畫。"
+      },
+      "languages": {
+        "title": "25 種語言",
+        "text": "你們用自己的語言籌備；每位賓客都能用自己的語言看到網站、回覆頁和郵件。"
+      }
+    },
+    "closingTitle": "向更少的壓力說「我願意」。",
+    "closingText": "邀請另一半、父母或婚禮顧問，即時一起安排一切。",
+    "create": "建立你們的婚禮",
+    "footer": "用愛打造 · © {year} Vow",
+    "preview": {
+      "couple": "Ian 和 Maria · 里斯本",
+      "daysToGo": "天後",
+      "attending": "出席",
+      "declined": "不出席",
+      "waiting": "待回覆",
+      "budget": "預算",
+      "budgetOf": "{spent} / {total}"
+    }
+  },
+  "login": {
+    "title": "登入",
+    "welcome": "歡迎",
+    "intro": "登入或建立帳號，不需要密碼。",
+    "errorLink": "此登入連結已過期或已被使用，請重新取得。",
+    "errorGoogle": "目前無法使用 Google 登入，請改用電子郵件。",
+    "google": "使用 Google 繼續",
+    "or": "或",
+    "email": "電子郵件",
+    "emailPlaceholder": "you@example.com",
+    "send": "寄給我登入連結",
+    "checkInbox": "請查看收件匣",
+    "sentTo": "我們已寄一封郵件到 <b>{email}</b>。點擊其中的連結（在此瀏覽器中），或在下方輸入郵件中的驗證碼。",
+    "code": "郵件中的驗證碼",
+    "signInWithCode": "使用驗證碼登入",
+    "again": "重新寄送郵件或使用其他地址",
+    "setupTitle": "快好了：Supabase 尚未連線。",
+    "setupText": "建立 <code>.env.local</code> 檔案，填入 Supabase 網址和公開金鑰（見 <code>.env.example</code> 和 README），然後重新執行 <code>npm run dev</code>。"
+  },
+  "welcome": {
+    "title": "選擇你的語言",
+    "intro": "Vow 會在所有地方使用這種語言。你可以隨時在帳號選單中更改。",
+    "suggested": "建議",
+    "continue": "使用{language}繼續",
+    "guestsNote": "賓客會用他們自己的語言看到網站、回覆頁和郵件——你可以為每個家庭分別設定。"
+  },
+  "onboarding": {
+    "metaTitle": "建立你們的婚禮",
+    "backToDashboard": "返回主控台",
+    "progress": "進度",
+    "stepOf": "第 {step} 步，共 {total} 步",
+    "stepOfTitle": "第 {step} 步，共 {total} 步：{title}",
+    "back": "返回",
+    "continue": "繼續",
+    "create": "建立我們的婚禮",
+    "steps": {
+      "names": {
+        "title": "誰要結婚？",
+        "text": "恭喜！先從你們的名字開始吧。"
+      },
+      "when": {
+        "title": "何時何地？",
+        "text": "還不確定也沒關係。"
+      },
+      "size": {
+        "title": "婚禮規模多大？",
+        "text": "這能幫我們規劃預算和座位。"
+      },
+      "style": {
+        "title": "你們喜歡什麼風格？",
+        "text": "我們會用它來推薦靈感和網站設計。"
+      }
+    },
+    "defaults": {
+      "ceremony": "婚禮儀式",
+      "reception": "喜宴",
+      "tagline": "我們要結婚了",
+      "rsvpIntro": "期待與你一起慶祝。請告訴我們你能否出席。",
+      "faqChildren": "可以帶小孩嗎？",
+      "faqParking": "場地有停車位嗎？",
+      "faqWear": "應該穿什麼？"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "新人一",
+    "partnerB": "新人二",
+    "partnerAPlaceholder": "例如 Ian",
+    "partnerBPlaceholder": "例如 Maria",
+    "date": "婚禮日期",
+    "dateHint": "還沒決定？先留空，之後再補。",
+    "location": "地點",
+    "locationHint": "城市、地區或場地，知道多少填多少。",
+    "locationPlaceholder": "例如 台北，台灣",
+    "guests": "預計賓客人數",
+    "guestsHint": "大概估計即可。",
+    "guestsPlaceholder": "例如 120",
+    "currency": "幣別",
+    "chooseCurrency": "選擇幣別",
+    "style": "風格（選擇適合你們的）",
+    "accent": "應用程式主題色",
+    "accents": {
+      "rose": "霧玫瑰",
+      "sage": "鼠尾草綠"
+    },
+    "styles": {
+      "Classic": "經典",
+      "Modern": "現代",
+      "Romantic": "浪漫",
+      "Rustic": "鄉村",
+      "Boho": "波西米亞",
+      "Garden": "花園",
+      "Beach": "海灘",
+      "Glam": "奢華",
+      "Minimal": "極簡",
+      "Vintage": "復古",
+      "Destination": "海外婚禮",
+      "Intimate": "小型私密"
+    },
+    "detailsTitle": "婚禮詳情",
+    "detailsViewOnly": "你只有檢視權限。如需修改，請聯絡擁有者。",
+    "detailsText": "名字、日期、地點和風格。變更會套用到整個應用程式。",
+    "saveChanges": "儲存變更",
+    "saved": "婚禮詳情已儲存"
+  },
+  "roles": {
+    "owner": {
+      "label": "擁有者",
+      "description": "完整權限，可管理協作者"
+    },
+    "editor": {
+      "label": "編輯者",
+      "description": "可新增和修改所有內容"
+    },
+    "viewer": {
+      "label": "檢視者",
+      "description": "只能檢視，不能修改"
+    }
+  },
+  "invite": {
+    "metaTitle": "你收到了邀請",
+    "used": "此邀請已被使用",
+    "invalid": "此邀請無效",
+    "expired": "邀請已過期。請新人寄給你新的連結。",
+    "askNew": "如果你仍需存取，請新人寄給你新的連結。",
+    "dashboard": "前往我的主控台",
+    "title": "協助籌備 {couple} 的婚禮",
+    "as": "你受邀成為<b>{role}</b>：{description}。",
+    "signedInAs": "已登入為 {email}",
+    "accept": "接受並開始籌備"
+  }
+}

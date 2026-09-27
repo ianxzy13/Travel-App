@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name}: νέα απάντηση",
+      "body": "{attending} έρχονται, {declined} δεν έρχονται"
+    },
+    "rsvpUpdated": {
+      "title": "{name}: αλλαγή απάντησης",
+      "body": "{attending} έρχονται, {declined} δεν έρχονται"
+    },
+    "taskAssigned": {
+      "title": "{who} σας ανέθεσε μια εργασία",
+      "body": "{title}",
+      "bodyDue": "{title} · έως {date}"
+    },
+    "someone": "Κάποιος",
+    "paymentSoon": {
+      "title": "Πληρωμή σύντομα: {name}",
+      "body": "{amount} · έως {date}"
+    },
+    "paymentLate": {
+      "title": "Εκπρόθεσμη πληρωμή: {name}",
+      "body": "{amount} · έως {date}"
+    },
+    "hotelCutoff": {
+      "title": "Λήγει σύντομα το μπλοκ δωματίων: {name}",
+      "body": "Οι καλεσμένοι πρέπει να κλείσουν έως {date}",
+      "bodyRooms": "Οι καλεσμένοι πρέπει να κλείσουν έως {date} · κλείστηκαν {booked} από {held} δωμάτια"
+    },
+    "taskDueToday": {
+      "title": "Λήγει σήμερα: {title}"
+    },
+    "taskDue": {
+      "title": "Προθεσμία {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# εργασία εκπρόθεσμη} other {# εργασίες εκπρόθεσμες}}",
+      "body": "{title}",
+      "bodyMore": "{title} και άλλες"
+    },
+    "coupleEmail": {
+      "replied": "{name}: νέα απάντηση",
+      "updated": "{name}: αλλαγή απάντησης",
+      "summary": "{attending} έρχονται, {declined} δεν έρχονται",
+      "seeAll": "Όλες οι απαντήσεις"
+    }
+  }
+}

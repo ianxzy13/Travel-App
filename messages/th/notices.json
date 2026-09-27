@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} ตอบกลับแล้ว",
+      "body": "มา {attending} ไม่มา {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name} อัปเดตการตอบรับแล้ว",
+      "body": "มา {attending} ไม่มา {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who} มอบหมายงานให้คุณ",
+      "body": "{title}",
+      "bodyDue": "{title} · กำหนด {date}"
+    },
+    "someone": "ใครบางคน",
+    "paymentSoon": {
+      "title": "ใกล้ถึงกำหนดชำระ: {name}",
+      "body": "{amount} · กำหนด {date}"
+    },
+    "paymentLate": {
+      "title": "เลยกำหนดชำระ: {name}",
+      "body": "{amount} · กำหนด {date}"
+    },
+    "hotelCutoff": {
+      "title": "บล็อกห้องพักใกล้หมดเขต: {name}",
+      "body": "แขกต้องจองภายใน {date}",
+      "bodyRooms": "แขกต้องจองภายใน {date} · จองแล้ว {booked} จาก {held} ห้อง"
+    },
+    "taskDueToday": {
+      "title": "ครบกำหนดวันนี้: {title}"
+    },
+    "taskDue": {
+      "title": "ครบกำหนด {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, other {มีงาน # รายการเลยกำหนด}}",
+      "body": "{title}",
+      "bodyMore": "{title} และอื่น ๆ"
+    },
+    "coupleEmail": {
+      "replied": "{name} ตอบกลับแล้ว",
+      "updated": "{name} อัปเดตการตอบรับแล้ว",
+      "summary": "มา {attending} ไม่มา {declined}",
+      "seeAll": "ดูคำตอบทั้งหมด"
+    }
+  }
+}

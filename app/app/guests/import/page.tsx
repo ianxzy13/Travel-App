@@ -29,7 +29,7 @@ export default async function ImportGuestsPage() {
     <>
       <Button asChild variant="ghost" size="sm" className="-ms-2 mb-4">
         <Link href="/app/guests">
-          <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("back")}
+          <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("backToGuests")}
         </Link>
       </Button>
       <PageHeader

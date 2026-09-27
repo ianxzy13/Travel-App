@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – planirajte vjenčanje zajedno",
+    "metaDescription": "Gosti, potvrde dolaska, raspored sjedenja, proračun, mjesta, putovanja, inspiracija i vaša web-stranica vjenčanja – sve na jednom mirnom mjestu, na vašem jeziku.",
+    "signIn": "Prijava",
+    "getStarted": "Započnite",
+    "eyebrow": "Planiranje vjenčanja, zajedno",
+    "title": "Sve za vaše vjenčanje, na jednom mirnom mjestu.",
+    "intro": "Planirajte goste, potvrde, raspored sjedenja, proračun, mjesta i putovanja s partnerom i obitelji, s mobitela ili računala.",
+    "start": "Počnite planirati besplatno",
+    "seeInside": "Pogledajte što je unutra",
+    "featuresTitle": "Jedna aplikacija umjesto dvanaest tablica",
+    "featuresText": "Svaki dio plana povezan je s ostalima. Potvrde idu u raspored sjedenja, rezervirana mjesta na vašu web-stranicu.",
+    "features": {
+      "guests": {
+        "title": "Popis gostiju",
+        "text": "Kućanstva, strane, prehrambene potrebe i CSV uvoz u nekoliko minuta."
+      },
+      "rsvp": {
+        "title": "Potvrde dolaska",
+        "text": "Jedna privatna poveznica po kućanstvu. Odgovori stižu uživo."
+      },
+      "seating": {
+        "title": "Raspored sjedenja",
+        "text": "Povucite goste na mjesta. Obitelji zajedno, bivši odvojeno."
+      },
+      "budget": {
+        "title": "Proračun",
+        "text": "Kategorije, predujmovi i rokovi, bez iznenađenja."
+      },
+      "venues": {
+        "title": "Mjesta i dobavljači",
+        "text": "Usporedite ih jedno uz drugo i rezervirajte s povjerenjem."
+      },
+      "travel": {
+        "title": "Hoteli i putovanja",
+        "text": "Blokovi soba, letovi i ploča dolazaka za prijevoz."
+      },
+      "inspiration": {
+        "title": "Inspiracija",
+        "text": "Spremajte ideje, izvucite palete boja i odlučite zajedno."
+      },
+      "website": {
+        "title": "Web-stranica vjenčanja",
+        "text": "Pet prekrasnih predložaka s ugrađenim potvrdama."
+      },
+      "timeline": {
+        "title": "Vremenski plan",
+        "text": "Plan zadataka od dvanaest mjeseci prije do velikog dana."
+      },
+      "languages": {
+        "title": "25 jezika",
+        "text": "Vi planirate na svom jeziku; svaki gost dobiva web-stranicu, potvrdu i e-poštu na svom."
+      }
+    },
+    "closingTitle": "Recite da manje stresa.",
+    "closingText": "Pozovite partnera, roditelje ili organizatora i planirajte sve zajedno u stvarnom vremenu.",
+    "create": "Stvorite svoje vjenčanje",
+    "footer": "Napravljeno s ljubavlju · © {year} Vow",
+    "preview": {
+      "couple": "Ian i Maria · Lisabon",
+      "daysToGo": "dana do vjenčanja",
+      "attending": "dolazi",
+      "declined": "ne dolazi",
+      "waiting": "čeka",
+      "budget": "Proračun",
+      "budgetOf": "{spent} od {total}"
+    }
+  },
+  "login": {
+    "title": "Prijava",
+    "welcome": "Dobro došli",
+    "intro": "Prijavite se ili stvorite račun. Lozinka nije potrebna.",
+    "errorLink": "Ta poveznica za prijavu je istekla ili je već iskorištena. Zatražite novu.",
+    "errorGoogle": "Prijava putem Googlea trenutno nije dostupna. Koristite e-poštu.",
+    "google": "Nastavi s Googleom",
+    "or": "ili",
+    "email": "E-pošta",
+    "emailPlaceholder": "vi@primjer.hr",
+    "send": "Pošalji mi poveznicu za prijavu",
+    "checkInbox": "Provjerite pretinac",
+    "sentTo": "Poslali smo e-poruku na <b>{email}</b>. Kliknite poveznicu u njoj (u ovom pregledniku) ili upišite kôd iz e-poruke ispod.",
+    "code": "Kôd iz e-poruke",
+    "signInWithCode": "Prijava kôdom",
+    "again": "Pošalji novu e-poruku ili koristi drugu adresu",
+    "setupTitle": "Skoro gotovo: Supabase još nije povezan.",
+    "setupText": "Stvorite datoteku <code>.env.local</code> sa svojim Supabase URL-om i javnim ključem (vidi <code>.env.example</code> i README), zatim ponovno pokrenite <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Odaberite svoj jezik",
+    "intro": "Vow će posvuda govoriti ovim jezikom. Možete ga promijeniti bilo kada u izborniku računa.",
+    "suggested": "Predloženo",
+    "continue": "Nastavi na jeziku: {language}",
+    "guestsNote": "Vaši gosti vidjet će web-stranicu, stranicu za potvrdu i e-poštu na svom jeziku — to postavljate za svako kućanstvo."
+  },
+  "onboarding": {
+    "metaTitle": "Stvorite svoje vjenčanje",
+    "backToDashboard": "Natrag na nadzornu ploču",
+    "progress": "Napredak",
+    "stepOf": "Korak {step} od {total}",
+    "stepOfTitle": "Korak {step} od {total}: {title}",
+    "back": "Natrag",
+    "continue": "Nastavi",
+    "create": "Stvori naše vjenčanje",
+    "steps": {
+      "names": {
+        "title": "Tko se vjenčava?",
+        "text": "Čestitamo! Počnimo s vašim imenima."
+      },
+      "when": {
+        "title": "Kada i gdje?",
+        "text": "U redu je ako još ne znate."
+      },
+      "size": {
+        "title": "Koliko je velika proslava?",
+        "text": "To nam pomaže planirati proračun i raspored sjedenja."
+      },
+      "style": {
+        "title": "Kakav je vaš stil?",
+        "text": "Koristit ćemo ga za inspiraciju i prijedloge za web-stranicu."
+      }
+    },
+    "defaults": {
+      "ceremony": "Vjenčanje",
+      "reception": "Svadba",
+      "tagline": "Vjenčavamo se",
+      "rsvpIntro": "Jedva čekamo slaviti s vama. Javite nam možete li doći.",
+      "faqChildren": "Jesu li djeca dobrodošla?",
+      "faqParking": "Ima li parkiralište kod mjesta održavanja?",
+      "faqWear": "Što da odjenem?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Prvi partner",
+    "partnerB": "Drugi partner",
+    "partnerAPlaceholder": "npr. Ian",
+    "partnerBPlaceholder": "npr. Maria",
+    "date": "Datum vjenčanja",
+    "dateHint": "Još nije odlučeno? Ostavite prazno i dodajte kasnije.",
+    "location": "Mjesto",
+    "locationHint": "Grad, regija ili mjesto održavanja, što god zasad znate.",
+    "locationPlaceholder": "npr. Dubrovnik, Hrvatska",
+    "guests": "Procijenjeni broj gostiju",
+    "guestsHint": "Gruba procjena je dovoljna.",
+    "guestsPlaceholder": "npr. 120",
+    "currency": "Valuta",
+    "chooseCurrency": "Odaberite valutu",
+    "style": "Stil (odaberite što vam odgovara)",
+    "accent": "Boja naglaska u aplikaciji",
+    "accents": {
+      "rose": "Prašnjava ruža",
+      "sage": "Kadulja"
+    },
+    "styles": {
+      "Classic": "Klasičan",
+      "Modern": "Moderan",
+      "Romantic": "Romantičan",
+      "Rustic": "Rustikalan",
+      "Boho": "Boho",
+      "Garden": "Vrtni",
+      "Beach": "Na plaži",
+      "Glam": "Glamurozan",
+      "Minimal": "Minimalistički",
+      "Vintage": "Vintage",
+      "Destination": "U inozemstvu",
+      "Intimate": "Intiman"
+    },
+    "detailsTitle": "Detalji vjenčanja",
+    "detailsViewOnly": "Imate pristup samo za pregled. Ako trebate nešto promijeniti, zamolite vlasnika.",
+    "detailsText": "Imena, datum, mjesto i stil. Promjene vrijede posvuda u aplikaciji.",
+    "saveChanges": "Spremi promjene",
+    "saved": "Detalji vjenčanja su spremljeni"
+  },
+  "roles": {
+    "owner": {
+      "label": "Vlasnik",
+      "description": "Puni pristup, upravlja suradnicima"
+    },
+    "editor": {
+      "label": "Urednik",
+      "description": "Može dodavati i mijenjati sve"
+    },
+    "viewer": {
+      "label": "Promatrač",
+      "description": "Može gledati, ali ne i mijenjati"
+    }
+  },
+  "invite": {
+    "metaTitle": "Pozvani ste",
+    "used": "Ova pozivnica je već iskorištena",
+    "invalid": "Ova pozivnica nije valjana",
+    "expired": "Istekla je. Zamolite par da vam pošalje novu poveznicu.",
+    "askNew": "Ako vam i dalje treba pristup, zamolite par za novu poveznicu.",
+    "dashboard": "Na moju nadzornu ploču",
+    "title": "Pomozite planirati vjenčanje: {couple}",
+    "as": "Pozvani ste kao <b>{role}</b>: {description}.",
+    "signedInAs": "Prijavljeni kao {email}",
+    "accept": "Prihvati i počni planirati"
+  }
+}

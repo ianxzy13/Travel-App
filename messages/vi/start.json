@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – cùng nhau lên kế hoạch đám cưới",
+    "metaDescription": "Khách mời, xác nhận tham dự, sơ đồ chỗ ngồi, ngân sách, địa điểm, đi lại, cảm hứng và trang web cưới – tất cả ở một nơi yên bình, bằng ngôn ngữ của bạn.",
+    "signIn": "Đăng nhập",
+    "getStarted": "Bắt đầu",
+    "eyebrow": "Cùng nhau chuẩn bị đám cưới",
+    "title": "Mọi thứ cho đám cưới của bạn, ở một nơi yên bình.",
+    "intro": "Lên kế hoạch khách mời, xác nhận tham dự, chỗ ngồi, ngân sách, địa điểm và đi lại cùng người ấy và gia đình, từ điện thoại hoặc máy tính.",
+    "start": "Bắt đầu miễn phí",
+    "seeInside": "Xem bên trong có gì",
+    "featuresTitle": "Một ứng dụng thay cho mười hai bảng tính",
+    "featuresText": "Mọi phần trong kế hoạch đều kết nối với nhau. Xác nhận tham dự đổ vào sơ đồ chỗ ngồi, địa điểm đã đặt hiện trên trang web của bạn.",
+    "features": {
+      "guests": {
+        "title": "Danh sách khách",
+        "text": "Gia đình, nhà trai/nhà gái, nhu cầu ăn uống và nhập CSV trong vài phút."
+      },
+      "rsvp": {
+        "title": "Xác nhận tham dự",
+        "text": "Mỗi gia đình một liên kết riêng. Câu trả lời đến ngay lập tức."
+      },
+      "seating": {
+        "title": "Sơ đồ chỗ ngồi",
+        "text": "Kéo khách vào ghế. Gia đình ngồi cùng nhau, người yêu cũ ngồi xa nhau."
+      },
+      "budget": {
+        "title": "Ngân sách",
+        "text": "Hạng mục, tiền cọc và hạn thanh toán, không bất ngờ."
+      },
+      "venues": {
+        "title": "Địa điểm & nhà cung cấp",
+        "text": "So sánh cạnh nhau, rồi tự tin đặt chỗ."
+      },
+      "travel": {
+        "title": "Khách sạn & đi lại",
+        "text": "Khối phòng, chuyến bay và bảng khách đến để đưa đón."
+      },
+      "inspiration": {
+        "title": "Cảm hứng",
+        "text": "Ghim ý tưởng, lấy bảng màu và cùng nhau quyết định."
+      },
+      "website": {
+        "title": "Trang web cưới",
+        "text": "Năm mẫu đẹp có sẵn xác nhận tham dự."
+      },
+      "timeline": {
+        "title": "Lịch trình",
+        "text": "Kế hoạch việc cần làm từ mười hai tháng trước đến ngày trọng đại."
+      },
+      "languages": {
+        "title": "25 ngôn ngữ",
+        "text": "Bạn lên kế hoạch bằng ngôn ngữ của mình; mỗi khách nhận trang web, xác nhận tham dự và email bằng ngôn ngữ của họ."
+      }
+    },
+    "closingTitle": "Nói có với ít căng thẳng hơn.",
+    "closingText": "Mời người ấy, bố mẹ hoặc người tổ chức, và cùng nhau lên kế hoạch theo thời gian thực.",
+    "create": "Tạo đám cưới của bạn",
+    "footer": "Làm bằng cả tấm lòng · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · Lisbon",
+      "daysToGo": "ngày nữa",
+      "attending": "tham dự",
+      "declined": "từ chối",
+      "waiting": "đang chờ",
+      "budget": "Ngân sách",
+      "budgetOf": "{spent} / {total}"
+    }
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "welcome": "Chào mừng",
+    "intro": "Đăng nhập hoặc tạo tài khoản. Không cần mật khẩu.",
+    "errorLink": "Liên kết đăng nhập đã hết hạn hoặc đã được dùng. Vui lòng yêu cầu liên kết mới.",
+    "errorGoogle": "Hiện không thể đăng nhập bằng Google. Vui lòng dùng email.",
+    "google": "Tiếp tục với Google",
+    "or": "hoặc",
+    "email": "Email",
+    "emailPlaceholder": "ban@vidu.com",
+    "send": "Gửi cho tôi liên kết đăng nhập",
+    "checkInbox": "Kiểm tra hộp thư của bạn",
+    "sentTo": "Chúng tôi đã gửi email đến <b>{email}</b>. Nhấp vào liên kết trong đó (trên trình duyệt này), hoặc nhập mã từ email bên dưới.",
+    "code": "Mã trong email",
+    "signInWithCode": "Đăng nhập bằng mã",
+    "again": "Gửi email mới hoặc dùng địa chỉ khác",
+    "setupTitle": "Sắp xong rồi: Supabase chưa được kết nối.",
+    "setupText": "Tạo tệp <code>.env.local</code> với URL Supabase và khóa công khai (xem <code>.env.example</code> và README), rồi khởi động lại <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Chọn ngôn ngữ của bạn",
+    "intro": "Vow sẽ dùng ngôn ngữ này ở mọi nơi. Bạn có thể đổi bất cứ lúc nào trong menu tài khoản.",
+    "suggested": "Gợi ý",
+    "continue": "Tiếp tục bằng {language}",
+    "guestsNote": "Khách của bạn sẽ thấy trang web, trang xác nhận và email bằng ngôn ngữ của họ — bạn đặt ngôn ngữ cho từng gia đình."
+  },
+  "onboarding": {
+    "metaTitle": "Tạo đám cưới của bạn",
+    "backToDashboard": "Về bảng điều khiển",
+    "progress": "Tiến độ",
+    "stepOf": "Bước {step} / {total}",
+    "stepOfTitle": "Bước {step} / {total}: {title}",
+    "back": "Quay lại",
+    "continue": "Tiếp tục",
+    "create": "Tạo đám cưới của chúng tôi",
+    "steps": {
+      "names": {
+        "title": "Ai sắp kết hôn?",
+        "text": "Chúc mừng! Hãy bắt đầu với tên của hai bạn."
+      },
+      "when": {
+        "title": "Khi nào và ở đâu?",
+        "text": "Chưa biết cũng không sao."
+      },
+      "size": {
+        "title": "Tiệc lớn cỡ nào?",
+        "text": "Điều này giúp chúng tôi lập ngân sách và chỗ ngồi."
+      },
+      "style": {
+        "title": "Phong cách của bạn là gì?",
+        "text": "Chúng tôi dùng để gợi ý cảm hứng và trang web."
+      }
+    },
+    "defaults": {
+      "ceremony": "Lễ cưới",
+      "reception": "Tiệc cưới",
+      "tagline": "Chúng tôi sắp kết hôn",
+      "rsvpIntro": "Chúng tôi rất mong được chung vui cùng bạn. Hãy cho chúng tôi biết bạn có đến được không nhé.",
+      "faqChildren": "Có thể đưa trẻ em theo không?",
+      "faqParking": "Địa điểm có chỗ đậu xe không?",
+      "faqWear": "Tôi nên mặc gì?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Người thứ nhất",
+    "partnerB": "Người thứ hai",
+    "partnerAPlaceholder": "ví dụ Ian",
+    "partnerBPlaceholder": "ví dụ Maria",
+    "date": "Ngày cưới",
+    "dateHint": "Chưa quyết định? Để trống và thêm sau.",
+    "location": "Địa điểm",
+    "locationHint": "Thành phố, vùng hoặc địa điểm, bất cứ gì bạn biết lúc này.",
+    "locationPlaceholder": "ví dụ Sintra, Bồ Đào Nha",
+    "guests": "Số khách dự kiến",
+    "guestsHint": "Ước lượng sơ bộ là được.",
+    "guestsPlaceholder": "ví dụ 120",
+    "currency": "Tiền tệ",
+    "chooseCurrency": "Chọn tiền tệ",
+    "style": "Phong cách (chọn bất kỳ cái nào hợp với bạn)",
+    "accent": "Màu nhấn của ứng dụng",
+    "accents": {
+      "rose": "Hồng phấn",
+      "sage": "Xanh xô thơm"
+    },
+    "styles": {
+      "Classic": "Cổ điển",
+      "Modern": "Hiện đại",
+      "Romantic": "Lãng mạn",
+      "Rustic": "Mộc mạc",
+      "Boho": "Boho",
+      "Garden": "Sân vườn",
+      "Beach": "Bãi biển",
+      "Glam": "Lộng lẫy",
+      "Minimal": "Tối giản",
+      "Vintage": "Vintage",
+      "Destination": "Cưới xa",
+      "Intimate": "Ấm cúng"
+    },
+    "detailsTitle": "Thông tin đám cưới",
+    "detailsViewOnly": "Bạn chỉ có quyền xem. Hãy nhờ chủ sở hữu nếu cần thay đổi.",
+    "detailsText": "Tên, ngày, địa điểm và phong cách. Thay đổi áp dụng cho toàn bộ ứng dụng.",
+    "saveChanges": "Lưu thay đổi",
+    "saved": "Đã lưu thông tin đám cưới"
+  },
+  "roles": {
+    "owner": {
+      "label": "Chủ sở hữu",
+      "description": "Toàn quyền, quản lý cộng tác viên"
+    },
+    "editor": {
+      "label": "Người chỉnh sửa",
+      "description": "Có thể thêm và thay đổi mọi thứ"
+    },
+    "viewer": {
+      "label": "Người xem",
+      "description": "Có thể xem nhưng không thay đổi"
+    }
+  },
+  "invite": {
+    "metaTitle": "Bạn được mời",
+    "used": "Lời mời này đã được sử dụng",
+    "invalid": "Lời mời này không hợp lệ",
+    "expired": "Lời mời đã hết hạn. Hãy nhờ cặp đôi gửi liên kết mới.",
+    "askNew": "Hãy nhờ cặp đôi gửi liên kết mới nếu bạn vẫn cần truy cập.",
+    "dashboard": "Đến bảng điều khiển của tôi",
+    "title": "Giúp chuẩn bị đám cưới của {couple}",
+    "as": "Bạn được mời với vai trò <b>{role}</b>: {description}.",
+    "signedInAs": "Đã đăng nhập là {email}",
+    "accept": "Chấp nhận và bắt đầu"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name}: получен ответ",
+      "body": "придут: {attending}, не придут: {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name}: ответ изменён",
+      "body": "придут: {attending}, не придут: {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who} назначил(а) вам задачу",
+      "body": "{title}",
+      "bodyDue": "{title} · срок {date}"
+    },
+    "someone": "Кто-то",
+    "paymentSoon": {
+      "title": "Скоро платёж: {name}",
+      "body": "{amount} · срок {date}"
+    },
+    "paymentLate": {
+      "title": "Просроченный платёж: {name}",
+      "body": "{amount} · срок {date}"
+    },
+    "hotelCutoff": {
+      "title": "Скоро срок блока номеров: {name}",
+      "body": "Гости должны забронировать до {date}",
+      "bodyRooms": "Гости должны забронировать до {date} · занято {booked} из {held} номеров"
+    },
+    "taskDueToday": {
+      "title": "Срок сегодня: {title}"
+    },
+    "taskDue": {
+      "title": "Срок {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# задача просрочена} few {# задачи просрочены} many {# задач просрочено} other {# задачи просрочено}}",
+      "body": "{title}",
+      "bodyMore": "{title} и другие"
+    },
+    "coupleEmail": {
+      "replied": "{name}: получен ответ",
+      "updated": "{name}: ответ изменён",
+      "summary": "придут: {attending}, не придут: {declined}",
+      "seeAll": "Все ответы"
+    }
+  }
+}

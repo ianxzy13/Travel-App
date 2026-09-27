@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} ha risposto",
+      "body": "{attending} presenti, {declined} assenti"
+    },
+    "rsvpUpdated": {
+      "title": "{name} ha modificato la conferma",
+      "body": "{attending} presenti, {declined} assenti"
+    },
+    "taskAssigned": {
+      "title": "{who} vi ha assegnato un’attività",
+      "body": "{title}",
+      "bodyDue": "{title} · scadenza {date}"
+    },
+    "someone": "Qualcuno",
+    "paymentSoon": {
+      "title": "Pagamento in scadenza: {name}",
+      "body": "{amount} · scadenza {date}"
+    },
+    "paymentLate": {
+      "title": "Pagamento scaduto: {name}",
+      "body": "{amount} · scadenza {date}"
+    },
+    "hotelCutoff": {
+      "title": "Scadenza del blocco camere vicina: {name}",
+      "body": "Gli invitati devono prenotare entro il {date}",
+      "bodyRooms": "Gli invitati devono prenotare entro il {date} · {booked} camere prenotate su {held}"
+    },
+    "taskDueToday": {
+      "title": "Scade oggi: {title}"
+    },
+    "taskDue": {
+      "title": "Scade il {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# attività in ritardo} other {# attività in ritardo}}",
+      "body": "{title}",
+      "bodyMore": "{title} e altre"
+    },
+    "coupleEmail": {
+      "replied": "{name} ha risposto",
+      "updated": "{name} ha modificato la conferma",
+      "summary": "{attending} presenti, {declined} assenti",
+      "seeAll": "Vedi tutte le risposte"
+    }
+  }
+}

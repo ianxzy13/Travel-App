@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – planera bröllopet tillsammans",
+    "metaDescription": "Gäster, OSA, bordsplacering, budget, lokaler, resor, inspiration och er bröllopssajt – allt på ett lugnt ställe, på ert språk.",
+    "signIn": "Logga in",
+    "getStarted": "Kom igång",
+    "eyebrow": "Bröllopsplanering, tillsammans",
+    "title": "Allt för ert bröllop, på ett lugnt ställe.",
+    "intro": "Planera gäster, OSA, bordsplacering, budget, lokaler och resor med din partner och familj, i mobilen eller datorn.",
+    "start": "Börja planera gratis",
+    "seeInside": "Se vad som finns",
+    "featuresTitle": "En app i stället för tolv kalkylark",
+    "featuresText": "Varje del av planen pratar med de andra. OSA går rakt in i bordsplaceringen, bokade lokaler på er sajt.",
+    "features": {
+      "guests": {
+        "title": "Gästlista",
+        "text": "Hushåll, sidor, kostbehov och CSV-import på några minuter."
+      },
+      "rsvp": {
+        "title": "OSA",
+        "text": "En privat länk per hushåll. Svaren kommer in direkt."
+      },
+      "seating": {
+        "title": "Bordsplacering",
+        "text": "Dra gäster till platser. Familjer ihop, ex isär."
+      },
+      "budget": {
+        "title": "Budget",
+        "text": "Kategorier, handpenningar och förfallodatum, utan överraskningar."
+      },
+      "venues": {
+        "title": "Lokaler och leverantörer",
+        "text": "Jämför sida vid sida och boka med trygghet."
+      },
+      "travel": {
+        "title": "Hotell och resor",
+        "text": "Rumsblock, flyg och en ankomsttavla för upphämtning."
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "text": "Spara idéer, ta fram färgpaletter och bestäm tillsammans."
+      },
+      "website": {
+        "title": "Bröllopssajt",
+        "text": "Fem vackra mallar med inbyggd OSA."
+      },
+      "timeline": {
+        "title": "Tidslinje",
+        "text": "En att göra-plan från tolv månader innan till den stora dagen."
+      },
+      "languages": {
+        "title": "25 språk",
+        "text": "Ni planerar på ert språk; varje gäst får sajten, OSA och mejl på sitt."
+      }
+    },
+    "closingTitle": "Säg ja till mindre stress.",
+    "closingText": "Bjud in din partner, föräldrar eller bröllopsplanerare och planera allt tillsammans i realtid.",
+    "create": "Skapa ert bröllop",
+    "footer": "Gjort med kärlek · © {year} Vow",
+    "preview": {
+      "couple": "Ian och Maria · Lissabon",
+      "daysToGo": "dagar kvar",
+      "attending": "kommer",
+      "declined": "tackat nej",
+      "waiting": "väntar",
+      "budget": "Budget",
+      "budgetOf": "{spent} av {total}"
+    }
+  },
+  "login": {
+    "title": "Logga in",
+    "welcome": "Välkommen",
+    "intro": "Logga in eller skapa ett konto. Inget lösenord behövs.",
+    "errorLink": "Inloggningslänken har gått ut eller redan använts. Be om en ny.",
+    "errorGoogle": "Inloggning med Google är inte tillgänglig just nu. Använd din e-post.",
+    "google": "Fortsätt med Google",
+    "or": "eller",
+    "email": "E-post",
+    "emailPlaceholder": "du@exempel.se",
+    "send": "Mejla mig en inloggningslänk",
+    "checkInbox": "Kolla din inkorg",
+    "sentTo": "Vi har skickat ett mejl till <b>{email}</b>. Klicka på länken (i den här webbläsaren) eller skriv koden från mejlet nedan.",
+    "code": "Kod från mejlet",
+    "signInWithCode": "Logga in med kod",
+    "again": "Skicka nytt mejl eller använd en annan adress",
+    "setupTitle": "Nästan klart: Supabase är inte anslutet än.",
+    "setupText": "Skapa en fil <code>.env.local</code> med din Supabase-URL och publika nyckel (se <code>.env.example</code> och README) och starta sedan om <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Välj ditt språk",
+    "intro": "Vow pratar det här språket överallt. Du kan byta när som helst i kontomenyn.",
+    "suggested": "Föreslaget",
+    "continue": "Fortsätt på {language}",
+    "guestsNote": "Era gäster ser sajten, OSA-sidan och mejlen på sitt eget språk — det ställer ni in för varje hushåll."
+  },
+  "onboarding": {
+    "metaTitle": "Skapa ert bröllop",
+    "backToDashboard": "Tillbaka till översikten",
+    "progress": "Framsteg",
+    "stepOf": "Steg {step} av {total}",
+    "stepOfTitle": "Steg {step} av {total}: {title}",
+    "back": "Tillbaka",
+    "continue": "Fortsätt",
+    "create": "Skapa vårt bröllop",
+    "steps": {
+      "names": {
+        "title": "Vilka ska gifta sig?",
+        "text": "Grattis! Vi börjar med era namn."
+      },
+      "when": {
+        "title": "När och var?",
+        "text": "Det gör inget om ni inte vet än."
+      },
+      "size": {
+        "title": "Hur stor blir festen?",
+        "text": "Det hjälper oss med budget och bordsplacering."
+      },
+      "style": {
+        "title": "Vilken stil har ni?",
+        "text": "Vi använder den för inspiration och förslag till sajten."
+      }
+    },
+    "defaults": {
+      "ceremony": "Vigsel",
+      "reception": "Bröllopsfest",
+      "tagline": "Vi ska gifta oss",
+      "rsvpIntro": "Vi längtar efter att fira med er. Säg till om ni kan komma.",
+      "faqChildren": "Är barn välkomna?",
+      "faqParking": "Finns det parkering vid lokalen?",
+      "faqWear": "Vad ska jag ha på mig?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Partner ett",
+    "partnerB": "Partner två",
+    "partnerAPlaceholder": "t.ex. Ian",
+    "partnerBPlaceholder": "t.ex. Maria",
+    "date": "Bröllopsdatum",
+    "dateHint": "Inte bestämt än? Lämna tomt och lägg till senare.",
+    "location": "Plats",
+    "locationHint": "Stad, region eller lokal, det ni vet hittills.",
+    "locationPlaceholder": "t.ex. Visby, Sverige",
+    "guests": "Uppskattat antal gäster",
+    "guestsHint": "En grov uppskattning räcker.",
+    "guestsPlaceholder": "t.ex. 120",
+    "currency": "Valuta",
+    "chooseCurrency": "Välj en valuta",
+    "style": "Stil (välj det som känns som ni)",
+    "accent": "Accentfärg i appen",
+    "accents": {
+      "rose": "Gammelrosa",
+      "sage": "Salvia"
+    },
+    "styles": {
+      "Classic": "Klassisk",
+      "Modern": "Modern",
+      "Romantic": "Romantisk",
+      "Rustic": "Rustik",
+      "Boho": "Boho",
+      "Garden": "Trädgård",
+      "Beach": "Strand",
+      "Glam": "Glamour",
+      "Minimal": "Minimalistisk",
+      "Vintage": "Vintage",
+      "Destination": "Utomlands",
+      "Intimate": "Intim"
+    },
+    "detailsTitle": "Bröllopsdetaljer",
+    "detailsViewOnly": "Du har bara läsbehörighet. Fråga en ägare om du behöver ändra något.",
+    "detailsText": "Namn, datum, plats och stil. Ändringar gäller överallt i appen.",
+    "saveChanges": "Spara ändringar",
+    "saved": "Bröllopsdetaljer sparade"
+  },
+  "roles": {
+    "owner": {
+      "label": "Ägare",
+      "description": "Full åtkomst, hanterar medarbetare"
+    },
+    "editor": {
+      "label": "Redaktör",
+      "description": "Kan lägga till och ändra allt"
+    },
+    "viewer": {
+      "label": "Läsare",
+      "description": "Kan titta men inte ändra"
+    }
+  },
+  "invite": {
+    "metaTitle": "Du är inbjuden",
+    "used": "Inbjudan har redan använts",
+    "invalid": "Inbjudan är inte giltig",
+    "expired": "Den har gått ut. Be paret om en ny länk.",
+    "askNew": "Be paret om en ny länk om du fortfarande behöver åtkomst.",
+    "dashboard": "Till min översikt",
+    "title": "Hjälp till att planera {couple}s bröllop",
+    "as": "Du är inbjuden som <b>{role}</b>: {description}.",
+    "signedInAs": "Inloggad som {email}",
+    "accept": "Acceptera och börja planera"
+  }
+}

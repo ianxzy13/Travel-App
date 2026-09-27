@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – organisez votre mariage ensemble",
+    "metaDescription": "Invités, réponses, plan de table, budget, lieux, voyages, inspiration et votre site de mariage – tout au même endroit, au calme, dans votre langue.",
+    "signIn": "Se connecter",
+    "getStarted": "Commencer",
+    "eyebrow": "Organiser son mariage, ensemble",
+    "title": "Tout pour votre mariage, au même endroit, au calme.",
+    "intro": "Gérez invités, réponses, plan de table, budget, lieux et voyages avec votre partenaire et votre famille, depuis votre téléphone ou votre ordinateur.",
+    "start": "Commencer gratuitement",
+    "seeInside": "Découvrir le contenu",
+    "featuresTitle": "Une appli au lieu de douze tableurs",
+    "featuresText": "Chaque partie de votre organisation communique avec les autres. Les réponses alimentent le plan de table, les lieux réservés votre site.",
+    "features": {
+      "guests": {
+        "title": "Liste d’invités",
+        "text": "Foyers, côtés, régimes alimentaires et import CSV en quelques minutes."
+      },
+      "rsvp": {
+        "title": "Réponses",
+        "text": "Un lien privé par foyer. Les réponses arrivent en direct."
+      },
+      "seating": {
+        "title": "Plan de table",
+        "text": "Glissez les invités sur les places. Familles ensemble, ex séparés."
+      },
+      "budget": {
+        "title": "Budget",
+        "text": "Catégories, acomptes et échéances, sans surprise."
+      },
+      "venues": {
+        "title": "Lieux et prestataires",
+        "text": "Comparez côte à côte, puis réservez sereinement."
+      },
+      "travel": {
+        "title": "Hôtels et voyages",
+        "text": "Blocs de chambres, vols et tableau des arrivées pour les navettes."
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "text": "Épinglez des idées, créez des palettes et décidez ensemble."
+      },
+      "website": {
+        "title": "Site de mariage",
+        "text": "Cinq beaux modèles avec réponse intégrée."
+      },
+      "timeline": {
+        "title": "Rétroplanning",
+        "text": "Une liste de tâches de douze mois avant jusqu’au jour J."
+      },
+      "languages": {
+        "title": "25 langues",
+        "text": "Vous organisez dans votre langue ; chaque invité reçoit le site, la réponse et les e-mails dans la sienne."
+      }
+    },
+    "closingTitle": "Dites oui à moins de stress.",
+    "closingText": "Invitez votre partenaire, vos parents ou votre wedding planner, et organisez tout ensemble en temps réel.",
+    "create": "Créer votre mariage",
+    "footer": "Fait avec amour · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · Lisbonne",
+      "daysToGo": "jours restants",
+      "attending": "présents",
+      "declined": "absents",
+      "waiting": "en attente",
+      "budget": "Budget",
+      "budgetOf": "{spent} sur {total}"
+    }
+  },
+  "login": {
+    "title": "Se connecter",
+    "welcome": "Bienvenue",
+    "intro": "Connectez-vous ou créez votre compte. Aucun mot de passe nécessaire.",
+    "errorLink": "Ce lien de connexion a expiré ou a déjà servi. Demandez-en un nouveau.",
+    "errorGoogle": "La connexion Google n’est pas disponible pour le moment. Utilisez plutôt votre e-mail.",
+    "google": "Continuer avec Google",
+    "or": "ou",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.fr",
+    "send": "Recevoir un lien de connexion",
+    "checkInbox": "Consultez votre boîte de réception",
+    "sentTo": "Nous avons envoyé un e-mail à <b>{email}</b>. Cliquez sur le lien (dans ce navigateur) ou saisissez ci-dessous le code de l’e-mail.",
+    "code": "Code de l’e-mail",
+    "signInWithCode": "Se connecter avec le code",
+    "again": "Renvoyer un e-mail ou utiliser une autre adresse",
+    "setupTitle": "Presque prêt : Supabase n’est pas encore connecté.",
+    "setupText": "Créez un fichier <code>.env.local</code> avec l’URL Supabase et la clé publique (voir <code>.env.example</code> et le README), puis relancez <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Choisissez votre langue",
+    "intro": "Vow parlera cette langue partout. Vous pouvez la changer à tout moment dans le menu du compte.",
+    "suggested": "Suggérée",
+    "continue": "Continuer en {language}",
+    "guestsNote": "Vos invités verront le site, la page de réponse et les e-mails dans leur propre langue — vous la choisissez pour chaque foyer."
+  },
+  "onboarding": {
+    "metaTitle": "Créer votre mariage",
+    "backToDashboard": "Retour au tableau de bord",
+    "progress": "Progression",
+    "stepOf": "Étape {step} sur {total}",
+    "stepOfTitle": "Étape {step} sur {total} : {title}",
+    "back": "Retour",
+    "continue": "Continuer",
+    "create": "Créer notre mariage",
+    "steps": {
+      "names": {
+        "title": "Qui se marie ?",
+        "text": "Félicitations ! Commençons par vos prénoms."
+      },
+      "when": {
+        "title": "Quand et où ?",
+        "text": "Pas de souci si vous ne savez pas encore."
+      },
+      "size": {
+        "title": "Quelle taille pour la fête ?",
+        "text": "Cela nous aide pour le budget et le plan de table."
+      },
+      "style": {
+        "title": "Quelle ambiance ?",
+        "text": "Nous l’utiliserons pour l’inspiration et les suggestions du site."
+      }
+    },
+    "defaults": {
+      "ceremony": "Cérémonie",
+      "reception": "Réception",
+      "tagline": "Nous nous marions",
+      "rsvpIntro": "Nous avons hâte de fêter ça avec vous. Dites-nous si vous pouvez venir.",
+      "faqChildren": "Les enfants sont-ils les bienvenus ?",
+      "faqParking": "Y a-t-il un parking sur place ?",
+      "faqWear": "Que dois-je porter ?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Partenaire 1",
+    "partnerB": "Partenaire 2",
+    "partnerAPlaceholder": "par ex. Ian",
+    "partnerBPlaceholder": "par ex. Maria",
+    "date": "Date du mariage",
+    "dateHint": "Pas encore décidé ? Laissez vide et ajoutez-la plus tard.",
+    "location": "Lieu",
+    "locationHint": "Ville, région ou domaine, ce que vous savez déjà.",
+    "locationPlaceholder": "par ex. Annecy, France",
+    "guests": "Nombre d’invités estimé",
+    "guestsHint": "Une estimation suffit.",
+    "guestsPlaceholder": "par ex. 120",
+    "currency": "Devise",
+    "chooseCurrency": "Choisir une devise",
+    "style": "Style (choisissez ce qui vous ressemble)",
+    "accent": "Couleur d’accent de l’appli",
+    "accents": {
+      "rose": "Vieux rose",
+      "sage": "Sauge"
+    },
+    "styles": {
+      "Classic": "Classique",
+      "Modern": "Moderne",
+      "Romantic": "Romantique",
+      "Rustic": "Champêtre",
+      "Boho": "Bohème",
+      "Garden": "Jardin",
+      "Beach": "Plage",
+      "Glam": "Glamour",
+      "Minimal": "Minimaliste",
+      "Vintage": "Vintage",
+      "Destination": "À l’étranger",
+      "Intimate": "Intime"
+    },
+    "detailsTitle": "Détails du mariage",
+    "detailsViewOnly": "Vous avez un accès en lecture seule. Demandez à un propriétaire si vous devez modifier quelque chose.",
+    "detailsText": "Prénoms, date, lieu et style. Les modifications s’appliquent partout dans l’appli.",
+    "saveChanges": "Enregistrer",
+    "saved": "Détails du mariage enregistrés"
+  },
+  "roles": {
+    "owner": {
+      "label": "Propriétaire",
+      "description": "Accès complet, gère les collaborateurs"
+    },
+    "editor": {
+      "label": "Éditeur",
+      "description": "Peut tout ajouter et modifier"
+    },
+    "viewer": {
+      "label": "Lecteur",
+      "description": "Peut consulter sans modifier"
+    }
+  },
+  "invite": {
+    "metaTitle": "Vous êtes invité",
+    "used": "Cette invitation a déjà été utilisée",
+    "invalid": "Cette invitation n’est pas valide",
+    "expired": "Elle a expiré. Demandez un nouveau lien au couple.",
+    "askNew": "Demandez un nouveau lien au couple si vous avez encore besoin d’accès.",
+    "dashboard": "Aller à mon tableau de bord",
+    "title": "Aidez à organiser le mariage de {couple}",
+    "as": "Vous êtes invité en tant que <b>{role}</b> : {description}.",
+    "signedInAs": "Connecté en tant que {email}",
+    "accept": "Accepter et commencer"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} har svarat",
+      "body": "{attending} kommer, {declined} kommer inte"
+    },
+    "rsvpUpdated": {
+      "title": "{name} har ändrat sitt svar",
+      "body": "{attending} kommer, {declined} kommer inte"
+    },
+    "taskAssigned": {
+      "title": "{who} gav dig en uppgift",
+      "body": "{title}",
+      "bodyDue": "{title} · senast {date}"
+    },
+    "someone": "Någon",
+    "paymentSoon": {
+      "title": "Betalning snart: {name}",
+      "body": "{amount} · förfaller {date}"
+    },
+    "paymentLate": {
+      "title": "Försenad betalning: {name}",
+      "body": "{amount} · förföll {date}"
+    },
+    "hotelCutoff": {
+      "title": "Sista dag för rumsblock snart: {name}",
+      "body": "Gästerna måste boka senast {date}",
+      "bodyRooms": "Gästerna måste boka senast {date} · {booked} av {held} rum bokade"
+    },
+    "taskDueToday": {
+      "title": "Ska göras i dag: {title}"
+    },
+    "taskDue": {
+      "title": "Senast {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# uppgift är försenad} other {# uppgifter är försenade}}",
+      "body": "{title}",
+      "bodyMore": "{title} med flera"
+    },
+    "coupleEmail": {
+      "replied": "{name} har svarat",
+      "updated": "{name} har ändrat sitt svar",
+      "summary": "{attending} kommer, {declined} kommer inte",
+      "seeAll": "Se alla svar"
+    }
+  }
+}

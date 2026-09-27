@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} 님이 답변했습니다",
+      "body": "참석 {attending}, 불참 {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name} 님이 참석 여부를 수정했습니다",
+      "body": "참석 {attending}, 불참 {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who} 님이 할 일을 맡겼습니다",
+      "body": "{title}",
+      "bodyDue": "{title} · 마감 {date}"
+    },
+    "someone": "누군가",
+    "paymentSoon": {
+      "title": "곧 납부 예정: {name}",
+      "body": "{amount} · 마감 {date}"
+    },
+    "paymentLate": {
+      "title": "납부 기한 초과: {name}",
+      "body": "{amount} · 마감 {date}"
+    },
+    "hotelCutoff": {
+      "title": "객실 블록 마감 임박: {name}",
+      "body": "하객은 {date}까지 예약해야 합니다",
+      "bodyRooms": "하객은 {date}까지 예약해야 합니다 · {held}실 중 {booked}실 예약됨"
+    },
+    "taskDueToday": {
+      "title": "오늘 마감: {title}"
+    },
+    "taskDue": {
+      "title": "{date} 마감: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, other {기한이 지난 할 일 #개}}",
+      "body": "{title}",
+      "bodyMore": "{title} 외"
+    },
+    "coupleEmail": {
+      "replied": "{name} 님이 답변했습니다",
+      "updated": "{name} 님이 참석 여부를 수정했습니다",
+      "summary": "참석 {attending}, 불참 {declined}",
+      "seeAll": "모든 답변 보기"
+    }
+  }
+}

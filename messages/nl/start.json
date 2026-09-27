@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – plan jullie bruiloft samen",
+    "metaDescription": "Gasten, reacties, tafelindeling, budget, locaties, reizen, inspiratie en jullie trouwwebsite – alles op één rustige plek, in jullie taal.",
+    "signIn": "Inloggen",
+    "getStarted": "Aan de slag",
+    "eyebrow": "Samen een bruiloft plannen",
+    "title": "Alles voor jullie bruiloft, op één rustige plek.",
+    "intro": "Plan gasten, reacties, tafelindeling, budget, locaties en reizen met je partner en familie, op je telefoon of laptop.",
+    "start": "Gratis beginnen met plannen",
+    "seeInside": "Bekijk wat erin zit",
+    "featuresTitle": "Eén app in plaats van twaalf spreadsheets",
+    "featuresText": "Elk onderdeel van je planning praat met de rest. Reacties komen in de tafelindeling, geboekte locaties op je website.",
+    "features": {
+      "guests": {
+        "title": "Gastenlijst",
+        "text": "Huishoudens, kanten, dieetwensen en CSV-import in een paar minuten."
+      },
+      "rsvp": {
+        "title": "Reacties",
+        "text": "Eén privélink per huishouden. Antwoorden komen live binnen."
+      },
+      "seating": {
+        "title": "Tafelindeling",
+        "text": "Sleep gasten naar stoelen. Families samen, exen uit elkaar."
+      },
+      "budget": {
+        "title": "Budget",
+        "text": "Categorieën, aanbetalingen en vervaldata, zonder verrassingen."
+      },
+      "venues": {
+        "title": "Locaties en leveranciers",
+        "text": "Vergelijk ze naast elkaar en boek met vertrouwen."
+      },
+      "travel": {
+        "title": "Hotels en reizen",
+        "text": "Kamerblokken, vluchten en een aankomstbord voor ophaalritten."
+      },
+      "inspiration": {
+        "title": "Inspiratie",
+        "text": "Bewaar ideeën, haal kleurpaletten eruit en beslis samen."
+      },
+      "website": {
+        "title": "Trouwwebsite",
+        "text": "Vijf mooie sjablonen met ingebouwde reactie."
+      },
+      "timeline": {
+        "title": "Planning",
+        "text": "Een takenlijst van twaalf maanden vooraf tot de grote dag."
+      },
+      "languages": {
+        "title": "25 talen",
+        "text": "Jullie plannen in je eigen taal; elke gast krijgt website, reactie en e-mails in de zijne."
+      }
+    },
+    "closingTitle": "Zeg ja tegen minder stress.",
+    "closingText": "Nodig je partner, ouders of weddingplanner uit en plan alles samen in realtime.",
+    "create": "Maak jullie bruiloft aan",
+    "footer": "Met liefde gemaakt · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · Lissabon",
+      "daysToGo": "dagen te gaan",
+      "attending": "komen",
+      "declined": "afgemeld",
+      "waiting": "wachten",
+      "budget": "Budget",
+      "budgetOf": "{spent} van {total}"
+    }
+  },
+  "login": {
+    "title": "Inloggen",
+    "welcome": "Welkom",
+    "intro": "Log in of maak een account aan. Geen wachtwoord nodig.",
+    "errorLink": "Die inloglink is verlopen of al gebruikt. Vraag een nieuwe aan.",
+    "errorGoogle": "Inloggen met Google is nu niet beschikbaar. Gebruik je e-mail.",
+    "google": "Doorgaan met Google",
+    "or": "of",
+    "email": "E-mail",
+    "emailPlaceholder": "jij@voorbeeld.nl",
+    "send": "Stuur me een inloglink",
+    "checkInbox": "Kijk in je inbox",
+    "sentTo": "We hebben een e-mail gestuurd naar <b>{email}</b>. Klik op de link (in deze browser) of typ hieronder de code uit de e-mail.",
+    "code": "Code uit de e-mail",
+    "signInWithCode": "Inloggen met code",
+    "again": "Nieuwe e-mail sturen of ander adres gebruiken",
+    "setupTitle": "Bijna klaar: Supabase is nog niet gekoppeld.",
+    "setupText": "Maak een bestand <code>.env.local</code> met je Supabase-URL en publieke sleutel (zie <code>.env.example</code> en de README) en start <code>npm run dev</code> opnieuw."
+  },
+  "welcome": {
+    "title": "Kies je taal",
+    "intro": "Vow spreekt overal deze taal. Je kunt hem altijd wijzigen in het accountmenu.",
+    "suggested": "Voorgesteld",
+    "continue": "Verder in het {language}",
+    "guestsNote": "Jullie gasten zien de website, reactiepagina en e-mails in hun eigen taal — dat stel je per huishouden in."
+  },
+  "onboarding": {
+    "metaTitle": "Maak jullie bruiloft aan",
+    "backToDashboard": "Terug naar dashboard",
+    "progress": "Voortgang",
+    "stepOf": "Stap {step} van {total}",
+    "stepOfTitle": "Stap {step} van {total}: {title}",
+    "back": "Terug",
+    "continue": "Verder",
+    "create": "Onze bruiloft aanmaken",
+    "steps": {
+      "names": {
+        "title": "Wie gaan er trouwen?",
+        "text": "Gefeliciteerd! Laten we met jullie namen beginnen."
+      },
+      "when": {
+        "title": "Wanneer en waar?",
+        "text": "Geen probleem als je het nog niet weet."
+      },
+      "size": {
+        "title": "Hoe groot wordt het feest?",
+        "text": "Dat helpt ons bij budget en tafelindeling."
+      },
+      "style": {
+        "title": "Wat is jullie stijl?",
+        "text": "We gebruiken dit voor inspiratie en websitesuggesties."
+      }
+    },
+    "defaults": {
+      "ceremony": "Ceremonie",
+      "reception": "Feest",
+      "tagline": "Wij gaan trouwen",
+      "rsvpIntro": "We kunnen niet wachten om samen met jullie te vieren. Laat ons weten of je erbij kunt zijn.",
+      "faqChildren": "Zijn kinderen welkom?",
+      "faqParking": "Kun je parkeren bij de locatie?",
+      "faqWear": "Wat trek ik aan?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Partner één",
+    "partnerB": "Partner twee",
+    "partnerAPlaceholder": "bijv. Ian",
+    "partnerBPlaceholder": "bijv. Maria",
+    "date": "Trouwdatum",
+    "dateHint": "Nog niet besloten? Laat leeg en vul later in.",
+    "location": "Plaats",
+    "locationHint": "Stad, regio of locatie, wat je tot nu toe weet.",
+    "locationPlaceholder": "bijv. Utrecht, Nederland",
+    "guests": "Geschat aantal gasten",
+    "guestsHint": "Een ruwe schatting is prima.",
+    "guestsPlaceholder": "bijv. 120",
+    "currency": "Valuta",
+    "chooseCurrency": "Kies een valuta",
+    "style": "Stijl (kies wat bij jullie past)",
+    "accent": "Accentkleur van de app",
+    "accents": {
+      "rose": "Oudroze",
+      "sage": "Saliegroen"
+    },
+    "styles": {
+      "Classic": "Klassiek",
+      "Modern": "Modern",
+      "Romantic": "Romantisch",
+      "Rustic": "Landelijk",
+      "Boho": "Boho",
+      "Garden": "Tuin",
+      "Beach": "Strand",
+      "Glam": "Glamour",
+      "Minimal": "Minimalistisch",
+      "Vintage": "Vintage",
+      "Destination": "In het buitenland",
+      "Intimate": "Intiem"
+    },
+    "detailsTitle": "Details van de bruiloft",
+    "detailsViewOnly": "Je hebt alleen leesrechten. Vraag een eigenaar als je iets wilt wijzigen.",
+    "detailsText": "Namen, datum, plaats en stijl. Wijzigingen gelden overal in de app.",
+    "saveChanges": "Wijzigingen opslaan",
+    "saved": "Details van de bruiloft opgeslagen"
+  },
+  "roles": {
+    "owner": {
+      "label": "Eigenaar",
+      "description": "Volledige toegang, beheert medewerkers"
+    },
+    "editor": {
+      "label": "Bewerker",
+      "description": "Kan alles toevoegen en wijzigen"
+    },
+    "viewer": {
+      "label": "Kijker",
+      "description": "Kan kijken maar niet wijzigen"
+    }
+  },
+  "invite": {
+    "metaTitle": "Je bent uitgenodigd",
+    "used": "Deze uitnodiging is al gebruikt",
+    "invalid": "Deze uitnodiging is niet geldig",
+    "expired": "Hij is verlopen. Vraag het stel om een nieuwe link.",
+    "askNew": "Vraag het stel om een nieuwe link als je nog toegang nodig hebt.",
+    "dashboard": "Naar mijn dashboard",
+    "title": "Help mee de bruiloft van {couple} te plannen",
+    "as": "Je bent uitgenodigd als <b>{role}</b>: {description}.",
+    "signedInAs": "Ingelogd als {email}",
+    "accept": "Accepteren en beginnen"
+  }
+}

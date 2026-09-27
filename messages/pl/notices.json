@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} odpowiedział(a)",
+      "body": "przyjdzie: {attending}, nie przyjdzie: {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name} zmienił(a) potwierdzenie",
+      "body": "przyjdzie: {attending}, nie przyjdzie: {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who} przydzielił(a) Ci zadanie",
+      "body": "{title}",
+      "bodyDue": "{title} · termin {date}"
+    },
+    "someone": "Ktoś",
+    "paymentSoon": {
+      "title": "Zbliża się płatność: {name}",
+      "body": "{amount} · termin {date}"
+    },
+    "paymentLate": {
+      "title": "Zaległa płatność: {name}",
+      "body": "{amount} · termin {date}"
+    },
+    "hotelCutoff": {
+      "title": "Zbliża się termin puli pokoi: {name}",
+      "body": "Goście muszą zarezerwować do {date}",
+      "bodyRooms": "Goście muszą zarezerwować do {date} · zarezerwowano {booked} z {held} pokoi"
+    },
+    "taskDueToday": {
+      "title": "Termin dziś: {title}"
+    },
+    "taskDue": {
+      "title": "Termin {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# zadanie po terminie} few {# zadania po terminie} many {# zadań po terminie} other {# zadania po terminie}}",
+      "body": "{title}",
+      "bodyMore": "{title} i inne"
+    },
+    "coupleEmail": {
+      "replied": "{name} odpowiedział(a)",
+      "updated": "{name} zmienił(a) potwierdzenie",
+      "summary": "przyjdzie: {attending}, nie przyjdzie: {declined}",
+      "seeAll": "Zobacz wszystkie odpowiedzi"
+    }
+  }
+}

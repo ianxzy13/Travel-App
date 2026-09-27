@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} respondeu",
+      "body": "{attending} vêm, {declined} não vêm"
+    },
+    "rsvpUpdated": {
+      "title": "{name} alterou a confirmação",
+      "body": "{attending} vêm, {declined} não vêm"
+    },
+    "taskAssigned": {
+      "title": "{who} atribuiu-vos uma tarefa",
+      "body": "{title}",
+      "bodyDue": "{title} · prazo {date}"
+    },
+    "someone": "Alguém",
+    "paymentSoon": {
+      "title": "Pagamento a vencer: {name}",
+      "body": "{amount} · vence a {date}"
+    },
+    "paymentLate": {
+      "title": "Pagamento em atraso: {name}",
+      "body": "{amount} · venceu a {date}"
+    },
+    "hotelCutoff": {
+      "title": "Prazo do bloco de quartos a terminar: {name}",
+      "body": "Os convidados têm de reservar até {date}",
+      "bodyRooms": "Os convidados têm de reservar até {date} · {booked} de {held} quartos reservados"
+    },
+    "taskDueToday": {
+      "title": "Prazo hoje: {title}"
+    },
+    "taskDue": {
+      "title": "Prazo {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# tarefa em atraso} other {# tarefas em atraso}}",
+      "body": "{title}",
+      "bodyMore": "{title} e mais"
+    },
+    "coupleEmail": {
+      "replied": "{name} respondeu",
+      "updated": "{name} alterou a confirmação",
+      "summary": "{attending} vêm, {declined} não vêm",
+      "seeAll": "Ver todas as respostas"
+    }
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – plánujte svatbu spolu",
+    "metaDescription": "Hosté, odpovědi, zasedací pořádek, rozpočet, místa, cestování, inspirace a vaše svatební stránky – vše na jednom klidném místě, ve vašem jazyce.",
+    "signIn": "Přihlásit se",
+    "getStarted": "Začít",
+    "eyebrow": "Plánování svatby, společně",
+    "title": "Vše pro vaši svatbu, na jednom klidném místě.",
+    "intro": "Plánujte hosty, odpovědi, zasedací pořádek, rozpočet, místa a cestování s partnerem a rodinou, z telefonu i počítače.",
+    "start": "Začněte plánovat zdarma",
+    "seeInside": "Podívejte se dovnitř",
+    "featuresTitle": "Jedna aplikace místo dvanácti tabulek",
+    "featuresText": "Každá část plánu mluví s ostatními. Odpovědi se propisují do zasedacího pořádku, rezervovaná místa na vaše stránky.",
+    "features": {
+      "guests": {
+        "title": "Seznam hostů",
+        "text": "Domácnosti, strany, stravovací potřeby a import CSV během minut."
+      },
+      "rsvp": {
+        "title": "Odpovědi",
+        "text": "Jeden soukromý odkaz na domácnost. Odpovědi přicházejí živě."
+      },
+      "seating": {
+        "title": "Zasedací pořádek",
+        "text": "Přetahujte hosty na místa. Rodiny spolu, bývalí od sebe."
+      },
+      "budget": {
+        "title": "Rozpočet",
+        "text": "Kategorie, zálohy a splatnosti, bez překvapení."
+      },
+      "venues": {
+        "title": "Místa a dodavatelé",
+        "text": "Porovnejte vedle sebe a rezervujte s jistotou."
+      },
+      "travel": {
+        "title": "Hotely a cestování",
+        "text": "Bloky pokojů, lety a tabule příletů pro vyzvednutí."
+      },
+      "inspiration": {
+        "title": "Inspirace",
+        "text": "Připínejte nápady, vytvářejte palety a rozhodujte spolu."
+      },
+      "website": {
+        "title": "Svatební stránky",
+        "text": "Pět krásných šablon s vestavěnými odpověďmi."
+      },
+      "timeline": {
+        "title": "Harmonogram",
+        "text": "Plán úkolů od dvanácti měsíců předem až po velký den."
+      },
+      "languages": {
+        "title": "25 jazyků",
+        "text": "Vy plánujete ve svém jazyce; každý host dostane stránky, odpověď a e-maily ve svém."
+      }
+    },
+    "closingTitle": "Řekněte ano menšímu stresu.",
+    "closingText": "Pozvěte partnera, rodiče nebo svatebního koordinátora a plánujte vše spolu v reálném čase.",
+    "create": "Vytvořte svou svatbu",
+    "footer": "Vytvořeno s láskou · © {year} Vow",
+    "preview": {
+      "couple": "Ian a Maria · Lisabon",
+      "daysToGo": "dní do svatby",
+      "attending": "přijde",
+      "declined": "nepřijde",
+      "waiting": "čeká",
+      "budget": "Rozpočet",
+      "budgetOf": "{spent} z {total}"
+    }
+  },
+  "login": {
+    "title": "Přihlásit se",
+    "welcome": "Vítejte",
+    "intro": "Přihlaste se nebo si vytvořte účet. Heslo není potřeba.",
+    "errorLink": "Tento přihlašovací odkaz vypršel nebo už byl použit. Vyžádejte si nový.",
+    "errorGoogle": "Přihlášení přes Google teď není k dispozici. Použijte e-mail.",
+    "google": "Pokračovat přes Google",
+    "or": "nebo",
+    "email": "E-mail",
+    "emailPlaceholder": "vy@priklad.cz",
+    "send": "Poslat přihlašovací odkaz",
+    "checkInbox": "Zkontrolujte schránku",
+    "sentTo": "Poslali jsme e-mail na <b>{email}</b>. Klikněte na odkaz v něm (v tomto prohlížeči) nebo níže zadejte kód z e-mailu.",
+    "code": "Kód z e-mailu",
+    "signInWithCode": "Přihlásit se kódem",
+    "again": "Poslat nový e-mail nebo použít jinou adresu",
+    "setupTitle": "Skoro hotovo: Supabase ještě není připojen.",
+    "setupText": "Vytvořte soubor <code>.env.local</code> s URL a veřejným klíčem Supabase (viz <code>.env.example</code> a README) a pak znovu spusťte <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Vyberte svůj jazyk",
+    "intro": "Vow bude všude mluvit tímto jazykem. Kdykoli ho můžete změnit v nabídce účtu.",
+    "suggested": "Navrhovaný",
+    "continue": "Pokračovat: {language}",
+    "guestsNote": "Vaši hosté uvidí stránky, odpověď a e-maily ve svém jazyce — ten nastavíte pro každou domácnost."
+  },
+  "onboarding": {
+    "metaTitle": "Vytvořte svou svatbu",
+    "backToDashboard": "Zpět na přehled",
+    "progress": "Postup",
+    "stepOf": "Krok {step} z {total}",
+    "stepOfTitle": "Krok {step} z {total}: {title}",
+    "back": "Zpět",
+    "continue": "Pokračovat",
+    "create": "Vytvořit naši svatbu",
+    "steps": {
+      "names": {
+        "title": "Kdo se bere?",
+        "text": "Gratulujeme! Začněme vašimi jmény."
+      },
+      "when": {
+        "title": "Kdy a kde?",
+        "text": "Nevadí, pokud to ještě nevíte."
+      },
+      "size": {
+        "title": "Jak velká bude oslava?",
+        "text": "Pomůže nám to s rozpočtem a zasedacím pořádkem."
+      },
+      "style": {
+        "title": "Jaký je váš styl?",
+        "text": "Použijeme ho pro inspiraci a návrhy stránek."
+      }
+    },
+    "defaults": {
+      "ceremony": "Obřad",
+      "reception": "Hostina",
+      "tagline": "Bereme se",
+      "rsvpIntro": "Už se nemůžeme dočkat, až to s vámi oslavíme. Dejte nám prosím vědět, zda přijdete.",
+      "faqChildren": "Jsou děti vítány?",
+      "faqParking": "Dá se u místa parkovat?",
+      "faqWear": "Co si mám obléct?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "První partner",
+    "partnerB": "Druhý partner",
+    "partnerAPlaceholder": "např. Ian",
+    "partnerBPlaceholder": "např. Maria",
+    "date": "Datum svatby",
+    "dateHint": "Ještě nerozhodnuto? Nechte prázdné a doplňte později.",
+    "location": "Místo",
+    "locationHint": "Město, kraj nebo místo konání, co zatím víte.",
+    "locationPlaceholder": "např. Praha, Česko",
+    "guests": "Odhadovaný počet hostů",
+    "guestsHint": "Stačí hrubý odhad.",
+    "guestsPlaceholder": "např. 120",
+    "currency": "Měna",
+    "chooseCurrency": "Vyberte měnu",
+    "style": "Styl (vyberte, co vám sedí)",
+    "accent": "Barva zvýraznění aplikace",
+    "accents": {
+      "rose": "Pudrově růžová",
+      "sage": "Šalvějová"
+    },
+    "styles": {
+      "Classic": "Klasický",
+      "Modern": "Moderní",
+      "Romantic": "Romantický",
+      "Rustic": "Rustikální",
+      "Boho": "Boho",
+      "Garden": "Zahradní",
+      "Beach": "Na pláži",
+      "Glam": "Glamour",
+      "Minimal": "Minimalistický",
+      "Vintage": "Vintage",
+      "Destination": "V zahraničí",
+      "Intimate": "Komorní"
+    },
+    "detailsTitle": "Podrobnosti svatby",
+    "detailsViewOnly": "Máte přístup jen pro čtení. Pokud potřebujete něco změnit, požádejte vlastníka.",
+    "detailsText": "Jména, datum, místo a styl. Změny platí v celé aplikaci.",
+    "saveChanges": "Uložit změny",
+    "saved": "Podrobnosti svatby uloženy"
+  },
+  "roles": {
+    "owner": {
+      "label": "Vlastník",
+      "description": "Plný přístup, spravuje spolupracovníky"
+    },
+    "editor": {
+      "label": "Editor",
+      "description": "Může vše přidávat a měnit"
+    },
+    "viewer": {
+      "label": "Čtenář",
+      "description": "Může prohlížet, ale nic neměnit"
+    }
+  },
+  "invite": {
+    "metaTitle": "Jste pozváni",
+    "used": "Tato pozvánka už byla použita",
+    "invalid": "Tato pozvánka není platná",
+    "expired": "Vypršela. Požádejte pár o nový odkaz.",
+    "askNew": "Pokud stále potřebujete přístup, požádejte pár o nový odkaz.",
+    "dashboard": "Na můj přehled",
+    "title": "Pomozte naplánovat svatbu: {couple}",
+    "as": "Jste pozváni jako <b>{role}</b>: {description}.",
+    "signedInAs": "Přihlášeni jako {email}",
+    "accept": "Přijmout a začít plánovat"
+  }
+}

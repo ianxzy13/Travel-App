@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} je odgovoril(a)",
+      "body": "{attending} pride, {declined} ne pride"
+    },
+    "rsvpUpdated": {
+      "title": "{name} je spremenil(a) potrditev",
+      "body": "{attending} pride, {declined} ne pride"
+    },
+    "taskAssigned": {
+      "title": "{who} vam je dodelil(a) opravilo",
+      "body": "{title}",
+      "bodyDue": "{title} · rok {date}"
+    },
+    "someone": "Nekdo",
+    "paymentSoon": {
+      "title": "Plačilo kmalu zapade: {name}",
+      "body": "{amount} · rok {date}"
+    },
+    "paymentLate": {
+      "title": "Zapadlo plačilo: {name}",
+      "body": "{amount} · rok {date}"
+    },
+    "hotelCutoff": {
+      "title": "Rok za rezervirane sobe se bliža: {name}",
+      "body": "Gostje morajo rezervirati do {date}",
+      "bodyRooms": "Gostje morajo rezervirati do {date} · rezerviranih {booked} od {held} sob"
+    },
+    "taskDueToday": {
+      "title": "Rok danes: {title}"
+    },
+    "taskDue": {
+      "title": "Rok {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# opravilo je zamujeno} two {# opravili sta zamujeni} few {# opravila so zamujena} other {# opravil je zamujenih}}",
+      "body": "{title}",
+      "bodyMore": "{title} in še več"
+    },
+    "coupleEmail": {
+      "replied": "{name} je odgovoril(a)",
+      "updated": "{name} je spremenil(a) potrditev",
+      "summary": "{attending} pride, {declined} ne pride",
+      "seeAll": "Poglej vse odgovore"
+    }
+  }
+}

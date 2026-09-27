@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} 已回覆",
+      "body": "{attending} 位出席，{declined} 位不出席"
+    },
+    "rsvpUpdated": {
+      "title": "{name} 更新了回覆",
+      "body": "{attending} 位出席，{declined} 位不出席"
+    },
+    "taskAssigned": {
+      "title": "{who} 指派給你一項待辦",
+      "body": "{title}",
+      "bodyDue": "{title} · {date} 到期"
+    },
+    "someone": "有人",
+    "paymentSoon": {
+      "title": "即將付款：{name}",
+      "body": "{amount} · {date} 到期"
+    },
+    "paymentLate": {
+      "title": "付款逾期：{name}",
+      "body": "{amount} · {date} 到期"
+    },
+    "hotelCutoff": {
+      "title": "團體房截止日將至：{name}",
+      "body": "賓客須在 {date} 前預訂",
+      "bodyRooms": "賓客須在 {date} 前預訂 · 已訂 {booked}/{held} 間"
+    },
+    "taskDueToday": {
+      "title": "今天到期：{title}"
+    },
+    "taskDue": {
+      "title": "{date} 到期：{title}"
+    },
+    "tasksOverdue": {
+      "title": "{count} 項待辦已逾期",
+      "body": "{title}",
+      "bodyMore": "{title} 等"
+    },
+    "coupleEmail": {
+      "replied": "{name} 已回覆",
+      "updated": "{name} 更新了回覆",
+      "summary": "{attending} 位出席，{declined} 位不出席",
+      "seeAll": "查看所有回覆"
+    }
+  }
+}

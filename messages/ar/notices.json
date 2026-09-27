@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "ردّ {name}",
+      "body": "سيحضر: {attending}، لن يحضر: {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "عدّل {name} ردّه",
+      "body": "سيحضر: {attending}، لن يحضر: {declined}"
+    },
+    "taskAssigned": {
+      "title": "أسند إليك {who} مهمة",
+      "body": "{title}",
+      "bodyDue": "{title} · الموعد {date}"
+    },
+    "someone": "شخص ما",
+    "paymentSoon": {
+      "title": "دفعة مستحقة قريبًا: {name}",
+      "body": "{amount} · الاستحقاق {date}"
+    },
+    "paymentLate": {
+      "title": "دفعة متأخرة: {name}",
+      "body": "{amount} · الاستحقاق {date}"
+    },
+    "hotelCutoff": {
+      "title": "اقترب موعد حجز الغرف الجماعي: {name}",
+      "body": "على الضيوف الحجز قبل {date}",
+      "bodyRooms": "على الضيوف الحجز قبل {date} · حُجزت {booked} من {held} غرفة"
+    },
+    "taskDueToday": {
+      "title": "مستحقة اليوم: {title}"
+    },
+    "taskDue": {
+      "title": "مستحقة في {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "مهام متأخرة: {count}",
+      "body": "{title}",
+      "bodyMore": "{title} ومهام أخرى"
+    },
+    "coupleEmail": {
+      "replied": "ردّ {name}",
+      "updated": "عدّل {name} ردّه",
+      "summary": "سيحضر: {attending}، لن يحضر: {declined}",
+      "seeAll": "عرض كل الردود"
+    }
+  }
+}

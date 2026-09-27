@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} ने जवाब दिया",
+      "body": "{attending} आ रहे हैं, {declined} नहीं आ रहे"
+    },
+    "rsvpUpdated": {
+      "title": "{name} ने अपना जवाब बदला",
+      "body": "{attending} आ रहे हैं, {declined} नहीं आ रहे"
+    },
+    "taskAssigned": {
+      "title": "{who} ने आपको एक काम सौंपा",
+      "body": "{title}",
+      "bodyDue": "{title} · देय {date}"
+    },
+    "someone": "कोई",
+    "paymentSoon": {
+      "title": "भुगतान जल्द देय: {name}",
+      "body": "{amount} · देय {date}"
+    },
+    "paymentLate": {
+      "title": "भुगतान बकाया: {name}",
+      "body": "{amount} · देय {date}"
+    },
+    "hotelCutoff": {
+      "title": "रूम ब्लॉक की अंतिम तिथि नज़दीक: {name}",
+      "body": "मेहमानों को {date} तक बुक करना होगा",
+      "bodyRooms": "मेहमानों को {date} तक बुक करना होगा · {held} में से {booked} कमरे बुक"
+    },
+    "taskDueToday": {
+      "title": "आज देय: {title}"
+    },
+    "taskDue": {
+      "title": "{date} को देय: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# काम बकाया है} other {# काम बकाया हैं}}",
+      "body": "{title}",
+      "bodyMore": "{title} और अन्य"
+    },
+    "coupleEmail": {
+      "replied": "{name} ने जवाब दिया",
+      "updated": "{name} ने अपना जवाब बदला",
+      "summary": "{attending} आ रहे हैं, {declined} नहीं आ रहे",
+      "seeAll": "सभी जवाब देखें"
+    }
+  }
+}

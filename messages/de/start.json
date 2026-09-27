@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – plant eure Hochzeit gemeinsam",
+    "metaDescription": "Gäste, Zusagen, Sitzplan, Budget, Locations, Reisen, Inspiration und eure Hochzeitswebsite – alles an einem ruhigen Ort, in eurer Sprache.",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen",
+    "eyebrow": "Hochzeitsplanung, gemeinsam",
+    "title": "Alles für eure Hochzeit, an einem ruhigen Ort.",
+    "intro": "Plant Gäste, Zusagen, Sitzordnung, Budget, Locations und Reisen mit Partner und Familie, auf dem Handy oder Laptop.",
+    "start": "Kostenlos mit der Planung beginnen",
+    "seeInside": "Sieh dir an, was drin ist",
+    "featuresTitle": "Eine App statt zwölf Tabellen",
+    "featuresText": "Jeder Teil eurer Planung spricht mit den anderen. Zusagen fließen in den Sitzplan, gebuchte Locations auf eure Website.",
+    "features": {
+      "guests": {
+        "title": "Gästeliste",
+        "text": "Haushalte, Seiten, Ernährungswünsche und CSV-Import in Minuten."
+      },
+      "rsvp": {
+        "title": "Zusagen",
+        "text": "Ein privater Link pro Haushalt. Antworten kommen live an."
+      },
+      "seating": {
+        "title": "Sitzplan",
+        "text": "Zieh Gäste auf Plätze. Familien zusammen, Ex-Partner getrennt."
+      },
+      "budget": {
+        "title": "Budget",
+        "text": "Kategorien, Anzahlungen und Fälligkeiten, ohne Überraschungen."
+      },
+      "venues": {
+        "title": "Locations & Dienstleister",
+        "text": "Direkt vergleichen und dann mit gutem Gefühl buchen."
+      },
+      "travel": {
+        "title": "Hotels & Reisen",
+        "text": "Zimmerkontingente, Flüge und eine Ankunftstafel für Abholungen."
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "text": "Ideen sammeln, Farbpaletten finden und gemeinsam entscheiden."
+      },
+      "website": {
+        "title": "Hochzeitswebsite",
+        "text": "Fünf schöne Vorlagen mit eingebauter Zusage-Funktion."
+      },
+      "timeline": {
+        "title": "Zeitplan",
+        "text": "Ein Aufgabenplan von zwölf Monaten vorher bis zum großen Tag."
+      },
+      "languages": {
+        "title": "25 Sprachen",
+        "text": "Ihr plant in eurer Sprache; jeder Gast bekommt Website, Zusage und E-Mails in seiner."
+      }
+    },
+    "closingTitle": "Sagt Ja zu weniger Stress.",
+    "closingText": "Ladet Partner, Eltern oder Hochzeitsplaner ein und plant alles gemeinsam in Echtzeit.",
+    "create": "Eure Hochzeit anlegen",
+    "footer": "Mit Liebe gemacht · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · Lissabon",
+      "daysToGo": "Tage noch",
+      "attending": "kommen",
+      "declined": "abgesagt",
+      "waiting": "offen",
+      "budget": "Budget",
+      "budgetOf": "{spent} von {total}"
+    }
+  },
+  "login": {
+    "title": "Anmelden",
+    "welcome": "Willkommen",
+    "intro": "Melde dich an oder erstelle ein Konto. Kein Passwort nötig.",
+    "errorLink": "Dieser Anmeldelink ist abgelaufen oder wurde schon benutzt. Bitte fordere einen neuen an.",
+    "errorGoogle": "Die Anmeldung mit Google ist gerade nicht verfügbar. Bitte nutze deine E-Mail.",
+    "google": "Weiter mit Google",
+    "or": "oder",
+    "email": "E-Mail",
+    "emailPlaceholder": "du@beispiel.de",
+    "send": "Anmeldelink per E-Mail senden",
+    "checkInbox": "Schau in dein Postfach",
+    "sentTo": "Wir haben eine E-Mail an <b>{email}</b> geschickt. Klick auf den Link darin (in diesem Browser) oder gib unten den Code aus der E-Mail ein.",
+    "code": "Code aus der E-Mail",
+    "signInWithCode": "Mit Code anmelden",
+    "again": "Neue E-Mail senden oder andere Adresse verwenden",
+    "setupTitle": "Fast geschafft: Supabase ist noch nicht verbunden.",
+    "setupText": "Erstelle eine Datei <code>.env.local</code> mit deiner Supabase-URL und dem Publishable Key (siehe <code>.env.example</code> und README) und starte dann <code>npm run dev</code> neu."
+  },
+  "welcome": {
+    "title": "Wähle deine Sprache",
+    "intro": "Vow spricht überall diese Sprache. Du kannst sie jederzeit im Kontomenü ändern.",
+    "suggested": "Vorgeschlagen",
+    "continue": "Weiter auf {language}",
+    "guestsNote": "Eure Gäste sehen Website, Zusageseite und E-Mails in ihrer eigenen Sprache — das legst du für jeden Haushalt fest."
+  },
+  "onboarding": {
+    "metaTitle": "Eure Hochzeit anlegen",
+    "backToDashboard": "Zurück zur Übersicht",
+    "progress": "Fortschritt",
+    "stepOf": "Schritt {step} von {total}",
+    "stepOfTitle": "Schritt {step} von {total}: {title}",
+    "back": "Zurück",
+    "continue": "Weiter",
+    "create": "Unsere Hochzeit anlegen",
+    "steps": {
+      "names": {
+        "title": "Wer heiratet?",
+        "text": "Herzlichen Glückwunsch! Fangen wir mit euren Namen an."
+      },
+      "when": {
+        "title": "Wann und wo?",
+        "text": "Kein Problem, wenn ihr es noch nicht wisst."
+      },
+      "size": {
+        "title": "Wie groß wird die Feier?",
+        "text": "Das hilft uns bei Budget und Sitzordnung."
+      },
+      "style": {
+        "title": "Was ist euer Stil?",
+        "text": "Wir nutzen das für Inspiration und Website-Vorschläge."
+      }
+    },
+    "defaults": {
+      "ceremony": "Trauung",
+      "reception": "Feier",
+      "tagline": "Wir heiraten",
+      "rsvpIntro": "Wir können es kaum erwarten, mit euch zu feiern. Bitte sagt uns, ob ihr kommen könnt.",
+      "faqChildren": "Sind Kinder willkommen?",
+      "faqParking": "Gibt es Parkplätze an der Location?",
+      "faqWear": "Was soll ich anziehen?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Partner eins",
+    "partnerB": "Partner zwei",
+    "partnerAPlaceholder": "z. B. Ian",
+    "partnerBPlaceholder": "z. B. Maria",
+    "date": "Hochzeitsdatum",
+    "dateHint": "Noch nicht entschieden? Leer lassen und später ergänzen.",
+    "location": "Ort",
+    "locationHint": "Stadt, Region oder Location, was ihr bisher wisst.",
+    "locationPlaceholder": "z. B. Tegernsee, Deutschland",
+    "guests": "Geschätzte Gästezahl",
+    "guestsHint": "Eine grobe Schätzung reicht.",
+    "guestsPlaceholder": "z. B. 120",
+    "currency": "Währung",
+    "chooseCurrency": "Währung wählen",
+    "style": "Stil (wählt alles, was zu euch passt)",
+    "accent": "Akzentfarbe der App",
+    "accents": {
+      "rose": "Altrosa",
+      "sage": "Salbei"
+    },
+    "styles": {
+      "Classic": "Klassisch",
+      "Modern": "Modern",
+      "Romantic": "Romantisch",
+      "Rustic": "Rustikal",
+      "Boho": "Boho",
+      "Garden": "Garten",
+      "Beach": "Strand",
+      "Glam": "Glamourös",
+      "Minimal": "Minimalistisch",
+      "Vintage": "Vintage",
+      "Destination": "Im Ausland",
+      "Intimate": "Im kleinen Kreis"
+    },
+    "detailsTitle": "Hochzeitsdetails",
+    "detailsViewOnly": "Du hast nur Lesezugriff. Frag einen Eigentümer, wenn du etwas ändern musst.",
+    "detailsText": "Namen, Datum, Ort und Stil. Änderungen gelten überall in der App.",
+    "saveChanges": "Änderungen speichern",
+    "saved": "Hochzeitsdetails gespeichert"
+  },
+  "roles": {
+    "owner": {
+      "label": "Eigentümer",
+      "description": "Voller Zugriff, verwaltet Mitwirkende"
+    },
+    "editor": {
+      "label": "Bearbeiter",
+      "description": "Kann alles hinzufügen und ändern"
+    },
+    "viewer": {
+      "label": "Betrachter",
+      "description": "Kann ansehen, aber nichts ändern"
+    }
+  },
+  "invite": {
+    "metaTitle": "Du bist eingeladen",
+    "used": "Diese Einladung wurde schon benutzt",
+    "invalid": "Diese Einladung ist ungültig",
+    "expired": "Sie ist abgelaufen. Bitte das Paar um einen neuen Link.",
+    "askNew": "Bitte das Paar um einen neuen Link, falls du noch Zugriff brauchst.",
+    "dashboard": "Zu meiner Übersicht",
+    "title": "Hilf bei der Hochzeit von {couple}",
+    "as": "Du bist als <b>{role}</b> eingeladen: {description}.",
+    "signedInAs": "Angemeldet als {email}",
+    "accept": "Annehmen und mitplanen"
+  }
+}

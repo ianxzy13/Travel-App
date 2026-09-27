@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – planeiem o vosso casamento juntos",
+    "metaDescription": "Convidados, confirmações, mesas, orçamento, espaços, viagens, inspiração e o site do vosso casamento – tudo num só lugar tranquilo, no vosso idioma.",
+    "signIn": "Entrar",
+    "getStarted": "Começar",
+    "eyebrow": "Planear o casamento, juntos",
+    "title": "Tudo para o vosso casamento, num só lugar tranquilo.",
+    "intro": "Planeiem convidados, confirmações, mesas, orçamento, espaços e viagens com o vosso par e a família, no telemóvel ou no computador.",
+    "start": "Comecem a planear grátis",
+    "seeInside": "Vejam o que inclui",
+    "featuresTitle": "Uma app em vez de doze folhas de cálculo",
+    "featuresText": "Cada parte do vosso plano fala com as outras. As confirmações passam para as mesas e os espaços reservados para o vosso site.",
+    "features": {
+      "guests": {
+        "title": "Lista de convidados",
+        "text": "Agregados, lados, restrições alimentares e importação CSV em minutos."
+      },
+      "rsvp": {
+        "title": "Confirmações",
+        "text": "Uma ligação privada por agregado. As respostas chegam em tempo real."
+      },
+      "seating": {
+        "title": "Mesas",
+        "text": "Arrastem convidados para os lugares. Famílias juntas, ex separados."
+      },
+      "budget": {
+        "title": "Orçamento",
+        "text": "Categorias, sinais e prazos, sem surpresas."
+      },
+      "venues": {
+        "title": "Espaços e fornecedores",
+        "text": "Comparem lado a lado e reservem com confiança."
+      },
+      "travel": {
+        "title": "Hotéis e viagens",
+        "text": "Blocos de quartos, voos e um quadro de chegadas para transferes."
+      },
+      "inspiration": {
+        "title": "Inspiração",
+        "text": "Guardem ideias, criem paletas de cores e decidam juntos."
+      },
+      "website": {
+        "title": "Site do casamento",
+        "text": "Cinco modelos bonitos com confirmação incluída."
+      },
+      "timeline": {
+        "title": "Cronograma",
+        "text": "Um plano de tarefas de doze meses antes até ao grande dia."
+      },
+      "languages": {
+        "title": "25 idiomas",
+        "text": "Vocês planeiam no vosso idioma; cada convidado recebe o site, a confirmação e os emails no seu."
+      }
+    },
+    "closingTitle": "Digam sim a menos stress.",
+    "closingText": "Convidem o vosso par, os pais ou o wedding planner e planeiem tudo juntos em tempo real.",
+    "create": "Criem o vosso casamento",
+    "footer": "Feito com amor · © {year} Vow",
+    "preview": {
+      "couple": "Ian e Maria · Lisboa",
+      "daysToGo": "dias para o casamento",
+      "attending": "vêm",
+      "declined": "não vêm",
+      "waiting": "a aguardar",
+      "budget": "Orçamento",
+      "budgetOf": "{spent} de {total}"
+    }
+  },
+  "login": {
+    "title": "Entrar",
+    "welcome": "Bem-vindos",
+    "intro": "Entrem ou criem a vossa conta. Não é preciso palavra-passe.",
+    "errorLink": "Essa ligação de acesso expirou ou já foi usada. Peçam uma nova.",
+    "errorGoogle": "O acesso com Google não está disponível agora. Usem o vosso email.",
+    "google": "Continuar com Google",
+    "or": "ou",
+    "email": "Email",
+    "emailPlaceholder": "voces@exemplo.pt",
+    "send": "Enviem-me uma ligação de acesso",
+    "checkInbox": "Vejam a vossa caixa de entrada",
+    "sentTo": "Enviámos um email para <b>{email}</b>. Cliquem na ligação (neste navegador) ou escrevam abaixo o código do email.",
+    "code": "Código do email",
+    "signInWithCode": "Entrar com o código",
+    "again": "Enviar novo email ou usar outro endereço",
+    "setupTitle": "Quase lá: o Supabase ainda não está ligado.",
+    "setupText": "Criem um ficheiro <code>.env.local</code> com o URL e a chave pública do Supabase (ver <code>.env.example</code> e o README) e reiniciem <code>npm run dev</code>."
+  },
+  "welcome": {
+    "title": "Escolham o vosso idioma",
+    "intro": "A Vow vai falar este idioma em todo o lado. Podem mudá-lo quando quiserem no menu da conta.",
+    "suggested": "Sugerido",
+    "continue": "Continuar em {language}",
+    "guestsNote": "Os vossos convidados veem o site, a página de confirmação e os emails no idioma deles — definem isso para cada agregado."
+  },
+  "onboarding": {
+    "metaTitle": "Criem o vosso casamento",
+    "backToDashboard": "Voltar ao painel",
+    "progress": "Progresso",
+    "stepOf": "Passo {step} de {total}",
+    "stepOfTitle": "Passo {step} de {total}: {title}",
+    "back": "Voltar",
+    "continue": "Continuar",
+    "create": "Criar o nosso casamento",
+    "steps": {
+      "names": {
+        "title": "Quem vai casar?",
+        "text": "Parabéns! Comecemos pelos vossos nomes."
+      },
+      "when": {
+        "title": "Quando e onde?",
+        "text": "Não faz mal se ainda não souberem."
+      },
+      "size": {
+        "title": "Qual o tamanho da festa?",
+        "text": "Ajuda-nos a planear o orçamento e as mesas."
+      },
+      "style": {
+        "title": "Qual é o vosso estilo?",
+        "text": "Vamos usá-lo para inspiração e sugestões para o site."
+      }
+    },
+    "defaults": {
+      "ceremony": "Cerimónia",
+      "reception": "Copo-d’água",
+      "tagline": "Vamos casar",
+      "rsvpIntro": "Mal podemos esperar para celebrar convosco. Digam-nos se podem vir.",
+      "faqChildren": "As crianças são bem-vindas?",
+      "faqParking": "Há estacionamento no local?",
+      "faqWear": "O que devo vestir?"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "Primeira pessoa",
+    "partnerB": "Segunda pessoa",
+    "partnerAPlaceholder": "p. ex. Ian",
+    "partnerBPlaceholder": "p. ex. Maria",
+    "date": "Data do casamento",
+    "dateHint": "Ainda não decidida? Deixem em branco e acrescentem depois.",
+    "location": "Local",
+    "locationHint": "Cidade, região ou espaço, o que já souberem.",
+    "locationPlaceholder": "p. ex. Sintra, Portugal",
+    "guests": "Convidados previstos",
+    "guestsHint": "Uma estimativa serve.",
+    "guestsPlaceholder": "p. ex. 120",
+    "currency": "Moeda",
+    "chooseCurrency": "Escolham uma moeda",
+    "style": "Estilo (escolham os que vos representam)",
+    "accent": "Cor de destaque da app",
+    "accents": {
+      "rose": "Rosa velho",
+      "sage": "Salva"
+    },
+    "styles": {
+      "Classic": "Clássico",
+      "Modern": "Moderno",
+      "Romantic": "Romântico",
+      "Rustic": "Rústico",
+      "Boho": "Boho",
+      "Garden": "Jardim",
+      "Beach": "Praia",
+      "Glam": "Glamoroso",
+      "Minimal": "Minimalista",
+      "Vintage": "Vintage",
+      "Destination": "No estrangeiro",
+      "Intimate": "Íntimo"
+    },
+    "detailsTitle": "Detalhes do casamento",
+    "detailsViewOnly": "Têm acesso apenas de leitura. Peçam a um proprietário se precisarem de alterar algo.",
+    "detailsText": "Nomes, data, local e estilo. As alterações aplicam-se em toda a app.",
+    "saveChanges": "Guardar alterações",
+    "saved": "Detalhes do casamento guardados"
+  },
+  "roles": {
+    "owner": {
+      "label": "Proprietário",
+      "description": "Acesso total, gere colaboradores"
+    },
+    "editor": {
+      "label": "Editor",
+      "description": "Pode adicionar e alterar tudo"
+    },
+    "viewer": {
+      "label": "Leitor",
+      "description": "Pode ver mas não alterar"
+    }
+  },
+  "invite": {
+    "metaTitle": "Receberam um convite",
+    "used": "Este convite já foi usado",
+    "invalid": "Este convite não é válido",
+    "expired": "Expirou. Peçam ao casal uma nova ligação.",
+    "askNew": "Peçam ao casal uma nova ligação se ainda precisarem de acesso.",
+    "dashboard": "Ir para o meu painel",
+    "title": "Ajudem a planear o casamento de {couple}",
+    "as": "Foram convidados como <b>{role}</b>: {description}.",
+    "signedInAs": "Sessão iniciada como {email}",
+    "accept": "Aceitar e começar a planear"
+  }
+}

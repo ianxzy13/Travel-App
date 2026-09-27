@@ -226,7 +226,7 @@
     "import": {
       "title": "Import guests",
       "description": "Bring in the spreadsheet you’ve already started. Nothing is saved until the last step.",
-      "back": "Back to guests",
+      "backToGuests": "Back to guests",
       "steps": {
         "label": "Import steps",
         "upload": "Upload",

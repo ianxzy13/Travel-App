@@ -1,0 +1,200 @@
+{
+  "landing": {
+    "metaTitle": "Vow – 2 人で一緒に結婚式を準備",
+    "metaDescription": "ゲスト、出欠、席次表、予算、会場、旅行、アイデア、そして結婚式サイト。すべてを 1 か所で、あなたの言語で落ち着いて。",
+    "signIn": "ログイン",
+    "getStarted": "はじめる",
+    "eyebrow": "一緒に準備する結婚式",
+    "title": "結婚式のすべてを、落ち着いた 1 か所に。",
+    "intro": "ゲスト、出欠、席次、予算、会場、旅行を、パートナーや家族と一緒にスマホやパソコンから準備できます。",
+    "start": "無料で準備をはじめる",
+    "seeInside": "機能を見る",
+    "featuresTitle": "12 個のスプレッドシートの代わりに、1 つのアプリ",
+    "featuresText": "計画のすべてがつながっています。出欠は席次表に、予約した会場は結婚式サイトに反映されます。",
+    "features": {
+      "guests": {
+        "title": "ゲストリスト",
+        "text": "世帯、新郎新婦側、食事制限、CSV インポートも数分で。"
+      },
+      "rsvp": {
+        "title": "出欠確認",
+        "text": "世帯ごとに専用リンクを 1 つ。回答はリアルタイムで届きます。"
+      },
+      "seating": {
+        "title": "席次表",
+        "text": "ゲストを席にドラッグ。家族は一緒に、元恋人は離して。"
+      },
+      "budget": {
+        "title": "予算",
+        "text": "カテゴリー、内金、支払期日。想定外の出費なし。"
+      },
+      "venues": {
+        "title": "会場と業者",
+        "text": "並べて比較し、安心して予約。"
+      },
+      "travel": {
+        "title": "ホテルと旅行",
+        "text": "団体予約、フライト、送迎用の到着一覧。"
+      },
+      "inspiration": {
+        "title": "アイデア",
+        "text": "アイデアをピン留めし、カラーパレットを作り、一緒に決める。"
+      },
+      "website": {
+        "title": "結婚式サイト",
+        "text": "出欠フォーム付きの美しいテンプレートが 5 種類。"
+      },
+      "timeline": {
+        "title": "タイムライン",
+        "text": "12 か月前から当日までのやることリスト。"
+      },
+      "languages": {
+        "title": "25 言語",
+        "text": "あなたは自分の言語で準備し、ゲストはサイト、出欠ページ、メールをそれぞれの言語で受け取ります。"
+      }
+    },
+    "closingTitle": "ストレスの少ない結婚式準備を。",
+    "closingText": "パートナー、両親、プランナーを招待して、リアルタイムで一緒に準備しましょう。",
+    "create": "結婚式を作成",
+    "footer": "心を込めて · © {year} Vow",
+    "preview": {
+      "couple": "Ian & Maria · リスボン",
+      "daysToGo": "日",
+      "attending": "出席",
+      "declined": "欠席",
+      "waiting": "未回答",
+      "budget": "予算",
+      "budgetOf": "{spent} / {total}"
+    }
+  },
+  "login": {
+    "title": "ログイン",
+    "welcome": "ようこそ",
+    "intro": "ログインまたはアカウントを作成します。パスワードは不要です。",
+    "errorLink": "ログインリンクの期限が切れているか、すでに使用されています。新しいリンクをリクエストしてください。",
+    "errorGoogle": "現在 Google でのログインは利用できません。メールアドレスをお使いください。",
+    "google": "Google で続ける",
+    "or": "または",
+    "email": "メールアドレス",
+    "emailPlaceholder": "you@example.com",
+    "send": "ログインリンクをメールで送る",
+    "checkInbox": "受信トレイを確認してください",
+    "sentTo": "<b>{email}</b> にメールを送信しました。メール内のリンクを（このブラウザで）クリックするか、下にメールのコードを入力してください。",
+    "code": "メールのコード",
+    "signInWithCode": "コードでログイン",
+    "again": "メールを再送信する、または別のアドレスを使う",
+    "setupTitle": "あと少し：Supabase がまだ接続されていません。",
+    "setupText": "Supabase の URL と公開キーを記載した <code>.env.local</code> ファイルを作成し（<code>.env.example</code> と README を参照）、<code>npm run dev</code> を再起動してください。"
+  },
+  "welcome": {
+    "title": "言語を選んでください",
+    "intro": "Vow はどこでもこの言語で表示されます。アカウントメニューからいつでも変更できます。",
+    "suggested": "おすすめ",
+    "continue": "{language}で続ける",
+    "guestsNote": "ゲストはサイト、出欠ページ、メールを自分の言語で見られます。言語は世帯ごとに設定します。"
+  },
+  "onboarding": {
+    "metaTitle": "結婚式を作成",
+    "backToDashboard": "ダッシュボードに戻る",
+    "progress": "進捗",
+    "stepOf": "ステップ {step} / {total}",
+    "stepOfTitle": "ステップ {step} / {total}：{title}",
+    "back": "戻る",
+    "continue": "次へ",
+    "create": "結婚式を作成する",
+    "steps": {
+      "names": {
+        "title": "結婚するのはどなたですか？",
+        "text": "おめでとうございます！まずはお 2 人のお名前から。"
+      },
+      "when": {
+        "title": "いつ、どこで？",
+        "text": "まだ決まっていなくても大丈夫です。"
+      },
+      "size": {
+        "title": "規模はどのくらい？",
+        "text": "予算と席次の計画に役立ちます。"
+      },
+      "style": {
+        "title": "どんな雰囲気が好きですか？",
+        "text": "アイデアとサイトの提案に使います。"
+      }
+    },
+    "defaults": {
+      "ceremony": "挙式",
+      "reception": "披露宴",
+      "tagline": "私たちは結婚します",
+      "rsvpIntro": "皆さまと一緒にお祝いできるのを楽しみにしています。ご出席いただけるかお知らせください。",
+      "faqChildren": "子ども連れでも大丈夫ですか？",
+      "faqParking": "会場に駐車場はありますか？",
+      "faqWear": "何を着ていけばいいですか？"
+    }
+  },
+  "weddingForm": {
+    "partnerA": "パートナー 1",
+    "partnerB": "パートナー 2",
+    "partnerAPlaceholder": "例：Ian",
+    "partnerBPlaceholder": "例：Maria",
+    "date": "結婚式の日付",
+    "dateHint": "まだ決まっていませんか？空欄にして後で追加できます。",
+    "location": "場所",
+    "locationHint": "都市、地域、会場など、今わかっていることで大丈夫です。",
+    "locationPlaceholder": "例：ポルトガル、シントラ",
+    "guests": "ゲストの予定人数",
+    "guestsHint": "おおよその数で大丈夫です。",
+    "guestsPlaceholder": "例：120",
+    "currency": "通貨",
+    "chooseCurrency": "通貨を選ぶ",
+    "style": "スタイル（しっくりくるものをいくつでも）",
+    "accent": "アプリのアクセントカラー",
+    "accents": {
+      "rose": "ダスティローズ",
+      "sage": "セージ"
+    },
+    "styles": {
+      "Classic": "クラシック",
+      "Modern": "モダン",
+      "Romantic": "ロマンチック",
+      "Rustic": "ラスティック",
+      "Boho": "ボヘミアン",
+      "Garden": "ガーデン",
+      "Beach": "ビーチ",
+      "Glam": "グラマラス",
+      "Minimal": "ミニマル",
+      "Vintage": "ヴィンテージ",
+      "Destination": "リゾート婚",
+      "Intimate": "少人数"
+    },
+    "detailsTitle": "結婚式の詳細",
+    "detailsViewOnly": "閲覧のみの権限です。変更が必要な場合はオーナーに依頼してください。",
+    "detailsText": "名前、日付、場所、スタイル。変更はアプリ全体に反映されます。",
+    "saveChanges": "変更を保存",
+    "saved": "結婚式の詳細を保存しました"
+  },
+  "roles": {
+    "owner": {
+      "label": "オーナー",
+      "description": "すべての操作と共同作業者の管理ができます"
+    },
+    "editor": {
+      "label": "編集者",
+      "description": "すべてを追加・変更できます"
+    },
+    "viewer": {
+      "label": "閲覧者",
+      "description": "見ることはできますが、変更はできません"
+    }
+  },
+  "invite": {
+    "metaTitle": "招待が届いています",
+    "used": "この招待はすでに使用されています",
+    "invalid": "この招待は無効です",
+    "expired": "期限が切れています。新郎新婦に新しいリンクを送ってもらってください。",
+    "askNew": "まだアクセスが必要な場合は、新郎新婦に新しいリンクを送ってもらってください。",
+    "dashboard": "ダッシュボードへ",
+    "title": "{couple}の結婚式の準備を手伝う",
+    "as": "<b>{role}</b>として招待されました：{description}。",
+    "signedInAs": "{email} でログイン中",
+    "accept": "承諾して準備をはじめる"
+  }
+}

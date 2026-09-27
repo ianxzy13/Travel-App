@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name} hat geantwortet",
+      "body": "{attending} kommen, {declined} kommen nicht"
+    },
+    "rsvpUpdated": {
+      "title": "{name} hat die Zusage geändert",
+      "body": "{attending} kommen, {declined} kommen nicht"
+    },
+    "taskAssigned": {
+      "title": "{who} hat dir eine Aufgabe gegeben",
+      "body": "{title}",
+      "bodyDue": "{title} · fällig am {date}"
+    },
+    "someone": "Jemand",
+    "paymentSoon": {
+      "title": "Zahlung bald fällig: {name}",
+      "body": "{amount} · fällig am {date}"
+    },
+    "paymentLate": {
+      "title": "Zahlung überfällig: {name}",
+      "body": "{amount} · fällig am {date}"
+    },
+    "hotelCutoff": {
+      "title": "Frist für Zimmerkontingent bald: {name}",
+      "body": "Gäste müssen bis {date} buchen",
+      "bodyRooms": "Gäste müssen bis {date} buchen · {booked} von {held} Zimmern gebucht"
+    },
+    "taskDueToday": {
+      "title": "Heute fällig: {title}"
+    },
+    "taskDue": {
+      "title": "Fällig am {date}: {title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, one {# Aufgabe ist überfällig} other {# Aufgaben sind überfällig}}",
+      "body": "{title}",
+      "bodyMore": "{title} und mehr"
+    },
+    "coupleEmail": {
+      "replied": "{name} hat geantwortet",
+      "updated": "{name} hat die Zusage geändert",
+      "summary": "{attending} kommen, {declined} kommen nicht",
+      "seeAll": "Alle Antworten ansehen"
+    }
+  }
+}

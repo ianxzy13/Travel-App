@@ -1,0 +1,48 @@
+{
+  "notices": {
+    "rsvpReplied": {
+      "title": "{name}から返信がありました",
+      "body": "出席 {attending}、欠席 {declined}"
+    },
+    "rsvpUpdated": {
+      "title": "{name}が出欠を更新しました",
+      "body": "出席 {attending}、欠席 {declined}"
+    },
+    "taskAssigned": {
+      "title": "{who}からやることが割り当てられました",
+      "body": "{title}",
+      "bodyDue": "{title} · 期限 {date}"
+    },
+    "someone": "誰か",
+    "paymentSoon": {
+      "title": "まもなく支払期日：{name}",
+      "body": "{amount} · 期限 {date}"
+    },
+    "paymentLate": {
+      "title": "支払期日超過：{name}",
+      "body": "{amount} · 期限 {date}"
+    },
+    "hotelCutoff": {
+      "title": "団体予約の締め切りが近づいています：{name}",
+      "body": "ゲストは {date} までに予約が必要です",
+      "bodyRooms": "ゲストは {date} までに予約が必要です · {held} 室中 {booked} 室予約済み"
+    },
+    "taskDueToday": {
+      "title": "今日が期限：{title}"
+    },
+    "taskDue": {
+      "title": "{date} が期限：{title}"
+    },
+    "tasksOverdue": {
+      "title": "{count, plural, other {期限切れのやることが # 件あります}}",
+      "body": "{title}",
+      "bodyMore": "{title} ほか"
+    },
+    "coupleEmail": {
+      "replied": "{name}から返信がありました",
+      "updated": "{name}が出欠を更新しました",
+      "summary": "出席 {attending}、欠席 {declined}",
+      "seeAll": "すべての返信を見る"
+    }
+  }
+}
