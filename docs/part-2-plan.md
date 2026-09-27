@@ -95,3 +95,47 @@ friendly empty states. Vitest tests for: improved auto-arrange (language groupin
 shuttle grouping, currency conversion, locale formatting. Extend the Playwright smoke test to open
 the RSVP page in Slovenian and submit travel details. Every guest-facing text in English and
 Slovenian before a phase is done.
+
+## Owner's changes (2026-09-27)
+
+- **Publish only after Part 2** is complete (merge the phase branches into `main`, push, deploy).
+- **Languages: as many as possible, to go worldwide.** At least English, Spanish, Mandarin
+  Chinese, Portuguese, German, Italian. Chosen set (25): en, es, pt, fr, de, it, nl, pl, sl, hr,
+  sv, el, tr, ru, uk, ar (right-to-left), hi, zh-CN (Simplified), zh-TW (Traditional), ja, ko,
+  id, vi, th. Guest-facing pages and emails fully translated in Phase 11; the couple's app
+  frame too, remaining app screens module by module afterwards. Translations are written by
+  the assistant; native-speaker review recommended before marketing in a country.
+- **Flights:** Google Flights and Skyscanner (pre-filled deep links; no public/free APIs).
+- **Hotels:** Booking.com (pre-filled search deep links; affiliate ID env var for later).
+- **Venues:** The Knot Worldwide network per country (The Knot / WeddingWire US, Hitched UK,
+  Bodas.net ES/MX, Matrimonio.com IT, Mariages.net FR, Casamentos PT/BR, …) with Google Maps
+  as the worldwide fallback.
+- **Find vendors of every kind** (added to Phase 12): DJs, bands, photographers, videographers,
+  florists, caterers, cake makers, hair & makeup, transport, and restaurants (rehearsal dinner,
+  welcome drinks, farewell brunch). A "Find" button per category that opens a pre-filled search
+  for the wedding's location on the right site for that country (The Knot Worldwide network),
+  Google Maps, and TripAdvisor/Google for restaurants. Paste any vendor's web page to add it
+  (reusing the inspiration link-preview), and compare quotes side by side like venues.
+
+## Phase 16: The couple's wishlist ("be my agent and customer")
+
+Ideas from thinking as both the couple using Vow and the business behind it. The owner reviews
+the list at the end of Phase 15 and picks what to build; the starred ones are the strongest.
+
+- ★ **Guest portal**: each household's private link (`/r/<code>`) becomes their personal page in
+  their language: their RSVP, travel and hotel, the schedule with maps, dress code, FAQ, and on
+  the day their table.
+- ★ **Announcements**: send an update to all or some guests ("the shuttle leaves at 14:00"),
+  by email in each guest's language, or as a ready-to-paste WhatsApp message.
+- ★ **Calendar sync**: a private calendar feed (.ics) of to-dos, payment due dates and events,
+  so they appear in Google/Apple/Outlook calendars; "add to calendar" for guests.
+- ★ **Day-of mode**: a big-button phone view for the couple and coordinator: what's happening
+  now and next, one-tap vendor calls, who has arrived.
+- **Weather & golden hour**: typical weather and sunset time for the date and place (Open-Meteo,
+  free) to plan photos and a rain plan.
+- **Gifts & thank-yous**: record gifts per household and tick off thank-you notes.
+- **Shared photo album**: guests upload their photos via a QR code on the tables.
+- **Printable stationery**: save-the-dates, invitations and menus as PDFs with a QR code to the
+  RSVP page, in the guest's language.
+- **Install on the phone** (PWA) with the schedule available offline.
+- **Price guide**: typical costs per category for the country, and cost per guest.
