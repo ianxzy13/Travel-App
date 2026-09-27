@@ -1,0 +1,376 @@
+{
+  "common": {
+    "language": "Idioma",
+    "moreLanguages": "Más idiomas",
+    "yourTime": "{time} en tu hora"
+  },
+  "site": {
+    "sections": {
+      "home": "Inicio",
+      "story": "Nuestra historia",
+      "events": "Programa",
+      "travel": "Viaje y alojamiento",
+      "rsvp": "Confirmar asistencia",
+      "party": "Cortejo nupcial",
+      "registry": "Lista de regalos",
+      "faq": "Preguntas",
+      "gallery": "Galería"
+    },
+    "nav": "Secciones del sitio",
+    "dateTbd": "Fecha por confirmar",
+    "newTab": "(se abre en una pestaña nueva)",
+    "rsvpButton": "Confirmar asistencia",
+    "countdown": {
+      "days": "{count, plural, one {Falta # día} other {Faltan # días}}",
+      "daysWord": "{count, plural, one {día para la boda} other {días para la boda}}",
+      "today": "¡Hoy es el gran día!",
+      "married": "Felizmente casados"
+    },
+    "madeWith": "Hecho con <link>Vow</link>",
+    "empty": {
+      "events": "Añade eventos en Ajustes → Eventos y aparecerán aquí.",
+      "travel": "Marca hoteles con «Mostrar en el sitio web» o añade consejos de viaje en el editor.",
+      "other": "Aún no hay nada aquí. Añade contenido en el editor.",
+      "hidden": "Esta sección permanece oculta en tu sitio publicado hasta entonces."
+    },
+    "event": {
+      "date": "Fecha",
+      "time": "Hora",
+      "place": "Lugar",
+      "dressCode": "Código de vestimenta",
+      "openMap": "Abrir en Google Maps"
+    },
+    "travel": {
+      "airport": "Aeropuerto más cercano: <b>{code}</b>",
+      "searchFlights": "Buscar vuelos",
+      "perNight": "Desde <b>{price}</b> por noche",
+      "code": "Nuestro código: <mono>{code}</mono>",
+      "bookBy": "Reserva antes del <b>{date}</b>",
+      "bookRoom": "Reservar habitación",
+      "bookRoomAt": "Reservar habitación en {name}",
+      "website": "Sitio web",
+      "websiteOf": "Sitio web de {name}",
+      "map": "Mapa",
+      "mapOf": "Mapa de {name}"
+    },
+    "rsvp": {
+      "replyBy": "Por favor, responde antes del <b>{date}</b>.",
+      "or": "o usa el código de tu invitación"
+    },
+    "registry": {
+      "visit": "Visitar"
+    },
+    "gallery": {
+      "alt": "Foto de la pareja"
+    },
+    "preview": {
+      "bar": "Vista previa: solo tu equipo de boda puede verla hasta que la publiques.",
+      "back": "Volver al editor"
+    },
+    "password": {
+      "intro": "Este sitio web es privado. Introduce la contraseña de tu invitación.",
+      "label": "Contraseña",
+      "enter": "Entrar",
+      "wrong": "La contraseña no es correcta. Revisa tu invitación o pregunta a la pareja."
+    },
+    "meta": {
+      "weddingOf": "La boda de {couple}",
+      "website": "Sitio web de la boda"
+    }
+  },
+  "rsvp": {
+    "title": "Confirmar asistencia",
+    "dateTbd": "Fecha por confirmar",
+    "weddingOf": "La boda de",
+    "rsvpsBy": "Confirmaciones con <link>Vow</link>",
+    "enterCode": "Introduce el código de tu invitación (correo o tarjeta).",
+    "findIntro": "Encuentra tu invitación escribiendo tu nombre tal como aparece en ella.",
+    "orCode": "O usa el código de tu invitación",
+    "notFound": "Invitación no encontrada",
+    "notFoundText": "Ese enlace o código no corresponde a ninguna invitación. Revísalo e inténtalo de nuevo.",
+    "nothingYet": "Todavía no hay nada que confirmar. Vuelve a consultar más adelante.",
+    "code": {
+      "label": "Tu código de confirmación",
+      "continue": "Continuar",
+      "invalid": "Los códigos tienen 6 letras y números, por ejemplo K7P2QX."
+    },
+    "find": {
+      "label": "Tu nombre completo",
+      "placeholder": "Nombre y apellido",
+      "button": "Buscar",
+      "fullName": "Escribe tu nombre y apellido tal como aparecen en la invitación.",
+      "noMatch": "No encontramos ese nombre. Prueba con la ortografía de tu invitación o usa el código que aparece en ella.",
+      "failed": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "dear": "Queridos {name}:",
+    "update": "Actualiza tus respuestas a continuación.",
+    "invite": "Nos encantaría saber si podéis acompañarnos.",
+    "replyBy": "Por favor, responde antes del {date}.",
+    "closed": "El plazo para confirmar ha terminado.",
+    "closedContact": "¿Necesitas cambiar algo? {contact}",
+    "closedNoContact": "¿Necesitas cambiar algo? Ponte en contacto directamente con la pareja.",
+    "thanks": "¡Gracias!",
+    "thanksText": "Tu respuesta se ha enviado a {couple}. Puedes cambiarla cuando quieras con este mismo enlace.",
+    "thanksTextUntil": "Tu respuesta se ha enviado a {couple}. Puedes cambiarla hasta el {date} con este mismo enlace.",
+    "send": "Enviar nuestra respuesta",
+    "save": "Guardar cambios",
+    "change": "Cambiar nuestras respuestas",
+    "yourAnswers": "Tus respuestas",
+    "attending": "Asiste",
+    "notAttending": "No asiste",
+    "noAnswer": "Sin respuesta",
+    "cantMakeIt": "no puede asistir",
+    "noAnswerYet": "sin respuesta todavía",
+    "songRequest": "Canción pedida: {song}",
+    "form": {
+      "everyone": "Vamos todos",
+      "none": "Ninguno de nosotros puede ir",
+      "willAttend": "¿Asistirá {name} a {event}?",
+      "accept": "Acepta con alegría",
+      "decline": "Lamenta no poder asistir",
+      "meal": "Elección de menú",
+      "chooseMeal": "Elige un menú.",
+      "chooseAnswer": "Elige una respuesta.",
+      "missingMeal": "Elige un menú para cada persona que asiste.",
+      "missingAnswer": "Responde por todas las personas antes de enviar.",
+      "details": "Algunos detalles",
+      "plusOneName": "Nombre de tu acompañante (acompañante de {host})",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "dietary": "Necesidades alimentarias o alergias: {name}",
+      "dietaryPlaceholder": "p. ej. vegetariano, alergia a los frutos secos (déjalo vacío si no hay)",
+      "song": "Una canción que te haga bailar",
+      "songPlaceholder": "Artista – canción",
+      "message": "Un mensaje para {couple}",
+      "guestOf": "Acompañante de {name}",
+      "guest": "Invitado"
+    },
+    "errors": {
+      "rsvp_not_found": "No encontramos esa invitación. Revisa el enlace o el código.",
+      "deadline_passed": "El plazo para confirmar ha terminado. Ponte en contacto directamente con la pareja.",
+      "invalid_guest_or_event": "Algo en tus respuestas no coincide con tu invitación. Vuelve a cargar la página.",
+      "invalid_status": "Indica para cada persona si asiste o no.",
+      "not_allowed": "No tienes permiso para registrar respuestas de esta boda.",
+      "generic": "No pudimos guardar tu respuesta. Inténtalo de nuevo en un momento."
+    }
+  },
+  "board": {
+    "empty": "Este tablero está vacío por ahora.",
+    "photoBy": "Foto de <photographer>{name}</photographer> en <unsplash>Unsplash</unsplash>",
+    "madeWith": "Hecho con <link>Vow</link>",
+    "title": "Tablero compartido",
+    "fallbackAlt": "Inspiración"
+  },
+  "email": {
+    "previewInvite": "Estás invitado a la boda de {couple}",
+    "previewReminder": "Un recordatorio para confirmar tu asistencia a la boda de {couple}",
+    "eyebrowInvite": "Estás invitado",
+    "eyebrowReminder": "Un pequeño recordatorio",
+    "dear": "Queridos {name}:",
+    "bodyInvite": "Nos haría muy felices celebrarlo con vosotros. Contadnos quién puede venir usando vuestro enlace personal de confirmación.",
+    "bodyReminder": "Todavía no hemos recibido vuestra respuesta y nos encantaría saber si podéis acompañarnos. Solo lleva un minuto.",
+    "button": "Confirmar ahora",
+    "replyBy": "Por favor, responde antes del {date}.",
+    "fallback": "¿No funciona el botón? Abre {link} o introduce el código {code}.",
+    "love": "Con cariño,",
+    "personal": "Este enlace es personal para tu hogar. Por favor, no lo compartas.",
+    "subjectInvite": "Estás invitado: la boda de {couple}",
+    "subjectReminder": "Recordatorio: confirma tu asistencia a la boda de {couple}"
+  },
+  "app": {
+    "nav": {
+      "dashboard": "Panel",
+      "tasks": "Tareas",
+      "budget": "Presupuesto",
+      "vendors": "Proveedores",
+      "guests": "Invitados",
+      "rsvp": "Confirmaciones",
+      "seating": "Mesas",
+      "venues": "Lugares",
+      "hotels": "Hoteles",
+      "travel": "Viajes",
+      "inspiration": "Inspiración",
+      "website": "Sitio web",
+      "schedule": "Programa del día",
+      "settings": "Ajustes",
+      "home": "Inicio",
+      "groups": {
+        "plan": "Planificar",
+        "people": "Personas",
+        "places": "Lugares",
+        "style": "Estilo"
+      }
+    },
+    "shell": {
+      "mainNav": "Navegación principal",
+      "expand": "Expandir barra lateral",
+      "collapse": "Contraer barra lateral",
+      "more": "Más",
+      "allTools": "Todas las herramientas"
+    },
+    "userMenu": {
+      "account": "Menú de la cuenta",
+      "appearance": "Apariencia",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema",
+      "language": "Idioma",
+      "signOut": "Cerrar sesión"
+    },
+    "switcher": {
+      "current": "Boda actual: {name}. Cambiar de boda",
+      "yours": "Tus bodas",
+      "noDate": "Fecha por confirmar",
+      "another": "Planificar otra boda",
+      "roles": {
+        "owner": "propietario",
+        "editor": "editor",
+        "viewer": "lector"
+      }
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "unread": "{count, plural, one {Notificaciones, # sin leer} other {Notificaciones, # sin leer}}",
+      "unreadOne": "Sin leer",
+      "markAll": "Marcar todo como leído",
+      "empty": "Nada todavía. Aquí aparecerán las nuevas confirmaciones, tus tareas y los recordatorios de pagos y plazos."
+    },
+    "countdown": {
+      "today": "¡Hoy es el gran día!",
+      "enjoy": "Disfrutad cada momento.",
+      "married": "{count, plural, one {Casados hace # día} other {Casados hace # días}}",
+      "congrats": "¡Enhorabuena!",
+      "daysToGo": "{count, plural, one {día para la boda} other {días para la boda}}",
+      "hours": "horas",
+      "minutes": "minutos",
+      "seconds": "segundos"
+    },
+    "dashboard": {
+      "welcome": "¡Te damos la bienvenida a tu planificador!",
+      "welcomeText": "Todo empieza aquí. Avanza con los siguientes pasos a tu ritmo.",
+      "noDate": "Fecha por confirmar",
+      "setDate": "Elige la fecha para iniciar la cuenta atrás",
+      "nextSteps": "Próximos pasos",
+      "stepsDone": "{done} de {total} hechos",
+      "done": "(hecho)",
+      "toDo": "(pendiente)",
+      "steps": {
+        "date": "Elige la fecha de la boda",
+        "location": "Elige un lugar",
+        "invite": "Invita a tu pareja, familia o wedding planner",
+        "guests": "Añade tu lista de invitados",
+        "guestsSoFar": "{count, plural, one {Añade tu lista de invitados (# por ahora)} other {Añade tu lista de invitados (# por ahora)}}",
+        "budget": "Fija tu presupuesto total",
+        "shortlist": "Preselecciona lugares",
+        "book": "Reserva el lugar",
+        "inspiration": "Empieza un tablero de inspiración",
+        "website": "Publica tu sitio web de boda",
+        "timeline": "Crea tu calendario de preparativos"
+      },
+      "budget": {
+        "title": "Presupuesto",
+        "empty": "Aún no hay presupuesto. Fija un total y te sugeriremos cómo repartirlo.",
+        "cta": "Planificar presupuesto",
+        "committed": "comprometido",
+        "committedOf": "comprometido de {total}",
+        "overdue": "Vencido: {name}"
+      },
+      "rsvp": {
+        "title": "Confirmaciones",
+        "empty": "Aún no hay respuestas. Añade invitados y envía las invitaciones.",
+        "cta": "Ver confirmaciones",
+        "attending": "Asisten",
+        "declined": "No asisten",
+        "waiting": "Pendientes"
+      },
+      "seating": {
+        "title": "Mesas",
+        "empty": "Aún no hay mesas. Cuando respondan los invitados, siéntalos arrastrando y soltando.",
+        "cta": "Abrir plano de mesas",
+        "seated": "de {attending} invitados que asisten, sentados en {tables, plural, one {# mesa} other {# mesas}}"
+      },
+      "inspiration": {
+        "title": "Inspiración",
+        "empty": "Aún no hay pines. Reúne ideas y saca de ellas una paleta de colores.",
+        "cta": "Abrir tableros",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Tareas",
+        "empty": "Aún no hay tareas. Crearemos un calendario a partir de la fecha de tu boda.",
+        "cta": "Ver tareas",
+        "ofDone": "de {total} hechas",
+        "overdue": "{count} vencidas"
+      }
+    },
+    "settings": {
+      "title": "Ajustes",
+      "description": "Los datos de tu boda, idiomas, eventos y quién planifica contigo."
+    },
+    "languages": {
+      "title": "Idiomas y región",
+      "description": "Los idiomas de tu sitio web, páginas de confirmación y correos, y la zona horaria del lugar.",
+      "languages": "Idiomas de la boda",
+      "main": "Principal",
+      "makeMain": "Hacer principal",
+      "remove": "Quitar {language}",
+      "add": "Añadir",
+      "choose": "Añadir un idioma…",
+      "help": "Los invitados ven tu sitio web y las páginas de confirmación en su idioma y pueden cambiarlo. Escribe tus textos en el idioma principal y luego añade traducciones; lo que no esté traducido se muestra en el idioma principal.",
+      "timeZone": "Zona horaria del lugar",
+      "noTimeZone": "Sin definir",
+      "useMine": "Usar mi zona horaria",
+      "timeZoneHelp": "Las horas de los eventos son la hora local del lugar. Los invitados en el extranjero también las ven en su propia hora.",
+      "translateDetails": "Traducir lugar y contacto",
+      "location": "Lugar",
+      "rsvpContact": "Contacto para confirmaciones (se muestra tras el plazo)",
+      "save": "Guardar",
+      "saved": "Idiomas guardados"
+    },
+    "translate": {
+      "button": "Traducciones",
+      "title": "Traducciones: {name}",
+      "hint": "Deja una casilla vacía para mostrar el texto en {language}.",
+      "draft": "Borrador",
+      "draftFailed": "Tu navegador no pudo traducir esta combinación de idiomas. Escribe la traducción.",
+      "noMachine": "Consejo: Chrome en un ordenador puede preparar un borrador de traducción (allí aparece un botón «Borrador»).",
+      "save": "Guardar traducciones",
+      "saved": "Traducciones guardadas",
+      "fields": {
+        "name": "Nombre",
+        "venue": "Nombre del lugar",
+        "dressCode": "Código de vestimenta",
+        "description": "Descripción",
+        "mealName": "Nombre del menú",
+        "mealDescription": "Descripción del menú"
+      }
+    },
+    "websiteLang": {
+      "editing": "Idioma",
+      "main": "{language} (principal)",
+      "hint": "Traducción: {language}. Las fotos, el orden y las secciones visibles se configuran en el idioma principal.",
+      "progress": "{done}/{total} traducido",
+      "complete": "Traducido",
+      "fallback": "Vacío: los invitados ven el texto en el idioma principal.",
+      "nothing": "Todavía no hay nada que traducir en esta sección.",
+      "draft": "Traducir todo con el traductor del navegador",
+      "draftFailed": "Tu navegador no pudo traducir esta combinación de idiomas. Escribe la traducción.",
+      "item": "Elemento {number}",
+      "fields": {
+        "tagline": "Lema",
+        "intro": "Introducción",
+        "notes": "Notas",
+        "date": "Cuándo",
+        "title": "Título",
+        "text": "Texto",
+        "role": "Papel",
+        "bio": "Unas palabras",
+        "label": "Nombre",
+        "note": "Nota",
+        "question": "Pregunta",
+        "answer": "Respuesta",
+        "caption": "Pie de foto"
+      }
+    }
+  }
+}

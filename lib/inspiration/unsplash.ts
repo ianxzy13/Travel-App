@@ -7,7 +7,8 @@ import "server-only";
 
 export const isUnsplashConfigured = Boolean(process.env.UNSPLASH_ACCESS_KEY);
 const APP = "vow_wedding_planner";
-const utm = (url: string) => `${url}${url.includes("?") ? "&" : "?"}utm_source=${APP}&utm_medium=referral`;
+const utm = (url: string) =>
+  `${url}${url.includes("?") ? "&" : "?"}utm_source=${APP}&utm_medium=referral`;
 export const UNSPLASH_HOME = utm("https://unsplash.com/");
 
 export type UnsplashPhoto = {
@@ -51,11 +52,15 @@ function toPhoto(p: ApiPhoto): UnsplashPhoto {
 
 async function api<T>(path: string): Promise<T> {
   const res = await fetch(`https://api.unsplash.com${path}`, {
-    headers: { Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`, "Accept-Version": "v1" },
+    headers: {
+      Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
+      "Accept-Version": "v1",
+    },
     signal: AbortSignal.timeout(8000),
     next: { revalidate: 3600 }, // cache searches for an hour (the free tier allows 50 requests/hour)
   });
-  if (res.status === 403 || res.status === 429) throw new Error("Unsplash's hourly limit was reached. Try again later.");
+  if (res.status === 403 || res.status === 429)
+    throw new Error("Unsplash's hourly limit was reached. Try again later.");
   if (!res.ok) throw new Error("Unsplash isn't responding right now.");
   return res.json() as Promise<T>;
 }

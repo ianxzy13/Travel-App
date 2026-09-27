@@ -1,9 +1,11 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { emailFrom, getResend } from "@/lib/email/resend";
-import { rsvpErrorMessage, type RsvpResult } from "@/lib/rsvp/types";
+import { isLocale } from "@/i18n/locales";
+import { rsvpErrorKey, type RsvpResult } from "@/lib/rsvp/types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
@@ -19,10 +21,12 @@ export async function submitRsvp(
   code: string,
   payload: unknown,
 ): Promise<ActionResult<RsvpResult>> {
+  // messages in the guest's language (the request comes from /r/<code>)
+  const t = await getTranslations("rsvp.errors");
   const parsedCode = codeSchema.safeParse(code);
   const parsed = rsvpPayloadSchema.safeParse(payload);
-  if (!parsedCode.success) return { ok: false, error: rsvpErrorMessage("rsvp_not_found") };
-  if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
+  if (!parsedCode.success) return { ok: false, error: t("rsvp_not_found") };
+  if (!parsed.success) return { ok: false, error: t("generic") };
 
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("submit_rsvp", {
@@ -31,7 +35,7 @@ export async function submitRsvp(
   });
   if (error || !data) {
     console.error("[submitRsvp]", error);
-    return { ok: false, error: rsvpErrorMessage(error?.message) };
+    return { ok: false, error: t(rsvpErrorKey(error?.message)) };
   }
 
   const result = data as RsvpResult;
@@ -82,10 +86,9 @@ export async function findInvitation(
   slug: string,
   name: string,
 ): Promise<ActionResult<{ code: string }>> {
+  const t = await getTranslations("rsvp.find");
   const cleanName = name.trim().replace(/\s+/g, " ");
-  if (cleanName.split(" ").length < 2) {
-    return { ok: false, error: "Please enter your first and last name, as on your invitation." };
-  }
+  if (cleanName.split(" ").length < 2) return { ok: false, error: t("fullName") };
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("find_rsvp_code", {
     p_slug: slug.slice(0, 60),
@@ -93,14 +96,20 @@ export async function findInvitation(
   });
   if (error) {
     console.error("[findInvitation]", error);
-    return { ok: false, error: "Something went wrong. Please try again." };
+    return { ok: false, error: t("failed") };
   }
   if (!data) {
-    return {
-      ok: false,
-      error:
-        "We couldn't find that name. Try the spelling on your invitation, or use the code from your invitation.",
-    };
+    return { ok: false, error: t("noMatch") };
   }
   return { ok: true, data: { code: data } };
+}
+
+/** A guest picked a language on their RSVP page: remember it for emails and links. */
+export async function setRsvpLanguage(code: string, language: string): Promise<ActionResult> {
+  if (!codeSchema.safeParse(code).success || !isLocale(language))
+    return { ok: false, error: "invalid" };
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("set_rsvp_language", { p_code: code, p_language: language });
+  if (error) console.error("[setRsvpLanguage]", error);
+  return { ok: true };
 }

@@ -17,6 +17,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { LOCALES } from "@/i18n/locales";
 import { householdSchema } from "@/lib/validation/guest";
 import type { HouseholdOption } from "./types";
 
@@ -47,7 +49,11 @@ function HouseholdForm({
   const [pending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(householdSchema),
-    defaultValues: { name: household.name, address: household.address },
+    defaultValues: {
+      name: household.name,
+      address: household.address,
+      language: household.language,
+    },
   });
   const { errors } = form.formState;
 
@@ -111,6 +117,24 @@ function HouseholdForm({
         <FormField id="h-country" label="Country" error={errors.address?.country?.message}>
           {(aria) => <Input {...aria} {...form.register("address.country")} />}
         </FormField>
+        <div className="space-y-2 sm:col-span-2">
+          <Label htmlFor="h-language">Language for emails and RSVP links</Label>
+          <select
+            id="h-language"
+            {...form.register("language")}
+            className="border-input bg-background h-9 w-full rounded-md border px-2 text-sm"
+          >
+            <option value="">The wedding&apos;s main language</option>
+            {LOCALES.map((l) => (
+              <option key={l.code} value={l.code}>
+                {l.native} – {l.english}
+              </option>
+            ))}
+          </select>
+          <p className="text-muted-foreground text-xs">
+            Guests can also change it themselves on their RSVP page; their choice is saved here.
+          </p>
+        </div>
       </form>
       <DialogFooter>
         <Button variant="outline" onClick={onClose} disabled={pending}>

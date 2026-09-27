@@ -8,13 +8,25 @@ import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
 export const metadata: Metadata = { title: "To-dos" };
 
-export default async function Tasks({ searchParams }: { searchParams: Promise<{ task?: string; show?: string }> }) {
+export default async function Tasks({
+  searchParams,
+}: {
+  searchParams: Promise<{ task?: string; show?: string }>;
+}) {
   const user = await requireUser();
   const { wedding, role } = await requireWedding();
   const { task, show } = await searchParams;
   const sb = await createClient();
   const [tasks, members, progress] = await Promise.all([
-    fetchAll((f, t) => sb.from("tasks").select("*").eq("wedding_id", wedding.id).order("sort_order").order("created_at").range(f, t)),
+    fetchAll((f, t) =>
+      sb
+        .from("tasks")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("sort_order")
+        .order("created_at")
+        .range(f, t),
+    ),
     loadMembers(sb, wedding.id),
     loadProgress(sb, wedding),
   ]);

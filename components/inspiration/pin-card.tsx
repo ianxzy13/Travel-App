@@ -60,7 +60,9 @@ export function PinCard({
           <span
             className={cn(
               "absolute top-2 left-2 rounded-full px-2 py-0.5 text-xs font-medium shadow-sm",
-              pin.status === "love" ? "bg-primary text-primary-foreground" : "bg-card text-foreground",
+              pin.status === "love"
+                ? "bg-primary text-primary-foreground"
+                : "bg-card text-foreground",
             )}
           >
             {STATUS_LABEL[pin.status]}
@@ -68,16 +70,24 @@ export function PinCard({
         )}
       </button>
       <div className="mt-1.5 flex items-start justify-between gap-2 px-0.5 text-sm">
-        <p className={cn("line-clamp-2 min-w-0", !pin.title && "text-muted-foreground")}>{pin.title || "Untitled"}</p>
+        <p className={cn("line-clamp-2 min-w-0", !pin.title && "text-muted-foreground")}>
+          {pin.title || "Untitled"}
+        </p>
         <div className="text-muted-foreground flex shrink-0 items-center gap-2 text-xs">
           {pin.hearts.length > 0 && (
             <span className="flex items-center gap-0.5" aria-label={`${pin.hearts.length} hearts`}>
-              <Heart className={cn("size-3.5", hearted && "fill-primary text-primary")} aria-hidden />
+              <Heart
+                className={cn("size-3.5", hearted && "fill-primary text-primary")}
+                aria-hidden
+              />
               {pin.hearts.length}
             </span>
           )}
           {pin.comments.length > 0 && (
-            <span className="flex items-center gap-0.5" aria-label={`${pin.comments.length} comments`}>
+            <span
+              className="flex items-center gap-0.5"
+              aria-label={`${pin.comments.length} comments`}
+            >
               <MessageCircle className="size-3.5" aria-hidden />
               {pin.comments.length}
             </span>

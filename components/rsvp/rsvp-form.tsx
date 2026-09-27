@@ -2,23 +2,31 @@
 
 import { useState, useTransition } from "react";
 import { Check, Loader2, MapPin, Shirt, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { ActionResult } from "@/lib/action-result";
-import { formatEventWhen } from "@/lib/format";
+import { fmtEventWhen } from "@/lib/i18n/format";
 import {
   answerKey,
   findMissing,
   needsMeal,
   rsvpGuestName,
   toPayload,
+  type GuestNameLabels,
   type RsvpFormState,
 } from "@/lib/rsvp/form";
 import type { RsvpData, RsvpResult } from "@/lib/rsvp/types";
 import { cn } from "@/lib/utils";
+
+/** "Ann's guest" / "Guest" in the current language. */
+export function useGuestNameLabels(): GuestNameLabels {
+  const t = useTranslations("rsvp.form");
+  return { guestOf: (name) => t("guestOf", { name }), guest: t("guest") };
+}
 
 /**
  * The RSVP questions: for each event, each invited person says yes/no (and
@@ -31,7 +39,7 @@ export function RsvpForm({
   onStateChange,
   onSubmit,
   onSaved,
-  submitLabel = "Send our RSVP",
+  submitLabel,
 }: {
   data: RsvpData;
   state: RsvpFormState;
@@ -40,10 +48,17 @@ export function RsvpForm({
   onSaved: (result: RsvpResult) => void;
   submitLabel?: string;
 }) {
+  const t = useTranslations("rsvp");
+  const tf = useTranslations("rsvp.form");
+  const locale = useLocale();
+  const labels = useGuestNameLabels();
+  const name = (guestId: string, withState = true) =>
+    rsvpGuestName(data, guestId, withState ? state : undefined, labels);
   const [pending, startTransition] = useTransition();
   const [showErrors, setShowErrors] = useState(false);
   const missing = findMissing(data, state);
   const missingSet = new Set(missing.map((m) => answerKey(m.guestId, m.eventId)));
+  const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
 
   const invitedTo = (eventId: string) =>
     data.invites.filter((i) => i.event_id === eventId).map((i) => i.guest_id);
@@ -86,15 +101,10 @@ export function RsvpForm({
     e.preventDefault();
     if (missing.length > 0) {
       setShowErrors(true);
-      toast.error(
-        missing[0].kind === "meal"
-          ? "Please choose a meal for everyone who's coming."
-          : "Please answer for everyone before sending.",
-      );
-      document.getElementById(`q-${missing[0].guestId}-${missing[0].eventId}`)?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+      toast.error(missing[0].kind === "meal" ? tf("missingMeal") : tf("missingAnswer"));
+      document
+        .getElementById(`q-${missing[0].guestId}-${missing[0].eventId}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     startTransition(async () => {
@@ -112,6 +122,7 @@ export function RsvpForm({
       {data.events.map((event) => {
         const guests = invitedTo(event.id);
         const mealAsked = needsMeal(data, event.id);
+        const where = [event.venue_name, event.address].filter(Boolean).join(", ");
         return (
           <section
             key={event.id}
@@ -122,19 +133,17 @@ export function RsvpForm({
               {event.name}
             </h2>
             <div className="text-muted-foreground mt-2 space-y-1 text-sm">
-              <p>{formatEventWhen(event)}</p>
-              {(event.venue_name || event.address) && (
+              <p>{fmtEventWhen(event, locale, t("dateTbd"))}</p>
+              {where && (
                 <p className="flex items-start gap-1.5">
                   <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
                   <a
                     className="hover:text-foreground underline-offset-2 hover:underline"
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                      [event.venue_name, event.address].filter(Boolean).join(", "),
-                    )}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(where)}`}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {[event.venue_name, event.address].filter(Boolean).join(", ")}
+                    {where}
                   </a>
                 </p>
               )}
@@ -154,7 +163,7 @@ export function RsvpForm({
                   size="sm"
                   onClick={() => setEveryone(event.id, "attending")}
                 >
-                  Everyone&apos;s coming
+                  {tf("everyone")}
                 </Button>
                 <Button
                   type="button"
@@ -162,7 +171,7 @@ export function RsvpForm({
                   size="sm"
                   onClick={() => setEveryone(event.id, "declined")}
                 >
-                  None of us can make it
+                  {tf("none")}
                 </Button>
               </div>
             )}
@@ -171,7 +180,7 @@ export function RsvpForm({
               {guests.map((guestId) => {
                 const key = answerKey(guestId, event.id);
                 const answer = state.answers[key];
-                const name = rsvpGuestName(data, guestId, state);
+                const guestName = name(guestId);
                 const invalid = showErrors && missingSet.has(key);
                 return (
                   <li
@@ -183,10 +192,10 @@ export function RsvpForm({
                     )}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="font-medium">{name}</p>
+                      <p className="font-medium">{guestName}</p>
                       <div
                         role="radiogroup"
-                        aria-label={`Will ${name} attend ${event.name}?`}
+                        aria-label={tf("willAttend", { name: guestName, event: event.name })}
                         className="flex gap-2"
                       >
                         <Choice
@@ -194,7 +203,7 @@ export function RsvpForm({
                           onClick={() => setAnswer(guestId, event.id, { status: "attending" })}
                           icon={<Check className="size-4" aria-hidden />}
                         >
-                          Joyfully accepts
+                          {tf("accept")}
                         </Choice>
                         <Choice
                           selected={answer?.status === "declined"}
@@ -202,14 +211,14 @@ export function RsvpForm({
                           icon={<X className="size-4" aria-hidden />}
                           muted
                         >
-                          Regretfully declines
+                          {tf("decline")}
                         </Choice>
                       </div>
                     </div>
 
                     {mealAsked && answer?.status === "attending" && (
                       <fieldset className="mt-4">
-                        <legend className="text-muted-foreground mb-2 text-sm">Meal choice</legend>
+                        <legend className="text-muted-foreground mb-2 text-sm">{tf("meal")}</legend>
                         <div role="radiogroup" className="flex flex-wrap gap-2">
                           {data.meal_options.map((m) => (
                             <Choice
@@ -226,7 +235,7 @@ export function RsvpForm({
                     )}
                     {invalid && (
                       <p className="text-destructive mt-2 text-sm">
-                        {answer?.status ? "Please choose a meal." : "Please choose an answer."}
+                        {answer?.status ? tf("chooseMeal") : tf("chooseAnswer")}
                       </p>
                     )}
                   </li>
@@ -239,14 +248,14 @@ export function RsvpForm({
 
       {(plusOnes.length > 0 || peopleComing.length > 0) && (
         <section className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
-          <h2 className="text-3xl">A few details</h2>
+          <h2 className="text-3xl">{tf("details")}</h2>
           {plusOnes.map((g) => (
             <div key={g.id} className="grid gap-3 sm:grid-cols-2">
               <p className="text-muted-foreground text-sm sm:col-span-2">
-                Your guest&apos;s name ({rsvpGuestName(data, g.plus_one_of ?? "")}&apos;s plus-one)
+                {tf("plusOneName", { host: name(g.plus_one_of ?? "", false) })}
               </p>
               <div className="space-y-1.5">
-                <Label htmlFor={`pf-${g.id}`}>First name</Label>
+                <Label htmlFor={`pf-${g.id}`}>{tf("firstName")}</Label>
                 <Input
                   id={`pf-${g.id}`}
                   value={state.people[g.id].firstName}
@@ -255,7 +264,7 @@ export function RsvpForm({
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor={`pl-${g.id}`}>Last name</Label>
+                <Label htmlFor={`pl-${g.id}`}>{tf("lastName")}</Label>
                 <Input
                   id={`pl-${g.id}`}
                   value={state.people[g.id].lastName}
@@ -267,14 +276,12 @@ export function RsvpForm({
           ))}
           {peopleComing.map((g) => (
             <div key={g.id} className="space-y-1.5">
-              <Label htmlFor={`d-${g.id}`}>
-                Dietary needs or allergies: {rsvpGuestName(data, g.id, state)}
-              </Label>
+              <Label htmlFor={`d-${g.id}`}>{tf("dietary", { name: name(g.id) })}</Label>
               <Input
                 id={`d-${g.id}`}
                 value={state.people[g.id].dietary}
                 maxLength={500}
-                placeholder="e.g. vegetarian, nut allergy (leave empty if none)"
+                placeholder={tf("dietaryPlaceholder")}
                 onChange={(e) => setPerson(g.id, { dietary: e.target.value })}
               />
             </div>
@@ -285,20 +292,18 @@ export function RsvpForm({
       <section className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
         {data.wedding.rsvp_ask_song && (
           <div className="space-y-1.5">
-            <Label htmlFor="song">A song that will get you dancing</Label>
+            <Label htmlFor="song">{tf("song")}</Label>
             <Input
               id="song"
               value={state.songRequest}
               maxLength={200}
-              placeholder="Artist – song"
+              placeholder={tf("songPlaceholder")}
               onChange={(e) => onStateChange({ ...state, songRequest: e.target.value })}
             />
           </div>
         )}
         <div className="space-y-1.5">
-          <Label htmlFor="message">
-            A message for {data.wedding.partner_a_name} &amp; {data.wedding.partner_b_name}
-          </Label>
+          <Label htmlFor="message">{tf("message", { couple })}</Label>
           <Textarea
             id="message"
             rows={3}
@@ -311,7 +316,7 @@ export function RsvpForm({
 
       <Button type="submit" size="lg" className="w-full" disabled={pending}>
         {pending && <Loader2 className="animate-spin" aria-hidden />}
-        {submitLabel}
+        {submitLabel ?? t("send")}
       </Button>
     </form>
   );

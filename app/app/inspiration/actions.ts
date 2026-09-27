@@ -23,7 +23,10 @@ import {
 } from "@/lib/validation/inspiration";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change the boards." };
+const NO_PERMISSION = {
+  ok: false as const,
+  error: "You don't have permission to change the boards.",
+};
 const id = z.uuid();
 
 async function editor() {
@@ -65,7 +68,10 @@ export async function createBoard(input: unknown): Promise<ActionResult<{ id: st
   if (!ctx) return NO_PERMISSION;
   const parsed = boardSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: parsed.error.issues[0].message };
-  const { count } = await ctx.sb.from("boards").select("id", { count: "exact", head: true }).eq("wedding_id", ctx.wedding.id);
+  const { count } = await ctx.sb
+    .from("boards")
+    .select("id", { count: "exact", head: true })
+    .eq("wedding_id", ctx.wedding.id);
   const { data, error } = await ctx.sb
     .from("boards")
     .insert({
@@ -99,9 +105,16 @@ export async function deleteBoard(boardId: string): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !id.safeParse(boardId).success) return NO_PERMISSION;
   const { data: files } = await ctx.sb.from("pins").select("image_path").eq("board_id", boardId);
-  const { error } = await ctx.sb.from("boards").delete().eq("id", boardId).eq("wedding_id", ctx.wedding.id);
+  const { error } = await ctx.sb
+    .from("boards")
+    .delete()
+    .eq("id", boardId)
+    .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("deleteBoard", error);
-  await removeFiles(ctx.sb, (files ?? []).map((f) => f.image_path));
+  await removeFiles(
+    ctx.sb,
+    (files ?? []).map((f) => f.image_path),
+  );
   return done();
 }
 
@@ -109,7 +122,13 @@ export async function reorderBoards(ids: string[]): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !z.array(z.uuid()).max(100).safeParse(ids).success) return NO_PERMISSION;
   const results = await Promise.all(
-    ids.map((bid, i) => ctx.sb.from("boards").update({ sort_order: i }).eq("id", bid).eq("wedding_id", ctx.wedding.id)),
+    ids.map((bid, i) =>
+      ctx.sb
+        .from("boards")
+        .update({ sort_order: i })
+        .eq("id", bid)
+        .eq("wedding_id", ctx.wedding.id),
+    ),
   );
   const error = results.find((r) => r.error)?.error;
   if (error) return fail("reorderBoards", error);
@@ -117,7 +136,10 @@ export async function reorderBoards(ids: string[]): Promise<ActionResult> {
 }
 
 /** Turns the public read-only link on (new random token) or off. */
-export async function setBoardSharing(boardId: string, on: boolean): Promise<ActionResult<{ shareId: string | null }>> {
+export async function setBoardSharing(
+  boardId: string,
+  on: boolean,
+): Promise<ActionResult<{ shareId: string | null }>> {
   const ctx = await editor();
   if (!ctx || !id.safeParse(boardId).success) return NO_PERMISSION;
   const shareId = on ? randomBytes(18).toString("base64url") : null;
@@ -161,7 +183,10 @@ export async function previewLink(url: string): Promise<ActionResult<LinkPreview
   try {
     return { ok: true, data: await getLinkPreview(url) };
   } catch (e) {
-    const message = e instanceof Error && !/fetch failed|ENOTFOUND|aborted/i.test(e.message) ? e.message : "We couldn't open that link.";
+    const message =
+      e instanceof Error && !/fetch failed|ENOTFOUND|aborted/i.test(e.message)
+        ? e.message
+        : "We couldn't open that link.";
     return { ok: false, error: message };
   }
 }
@@ -195,7 +220,10 @@ export async function discoverPhotos(
   await requireWedding();
   if (!isUnsplashConfigured) return { ok: false, error: "Unsplash isn't set up yet (see README)." };
   try {
-    return { ok: true, data: await searchPhotos(query.slice(0, 80), Math.max(1, Math.min(50, page))) };
+    return {
+      ok: true,
+      data: await searchPhotos(query.slice(0, 80), Math.max(1, Math.min(50, page))),
+    };
   } catch (e) {
     return fail("discoverPhotos", e, e instanceof Error ? e.message : "Unsplash isn't responding.");
   }
@@ -205,7 +233,8 @@ export async function discoverPhotos(
 export async function addUnsplashPin(boardId: string, photoId: string): Promise<ActionResult> {
   const user = await requireUser();
   const ctx = await editor();
-  if (!ctx || !id.safeParse(boardId).success || !/^[\w-]{1,40}$/.test(photoId)) return NO_PERMISSION;
+  if (!ctx || !id.safeParse(boardId).success || !/^[\w-]{1,40}$/.test(photoId))
+    return NO_PERMISSION;
   if (!isUnsplashConfigured) return { ok: false, error: "Unsplash isn't set up yet." };
   try {
     const p = await getPhotoForSaving(photoId);
@@ -256,9 +285,18 @@ export async function updatePin(pinId: string, input: unknown): Promise<ActionRe
 }
 
 /** Moves a pin (to another board and/or position). */
-export async function movePin(pinId: string, boardId: string, sortOrder: number): Promise<ActionResult> {
+export async function movePin(
+  pinId: string,
+  boardId: string,
+  sortOrder: number,
+): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(pinId).success || !id.safeParse(boardId).success || !Number.isFinite(sortOrder)) {
+  if (
+    !ctx ||
+    !id.safeParse(pinId).success ||
+    !id.safeParse(boardId).success ||
+    !Number.isFinite(sortOrder)
+  ) {
     return NO_PERMISSION;
   }
   const { error } = await ctx.sb
@@ -280,7 +318,10 @@ export async function deletePin(pinId: string): Promise<ActionResult> {
     .eq("wedding_id", ctx.wedding.id)
     .select("image_path");
   if (error) return fail("deletePin", error);
-  await removeFiles(ctx.sb, (data ?? []).map((r) => r.image_path));
+  await removeFiles(
+    ctx.sb,
+    (data ?? []).map((r) => r.image_path),
+  );
   return done();
 }
 
@@ -297,7 +338,9 @@ export async function toggleHeart(pinId: string): Promise<ActionResult> {
     .maybeSingle();
   const { error } = existing
     ? await sb.from("pin_reactions").delete().eq("pin_id", pinId).eq("user_id", user.id)
-    : await sb.from("pin_reactions").insert({ pin_id: pinId, user_id: user.id, wedding_id: wedding.id });
+    : await sb
+        .from("pin_reactions")
+        .insert({ pin_id: pinId, user_id: user.id, wedding_id: wedding.id });
   if (error) return fail("toggleHeart", error);
   revalidatePath("/app/inspiration");
   return { ok: true };
@@ -306,8 +349,11 @@ export async function toggleHeart(pinId: string): Promise<ActionResult> {
 export async function addComment(pinId: string, body: string): Promise<ActionResult> {
   const { user, wedding, sb } = await member();
   const text = body.trim();
-  if (!id.safeParse(pinId).success || !text || text.length > 2000) return { ok: false, error: "Please write a comment (up to 2000 characters)." };
-  const { error } = await sb.from("pin_comments").insert({ pin_id: pinId, user_id: user.id, wedding_id: wedding.id, body: text });
+  if (!id.safeParse(pinId).success || !text || text.length > 2000)
+    return { ok: false, error: "Please write a comment (up to 2000 characters)." };
+  const { error } = await sb
+    .from("pin_comments")
+    .insert({ pin_id: pinId, user_id: user.id, wedding_id: wedding.id, body: text });
   if (error) return fail("addComment", error);
   revalidatePath("/app/inspiration");
   return { ok: true };
@@ -316,7 +362,11 @@ export async function addComment(pinId: string, body: string): Promise<ActionRes
 export async function deleteComment(commentId: string): Promise<ActionResult> {
   const { user, sb } = await member();
   if (!id.safeParse(commentId).success) return NO_PERMISSION;
-  const { error } = await sb.from("pin_comments").delete().eq("id", commentId).eq("user_id", user.id);
+  const { error } = await sb
+    .from("pin_comments")
+    .delete()
+    .eq("id", commentId)
+    .eq("user_id", user.id);
   if (error) return fail("deleteComment", error);
   revalidatePath("/app/inspiration");
   return { ok: true };
@@ -324,14 +374,21 @@ export async function deleteComment(commentId: string): Promise<ActionResult> {
 
 // ---------- colour palette ----------
 
-export async function addPaletteColors(hexes: string[], sourcePinId?: string): Promise<ActionResult> {
+export async function addPaletteColors(
+  hexes: string[],
+  sourcePinId?: string,
+): Promise<ActionResult> {
   const ctx = await editor();
   const parsed = hexList.safeParse(hexes);
   if (!ctx || !parsed.success) return NO_PERMISSION;
-  const { data: existing } = await ctx.sb.from("palette_colors").select("hex").eq("wedding_id", ctx.wedding.id);
+  const { data: existing } = await ctx.sb
+    .from("palette_colors")
+    .select("hex")
+    .eq("wedding_id", ctx.wedding.id);
   const have = new Set((existing ?? []).map((c) => c.hex));
   const fresh = [...new Set(parsed.data.map((h) => h.toLowerCase()))].filter((h) => !have.has(h));
-  if (have.size + fresh.length > 12) return { ok: false, error: "Your palette holds up to 12 colours. Remove some first." };
+  if (have.size + fresh.length > 12)
+    return { ok: false, error: "Your palette holds up to 12 colours. Remove some first." };
   if (!fresh.length) return { ok: true };
   const { error } = await ctx.sb.from("palette_colors").insert(
     fresh.map((hex, i) => ({
@@ -348,7 +405,11 @@ export async function addPaletteColors(hexes: string[], sourcePinId?: string): P
 export async function removePaletteColor(colorId: string): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !id.safeParse(colorId).success) return NO_PERMISSION;
-  const { error } = await ctx.sb.from("palette_colors").delete().eq("id", colorId).eq("wedding_id", ctx.wedding.id);
+  const { error } = await ctx.sb
+    .from("palette_colors")
+    .delete()
+    .eq("id", colorId)
+    .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("removePaletteColor", error);
   return done();
 }

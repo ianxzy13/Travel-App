@@ -42,6 +42,8 @@ type Filter = "all" | "waiting" | "replied" | "partial" | "not_emailed";
 
 type Props = {
   data: RsvpDashboardData;
+  /** the wedding's languages, main first */
+  languages: string[];
   settings: RsvpSettingsValues;
   siteUrl: string;
   slug: string;
@@ -328,6 +330,7 @@ export function RsvpDashboard(props: Props) {
             adminConfigured={props.adminConfigured}
             emailConfigured={emailConfigured}
             readOnly={!canEdit}
+            languages={props.languages}
           />
         </TabsContent>
       </Tabs>

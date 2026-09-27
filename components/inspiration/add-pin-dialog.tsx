@@ -13,10 +13,22 @@ import {
 } from "@/app/app/inspiration/actions";
 import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { LinkPreview } from "@/lib/inspiration/link-preview";
 import type { BoardView } from "@/lib/inspiration/load";
@@ -28,7 +40,18 @@ import { UNSPLASH_LINK } from "./pin-image";
 const BUCKET = "wedding-files";
 const MAX_BYTES = 10 * 1024 * 1024;
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-const IDEAS = ["Bouquets", "Table settings", "Cakes", "Dresses", "Ceremony arch", "Invitations", "Hairstyles", "Rustic barn", "Beach", "Candles"];
+const IDEAS = [
+  "Bouquets",
+  "Table settings",
+  "Cakes",
+  "Dresses",
+  "Ceremony arch",
+  "Invitations",
+  "Hairstyles",
+  "Rustic barn",
+  "Beach",
+  "Candles",
+];
 
 export function AddPinDialog({
   open,
@@ -55,7 +78,9 @@ export function AddPinDialog({
       <DialogContent className="max-h-[92dvh] overflow-y-auto sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Add pins</DialogTitle>
-          <DialogDescription>Upload your own photos, save an image from any website, or discover ideas.</DialogDescription>
+          <DialogDescription>
+            Upload your own photos, save an image from any website, or discover ideas.
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-2">
           <Label htmlFor="add-board">Save to board</Label>
@@ -116,8 +141,13 @@ function UploadTab({ boardId, weddingId }: { boardId: string; weddingId: string 
   const [over, setOver] = useState(false);
 
   async function upload(files: File[]) {
-    const ok = files.filter((f) => IMAGE_TYPES.includes(f.type) && f.size <= MAX_BYTES).slice(0, 20);
-    if (ok.length < files.length) toast.warning("Some files were skipped: only JPG, PNG, WebP or GIF up to 10 MB (20 at a time).");
+    const ok = files
+      .filter((f) => IMAGE_TYPES.includes(f.type) && f.size <= MAX_BYTES)
+      .slice(0, 20);
+    if (ok.length < files.length)
+      toast.warning(
+        "Some files were skipped: only JPG, PNG, WebP or GIF up to 10 MB (20 at a time).",
+      );
     if (!ok.length) return;
     setProgress({ done: 0, total: ok.length });
     const sb = createClient();
@@ -126,12 +156,20 @@ function UploadTab({ boardId, weddingId }: { boardId: string; weddingId: string 
       const safeName = file.name.replace(/[^\w.\-]+/g, "_").slice(-80);
       const path = `${weddingId}/pins/${crypto.randomUUID()}-${safeName}`;
       const { width, height } = await sizeOf(file);
-      const { error } = await sb.storage.from(BUCKET).upload(path, file, { contentType: file.type, upsert: false });
+      const { error } = await sb.storage
+        .from(BUCKET)
+        .upload(path, file, { contentType: file.type, upsert: false });
       if (error) {
         console.error(error);
         toast.error(`Couldn't upload ${file.name}. Is file storage set up (see README)?`);
       } else {
-        const r = await addUploadedPin({ boardId, path, width, height, title: file.name.replace(/\.[^.]+$/, "").slice(0, 200) });
+        const r = await addUploadedPin({
+          boardId,
+          path,
+          width,
+          height,
+          title: file.name.replace(/\.[^.]+$/, "").slice(0, 200),
+        });
         if (r.ok) saved++;
         else {
           toast.error(r.error);
@@ -180,7 +218,9 @@ function UploadTab({ boardId, weddingId }: { boardId: string; weddingId: string 
         {progress ? <Loader2 className="animate-spin" aria-hidden /> : <Upload aria-hidden />}
         {progress ? `Uploading ${progress.done + 1} of ${progress.total}…` : "Choose photos"}
       </Button>
-      <p className="text-muted-foreground text-xs">JPG, PNG, WebP or GIF, up to 10 MB each. Only your wedding team can see them.</p>
+      <p className="text-muted-foreground text-xs">
+        JPG, PNG, WebP or GIF, up to 10 MB each. Only your wedding team can see them.
+      </p>
     </div>
   );
 }
@@ -189,7 +229,10 @@ function LinkTab({ boardId, onDone }: { boardId: string; onDone: () => void }) {
   const [url, setUrl] = useState("");
   const [preview, setPreview] = useState<LinkPreview | null>(null);
   const [title, setTitle] = useState("");
-  const [size, setSize] = useState<{ width: number | null; height: number | null }>({ width: null, height: null });
+  const [size, setSize] = useState<{ width: number | null; height: number | null }>({
+    width: null,
+    height: null,
+  });
   const [error, setError] = useState<string>();
   const [looking, startLookup] = useTransition();
   const [saving, startSave] = useTransition();
@@ -234,13 +277,32 @@ function LinkTab({ boardId, onDone }: { boardId: string; onDone: () => void }) {
   return (
     <div className="space-y-4">
       <form onSubmit={lookUp} className="flex items-start gap-2">
-        <FormField id="pin-url" label="Web address" error={error} className="flex-1" hint="A web page (we'll find its main picture) or a direct image link.">
+        <FormField
+          id="pin-url"
+          label="Web address"
+          error={error}
+          className="flex-1"
+          hint="A web page (we'll find its main picture) or a direct image link."
+        >
           {(a) => (
-            <Input {...a} type="url" required placeholder="https://…" value={url} onChange={(e) => setUrl(e.target.value)} />
+            <Input
+              {...a}
+              type="url"
+              required
+              placeholder="https://…"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
           )}
         </FormField>
-        <Button type="submit" variant="secondary" disabled={looking || !url.trim()} className="mt-[1.375rem]">
-          {looking ? <Loader2 className="animate-spin" aria-hidden /> : <Search aria-hidden />} Look up
+        <Button
+          type="submit"
+          variant="secondary"
+          disabled={looking || !url.trim()}
+          className="mt-[1.375rem]"
+        >
+          {looking ? <Loader2 className="animate-spin" aria-hidden /> : <Search aria-hidden />} Look
+          up
         </Button>
       </form>
       {preview && (
@@ -251,12 +313,24 @@ function LinkTab({ boardId, onDone }: { boardId: string; onDone: () => void }) {
             alt="Preview"
             referrerPolicy="no-referrer"
             className="bg-muted max-h-64 w-full rounded-lg object-contain"
-            onLoad={(e) => setSize({ width: e.currentTarget.naturalWidth || null, height: e.currentTarget.naturalHeight || null })}
+            onLoad={(e) =>
+              setSize({
+                width: e.currentTarget.naturalWidth || null,
+                height: e.currentTarget.naturalHeight || null,
+              })
+            }
             onError={() => setError("That image couldn't be shown. Try a different link.")}
           />
           <div className="space-y-3">
             <FormField id="link-title" label="Title">
-              {(a) => <Input {...a} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />}
+              {(a) => (
+                <Input
+                  {...a}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  maxLength={200}
+                />
+              )}
             </FormField>
             <Button onClick={save} disabled={saving}>
               {saving && <Loader2 className="animate-spin" aria-hidden />} Save pin
@@ -273,9 +347,10 @@ function DiscoverSetup() {
     <div className="bg-muted/50 space-y-2 rounded-xl p-5 text-sm">
       <p className="font-medium">Discover isn&apos;t switched on yet</p>
       <p className="text-muted-foreground">
-        Discover searches millions of free photos on Unsplash. To turn it on, whoever runs this app adds a free Unsplash
-        access key as <code className="bg-muted rounded px-1">UNSPLASH_ACCESS_KEY</code> (the README explains how). You can
-        still upload photos and save links.
+        Discover searches millions of free photos on Unsplash. To turn it on, whoever runs this app
+        adds a free Unsplash access key as{" "}
+        <code className="bg-muted rounded px-1">UNSPLASH_ACCESS_KEY</code> (the README explains
+        how). You can still upload photos and save links.
       </p>
     </div>
   );
@@ -304,7 +379,11 @@ function DiscoverTab({ boardId }: { boardId: string }) {
     setActive(q);
     setPage(p);
     setHasMore(r.data.hasMore);
-    setPhotos((prev) => (p === 1 ? r.data.photos : [...prev, ...r.data.photos.filter((x) => !prev.some((y) => y.id === x.id))]));
+    setPhotos((prev) =>
+      p === 1
+        ? r.data.photos
+        : [...prev, ...r.data.photos.filter((x) => !prev.some((y) => y.id === x.id))],
+    );
   }
 
   // Infinite scroll: fetch the next page when the bottom is visible.
@@ -339,7 +418,13 @@ function DiscoverTab({ boardId }: { boardId: string }) {
         <Label htmlFor="discover-q" className="sr-only">
           Search ideas
         </Label>
-        <Input id="discover-q" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. peony bouquet" maxLength={80} />
+        <Input
+          id="discover-q"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="e.g. peony bouquet"
+          maxLength={80}
+        />
         <Button type="submit" variant="secondary" disabled={loading || !query.trim()}>
           <Search aria-hidden /> Search
         </Button>
@@ -355,7 +440,9 @@ function DiscoverTab({ boardId }: { boardId: string }) {
             }}
             className={cn(
               "focus-visible:ring-ring rounded-full border px-3 py-1 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
-              active === idea ? "bg-primary text-primary-foreground border-primary" : "hover:bg-accent",
+              active === idea
+                ? "bg-primary text-primary-foreground border-primary"
+                : "hover:bg-accent",
             )}
           >
             {idea}
@@ -363,11 +450,18 @@ function DiscoverTab({ boardId }: { boardId: string }) {
         ))}
       </div>
 
-      {active && !loading && photos.length === 0 && <p className="text-muted-foreground py-6 text-center text-sm">No photos found. Try other words.</p>}
+      {active && !loading && photos.length === 0 && (
+        <p className="text-muted-foreground py-6 text-center text-sm">
+          No photos found. Try other words.
+        </p>
+      )}
       <ul className="columns-2 gap-3 sm:columns-3">
         {photos.map((p) => (
           <li key={p.id} className="mb-3 break-inside-avoid">
-            <div className="relative overflow-hidden rounded-lg" style={{ background: p.color ?? undefined }}>
+            <div
+              className="relative overflow-hidden rounded-lg"
+              style={{ background: p.color ?? undefined }}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element -- Unsplash asks apps to hotlink its images */}
               <img
                 src={p.thumb}
@@ -384,7 +478,11 @@ function DiscoverTab({ boardId }: { boardId: string }) {
                 onClick={() => save(p)}
                 aria-label={saved.has(p.id) ? "Saved" : `Save photo by ${p.photographer}`}
               >
-                {saving === p.id ? <Loader2 className="animate-spin" aria-hidden /> : saved.has(p.id) ? <Check aria-hidden /> : null}
+                {saving === p.id ? (
+                  <Loader2 className="animate-spin" aria-hidden />
+                ) : saved.has(p.id) ? (
+                  <Check aria-hidden />
+                ) : null}
                 {saved.has(p.id) ? "Saved" : "Save"}
               </Button>
             </div>

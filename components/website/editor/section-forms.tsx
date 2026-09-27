@@ -40,7 +40,15 @@ export function SectionForm({
       return (
         <div className="space-y-3">
           <FormField id={`${id}-tagline`} label="Tagline" hint="A short line above your names.">
-            {(a) => <Input {...a} value={c.tagline} maxLength={120} disabled={common.disabled} onChange={(e) => onChange({ ...c, tagline: e.target.value })} />}
+            {(a) => (
+              <Input
+                {...a}
+                value={c.tagline}
+                maxLength={120}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, tagline: e.target.value })}
+              />
+            )}
           </FormField>
           <p className="text-muted-foreground text-sm">
             Names, date and place come from{" "}
@@ -58,7 +66,15 @@ export function SectionForm({
         <div className="space-y-4">
           <FormField id={`${id}-intro`} label="How it all began">
             {(a) => (
-              <Textarea {...a} rows={4} value={c.intro} maxLength={3000} disabled={common.disabled} placeholder="We met at…" onChange={(e) => onChange({ ...c, intro: e.target.value })} />
+              <Textarea
+                {...a}
+                rows={4}
+                value={c.intro}
+                maxLength={3000}
+                disabled={common.disabled}
+                placeholder="We met at…"
+                onChange={(e) => onChange({ ...c, intro: e.target.value })}
+              />
             )}
           </FormField>
           <ListEditor
@@ -73,10 +89,31 @@ export function SectionForm({
               <div className="grid gap-3 sm:grid-cols-[1fr_8rem]">
                 <div className="space-y-2">
                   <div className="grid grid-cols-[7rem_1fr] gap-2">
-                    <Input aria-label="When" placeholder="e.g. June 2019" value={m.date} maxLength={40} disabled={common.disabled} onChange={(e) => set({ ...m, date: e.target.value })} />
-                    <Input aria-label="Title" placeholder="First date" value={m.title} maxLength={120} disabled={common.disabled} onChange={(e) => set({ ...m, title: e.target.value })} />
+                    <Input
+                      aria-label="When"
+                      placeholder="e.g. June 2019"
+                      value={m.date}
+                      maxLength={40}
+                      disabled={common.disabled}
+                      onChange={(e) => set({ ...m, date: e.target.value })}
+                    />
+                    <Input
+                      aria-label="Title"
+                      placeholder="First date"
+                      value={m.title}
+                      maxLength={120}
+                      disabled={common.disabled}
+                      onChange={(e) => set({ ...m, title: e.target.value })}
+                    />
                   </div>
-                  <Textarea aria-label="What happened" rows={2} value={m.text} maxLength={1500} disabled={common.disabled} onChange={(e) => set({ ...m, text: e.target.value })} />
+                  <Textarea
+                    aria-label="What happened"
+                    rows={2}
+                    value={m.text}
+                    maxLength={1500}
+                    disabled={common.disabled}
+                    onChange={(e) => set({ ...m, text: e.target.value })}
+                  />
                 </div>
                 <ImageSlot
                   weddingId={common.weddingId}
@@ -100,7 +137,16 @@ export function SectionForm({
       return (
         <div className="space-y-3">
           <FormField id={`${id}-intro`} label="Introduction (optional)">
-            {(a) => <Textarea {...a} rows={2} value={section.content.intro} maxLength={1000} disabled={common.disabled} onChange={(e) => onChange({ intro: e.target.value })} />}
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={2}
+                value={section.content.intro}
+                maxLength={1000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ intro: e.target.value })}
+              />
+            )}
           </FormField>
           <p className="text-muted-foreground text-sm">
             {eventCount} event{eventCount === 1 ? "" : "s"} from{" "}
@@ -116,7 +162,16 @@ export function SectionForm({
       return (
         <div className="space-y-3">
           <FormField id={`${id}-intro`} label="Introduction (optional)">
-            {(a) => <Textarea {...a} rows={2} value={c.intro} maxLength={1500} disabled={common.disabled} onChange={(e) => onChange({ ...c, intro: e.target.value })} />}
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={2}
+                value={c.intro}
+                maxLength={1500}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, intro: e.target.value })}
+              />
+            )}
           </FormField>
           <p className="text-muted-foreground text-sm">
             {hotelCount} hotel{hotelCount === 1 ? "" : "s"} shown (tick “Show on website” in{" "}
@@ -129,8 +184,21 @@ export function SectionForm({
             </Link>
             .
           </p>
-          <FormField id={`${id}-notes`} label="Getting around" hint="Taxis, parking, shuttles, weather…">
-            {(a) => <Textarea {...a} rows={4} value={c.notes} maxLength={3000} disabled={common.disabled} onChange={(e) => onChange({ ...c, notes: e.target.value })} />}
+          <FormField
+            id={`${id}-notes`}
+            label="Getting around"
+            hint="Taxis, parking, shuttles, weather…"
+          >
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={4}
+                value={c.notes}
+                maxLength={3000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, notes: e.target.value })}
+              />
+            )}
           </FormField>
         </div>
       );
@@ -139,7 +207,16 @@ export function SectionForm({
       return (
         <div className="space-y-3">
           <FormField id={`${id}-intro`} label="Message above the form">
-            {(a) => <Textarea {...a} rows={3} value={section.content.intro} maxLength={1000} disabled={common.disabled} onChange={(e) => onChange({ intro: e.target.value })} />}
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={3}
+                value={section.content.intro}
+                maxLength={1000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ intro: e.target.value })}
+              />
+            )}
           </FormField>
           <p className="text-muted-foreground text-sm">
             Guests find their invitation by name or code. The deadline and meals are set in{" "}
@@ -177,10 +254,32 @@ export function SectionForm({
               />
               <div className="space-y-2">
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <Input aria-label="Name" placeholder="Name" value={p.name} maxLength={80} disabled={common.disabled} onChange={(e) => set({ ...p, name: e.target.value })} />
-                  <Input aria-label="Role" placeholder="Maid of honour" value={p.role} maxLength={80} disabled={common.disabled} onChange={(e) => set({ ...p, role: e.target.value })} />
+                  <Input
+                    aria-label="Name"
+                    placeholder="Name"
+                    value={p.name}
+                    maxLength={80}
+                    disabled={common.disabled}
+                    onChange={(e) => set({ ...p, name: e.target.value })}
+                  />
+                  <Input
+                    aria-label="Role"
+                    placeholder="Maid of honour"
+                    value={p.role}
+                    maxLength={80}
+                    disabled={common.disabled}
+                    onChange={(e) => set({ ...p, role: e.target.value })}
+                  />
                 </div>
-                <Textarea aria-label="A few words" placeholder="A few words (optional)" rows={2} value={p.bio} maxLength={500} disabled={common.disabled} onChange={(e) => set({ ...p, bio: e.target.value })} />
+                <Textarea
+                  aria-label="A few words"
+                  placeholder="A few words (optional)"
+                  rows={2}
+                  value={p.bio}
+                  maxLength={500}
+                  disabled={common.disabled}
+                  onChange={(e) => set({ ...p, bio: e.target.value })}
+                />
               </div>
             </div>
           )}
@@ -191,8 +290,21 @@ export function SectionForm({
       const c = section.content;
       return (
         <div className="space-y-4">
-          <FormField id={`${id}-intro`} label="Introduction (optional)" hint="e.g. “Your presence is the best gift, but if you'd like…”">
-            {(a) => <Textarea {...a} rows={2} value={c.intro} maxLength={1500} disabled={common.disabled} onChange={(e) => onChange({ ...c, intro: e.target.value })} />}
+          <FormField
+            id={`${id}-intro`}
+            label="Introduction (optional)"
+            hint="e.g. “Your presence is the best gift, but if you'd like…”"
+          >
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={2}
+                value={c.intro}
+                maxLength={1500}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, intro: e.target.value })}
+              />
+            )}
           </FormField>
           <ListEditor
             label="Links"
@@ -205,7 +317,14 @@ export function SectionForm({
             render={(l, set) => (
               <div className="space-y-2">
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <Input aria-label="Name" placeholder="Honeymoon fund" value={l.label} maxLength={100} disabled={common.disabled} onChange={(e) => set({ ...l, label: e.target.value })} />
+                  <Input
+                    aria-label="Name"
+                    placeholder="Honeymoon fund"
+                    value={l.label}
+                    maxLength={100}
+                    disabled={common.disabled}
+                    onChange={(e) => set({ ...l, label: e.target.value })}
+                  />
                   <Input
                     aria-label="Web address"
                     placeholder="https://…"
@@ -217,8 +336,19 @@ export function SectionForm({
                     onChange={(e) => set({ ...l, url: e.target.value })}
                   />
                 </div>
-                {!!l.url.trim() && !safeUrl(l.url) && <p className="text-destructive text-xs">That doesn&apos;t look like a web address.</p>}
-                <Input aria-label="Note" placeholder="Note (optional)" value={l.note} maxLength={300} disabled={common.disabled} onChange={(e) => set({ ...l, note: e.target.value })} />
+                {!!l.url.trim() && !safeUrl(l.url) && (
+                  <p className="text-destructive text-xs">
+                    That doesn&apos;t look like a web address.
+                  </p>
+                )}
+                <Input
+                  aria-label="Note"
+                  placeholder="Note (optional)"
+                  value={l.note}
+                  maxLength={300}
+                  disabled={common.disabled}
+                  onChange={(e) => set({ ...l, note: e.target.value })}
+                />
               </div>
             )}
           />
@@ -239,8 +369,23 @@ export function SectionForm({
           max={40}
           render={(q, set) => (
             <div className="space-y-2">
-              <Input aria-label="Question" placeholder="Question" value={q.question} maxLength={200} disabled={common.disabled} onChange={(e) => set({ ...q, question: e.target.value })} />
-              <Textarea aria-label="Answer" placeholder="Answer" rows={2} value={q.answer} maxLength={2000} disabled={common.disabled} onChange={(e) => set({ ...q, answer: e.target.value })} />
+              <Input
+                aria-label="Question"
+                placeholder="Question"
+                value={q.question}
+                maxLength={200}
+                disabled={common.disabled}
+                onChange={(e) => set({ ...q, question: e.target.value })}
+              />
+              <Textarea
+                aria-label="Answer"
+                placeholder="Answer"
+                rows={2}
+                value={q.answer}
+                maxLength={2000}
+                disabled={common.disabled}
+                onChange={(e) => set({ ...q, answer: e.target.value })}
+              />
             </div>
           )}
         />
@@ -251,7 +396,17 @@ export function SectionForm({
   }
 }
 
-function GalleryForm({ content, onChange, weddingId, images, addImage, disabled }: Common & { content: SectionContent["gallery"]; onChange: (c: SectionContent["gallery"]) => void }) {
+function GalleryForm({
+  content,
+  onChange,
+  weddingId,
+  images,
+  addImage,
+  disabled,
+}: Common & {
+  content: SectionContent["gallery"];
+  onChange: (c: SectionContent["gallery"]) => void;
+}) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<string | null>(null);
 
@@ -294,16 +449,34 @@ function GalleryForm({ content, onChange, weddingId, images, addImage, disabled 
               void add(f);
             }}
           />
-          <Button type="button" variant="outline" size="sm" disabled={disabled || !!busy || content.photos.length >= 60} onClick={() => input.current?.click()}>
-            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />} {busy ?? "Add photos"}
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={disabled || !!busy || content.photos.length >= 60}
+            onClick={() => input.current?.click()}
+          >
+            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />}{" "}
+            {busy ?? "Add photos"}
           </Button>
         </>
       }
       render={(p, set) => (
         <div className="grid grid-cols-[4.5rem_1fr] items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element -- private preview link */}
-          <img src={images[p.path]} alt="" className="bg-muted aspect-square w-full rounded-md object-cover" />
-          <Input aria-label="Caption" placeholder="Caption (optional)" value={p.caption} maxLength={200} disabled={disabled} onChange={(e) => set({ ...p, caption: e.target.value })} />
+          <img
+            src={images[p.path]}
+            alt=""
+            className="bg-muted aspect-square w-full rounded-md object-cover"
+          />
+          <Input
+            aria-label="Caption"
+            placeholder="Caption (optional)"
+            value={p.caption}
+            maxLength={200}
+            disabled={disabled}
+            onChange={(e) => set({ ...p, caption: e.target.value })}
+          />
         </div>
       )}
     />
@@ -349,13 +522,33 @@ function ListEditor<T extends { id: string }>({
             {render(item, (next) => onChange(items.map((x) => (x.id === item.id ? next : x))))}
             {!disabled && (
               <div className="mt-2 flex justify-end gap-1">
-                <Button type="button" variant="ghost" size="icon-sm" disabled={i === 0} onClick={() => move(i, -1)} aria-label={`Move item ${i + 1} up`}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  disabled={i === 0}
+                  onClick={() => move(i, -1)}
+                  aria-label={`Move item ${i + 1} up`}
+                >
                   <ArrowUp aria-hidden />
                 </Button>
-                <Button type="button" variant="ghost" size="icon-sm" disabled={i === items.length - 1} onClick={() => move(i, 1)} aria-label={`Move item ${i + 1} down`}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  disabled={i === items.length - 1}
+                  onClick={() => move(i, 1)}
+                  aria-label={`Move item ${i + 1} down`}
+                >
                   <ArrowDown aria-hidden />
                 </Button>
-                <Button type="button" variant="ghost" size="icon-sm" onClick={() => onChange(items.filter((x) => x.id !== item.id))} aria-label={`Remove item ${i + 1}`}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => onChange(items.filter((x) => x.id !== item.id))}
+                  aria-label={`Remove item ${i + 1}`}
+                >
                   <Trash2 aria-hidden />
                 </Button>
               </div>
@@ -364,7 +557,13 @@ function ListEditor<T extends { id: string }>({
         ))}
       </ol>
       {!disabled && create && (
-        <Button type="button" variant="outline" size="sm" disabled={items.length >= max} onClick={() => onChange([...items, create()])}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          disabled={items.length >= max}
+          onClick={() => onChange([...items, create()])}
+        >
           <Plus aria-hidden /> {addLabel}
         </Button>
       )}

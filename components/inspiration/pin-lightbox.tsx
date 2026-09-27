@@ -27,7 +27,13 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { extractPalette, textOn } from "@/lib/inspiration/layout";
@@ -89,7 +95,11 @@ export function PinLightbox({
     if (!pin) return;
     function key(e: KeyboardEvent) {
       const t = e.target as HTMLElement;
-      if (t.closest("input, textarea, select, [role=combobox], [role=listbox]") || t.isContentEditable) return;
+      if (
+        t.closest("input, textarea, select, [role=combobox], [role=listbox]") ||
+        t.isContentEditable
+      )
+        return;
       if (e.key === "ArrowLeft" && hasPrev) onPrev();
       if (e.key === "ArrowRight" && hasNext) onNext();
     }
@@ -114,10 +124,24 @@ export function PinLightbox({
                 className="max-h-[60dvh] bg-transparent md:max-h-[85dvh]"
               />
               <div className="absolute inset-x-2 top-1/2 flex -translate-y-1/2 justify-between">
-                <Button variant="secondary" size="icon" className="rounded-full shadow" onClick={onPrev} disabled={!hasPrev} aria-label="Previous pin">
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full shadow"
+                  onClick={onPrev}
+                  disabled={!hasPrev}
+                  aria-label="Previous pin"
+                >
                   <ChevronLeft aria-hidden />
                 </Button>
-                <Button variant="secondary" size="icon" className="rounded-full shadow" onClick={onNext} disabled={!hasNext} aria-label="Next pin">
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full shadow"
+                  onClick={onNext}
+                  disabled={!hasNext}
+                  aria-label="Next pin"
+                >
                   <ChevronRight aria-hidden />
                 </Button>
               </div>
@@ -125,15 +149,27 @@ export function PinLightbox({
             <div className="space-y-5 p-5">
               <div className="pr-8">
                 <DialogTitle className="font-serif text-2xl leading-tight">{label}</DialogTitle>
-                <DialogDescription className="sr-only">Details, colours and comments for this pin.</DialogDescription>
+                <DialogDescription className="sr-only">
+                  Details, colours and comments for this pin.
+                </DialogDescription>
                 {pin.creditName && (
                   <p className="text-muted-foreground mt-1 text-xs">
                     Photo by{" "}
-                    <a href={pin.creditUrl ?? undefined} target="_blank" rel="noreferrer" className="underline">
+                    <a
+                      href={pin.creditUrl ?? undefined}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline"
+                    >
                       {pin.creditName}
                     </a>{" "}
                     on{" "}
-                    <a href={pin.sourceUrl ?? undefined} target="_blank" rel="noreferrer" className="underline">
+                    <a
+                      href={pin.sourceUrl ?? undefined}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline"
+                    >
                       Unsplash
                     </a>
                   </p>
@@ -147,7 +183,10 @@ export function PinLightbox({
                   onClick={() => onHeart(pin)}
                   aria-pressed={pin.hearts.includes(userId)}
                 >
-                  <Heart className={cn(pin.hearts.includes(userId) && "fill-current")} aria-hidden />
+                  <Heart
+                    className={cn(pin.hearts.includes(userId) && "fill-current")}
+                    aria-hidden
+                  />
                   {pin.hearts.length || ""} {pin.hearts.includes(userId) ? "Loved" : "Love"}
                 </Button>
                 {pin.sourceUrl && !pin.creditName && (
@@ -216,7 +255,15 @@ export function PinLightbox({
   );
 }
 
-function ReadOnlyDetails({ pin, categories, vendors }: { pin: PinView; categories: Option[]; vendors: Option[] }) {
+function ReadOnlyDetails({
+  pin,
+  categories,
+  vendors,
+}: {
+  pin: PinView;
+  categories: Option[];
+  vendors: Option[];
+}) {
   const category = categories.find((c) => c.id === pin.budgetCategoryId);
   const vendor = vendors.find((v) => v.id === pin.vendorId);
   return (
@@ -237,7 +284,15 @@ function ReadOnlyDetails({ pin, categories, vendors }: { pin: PinView; categorie
   );
 }
 
-function PinForm({ pin, categories, vendors }: { pin: PinView; categories: Option[]; vendors: Option[] }) {
+function PinForm({
+  pin,
+  categories,
+  vendors,
+}: {
+  pin: PinView;
+  categories: Option[];
+  vendors: Option[];
+}) {
   const [title, setTitle] = useState(pin.title ?? "");
   const [note, setNote] = useState(pin.note ?? "");
   const [tags, setTags] = useState(pin.tags.join(", "));
@@ -267,11 +322,20 @@ function PinForm({ pin, categories, vendors }: { pin: PinView; categories: Optio
   return (
     <form onSubmit={save} className="space-y-3">
       <FormField id="pin-title" label="Title">
-        {(a) => <Input {...a} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />}
+        {(a) => (
+          <Input {...a} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />
+        )}
       </FormField>
       <FormField id="pin-note" label="Notes">
         {(a) => (
-          <Textarea {...a} value={note} onChange={(e) => setNote(e.target.value)} rows={2} maxLength={2000} placeholder="What do you love about it?" />
+          <Textarea
+            {...a}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            rows={2}
+            maxLength={2000}
+            placeholder="What do you love about it?"
+          />
         )}
       </FormField>
       <FormField id="pin-tags" label="Tags" hint="Separate with commas, e.g. peonies, blush">
@@ -325,7 +389,15 @@ function PinForm({ pin, categories, vendors }: { pin: PinView; categories: Optio
         </Select>
       </div>
       <FormField id="pin-source" label="Link">
-        {(a) => <Input {...a} type="url" value={sourceUrl} onChange={(e) => setSourceUrl(e.target.value)} placeholder="https://" />}
+        {(a) => (
+          <Input
+            {...a}
+            type="url"
+            value={sourceUrl}
+            onChange={(e) => setSourceUrl(e.target.value)}
+            placeholder="https://"
+          />
+        )}
       </FormField>
       <Button type="submit" size="sm" disabled={pending}>
         {pending && <Loader2 className="animate-spin" aria-hidden />} Save changes
@@ -348,7 +420,9 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
       setColours(c);
       setPicked(c);
     } catch {
-      toast.error("This website doesn't let us read the image's colours. Try an uploaded or Unsplash image.");
+      toast.error(
+        "This website doesn't let us read the image's colours. Try an uploaded or Unsplash image.",
+      );
     } finally {
       setBusy(false);
     }
@@ -360,7 +434,8 @@ function Colours({ pin, canEdit }: { pin: PinView; canEdit: boolean }) {
         <h3 className="text-sm font-medium">Colours</h3>
         {!colours && (
           <Button variant="outline" size="sm" onClick={find} disabled={busy || !pin.src}>
-            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Palette aria-hidden />} Find colours
+            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <Palette aria-hidden />} Find
+            colours
           </Button>
         )}
       </div>
@@ -419,13 +494,17 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
   return (
     <div className="space-y-3">
       <h3 className="text-sm font-medium">Comments</h3>
-      {pin.comments.length === 0 && <p className="text-muted-foreground text-sm">No comments yet.</p>}
+      {pin.comments.length === 0 && (
+        <p className="text-muted-foreground text-sm">No comments yet.</p>
+      )}
       <ul className="space-y-3">
         {pin.comments.map((c) => (
           <li key={c.id} className="group text-sm">
             <p>
               <span className="font-medium">{c.name}</span>{" "}
-              <span className="text-muted-foreground text-xs">{formatDistanceToNow(parseISO(c.createdAt), { addSuffix: true })}</span>
+              <span className="text-muted-foreground text-xs">
+                {formatDistanceToNow(parseISO(c.createdAt), { addSuffix: true })}
+              </span>
             </p>
             <p className="whitespace-pre-wrap">{c.body}</p>
             {c.userId === userId && (
@@ -475,7 +554,12 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
             }
           }}
         />
-        <Button type="submit" size="icon" disabled={pending || !body.trim()} aria-label="Post comment">
+        <Button
+          type="submit"
+          size="icon"
+          disabled={pending || !body.trim()}
+          aria-label="Post comment"
+        >
           {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
         </Button>
       </form>

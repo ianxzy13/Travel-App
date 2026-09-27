@@ -2,7 +2,13 @@ import type { RelationshipType, TagColor } from "@/lib/database.types";
 import type { GuestView, PartnerNames } from "@/lib/guests/model";
 import type { AddressValues } from "@/lib/validation/guest";
 
-export type HouseholdOption = { id: string; name: string; address: AddressValues };
+/** language: the household's preferred language code, "" = the wedding's main language */
+export type HouseholdOption = {
+  id: string;
+  name: string;
+  address: AddressValues;
+  language: string;
+};
 export type EventOption = { id: string; name: string };
 export type TagOption = { id: string; name: string; color: TagColor };
 export type RelationshipItem = {

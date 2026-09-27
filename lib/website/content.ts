@@ -6,7 +6,8 @@ import type { BodyFont, HeadingFont, SiteSectionKind, SiteTemplate } from "@/lib
 // the site; saving uses the same schemas, so limits are enforced.
 // (Part 2 will add translations: one of these objects per language.)
 
-const text = (max: number) => z.string().max(max, `Please keep this under ${max} characters`).catch("");
+const text = (max: number) =>
+  z.string().max(max, `Please keep this under ${max} characters`).catch("");
 const id = z.string().min(1).max(64);
 const photo = z.string().max(500).nullable().catch(null);
 
@@ -36,10 +37,16 @@ export const sectionSchemas = {
       .catch([]),
   }),
   faq: z.object({
-    items: z.array(z.object({ id, question: text(200), answer: text(2000) })).max(40).catch([]),
+    items: z
+      .array(z.object({ id, question: text(200), answer: text(2000) }))
+      .max(40)
+      .catch([]),
   }),
   gallery: z.object({
-    photos: z.array(z.object({ id, path: z.string().max(500), caption: text(200) })).max(60).catch([]),
+    photos: z
+      .array(z.object({ id, path: z.string().max(500), caption: text(200) }))
+      .max(60)
+      .catch([]),
   }),
 } satisfies Record<SiteSectionKind, z.ZodType>;
 
@@ -93,14 +100,20 @@ export function safeUrl(raw: string | null | undefined) {
 }
 
 /** Every storage path used by the site (hero + section photos). */
-export function sitePaths(heroPath: string | null, sections: { kind: SiteSectionKind; content: unknown }[]) {
+export function sitePaths(
+  heroPath: string | null,
+  sections: { kind: SiteSectionKind; content: unknown }[],
+) {
   const paths = new Set<string>();
   if (heroPath) paths.add(heroPath);
   for (const s of sections) {
     const c = parseContent(s.kind, s.content) as Record<string, unknown>;
-    if (s.kind === "story") for (const m of (c as SectionContent["story"]).milestones) if (m.photo) paths.add(m.photo);
-    if (s.kind === "party") for (const p of (c as SectionContent["party"]).people) if (p.photo) paths.add(p.photo);
-    if (s.kind === "gallery") for (const p of (c as SectionContent["gallery"]).photos) paths.add(p.path);
+    if (s.kind === "story")
+      for (const m of (c as SectionContent["story"]).milestones) if (m.photo) paths.add(m.photo);
+    if (s.kind === "party")
+      for (const p of (c as SectionContent["party"]).people) if (p.photo) paths.add(p.photo);
+    if (s.kind === "gallery")
+      for (const p of (c as SectionContent["gallery"]).photos) paths.add(p.path);
   }
   return [...paths];
 }
@@ -139,6 +152,10 @@ export type SiteData = {
     location: string | null;
     destination_airport: string | null;
     rsvp_deadline: string | null;
+    /** languages the site is offered in (first = main) */
+    languages: string[];
+    /** IANA time zone of the venue; event times are local times there */
+    time_zone: string | null;
   };
   look: {
     template: SiteTemplate;
@@ -167,7 +184,12 @@ export function isSectionEmpty(s: Section, data: Pick<SiteData, "events" | "hote
     case "events":
       return data.events.length === 0;
     case "travel":
-      return data.hotels.length === 0 && !s.content.intro.trim() && !s.content.notes.trim() && !data.wedding.destination_airport;
+      return (
+        data.hotels.length === 0 &&
+        !s.content.intro.trim() &&
+        !s.content.notes.trim() &&
+        !data.wedding.destination_airport
+      );
     case "party":
       return !s.content.people.some((p) => p.name.trim());
     case "registry":

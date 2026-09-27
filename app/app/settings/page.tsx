@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/app/page-header";
 import { Collaborators } from "@/components/settings/collaborators";
 import { DangerZone } from "@/components/settings/danger-zone";
 import { EventsCard } from "@/components/settings/events-card";
+import { LanguagesCard } from "@/components/settings/languages-card";
 import { WeddingDetailsForm } from "@/components/settings/wedding-details-form";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import type { WeddingFormValues } from "@/lib/validation/wedding";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Settings" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("settings") };
+}
 
 export default async function SettingsPage() {
   const user = await requireUser();
   const { wedding, role } = await requireWedding();
   const supabase = await createClient();
   const isOwner = role === "owner";
+  const t = await getTranslations("app.settings");
 
   const [{ data: members }, { data: invitations }] = await Promise.all([
     supabase
@@ -71,10 +76,7 @@ export default async function SettingsPage() {
 
   return (
     <>
-      <PageHeader
-        title="Settings"
-        description="Your wedding details, events and who's planning with you."
-      />
+      <PageHeader title={t("title")} description={t("description")} />
       <div className="space-y-8">
         <WeddingDetailsForm
           // Re-mount the form when switching weddings so it shows fresh values.
@@ -82,7 +84,17 @@ export default async function SettingsPage() {
           defaultValues={values}
           readOnly={!canEdit(role)}
         />
+        <LanguagesCard
+          key={`lang-${wedding.id}`}
+          languages={wedding.languages}
+          timeZone={wedding.time_zone}
+          translations={wedding.translations}
+          location={wedding.location}
+          rsvpContact={wedding.rsvp_contact}
+          readOnly={!canEdit(role)}
+        />
         <EventsCard
+          languages={wedding.languages}
           readOnly={!canEdit(role)}
           events={(events ?? []).map((e, i) => ({ ...e, invitedCount: invitedCounts[i] }))}
           bookedVenues={bookedVenues ?? []}

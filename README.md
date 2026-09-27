@@ -28,6 +28,7 @@ Built with Next.js 15 (App Router, TypeScript), Tailwind CSS v4 + shadcn/ui, and
 | **Wedding website**        | 5 templates, live editor, sections, password, publishing, SEO and link-preview image                                       |
 | **To-dos & schedule**      | Suggested timeline from your date, assignees, day-of run sheet with print-out                                              |
 | **Notifications**          | New RSVPs, to-dos for you, payment / room-block / overdue reminders                                                        |
+| **25 languages**           | Guest website, RSVP pages and emails in each guest's language; your own translations; local dates, times and money         |
 
 Everything is **mobile-first** (works from 375 px wide), has **light and dark mode**, and is checked
 for **accessibility** (keyboard use, labels, contrast) by the automated tests.
@@ -110,6 +111,7 @@ Never share or commit `.env.local` (Git already ignores it). Restart `npm run de
    | `20261002000000_inspiration.sql`    | boards, pins, comments, hearts, palette, shared boards |
    | `20261003000000_website.sql`        | wedding website, sections, password protection         |
    | `20261004000000_tasks_schedule.sql` | to-dos, day-of schedule, reminders                     |
+   | `20261005000000_languages.sql`      | wedding languages, time zone, translations             |
 
 3. Check **Table Editor**: you should see `weddings`, `guests`, `households`, `events` and more,
    and **Storage** should show a private bucket called `wedding-files`.
@@ -332,6 +334,25 @@ everything), **viewer** (read only; can still heart and comment on pins).
   room-block cut-offs within 14 days, to-dos due in 3 days, and a weekly overdue summary. Reminders
   are checked once a day when someone opens the app (no cron job needed).
 
+**Languages**
+
+- Vow speaks 25 languages: English, Spanish, Portuguese, French, German, Italian, Dutch, Polish,
+  Czech, Slovenian, Croatian, Swedish, Greek, Turkish, Russian, Ukrainian, Arabic (right-to-left),
+  Hindi, Chinese (Simplified and Traditional), Japanese, Korean, Indonesian, Vietnamese and Thai.
+- **Settings → Languages & region**: pick your wedding's languages (the first is the main one) and
+  the venue's time zone. Guests see the website and RSVP pages in their browser's language (or the
+  one set on their household), and can switch with the globe menu. Guests abroad also see event
+  times in their own time.
+- Write your texts in the main language, then add translations: **Website → Language** (per
+  section), **Translations** on each event and meal, and in Languages & region for the location.
+  Anything not translated shows in the main language. In desktop Chrome a **Draft** button can
+  pre-fill a translation for you to check.
+- Invitation emails go out in each household's language (**Guests → edit household → Language**).
+- Your own app language: **account menu → Language**. The guest pages and main screens are
+  translated; some planning screens are still English for now.
+- **Add a language:** copy `messages/en.json` to `messages/<code>.json`, translate the values, add
+  the code to `i18n/locales.ts`, and run `npm test` (it checks nothing is missing or broken).
+
 ---
 
 ## 8. Troubleshooting
@@ -363,6 +384,7 @@ app/                      pages (Next.js App Router)
   b/[shareId]/            public shared inspiration board
   print/                  printable seating chart and run sheet
   api/resend/webhook/     email delivery status from Resend
+i18n/, messages/          languages: which one to show, and every text in each language
 components/               UI, one folder per module; components/ui = shadcn/ui building blocks
 lib/                      logic shared by pages and server actions (one folder per module),
                           validation (zod), Supabase clients, database types

@@ -2,6 +2,7 @@
 import { cache } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Logo } from "@/components/logo";
 import type { Accent } from "@/lib/database.types";
 import { FILES_BUCKET } from "@/lib/files";
@@ -21,7 +22,13 @@ type SharedPin = {
   credit_name: string | null;
   credit_url: string | null;
 };
-type SharedBoard = { name: string; description: string | null; couple: string; accent: Accent; pins: SharedPin[] };
+type SharedBoard = {
+  name: string;
+  description: string | null;
+  couple: string;
+  accent: Accent;
+  pins: SharedPin[];
+};
 
 const loadBoard = cache(async (shareId: string) => {
   if (!isSupabaseConfigured || !/^[\w-]{16,64}$/.test(shareId)) return null;
@@ -30,17 +37,31 @@ const loadBoard = cache(async (shareId: string) => {
   return (data as SharedBoard | null) ?? null;
 });
 
-export async function generateMetadata({ params }: { params: Promise<{ shareId: string }> }): Promise<Metadata> {
-  const board = await loadBoard((await params).shareId);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ shareId: string }>;
+}): Promise<Metadata> {
+  const [board, t] = await Promise.all([
+    loadBoard((await params).shareId),
+    getTranslations("board"),
+  ]);
   return {
-    title: board ? `${board.name} · ${board.couple}` : "Shared board",
+    title: board ? `${board.name} · ${board.couple}` : t("title"),
     robots: { index: false, follow: false },
   };
 }
 
 /** /b/<token> — a read-only board shared with a link (e.g. for the florist). */
-export default async function SharedBoardPage({ params }: { params: Promise<{ shareId: string }> }) {
-  const board = await loadBoard((await params).shareId);
+export default async function SharedBoardPage({
+  params,
+}: {
+  params: Promise<{ shareId: string }>;
+}) {
+  const [board, t] = await Promise.all([
+    loadBoard((await params).shareId),
+    getTranslations("board"),
+  ]);
   if (!board) notFound();
 
   // Uploaded images are private; shared boards get temporary (1 hour) links.
@@ -61,18 +82,26 @@ export default async function SharedBoardPage({ params }: { params: Promise<{ sh
     <div data-accent={board.accent} className="bg-background min-h-dvh">
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-16">
         <header className="mb-8 text-center">
-          <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase">{board.couple}</p>
+          <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase">
+            {board.couple}
+          </p>
           <h1 className="mt-3 text-5xl">{board.name}</h1>
-          {board.description && <p className="text-muted-foreground mx-auto mt-3 max-w-xl">{board.description}</p>}
+          {board.description && (
+            <p className="text-muted-foreground mx-auto mt-3 max-w-xl">{board.description}</p>
+          )}
         </header>
         {pins.length === 0 ? (
-          <p className="text-muted-foreground text-center">This board is empty for now.</p>
+          <p className="text-muted-foreground text-center">{t("empty")}</p>
         ) : (
           layouts.map((cols, i) => (
             <div
               key={i}
               className={
-                i === 0 ? "flex items-start gap-3 sm:hidden" : i === 1 ? "hidden items-start gap-3 sm:flex lg:hidden" : "hidden items-start gap-4 lg:flex"
+                i === 0
+                  ? "flex items-start gap-3 sm:hidden"
+                  : i === 1
+                    ? "hidden items-start gap-3 sm:flex lg:hidden"
+                    : "hidden items-start gap-4 lg:flex"
               }
             >
               {cols.map((col, c) => (
@@ -81,11 +110,13 @@ export default async function SharedBoardPage({ params }: { params: Promise<{ sh
                     <figure key={p.id}>
                       <img
                         src={p.src}
-                        alt={p.title || "Inspiration"}
+                        alt={p.title || t("fallbackAlt")}
                         loading="lazy"
                         referrerPolicy="no-referrer"
                         className="bg-muted w-full rounded-xl object-cover"
-                        style={{ aspectRatio: p.width && p.height ? `${p.width} / ${p.height}` : "4 / 5" }}
+                        style={{
+                          aspectRatio: p.width && p.height ? `${p.width} / ${p.height}` : "4 / 5",
+                        }}
                       />
                       {(p.title || p.note || p.credit_name) && (
                         <figcaption className="mt-1.5 space-y-0.5 px-0.5 text-sm">
@@ -93,14 +124,29 @@ export default async function SharedBoardPage({ params }: { params: Promise<{ sh
                           {p.note && <p className="text-muted-foreground">{p.note}</p>}
                           {p.credit_name && (
                             <p className="text-muted-foreground text-xs">
-                              Photo by{" "}
-                              <a href={p.credit_url ?? undefined} className="underline" target="_blank" rel="noreferrer">
-                                {p.credit_name}
-                              </a>{" "}
-                              on{" "}
-                              <a href={p.source_url ?? undefined} className="underline" target="_blank" rel="noreferrer">
-                                Unsplash
-                              </a>
+                              {t.rich("photoBy", {
+                                name: p.credit_name,
+                                photographer: (c) => (
+                                  <a
+                                    href={p.credit_url ?? undefined}
+                                    className="underline"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {c}
+                                  </a>
+                                ),
+                                unsplash: (c) => (
+                                  <a
+                                    href={p.source_url ?? undefined}
+                                    className="underline"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {c}
+                                  </a>
+                                ),
+                              })}
                             </p>
                           )}
                         </figcaption>
@@ -113,7 +159,7 @@ export default async function SharedBoardPage({ params }: { params: Promise<{ sh
           ))
         )}
         <footer className="text-muted-foreground mt-16 flex items-center justify-center gap-2 text-sm">
-          Made with <Logo />
+          {t.rich("madeWith", { link: () => <Logo /> })}
         </footer>
       </main>
     </div>

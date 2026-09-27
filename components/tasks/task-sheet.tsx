@@ -11,8 +11,21 @@ import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
 import type { TaskRow } from "@/lib/database.types";
 import { taskSchema, type TaskValues } from "@/lib/validation/tasks";
@@ -72,7 +85,9 @@ export function TaskSheet({
           </SheetHeader>
           <fieldset disabled={!canEdit} className="flex-1 space-y-4 px-4">
             <FormField id="task-title" label="What needs doing?" error={errors.title?.message}>
-              {(a) => <Input {...a} {...form.register("title")} maxLength={200} autoFocus={!task} />}
+              {(a) => (
+                <Input {...a} {...form.register("title")} maxLength={200} autoFocus={!task} />
+              )}
             </FormField>
             <div className="grid grid-cols-2 gap-3">
               <FormField id="task-due" label="Due date" error={errors.due_date?.message}>
@@ -82,7 +97,9 @@ export function TaskSheet({
                 <Label htmlFor="task-assignee">Who</Label>
                 <Select
                   value={form.watch("assignee_id") || NOBODY}
-                  onValueChange={(v) => form.setValue("assignee_id", v === NOBODY ? "" : v, { shouldDirty: true })}
+                  onValueChange={(v) =>
+                    form.setValue("assignee_id", v === NOBODY ? "" : v, { shouldDirty: true })
+                  }
                   disabled={!canEdit}
                 >
                   <SelectTrigger id="task-assignee" className="w-full">
@@ -99,8 +116,19 @@ export function TaskSheet({
                 </Select>
               </div>
             </div>
-            <FormField id="task-category" label="Category (optional)" hint="e.g. Guests, Vendors, Attire">
-              {(a) => <Input {...a} {...form.register("category")} maxLength={40} list="task-categories" />}
+            <FormField
+              id="task-category"
+              label="Category (optional)"
+              hint="e.g. Guests, Vendors, Attire"
+            >
+              {(a) => (
+                <Input
+                  {...a}
+                  {...form.register("category")}
+                  maxLength={40}
+                  list="task-categories"
+                />
+              )}
             </FormField>
             <datalist id="task-categories">
               {categories.map((c) => (
@@ -136,7 +164,8 @@ export function TaskSheet({
                 <span />
               )}
               <Button type="submit" disabled={pending}>
-                {pending && <Loader2 className="animate-spin" aria-hidden />} {task ? "Save" : "Add to-do"}
+                {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
+                {task ? "Save" : "Add to-do"}
               </Button>
             </SheetFooter>
           )}

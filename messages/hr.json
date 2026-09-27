@@ -1,0 +1,376 @@
+{
+  "common": {
+    "language": "Jezik",
+    "moreLanguages": "Više jezika",
+    "yourTime": "{time} po vašem vremenu"
+  },
+  "site": {
+    "sections": {
+      "home": "Početna",
+      "story": "Naša priča",
+      "events": "Program",
+      "travel": "Putovanje i smještaj",
+      "rsvp": "Potvrda dolaska",
+      "party": "Kumovi",
+      "registry": "Popis darova",
+      "faq": "Pitanja",
+      "gallery": "Galerija"
+    },
+    "nav": "Dijelovi stranice",
+    "dateTbd": "Datum će biti određen",
+    "newTab": "(otvara se u novoj kartici)",
+    "rsvpButton": "Potvrdi dolazak",
+    "countdown": {
+      "days": "{count, plural, one {Još # dan} few {Još # dana} other {Još # dana}}",
+      "daysWord": "{count, plural, one {dan do vjenčanja} few {dana do vjenčanja} other {dana do vjenčanja}}",
+      "today": "Danas je veliki dan!",
+      "married": "Sretno vjenčani"
+    },
+    "madeWith": "Izrađeno uz <link>Vow</link>",
+    "empty": {
+      "events": "Dodajte događaje u Postavke → Događaji i pojavit će se ovdje.",
+      "travel": "Označite hotele s „Prikaži na stranici” ili dodajte savjete za put u uređivaču.",
+      "other": "Ovdje još nema ničega. Dodajte sadržaj u uređivaču.",
+      "hidden": "Do tada ovaj dio ostaje skriven na objavljenoj stranici."
+    },
+    "event": {
+      "date": "Datum",
+      "time": "Vrijeme",
+      "place": "Mjesto",
+      "dressCode": "Pravila odijevanja",
+      "openMap": "Otvori u Google kartama"
+    },
+    "travel": {
+      "airport": "Najbliža zračna luka: <b>{code}</b>",
+      "searchFlights": "Traži letove",
+      "perNight": "Od <b>{price}</b> po noći",
+      "code": "Naš kod: <mono>{code}</mono>",
+      "bookBy": "Rezervirajte do <b>{date}</b>",
+      "bookRoom": "Rezerviraj sobu",
+      "bookRoomAt": "Rezerviraj sobu: {name}",
+      "website": "Web stranica",
+      "websiteOf": "Web stranica: {name}",
+      "map": "Karta",
+      "mapOf": "Karta: {name}"
+    },
+    "rsvp": {
+      "replyBy": "Molimo odgovorite do <b>{date}</b>.",
+      "or": "ili upotrijebite kod s pozivnice"
+    },
+    "registry": {
+      "visit": "Pogledaj"
+    },
+    "gallery": {
+      "alt": "Fotografija para"
+    },
+    "preview": {
+      "bar": "Pregled: dok je ne objavite, stranicu vidi samo vaš svadbeni tim.",
+      "back": "Natrag u uređivač"
+    },
+    "password": {
+      "intro": "Ova je stranica privatna. Upišite lozinku s pozivnice.",
+      "label": "Lozinka",
+      "enter": "Uđi",
+      "wrong": "Lozinka nije točna. Provjerite pozivnicu ili pitajte par."
+    },
+    "meta": {
+      "weddingOf": "Vjenčanje: {couple}",
+      "website": "Svadbena stranica"
+    }
+  },
+  "rsvp": {
+    "title": "Potvrda dolaska",
+    "dateTbd": "Datum će biti određen",
+    "weddingOf": "Vjenčanje",
+    "rsvpsBy": "Potvrde putem <link>Vow</link>",
+    "enterCode": "Upišite kod s pozivnice (e-pošta ili kartica).",
+    "findIntro": "Pronađite svoju pozivnicu upisivanjem imena kako piše na pozivnici.",
+    "orCode": "Ili upotrijebite kod s pozivnice",
+    "notFound": "Pozivnica nije pronađena",
+    "notFoundText": "Ova poveznica ili kod ne odgovara nijednoj pozivnici. Provjerite ih i pokušajte ponovno.",
+    "nothingYet": "Još nema ničega za potvrditi. Navratite kasnije.",
+    "code": {
+      "label": "Vaš kod",
+      "continue": "Nastavi",
+      "invalid": "Kodovi imaju 6 slova i brojeva, npr. K7P2QX."
+    },
+    "find": {
+      "label": "Vaše puno ime",
+      "placeholder": "Ime i prezime",
+      "button": "Traži",
+      "fullName": "Upišite ime i prezime kao na pozivnici.",
+      "noMatch": "Nismo pronašli to ime. Pokušajte s pravopisom s pozivnice ili upotrijebite kod s pozivnice.",
+      "failed": "Nešto nije u redu. Pokušajte ponovno."
+    },
+    "dear": "Dragi {name},",
+    "update": "Svoje odgovore možete promijeniti u nastavku.",
+    "invite": "Voljeli bismo znati možete li biti s nama.",
+    "replyBy": "Molimo odgovorite do {date}.",
+    "closed": "Rok za potvrdu dolaska je istekao.",
+    "closedContact": "Trebate nešto promijeniti? {contact}",
+    "closedNoContact": "Trebate nešto promijeniti? Javite se izravno paru.",
+    "thanks": "Hvala!",
+    "thanksText": "Vaš je odgovor poslan: {couple}. Istom ga poveznicom možete promijeniti bilo kada.",
+    "thanksTextUntil": "Vaš je odgovor poslan: {couple}. Istom ga poveznicom možete promijeniti do {date}.",
+    "send": "Pošalji odgovor",
+    "save": "Spremi promjene",
+    "change": "Promijeni odgovore",
+    "yourAnswers": "Vaši odgovori",
+    "attending": "Dolazi",
+    "notAttending": "Ne dolazi",
+    "noAnswer": "Još bez odgovora",
+    "cantMakeIt": "ne može doći",
+    "noAnswerYet": "još bez odgovora",
+    "songRequest": "Željena pjesma: {song}",
+    "form": {
+      "everyone": "Dolazimo svi",
+      "none": "Nitko od nas ne može doći",
+      "willAttend": "Dolazi li {name} na: {event}?",
+      "accept": "Rado dolazi",
+      "decline": "Nažalost ne može",
+      "meal": "Izbor jela",
+      "chooseMeal": "Odaberite jelo.",
+      "chooseAnswer": "Odaberite odgovor.",
+      "missingMeal": "Odaberite jelo za svakoga tko dolazi.",
+      "missingAnswer": "Prije slanja odgovorite za sve.",
+      "details": "Nekoliko pojedinosti",
+      "plusOneName": "Ime vaše pratnje (pratnja: {host})",
+      "firstName": "Ime",
+      "lastName": "Prezime",
+      "dietary": "Prehrana ili alergije: {name}",
+      "dietaryPlaceholder": "npr. vegetarijanska, alergija na orašaste plodove (ostavite prazno ako ništa)",
+      "song": "Pjesma uz koju ćete zaplesati",
+      "songPlaceholder": "Izvođač – pjesma",
+      "message": "Poruka za: {couple}",
+      "guestOf": "Pratnja: {name}",
+      "guest": "Gost"
+    },
+    "errors": {
+      "rsvp_not_found": "Nismo pronašli tu pozivnicu. Provjerite poveznicu ili kod.",
+      "deadline_passed": "Rok za potvrdu je istekao. Javite se izravno paru.",
+      "invalid_guest_or_event": "Nešto u odgovorima ne odgovara pozivnici. Ponovno učitajte stranicu.",
+      "invalid_status": "Za svakoga označite dolazi li ili ne.",
+      "not_allowed": "Nemate dopuštenje za upis odgovora za ovo vjenčanje.",
+      "generic": "Odgovor nije spremljen. Pokušajte ponovno za trenutak."
+    }
+  },
+  "board": {
+    "empty": "Ova je ploča zasad prazna.",
+    "photoBy": "Fotografija: <photographer>{name}</photographer>, <unsplash>Unsplash</unsplash>",
+    "madeWith": "Izrađeno uz <link>Vow</link>",
+    "title": "Dijeljena ploča",
+    "fallbackAlt": "Inspiracija"
+  },
+  "email": {
+    "previewInvite": "Pozivnica za vjenčanje: {couple}",
+    "previewReminder": "Podsjetnik za potvrdu dolaska na vjenčanje: {couple}",
+    "eyebrowInvite": "Pozvani ste",
+    "eyebrowReminder": "Mali podsjetnik",
+    "dear": "Dragi {name},",
+    "bodyInvite": "Bili bismo presretni da slavite s nama. Putem svoje osobne poveznice javite nam tko dolazi.",
+    "bodyReminder": "Još nismo primili vaš odgovor, a voljeli bismo znati hoćete li doći. Treba samo minuta.",
+    "button": "Odgovori sada",
+    "replyBy": "Molimo odgovorite do {date}.",
+    "fallback": "Gumb ne radi? Otvorite {link} ili upišite kod {code}.",
+    "love": "S ljubavlju,",
+    "personal": "Ova je poveznica samo za vaše kućanstvo. Molimo, ne dijelite je.",
+    "subjectInvite": "Pozivnica za vjenčanje: {couple}",
+    "subjectReminder": "Podsjetnik: potvrdite dolazak na vjenčanje: {couple}"
+  },
+  "app": {
+    "nav": {
+      "dashboard": "Pregled",
+      "tasks": "Zadaci",
+      "budget": "Proračun",
+      "vendors": "Dobavljači",
+      "guests": "Gosti",
+      "rsvp": "Potvrde",
+      "seating": "Raspored sjedenja",
+      "venues": "Lokacije",
+      "hotels": "Hoteli",
+      "travel": "Putovanja",
+      "inspiration": "Inspiracija",
+      "website": "Web stranica",
+      "schedule": "Plan dana",
+      "settings": "Postavke",
+      "home": "Početna",
+      "groups": {
+        "plan": "Planiranje",
+        "people": "Ljudi",
+        "places": "Mjesta",
+        "style": "Stil"
+      }
+    },
+    "shell": {
+      "mainNav": "Glavna navigacija",
+      "expand": "Proširi bočnu traku",
+      "collapse": "Sažmi bočnu traku",
+      "more": "Više",
+      "allTools": "Svi alati"
+    },
+    "userMenu": {
+      "account": "Izbornik računa",
+      "appearance": "Izgled",
+      "light": "Svijetlo",
+      "dark": "Tamno",
+      "system": "Sustav",
+      "language": "Jezik",
+      "signOut": "Odjava"
+    },
+    "switcher": {
+      "current": "Trenutno vjenčanje: {name}. Promijeni vjenčanje",
+      "yours": "Vaša vjenčanja",
+      "noDate": "Datum će biti određen",
+      "another": "Planiraj novo vjenčanje",
+      "roles": {
+        "owner": "vlasnik",
+        "editor": "urednik",
+        "viewer": "čitatelj"
+      }
+    },
+    "notifications": {
+      "title": "Obavijesti",
+      "unread": "{count, plural, one {Obavijesti, # nepročitana} few {Obavijesti, # nepročitane} other {Obavijesti, # nepročitanih}}",
+      "unreadOne": "Nepročitano",
+      "markAll": "Označi sve kao pročitano",
+      "empty": "Još ništa. Ovdje će se pojaviti nove potvrde, zadaci za vas i podsjetnici za plaćanja i rokove."
+    },
+    "countdown": {
+      "today": "Danas je veliki dan!",
+      "enjoy": "Uživajte u svakom trenutku.",
+      "married": "{count, plural, one {Vjenčani # dan} few {Vjenčani # dana} other {Vjenčani # dana}}",
+      "congrats": "Čestitamo!",
+      "daysToGo": "{count, plural, one {dan do vjenčanja} few {dana do vjenčanja} other {dana do vjenčanja}}",
+      "hours": "sati",
+      "minutes": "minuta",
+      "seconds": "sekundi"
+    },
+    "dashboard": {
+      "welcome": "Dobro došli u svoj planer!",
+      "welcomeText": "Ovdje sve počinje. Prođite sljedeće korake svojim tempom.",
+      "noDate": "Datum će biti određen",
+      "setDate": "Odredite datum i pokrenite odbrojavanje",
+      "nextSteps": "Sljedeći koraci",
+      "stepsDone": "Gotovo {done} od {total}",
+      "done": "(gotovo)",
+      "toDo": "(za napraviti)",
+      "steps": {
+        "date": "Odredite datum vjenčanja",
+        "location": "Odaberite mjesto",
+        "invite": "Pozovite partnera, obitelj ili planera vjenčanja",
+        "guests": "Dodajte popis gostiju",
+        "guestsSoFar": "{count, plural, one {Dodajte popis gostiju (zasad #)} few {Dodajte popis gostiju (zasad #)} other {Dodajte popis gostiju (zasad #)}}",
+        "budget": "Odredite ukupni proračun",
+        "shortlist": "Suzite izbor lokacija",
+        "book": "Rezervirajte lokaciju",
+        "inspiration": "Započnite ploču inspiracije",
+        "website": "Objavite svadbenu stranicu",
+        "timeline": "Izradite plan pripreme"
+      },
+      "budget": {
+        "title": "Proračun",
+        "empty": "Još nema proračuna. Odredite iznos i predložit ćemo raspodjelu.",
+        "cta": "Planiraj proračun",
+        "committed": "dogovoreno",
+        "committedOf": "dogovoreno od {total}",
+        "overdue": "Dospjelo: {name}"
+      },
+      "rsvp": {
+        "title": "Potvrde",
+        "empty": "Još nema odgovora. Dodajte goste i pošaljite pozivnice.",
+        "cta": "Pogledaj potvrde",
+        "attending": "Dolaze",
+        "declined": "Ne dolaze",
+        "waiting": "Čeka se"
+      },
+      "seating": {
+        "title": "Raspored sjedenja",
+        "empty": "Još nema stolova. Kad gosti odgovore, rasporedite ih povlačenjem.",
+        "cta": "Otvori raspored sjedenja",
+        "seated": "od {attending} gostiju smješteno za {tables, plural, one {# stol} few {# stola} other {# stolova}}"
+      },
+      "inspiration": {
+        "title": "Inspiracija",
+        "empty": "Još nema pinova. Skupljajte ideje i iz njih izvucite paletu boja.",
+        "cta": "Otvori ploče",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Zadaci",
+        "empty": "Još nema zadataka. Izradit ćemo plan prema datumu vjenčanja.",
+        "cta": "Pogledaj zadatke",
+        "ofDone": "od {total} gotovo",
+        "overdue": "kasni: {count}"
+      }
+    },
+    "settings": {
+      "title": "Postavke",
+      "description": "Podaci o vjenčanju, jezici, događaji i tko planira s vama."
+    },
+    "languages": {
+      "title": "Jezici i regija",
+      "description": "Jezici stranice, stranica za potvrdu i e-pošte te vremenska zona lokacije.",
+      "languages": "Jezici vjenčanja",
+      "main": "Glavni",
+      "makeMain": "Postavi kao glavni",
+      "remove": "Ukloni: {language}",
+      "add": "Dodaj",
+      "choose": "Dodaj jezik…",
+      "help": "Gosti vide stranicu i stranice za potvrdu na svom jeziku i mogu ga promijeniti. Tekstove pišite na glavnom jeziku, zatim dodajte prijevode; ono što nije prevedeno prikazuje se na glavnom jeziku.",
+      "timeZone": "Vremenska zona lokacije",
+      "noTimeZone": "Nije postavljeno",
+      "useMine": "Koristi moju vremensku zonu",
+      "timeZoneHelp": "Vremena događaja su lokalno vrijeme na lokaciji. Gosti iz inozemstva vide ih i po svom vremenu.",
+      "translateDetails": "Prevedi mjesto i kontakt",
+      "location": "Mjesto",
+      "rsvpContact": "Kontakt za potvrde (prikazuje se nakon roka)",
+      "save": "Spremi",
+      "saved": "Jezici spremljeni"
+    },
+    "translate": {
+      "button": "Prijevodi",
+      "title": "Prijevodi: {name}",
+      "hint": "Ostavite polje prazno za prikaz teksta na jeziku: {language}.",
+      "draft": "Nacrt",
+      "draftFailed": "Preglednik ne može prevesti ovaj par jezika. Upišite prijevod.",
+      "noMachine": "Savjet: Chrome na računalu može pripremiti nacrt prijevoda (ondje se pojavi gumb „Nacrt”).",
+      "save": "Spremi prijevode",
+      "saved": "Prijevodi spremljeni",
+      "fields": {
+        "name": "Naziv",
+        "venue": "Naziv lokacije",
+        "dressCode": "Pravila odijevanja",
+        "description": "Opis",
+        "mealName": "Naziv jela",
+        "mealDescription": "Opis jela"
+      }
+    },
+    "websiteLang": {
+      "editing": "Jezik",
+      "main": "{language} (glavni)",
+      "hint": "Prijevod: {language}. Fotografije, redoslijed i vidljivi dijelovi postavljaju se na glavnom jeziku.",
+      "progress": "Prevedeno {done}/{total}",
+      "complete": "Prevedeno",
+      "fallback": "Prazno: gosti vide tekst na glavnom jeziku.",
+      "nothing": "U ovom dijelu još nema ničega za prevesti.",
+      "draft": "Prevedi sve prevoditeljem preglednika",
+      "draftFailed": "Preglednik ne može prevesti ovaj par jezika. Upišite prijevod.",
+      "item": "Stavka {number}",
+      "fields": {
+        "tagline": "Moto",
+        "intro": "Uvod",
+        "notes": "Napomene",
+        "date": "Kada",
+        "title": "Naslov",
+        "text": "Tekst",
+        "role": "Uloga",
+        "bio": "Nekoliko riječi",
+        "label": "Naziv",
+        "note": "Bilješka",
+        "question": "Pitanje",
+        "answer": "Odgovor",
+        "caption": "Opis slike"
+      }
+    }
+  }
+}

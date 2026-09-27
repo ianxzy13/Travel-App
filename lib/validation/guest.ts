@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isLocale } from "@/i18n/locales";
 
 const text = (max: number) =>
   z.string().trim().max(max, `Please keep this under ${max} characters`);
@@ -61,6 +62,11 @@ export type GuestFormValues = z.infer<typeof guestFormSchema>;
 export const householdSchema = z.object({
   name: text(120).min(1, "Please enter a household name"),
   address: addressSchema,
+  // "" = the wedding's main language
+  language: z
+    .string()
+    .refine((v) => v === "" || isLocale(v), "Unknown language")
+    .optional(),
 });
 
 export type HouseholdFormValues = z.infer<typeof householdSchema>;

@@ -21,7 +21,9 @@ export type TimedItem = { id: string; start_time: string; duration_min: number |
 /** Sorted by start time (then shortest first). */
 export function sortByTime<T extends TimedItem>(items: T[]) {
   return [...items].sort(
-    (a, b) => toMinutes(a.start_time) - toMinutes(b.start_time) || (a.duration_min ?? 0) - (b.duration_min ?? 0),
+    (a, b) =>
+      toMinutes(a.start_time) - toMinutes(b.start_time) ||
+      (a.duration_min ?? 0) - (b.duration_min ?? 0),
   );
 }
 
@@ -50,18 +52,37 @@ export function shiftFrom<T extends TimedItem>(items: T[], fromId: string, delta
   const sorted = sortByTime(items);
   const start = sorted.findIndex((i) => i.id === fromId);
   if (start < 0) return [];
-  return sorted.slice(start).map((i) => ({ id: i.id, start_time: fromMinutes(toMinutes(i.start_time) + delta) }));
+  return sorted
+    .slice(start)
+    .map((i) => ({ id: i.id, start_time: fromMinutes(toMinutes(i.start_time) + delta) }));
 }
 
 /** A typical wedding day, relative to the ceremony start (minutes). */
-export const DAY_TEMPLATE: { offset: number; duration: number; title: string; owner?: string; location?: "ceremony" | "reception" }[] = [
+export const DAY_TEMPLATE: {
+  offset: number;
+  duration: number;
+  title: string;
+  owner?: string;
+  location?: "ceremony" | "reception";
+}[] = [
   { offset: -300, duration: 180, title: "Hair & makeup", owner: "Hair & makeup artist" },
-  { offset: -180, duration: 120, title: "Photographer arrives: getting-ready photos", owner: "Photographer" },
+  {
+    offset: -180,
+    duration: 120,
+    title: "Photographer arrives: getting-ready photos",
+    owner: "Photographer",
+  },
   { offset: -90, duration: 30, title: "Get dressed", owner: "Wedding party" },
   { offset: -60, duration: 30, title: "First look & couple photos", owner: "Photographer" },
   { offset: -30, duration: 30, title: "Guests arrive", location: "ceremony" },
   { offset: 0, duration: 45, title: "Ceremony", owner: "Officiant", location: "ceremony" },
-  { offset: 45, duration: 75, title: "Drinks reception & family photos", owner: "Photographer", location: "reception" },
+  {
+    offset: 45,
+    duration: 75,
+    title: "Drinks reception & family photos",
+    owner: "Photographer",
+    location: "reception",
+  },
   { offset: 120, duration: 15, title: "Guests take their seats", location: "reception" },
   { offset: 135, duration: 10, title: "Grand entrance", owner: "DJ / band", location: "reception" },
   { offset: 145, duration: 90, title: "Dinner", owner: "Caterer", location: "reception" },

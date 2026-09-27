@@ -2,11 +2,14 @@
 
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { RsvpEmail, type RsvpEmailProps } from "@/emails/rsvp-email";
 import { fail, type ActionResult } from "@/lib/action-result";
 import { emailFrom, getResend } from "@/lib/email/resend";
-import { formatWeddingDate } from "@/lib/format";
+import { isLocale, isRtl, type Locale } from "@/i18n/locales";
+import { localized } from "@/lib/i18n/content";
+import { fmtDate } from "@/lib/i18n/format";
 import { rsvpErrorMessage, type RsvpData, type RsvpResult } from "@/lib/rsvp/types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
@@ -130,35 +133,59 @@ export async function recordRsvp(
 
 type Kind = "invitation" | "reminder";
 
-function emailProps(
-  wedding: Awaited<ReturnType<typeof requireWedding>>["wedding"],
-  kind: Kind,
-  note: string,
-  household: { name: string; code: string },
-  siteUrl: string,
-): RsvpEmailProps {
-  return {
-    kind,
-    couple: coupleName(wedding),
-    householdName: household.name,
-    dateText: wedding.wedding_date
-      ? formatWeddingDate(wedding.wedding_date, "EEEE d MMMM yyyy")
-      : null,
-    location: wedding.location,
-    deadlineText: wedding.rsvp_deadline
-      ? formatWeddingDate(wedding.rsvp_deadline, "d MMMM yyyy")
-      : null,
-    link: `${siteUrl}/r/${household.code}`,
-    code: household.code,
-    note,
-    accent: wedding.accent,
-  };
+type Wedding = Awaited<ReturnType<typeof requireWedding>>["wedding"];
+
+/** The household's own language if they chose one, otherwise the wedding's main language. */
+function emailLocale(wedding: Wedding, preferred: string | null | undefined): Locale {
+  if (isLocale(preferred)) return preferred;
+  const main = wedding.languages?.[0];
+  return isLocale(main) ? main : "en";
 }
 
-function subjectFor(kind: Kind, couple: string) {
-  return kind === "invitation"
-    ? `You're invited: ${couple}'s wedding`
-    : `Reminder: please RSVP for ${couple}'s wedding`;
+/** Email props and subject, written in the household's language. */
+async function emailFor(
+  wedding: Wedding,
+  kind: Kind,
+  note: string,
+  household: { name: string; code: string; language?: string | null },
+  siteUrl: string,
+): Promise<{ props: RsvpEmailProps; subject: string }> {
+  const locale = emailLocale(wedding, household.language);
+  const t = await getTranslations({ locale, namespace: "email" });
+  const couple = coupleName(wedding);
+  const invite = kind === "invitation";
+  // the link opens the RSVP page in the same language
+  const link = `${siteUrl}/r/${household.code}?lang=${locale}`;
+  const deadline = wedding.rsvp_deadline ? fmtDate(wedding.rsvp_deadline, locale, "long") : null;
+  const place = localized(wedding, locale, ["location"]).location;
+  return {
+    subject: t(invite ? "subjectInvite" : "subjectReminder", { couple }),
+    props: {
+      kind,
+      lang: locale,
+      rtl: isRtl(locale),
+      text: {
+        preview: t(invite ? "previewInvite" : "previewReminder", { couple }),
+        eyebrow: t(invite ? "eyebrowInvite" : "eyebrowReminder"),
+        dear: t("dear", { name: household.name }),
+        body: t(invite ? "bodyInvite" : "bodyReminder"),
+        button: t("button"),
+        replyBy: deadline ? t("replyBy", { date: deadline }) : null,
+        fallback: t("fallback", { link, code: household.code }),
+        love: t("love"),
+        personal: t("personal"),
+      },
+      couple,
+      householdName: household.name,
+      dateText: wedding.wedding_date ? fmtDate(wedding.wedding_date, locale, "full") : null,
+      location: place,
+      deadlineText: deadline,
+      link,
+      code: household.code,
+      note,
+      accent: wedding.accent,
+    },
+  };
 }
 
 /** Renders the email as HTML for the preview in the send dialog. */
@@ -167,7 +194,7 @@ export async function previewRsvpEmail(
   note: string,
 ): Promise<ActionResult<{ html: string; subject: string }>> {
   const { wedding } = await requireWedding();
-  const props = emailProps(
+  const { props, subject } = await emailFor(
     wedding,
     kind,
     note.slice(0, 1000),
@@ -175,7 +202,7 @@ export async function previewRsvpEmail(
     await getSiteUrl(),
   );
   const html = await render(RsvpEmail(props));
-  return { ok: true, data: { html, subject: subjectFor(kind, props.couple) } };
+  return { ok: true, data: { html, subject } };
 }
 
 export type SendSummary = {
@@ -200,14 +227,19 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
   const { wedding, supabase } = ctx;
 
   // Load households + guest emails (in batches: ids go in the URL).
-  const households: { id: string; name: string; rsvp_code: string }[] = [];
+  const households: {
+    id: string;
+    name: string;
+    rsvp_code: string;
+    preferred_language: string | null;
+  }[] = [];
   const guests: { household_id: string; email: string | null }[] = [];
   for (let i = 0; i < householdIds.length; i += 100) {
     const batch = householdIds.slice(i, i + 100);
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name, rsvp_code")
+        .select("id, name, rsvp_code, preferred_language")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -244,14 +276,19 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     const chunk = sendable.slice(i, i + 100);
     const messages = await Promise.all(
       chunk.map(async (h) => {
-        const element = RsvpEmail(
-          emailProps(wedding, kind, note, { name: h.name, code: h.rsvp_code }, siteUrl),
+        const { props, subject } = await emailFor(
+          wedding,
+          kind,
+          note,
+          { name: h.name, code: h.rsvp_code, language: h.preferred_language },
+          siteUrl,
         );
+        const element = RsvpEmail(props);
         return {
           from: emailFrom(couple),
           to: emailsByHousehold.get(h.id)!,
           replyTo: user.email,
-          subject: subjectFor(kind, couple),
+          subject,
           html: await render(element),
           text: await render(element, { plainText: true }),
         };

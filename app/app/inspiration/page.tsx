@@ -13,7 +13,11 @@ export default async function Inspiration() {
   const sb = await createClient();
   const [data, { data: categories }, { data: vendors }] = await Promise.all([
     loadInspiration(sb, wedding.id),
-    sb.from("budget_categories").select("id, name").eq("wedding_id", wedding.id).order("sort_order"),
+    sb
+      .from("budget_categories")
+      .select("id, name")
+      .eq("wedding_id", wedding.id)
+      .order("sort_order"),
     sb.from("vendors").select("id, name").eq("wedding_id", wedding.id).order("name"),
   ]);
 

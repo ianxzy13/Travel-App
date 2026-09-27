@@ -1,0 +1,376 @@
+{
+  "common": {
+    "language": "Dil",
+    "moreLanguages": "Diğer diller",
+    "yourTime": "sizin saatinizle {time}"
+  },
+  "site": {
+    "sections": {
+      "home": "Ana sayfa",
+      "story": "Hikâyemiz",
+      "events": "Program",
+      "travel": "Ulaşım ve konaklama",
+      "rsvp": "Katılım bildirimi",
+      "party": "Sağdıç ve nedimeler",
+      "registry": "Hediye listesi",
+      "faq": "Sorular",
+      "gallery": "Galeri"
+    },
+    "nav": "Site bölümleri",
+    "dateTbd": "Tarih daha sonra belirlenecek",
+    "newTab": "(yeni sekmede açılır)",
+    "rsvpButton": "Katılımı bildir",
+    "countdown": {
+      "days": "{count, plural, one {# gün kaldı} other {# gün kaldı}}",
+      "daysWord": "{count, plural, one {gün kaldı} other {gün kaldı}}",
+      "today": "Bugün o büyük gün!",
+      "married": "Mutlu evliler"
+    },
+    "madeWith": "<link>Vow</link> ile hazırlandı",
+    "empty": {
+      "events": "Ayarlar → Etkinlikler bölümünden etkinlik ekleyin, burada görünsün.",
+      "travel": "Otelleri “Sitede göster” olarak işaretleyin veya düzenleyicide seyahat ipuçları ekleyin.",
+      "other": "Burada henüz bir şey yok. Düzenleyicide içerik ekleyin.",
+      "hidden": "O zamana kadar bu bölüm yayındaki sitenizde gizli kalır."
+    },
+    "event": {
+      "date": "Tarih",
+      "time": "Saat",
+      "place": "Yer",
+      "dressCode": "Kıyafet kuralı",
+      "openMap": "Google Haritalar’da aç"
+    },
+    "travel": {
+      "airport": "En yakın havalimanı: <b>{code}</b>",
+      "searchFlights": "Uçuş ara",
+      "perNight": "Gecelik <b>{price}</b> başlayan fiyatlarla",
+      "code": "Kodumuz: <mono>{code}</mono>",
+      "bookBy": "Son rezervasyon tarihi: <b>{date}</b>",
+      "bookRoom": "Oda ayırt",
+      "bookRoomAt": "Oda ayırt: {name}",
+      "website": "Web sitesi",
+      "websiteOf": "Web sitesi: {name}",
+      "map": "Harita",
+      "mapOf": "Harita: {name}"
+    },
+    "rsvp": {
+      "replyBy": "Lütfen <b>{date}</b> tarihine kadar yanıt verin.",
+      "or": "ya da davetiyenizdeki kodu kullanın"
+    },
+    "registry": {
+      "visit": "Git"
+    },
+    "gallery": {
+      "alt": "Çiftin fotoğrafı"
+    },
+    "preview": {
+      "bar": "Önizleme: yayınlayana kadar bunu yalnızca düğün ekibiniz görebilir.",
+      "back": "Düzenleyiciye dön"
+    },
+    "password": {
+      "intro": "Bu site gizlidir. Lütfen davetiyenizdeki şifreyi girin.",
+      "label": "Şifre",
+      "enter": "Gir",
+      "wrong": "Şifre doğru değil. Davetiyenize bakın veya çifte sorun."
+    },
+    "meta": {
+      "weddingOf": "Düğün: {couple}",
+      "website": "Düğün sitesi"
+    }
+  },
+  "rsvp": {
+    "title": "Katılım bildirimi",
+    "dateTbd": "Tarih daha sonra belirlenecek",
+    "weddingOf": "Düğün",
+    "rsvpsBy": "<link>Vow</link> ile katılım bildirimi",
+    "enterCode": "Davetiyenizdeki (e-posta ya da kart) kodu girin.",
+    "findIntro": "Adınızı davetiyede yazdığı gibi yazarak davetiyenizi bulun.",
+    "orCode": "Ya da davetiyenizdeki kodu kullanın",
+    "notFound": "Davetiye bulunamadı",
+    "notFoundText": "Bu bağlantı veya kod hiçbir davetiyeyle eşleşmiyor. Kontrol edip tekrar deneyin.",
+    "nothingYet": "Henüz yanıtlanacak bir şey yok. Daha sonra tekrar bakın.",
+    "code": {
+      "label": "Katılım kodunuz",
+      "continue": "Devam",
+      "invalid": "Kodlar 6 harf ve rakamdan oluşur, örneğin K7P2QX."
+    },
+    "find": {
+      "label": "Adınız soyadınız",
+      "placeholder": "Ad ve soyad",
+      "button": "Bul",
+      "fullName": "Lütfen adınızı ve soyadınızı davetiyedeki gibi yazın.",
+      "noMatch": "Bu adı bulamadık. Davetiyedeki yazımı deneyin veya davetiyedeki kodu kullanın.",
+      "failed": "Bir sorun oluştu. Lütfen tekrar deneyin."
+    },
+    "dear": "Sevgili {name},",
+    "update": "Yanıtlarınızı aşağıdan güncelleyin.",
+    "invite": "Bize katılıp katılamayacağınızı öğrenmek isteriz.",
+    "replyBy": "Lütfen {date} tarihine kadar yanıt verin.",
+    "closed": "Katılım bildirme süresi doldu.",
+    "closedContact": "Bir şeyi değiştirmeniz mi gerekiyor? {contact}",
+    "closedNoContact": "Bir şeyi değiştirmeniz mi gerekiyor? Lütfen doğrudan çiftle iletişime geçin.",
+    "thanks": "Teşekkürler!",
+    "thanksText": "Yanıtınız {couple} çiftine iletildi. Aynı bağlantıyla istediğiniz zaman değiştirebilirsiniz.",
+    "thanksTextUntil": "Yanıtınız {couple} çiftine iletildi. Aynı bağlantıyla {date} tarihine kadar değiştirebilirsiniz.",
+    "send": "Yanıtımızı gönder",
+    "save": "Değişiklikleri kaydet",
+    "change": "Yanıtlarımızı değiştir",
+    "yourAnswers": "Yanıtlarınız",
+    "attending": "Katılıyor",
+    "notAttending": "Katılmıyor",
+    "noAnswer": "Henüz yanıt yok",
+    "cantMakeIt": "katılamıyor",
+    "noAnswerYet": "henüz yanıt yok",
+    "songRequest": "Şarkı isteği: {song}",
+    "form": {
+      "everyone": "Hepimiz geliyoruz",
+      "none": "Hiçbirimiz gelemiyoruz",
+      "willAttend": "{name}, {event} etkinliğine katılacak mı?",
+      "accept": "Memnuniyetle katılıyor",
+      "decline": "Maalesef katılamıyor",
+      "meal": "Menü seçimi",
+      "chooseMeal": "Lütfen bir menü seçin.",
+      "chooseAnswer": "Lütfen bir yanıt seçin.",
+      "missingMeal": "Lütfen katılan herkes için bir menü seçin.",
+      "missingAnswer": "Lütfen göndermeden önce herkes için yanıt verin.",
+      "details": "Birkaç ayrıntı",
+      "plusOneName": "Misafirinizin adı ({host} kişisinin misafiri)",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "dietary": "Beslenme tercihi veya alerjiler: {name}",
+      "dietaryPlaceholder": "ör. vejetaryen, fındık alerjisi (yoksa boş bırakın)",
+      "song": "Sizi dans ettirecek bir şarkı",
+      "songPlaceholder": "Sanatçı – şarkı",
+      "message": "{couple} için bir mesaj",
+      "guestOf": "{name} kişisinin misafiri",
+      "guest": "Misafir"
+    },
+    "errors": {
+      "rsvp_not_found": "Bu davetiyeyi bulamadık. Lütfen bağlantıyı veya kodu kontrol edin.",
+      "deadline_passed": "Katılım bildirme süresi doldu. Lütfen doğrudan çiftle iletişime geçin.",
+      "invalid_guest_or_event": "Yanıtlarınızdaki bir şey davetiyenizle uyuşmuyor. Lütfen sayfayı yenileyin.",
+      "invalid_status": "Lütfen herkes için katılıp katılmayacağını belirtin.",
+      "not_allowed": "Bu düğün için yanıt kaydetme izniniz yok.",
+      "generic": "Yanıtınızı kaydedemedik. Lütfen biraz sonra tekrar deneyin."
+    }
+  },
+  "board": {
+    "empty": "Bu pano şimdilik boş.",
+    "photoBy": "Fotoğraf: <photographer>{name}</photographer>, <unsplash>Unsplash</unsplash>",
+    "madeWith": "<link>Vow</link> ile hazırlandı",
+    "title": "Paylaşılan pano",
+    "fallbackAlt": "İlham"
+  },
+  "email": {
+    "previewInvite": "{couple} düğününe davetlisiniz",
+    "previewReminder": "{couple} düğünü için katılım bildirimi hatırlatması",
+    "eyebrowInvite": "Davetlisiniz",
+    "eyebrowReminder": "Küçük bir hatırlatma",
+    "dear": "Sevgili {name},",
+    "bodyInvite": "Bu mutlu günü sizinle kutlamak bizi çok sevindirir. Kişisel bağlantınızdan kimlerin gelebileceğini bize bildirin.",
+    "bodyReminder": "Yanıtınızı henüz almadık ve gelip gelemeyeceğinizi çok merak ediyoruz. Sadece bir dakikanızı alır.",
+    "button": "Şimdi yanıtla",
+    "replyBy": "Lütfen {date} tarihine kadar yanıt verin.",
+    "fallback": "Düğme çalışmıyor mu? {link} adresini açın veya {code} kodunu girin.",
+    "love": "Sevgiyle,",
+    "personal": "Bu bağlantı yalnızca sizin haneniz içindir. Lütfen paylaşmayın.",
+    "subjectInvite": "Davetlisiniz: {couple} düğünü",
+    "subjectReminder": "Hatırlatma: {couple} düğünü için lütfen katılımınızı bildirin"
+  },
+  "app": {
+    "nav": {
+      "dashboard": "Genel bakış",
+      "tasks": "Yapılacaklar",
+      "budget": "Bütçe",
+      "vendors": "Tedarikçiler",
+      "guests": "Misafirler",
+      "rsvp": "Katılım",
+      "seating": "Oturma düzeni",
+      "venues": "Mekânlar",
+      "hotels": "Oteller",
+      "travel": "Seyahat",
+      "inspiration": "İlham",
+      "website": "Web sitesi",
+      "schedule": "Günün akışı",
+      "settings": "Ayarlar",
+      "home": "Ana sayfa",
+      "groups": {
+        "plan": "Planlama",
+        "people": "Kişiler",
+        "places": "Yerler",
+        "style": "Tarz"
+      }
+    },
+    "shell": {
+      "mainNav": "Ana gezinme",
+      "expand": "Kenar çubuğunu genişlet",
+      "collapse": "Kenar çubuğunu daralt",
+      "more": "Daha fazla",
+      "allTools": "Tüm planlama araçları"
+    },
+    "userMenu": {
+      "account": "Hesap menüsü",
+      "appearance": "Görünüm",
+      "light": "Açık",
+      "dark": "Koyu",
+      "system": "Sistem",
+      "language": "Dil",
+      "signOut": "Çıkış yap"
+    },
+    "switcher": {
+      "current": "Mevcut düğün: {name}. Düğün değiştir",
+      "yours": "Düğünleriniz",
+      "noDate": "Tarih daha sonra belirlenecek",
+      "another": "Başka bir düğün planla",
+      "roles": {
+        "owner": "sahip",
+        "editor": "düzenleyici",
+        "viewer": "görüntüleyici"
+      }
+    },
+    "notifications": {
+      "title": "Bildirimler",
+      "unread": "{count, plural, one {Bildirimler, # okunmamış} other {Bildirimler, # okunmamış}}",
+      "unreadOne": "Okunmamış",
+      "markAll": "Tümünü okundu işaretle",
+      "empty": "Henüz bir şey yok. Yeni katılım yanıtları, size atanan görevler ve ödeme ile son tarih hatırlatmaları burada görünür."
+    },
+    "countdown": {
+      "today": "Bugün o büyük gün!",
+      "enjoy": "Her anın tadını çıkarın.",
+      "married": "{count, plural, one {# gündür evli} other {# gündür evli}}",
+      "congrats": "Tebrikler!",
+      "daysToGo": "{count, plural, one {gün kaldı} other {gün kaldı}}",
+      "hours": "saat",
+      "minutes": "dakika",
+      "seconds": "saniye"
+    },
+    "dashboard": {
+      "welcome": "Planlayıcınıza hoş geldiniz!",
+      "welcomeText": "Her şey burada başlıyor. Sonraki adımları kendi hızınızda tamamlayın.",
+      "noDate": "Tarih daha sonra belirlenecek",
+      "setDate": "Geri sayımı başlatmak için tarihi belirleyin",
+      "nextSteps": "Sonraki adımlar",
+      "stepsDone": "{total} adımdan {done} tamamlandı",
+      "done": "(tamamlandı)",
+      "toDo": "(yapılacak)",
+      "steps": {
+        "date": "Düğün tarihini belirleyin",
+        "location": "Bir yer seçin",
+        "invite": "Partnerinizi, ailenizi veya düğün planlayıcınızı davet edin",
+        "guests": "Misafir listenizi ekleyin",
+        "guestsSoFar": "{count, plural, one {Misafir listenizi ekleyin (şu ana kadar #)} other {Misafir listenizi ekleyin (şu ana kadar #)}}",
+        "budget": "Toplam bütçenizi belirleyin",
+        "shortlist": "Mekânları kısa listeye alın",
+        "book": "Mekânı ayırtın",
+        "inspiration": "Bir ilham panosu başlatın",
+        "website": "Düğün sitenizi yayınlayın",
+        "timeline": "Planlama takviminizi oluşturun"
+      },
+      "budget": {
+        "title": "Bütçe",
+        "empty": "Henüz bütçe yok. Bir toplam belirleyin, dağılımını önerelim.",
+        "cta": "Bütçeyi planla",
+        "committed": "ayrıldı",
+        "committedOf": "{total} tutarının ayrılan kısmı",
+        "overdue": "Gecikmiş: {name}"
+      },
+      "rsvp": {
+        "title": "Katılım",
+        "empty": "Henüz yanıt yok. Misafir ekleyin ve davetiyelerinizi gönderin.",
+        "cta": "Katılımları gör",
+        "attending": "Katılıyor",
+        "declined": "Katılmıyor",
+        "waiting": "Bekleniyor"
+      },
+      "seating": {
+        "title": "Oturma düzeni",
+        "empty": "Henüz masa yok. Misafirler yanıt verince onları sürükleyip bırakarak yerleştirin.",
+        "cta": "Oturma planını aç",
+        "seated": "/ {attending} katılan misafir, {tables, plural, one {# masaya} other {# masaya}} yerleştirildi"
+      },
+      "inspiration": {
+        "title": "İlham",
+        "empty": "Henüz pin yok. Fikir toplayın ve onlardan bir renk paleti çıkarın.",
+        "cta": "Panoları aç",
+        "pin": "Pin"
+      },
+      "tasks": {
+        "title": "Yapılacaklar",
+        "empty": "Henüz görev yok. Düğün tarihinize göre bir takvim oluşturacağız.",
+        "cta": "Görevleri gör",
+        "ofDone": "/ {total} tamamlandı",
+        "overdue": "{count} gecikmiş"
+      }
+    },
+    "settings": {
+      "title": "Ayarlar",
+      "description": "Düğün bilgileriniz, diller, etkinlikler ve sizinle birlikte planlayanlar."
+    },
+    "languages": {
+      "title": "Diller ve bölge",
+      "description": "Sitenizin, katılım sayfalarınızın ve e-postalarınızın dilleri ile mekânın saat dilimi.",
+      "languages": "Düğün dilleri",
+      "main": "Ana dil",
+      "makeMain": "Ana dil yap",
+      "remove": "Kaldır: {language}",
+      "add": "Ekle",
+      "choose": "Dil ekle…",
+      "help": "Misafirler sitenizi ve katılım sayfalarını kendi dillerinde görür ve değiştirebilir. Metinlerinizi ana dilde yazın, sonra çeviri ekleyin; çevrilmemiş olanlar ana dilde görünür.",
+      "timeZone": "Mekânın saat dilimi",
+      "noTimeZone": "Belirlenmedi",
+      "useMine": "Benim saat dilimimi kullan",
+      "timeZoneHelp": "Etkinlik saatleri mekânın yerel saatidir. Yurt dışındaki misafirler bunları kendi saatleriyle de görür.",
+      "translateDetails": "Yer ve iletişim bilgisini çevir",
+      "location": "Yer",
+      "rsvpContact": "Katılım için iletişim (son tarihten sonra gösterilir)",
+      "save": "Kaydet",
+      "saved": "Diller kaydedildi"
+    },
+    "translate": {
+      "button": "Çeviriler",
+      "title": "Çeviriler: {name}",
+      "hint": "Metni {language} dilinde göstermek için alanı boş bırakın.",
+      "draft": "Taslak",
+      "draftFailed": "Tarayıcınız bu dil çiftini çeviremedi. Lütfen çeviriyi yazın.",
+      "noMachine": "İpucu: Bilgisayardaki Chrome çeviri taslağı hazırlayabilir (orada “Taslak” düğmesi görünür).",
+      "save": "Çevirileri kaydet",
+      "saved": "Çeviriler kaydedildi",
+      "fields": {
+        "name": "Ad",
+        "venue": "Mekân adı",
+        "dressCode": "Kıyafet kuralı",
+        "description": "Açıklama",
+        "mealName": "Menü adı",
+        "mealDescription": "Menü açıklaması"
+      }
+    },
+    "websiteLang": {
+      "editing": "Dil",
+      "main": "{language} (ana dil)",
+      "hint": "Çeviri: {language}. Fotoğraflar, sıra ve görünen bölümler ana dilde ayarlanır.",
+      "progress": "{done}/{total} çevrildi",
+      "complete": "Çevrildi",
+      "fallback": "Boş: misafirler ana dildeki metni görür.",
+      "nothing": "Bu bölümde henüz çevrilecek bir şey yok.",
+      "draft": "Tümünü tarayıcı çevirmeniyle çevir",
+      "draftFailed": "Tarayıcınız bu dil çiftini çeviremedi. Lütfen çeviriyi yazın.",
+      "item": "Öğe {number}",
+      "fields": {
+        "tagline": "Slogan",
+        "intro": "Giriş",
+        "notes": "Notlar",
+        "date": "Ne zaman",
+        "title": "Başlık",
+        "text": "Metin",
+        "role": "Rol",
+        "bio": "Birkaç söz",
+        "label": "Ad",
+        "note": "Not",
+        "question": "Soru",
+        "answer": "Yanıt",
+        "caption": "Açıklama"
+      }
+    }
+  }
+}

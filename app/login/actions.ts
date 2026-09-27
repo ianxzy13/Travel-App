@@ -1,5 +1,6 @@
 "use server";
 
+import { rememberAppLocale } from "@/lib/i18n/remember";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { fail, type ActionResult } from "@/lib/action-result";
@@ -61,6 +62,7 @@ export async function verifyEmailCode(input: unknown): Promise<ActionResult> {
     console.error("[verifyEmailCode]", error);
     return { ok: false, error: "That code is wrong or has expired. Please request a new email." };
   }
+  await rememberAppLocale(supabase);
   return { ok: true };
 }
 

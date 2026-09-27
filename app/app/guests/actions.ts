@@ -361,7 +361,13 @@ export async function updateHousehold(id: string, input: unknown): Promise<Actio
 
   const { error } = await ctx.supabase
     .from("households")
-    .update({ name: parsed.data.name, ...addressColumns(parsed.data.address) })
+    .update({
+      name: parsed.data.name,
+      ...addressColumns(parsed.data.address),
+      ...(parsed.data.language !== undefined
+        ? { preferred_language: parsed.data.language || null }
+        : {}),
+    })
     .eq("id", id)
     .eq("wedding_id", ctx.weddingId);
   if (error) return fail("updateHousehold", error);
@@ -566,6 +572,7 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
       accessibility: r.accessibility || null,
       notes: r.notes || null,
       list: r.list,
+      languages: [],
       created_at: now,
       updated_at: now,
       ...overrides,

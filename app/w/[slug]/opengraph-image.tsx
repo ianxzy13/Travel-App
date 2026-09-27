@@ -23,7 +23,9 @@ const GOOGLE: Record<HeadingFont, string> = {
 async function loadFont(family: string, text: string) {
   try {
     const css = await (
-      await fetch(`https://fonts.googleapis.com/css2?family=${encodeURIComponent(family).replace(/%20/g, "+")}&text=${encodeURIComponent(text)}`)
+      await fetch(
+        `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family).replace(/%20/g, "+")}&text=${encodeURIComponent(text)}`,
+      )
     ).text();
     const url = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1];
     return url ? await (await fetch(url)).arrayBuffer() : null;
@@ -35,9 +37,18 @@ async function loadFont(family: string, text: string) {
 /** The picture shown when the website link is shared (WhatsApp, iMessage, Facebook…). */
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  type Info = { partner_a_name: string; partner_b_name: string; wedding_date: string | null; location: string | null };
+  type Info = {
+    partner_a_name: string;
+    partner_b_name: string;
+    wedding_date: string | null;
+    location: string | null;
+  };
   let info: Info | null = null;
-  type Look = { template: SiteTemplate; accent_color: string | null; heading_font: HeadingFont | null };
+  type Look = {
+    template: SiteTemplate;
+    accent_color: string | null;
+    heading_font: HeadingFont | null;
+  };
   let look: Look | null = null;
   if (isSupabaseConfigured) {
     const sb = await createClient();
@@ -59,41 +70,41 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
   const upper = look?.template === "modern" || look?.template === "beach";
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: t.colors.bg,
+        color: t.colors.fg,
+        border: `24px solid ${t.colors.card}`,
+        padding: 60,
+      }}
+    >
+      <div style={{ fontSize: 26, letterSpacing: 8, textTransform: "uppercase", color: accent }}>
+        We&apos;re getting married
+      </div>
       <div
         style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          background: t.colors.bg,
-          color: t.colors.fg,
-          border: `24px solid ${t.colors.card}`,
-          padding: 60,
+          marginTop: 30,
+          fontSize: names.length > 26 ? 78 : 100,
+          fontFamily: font ? "Heading" : undefined,
+          textTransform: upper ? "uppercase" : "none",
+          fontWeight: headingFont === "inter" ? 800 : 500,
+          textAlign: "center",
+          lineHeight: 1.05,
         }}
       >
-        <div style={{ fontSize: 26, letterSpacing: 8, textTransform: "uppercase", color: accent }}>We&apos;re getting married</div>
-        <div
-          style={{
-            marginTop: 30,
-            fontSize: names.length > 26 ? 78 : 100,
-            fontFamily: font ? "Heading" : undefined,
-            textTransform: upper ? "uppercase" : "none",
-            fontWeight: headingFont === "inter" ? 800 : 500,
-            textAlign: "center",
-            lineHeight: 1.05,
-          }}
-        >
-          {names}
-        </div>
-        <div style={{ marginTop: 34, width: 180, height: 3, background: accent }} />
-        <div style={{ marginTop: 34, fontSize: 34, color: t.colors.muted, textAlign: "center" }}>
-          {[when, where].filter(Boolean).join("  ·  ")}
-        </div>
+        {names}
       </div>
-    ),
+      <div style={{ marginTop: 34, width: 180, height: 3, background: accent }} />
+      <div style={{ marginTop: 34, fontSize: 34, color: t.colors.muted, textAlign: "center" }}>
+        {[when, where].filter(Boolean).join("  ·  ")}
+      </div>
+    </div>,
     { ...size, fonts: font ? [{ name: "Heading", data: font, style: "normal" }] : undefined },
   );
 }

@@ -3,7 +3,12 @@
 import { useEffect, useState, useTransition } from "react";
 import { Copy, ExternalLink, Loader2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { createBoard, deleteBoard, setBoardSharing, updateBoard } from "@/app/app/inspiration/actions";
+import {
+  createBoard,
+  deleteBoard,
+  setBoardSharing,
+  updateBoard,
+} from "@/app/app/inspiration/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
@@ -72,13 +77,32 @@ export function BoardDialog({
         <form onSubmit={save} className="space-y-4">
           <DialogHeader>
             <DialogTitle>{board ? "Edit board" : "New board"}</DialogTitle>
-            <DialogDescription>Boards group your ideas, e.g. Flowers, Dress, Tablescape.</DialogDescription>
+            <DialogDescription>
+              Boards group your ideas, e.g. Flowers, Dress, Tablescape.
+            </DialogDescription>
           </DialogHeader>
           <FormField id="board-name" label="Name" error={error}>
-            {(a) => <Input {...a} value={name} onChange={(e) => setName(e.target.value)} maxLength={60} autoFocus required />}
+            {(a) => (
+              <Input
+                {...a}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={60}
+                autoFocus
+                required
+              />
+            )}
           </FormField>
           <FormField id="board-description" label="Description (optional)">
-            {(a) => <Textarea {...a} value={description} onChange={(e) => setDescription(e.target.value)} maxLength={300} rows={2} />}
+            {(a) => (
+              <Textarea
+                {...a}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                maxLength={300}
+                rows={2}
+              />
+            )}
           </FormField>
           <DialogFooter className="gap-2 sm:justify-between">
             {board ? (
@@ -105,7 +129,8 @@ export function BoardDialog({
               <span />
             )}
             <Button type="submit" disabled={pending}>
-              {pending && <Loader2 className="animate-spin" aria-hidden />} {board ? "Save" : "Create board"}
+              {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
+              {board ? "Save" : "Create board"}
             </Button>
           </DialogFooter>
         </form>
@@ -127,7 +152,8 @@ export function ShareDialog({
   const [shareId, setShareId] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   useEffect(() => setShareId(board?.shareId ?? null), [board]);
-  const link = shareId && typeof window !== "undefined" ? `${window.location.origin}/b/${shareId}` : "";
+  const link =
+    shareId && typeof window !== "undefined" ? `${window.location.origin}/b/${shareId}` : "";
 
   function toggle(on: boolean) {
     if (!board) return;
@@ -145,24 +171,36 @@ export function ShareDialog({
         <DialogHeader>
           <DialogTitle>Share &ldquo;{board?.name}&rdquo;</DialogTitle>
           <DialogDescription>
-            Anyone with the link can look at this board (not change it), e.g. your florist or hairdresser. They don&apos;t
-            see comments or anything else in your wedding.
+            Anyone with the link can look at this board (not change it), e.g. your florist or
+            hairdresser. They don&apos;t see comments or anything else in your wedding.
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center justify-between gap-3 rounded-lg border p-3">
           <Label htmlFor="share-switch">Share with a link</Label>
-          <Switch id="share-switch" checked={!!shareId} onCheckedChange={toggle} disabled={pending || !canEdit} />
+          <Switch
+            id="share-switch"
+            checked={!!shareId}
+            onCheckedChange={toggle}
+            disabled={pending || !canEdit}
+          />
         </div>
         {shareId && (
           <div className="space-y-2">
             <Label htmlFor="share-link">Link</Label>
             <div className="flex gap-2">
-              <Input id="share-link" readOnly value={link} onFocus={(e) => e.currentTarget.select()} />
+              <Input
+                id="share-link"
+                readOnly
+                value={link}
+                onFocus={(e) => e.currentTarget.select()}
+              />
               <Button
                 variant="outline"
                 size="icon"
                 aria-label="Copy link"
-                onClick={() => navigator.clipboard?.writeText(link).then(() => toast.success("Link copied"))}
+                onClick={() =>
+                  navigator.clipboard?.writeText(link).then(() => toast.success("Link copied"))
+                }
               >
                 <Copy aria-hidden />
               </Button>

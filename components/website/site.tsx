@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Clock, ExternalLink, Gift, MapPin, Plane, Shirt } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { CodeForm } from "@/components/rsvp/code-form";
 import { FindInvitation } from "@/components/rsvp/find-invitation";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import type { SiteSectionKind, SiteTemplate } from "@/lib/database.types";
-import { formatMoney } from "@/lib/budget/money";
-import { formatTime, formatWeddingDate } from "@/lib/format";
+import { fmtDate, fmtMoney, fmtTime } from "@/lib/i18n/format";
 import { flightSearchLinks, mapsSearch } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
 import {
-  SECTION_LABEL,
   isSectionEmpty,
   safeUrl,
   type Section,
@@ -18,6 +18,7 @@ import {
 } from "@/lib/website/content";
 import { siteVars } from "@/lib/website/templates";
 import { SiteCountdown } from "./site-countdown";
+import { YourTime } from "./your-time";
 
 // Shorthands for the site's colour/font variables (set by siteVars()).
 const heading = "font-[family-name:var(--site-heading)]";
@@ -25,12 +26,29 @@ const muted = "text-[var(--site-muted)]";
 const accentText = "text-[var(--site-accent)]";
 const line = "border-[var(--site-line)]";
 
-type Ctx = { t: SiteTemplate; data: SiteData; preview: boolean };
+type Tr = ReturnType<typeof useTranslations<"site">>;
+/** t = template, tr = translations for the visitor's language */
+type Ctx = { t: SiteTemplate; data: SiteData; preview: boolean; tr: Tr; locale: string };
 
 /** Picture from storage, kept to a fixed shape by its parent box. */
-function Pic({ ctx, path, alt, sizes, priority, className }: { ctx: Ctx; path: string | null; alt: string; sizes: string; priority?: boolean; className?: string }) {
+function Pic({
+  ctx,
+  path,
+  alt,
+  sizes,
+  priority,
+  className,
+}: {
+  ctx: Ctx;
+  path: string | null;
+  alt: string;
+  sizes: string;
+  priority?: boolean;
+  className?: string;
+}) {
   const src = path ? ctx.data.images[path] : null;
-  if (!src) return <div className={cn("absolute inset-0 bg-[var(--site-card)]", className)} aria-hidden />;
+  if (!src)
+    return <div className={cn("absolute inset-0 bg-[var(--site-card)]", className)} aria-hidden />;
   return (
     <Image
       src={src}
@@ -54,7 +72,14 @@ function Ornament({ t, className }: { t: SiteTemplate; className?: string }) {
   switch (t) {
     case "classic":
       return (
-        <svg viewBox="0 0 160 16" className={cn(cls, "h-4 w-40")} aria-hidden fill="none" stroke="currentColor" strokeWidth="1">
+        <svg
+          viewBox="0 0 160 16"
+          className={cn(cls, "h-4 w-40")}
+          aria-hidden
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1"
+        >
           <path d="M0 8h62M98 8h62" />
           <path d="M80 2l6 6-6 6-6-6z" fill="currentColor" />
           <circle cx="68" cy="8" r="1.5" fill="currentColor" />
@@ -66,13 +91,23 @@ function Ornament({ t, className }: { t: SiteTemplate; className?: string }) {
         <svg viewBox="0 0 120 32" className={cn(cls, "h-8 w-32")} aria-hidden fill="currentColor">
           <path d="M60 30C60 18 50 8 30 4c10 8 16 16 30 26z" opacity=".75" />
           <path d="M60 30C60 18 70 8 90 4C80 12 74 20 60 30z" opacity=".75" />
-          <path d="M60 30c-6-4-16-6-28 0 10 1 18 2 28 0zM60 30c6-4 16-6 28 0-10 1-18 2-28 0z" opacity=".5" />
+          <path
+            d="M60 30c-6-4-16-6-28 0 10 1 18 2 28 0zM60 30c6-4 16-6 28 0-10 1-18 2-28 0z"
+            opacity=".5"
+          />
           <circle cx="60" cy="8" r="3" opacity=".6" />
         </svg>
       );
     case "boho":
       return (
-        <svg viewBox="0 0 80 40" className={cn(cls, "h-9 w-20")} aria-hidden fill="none" stroke="currentColor" strokeWidth="2.5">
+        <svg
+          viewBox="0 0 80 40"
+          className={cn(cls, "h-9 w-20")}
+          aria-hidden
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+        >
           <path d="M8 38a32 32 0 0 1 64 0" />
           <path d="M18 38a22 22 0 0 1 44 0" opacity=".7" />
           <path d="M28 38a12 12 0 0 1 24 0" opacity=".45" />
@@ -80,7 +115,14 @@ function Ornament({ t, className }: { t: SiteTemplate; className?: string }) {
       );
     case "beach":
       return (
-        <svg viewBox="0 0 120 12" className={cn(cls, "h-3 w-28")} aria-hidden fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          viewBox="0 0 120 12"
+          className={cn(cls, "h-3 w-28")}
+          aria-hidden
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M0 6c10-6 20-6 30 0s20 6 30 0 20-6 30 0 20 6 30 0" />
         </svg>
       );
@@ -91,8 +133,16 @@ function Ornament({ t, className }: { t: SiteTemplate; className?: string }) {
 
 function Wave({ fill, flip }: { fill: string; flip?: boolean }) {
   return (
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className={cn("block h-10 w-full @3xl:h-16", flip && "rotate-180")} aria-hidden>
-      <path d="M0 40c120-30 240-30 360 0s240 30 360 0 240-30 360 0 240 30 360 0v40H0z" fill={fill} />
+    <svg
+      viewBox="0 0 1440 80"
+      preserveAspectRatio="none"
+      className={cn("block h-10 w-full @3xl:h-16", flip && "rotate-180")}
+      aria-hidden
+    >
+      <path
+        d="M0 40c120-30 240-30 360 0s240 30 360 0 240-30 360 0 240 30 360 0v40H0z"
+        fill={fill}
+      />
     </svg>
   );
 }
@@ -108,10 +158,14 @@ function Wave({ fill, flip }: { fill: string; flip?: boolean }) {
  */
 export function Site({ data, preview = false }: { data: SiteData; preview?: boolean }) {
   const t = data.look.template;
-  const ctx: Ctx = { t, data, preview };
+  const tr = useTranslations("site");
+  const locale = useLocale();
+  const ctx: Ctx = { t, data, preview, tr, locale };
   // The public site hides empty sections; the preview shows a hint instead.
   const sections = data.sections.filter((s) => preview || !isSectionEmpty(s, data));
-  const navSections = sections.filter((s) => s.kind !== "home" && (!preview || !isSectionEmpty(s, data)));
+  const navSections = sections.filter(
+    (s) => s.kind !== "home" && (!preview || !isSectionEmpty(s, data)),
+  );
   const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
   let n = 0;
 
@@ -141,10 +195,19 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
           const index = s.kind === "home" ? 0 : ++n;
           const empty = isSectionEmpty(s, data);
           return s.kind === "home" ? (
-            <Hero key={s.kind} ctx={ctx} content={s.content} hasRsvp={sections.some((x) => x.kind === "rsvp")} />
+            <Hero
+              key={s.kind}
+              ctx={ctx}
+              content={s.content}
+              hasRsvp={sections.some((x) => x.kind === "rsvp")}
+            />
           ) : (
             <Block key={s.kind} ctx={ctx} kind={s.kind} index={index}>
-              {empty ? <EmptyHint kind={s.kind} /> : <SectionBody ctx={ctx} section={s} />}
+              {empty ? (
+                <EmptyHint ctx={ctx} kind={s.kind} />
+              ) : (
+                <SectionBody ctx={ctx} section={s} />
+              )}
             </Block>
           );
         })}
@@ -153,14 +216,19 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
         <Ornament t={t} className="mb-4" />
         <p className={cn(heading, "text-2xl")}>{couple}</p>
         <p className={cn(muted, "mt-1 text-sm")}>
-          {formatWeddingDate(data.wedding.wedding_date, "d MMMM yyyy")}
+          {data.wedding.wedding_date
+            ? fmtDate(data.wedding.wedding_date, locale, "long")
+            : tr("dateTbd")}
           {data.wedding.location ? ` · ${data.wedding.location}` : ""}
         </p>
         <p className={cn(muted, "mt-6 text-xs")}>
-          Made with{" "}
-          <Link href="/" className="underline underline-offset-2">
-            Vow
-          </Link>
+          {tr.rich("madeWith", {
+            link: (chunks) => (
+              <Link href="/" className="underline underline-offset-2">
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
       </footer>
     </div>
@@ -172,7 +240,7 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
   const modern = ctx.t === "modern";
   return (
     <nav
-      aria-label="Website sections"
+      aria-label={ctx.tr("nav")}
       className={cn(
         "sticky top-0 z-20 border-b bg-[color-mix(in_srgb,var(--site-bg)_90%,transparent)] backdrop-blur",
         line,
@@ -180,10 +248,18 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
-        <a href="#home" className={cn(heading, "shrink-0 text-xl", modern && "font-bold tracking-tight uppercase")} aria-label={couple}>
+        <a
+          href="#home"
+          className={cn(
+            heading,
+            "shrink-0 text-xl",
+            modern && "font-bold tracking-tight uppercase",
+          )}
+          aria-label={couple}
+        >
           {initials}
         </a>
-        <ul className="-mr-5 flex min-w-0 flex-1 justify-end gap-5 overflow-x-auto pr-5 text-sm whitespace-nowrap [scrollbar-width:none]">
+        <ul className="-me-5 flex min-w-0 flex-1 [scrollbar-width:none] justify-end gap-5 overflow-x-auto pe-5 text-sm whitespace-nowrap">
           {sections.map((s) => (
             <li key={s.kind}>
               <a
@@ -193,11 +269,15 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
                   (modern || ctx.t === "beach") && "text-xs tracking-[0.15em] uppercase",
                 )}
               >
-                {SECTION_LABEL[s.kind]}
+                {ctx.tr(`sections.${s.kind}`)}
               </a>
             </li>
           ))}
         </ul>
+        {/* guests pick a language; hidden in the editor preview (it would reload the editor) */}
+        {!ctx.preview && ctx.data.wedding.languages.length > 1 && (
+          <LanguageSwitcher offered={ctx.data.wedding.languages} className="shrink-0" />
+        )}
       </div>
     </nav>
   );
@@ -207,11 +287,19 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
 // Hero (the biggest difference between templates)
 // ---------------------------------------------------------------------------
 
-function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["home"]; hasRsvp: boolean }) {
+function Hero({
+  ctx,
+  content,
+  hasRsvp,
+}: {
+  ctx: Ctx;
+  content: SectionContent["home"];
+  hasRsvp: boolean;
+}) {
   const { t, data } = ctx;
   const w = data.wedding;
   const hero = data.look.hero_path;
-  const date = formatWeddingDate(w.wedding_date, "EEEE d MMMM yyyy");
+  const date = w.wedding_date ? fmtDate(w.wedding_date, ctx.locale, "full") : ctx.tr("dateTbd");
   const place = w.location;
   const tagline = content.tagline.trim();
   const cta = hasRsvp && (
@@ -220,30 +308,52 @@ function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["ho
       className={cn(
         "inline-flex h-11 items-center justify-center px-7 text-sm font-medium transition-opacity hover:opacity-90",
         "bg-[var(--site-accent)] text-[var(--site-on-accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]",
-        t === "modern" ? "rounded-none tracking-[0.2em] uppercase" : t === "classic" ? "rounded-sm tracking-widest uppercase" : "rounded-full",
+        t === "modern"
+          ? "rounded-none tracking-[0.2em] uppercase"
+          : t === "classic"
+            ? "rounded-sm tracking-widest uppercase"
+            : "rounded-full",
       )}
     >
-      RSVP
+      {ctx.tr("rsvpButton")}
     </a>
   );
 
   if (t === "modern") {
     return (
       <section id="home" className="scroll-mt-16">
-        <div className={cn("relative flex min-h-[30rem] flex-col justify-end @3xl:min-h-[40rem]", hero ? "text-white" : "")}>
+        <div
+          className={cn(
+            "relative flex min-h-[30rem] flex-col justify-end @3xl:min-h-[40rem]",
+            hero ? "text-white" : "",
+          )}
+        >
           {hero && (
             <>
               <Pic ctx={ctx} path={hero} alt="" sizes="100vw" priority />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" aria-hidden />
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                aria-hidden
+              />
             </>
           )}
           <div className="relative mx-auto w-full max-w-6xl px-5 pt-24 pb-10">
             {tagline && <p className="mb-4 text-xs tracking-[0.3em] uppercase">{tagline}</p>}
-            <h1 className={cn(heading, "text-6xl leading-[0.9] font-extrabold tracking-tighter break-words uppercase @xl:text-7xl @3xl:text-9xl")}>
+            <h1
+              className={cn(
+                heading,
+                "text-6xl leading-[0.9] font-extrabold tracking-tighter break-words uppercase @xl:text-7xl @3xl:text-9xl",
+              )}
+            >
               {w.partner_a_name}
               <br />& {w.partner_b_name}
             </h1>
-            <div className={cn("mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 border-t-2 pt-4 text-sm tracking-[0.15em] uppercase", hero ? "border-white" : "border-[var(--site-fg)]")}>
+            <div
+              className={cn(
+                "mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 border-t-2 pt-4 text-sm tracking-[0.15em] uppercase",
+                hero ? "border-white" : "border-[var(--site-fg)]",
+              )}
+            >
               <span>{date}</span>
               {place && <span>{place}</span>}
               <span className="@3xl:ml-auto">
@@ -264,14 +374,25 @@ function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["ho
           {hero ? (
             <>
               <Pic ctx={ctx} path={hero} alt="" sizes="100vw" priority />
-              <div className="absolute inset-0 bg-[color-mix(in_srgb,var(--site-bg)_45%,transparent)]" aria-hidden />
+              <div
+                className="absolute inset-0 bg-[color-mix(in_srgb,var(--site-bg)_45%,transparent)]"
+                aria-hidden
+              />
             </>
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-b from-[var(--site-card)] to-[var(--site-bg)]" aria-hidden />
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-[var(--site-card)] to-[var(--site-bg)]"
+              aria-hidden
+            />
           )}
           <div className="relative max-w-3xl rounded-3xl bg-[color-mix(in_srgb,var(--site-bg)_70%,transparent)] px-6 py-10 backdrop-blur-sm @3xl:px-14">
             {tagline && <p className="text-xs tracking-[0.35em] uppercase">{tagline}</p>}
-            <h1 className={cn(heading, "mt-4 text-4xl font-light tracking-[0.12em] uppercase @xl:text-5xl @3xl:text-6xl")}>
+            <h1
+              className={cn(
+                heading,
+                "mt-4 text-4xl font-light tracking-[0.12em] uppercase @xl:text-5xl @3xl:text-6xl",
+              )}
+            >
               {w.partner_a_name} <span className={accentText}>&</span> {w.partner_b_name}
             </h1>
             <Ornament t={t} className="my-5" />
@@ -297,9 +418,13 @@ function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["ho
           <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-t-full border-8 border-[var(--site-bg)] shadow-lg">
             <Pic ctx={ctx} path={hero} alt="" sizes="(min-width: 768px) 400px, 90vw" priority />
           </div>
-          <div className="text-center @3xl:text-left">
+          <div className="text-center @3xl:text-start">
             <Ornament t={t} className="mb-4 @3xl:mx-0" />
-            {tagline && <p className={cn(accentText, "text-sm font-semibold tracking-[0.25em] uppercase")}>{tagline}</p>}
+            {tagline && (
+              <p className={cn(accentText, "text-sm font-semibold tracking-[0.25em] uppercase")}>
+                {tagline}
+              </p>
+            )}
             <h1 className={cn(heading, "mt-3 text-5xl leading-tight @3xl:text-6xl")}>
               {w.partner_a_name}
               <span className={cn(accentText, "block text-4xl italic")}>and</span>
@@ -343,7 +468,11 @@ function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["ho
   // classic
   return (
     <section id="home" className="scroll-mt-16 px-5 pt-16 pb-12 text-center @3xl:pt-24">
-      {tagline && <p className={cn(accentText, "text-xs font-medium tracking-[0.35em] uppercase")}>{tagline}</p>}
+      {tagline && (
+        <p className={cn(accentText, "text-xs font-medium tracking-[0.35em] uppercase")}>
+          {tagline}
+        </p>
+      )}
       <h1 className={cn(heading, "mt-6 text-6xl leading-none font-medium @3xl:text-8xl")}>
         {w.partner_a_name}
         <span className={cn(accentText, "my-2 block text-4xl italic @3xl:text-5xl")}>&amp;</span>
@@ -371,13 +500,27 @@ function Hero({ ctx, content, hasRsvp }: { ctx: Ctx; content: SectionContent["ho
 // Section frame + heading
 // ---------------------------------------------------------------------------
 
-function Block({ ctx, kind, index, children }: { ctx: Ctx; kind: SiteSectionKind; index: number; children: React.ReactNode }) {
+function Block({
+  ctx,
+  kind,
+  index,
+  children,
+}: {
+  ctx: Ctx;
+  kind: SiteSectionKind;
+  index: number;
+  children: React.ReactNode;
+}) {
   const { t } = ctx;
   const alt = index % 2 === 0;
   const tinted = (t === "boho" || t === "garden") && alt;
   const beachTint = t === "beach" && alt;
   return (
-    <section id={kind} aria-labelledby={`${kind}-title`} className={cn("scroll-mt-16", tinted && "bg-[var(--site-card)]")}>
+    <section
+      id={kind}
+      aria-labelledby={`${kind}-title`}
+      className={cn("scroll-mt-16", tinted && "bg-[var(--site-card)]")}
+    >
       {beachTint && <Wave fill="var(--site-card)" flip />}
       <div
         className={cn(
@@ -388,7 +531,12 @@ function Block({ ctx, kind, index, children }: { ctx: Ctx; kind: SiteSectionKind
           line,
         )}
       >
-        <div className={cn("mx-auto", t === "modern" ? "grid max-w-6xl gap-8 @3xl:grid-cols-[1fr_2fr]" : "max-w-5xl")}>
+        <div
+          className={cn(
+            "mx-auto",
+            t === "modern" ? "grid max-w-6xl gap-8 @3xl:grid-cols-[1fr_2fr]" : "max-w-5xl",
+          )}
+        >
           <Heading ctx={ctx} kind={kind} index={index} />
           <div className={cn(t !== "modern" && "mt-10")}>{children}</div>
         </div>
@@ -399,14 +547,20 @@ function Block({ ctx, kind, index, children }: { ctx: Ctx; kind: SiteSectionKind
 }
 
 function Heading({ ctx, kind, index }: { ctx: Ctx; kind: SiteSectionKind; index: number }) {
-  const title = SECTION_LABEL[kind];
+  const title = ctx.tr(`sections.${kind}`);
   const id = `${kind}-title`;
   switch (ctx.t) {
     case "modern":
       return (
         <div>
           <p className="text-sm tabular-nums">{String(index).padStart(2, "0")}</p>
-          <h2 id={id} className={cn(heading, "mt-2 text-4xl leading-none font-extrabold tracking-tighter uppercase @3xl:text-6xl")}>
+          <h2
+            id={id}
+            className={cn(
+              heading,
+              "mt-2 text-4xl leading-none font-extrabold tracking-tighter uppercase @3xl:text-6xl",
+            )}
+          >
             {title}
           </h2>
         </div>
@@ -414,7 +568,10 @@ function Heading({ ctx, kind, index }: { ctx: Ctx; kind: SiteSectionKind; index:
     case "beach":
       return (
         <div className="text-center">
-          <h2 id={id} className={cn(heading, "text-2xl font-light tracking-[0.3em] uppercase @3xl:text-3xl")}>
+          <h2
+            id={id}
+            className={cn(heading, "text-2xl font-light tracking-[0.3em] uppercase @3xl:text-3xl")}
+          >
             {title}
           </h2>
           <Ornament t="beach" className="mt-4" />
@@ -450,15 +607,13 @@ function Heading({ ctx, kind, index }: { ctx: Ctx; kind: SiteSectionKind; index:
   }
 }
 
-function EmptyHint({ kind }: { kind: SiteSectionKind }) {
+function EmptyHint({ ctx, kind }: { ctx: Ctx; kind: SiteSectionKind }) {
   return (
     <p className={cn("rounded-xl border-2 border-dashed p-6 text-center text-sm", line, muted)}>
-      {kind === "events"
-        ? "Add events in Settings → Events and they appear here."
-        : kind === "travel"
-          ? "Mark hotels “Show on website” or add travel tips in the editor."
-          : "Nothing here yet. Add content in the editor."}{" "}
-      This section stays hidden on your live site until then.
+      {ctx.tr(
+        kind === "events" ? "empty.events" : kind === "travel" ? "empty.travel" : "empty.other",
+      )}{" "}
+      {ctx.tr("empty.hidden")}
     </p>
   );
 }
@@ -510,7 +665,14 @@ const photoShape: Record<SiteTemplate, string> = {
 function Intro({ ctx, text }: { ctx: Ctx; text: string }) {
   if (!text.trim()) return null;
   return (
-    <p className={cn("mb-10 text-lg whitespace-pre-wrap", ctx.t === "modern" ? "max-w-2xl" : "mx-auto max-w-2xl text-center")}>{text}</p>
+    <p
+      className={cn(
+        "mb-10 text-lg whitespace-pre-wrap",
+        ctx.t === "modern" ? "max-w-2xl" : "mx-auto max-w-2xl text-center",
+      )}
+    >
+      {text}
+    </p>
   );
 }
 
@@ -520,7 +682,13 @@ function Story({ ctx, c }: { ctx: Ctx; c: SectionContent["story"] }) {
     <>
       <Intro ctx={ctx} text={c.intro} />
       {c.milestones.length > 0 && (
-        <ol className={cn("relative space-y-10", !modern && "@3xl:before:absolute @3xl:before:inset-y-0 @3xl:before:left-1/2 @3xl:before:w-px @3xl:before:bg-[var(--site-line)]")}>
+        <ol
+          className={cn(
+            "relative space-y-10",
+            !modern &&
+              "@3xl:before:absolute @3xl:before:inset-y-0 @3xl:before:left-1/2 @3xl:before:w-px @3xl:before:bg-[var(--site-line)]",
+          )}
+        >
           {c.milestones.map((m, i) => (
             <li
               key={m.id}
@@ -534,18 +702,56 @@ function Story({ ctx, c }: { ctx: Ctx; c: SectionContent["story"] }) {
                 <p className="text-sm font-bold tracking-widest uppercase">{m.date}</p>
               ) : (
                 m.photo && (
-                  <div className={cn("relative aspect-[4/3] overflow-hidden", ctx.t === "boho" ? "rounded-t-full" : "rounded-2xl", ctx.t === "classic" && "rounded-none", i % 2 && "@3xl:order-2")}>
-                    <Pic ctx={ctx} path={m.photo} alt={m.title} sizes="(min-width: 768px) 480px, 90vw" />
+                  <div
+                    className={cn(
+                      "relative aspect-[4/3] overflow-hidden",
+                      ctx.t === "boho" ? "rounded-t-full" : "rounded-2xl",
+                      ctx.t === "classic" && "rounded-none",
+                      i % 2 && "@3xl:order-2",
+                    )}
+                  >
+                    <Pic
+                      ctx={ctx}
+                      path={m.photo}
+                      alt={m.title}
+                      sizes="(min-width: 768px) 480px, 90vw"
+                    />
                   </div>
                 )
               )}
-              <div className={cn(!modern && !m.photo && "@3xl:col-span-2 @3xl:mx-auto @3xl:max-w-xl @3xl:text-center", !modern && m.photo && i % 2 && "@3xl:text-right")}>
-                {!modern && m.date && <p className={cn(accentText, "text-sm font-medium tracking-[0.2em] uppercase")}>{m.date}</p>}
-                {m.title && <h3 className={cn(heading, "mt-1 text-2xl @3xl:text-3xl", modern && "font-bold tracking-tight")}>{m.title}</h3>}
+              <div
+                className={cn(
+                  !modern &&
+                    !m.photo &&
+                    "@3xl:col-span-2 @3xl:mx-auto @3xl:max-w-xl @3xl:text-center",
+                  !modern && m.photo && i % 2 && "@3xl:text-end",
+                )}
+              >
+                {!modern && m.date && (
+                  <p className={cn(accentText, "text-sm font-medium tracking-[0.2em] uppercase")}>
+                    {m.date}
+                  </p>
+                )}
+                {m.title && (
+                  <h3
+                    className={cn(
+                      heading,
+                      "mt-1 text-2xl @3xl:text-3xl",
+                      modern && "font-bold tracking-tight",
+                    )}
+                  >
+                    {m.title}
+                  </h3>
+                )}
                 {m.text && <p className={cn(muted, "mt-2 whitespace-pre-wrap")}>{m.text}</p>}
                 {modern && m.photo && (
                   <div className="relative mt-4 aspect-[16/9] overflow-hidden grayscale">
-                    <Pic ctx={ctx} path={m.photo} alt={m.title} sizes="(min-width: 768px) 640px, 90vw" />
+                    <Pic
+                      ctx={ctx}
+                      path={m.photo}
+                      alt={m.title}
+                      sizes="(min-width: 768px) 640px, 90vw"
+                    />
                   </div>
                 )}
               </div>
@@ -563,38 +769,63 @@ function Events({ ctx, intro }: { ctx: Ctx; intro: string }) {
       <Intro ctx={ctx} text={intro} />
       <ul className={cn("grid gap-5", ctx.data.events.length > 1 && "@2xl:grid-cols-2")}>
         {ctx.data.events.map((e) => {
-          const start = formatTime(e.start_time);
-          const end = formatTime(e.end_time);
+          const start = fmtTime(e.start_time, ctx.locale);
+          const end = fmtTime(e.end_time, ctx.locale);
           const where = [e.venue_name, e.address].filter(Boolean).join(", ");
           return (
             <li key={e.id} className={card(ctx.t)}>
-              <h3 className={cn(heading, "text-2xl @3xl:text-3xl", ctx.t === "modern" && "font-bold tracking-tight")}>{e.name}</h3>
+              <h3
+                className={cn(
+                  heading,
+                  "text-2xl @3xl:text-3xl",
+                  ctx.t === "modern" && "font-bold tracking-tight",
+                )}
+              >
+                {e.name}
+              </h3>
               <dl className="mt-4 space-y-2 text-sm">
-                <Row icon={CalendarDays} label="Date">
-                  {formatWeddingDate(e.event_date, "EEEE d MMMM yyyy")}
+                <Row icon={CalendarDays} label={ctx.tr("event.date")}>
+                  {e.event_date ? fmtDate(e.event_date, ctx.locale, "full") : ctx.tr("dateTbd")}
                 </Row>
                 {start && (
-                  <Row icon={Clock} label="Time">
+                  <Row icon={Clock} label={ctx.tr("event.time")}>
                     {end ? `${start} – ${end}` : start}
+                    {e.event_date && e.start_time && ctx.data.wedding.time_zone && (
+                      <YourTime
+                        date={e.event_date}
+                        time={e.start_time}
+                        timeZone={ctx.data.wedding.time_zone}
+                      />
+                    )}
                   </Row>
                 )}
                 {where && (
-                  <Row icon={MapPin} label="Place">
+                  <Row icon={MapPin} label={ctx.tr("event.place")}>
                     {e.venue_name && <span className="block font-medium">{e.venue_name}</span>}
                     {e.address && <span className={cn("block", muted)}>{e.address}</span>}
-                    <a href={mapsSearch(where)} target="_blank" rel="noreferrer" className={cn(accentText, "mt-1 inline-flex items-center gap-1 underline underline-offset-2")}>
-                      Open in Google Maps <ExternalLink className="size-3" aria-hidden />
-                      <span className="sr-only">(opens in a new tab)</span>
+                    <a
+                      href={mapsSearch(where)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={cn(
+                        accentText,
+                        "mt-1 inline-flex items-center gap-1 underline underline-offset-2",
+                      )}
+                    >
+                      {ctx.tr("event.openMap")} <ExternalLink className="size-3" aria-hidden />
+                      <span className="sr-only">{ctx.tr("newTab")}</span>
                     </a>
                   </Row>
                 )}
                 {e.dress_code && (
-                  <Row icon={Shirt} label="Dress code">
+                  <Row icon={Shirt} label={ctx.tr("event.dressCode")}>
                     {e.dress_code}
                   </Row>
                 )}
               </dl>
-              {e.description && <p className={cn(muted, "mt-4 text-sm whitespace-pre-wrap")}>{e.description}</p>}
+              {e.description && (
+                <p className={cn(muted, "mt-4 text-sm whitespace-pre-wrap")}>{e.description}</p>
+              )}
             </li>
           );
         })}
@@ -603,7 +834,15 @@ function Events({ ctx, intro }: { ctx: Ctx; intro: string }) {
   );
 }
 
-function Row({ icon: Icon, label, children }: { icon: typeof Clock; label: string; children: React.ReactNode }) {
+function Row({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: typeof Clock;
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex gap-3">
       <dt className="pt-0.5">
@@ -625,10 +864,16 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
         <div className={cn(card(ctx.t), "mb-5 flex flex-wrap items-center gap-3")}>
           <Plane className={cn("size-5", accentText)} aria-hidden />
           <p className="flex-1">
-            Nearest airport: <strong>{airport}</strong>
+            {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}
           </p>
-          <a href={flightSearchLinks({ to: airport }).google} target="_blank" rel="noreferrer" className={cn(accentText, "text-sm underline underline-offset-2")}>
-            Search flights<span className="sr-only"> (opens in a new tab)</span>
+          <a
+            href={flightSearchLinks({ to: airport }).google}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(accentText, "text-sm underline underline-offset-2")}
+          >
+            {ctx.tr("travel.searchFlights")}
+            <span className="sr-only"> {ctx.tr("newTab")}</span>
           </a>
         </div>
       )}
@@ -639,45 +884,83 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
             const site = safeUrl(h.website);
             return (
               <li key={h.id} className={cn(card(ctx.t), "flex flex-col")}>
-                <h3 className={cn(heading, "text-2xl", ctx.t === "modern" && "font-bold tracking-tight")}>{h.name}</h3>
+                <h3
+                  className={cn(
+                    heading,
+                    "text-2xl",
+                    ctx.t === "modern" && "font-bold tracking-tight",
+                  )}
+                >
+                  {h.name}
+                </h3>
                 {h.distance && <p className={cn(muted, "text-sm")}>{h.distance}</p>}
                 {h.address && <p className="mt-2 text-sm">{h.address}</p>}
-                <dl className="mt-3 space-y-1 text-sm">
+                <div className="mt-3 space-y-1 text-sm">
                   {h.price_per_night != null && (
-                    <div>
-                      <dt className="inline">From </dt>
-                      <dd className="inline">
-                        <span className="font-medium">{formatMoney(Number(h.price_per_night), data.currency)}</span> / night
-                      </dd>
-                    </div>
+                    <p>
+                      {ctx.tr.rich("travel.perNight", {
+                        price: fmtMoney(Number(h.price_per_night), data.currency, ctx.locale),
+                        b: (c) => <span className="font-medium">{c}</span>,
+                      })}
+                    </p>
                   )}
                   {h.discount_code && (
-                    <div>
-                      <dt className="inline">Our code: </dt>
-                      <dd className="inline rounded bg-[var(--site-card)] px-1.5 py-0.5 font-mono">{h.discount_code}</dd>
-                    </div>
+                    <p>
+                      {ctx.tr.rich("travel.code", {
+                        code: h.discount_code,
+                        mono: (c) => (
+                          <span className="rounded bg-[var(--site-card)] px-1.5 py-0.5 font-mono">
+                            {c}
+                          </span>
+                        ),
+                      })}
+                    </p>
                   )}
                   {h.cutoff_date && (
-                    <div>
-                      <dt className="inline">Book by </dt>
-                      <dd className="inline font-medium">{formatWeddingDate(h.cutoff_date, "d MMMM yyyy")}</dd>
-                    </div>
+                    <p>
+                      {ctx.tr.rich("travel.bookBy", {
+                        date: fmtDate(h.cutoff_date, ctx.locale, "long"),
+                        b: (c) => <span className="font-medium">{c}</span>,
+                      })}
+                    </p>
                   )}
-                </dl>
+                </div>
                 <div className="mt-auto flex flex-wrap gap-3 pt-4 text-sm">
                   {book && (
-                    <a href={book} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center rounded-full bg-[var(--site-accent)] px-4 text-[var(--site-on-accent)]">
-                      Book a room<span className="sr-only"> at {h.name} (opens in a new tab)</span>
+                    <a
+                      href={book}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-9 items-center rounded-full bg-[var(--site-accent)] px-4 text-[var(--site-on-accent)]"
+                    >
+                      <span aria-hidden>{ctx.tr("travel.bookRoom")}</span>
+                      <span className="sr-only">
+                        {ctx.tr("travel.bookRoomAt", { name: h.name })} {ctx.tr("newTab")}
+                      </span>
                     </a>
                   )}
                   {site && site !== book && (
-                    <a href={site} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center underline underline-offset-2">
-                      Website<span className="sr-only"> of {h.name}</span>
+                    <a
+                      href={site}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-9 items-center underline underline-offset-2"
+                    >
+                      <span aria-hidden>{ctx.tr("travel.website")}</span>
+                      <span className="sr-only">
+                        {ctx.tr("travel.websiteOf", { name: h.name })}
+                      </span>
                     </a>
                   )}
                   {h.address && (
-                    <a href={mapsSearch(`${h.name}, ${h.address}`)} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center underline underline-offset-2">
-                      Map<span className="sr-only"> of {h.name}</span>
+                    <a
+                      href={mapsSearch(`${h.name}, ${h.address}`)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-9 items-center underline underline-offset-2"
+                    >
+                      <span aria-hidden>{ctx.tr("travel.map")}</span>
+                      <span className="sr-only">{ctx.tr("travel.mapOf", { name: h.name })}</span>
                     </a>
                   )}
                 </div>
@@ -686,7 +969,16 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
           })}
         </ul>
       )}
-      {c.notes.trim() && <p className={cn("mt-8 whitespace-pre-wrap", ctx.t !== "modern" && "mx-auto max-w-2xl text-center")}>{c.notes}</p>}
+      {c.notes.trim() && (
+        <p
+          className={cn(
+            "mt-8 whitespace-pre-wrap",
+            ctx.t !== "modern" && "mx-auto max-w-2xl text-center",
+          )}
+        >
+          {c.notes}
+        </p>
+      )}
     </>
   );
 }
@@ -698,14 +990,21 @@ function Rsvp({ ctx, intro }: { ctx: Ctx; intro: string }) {
       <Intro ctx={ctx} text={intro} />
       {deadline && (
         <p className={cn(muted, "-mt-6 mb-8", ctx.t !== "modern" && "text-center")}>
-          Please reply by <strong className="text-[var(--site-fg)]">{formatWeddingDate(deadline, "d MMMM yyyy")}</strong>.
+          {ctx.tr.rich("rsvp.replyBy", {
+            date: fmtDate(deadline, ctx.locale, "long"),
+            b: (c) => <strong className="text-[var(--site-fg)]">{c}</strong>,
+          })}
         </p>
       )}
       {/* In the editor preview the forms are inert, so clicks don't leave the editor. */}
-      <div inert={ctx.preview} className={cn(card(ctx.t), "mx-auto max-w-md space-y-6", ctx.t === "modern" && "mx-0")}>
+      <div
+        inert={ctx.preview}
+        className={cn(card(ctx.t), "mx-auto max-w-md space-y-6", ctx.t === "modern" && "mx-0")}
+      >
         <FindInvitation slug={ctx.data.wedding.slug} />
         <div className={cn("flex items-center gap-3 text-xs tracking-widest uppercase", muted)}>
-          <span className="h-px flex-1 bg-[var(--site-line)]" /> or use the code on your invitation <span className="h-px flex-1 bg-[var(--site-line)]" />
+          <span className="h-px flex-1 bg-[var(--site-line)]" /> {ctx.tr("rsvp.or")}{" "}
+          <span className="h-px flex-1 bg-[var(--site-line)]" />
         </div>
         <CodeForm />
       </div>
@@ -719,17 +1018,42 @@ function Party({ ctx, c }: { ctx: Ctx; c: SectionContent["party"] }) {
     <ul className="grid grid-cols-2 gap-x-5 gap-y-10 @xl:grid-cols-3 @4xl:grid-cols-4">
       {people.map((p) => (
         <li key={p.id} className={cn(ctx.t !== "modern" && "text-center")}>
-          <div className={cn("relative mx-auto aspect-square w-full max-w-44 overflow-hidden bg-[var(--site-card)]", photoShape[ctx.t], ctx.t === "boho" && "aspect-[3/4]")}>
+          <div
+            className={cn(
+              "relative mx-auto aspect-square w-full max-w-44 overflow-hidden bg-[var(--site-card)]",
+              photoShape[ctx.t],
+              ctx.t === "boho" && "aspect-[3/4]",
+            )}
+          >
             {p.photo ? (
               <Pic ctx={ctx} path={p.photo} alt={p.name} sizes="180px" />
             ) : (
-              <span className={cn(heading, "absolute inset-0 flex items-center justify-center text-4xl", accentText)} aria-hidden>
+              <span
+                className={cn(
+                  heading,
+                  "absolute inset-0 flex items-center justify-center text-4xl",
+                  accentText,
+                )}
+                aria-hidden
+              >
                 {p.name.trim().charAt(0)}
               </span>
             )}
           </div>
-          <h3 className={cn(heading, "mt-3 text-xl", ctx.t === "modern" && "font-bold tracking-tight")}>{p.name}</h3>
-          {p.role && <p className={cn(accentText, "text-xs font-medium tracking-[0.2em] uppercase")}>{p.role}</p>}
+          <h3
+            className={cn(
+              heading,
+              "mt-3 text-xl",
+              ctx.t === "modern" && "font-bold tracking-tight",
+            )}
+          >
+            {p.name}
+          </h3>
+          {p.role && (
+            <p className={cn(accentText, "text-xs font-medium tracking-[0.2em] uppercase")}>
+              {p.role}
+            </p>
+          )}
           {p.bio && <p className={cn(muted, "mt-2 text-sm")}>{p.bio}</p>}
         </li>
       ))}
@@ -742,15 +1066,42 @@ function Registry({ ctx, c }: { ctx: Ctx; c: SectionContent["registry"] }) {
   return (
     <>
       <Intro ctx={ctx} text={c.intro} />
-      <ul className={cn("grid gap-5", links.length > 1 && "@2xl:grid-cols-2", links.length > 2 && "@4xl:grid-cols-3")}>
+      <ul
+        className={cn(
+          "grid gap-5",
+          links.length > 1 && "@2xl:grid-cols-2",
+          links.length > 2 && "@4xl:grid-cols-3",
+        )}
+      >
         {links.map((l) => (
-          <li key={l.id} className={cn(card(ctx.t), "flex flex-col", ctx.t !== "modern" && "items-center text-center")}>
+          <li
+            key={l.id}
+            className={cn(
+              card(ctx.t),
+              "flex flex-col",
+              ctx.t !== "modern" && "items-center text-center",
+            )}
+          >
             <Gift className={cn("mb-3 size-6", accentText)} aria-hidden />
-            <h3 className={cn(heading, "text-2xl", ctx.t === "modern" && "font-bold tracking-tight")}>{l.label || new URL(l.href!).hostname}</h3>
+            <h3
+              className={cn(heading, "text-2xl", ctx.t === "modern" && "font-bold tracking-tight")}
+            >
+              {l.label || new URL(l.href!).hostname}
+            </h3>
             {l.note && <p className={cn(muted, "mt-2 text-sm")}>{l.note}</p>}
-            <a href={l.href!} target="_blank" rel="noreferrer" className={cn(accentText, "mt-4 inline-flex items-center gap-1 text-sm font-medium underline underline-offset-2")}>
-              Visit <ExternalLink className="size-3" aria-hidden />
-              <span className="sr-only">{l.label} (opens in a new tab)</span>
+            <a
+              href={l.href!}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                accentText,
+                "mt-4 inline-flex items-center gap-1 text-sm font-medium underline underline-offset-2",
+              )}
+            >
+              {ctx.tr("registry.visit")} <ExternalLink className="size-3" aria-hidden />
+              <span className="sr-only">
+                {l.label} {ctx.tr("newTab")}
+              </span>
             </a>
           </li>
         ))}
@@ -762,12 +1113,25 @@ function Registry({ ctx, c }: { ctx: Ctx; c: SectionContent["registry"] }) {
 function Faq({ ctx, c }: { ctx: Ctx; c: SectionContent["faq"] }) {
   const items = c.items.filter((i) => i.question.trim() && i.answer.trim());
   return (
-    <div className={cn("divide-y border-y", line, "divide-[var(--site-line)]", ctx.t !== "modern" && "mx-auto max-w-2xl")}>
+    <div
+      className={cn(
+        "divide-y border-y",
+        line,
+        "divide-[var(--site-line)]",
+        ctx.t !== "modern" && "mx-auto max-w-2xl",
+      )}
+    >
       {items.map((i) => (
         <details key={i.id} className="group py-4">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-medium focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--site-accent)] [&::-webkit-details-marker]:hidden">
             {i.question}
-            <span className={cn(accentText, "text-2xl leading-none transition-transform group-open:rotate-45")} aria-hidden>
+            <span
+              className={cn(
+                accentText,
+                "text-2xl leading-none transition-transform group-open:rotate-45",
+              )}
+              aria-hidden
+            >
               +
             </span>
           </summary>
@@ -779,16 +1143,43 @@ function Faq({ ctx, c }: { ctx: Ctx; c: SectionContent["faq"] }) {
 }
 
 function Gallery({ ctx, c }: { ctx: Ctx; c: SectionContent["gallery"] }) {
-  const round = ctx.t === "modern" || ctx.t === "classic" ? "" : ctx.t === "boho" ? "rounded-t-full rounded-b-lg" : "rounded-2xl";
+  const round =
+    ctx.t === "modern" || ctx.t === "classic"
+      ? ""
+      : ctx.t === "boho"
+        ? "rounded-t-full rounded-b-lg"
+        : "rounded-2xl";
   return (
     <ul className="grid grid-cols-2 gap-3 @3xl:grid-cols-3">
       {c.photos.map((p, i) => (
-        <li key={p.id} className={cn(ctx.t === "modern" && i % 5 === 0 && "col-span-2 @3xl:col-span-2")}>
+        <li
+          key={p.id}
+          className={cn(ctx.t === "modern" && i % 5 === 0 && "col-span-2 @3xl:col-span-2")}
+        >
           <figure>
-            <div className={cn("relative overflow-hidden", ctx.t === "boho" ? "aspect-[3/4]" : ctx.t === "modern" && i % 5 === 0 ? "aspect-[2/1]" : "aspect-square", round)}>
-              <Pic ctx={ctx} path={p.path} alt={p.caption || "Photo of the couple"} sizes="(min-width: 768px) 33vw, 50vw" />
+            <div
+              className={cn(
+                "relative overflow-hidden",
+                ctx.t === "boho"
+                  ? "aspect-[3/4]"
+                  : ctx.t === "modern" && i % 5 === 0
+                    ? "aspect-[2/1]"
+                    : "aspect-square",
+                round,
+              )}
+            >
+              <Pic
+                ctx={ctx}
+                path={p.path}
+                alt={p.caption || ctx.tr("gallery.alt")}
+                sizes="(min-width: 768px) 33vw, 50vw"
+              />
             </div>
-            {p.caption && <figcaption className={cn(muted, "mt-1.5 text-center text-sm")}>{p.caption}</figcaption>}
+            {p.caption && (
+              <figcaption className={cn(muted, "mt-1.5 text-center text-sm")}>
+                {p.caption}
+              </figcaption>
+            )}
           </figure>
         </li>
       ))}

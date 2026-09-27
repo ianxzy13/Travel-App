@@ -35,6 +35,7 @@ export default async function RsvpPage({
       adminConfigured={Boolean(process.env.SUPABASE_SECRET_KEY)}
       canEdit={canEdit(role)}
       focusHouseholdId={household}
+      languages={wedding.languages}
     />
   );
 }

@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import Link from "next/link";
 import { Check, ChevronsUpDown, Loader2, Plus } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { switchWedding } from "@/app/app/actions";
 import {
   DropdownMenu,
@@ -12,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { formatWeddingDate } from "@/lib/format";
+import { fmtDate } from "@/lib/i18n/format";
 import { cn } from "@/lib/utils";
 import type { WeddingSummary } from "@/lib/wedding";
 
@@ -26,6 +27,8 @@ export function WeddingSwitcher({
   weddings: WeddingSummary[];
   compact?: boolean;
 }) {
+  const t = useTranslations("app.switcher");
+  const locale = useLocale();
   const [pending, startTransition] = useTransition();
 
   return (
@@ -35,7 +38,7 @@ export function WeddingSwitcher({
           "hover:bg-accent focus-visible:ring-ring flex w-full min-w-0 items-center gap-2 rounded-lg text-left transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
           compact ? "justify-center p-2" : "px-3 py-2",
         )}
-        aria-label={`Current wedding: ${current.name}. Switch wedding`}
+        aria-label={t("current", { name: current.name })}
       >
         <span
           aria-hidden
@@ -50,7 +53,7 @@ export function WeddingSwitcher({
                 {current.name}
               </span>
               <span className="text-muted-foreground block truncate text-xs">
-                {formatWeddingDate(current.date)}
+                {current.date ? fmtDate(current.date, locale, "long") : t("noDate")}
               </span>
             </span>
             {pending ? (
@@ -62,7 +65,7 @@ export function WeddingSwitcher({
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-64">
-        <DropdownMenuLabel>Your weddings</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("yours")}</DropdownMenuLabel>
         {weddings.map((w) => (
           <DropdownMenuItem
             key={w.id}
@@ -73,7 +76,7 @@ export function WeddingSwitcher({
             <span className="min-w-0 flex-1">
               <span className="block truncate">{w.name}</span>
               <span className="text-muted-foreground block text-xs">
-                {formatWeddingDate(w.date)} · {w.role}
+                {w.date ? fmtDate(w.date, locale, "medium") : t("noDate")} · {t(`roles.${w.role}`)}
               </span>
             </span>
             {w.id === current.id && <Check aria-hidden />}
@@ -82,7 +85,7 @@ export function WeddingSwitcher({
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/onboarding">
-            <Plus aria-hidden /> Plan another wedding
+            <Plus aria-hidden /> {t("another")}
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>

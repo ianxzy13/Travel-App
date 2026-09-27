@@ -36,7 +36,9 @@ export function Masonry<T extends { id: string; width: number | null; height: nu
   useEffect(() => {
     const el = sentinel.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && setShown((s) => s + batch), { rootMargin: "800px" });
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setShown((s) => s + batch), {
+      rootMargin: "800px",
+    });
     io.observe(el);
     return () => io.disconnect();
   }, [batch]);

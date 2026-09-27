@@ -258,6 +258,7 @@ describe("buildGuestViews", () => {
     const base = {
       wedding_id: "w",
       household_id: "h",
+      languages: [],
       email: null,
       phone: null,
       side: "both" as const,

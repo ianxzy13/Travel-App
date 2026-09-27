@@ -18,7 +18,13 @@ import { toast } from "sonner";
 import { createBoard, movePin, reorderBoards, toggleHeart } from "@/app/app/inspiration/actions";
 import { PageHeader } from "@/components/app/page-header";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { orderBetween } from "@/lib/inspiration/layout";
 import type { BoardView, InspirationData, PinView } from "@/lib/inspiration/load";
 import { cn } from "@/lib/utils";
@@ -41,7 +47,14 @@ type Props = InspirationData & {
   unsplashEnabled: boolean;
 };
 
-const STARTER_BOARDS = ["Dress & attire", "Flowers", "Decor & tablescape", "Cake", "Hair & makeup", "Venue & ceremony"];
+const STARTER_BOARDS = [
+  "Dress & attire",
+  "Flowers",
+  "Decor & tablescape",
+  "Cake",
+  "Hair & makeup",
+  "Venue & ceremony",
+];
 type Filter = "all" | "love" | "maybe" | "hearted";
 
 export function InspirationPage(props: Props) {
@@ -119,7 +132,9 @@ export function InspirationPage(props: Props) {
     const on = !pin.hearts.includes(userId);
     setPins((all) =>
       all.map((p) =>
-        p.id === pin.id ? { ...p, hearts: on ? [...p.hearts, userId] : p.hearts.filter((h) => h !== userId) } : p,
+        p.id === pin.id
+          ? { ...p, hearts: on ? [...p.hearts, userId] : p.hearts.filter((h) => h !== userId) }
+          : p,
       ),
     );
     void toggleHeart(pin.id).then((r) => !r.ok && (toast.error(r.error), setPins(props.pins)));
@@ -141,7 +156,9 @@ export function InspirationPage(props: Props) {
       const to = boards.findIndex((b) => `board:${b.id}` === o);
       const next = arrayMove(boards, from, to);
       setBoards(next);
-      void reorderBoards(next.map((b) => b.id)).then((r) => !r.ok && (toast.error(r.error), setBoards(props.boards)));
+      void reorderBoards(next.map((b) => b.id)).then(
+        (r) => !r.ok && (toast.error(r.error), setBoards(props.boards)),
+      );
       return;
     }
 
@@ -213,13 +230,20 @@ export function InspirationPage(props: Props) {
                 </Button>
               ))}
               <Button onClick={() => setBoardDialog("new")} disabled={starting}>
-                {starting ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />} Your own
+                {starting ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}{" "}
+                Your own
               </Button>
             </div>
           )}
         </div>
       ) : (
-        <DndContext id="inspiration-dnd" sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragCancel={() => setDragging(null)}>
+        <DndContext
+          id="inspiration-dnd"
+          sensors={sensors}
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          onDragCancel={() => setDragging(null)}
+        >
           <BoardBar
             boards={boards}
             selected={boardKey}
@@ -234,7 +258,9 @@ export function InspirationPage(props: Props) {
               {board ? (
                 <>
                   <h2 className="text-2xl">{board.name}</h2>
-                  {board.description && <p className="text-muted-foreground text-sm">{board.description}</p>}
+                  {board.description && (
+                    <p className="text-muted-foreground text-sm">{board.description}</p>
+                  )}
                 </>
               ) : (
                 <h2 className="text-2xl">All pins</h2>
@@ -260,7 +286,12 @@ export function InspirationPage(props: Props) {
                 </Button>
               )}
               {board && canEdit && (
-                <Button variant="outline" size="sm" onClick={() => setBoardDialog("edit")} aria-label={`Edit ${board.name}`}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setBoardDialog("edit")}
+                  aria-label={`Edit ${board.name}`}
+                >
                   <Pencil aria-hidden /> Edit
                 </Button>
               )}
@@ -305,7 +336,8 @@ export function InspirationPage(props: Props) {
             <>
               {canEdit && (
                 <p className="text-muted-foreground mb-3 hidden text-xs sm:block">
-                  Tip: drag a pin onto a board above to move it{board ? ", or onto another pin to change the order" : ""}.
+                  Tip: drag a pin onto a board above to move it
+                  {board ? ", or onto another pin to change the order" : ""}.
                 </p>
               )}
               <Masonry
@@ -327,7 +359,13 @@ export function InspirationPage(props: Props) {
           <DragOverlay dropAnimation={null}>
             {dragging && (
               <div className="w-40 rotate-2 overflow-hidden rounded-xl shadow-2xl">
-                <PinImage src={dragging.src} alt={dragging.title || "Pin"} width={dragging.width} height={dragging.height} size={300} />
+                <PinImage
+                  src={dragging.src}
+                  alt={dragging.title || "Pin"}
+                  width={dragging.width}
+                  height={dragging.height}
+                  size={300}
+                />
               </div>
             )}
           </DragOverlay>

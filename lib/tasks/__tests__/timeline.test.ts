@@ -1,6 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { endTime, fromMinutes, overlaps, shiftFrom, sortByTime, toMinutes } from "@/lib/schedule/time";
-import { SUGGESTIONS, detectDone, dueState, missingSuggestions, phaseOf, suggestionDue } from "../timeline";
+import {
+  endTime,
+  fromMinutes,
+  overlaps,
+  shiftFrom,
+  sortByTime,
+  toMinutes,
+} from "@/lib/schedule/time";
+import {
+  SUGGESTIONS,
+  detectDone,
+  dueState,
+  missingSuggestions,
+  phaseOf,
+  suggestionDue,
+} from "../timeline";
 
 describe("suggested timeline", () => {
   const wedding = "2027-06-12";
@@ -34,7 +48,14 @@ describe("suggested timeline", () => {
     // the sort value still follows the due dates, and nothing moves past the wedding
     const byOrder = [...rows].sort((a, b) => a.sort_order - b.sort_order).map((r) => r.due_date);
     expect(byOrder).toEqual(rows.map((r) => r.due_date).sort());
-    expect(rows.every((r) => r.suggestion_key === "thank-you" || r.suggestion_key === "reviews" || r.due_date <= wedding)).toBe(true);
+    expect(
+      rows.every(
+        (r) =>
+          r.suggestion_key === "thank-you" ||
+          r.suggestion_key === "reviews" ||
+          r.due_date <= wedding,
+      ),
+    ).toBe(true);
   });
   it("keys are unique", () => {
     expect(new Set(SUGGESTIONS.map((s) => s.key)).size).toBe(SUGGESTIONS.length);
@@ -75,7 +96,12 @@ describe("detectDone", () => {
       bookedVendorCategories: ["photography"],
       seatingDone: false,
     });
-    expect(Object.keys(done).sort()).toEqual(["book-venue", "inspiration", "photographer", "set-budget"]);
+    expect(Object.keys(done).sort()).toEqual([
+      "book-venue",
+      "inspiration",
+      "photographer",
+      "set-budget",
+    ]);
   });
 });
 

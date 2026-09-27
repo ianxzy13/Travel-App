@@ -2,7 +2,13 @@
 
 import { AlertTriangle, Check } from "lucide-react";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { BodyFont, HeadingFont, SiteTemplate } from "@/lib/database.types";
 import type { SiteData } from "@/lib/website/content";
 import { ACCENT_SWATCHES, BODY_FONTS, HEADING_FONTS, TEMPLATES } from "@/lib/website/templates";
@@ -14,7 +20,9 @@ const DEFAULT = "default";
 
 function contrast(a: string, b: string) {
   const lum = (h: string) => {
-    const [r, g, bl] = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+    const [r, g, bl] = [1, 3, 5]
+      .map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+      .map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
     return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
   };
   const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
@@ -56,15 +64,31 @@ export function DesignPanel({
                 aria-checked={on}
                 disabled={disabled}
                 // switching template resets colour and fonts to that template's own
-                onClick={() => onChange({ ...look, template: key, accent_color: null, heading_font: null, body_font: null })}
+                onClick={() =>
+                  onChange({
+                    ...look,
+                    template: key,
+                    accent_color: null,
+                    heading_font: null,
+                    body_font: null,
+                  })
+                }
                 className={cn(
                   "focus-visible:ring-ring relative overflow-hidden rounded-xl border text-left transition focus-visible:ring-2 focus-visible:outline-none",
                   on ? "ring-primary ring-2 ring-offset-2" : "hover:border-foreground/30",
                 )}
               >
-                <div className="flex h-20 flex-col items-center justify-center gap-1" style={{ background: tpl.colors.bg, color: tpl.colors.fg }}>
+                <div
+                  className="flex h-20 flex-col items-center justify-center gap-1"
+                  style={{ background: tpl.colors.bg, color: tpl.colors.fg }}
+                >
                   <span
-                    className={cn("text-2xl", key === "modern" && "font-extrabold uppercase", key === "beach" && "font-light tracking-[0.2em] uppercase", key === "garden" && "italic")}
+                    className={cn(
+                      "text-2xl",
+                      key === "modern" && "font-extrabold uppercase",
+                      key === "beach" && "font-light tracking-[0.2em] uppercase",
+                      key === "garden" && "italic",
+                    )}
                     style={{ fontFamily: HEADING_FONTS[tpl.heading].css }}
                   >
                     A &amp; B
@@ -96,7 +120,8 @@ export function DesignPanel({
               look.accent_color == null && "ring-primary ring-2 ring-offset-1",
             )}
           >
-            <span className="size-4 rounded-full" style={{ background: t.colors.accent }} /> Template colour
+            <span className="size-4 rounded-full" style={{ background: t.colors.accent }} />{" "}
+            Template colour
           </button>
           {ACCENT_SWATCHES.filter((c) => c !== t.colors.accent).map((c) => (
             <button
@@ -126,7 +151,8 @@ export function DesignPanel({
         </div>
         {lowContrast && (
           <p className="text-warning flex items-center gap-1.5 text-xs">
-            <AlertTriangle className="size-3.5" aria-hidden /> This colour is light, so small text in it may be hard to read. A darker shade works better.
+            <AlertTriangle className="size-3.5" aria-hidden /> This colour is light, so small text
+            in it may be hard to read. A darker shade works better.
           </p>
         )}
       </fieldset>
@@ -137,13 +163,17 @@ export function DesignPanel({
           <Select
             value={look.heading_font ?? DEFAULT}
             disabled={disabled}
-            onValueChange={(v) => onChange({ ...look, heading_font: v === DEFAULT ? null : (v as HeadingFont) })}
+            onValueChange={(v) =>
+              onChange({ ...look, heading_font: v === DEFAULT ? null : (v as HeadingFont) })
+            }
           >
             <SelectTrigger id="heading-font" className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={DEFAULT}>Default: {HEADING_FONTS[t.heading].label.split(" (")[0]}</SelectItem>
+              <SelectItem value={DEFAULT}>
+                Default: {HEADING_FONTS[t.heading].label.split(" (")[0]}
+              </SelectItem>
               {(Object.keys(HEADING_FONTS) as HeadingFont[]).map((f) => (
                 <SelectItem key={f} value={f}>
                   <span style={{ fontFamily: HEADING_FONTS[f].css }}>{HEADING_FONTS[f].label}</span>
@@ -157,13 +187,17 @@ export function DesignPanel({
           <Select
             value={look.body_font ?? DEFAULT}
             disabled={disabled}
-            onValueChange={(v) => onChange({ ...look, body_font: v === DEFAULT ? null : (v as BodyFont) })}
+            onValueChange={(v) =>
+              onChange({ ...look, body_font: v === DEFAULT ? null : (v as BodyFont) })
+            }
           >
             <SelectTrigger id="body-font" className="w-full">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={DEFAULT}>Default: {BODY_FONTS[t.body].label.split(" (")[0]}</SelectItem>
+              <SelectItem value={DEFAULT}>
+                Default: {BODY_FONTS[t.body].label.split(" (")[0]}
+              </SelectItem>
               {(Object.keys(BODY_FONTS) as BodyFont[]).map((f) => (
                 <SelectItem key={f} value={f}>
                   <span style={{ fontFamily: BODY_FONTS[f].css }}>{BODY_FONTS[f].label}</span>
@@ -176,7 +210,9 @@ export function DesignPanel({
 
       <div className="space-y-2">
         <p className="text-sm font-medium">Hero photo</p>
-        <p className="text-muted-foreground text-xs">The big photo at the top. Landscape photos work best (at least 1600 px wide).</p>
+        <p className="text-muted-foreground text-xs">
+          The big photo at the top. Landscape photos work best (at least 1600 px wide).
+        </p>
         <ImageSlot
           weddingId={weddingId}
           path={look.hero_path}

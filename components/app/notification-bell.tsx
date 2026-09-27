@@ -2,11 +2,20 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { formatDistanceToNowStrict, parseISO } from "date-fns";
-import { Bell, CalendarClock, Hotel, ListChecks, MailCheck, Wallet, type LucideIcon } from "lucide-react";
+import {
+  Bell,
+  CalendarClock,
+  Hotel,
+  ListChecks,
+  MailCheck,
+  Wallet,
+  type LucideIcon,
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { markNotificationsRead } from "@/app/app/rsvp/actions";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { relative } from "@/lib/i18n/format";
 import { cn } from "@/lib/utils";
 
 export type NotificationItem = {
@@ -19,7 +28,12 @@ export type NotificationItem = {
   createdAt: string;
 };
 
-const ICONS: Record<string, LucideIcon> = { rsvp: MailCheck, payment: Wallet, hotel: Hotel, task: ListChecks };
+const ICONS: Record<string, LucideIcon> = {
+  rsvp: MailCheck,
+  payment: Wallet,
+  hotel: Hotel,
+  task: ListChecks,
+};
 
 /** Bell with unread count: new RSVPs, to-dos given to you, and daily reminders (payments, hotels, overdue to-dos). */
 export function NotificationBell({
@@ -31,6 +45,8 @@ export function NotificationBell({
   unread: number;
   align?: "start" | "end";
 }) {
+  const t = useTranslations("app.notifications");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
 
@@ -43,7 +59,7 @@ export function NotificationBell({
           variant="ghost"
           size="icon"
           className="relative"
-          aria-label={unread ? `Notifications, ${unread} unread` : "Notifications"}
+          aria-label={unread ? t("unread", { count: unread }) : t("title")}
         >
           <Bell aria-hidden />
           {unread > 0 && (
@@ -55,7 +71,7 @@ export function NotificationBell({
       </PopoverTrigger>
       <PopoverContent align={align} className="w-80 p-0">
         <div className="flex items-center justify-between border-b px-4 py-3">
-          <p className="font-serif text-xl font-semibold">Notifications</p>
+          <p className="font-serif text-xl font-semibold">{t("title")}</p>
           {unread > 0 && (
             <Button
               variant="link"
@@ -64,14 +80,12 @@ export function NotificationBell({
               disabled={pending}
               onClick={() => markRead()}
             >
-              Mark all read
+              {t("markAll")}
             </Button>
           )}
         </div>
         {items.length === 0 ? (
-          <p className="text-muted-foreground px-4 py-8 text-center text-sm">
-            Nothing yet. New RSVPs, to-dos for you and reminders about payments and deadlines show up here.
-          </p>
+          <p className="text-muted-foreground px-4 py-8 text-center text-sm">{t("empty")}</p>
         ) : (
           <ul className="max-h-96 divide-y overflow-y-auto">
             {items.map((n) => {
@@ -80,17 +94,21 @@ export function NotificationBell({
                 <>
                   <span className="flex items-start gap-2">
                     <Icon className="text-muted-foreground mt-0.5 size-4 shrink-0" aria-hidden />
-                    <span className={cn("flex-1 text-sm", !n.readAt && "font-medium")}>{n.title}</span>
+                    <span className={cn("flex-1 text-sm", !n.readAt && "font-medium")}>
+                      {n.title}
+                    </span>
                     {!n.readAt && (
                       <span
                         className="bg-primary mt-1.5 size-2 shrink-0 rounded-full"
-                        aria-label="Unread"
+                        aria-label={t("unreadOne")}
                       />
                     )}
                   </span>
-                  {n.body && <span className="text-muted-foreground block pl-6 text-xs">{n.body}</span>}
+                  {n.body && (
+                    <span className="text-muted-foreground block pl-6 text-xs">{n.body}</span>
+                  )}
                   <span className="text-muted-foreground block pl-6 text-xs">
-                    {formatDistanceToNowStrict(parseISO(n.createdAt), { addSuffix: true })}
+                    {relative(n.createdAt, locale)}
                   </span>
                 </>
               );

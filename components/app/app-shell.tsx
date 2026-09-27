@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -48,6 +49,8 @@ export function AppShell({
   children,
 }: Props) {
   const pathname = usePathname();
+  const t = useTranslations("app.shell");
+  const tn = useTranslations("app.nav");
   // The seating chart uses the whole screen width and height.
   const wide = pathname.startsWith("/app/seating");
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
@@ -73,19 +76,23 @@ export function AppShell({
       {/* ---------- Desktop sidebar ---------- */}
       <aside
         className={cn(
-          "bg-card fixed inset-y-0 left-0 z-30 hidden flex-col border-r transition-[width] duration-200 md:flex",
+          "bg-card fixed inset-y-0 start-0 z-30 hidden flex-col border-e transition-[width] duration-200 md:flex",
           collapsed ? "w-[4.5rem]" : "w-64",
         )}
-        aria-label="Main navigation"
+        aria-label={t("mainNav")}
       >
         <div
           className={cn(
             "flex items-center",
-            collapsed ? "flex-col gap-1 py-3" : "h-16 justify-between pr-3 pl-5",
+            collapsed ? "flex-col gap-1 py-3" : "h-16 justify-between ps-5 pe-3",
           )}
         >
           {collapsed ? (
-            <Link href="/app" className="font-serif text-2xl font-semibold" aria-label="Dashboard">
+            <Link
+              href="/app"
+              className="font-serif text-2xl font-semibold"
+              aria-label={tn("dashboard")}
+            >
               V<span className="text-primary">.</span>
             </Link>
           ) : (
@@ -100,10 +107,10 @@ export function AppShell({
 
         <nav className="mt-4 flex-1 space-y-5 overflow-y-auto px-3 pb-4">
           {NAV_GROUPS.map((group) => (
-            <div key={group.label}>
+            <div key={group.key}>
               {!collapsed && (
                 <p className="text-muted-foreground mb-1 px-3 text-xs font-medium tracking-wide uppercase">
-                  {group.label}
+                  {tn(`groups.${group.key}`)}
                 </p>
               )}
               <ul className="space-y-0.5">
@@ -135,10 +142,14 @@ export function AppShell({
               variant="ghost"
               size="icon"
               onClick={toggleCollapsed}
-              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-label={collapsed ? t("expand") : t("collapse")}
               aria-expanded={!collapsed}
             >
-              {collapsed ? <PanelLeftOpen aria-hidden /> : <PanelLeftClose aria-hidden />}
+              {collapsed ? (
+                <PanelLeftOpen className="rtl:rotate-180" aria-hidden />
+              ) : (
+                <PanelLeftClose className="rtl:rotate-180" aria-hidden />
+              )}
             </Button>
           </div>
         </div>
@@ -158,7 +169,7 @@ export function AppShell({
         id="main"
         className={cn(
           "pb-24 transition-[padding] duration-200 md:pb-0",
-          collapsed ? "md:pl-[4.5rem]" : "md:pl-64",
+          collapsed ? "md:ps-[4.5rem]" : "md:ps-64",
         )}
       >
         <div
@@ -173,7 +184,7 @@ export function AppShell({
 
       {/* ---------- Mobile bottom tab bar ---------- */}
       <nav
-        aria-label="Main navigation"
+        aria-label={t("mainNav")}
         className="bg-card/95 fixed inset-x-0 bottom-0 z-30 border-t pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         <ul className="grid grid-cols-5">
@@ -201,11 +212,12 @@ function SidebarLink({
   collapsed: boolean;
 }) {
   const Icon = item.icon;
+  const label = useTranslations("app.nav")(item.key);
   const link = (
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
-      aria-label={collapsed ? item.label : undefined}
+      aria-label={collapsed ? label : undefined}
       className={cn(
         "focus-visible:ring-ring flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
         collapsed && "justify-center px-0",
@@ -215,7 +227,7 @@ function SidebarLink({
       )}
     >
       <Icon className={cn("size-[1.15rem] shrink-0", active && "text-primary")} aria-hidden />
-      {!collapsed && item.label}
+      {!collapsed && label}
     </Link>
   );
 
@@ -223,13 +235,14 @@ function SidebarLink({
   return (
     <Tooltip>
       <TooltipTrigger asChild>{link}</TooltipTrigger>
-      <TooltipContent side="right">{item.label}</TooltipContent>
+      <TooltipContent side="right">{label}</TooltipContent>
     </Tooltip>
   );
 }
 
 function TabLink({ item, active }: { item: NavItem; active: boolean }) {
   const Icon = item.icon;
+  const label = useTranslations("app.nav")(item.key);
   return (
     <Link
       href={item.href}
@@ -240,7 +253,7 @@ function TabLink({ item, active }: { item: NavItem; active: boolean }) {
       )}
     >
       <Icon className="size-5" aria-hidden />
-      {item.label}
+      {label}
     </Link>
   );
 }
@@ -248,6 +261,8 @@ function TabLink({ item, active }: { item: NavItem; active: boolean }) {
 /** "More" tab on mobile: a bottom sheet with every module. */
 function MoreSheet({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("app.shell");
+  const tn = useTranslations("app.nav");
   const all = [...NAV_GROUPS.flatMap((g) => g.items), SETTINGS_ITEM];
   const activeInMore = !MOBILE_TABS.some((t) => isActive(pathname, t.href));
 
@@ -260,11 +275,11 @@ function MoreSheet({ pathname }: { pathname: string }) {
         )}
       >
         <Menu className="size-5" aria-hidden />
-        More
+        {t("more")}
       </SheetTrigger>
       <SheetContent side="bottom" className="max-h-[85dvh] overflow-y-auto rounded-t-2xl">
         <SheetHeader>
-          <SheetTitle className="font-serif text-2xl">All planning tools</SheetTitle>
+          <SheetTitle className="font-serif text-2xl">{t("allTools")}</SheetTitle>
         </SheetHeader>
         <ul className="grid grid-cols-3 gap-2 px-4 pb-6">
           {all.map((item) => {
@@ -282,7 +297,7 @@ function MoreSheet({ pathname }: { pathname: string }) {
                   )}
                 >
                   <Icon className="text-primary size-5" aria-hidden />
-                  {item.label}
+                  {tn(item.key)}
                 </Link>
               </li>
             );

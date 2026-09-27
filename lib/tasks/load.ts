@@ -9,10 +9,25 @@ type Supabase = Awaited<ReturnType<typeof createClient>>;
 const count = (r: { count: number | null }) => r.count ?? 0;
 
 /** What the rest of the app says about the planning progress (for "looks done" hints). */
-export async function loadProgress(sb: Supabase, wedding: Pick<WeddingRow, "id" | "budget_total">): Promise<Progress> {
+export async function loadProgress(
+  sb: Supabase,
+  wedding: Pick<WeddingRow, "id" | "budget_total">,
+): Promise<Progress> {
   const wid = wedding.id;
   const head = { count: "exact" as const, head: true };
-  const [guests, pins, venues, site, hotels, emails, schedule, vendors, categories, seated, attending] = await Promise.all([
+  const [
+    guests,
+    pins,
+    venues,
+    site,
+    hotels,
+    emails,
+    schedule,
+    vendors,
+    categories,
+    seated,
+    attending,
+  ] = await Promise.all([
     sb.from("guests").select("id", head).eq("wedding_id", wid),
     sb.from("pins").select("id", head).eq("wedding_id", wid),
     sb.from("venues").select("id", head).eq("wedding_id", wid).eq("status", "booked"),
@@ -24,7 +39,13 @@ export async function loadProgress(sb: Supabase, wedding: Pick<WeddingRow, "id" 
     sb.from("budget_categories").select("id, name").eq("wedding_id", wid),
     sb.from("seat_assignments").select("guest_id", head).eq("wedding_id", wid),
     fetchAll((f, t) =>
-      sb.from("rsvp_responses").select("guest_id").eq("wedding_id", wid).eq("status", "attending").order("guest_id").range(f, t),
+      sb
+        .from("rsvp_responses")
+        .select("guest_id")
+        .eq("wedding_id", wid)
+        .eq("status", "attending")
+        .order("guest_id")
+        .range(f, t),
     ),
   ]);
   const names = new Map((categories.data ?? []).map((c) => [c.id, c.name]));
@@ -38,7 +59,9 @@ export async function loadProgress(sb: Supabase, wedding: Pick<WeddingRow, "id" 
     roomBlockConfirmed: count(hotels) > 0,
     invitesSent: count(emails) > 0,
     scheduleItems: count(schedule),
-    bookedVendorCategories: (vendors.data ?? []).map((v) => (v.category_id ? names.get(v.category_id) : undefined)).filter((n): n is string => !!n),
+    bookedVendorCategories: (vendors.data ?? [])
+      .map((v) => (v.category_id ? names.get(v.category_id) : undefined))
+      .filter((n): n is string => !!n),
     seatingDone: attendingCount > 0 && count(seated) >= attendingCount,
   };
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +11,7 @@ import { CODE_PATTERN, normalizeCode } from "@/lib/rsvp/types";
 
 /** "Enter the code from your invitation" box. */
 export function CodeForm() {
+  const t = useTranslations("rsvp.code");
   const router = useRouter();
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -21,13 +23,13 @@ export function CodeForm() {
         e.preventDefault();
         const clean = normalizeCode(code);
         if (!CODE_PATTERN.test(clean)) {
-          setError("Codes have 6 letters and numbers, like K7P2QX.");
+          setError(t("invalid"));
           return;
         }
         router.push(`/r/${clean}`);
       }}
     >
-      <Label htmlFor="rsvp-code">Your RSVP code</Label>
+      <Label htmlFor="rsvp-code">{t("label")}</Label>
       <div className="flex gap-2">
         <Input
           id="rsvp-code"
@@ -43,9 +45,10 @@ export function CodeForm() {
           aria-invalid={!!error}
           aria-describedby={error ? "code-err" : undefined}
           className="text-center font-mono text-lg tracking-[0.3em] uppercase"
+          dir="ltr"
         />
         <Button type="submit">
-          Continue <ArrowRight aria-hidden />
+          {t("continue")} <ArrowRight className="rtl:rotate-180" aria-hidden />
         </Button>
       </div>
       {error && (

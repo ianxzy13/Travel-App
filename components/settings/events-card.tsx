@@ -1,5 +1,8 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { saveEventTranslations } from "@/app/app/settings/language-actions";
+import { TranslationsDialog } from "@/components/translations-dialog";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -54,11 +57,15 @@ export function EventsCard({
   events,
   readOnly,
   bookedVenues = [],
+  languages = [],
 }: {
   events: EventItem[];
   readOnly: boolean;
   bookedVenues?: BookedVenue[];
+  /** the wedding's languages (main first): extra ones get a Translations button */
+  languages?: string[];
 }) {
+  const tt = useTranslations("app.translate");
   const [editing, setEditing] = useState<EventItem | "new" | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -143,7 +150,27 @@ export function EventsCard({
                   </div>
                 </div>
                 {!readOnly && (
-                  <div className="ml-auto flex items-center gap-0.5">
+                  <div className="ms-auto flex items-center gap-0.5">
+                    <TranslationsDialog
+                      compact
+                      title={tt("title", { name: event.name })}
+                      fields={[
+                        { key: "name", label: tt("fields.name"), max: 100 },
+                        { key: "venue_name", label: tt("fields.venue"), max: 200 },
+                        { key: "dress_code", label: tt("fields.dressCode"), max: 200 },
+                        { key: "description", label: tt("fields.description"), multiline: true },
+                      ]}
+                      source={{
+                        name: event.name,
+                        venue_name: event.venue_name,
+                        dress_code: event.dress_code,
+                        description: event.description,
+                      }}
+                      mainLanguage={languages[0] ?? "en"}
+                      languages={languages.slice(1)}
+                      value={event.translations ?? {}}
+                      onSave={(tr) => saveEventTranslations(event.id, tr)}
+                    />
                     <Button
                       variant="ghost"
                       size="icon"

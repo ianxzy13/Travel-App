@@ -25,7 +25,9 @@ export function PaletteStrip({
         <li key={c.id} className="group relative">
           <button
             type="button"
-            onClick={() => navigator.clipboard?.writeText(c.hex).then(() => toast.success(`Copied ${c.hex}`))}
+            onClick={() =>
+              navigator.clipboard?.writeText(c.hex).then(() => toast.success(`Copied ${c.hex}`))
+            }
             className={cn(
               "focus-visible:ring-ring flex items-end justify-center rounded-lg border shadow-sm focus-visible:ring-2 focus-visible:outline-none",
               size === "md" ? "h-14 w-16 pb-1" : "size-8",
@@ -45,7 +47,12 @@ export function PaletteStrip({
             <button
               type="button"
               disabled={pending}
-              onClick={() => startTransition(async () => { const r = await removePaletteColor(c.id); if (!r.ok) toast.error(r.error); })}
+              onClick={() =>
+                startTransition(async () => {
+                  const r = await removePaletteColor(c.id);
+                  if (!r.ok) toast.error(r.error);
+                })
+              }
               className="bg-card focus-visible:ring-ring absolute -top-1.5 -right-1.5 hidden rounded-full border p-0.5 shadow group-hover:block focus-visible:block focus-visible:ring-2 focus-visible:outline-none"
               aria-label={`Remove ${c.hex} from palette`}
             >

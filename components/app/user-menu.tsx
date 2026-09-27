@@ -2,7 +2,10 @@
 
 import { useTransition } from "react";
 import { useTheme } from "next-themes";
-import { LogOut, Monitor, Moon, Sun } from "lucide-react";
+import { Check, Languages, LogOut, Monitor, Moon, Sun } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { setAppLanguage } from "@/app/app/settings/language-actions";
+import { LOCALES } from "@/i18n/locales";
 import { signOut } from "@/app/login/actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,6 +16,9 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
@@ -27,6 +33,8 @@ export function initials(nameOrEmail: string) {
 /** Avatar button with theme switcher and sign out. */
 export function UserMenu({ user, showName = true }: { user: CurrentUser; showName?: boolean }) {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("app.userMenu");
+  const locale = useLocale();
   const [, startTransition] = useTransition();
   const display = user.name ?? user.email;
 
@@ -34,10 +42,10 @@ export function UserMenu({ user, showName = true }: { user: CurrentUser; showNam
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "hover:bg-accent focus-visible:ring-ring flex min-w-0 items-center gap-2 rounded-lg p-1.5 text-left text-sm transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+          "hover:bg-accent focus-visible:ring-ring flex min-w-0 items-center gap-2 rounded-lg p-1.5 text-start text-sm transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
           showName && "w-full px-3 py-2",
         )}
-        aria-label="Account menu"
+        aria-label={t("account")}
       >
         <Avatar className="size-8">
           {user.avatarUrl && <AvatarImage src={user.avatarUrl} alt="" />}
@@ -53,21 +61,44 @@ export function UserMenu({ user, showName = true }: { user: CurrentUser; showNam
           )}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel className="text-muted-foreground text-xs">Appearance</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-muted-foreground text-xs">
+          {t("appearance")}
+        </DropdownMenuLabel>
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
           <DropdownMenuRadioItem value="light">
-            <Sun aria-hidden /> Light
+            <Sun aria-hidden /> {t("light")}
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="dark">
-            <Moon aria-hidden /> Dark
+            <Moon aria-hidden /> {t("dark")}
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="system">
-            <Monitor aria-hidden /> System
+            <Monitor aria-hidden /> {t("system")}
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
         <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            <Languages aria-hidden /> {t("language")}
+            <span className="text-muted-foreground ms-auto text-xs">
+              {LOCALES.find((l) => l.code === locale)?.native}
+            </span>
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent className="max-h-80 overflow-y-auto">
+            {LOCALES.map((l) => (
+              <DropdownMenuItem
+                key={l.code}
+                lang={l.code}
+                onSelect={() => startTransition(() => void setAppLanguage(l.code))}
+              >
+                <span className="flex-1">{l.native}</span>
+                {l.code === locale && <Check aria-hidden />}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={() => startTransition(() => signOut())}>
-          <LogOut aria-hidden /> Sign out
+          <LogOut aria-hidden /> {t("signOut")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

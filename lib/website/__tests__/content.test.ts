@@ -1,11 +1,28 @@
 import { describe, expect, it } from "vitest";
-import { isSectionEmpty, parseContent, safeUrl, sectionSchemas, sitePaths, type Section } from "../content";
+import {
+  isSectionEmpty,
+  parseContent,
+  safeUrl,
+  sectionSchemas,
+  sitePaths,
+  type Section,
+} from "../content";
 import { onAccent, siteVars } from "../templates";
 
 const site = {
   events: [],
   hotels: [],
-  wedding: { slug: "a-and-b", partner_a_name: "A", partner_b_name: "B", wedding_date: null, location: null, destination_airport: null, rsvp_deadline: null },
+  wedding: {
+    slug: "a-and-b",
+    partner_a_name: "A",
+    partner_b_name: "B",
+    wedding_date: null,
+    location: null,
+    destination_airport: null,
+    rsvp_deadline: null,
+    languages: ["en"],
+    time_zone: null,
+  },
 };
 const section = <K extends Section["kind"]>(kind: K, content: unknown) =>
   ({ id: kind, kind, visible: true, content: parseContent(kind, content) }) as Section;
@@ -28,7 +45,10 @@ describe("safeUrl", () => {
 describe("parseContent", () => {
   it("fills in defaults for missing or broken content", () => {
     expect(parseContent("faq", null)).toEqual({ items: [] });
-    expect(parseContent("story", { intro: 5, milestones: "x" })).toEqual({ intro: "", milestones: [] });
+    expect(parseContent("story", { intro: 5, milestones: "x" })).toEqual({
+      intro: "",
+      milestones: [],
+    });
   });
   it("never stores over-long text (the editor also caps every field)", () => {
     const r = sectionSchemas.home.safeParse({ tagline: "x".repeat(121) });
@@ -38,15 +58,35 @@ describe("parseContent", () => {
 
 describe("isSectionEmpty", () => {
   it("hides FAQ questions without answers", () => {
-    expect(isSectionEmpty(section("faq", { items: [{ id: "1", question: "Kids?", answer: "" }] }), site)).toBe(true);
-    expect(isSectionEmpty(section("faq", { items: [{ id: "1", question: "Kids?", answer: "Yes" }] }), site)).toBe(false);
+    expect(
+      isSectionEmpty(section("faq", { items: [{ id: "1", question: "Kids?", answer: "" }] }), site),
+    ).toBe(true);
+    expect(
+      isSectionEmpty(
+        section("faq", { items: [{ id: "1", question: "Kids?", answer: "Yes" }] }),
+        site,
+      ),
+    ).toBe(false);
   });
   it("hides a registry with only invalid links", () => {
-    expect(isSectionEmpty(section("registry", { intro: "", links: [{ id: "1", label: "x", url: "javascript:x", note: "" }] }), site)).toBe(true);
+    expect(
+      isSectionEmpty(
+        section("registry", {
+          intro: "",
+          links: [{ id: "1", label: "x", url: "javascript:x", note: "" }],
+        }),
+        site,
+      ),
+    ).toBe(true);
   });
   it("shows travel when an airport is known", () => {
     expect(isSectionEmpty(section("travel", {}), site)).toBe(true);
-    expect(isSectionEmpty(section("travel", {}), { ...site, wedding: { ...site.wedding, destination_airport: "LIS" } })).toBe(false);
+    expect(
+      isSectionEmpty(section("travel", {}), {
+        ...site,
+        wedding: { ...site.wedding, destination_airport: "LIS" },
+      }),
+    ).toBe(false);
   });
   it("always shows home and RSVP", () => {
     expect(isSectionEmpty(section("home", {}), site)).toBe(false);
@@ -67,9 +107,16 @@ describe("sitePaths", () => {
 
 describe("templates", () => {
   it("uses the template colour unless the couple picked one", () => {
-    const base = { template: "boho" as const, accent_color: null, heading_font: null, body_font: null };
+    const base = {
+      template: "boho" as const,
+      accent_color: null,
+      heading_font: null,
+      body_font: null,
+    };
     expect((siteVars(base) as Record<string, string>)["--site-accent"]).toBe("#9a4424");
-    expect((siteVars({ ...base, accent_color: "#123456" }) as Record<string, string>)["--site-accent"]).toBe("#123456");
+    expect(
+      (siteVars({ ...base, accent_color: "#123456" }) as Record<string, string>)["--site-accent"],
+    ).toBe("#123456");
   });
   it("picks readable button text", () => {
     expect(onAccent("#0b0b0b")).toBe("#ffffff");

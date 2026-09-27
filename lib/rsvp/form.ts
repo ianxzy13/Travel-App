@@ -83,13 +83,21 @@ export function toPayload(data: RsvpData, state: RsvpFormState) {
   };
 }
 
+export type GuestNameLabels = { guestOf: (name: string) => string; guest: string };
+const ENGLISH_LABELS: GuestNameLabels = { guestOf: (name) => `${name}'s guest`, guest: "Guest" };
+
 /** Display name on the RSVP page ("Ann's guest" for an unnamed plus-one). */
-export function rsvpGuestName(data: RsvpData, guestId: string, state?: RsvpFormState) {
+export function rsvpGuestName(
+  data: RsvpData,
+  guestId: string,
+  state?: RsvpFormState,
+  labels: GuestNameLabels = ENGLISH_LABELS,
+) {
   const g = data.guests.find((x) => x.id === guestId);
   if (!g) return "";
   const p = state?.people[guestId];
   const name = `${p?.firstName ?? g.first_name} ${p?.lastName ?? g.last_name}`.trim();
   if (name) return name;
   const host = data.guests.find((x) => x.id === g.plus_one_of);
-  return host ? `${host.first_name}'s guest` : "Guest";
+  return host ? labels.guestOf(host.first_name) : labels.guest;
 }

@@ -1,0 +1,376 @@
+{
+  "common": {
+    "language": "语言",
+    "moreLanguages": "更多语言",
+    "yourTime": "你所在时区 {time}"
+  },
+  "site": {
+    "sections": {
+      "home": "首页",
+      "story": "我们的故事",
+      "events": "日程",
+      "travel": "交通与住宿",
+      "rsvp": "回复出席",
+      "party": "伴郎伴娘",
+      "registry": "礼物清单",
+      "faq": "常见问题",
+      "gallery": "相册"
+    },
+    "nav": "网站栏目",
+    "dateTbd": "日期待定",
+    "newTab": "（在新标签页中打开）",
+    "rsvpButton": "回复出席",
+    "countdown": {
+      "days": "{count, plural, other {还有 # 天}}",
+      "daysWord": "{count, plural, other {天后举行婚礼}}",
+      "today": "今天就是大喜之日！",
+      "married": "幸福的新婚夫妇"
+    },
+    "madeWith": "由 <link>Vow</link> 制作",
+    "empty": {
+      "events": "在“设置 → 活动”中添加活动，它们会显示在这里。",
+      "travel": "将酒店标记为“在网站上显示”，或在编辑器中添加出行提示。",
+      "other": "这里还没有内容。请在编辑器中添加。",
+      "hidden": "在此之前，这个栏目在已发布的网站上保持隐藏。"
+    },
+    "event": {
+      "date": "日期",
+      "time": "时间",
+      "place": "地点",
+      "dressCode": "着装要求",
+      "openMap": "在 Google 地图中打开"
+    },
+    "travel": {
+      "airport": "最近的机场：<b>{code}</b>",
+      "searchFlights": "搜索航班",
+      "perNight": "每晚 <b>{price}</b> 起",
+      "code": "我们的优惠码：<mono>{code}</mono>",
+      "bookBy": "请在 <b>{date}</b> 前预订",
+      "bookRoom": "预订房间",
+      "bookRoomAt": "在{name}预订房间",
+      "website": "网站",
+      "websiteOf": "{name}的网站",
+      "map": "地图",
+      "mapOf": "{name}的地图"
+    },
+    "rsvp": {
+      "replyBy": "请在 <b>{date}</b> 前回复。",
+      "or": "或使用请柬上的代码"
+    },
+    "registry": {
+      "visit": "查看"
+    },
+    "gallery": {
+      "alt": "新人照片"
+    },
+    "preview": {
+      "bar": "预览：发布之前，只有你们的婚礼团队可以看到。",
+      "back": "返回编辑器"
+    },
+    "password": {
+      "intro": "这是一个私密网站。请输入请柬上的密码。",
+      "label": "密码",
+      "enter": "进入",
+      "wrong": "密码不正确。请查看请柬或询问新人。"
+    },
+    "meta": {
+      "weddingOf": "{couple}的婚礼",
+      "website": "婚礼网站"
+    }
+  },
+  "rsvp": {
+    "title": "回复出席",
+    "dateTbd": "日期待定",
+    "weddingOf": "诚邀您参加婚礼",
+    "rsvpsBy": "由 <link>Vow</link> 提供回复服务",
+    "enterCode": "请输入请柬（邮件或卡片）上的代码。",
+    "findIntro": "按请柬上的写法输入你的姓名，找到你的请柬。",
+    "orCode": "或使用请柬上的代码",
+    "notFound": "未找到请柬",
+    "notFoundText": "该链接或代码与任何请柬都不匹配。请检查后重试。",
+    "nothingYet": "目前还没有需要回复的内容。请稍后再来看看。",
+    "code": {
+      "label": "你的回复代码",
+      "continue": "继续",
+      "invalid": "代码由 6 个字母和数字组成，例如 K7P2QX。"
+    },
+    "find": {
+      "label": "你的全名",
+      "placeholder": "姓名",
+      "button": "查找",
+      "fullName": "请按请柬上的写法输入姓和名。",
+      "noMatch": "没有找到这个名字。请尝试请柬上的写法，或使用请柬上的代码。",
+      "failed": "出了点问题，请重试。"
+    },
+    "dear": "亲爱的{name}：",
+    "update": "请在下方修改你的回复。",
+    "invite": "期待知道你们能否前来与我们相聚。",
+    "replyBy": "请在 {date} 前回复。",
+    "closed": "回复截止日期已过。",
+    "closedContact": "需要修改？{contact}",
+    "closedNoContact": "需要修改？请直接联系新人。",
+    "thanks": "谢谢！",
+    "thanksText": "你的回复已发送给{couple}。你可以随时通过同一链接修改。",
+    "thanksTextUntil": "你的回复已发送给{couple}。在 {date} 之前，你可以通过同一链接修改。",
+    "send": "发送回复",
+    "save": "保存修改",
+    "change": "修改回复",
+    "yourAnswers": "你的回复",
+    "attending": "出席",
+    "notAttending": "不出席",
+    "noAnswer": "尚未回复",
+    "cantMakeIt": "无法出席",
+    "noAnswerYet": "尚未回复",
+    "songRequest": "点歌：{song}",
+    "form": {
+      "everyone": "我们都会出席",
+      "none": "我们都无法出席",
+      "willAttend": "{name}会出席{event}吗？",
+      "accept": "欣然出席",
+      "decline": "遗憾无法出席",
+      "meal": "餐点选择",
+      "chooseMeal": "请选择餐点。",
+      "chooseAnswer": "请选择一个回复。",
+      "missingMeal": "请为每位出席者选择餐点。",
+      "missingAnswer": "发送前请为每个人作答。",
+      "details": "一些细节",
+      "plusOneName": "你的同伴姓名（{host}的同伴）",
+      "firstName": "名",
+      "lastName": "姓",
+      "dietary": "饮食需求或过敏：{name}",
+      "dietaryPlaceholder": "例如：素食、坚果过敏（没有请留空）",
+      "song": "一首让你忍不住起舞的歌",
+      "songPlaceholder": "歌手 – 歌名",
+      "message": "给{couple}的留言",
+      "guestOf": "{name}的同伴",
+      "guest": "宾客"
+    },
+    "errors": {
+      "rsvp_not_found": "没有找到这份请柬。请检查链接或代码。",
+      "deadline_passed": "回复截止日期已过。请直接联系新人。",
+      "invalid_guest_or_event": "你的回复中有内容与请柬不符。请重新加载页面。",
+      "invalid_status": "请为每个人选择出席或不出席。",
+      "not_allowed": "你没有权限为这场婚礼登记回复。",
+      "generic": "无法保存你的回复。请稍后重试。"
+    }
+  },
+  "board": {
+    "empty": "这个看板目前是空的。",
+    "photoBy": "摄影：<photographer>{name}</photographer>，来自 <unsplash>Unsplash</unsplash>",
+    "madeWith": "由 <link>Vow</link> 制作",
+    "title": "共享看板",
+    "fallbackAlt": "灵感"
+  },
+  "email": {
+    "previewInvite": "诚邀你参加{couple}的婚礼",
+    "previewReminder": "提醒：请回复是否出席{couple}的婚礼",
+    "eyebrowInvite": "诚挚邀请",
+    "eyebrowReminder": "温馨提醒",
+    "dear": "亲爱的{name}：",
+    "bodyInvite": "我们非常希望与你们一起庆祝。请通过你们的专属回复链接告诉我们谁能出席。",
+    "bodyReminder": "我们还没有收到你们的回复，很想知道你们能否前来。只需一分钟。",
+    "button": "立即回复",
+    "replyBy": "请在 {date} 前回复。",
+    "fallback": "按钮无法使用？请打开 {link} 或输入代码 {code}。",
+    "love": "满怀爱意，",
+    "personal": "此链接仅供你们家庭使用，请勿分享。",
+    "subjectInvite": "婚礼邀请：{couple}的婚礼",
+    "subjectReminder": "提醒：请回复是否出席{couple}的婚礼"
+  },
+  "app": {
+    "nav": {
+      "dashboard": "概览",
+      "tasks": "待办事项",
+      "budget": "预算",
+      "vendors": "供应商",
+      "guests": "宾客",
+      "rsvp": "出席回复",
+      "seating": "座位安排",
+      "venues": "场地",
+      "hotels": "酒店",
+      "travel": "出行",
+      "inspiration": "灵感",
+      "website": "网站",
+      "schedule": "当日流程",
+      "settings": "设置",
+      "home": "首页",
+      "groups": {
+        "plan": "筹备",
+        "people": "人员",
+        "places": "地点",
+        "style": "风格"
+      }
+    },
+    "shell": {
+      "mainNav": "主导航",
+      "expand": "展开侧边栏",
+      "collapse": "收起侧边栏",
+      "more": "更多",
+      "allTools": "全部筹备工具"
+    },
+    "userMenu": {
+      "account": "账户菜单",
+      "appearance": "外观",
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统",
+      "language": "语言",
+      "signOut": "退出登录"
+    },
+    "switcher": {
+      "current": "当前婚礼：{name}。切换婚礼",
+      "yours": "你的婚礼",
+      "noDate": "日期待定",
+      "another": "筹备另一场婚礼",
+      "roles": {
+        "owner": "所有者",
+        "editor": "编辑者",
+        "viewer": "查看者"
+      }
+    },
+    "notifications": {
+      "title": "通知",
+      "unread": "{count, plural, other {通知，# 条未读}}",
+      "unreadOne": "未读",
+      "markAll": "全部标为已读",
+      "empty": "暂无通知。新的出席回复、分配给你的待办以及付款和截止日期提醒会显示在这里。"
+    },
+    "countdown": {
+      "today": "今天就是大喜之日！",
+      "enjoy": "享受每一刻。",
+      "married": "{count, plural, other {已结婚 # 天}}",
+      "congrats": "恭喜！",
+      "daysToGo": "{count, plural, other {天后举行婚礼}}",
+      "hours": "小时",
+      "minutes": "分钟",
+      "seconds": "秒"
+    },
+    "dashboard": {
+      "welcome": "欢迎使用你的婚礼筹备工具！",
+      "welcomeText": "一切从这里开始。按照自己的节奏完成下面的步骤。",
+      "noDate": "日期待定",
+      "setDate": "设定日期，开始倒计时",
+      "nextSteps": "下一步",
+      "stepsDone": "已完成 {done}/{total}",
+      "done": "（已完成）",
+      "toDo": "（待完成）",
+      "steps": {
+        "date": "确定婚礼日期",
+        "location": "选择地点",
+        "invite": "邀请伴侣、家人或婚礼策划师",
+        "guests": "添加宾客名单",
+        "guestsSoFar": "{count, plural, other {添加宾客名单（已有 # 位）}}",
+        "budget": "设定总预算",
+        "shortlist": "筛选候选场地",
+        "book": "预订场地",
+        "inspiration": "创建灵感看板",
+        "website": "发布婚礼网站",
+        "timeline": "制定筹备时间表"
+      },
+      "budget": {
+        "title": "预算",
+        "empty": "还没有预算。设定总额，我们会建议如何分配。",
+        "cta": "规划预算",
+        "committed": "已承诺",
+        "committedOf": "已承诺，共 {total}",
+        "overdue": "逾期：{name}"
+      },
+      "rsvp": {
+        "title": "出席回复",
+        "empty": "还没有回复。先添加宾客，再发送请柬。",
+        "cta": "查看回复",
+        "attending": "出席",
+        "declined": "不出席",
+        "waiting": "待回复"
+      },
+      "seating": {
+        "title": "座位安排",
+        "empty": "还没有桌子。宾客回复后，拖放即可安排座位。",
+        "cta": "打开座位图",
+        "seated": "/ {attending} 位出席宾客已安排在 {tables, plural, other {# 张桌子}}"
+      },
+      "inspiration": {
+        "title": "灵感",
+        "empty": "还没有图钉。收集灵感并从中提取配色。",
+        "cta": "打开看板",
+        "pin": "图钉"
+      },
+      "tasks": {
+        "title": "待办事项",
+        "empty": "还没有待办。我们会根据婚礼日期生成时间表。",
+        "cta": "查看待办",
+        "ofDone": "/ {total} 已完成",
+        "overdue": "{count} 项逾期"
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "description": "婚礼信息、语言、活动以及与你一起筹备的人。"
+    },
+    "languages": {
+      "title": "语言与地区",
+      "description": "网站、回复页面和邮件的语言，以及场地所在时区。",
+      "languages": "婚礼语言",
+      "main": "主要语言",
+      "makeMain": "设为主要语言",
+      "remove": "移除{language}",
+      "add": "添加",
+      "choose": "添加语言…",
+      "help": "宾客会以自己的语言看到网站和回复页面，并可切换。请用主要语言撰写内容，再添加翻译；未翻译的内容会以主要语言显示。",
+      "timeZone": "场地时区",
+      "noTimeZone": "未设置",
+      "useMine": "使用我的时区",
+      "timeZoneHelp": "活动时间为场地当地时间。海外宾客还会看到换算成他们当地的时间。",
+      "translateDetails": "翻译地点和联系方式",
+      "location": "地点",
+      "rsvpContact": "回复联系方式（截止后显示）",
+      "save": "保存",
+      "saved": "语言已保存"
+    },
+    "translate": {
+      "button": "翻译",
+      "title": "翻译：{name}",
+      "hint": "留空则显示{language}原文。",
+      "draft": "草稿",
+      "draftFailed": "你的浏览器无法翻译这组语言。请手动输入翻译。",
+      "noMachine": "提示：电脑上的 Chrome 可以生成翻译草稿（那里会出现“草稿”按钮）。",
+      "save": "保存翻译",
+      "saved": "翻译已保存",
+      "fields": {
+        "name": "名称",
+        "venue": "场地名称",
+        "dressCode": "着装要求",
+        "description": "描述",
+        "mealName": "餐点名称",
+        "mealDescription": "餐点描述"
+      }
+    },
+    "websiteLang": {
+      "editing": "语言",
+      "main": "{language}（主要语言）",
+      "hint": "翻译：{language}。照片、顺序和显示的栏目在主要语言中设置。",
+      "progress": "已翻译 {done}/{total}",
+      "complete": "已翻译",
+      "fallback": "留空：宾客将看到主要语言的内容。",
+      "nothing": "这个栏目暂时没有可翻译的内容。",
+      "draft": "用浏览器翻译全部内容",
+      "draftFailed": "你的浏览器无法翻译这组语言。请手动输入翻译。",
+      "item": "第 {number} 项",
+      "fields": {
+        "tagline": "标语",
+        "intro": "简介",
+        "notes": "备注",
+        "date": "时间",
+        "title": "标题",
+        "text": "正文",
+        "role": "身份",
+        "bio": "简短介绍",
+        "label": "名称",
+        "note": "备注",
+        "question": "问题",
+        "answer": "回答",
+        "caption": "图片说明"
+      }
+    }
+  }
+}

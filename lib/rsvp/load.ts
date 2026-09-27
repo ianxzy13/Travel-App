@@ -1,4 +1,5 @@
 import "server-only";
+import type { Translations } from "@/lib/database.types";
 import type { EmailKind, EmailStatus, WeddingRow } from "@/lib/database.types";
 import { guestDisplayName } from "@/lib/guests/model";
 import { fetchAll } from "@/lib/supabase/fetch-all";
@@ -34,7 +35,12 @@ export type DashboardHousehold = {
 export type RsvpDashboardData = {
   households: DashboardHousehold[];
   events: { id: string; name: string; mealChoice: boolean }[];
-  mealOptions: { id: string; name: string; description: string | null }[];
+  mealOptions: {
+    id: string;
+    name: string;
+    description: string | null;
+    translations: Translations;
+  }[];
   totals: Record<string, EventTotals>;
   meals: Record<string, MealCounts>;
 };
@@ -89,7 +95,7 @@ export async function loadRsvpDashboard(
     fetchAll((f, t) =>
       sb
         .from("meal_options")
-        .select("id, name, description")
+        .select("id, name, description, translations")
         .eq("wedding_id", wid)
         .order("sort_order")
         .order("created_at")

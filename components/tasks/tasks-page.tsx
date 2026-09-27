@@ -2,17 +2,46 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
-import { SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { format, parseISO } from "date-fns";
-import { ArrowUpRight, CalendarClock, GripVertical, ListChecks, Loader2, Plus, Sparkles, StickyNote, Wand2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  CalendarClock,
+  GripVertical,
+  ListChecks,
+  Loader2,
+  Plus,
+  Sparkles,
+  StickyNote,
+  Wand2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { addSuggestedTasks, moveTask, setTaskDone } from "@/app/app/tasks/actions";
 import { PageHeader } from "@/components/app/page-header";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { TaskRow } from "@/lib/database.types";
 import { orderBetween } from "@/lib/inspiration/layout";
 import { PHASES, dueState, phaseOf, type DueState } from "@/lib/tasks/timeline";
@@ -49,12 +78,23 @@ export function TasksPage(props: Props) {
   const [today] = useState(todayIso);
 
   const names = useMemo(() => new Map(members.map((m) => [m.id, m.name])), [members]);
-  const categories = useMemo(() => [...new Set(tasks.map((t) => t.category).filter((c): c is string => !!c))].sort(), [tasks]);
+  const categories = useMemo(
+    () => [...new Set(tasks.map((t) => t.category).filter((c): c is string => !!c))].sort(),
+    [tasks],
+  );
 
   const visible = tasks.filter((t) => {
     const state = dueState(t.due_date, today, t.done);
-    const showOk = show === "all" || (show === "done" ? t.done : show === "overdue" ? state === "overdue" : !t.done);
-    const whoOk = who === "everyone" || (who === "me" ? t.assignee_id === userId : who === "nobody" ? !t.assignee_id : t.assignee_id === who);
+    const showOk =
+      show === "all" ||
+      (show === "done" ? t.done : show === "overdue" ? state === "overdue" : !t.done);
+    const whoOk =
+      who === "everyone" ||
+      (who === "me"
+        ? t.assignee_id === userId
+        : who === "nobody"
+          ? !t.assignee_id
+          : t.assignee_id === who);
     return showOk && whoOk;
   });
 
@@ -64,16 +104,29 @@ export function TasksPage(props: Props) {
     const overdue = visible.filter((t) => dueState(t.due_date, today, t.done) === "overdue");
     if (overdue.length) out.push({ key: "overdue", label: "Overdue", items: overdue });
     for (const p of PHASES) {
-      const items = visible.filter((t) => dueState(t.due_date, today, t.done) !== "overdue" && phaseOf(t.due_date, weddingDate) === p.key);
-      if (items.length) out.push({ key: p.key, label: weddingDate || p.key === "none" ? p.label : "With a due date", items });
+      const items = visible.filter(
+        (t) =>
+          dueState(t.due_date, today, t.done) !== "overdue" &&
+          phaseOf(t.due_date, weddingDate) === p.key,
+      );
+      if (items.length)
+        out.push({
+          key: p.key,
+          label: weddingDate || p.key === "none" ? p.label : "With a due date",
+          items,
+        });
     }
     return out;
   }, [visible, today, weddingDate]);
 
   const total = tasks.length;
   const doneCount = tasks.filter((t) => t.done).length;
-  const overdueCount = tasks.filter((t) => dueState(t.due_date, today, t.done) === "overdue").length;
-  const weekCount = tasks.filter((t) => ["today", "soon"].includes(dueState(t.due_date, today, t.done) ?? "")).length;
+  const overdueCount = tasks.filter(
+    (t) => dueState(t.due_date, today, t.done) === "overdue",
+  ).length;
+  const weekCount = tasks.filter((t) =>
+    ["today", "soon"].includes(dueState(t.due_date, today, t.done) ?? ""),
+  ).length;
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -107,7 +160,11 @@ export function TasksPage(props: Props) {
     // either way the task lands between rest[to - 1] and rest[to]
     const [before, after] = [rest[to - 1], rest[to]];
     const order = orderBetween(before?.sort_order ?? null, after?.sort_order ?? null);
-    setTasks((all) => all.map((t) => (t.id === moving.id ? { ...t, sort_order: order } : t)).sort((a, b) => a.sort_order - b.sort_order));
+    setTasks((all) =>
+      all
+        .map((t) => (t.id === moving.id ? { ...t, sort_order: order } : t))
+        .sort((a, b) => a.sort_order - b.sort_order),
+    );
     void moveTask(moving.id, order)
       .then((r) => !r.ok && (toast.error(r.error), setTasks(props.tasks)))
       .catch(undo);
@@ -117,7 +174,11 @@ export function TasksPage(props: Props) {
     startAdding(async () => {
       const r = await addSuggestedTasks();
       if (!r.ok) return void toast.error(r.error);
-      toast.success(r.data?.added ? `Added ${r.data.added} to-dos to your timeline` : "Your timeline is already complete");
+      toast.success(
+        r.data?.added
+          ? `Added ${r.data.added} to-dos to your timeline`
+          : "Your timeline is already complete",
+      );
     });
   }
 
@@ -133,7 +194,12 @@ export function TasksPage(props: Props) {
             <>
               {props.missingSuggestions > 0 && total > 0 && (
                 <Button variant="outline" size="sm" onClick={addSuggestions} disabled={adding}>
-                  {adding ? <Loader2 className="animate-spin" aria-hidden /> : <Wand2 aria-hidden />} Add missing suggestions
+                  {adding ? (
+                    <Loader2 className="animate-spin" aria-hidden />
+                  ) : (
+                    <Wand2 aria-hidden />
+                  )}{" "}
+                  Add missing suggestions
                 </Button>
               )}
               <Button size="sm" onClick={() => setSheet("new")}>
@@ -157,7 +223,12 @@ export function TasksPage(props: Props) {
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {weddingDate ? (
                 <Button onClick={addSuggestions} disabled={adding}>
-                  {adding ? <Loader2 className="animate-spin" aria-hidden /> : <Sparkles aria-hidden />} Create my timeline
+                  {adding ? (
+                    <Loader2 className="animate-spin" aria-hidden />
+                  ) : (
+                    <Sparkles aria-hidden />
+                  )}{" "}
+                  Create my timeline
                 </Button>
               ) : (
                 <Button asChild>
@@ -178,20 +249,41 @@ export function TasksPage(props: Props) {
                 <span className="font-serif text-3xl font-semibold tabular-nums">{doneCount}</span>{" "}
                 <span className="text-muted-foreground">of {total} done</span>
               </p>
-              <div className="bg-muted mt-2 h-2 rounded-full" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={doneCount} aria-label="To-dos done">
-                <div className="bg-primary h-2 rounded-full transition-all" style={{ width: `${(doneCount / total) * 100}%` }} />
+              <div
+                className="bg-muted mt-2 h-2 rounded-full"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={total}
+                aria-valuenow={doneCount}
+                aria-label="To-dos done"
+              >
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{ width: `${(doneCount / total) * 100}%` }}
+                />
               </div>
             </div>
             <button
               type="button"
               onClick={() => setShow("overdue")}
-              className={cn("bg-card hover:bg-accent rounded-xl border p-4 text-left", overdueCount > 0 && "border-destructive/40")}
+              className={cn(
+                "bg-card hover:bg-accent rounded-xl border p-4 text-left",
+                overdueCount > 0 && "border-destructive/40",
+              )}
             >
-              <span className={cn("font-serif text-3xl font-semibold tabular-nums", overdueCount > 0 && "text-destructive")}>{overdueCount}</span>{" "}
+              <span
+                className={cn(
+                  "font-serif text-3xl font-semibold tabular-nums",
+                  overdueCount > 0 && "text-destructive",
+                )}
+              >
+                {overdueCount}
+              </span>{" "}
               <span className="text-muted-foreground text-sm">overdue</span>
             </button>
             <div className="bg-card rounded-xl border p-4">
-              <span className="font-serif text-3xl font-semibold tabular-nums">{weekCount}</span> <span className="text-muted-foreground text-sm">due this week</span>
+              <span className="font-serif text-3xl font-semibold tabular-nums">{weekCount}</span>{" "}
+              <span className="text-muted-foreground text-sm">due this week</span>
             </div>
           </section>
 
@@ -205,7 +297,13 @@ export function TasksPage(props: Props) {
                   ["all", "All"],
                 ] as const
               ).map(([key, label]) => (
-                <Button key={key} size="sm" variant={show === key ? "secondary" : "ghost"} aria-pressed={show === key} onClick={() => setShow(key)}>
+                <Button
+                  key={key}
+                  size="sm"
+                  variant={show === key ? "secondary" : "ghost"}
+                  aria-pressed={show === key}
+                  onClick={() => setShow(key)}
+                >
                   {label}
                 </Button>
               ))}
@@ -231,17 +329,38 @@ export function TasksPage(props: Props) {
 
           {groups.length === 0 ? (
             <p className="text-muted-foreground rounded-2xl border border-dashed p-10 text-center">
-              {show === "overdue" ? "Nothing overdue. Well done!" : show === "done" ? "Nothing ticked off yet." : "Nothing here with these filters."}
+              {show === "overdue"
+                ? "Nothing overdue. Well done!"
+                : show === "done"
+                  ? "Nothing ticked off yet."
+                  : "Nothing here with these filters."}
             </p>
           ) : (
             <div className="space-y-8">
               {groups.map((g) => (
                 <section key={g.key} aria-labelledby={`group-${g.key}`}>
-                  <h2 id={`group-${g.key}`} className={cn("mb-3 flex items-baseline gap-2 text-2xl", g.key === "overdue" && "text-destructive")}>
-                    {g.label} <span className="text-muted-foreground font-sans text-sm font-normal">{g.items.length}</span>
+                  <h2
+                    id={`group-${g.key}`}
+                    className={cn(
+                      "mb-3 flex items-baseline gap-2 text-2xl",
+                      g.key === "overdue" && "text-destructive",
+                    )}
+                  >
+                    {g.label}{" "}
+                    <span className="text-muted-foreground font-sans text-sm font-normal">
+                      {g.items.length}
+                    </span>
                   </h2>
-                  <DndContext id={`tasks-${g.key}`} sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => onDragEnd(g.items, e)}>
-                    <SortableContext items={g.items.map((t) => t.id)} strategy={verticalListSortingStrategy}>
+                  <DndContext
+                    id={`tasks-${g.key}`}
+                    sensors={sensors}
+                    collisionDetection={closestCenter}
+                    onDragEnd={(e) => onDragEnd(g.items, e)}
+                  >
+                    <SortableContext
+                      items={g.items.map((t) => t.id)}
+                      strategy={verticalListSortingStrategy}
+                    >
                       <ul className="bg-card divide-y rounded-xl border">
                         {g.items.map((t) => (
                           <TaskItem
@@ -315,7 +434,10 @@ function TaskItem({
     <li
       ref={s.setNodeRef}
       style={{ transform: CSS.Translate.toString(s.transform), transition: s.transition }}
-      className={cn("flex items-start gap-2 px-2 py-2.5 sm:px-3", s.isDragging && "bg-card relative z-10 rounded-xl shadow-lg")}
+      className={cn(
+        "flex items-start gap-2 px-2 py-2.5 sm:px-3",
+        s.isDragging && "bg-card relative z-10 rounded-xl shadow-lg",
+      )}
     >
       {sortable ? (
         <button
@@ -351,18 +473,35 @@ function TaskItem({
         </button>
         <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
           {due && (
-            <span className={cn("inline-flex items-center gap-1", state ? DUE_STYLE[state] : "text-muted-foreground")}>
+            <span
+              className={cn(
+                "inline-flex items-center gap-1",
+                state ? DUE_STYLE[state] : "text-muted-foreground",
+              )}
+            >
               <CalendarClock className="size-3.5" aria-hidden />
               {state === "overdue" ? `Overdue · ${due}` : state === "today" ? "Due today" : due}
             </span>
           )}
           {task.category && <span className="text-muted-foreground">{task.category}</span>}
           {assignee && (
-            <span className={cn("rounded-full px-2 py-0.5", isMine ? "bg-primary-soft text-foreground" : "bg-muted")}>{isMine ? "You" : assignee}</span>
+            <span
+              className={cn(
+                "rounded-full px-2 py-0.5",
+                isMine ? "bg-primary-soft text-foreground" : "bg-muted",
+              )}
+            >
+              {isMine ? "You" : assignee}
+            </span>
           )}
-          {task.notes && <StickyNote className="text-muted-foreground size-3.5" aria-label="Has notes" />}
+          {task.notes && (
+            <StickyNote className="text-muted-foreground size-3.5" aria-label="Has notes" />
+          )}
           {task.link && (
-            <Link href={task.link} className="text-primary inline-flex items-center gap-0.5 underline-offset-2 hover:underline">
+            <Link
+              href={task.link}
+              className="text-primary inline-flex items-center gap-0.5 underline-offset-2 hover:underline"
+            >
               Open <ArrowUpRight className="size-3" aria-hidden />
               <span className="sr-only">page for {task.title}</span>
             </Link>
@@ -371,7 +510,11 @@ function TaskItem({
         {looksDone && !task.done && canEdit && (
           <p className="text-success mt-1 flex flex-wrap items-center gap-2 text-xs">
             <Sparkles className="size-3.5" aria-hidden /> Looks done: {looksDone}
-            <button type="button" onClick={() => onToggle(true)} className="font-medium underline underline-offset-2">
+            <button
+              type="button"
+              onClick={() => onToggle(true)}
+              className="font-medium underline underline-offset-2"
+            >
               Tick it off
             </button>
           </p>

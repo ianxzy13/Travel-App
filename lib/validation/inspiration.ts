@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-const text = (max: number) => z.string().trim().max(max, `Please keep this under ${max} characters`);
+const text = (max: number) =>
+  z.string().trim().max(max, `Please keep this under ${max} characters`);
 const size = z.number().int().min(1).max(20000).nullable();
 
 export const boardSchema = z.object({
@@ -36,4 +37,7 @@ export const pinUpdateSchema = z.object({
 });
 export type PinUpdate = z.infer<typeof pinUpdateSchema>;
 
-export const hexList = z.array(z.string().regex(/^#[0-9a-f]{6}$/i)).min(1).max(12);
+export const hexList = z
+  .array(z.string().regex(/^#[0-9a-f]{6}$/i))
+  .min(1)
+  .max(12);

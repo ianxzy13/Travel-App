@@ -4,7 +4,11 @@ import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Pencil, Plus, Trash2, UtensilsCrossed } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { saveMealTranslations } from "@/app/app/settings/language-actions";
+import { TranslationsDialog } from "@/components/translations-dialog";
+import type { Translations } from "@/lib/database.types";
 import {
   deleteMealOption,
   saveMealOption,
@@ -20,7 +24,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { rsvpSettingsSchema, type RsvpSettingsValues } from "@/lib/validation/rsvp";
 
-type Meal = { id: string; name: string; description: string | null };
+type Meal = { id: string; name: string; description: string | null; translations?: Translations };
 
 export function RsvpSetup({
   settings,
@@ -29,7 +33,10 @@ export function RsvpSetup({
   adminConfigured,
   emailConfigured,
   readOnly,
+  languages = [],
 }: {
+  /** the wedding's languages, main first */
+  languages?: string[];
   settings: RsvpSettingsValues;
   mealOptions: Meal[];
   events: { id: string; name: string; mealChoice: boolean }[];
@@ -46,7 +53,7 @@ export function RsvpSetup({
         canNotify={adminConfigured && emailConfigured}
       />
       <div className="space-y-6">
-        <MealsCard mealOptions={mealOptions} readOnly={readOnly} />
+        <MealsCard mealOptions={mealOptions} readOnly={readOnly} languages={languages} />
         <MealEventsCard events={events} readOnly={readOnly} hasMeals={mealOptions.length > 0} />
       </div>
     </div>
@@ -175,7 +182,16 @@ function Toggle({
   );
 }
 
-function MealsCard({ mealOptions, readOnly }: { mealOptions: Meal[]; readOnly: boolean }) {
+function MealsCard({
+  mealOptions,
+  readOnly,
+  languages,
+}: {
+  mealOptions: Meal[];
+  readOnly: boolean;
+  languages: string[];
+}) {
+  const tt = useTranslations("app.translate");
   const [editing, setEditing] = useState<string | "new" | null>(null);
   return (
     <Card>
@@ -211,6 +227,19 @@ function MealsCard({ mealOptions, readOnly }: { mealOptions: Meal[]; readOnly: b
                 </div>
                 {!readOnly && (
                   <>
+                    <TranslationsDialog
+                      compact
+                      title={tt("title", { name: m.name })}
+                      fields={[
+                        { key: "name", label: tt("fields.mealName"), max: 100 },
+                        { key: "description", label: tt("fields.mealDescription"), max: 300 },
+                      ]}
+                      source={{ name: m.name, description: m.description }}
+                      mainLanguage={languages[0] ?? "en"}
+                      languages={languages.slice(1)}
+                      value={m.translations ?? {}}
+                      onSave={(tr) => saveMealTranslations(m.id, tr)}
+                    />
                     <Button
                       variant="ghost"
                       size="icon-sm"

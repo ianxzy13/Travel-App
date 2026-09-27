@@ -33,6 +33,7 @@ flight/hotel booking API. Links and affiliate links are fine.
 
 Extend Hotels and Flights (reuse `flights`, `flight_travellers`, `hotels`,
 `hotel_guest_assignments`).
+
 - After RSVP "yes", optional step on `/r/[code]`: arrival date/time, airport, flight number,
   departure date, where they're staying (couple's hotels or "other"), needs transfer. Editable
   later with the same link.

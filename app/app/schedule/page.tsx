@@ -10,8 +10,17 @@ export default async function Schedule() {
   const sb = await createClient();
   const [{ data: items }, { data: events }, { data: vendors }] = await Promise.all([
     sb.from("schedule_items").select("*").eq("wedding_id", wedding.id).order("start_time"),
-    sb.from("events").select("id, name, event_date, start_time").eq("wedding_id", wedding.id).order("event_date"),
-    sb.from("vendors").select("id, name, contact_name, phone").eq("wedding_id", wedding.id).neq("status", "rejected").order("name"),
+    sb
+      .from("events")
+      .select("id, name, event_date, start_time")
+      .eq("wedding_id", wedding.id)
+      .order("event_date"),
+    sb
+      .from("vendors")
+      .select("id, name, contact_name, phone")
+      .eq("wedding_id", wedding.id)
+      .neq("status", "rejected")
+      .order("name"),
   ]);
 
   return (

@@ -48,12 +48,15 @@ async function assertPublicUrl(raw: string) {
   } catch {
     throw new Error("That doesn't look like a web address.");
   }
-  if (url.protocol !== "http:" && url.protocol !== "https:") throw new Error("Only http and https links work.");
+  if (url.protocol !== "http:" && url.protocol !== "https:")
+    throw new Error("Only http and https links work.");
   if (url.username || url.password) throw new Error("Links with passwords aren't supported.");
-  if (url.port && !["80", "443"].includes(url.port)) throw new Error("That link uses an unusual port.");
+  if (url.port && !["80", "443"].includes(url.port))
+    throw new Error("That link uses an unusual port.");
   const host = url.hostname.replace(/^\[|\]$/g, "");
   const addresses = isIP(host) ? [host] : (await lookup(host, { all: true })).map((a) => a.address);
-  if (!addresses.length || addresses.some(isPrivateIp)) throw new Error("That address can't be reached.");
+  if (!addresses.length || addresses.some(isPrivateIp))
+    throw new Error("That address can't be reached.");
   return url;
 }
 
@@ -66,7 +69,10 @@ async function safeFetch(raw: string) {
     const res = await fetch(url, {
       redirect: "manual",
       signal: AbortSignal.timeout(8000),
-      headers: { "user-agent": "Mozilla/5.0 (compatible; VowBot/1.0; +link preview)", accept: "text/html,image/*;q=0.9,*/*;q=0.5" },
+      headers: {
+        "user-agent": "Mozilla/5.0 (compatible; VowBot/1.0; +link preview)",
+        accept: "text/html,image/*;q=0.9,*/*;q=0.5",
+      },
     });
     if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
       url = await assertPublicUrl(new URL(res.headers.get("location")!, url).toString());
@@ -116,7 +122,13 @@ export function parseOpenGraph(html: string, base: string) {
     }
     return null;
   };
-  const rawImage = meta(["og:image:secure_url", "og:image", "og:image:url", "twitter:image", "twitter:image:src"]);
+  const rawImage = meta([
+    "og:image:secure_url",
+    "og:image",
+    "og:image:url",
+    "twitter:image",
+    "twitter:image:src",
+  ]);
   let image: string | null = null;
   if (rawImage) {
     try {
@@ -125,7 +137,10 @@ export function parseOpenGraph(html: string, base: string) {
       image = null;
     }
   }
-  const title = meta(["og:title", "twitter:title"]) ?? head.match(/<title[^>]*>([^<]{1,300})<\/title>/i)?.[1] ?? null;
+  const title =
+    meta(["og:title", "twitter:title"]) ??
+    head.match(/<title[^>]*>([^<]{1,300})<\/title>/i)?.[1] ??
+    null;
   return { image, title: title ? decode(title).slice(0, 200) : null };
 }
 
@@ -141,6 +156,9 @@ export async function getLinkPreview(raw: string): Promise<LinkPreview> {
   }
   if (!type.includes("html")) throw new Error("That link isn't an image or a web page.");
   const { image, title } = parseOpenGraph(await readText(res), url.toString());
-  if (!image) throw new Error("We couldn't find an image on that page. Try right-clicking the image and copying its address.");
+  if (!image)
+    throw new Error(
+      "We couldn't find an image on that page. Try right-clicking the image and copying its address.",
+    );
   return { imageUrl: image, title, sourceUrl: url.toString() };
 }

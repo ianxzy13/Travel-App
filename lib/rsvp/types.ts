@@ -53,6 +53,18 @@ export type RsvpData = {
   meal_options: { id: string; name: string; description: string | null }[];
 };
 
+/** Language details for one RSVP code (get_rsvp_extras()). */
+export type RsvpExtras = {
+  languages: string[];
+  time_zone: string | null;
+  translations: import("@/lib/database.types").Translations;
+  preferred_language: string | null;
+  /** event id → translations */
+  events: Record<string, import("@/lib/database.types").Translations>;
+  /** meal option id → translations */
+  meals: Record<string, import("@/lib/database.types").Translations>;
+};
+
 /** What submit_rsvp() returns. */
 export type RsvpResult = {
   household_id: string;
@@ -72,6 +84,17 @@ export const RSVP_ERRORS: Record<string, string> = {
   invalid_status: "Please answer attending or not attending for everyone.",
   not_allowed: "You don't have permission to record replies for this wedding.",
 };
+
+/** Which error submit_rsvp() raised (for translated messages); "generic" if unknown. */
+export function rsvpErrorKey(message: string | undefined) {
+  return (Object.keys(RSVP_ERRORS).find((k) => message?.includes(k)) ?? "generic") as
+    | "rsvp_not_found"
+    | "deadline_passed"
+    | "invalid_guest_or_event"
+    | "invalid_status"
+    | "not_allowed"
+    | "generic";
+}
 
 export function rsvpErrorMessage(message: string | undefined) {
   const key = Object.keys(RSVP_ERRORS).find((k) => message?.includes(k));

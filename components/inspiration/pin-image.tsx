@@ -2,11 +2,16 @@
 import { ImageOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export const UNSPLASH_LINK = "https://unsplash.com/?utm_source=vow_wedding_planner&utm_medium=referral";
+export const UNSPLASH_LINK =
+  "https://unsplash.com/?utm_source=vow_wedding_planner&utm_medium=referral";
 
 /** Unsplash images can be resized by adding ?w=…; other images are used as-is. */
 export function sized(src: string, width: number) {
-  if (!src.startsWith("https://images.unsplash.com/") && !src.startsWith("https://plus.unsplash.com/")) return src;
+  if (
+    !src.startsWith("https://images.unsplash.com/") &&
+    !src.startsWith("https://plus.unsplash.com/")
+  )
+    return src;
   const url = new URL(src);
   url.searchParams.set("w", String(width));
   url.searchParams.set("auto", "format");
@@ -53,7 +58,11 @@ export function PinImage({
       decoding="async"
       draggable={false}
       referrerPolicy="no-referrer"
-      className={cn("bg-muted block w-full", fit === "cover" ? "object-cover" : "object-contain", className)}
+      className={cn(
+        "bg-muted block w-full",
+        fit === "cover" ? "object-cover" : "object-contain",
+        className,
+      )}
       style={fit === "cover" ? { aspectRatio: ratio } : undefined}
     />
   );

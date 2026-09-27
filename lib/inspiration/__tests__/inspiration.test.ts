@@ -60,10 +60,23 @@ describe("palette", () => {
 
 describe("link preview safety", () => {
   it("blocks private and internal addresses", () => {
-    for (const ip of ["127.0.0.1", "10.1.2.3", "172.20.0.1", "192.168.1.1", "169.254.169.254", "0.0.0.0", "100.64.0.1", "::1", "fd00::1", "fe80::1", "::ffff:127.0.0.1"]) {
+    for (const ip of [
+      "127.0.0.1",
+      "10.1.2.3",
+      "172.20.0.1",
+      "192.168.1.1",
+      "169.254.169.254",
+      "0.0.0.0",
+      "100.64.0.1",
+      "::1",
+      "fd00::1",
+      "fe80::1",
+      "::ffff:127.0.0.1",
+    ]) {
       expect(isPrivateIp(ip), ip).toBe(true);
     }
-    for (const ip of ["8.8.8.8", "151.101.1.140", "2606:4700::6810:84e5"]) expect(isPrivateIp(ip), ip).toBe(false);
+    for (const ip of ["8.8.8.8", "151.101.1.140", "2606:4700::6810:84e5"])
+      expect(isPrivateIp(ip), ip).toBe(false);
   });
 
   it("reads Open Graph images and titles, resolving relative URLs", () => {

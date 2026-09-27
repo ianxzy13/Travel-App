@@ -8,7 +8,10 @@ import { createClient } from "@/lib/supabase/server";
 import { scheduleItemSchema } from "@/lib/validation/tasks";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
-const NO_PERMISSION = { ok: false as const, error: "You don't have permission to change the schedule." };
+const NO_PERMISSION = {
+  ok: false as const,
+  error: "You don't have permission to change the schedule.",
+};
 const id = z.uuid();
 const day = z.union([z.null(), z.iso.date()]);
 
@@ -23,7 +26,10 @@ function done(): ActionResult {
   return { ok: true };
 }
 
-export async function saveScheduleItem(itemId: string | null, input: unknown): Promise<ActionResult> {
+export async function saveScheduleItem(
+  itemId: string | null,
+  input: unknown,
+): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || (itemId && !id.safeParse(itemId).success)) return NO_PERMISSION;
   const parsed = scheduleItemSchema.safeParse(input);
@@ -41,7 +47,11 @@ export async function saveScheduleItem(itemId: string | null, input: unknown): P
     vendor_id: v.vendor_id || null,
   };
   const { error } = itemId
-    ? await ctx.sb.from("schedule_items").update(row).eq("id", itemId).eq("wedding_id", ctx.wedding.id)
+    ? await ctx.sb
+        .from("schedule_items")
+        .update(row)
+        .eq("id", itemId)
+        .eq("wedding_id", ctx.wedding.id)
     : await ctx.sb.from("schedule_items").insert({ ...row, wedding_id: ctx.wedding.id });
   if (error) return fail("saveScheduleItem", error);
   return done();
@@ -50,26 +60,49 @@ export async function saveScheduleItem(itemId: string | null, input: unknown): P
 export async function deleteScheduleItem(itemId: string): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !id.safeParse(itemId).success) return NO_PERMISSION;
-  const { error } = await ctx.sb.from("schedule_items").delete().eq("id", itemId).eq("wedding_id", ctx.wedding.id);
+  const { error } = await ctx.sb
+    .from("schedule_items")
+    .delete()
+    .eq("id", itemId)
+    .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("deleteScheduleItem", error);
   return done();
 }
 
 async function itemsOfDay(ctx: NonNullable<Awaited<ReturnType<typeof editor>>>, d: string | null) {
-  const q = ctx.sb.from("schedule_items").select("id, start_time, duration_min").eq("wedding_id", ctx.wedding.id);
+  const q = ctx.sb
+    .from("schedule_items")
+    .select("id, start_time, duration_min")
+    .eq("wedding_id", ctx.wedding.id);
   const { data } = await (d ? q.eq("day", d) : q.is("day", null));
   return data ?? [];
 }
 
 /** Moves an item and everything after it that day by `delta` minutes (e.g. ±15). */
-export async function shiftSchedule(itemId: string, forDay: string | null, delta: number): Promise<ActionResult> {
+export async function shiftSchedule(
+  itemId: string,
+  forDay: string | null,
+  delta: number,
+): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !id.safeParse(itemId).success || !day.safeParse(forDay).success || !Number.isInteger(delta) || Math.abs(delta) > 720) {
+  if (
+    !ctx ||
+    !id.safeParse(itemId).success ||
+    !day.safeParse(forDay).success ||
+    !Number.isInteger(delta) ||
+    Math.abs(delta) > 720
+  ) {
     return NO_PERMISSION;
   }
   const updates = shiftFrom(await itemsOfDay(ctx, forDay), itemId, delta);
   const results = await Promise.all(
-    updates.map((u) => ctx.sb.from("schedule_items").update({ start_time: u.start_time }).eq("id", u.id).eq("wedding_id", ctx.wedding.id)),
+    updates.map((u) =>
+      ctx.sb
+        .from("schedule_items")
+        .update({ start_time: u.start_time })
+        .eq("id", u.id)
+        .eq("wedding_id", ctx.wedding.id),
+    ),
   );
   const error = results.find((r) => r.error)?.error;
   if (error) return fail("shiftSchedule", error);
@@ -77,20 +110,28 @@ export async function shiftSchedule(itemId: string, forDay: string | null, delta
 }
 
 /** Adds that day's events (ceremony, reception…) as schedule items. */
-export async function importEvents(forDay: string | null): Promise<ActionResult<{ added: number }>> {
+export async function importEvents(
+  forDay: string | null,
+): Promise<ActionResult<{ added: number }>> {
   const ctx = await editor();
   if (!ctx || !day.safeParse(forDay).success) return NO_PERMISSION;
   const date = forDay ?? ctx.wedding.wedding_date;
   if (!date) return { ok: false, error: "Set your wedding date first." };
   const [{ data: events }, existing] = await Promise.all([
-    ctx.sb.from("events").select("id, name, start_time, end_time, venue_name, address").eq("wedding_id", ctx.wedding.id).eq("event_date", date),
+    ctx.sb
+      .from("events")
+      .select("id, name, start_time, end_time, venue_name, address")
+      .eq("wedding_id", ctx.wedding.id)
+      .eq("event_date", date),
     ctx.sb.from("schedule_items").select("event_id, title, day").eq("wedding_id", ctx.wedding.id),
   ]);
   // skip events already on the schedule (linked, or an item with the same name that day)
   const sameDay = (existing.data ?? []).filter((i) => (i.day ?? ctx.wedding.wedding_date) === date);
   const have = new Set((existing.data ?? []).map((e) => e.event_id).filter(Boolean));
   const names = new Set(sameDay.map((i) => i.title.trim().toLowerCase()));
-  const fresh = (events ?? []).filter((e) => e.start_time && !have.has(e.id) && !names.has(e.name.trim().toLowerCase()));
+  const fresh = (events ?? []).filter(
+    (e) => e.start_time && !have.has(e.id) && !names.has(e.name.trim().toLowerCase()),
+  );
   if (!fresh.length) return { ok: true, data: { added: 0 } };
   const { error } = await ctx.sb.from("schedule_items").insert(
     fresh.map((e) => {
@@ -114,13 +155,25 @@ export async function importEvents(forDay: string | null): Promise<ActionResult<
 }
 
 /** Fills an empty day with a typical wedding day, timed around the ceremony. */
-export async function addTemplateDay(forDay: string | null, ceremonyTime: string): Promise<ActionResult> {
+export async function addTemplateDay(
+  forDay: string | null,
+  ceremonyTime: string,
+): Promise<ActionResult> {
   const ctx = await editor();
-  if (!ctx || !day.safeParse(forDay).success || !/^([01]\d|2[0-3]):[0-5]\d$/.test(ceremonyTime)) return NO_PERMISSION;
-  if ((await itemsOfDay(ctx, forDay)).length) return { ok: false, error: "This day already has items. The template only fills an empty day." };
+  if (!ctx || !day.safeParse(forDay).success || !/^([01]\d|2[0-3]):[0-5]\d$/.test(ceremonyTime))
+    return NO_PERMISSION;
+  if ((await itemsOfDay(ctx, forDay)).length)
+    return {
+      ok: false,
+      error: "This day already has items. The template only fills an empty day.",
+    };
   const [{ data: events }, { data: venues }] = await Promise.all([
     ctx.sb.from("events").select("name, venue_name").eq("wedding_id", ctx.wedding.id),
-    ctx.sb.from("venues").select("name, kind").eq("wedding_id", ctx.wedding.id).eq("status", "booked"),
+    ctx.sb
+      .from("venues")
+      .select("name, kind")
+      .eq("wedding_id", ctx.wedding.id)
+      .eq("status", "booked"),
   ]);
   // best guess at the places, from booked venues or the events' venues
   const venueFor = (role: "ceremony" | "reception") =>

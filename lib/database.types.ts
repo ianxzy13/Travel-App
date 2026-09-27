@@ -14,6 +14,8 @@ export type ProfileRow = Timestamps & {
   email: string | null;
   full_name: string | null;
   avatar_url: string | null;
+  /** app language this person chose */
+  locale: string | null;
 };
 
 export type WeddingRow = Timestamps & {
@@ -35,7 +37,15 @@ export type WeddingRow = Timestamps & {
   budget_total: number | null;
   destination_airport: string | null;
   reminders_checked_on: string | null;
+  /** languages the wedding is shown in; the first is the main one */
+  languages: string[];
+  /** IANA time zone of the venue, e.g. "Europe/Ljubljana" */
+  time_zone: string | null;
+  translations: Translations;
 };
+
+/** Per-language versions of texts: { "sl": { "name": "Poroka" } } */
+export type Translations = Record<string, Record<string, unknown>>;
 
 export type WeddingMemberRow = Timestamps & {
   id: string;
@@ -77,6 +87,7 @@ export type EventRow = WeddingScoped & {
   description: string | null;
   sort_order: number;
   meal_choice: boolean;
+  translations: Translations;
 };
 
 export type HouseholdRow = WeddingScoped & {
@@ -92,6 +103,7 @@ export type HouseholdRow = WeddingScoped & {
   rsvp_song_request: string | null;
   rsvp_message: string | null;
   rsvp_responded_at: string | null;
+  preferred_language: string | null;
 };
 
 export type GuestRow = WeddingScoped & {
@@ -108,6 +120,8 @@ export type GuestRow = WeddingScoped & {
   accessibility: string | null;
   notes: string | null;
   list: GuestList;
+  /** languages this guest speaks */
+  languages: string[];
 };
 
 export type GuestEventInviteRow = WeddingScoped & { guest_id: string; event_id: string };
@@ -130,6 +144,7 @@ export type MealOptionRow = WeddingScoped & {
   name: string;
   description: string | null;
   sort_order: number;
+  translations: Translations;
 };
 
 export type RsvpResponseRow = WeddingScoped & {
@@ -367,11 +382,17 @@ export type PinRow = WeddingScoped & {
 
 export type PinCommentRow = WeddingScoped & { pin_id: string; user_id: string; body: string };
 export type PinReactionRow = Timestamps & { pin_id: string; user_id: string; wedding_id: string };
-export type PaletteColorRow = WeddingScoped & { hex: string; source_pin_id: string | null; sort_order: number };
+export type PaletteColorRow = WeddingScoped & {
+  hex: string;
+  source_pin_id: string | null;
+  sort_order: number;
+};
 
 export type SiteTemplate = "classic" | "modern" | "garden" | "boho" | "beach";
-export type SiteSectionKind = "home" | "story" | "events" | "travel" | "party" | "rsvp" | "registry" | "faq" | "gallery";
-export type HeadingFont = "cormorant" | "playfair" | "fraunces" | "josefin" | "inter" | "great-vibes";
+export type SiteSectionKind =
+  "home" | "story" | "events" | "travel" | "party" | "rsvp" | "registry" | "faq" | "gallery";
+export type HeadingFont =
+  "cormorant" | "playfair" | "fraunces" | "josefin" | "inter" | "great-vibes";
 export type BodyFont = "inter" | "lora" | "nunito" | "josefin";
 
 export type WebsiteSettingsRow = Timestamps & {
@@ -417,6 +438,7 @@ export type WebsiteSectionRow = WeddingScoped & {
   sort_order: number;
   visible: boolean;
   content: Json;
+  translations: Translations;
 };
 
 // Helper: columns with DB defaults become optional on insert.
@@ -558,9 +580,15 @@ export type Database = {
       get_shared_board: { Args: { p_share_id: string }; Returns: Json };
       get_public_site: { Args: { p_slug: string; p_token?: string | null }; Returns: Json };
       unlock_site: { Args: { p_slug: string; p_password: string }; Returns: string | null };
-      set_site_password: { Args: { p_wedding_id: string; p_password: string | null }; Returns: undefined };
+      set_site_password: {
+        Args: { p_wedding_id: string; p_password: string | null };
+        Returns: undefined;
+      };
       site_has_password: { Args: { p_wedding_id: string }; Returns: boolean };
       sync_reminders: { Args: { p_wedding_id: string }; Returns: number };
+      get_page_languages: { Args: { p_kind: string; p_key: string }; Returns: Json };
+      get_rsvp_extras: { Args: { p_code: string }; Returns: Json };
+      set_rsvp_language: { Args: { p_code: string; p_language: string }; Returns: undefined };
       apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };

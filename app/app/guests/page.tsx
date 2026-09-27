@@ -27,6 +27,7 @@ export default async function GuestsPage() {
           postalCode: h.postal_code ?? "",
           country: h.country ?? "",
         },
+        language: h.preferred_language ?? "",
       }))}
       events={events}
       tags={tags}

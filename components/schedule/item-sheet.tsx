@@ -11,8 +11,21 @@ import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
 import type { ScheduleItemRow } from "@/lib/database.types";
 import { scheduleItemSchema, type ScheduleItemValues } from "@/lib/validation/tasks";
@@ -40,7 +53,16 @@ export function ItemSheet({
   const [pending, startTransition] = useTransition();
   const form = useForm<ScheduleItemValues>({
     resolver: zodResolver(scheduleItemSchema),
-    defaultValues: { day: "", start_time: "", duration_min: "", title: "", location: "", owner: "", notes: "", vendor_id: "" },
+    defaultValues: {
+      day: "",
+      start_time: "",
+      duration_min: "",
+      title: "",
+      location: "",
+      owner: "",
+      notes: "",
+      vendor_id: "",
+    },
   });
 
   useEffect(() => {
@@ -72,19 +94,41 @@ export function ItemSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-md">
         <form onSubmit={submit} className="flex h-full flex-col">
           <SheetHeader>
-            <SheetTitle>{item ? (canEdit ? "Edit item" : "Schedule item") : "Add to the schedule"}</SheetTitle>
-            <SheetDescription>What happens, when, where, and who&apos;s in charge.</SheetDescription>
+            <SheetTitle>
+              {item ? (canEdit ? "Edit item" : "Schedule item") : "Add to the schedule"}
+            </SheetTitle>
+            <SheetDescription>
+              What happens, when, where, and who&apos;s in charge.
+            </SheetDescription>
           </SheetHeader>
           <fieldset disabled={!canEdit} className="flex-1 space-y-4 px-4">
             <FormField id="item-title" label="What" error={errors.title?.message}>
-              {(a) => <Input {...a} {...form.register("title")} maxLength={150} placeholder="e.g. First dance" autoFocus={!item} />}
+              {(a) => (
+                <Input
+                  {...a}
+                  {...form.register("title")}
+                  maxLength={150}
+                  placeholder="e.g. First dance"
+                  autoFocus={!item}
+                />
+              )}
             </FormField>
             <div className="grid grid-cols-3 gap-3">
               <FormField id="item-start" label="Starts" error={errors.start_time?.message}>
                 {(a) => <Input {...a} type="time" {...form.register("start_time")} />}
               </FormField>
               <FormField id="item-duration" label="Minutes" error={errors.duration_min?.message}>
-                {(a) => <Input {...a} type="number" min={0} max={1440} step={5} inputMode="numeric" {...form.register("duration_min")} />}
+                {(a) => (
+                  <Input
+                    {...a}
+                    type="number"
+                    min={0}
+                    max={1440}
+                    step={5}
+                    inputMode="numeric"
+                    {...form.register("duration_min")}
+                  />
+                )}
               </FormField>
               <FormField id="item-day" label="Day" error={errors.day?.message}>
                 {(a) => <Input {...a} type="date" {...form.register("day")} />}
@@ -93,14 +137,20 @@ export function ItemSheet({
             <FormField id="item-location" label="Where">
               {(a) => <Input {...a} {...form.register("location")} maxLength={200} />}
             </FormField>
-            <FormField id="item-owner" label="Who's in charge" hint="e.g. Photographer, or Anna (maid of honour)">
+            <FormField
+              id="item-owner"
+              label="Who's in charge"
+              hint="e.g. Photographer, or Anna (maid of honour)"
+            >
               {(a) => <Input {...a} {...form.register("owner")} maxLength={120} />}
             </FormField>
             <div className="space-y-2">
               <Label htmlFor="item-vendor">Vendor (their phone shows on the print-out)</Label>
               <Select
                 value={form.watch("vendor_id") || NONE}
-                onValueChange={(v) => form.setValue("vendor_id", v === NONE ? "" : v, { shouldDirty: true })}
+                onValueChange={(v) =>
+                  form.setValue("vendor_id", v === NONE ? "" : v, { shouldDirty: true })
+                }
                 disabled={!canEdit}
               >
                 <SelectTrigger id="item-vendor" className="w-full">
@@ -117,7 +167,15 @@ export function ItemSheet({
               </Select>
             </div>
             <FormField id="item-notes" label="Notes">
-              {(a) => <Textarea {...a} {...form.register("notes")} rows={4} maxLength={2000} placeholder="e.g. Song: At Last – Etta James" />}
+              {(a) => (
+                <Textarea
+                  {...a}
+                  {...form.register("notes")}
+                  rows={4}
+                  maxLength={2000}
+                  placeholder="e.g. Song: At Last – Etta James"
+                />
+              )}
             </FormField>
           </fieldset>
           {canEdit && (
@@ -144,7 +202,8 @@ export function ItemSheet({
                 <span />
               )}
               <Button type="submit" disabled={pending}>
-                {pending && <Loader2 className="animate-spin" aria-hidden />} {item ? "Save" : "Add"}
+                {pending && <Loader2 className="animate-spin" aria-hidden />}{" "}
+                {item ? "Save" : "Add"}
               </Button>
             </SheetFooter>
           )}

@@ -11,20 +11,31 @@ import { coupleName, requireWedding } from "@/lib/wedding";
 export const metadata: Metadata = { title: "Print schedule", robots: { index: false } };
 
 /** A clean run sheet to print or save as PDF, with vendor phone numbers at the bottom. */
-export default async function PrintSchedule({ searchParams }: { searchParams: Promise<{ day?: string }> }) {
+export default async function PrintSchedule({
+  searchParams,
+}: {
+  searchParams: Promise<{ day?: string }>;
+}) {
   const { wedding } = await requireWedding();
   const requested = (await searchParams).day;
-  const day = requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) && requested !== wedding.wedding_date ? requested : null;
+  const day =
+    requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) && requested !== wedding.wedding_date
+      ? requested
+      : null;
   const sb = await createClient();
   const query = sb.from("schedule_items").select("*").eq("wedding_id", wedding.id);
   const [{ data: rows }, { data: vendors }] = await Promise.all([
-    day ? query.eq("day", day) : query.or(`day.is.null${wedding.wedding_date ? `,day.eq.${wedding.wedding_date}` : ""}`),
+    day
+      ? query.eq("day", day)
+      : query.or(`day.is.null${wedding.wedding_date ? `,day.eq.${wedding.wedding_date}` : ""}`),
     sb.from("vendors").select("id, name, contact_name, phone, email").eq("wedding_id", wedding.id),
   ]);
   const items = sortByTime(rows ?? []);
   const date = day ?? wedding.wedding_date;
   const byId = new Map((vendors ?? []).map((v) => [v.id, v]));
-  const used = [...new Set(items.map((i) => i.vendor_id).filter((v): v is string => !!v))].map((id) => byId.get(id)!).filter(Boolean);
+  const used = [...new Set(items.map((i) => i.vendor_id).filter((v): v is string => !!v))]
+    .map((id) => byId.get(id)!)
+    .filter(Boolean);
 
   return (
     <main className="mx-auto max-w-4xl bg-white p-6 text-stone-900 print:max-w-none print:p-0">
@@ -43,7 +54,9 @@ export default async function PrintSchedule({ searchParams }: { searchParams: Pr
       <header className="mb-6 border-b border-stone-300 pb-4">
         <p className="text-xs tracking-[0.25em] text-stone-500 uppercase">Run sheet</p>
         <h1 className="font-serif text-4xl font-semibold">{coupleName(wedding)}</h1>
-        <p className="text-stone-600">{date ? format(parseISO(date), "EEEE d MMMM yyyy") : "Wedding day"}</p>
+        <p className="text-stone-600">
+          {date ? format(parseISO(date), "EEEE d MMMM yyyy") : "Wedding day"}
+        </p>
       </header>
 
       {items.length === 0 ? (
@@ -52,10 +65,18 @@ export default async function PrintSchedule({ searchParams }: { searchParams: Pr
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="border-b-2 border-stone-800 text-left">
-              <th scope="col" className="w-24 py-2 pr-3">Time</th>
-              <th scope="col" className="py-2 pr-3">What</th>
-              <th scope="col" className="w-40 py-2 pr-3">Where</th>
-              <th scope="col" className="w-36 py-2">Who</th>
+              <th scope="col" className="w-24 py-2 pr-3">
+                Time
+              </th>
+              <th scope="col" className="py-2 pr-3">
+                What
+              </th>
+              <th scope="col" className="w-40 py-2 pr-3">
+                Where
+              </th>
+              <th scope="col" className="w-36 py-2">
+                Who
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -66,11 +87,15 @@ export default async function PrintSchedule({ searchParams }: { searchParams: Pr
                 <tr key={i.id} className="break-inside-avoid border-b border-stone-200 align-top">
                   <td className="py-2 pr-3 font-semibold tabular-nums">
                     {i.start_time.slice(0, 5)}
-                    {end && <span className="block text-xs font-normal text-stone-500">to {end}</span>}
+                    {end && (
+                      <span className="block text-xs font-normal text-stone-500">to {end}</span>
+                    )}
                   </td>
                   <td className="py-2 pr-3">
                     <span className="font-medium">{i.title}</span>
-                    {i.notes && <span className="block whitespace-pre-wrap text-stone-600">{i.notes}</span>}
+                    {i.notes && (
+                      <span className="block whitespace-pre-wrap text-stone-600">{i.notes}</span>
+                    )}
                   </td>
                   <td className="py-2 pr-3 text-stone-700">{i.location}</td>
                   <td className="py-2 text-stone-700">

@@ -106,16 +106,14 @@ export async function saveVenue(
     if (error) return fail("saveVenue", error);
     venueId = data.id;
     // start every venue with a useful site-visit checklist
-    await ctx.sb
-      .from("venue_checklist_items")
-      .insert(
-        DEFAULT_VISIT_QUESTIONS.map((question, i) => ({
-          wedding_id: wid,
-          venue_id: venueId!,
-          question,
-          sort_order: i,
-        })),
-      );
+    await ctx.sb.from("venue_checklist_items").insert(
+      DEFAULT_VISIT_QUESTIONS.map((question, i) => ({
+        wedding_id: wid,
+        venue_id: venueId!,
+        question,
+        sort_order: i,
+      })),
+    );
   }
 
   if (v.status === "booked") await releaseOtherBookings(ctx.sb, wid, venueId, v.kind);

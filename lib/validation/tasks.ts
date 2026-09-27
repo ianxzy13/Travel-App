@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-const text = (max: number) => z.string().trim().max(max, `Please keep this under ${max} characters`);
+const text = (max: number) =>
+  z.string().trim().max(max, `Please keep this under ${max} characters`);
 const date = z.union([z.literal(""), z.iso.date("Please pick a date")]);
 
 export const taskSchema = z.object({

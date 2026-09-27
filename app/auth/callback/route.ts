@@ -1,5 +1,6 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
+import { rememberAppLocale } from "@/lib/i18n/remember";
 import { safeNextPath } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 
@@ -19,11 +20,17 @@ export async function GET(request: NextRequest) {
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) return NextResponse.redirect(new URL(next, origin));
+    if (!error) {
+      await rememberAppLocale(supabase);
+      return NextResponse.redirect(new URL(next, origin));
+    }
     console.error("[auth/callback] code exchange failed", error);
   } else if (tokenHash && type) {
     const { error } = await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
-    if (!error) return NextResponse.redirect(new URL(next, origin));
+    if (!error) {
+      await rememberAppLocale(supabase);
+      return NextResponse.redirect(new URL(next, origin));
+    }
     console.error("[auth/callback] OTP verification failed", error);
   }
 

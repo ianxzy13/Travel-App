@@ -28,7 +28,9 @@ export async function uploadSiteImage(weddingId: string, file: File) {
   }
   const safeName = file.name.replace(/[^\w.\-]+/g, "_").slice(-60);
   const path = `${weddingId}/website/${crypto.randomUUID()}-${safeName}`;
-  const { error } = await createClient().storage.from(BUCKET).upload(path, file, { contentType: file.type, upsert: false });
+  const { error } = await createClient()
+    .storage.from(BUCKET)
+    .upload(path, file, { contentType: file.type, upsert: false });
   if (error) {
     console.error(error);
     toast.error("Upload failed. Is file storage set up (see README)? Please try again.");
@@ -90,17 +92,34 @@ export function ImageSlot({
             onClick={() => input.current?.click()}
             className="text-muted-foreground hover:bg-accent focus-visible:ring-ring absolute inset-0 flex flex-col items-center justify-center gap-1 text-sm focus-visible:ring-2 focus-visible:outline-none"
           >
-            {busy ? <Loader2 className="size-5 animate-spin" aria-hidden /> : <ImagePlus className="size-5" aria-hidden />}
+            {busy ? (
+              <Loader2 className="size-5 animate-spin" aria-hidden />
+            ) : (
+              <ImagePlus className="size-5" aria-hidden />
+            )}
             {busy ? "Uploading…" : label}
           </button>
         )}
       </div>
       {path && (
         <div className="flex gap-2">
-          <Button type="button" variant="outline" size="sm" disabled={disabled || busy} onClick={() => input.current?.click()}>
-            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />} Replace
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={disabled || busy}
+            onClick={() => input.current?.click()}
+          >
+            {busy ? <Loader2 className="animate-spin" aria-hidden /> : <ImagePlus aria-hidden />}{" "}
+            Replace
           </Button>
-          <Button type="button" variant="ghost" size="sm" disabled={disabled || busy} onClick={() => onChange(null)}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            disabled={disabled || busy}
+            onClick={() => onChange(null)}
+          >
             <Trash2 aria-hidden /> Remove
           </Button>
         </div>

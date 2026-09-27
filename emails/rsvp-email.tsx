@@ -11,8 +11,25 @@ import {
   Text,
 } from "@react-email/components";
 
+/** All wording, already translated into the household's language. */
+export type RsvpEmailText = {
+  preview: string;
+  eyebrow: string;
+  dear: string;
+  body: string;
+  button: string;
+  replyBy: string | null;
+  fallback: string;
+  love: string;
+  personal: string;
+};
+
 export type RsvpEmailProps = {
   kind: "invitation" | "reminder";
+  /** language code for <html lang> */
+  lang: string;
+  rtl: boolean;
+  text: RsvpEmailText;
   couple: string;
   householdName: string;
   /** e.g. "Saturday 12 June 2027" */
@@ -31,16 +48,12 @@ const ACCENTS = { rose: "#9b5a63", sage: "#4f6b58" };
 /** Invitation / reminder email with the household's private RSVP link. */
 export function RsvpEmail(p: RsvpEmailProps) {
   const color = ACCENTS[p.accent];
-  const reminder = p.kind === "reminder";
+  const t = p.text;
 
   return (
-    <Html lang="en">
+    <Html lang={p.lang} dir={p.rtl ? "rtl" : "ltr"}>
       <Head />
-      <Preview>
-        {reminder
-          ? `A friendly reminder to RSVP for ${p.couple}'s wedding`
-          : `You're invited to ${p.couple}'s wedding`}
-      </Preview>
+      <Preview>{t.preview}</Preview>
       <Body
         style={{
           backgroundColor: "#f7f3ec",
@@ -68,7 +81,7 @@ export function RsvpEmail(p: RsvpEmailProps) {
               margin: 0,
             }}
           >
-            {reminder ? "A gentle reminder" : "You're invited"}
+            {t.eyebrow}
           </Text>
           <Heading
             style={{
@@ -89,12 +102,8 @@ export function RsvpEmail(p: RsvpEmailProps) {
 
           <Hr style={{ borderColor: "#eadfd3", margin: "28px 0" }} />
 
-          <Text style={bodyText}>Dear {p.householdName},</Text>
-          <Text style={bodyText}>
-            {reminder
-              ? "We haven't received your RSVP yet and would love to know if you can join us. It only takes a minute."
-              : "We would be so happy to celebrate with you. Please let us know who can make it using your personal RSVP link."}
-          </Text>
+          <Text style={bodyText}>{t.dear}</Text>
+          <Text style={bodyText}>{t.body}</Text>
           {p.note && (
             <Text style={{ ...bodyText, fontStyle: "italic", whiteSpace: "pre-line" }}>
               {p.note}
@@ -114,28 +123,20 @@ export function RsvpEmail(p: RsvpEmailProps) {
                 textDecoration: "none",
               }}
             >
-              RSVP now
+              {t.button}
             </Button>
           </Section>
 
-          {p.deadlineText && (
-            <Text style={{ ...bodyText, textAlign: "center" }}>
-              Please reply by {p.deadlineText}.
-            </Text>
-          )}
-          <Text style={{ ...smallText, textAlign: "center" }}>
-            Button not working? Open {p.link} or enter the code <strong>{p.code}</strong>.
-          </Text>
+          {t.replyBy && <Text style={{ ...bodyText, textAlign: "center" }}>{t.replyBy}</Text>}
+          <Text style={{ ...smallText, textAlign: "center" }}>{t.fallback}</Text>
 
           <Text style={{ ...bodyText, marginTop: 28 }}>
-            With love,
+            {t.love}
             <br />
             {p.couple}
           </Text>
         </Container>
-        <Text style={{ ...smallText, textAlign: "center" }}>
-          This link is personal to your household. Please don&apos;t share it.
-        </Text>
+        <Text style={{ ...smallText, textAlign: "center" }}>{t.personal}</Text>
       </Body>
     </Html>
   );
@@ -157,6 +158,19 @@ const smallText = {
 // Sample data for the "react-email" preview tool.
 RsvpEmail.PreviewProps = {
   kind: "invitation",
+  lang: "en",
+  rtl: false,
+  text: {
+    preview: "You’re invited to Ian & Maria’s wedding",
+    eyebrow: "You’re invited",
+    dear: "Dear The Smith Family,",
+    body: "We would be so happy to celebrate with you. Please let us know who can make it using your personal RSVP link.",
+    button: "RSVP now",
+    replyBy: "Please reply by 1 May 2027.",
+    fallback: "Button not working? Open https://example.com/r/K7P2QX or enter the code K7P2QX.",
+    love: "With love,",
+    personal: "This link is personal to your household. Please don’t share it.",
+  },
   couple: "Ian & Maria",
   householdName: "The Smith Family",
   dateText: "Saturday 12 June 2027",

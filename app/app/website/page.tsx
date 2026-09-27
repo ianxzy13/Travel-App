@@ -13,9 +13,17 @@ export default async function WebsitePage() {
   if (!data) {
     return (
       <p className="text-muted-foreground rounded-xl border border-dashed p-8 text-center">
-        The website tables aren&apos;t set up yet. Run the phase 8 migration (see README), then reload this page.
+        The website tables aren&apos;t set up yet. Run the phase 8 migration (see README), then
+        reload this page.
       </p>
     );
   }
-  return <WebsiteEditor {...data} weddingId={wedding.id} canEdit={canEdit(role)} fontClass={siteFontVariables} />;
+  return (
+    <WebsiteEditor
+      {...data}
+      weddingId={wedding.id}
+      canEdit={canEdit(role)}
+      fontClass={siteFontVariables}
+    />
+  );
 }

@@ -5,7 +5,10 @@
  * height ÷ width), so the grid stays balanced and roughly keeps its order
  * left-to-right. Items without a size count as 4:5 portrait.
  */
-export function masonryColumns<T extends { width: number | null; height: number | null }>(items: T[], columns: number): T[][] {
+export function masonryColumns<T extends { width: number | null; height: number | null }>(
+  items: T[],
+  columns: number,
+): T[][] {
   const cols: T[][] = Array.from({ length: Math.max(1, columns) }, () => []);
   const heights = cols.map(() => 0);
   for (const item of items) {
@@ -69,7 +72,9 @@ export function extractPalette(pixels: Uint8ClampedArray | number[], count = 5):
     box.b += b;
     boxes.set(key, box);
   }
-  const ranked = [...boxes.values()].sort((a, b) => b.n - a.n).map((x) => [x.r / x.n, x.g / x.n, x.b / x.n]);
+  const ranked = [...boxes.values()]
+    .sort((a, b) => b.n - a.n)
+    .map((x) => [x.r / x.n, x.g / x.n, x.b / x.n]);
   const chosen: number[][] = [];
   for (const c of ranked) {
     if (chosen.every((p) => distance(p, c) > 40)) chosen.push(c);

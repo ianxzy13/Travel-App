@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import {
   Armchair,
@@ -17,17 +18,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PaletteStrip } from "@/components/inspiration/palette-strip";
 import { PinImage } from "@/components/inspiration/pin-image";
-import { formatWeddingDate } from "@/lib/format";
 import { loadBudget } from "@/lib/budget/load";
-import { formatMoney } from "@/lib/budget/money";
 import { summarizeBudget, upcomingPayments } from "@/lib/budget/stats";
+import { fmtDate, fmtMoney } from "@/lib/i18n/format";
 import { signPaths } from "@/lib/inspiration/load";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { canEdit, coupleName, requireWedding } from "@/lib/wedding";
 
-export const metadata: Metadata = { title: "Dashboard" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("app.nav"))("dashboard") };
+}
 
 export default async function DashboardPage({
   searchParams,
@@ -35,6 +37,9 @@ export default async function DashboardPage({
   searchParams: Promise<{ welcome?: string }>;
 }) {
   const { wedding, role } = await requireWedding();
+  const [t, locale] = await Promise.all([getTranslations("app.dashboard"), getLocale()]);
+  const money = (n: number) => fmtMoney(n, wedding.currency, locale);
+  const shortDate = (d: string) => fmtDate(d, locale, "medium");
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
@@ -86,24 +91,24 @@ export default async function DashboardPage({
 
   // Suggestions based on what's still missing.
   const steps: { label: string; href: string; done: boolean }[] = [
-    { label: "Set your wedding date", href: "/app/settings", done: !!wedding.wedding_date },
-    { label: "Choose a location", href: "/app/settings", done: !!wedding.location },
+    { label: t("steps.date"), href: "/app/settings", done: !!wedding.wedding_date },
+    { label: t("steps.location"), href: "/app/settings", done: !!wedding.location },
     {
-      label: "Invite your partner, family or planner",
+      label: t("steps.invite"),
       href: "/app/settings#collaborators",
       done: (memberCount ?? 1) > 1,
     },
     {
-      label: guestCount ? `Add your guest list (${guestCount} so far)` : "Add your guest list",
+      label: guestCount ? t("steps.guestsSoFar", { count: guestCount }) : t("steps.guests"),
       href: "/app/guests",
       done: (guestCount ?? 0) > 0,
     },
-    { label: "Set your total budget", href: "/app/budget", done: wedding.budget_total != null },
-    { label: "Shortlist venues", href: "/app/venues", done: venues.total > 0 },
-    { label: "Book your venue", href: "/app/venues", done: venues.booked > 0 },
-    { label: "Start an inspiration board", href: "/app/inspiration", done: inspiration.pins.length > 0 },
-    { label: "Publish your wedding website", href: "/app/website", done: website.published },
-    { label: "Create your planning timeline", href: "/app/tasks", done: tasks.total > 0 },
+    { label: t("steps.budget"), href: "/app/budget", done: wedding.budget_total != null },
+    { label: t("steps.shortlist"), href: "/app/venues", done: venues.total > 0 },
+    { label: t("steps.book"), href: "/app/venues", done: venues.booked > 0 },
+    { label: t("steps.inspiration"), href: "/app/inspiration", done: inspiration.pins.length > 0 },
+    { label: t("steps.website"), href: "/app/website", done: website.published },
+    { label: t("steps.timeline"), href: "/app/tasks", done: tasks.total > 0 },
   ];
   const doneCount = steps.filter((s) => s.done).length;
 
@@ -111,10 +116,8 @@ export default async function DashboardPage({
     <div className="space-y-6">
       {welcome && (
         <div role="status" className="bg-primary-soft rounded-xl px-5 py-4">
-          <p className="font-serif text-2xl font-semibold">Welcome to your planner!</p>
-          <p className="text-muted-foreground text-sm">
-            Everything starts here. Work through the next steps below at your own pace.
-          </p>
+          <p className="font-serif text-2xl font-semibold">{t("welcome")}</p>
+          <p className="text-muted-foreground text-sm">{t("welcomeText")}</p>
         </div>
       )}
 
@@ -123,12 +126,14 @@ export default async function DashboardPage({
         <CardContent className="relative p-6 sm:p-8">
           <div
             aria-hidden
-            className="bg-primary-soft pointer-events-none absolute -top-24 -right-24 size-72 rounded-full blur-2xl"
+            className="bg-primary-soft pointer-events-none absolute -end-24 -top-24 size-72 rounded-full blur-2xl"
           />
           <div className="relative">
             <h1 className="text-4xl sm:text-5xl">{coupleName(wedding)}</h1>
             <p className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-              <span>{formatWeddingDate(wedding.wedding_date, "EEEE d MMMM yyyy")}</span>
+              <span>
+                {wedding.wedding_date ? fmtDate(wedding.wedding_date, locale, "full") : t("noDate")}
+              </span>
               {wedding.location && (
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="size-4" aria-hidden />
@@ -143,7 +148,7 @@ export default async function DashboardPage({
                 canEdit(role) && (
                   <Button asChild>
                     <Link href="/app/settings">
-                      <CalendarPlus aria-hidden /> Set your date to start the countdown
+                      <CalendarPlus aria-hidden /> {t("setDate")}
                     </Link>
                   </Button>
                 )
@@ -157,9 +162,9 @@ export default async function DashboardPage({
         {/* Next steps */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle className="font-serif text-2xl">Next steps</CardTitle>
+            <CardTitle className="font-serif text-2xl">{t("nextSteps")}</CardTitle>
             <p className="text-muted-foreground text-sm">
-              {doneCount} of {steps.length} done
+              {t("stepsDone", { done: doneCount, total: steps.length })}
             </p>
             <div className="bg-muted h-1.5 rounded-full">
               <div
@@ -184,7 +189,7 @@ export default async function DashboardPage({
                     <span className={cn(s.done && "text-muted-foreground line-through")}>
                       {s.label}
                     </span>
-                    <span className="sr-only">{s.done ? "(done)" : "(to do)"}</span>
+                    <span className="sr-only">{s.done ? t("done") : t("toDo")}</span>
                   </Link>
                 </li>
               ))}
@@ -196,21 +201,21 @@ export default async function DashboardPage({
         <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2">
           <SummaryCard
             icon={Wallet}
-            title="Budget"
-            empty="No budget yet. Set a total and we'll suggest how to split it."
+            title={t("budget.title")}
+            empty={t("budget.empty")}
             href="/app/budget"
-            cta="Plan budget"
+            cta={t("budget.cta")}
           >
             {(budget.summary.total != null || budget.summary.totals.committed > 0) && (
               <div className="space-y-3">
                 <p className="text-sm">
                   <span className="font-serif text-3xl font-semibold tabular-nums">
-                    {formatMoney(budget.summary.totals.committed, wedding.currency)}
+                    {money(budget.summary.totals.committed)}
                   </span>{" "}
                   <span className="text-muted-foreground">
-                    committed
-                    {budget.summary.total != null &&
-                      ` of ${formatMoney(budget.summary.total, wedding.currency)}`}
+                    {budget.summary.total != null
+                      ? t("budget.committedOf", { total: money(budget.summary.total) })
+                      : t("budget.committed")}
                   </span>
                 </p>
                 {budget.summary.total != null && budget.summary.total > 0 && (
@@ -239,12 +244,11 @@ export default async function DashboardPage({
                         )}
                       >
                         <span className="truncate">
-                          {p.overdue ? "Overdue: " : ""}
-                          {p.expenseName}
+                          {p.overdue ? t("budget.overdue", { name: p.expenseName }) : p.expenseName}
                         </span>
                         <span className="shrink-0 tabular-nums">
-                          {formatMoney(p.amount, wedding.currency)} ·{" "}
-                          {formatWeddingDate(p.dueDate, "d MMM")}
+                          {money(p.amount)}
+                          {p.dueDate ? ` · ${shortDate(p.dueDate)}` : ""}
                         </span>
                       </li>
                     ))}
@@ -255,18 +259,18 @@ export default async function DashboardPage({
           </SummaryCard>
           <SummaryCard
             icon={MailCheck}
-            title="RSVPs"
-            empty="No replies yet. Add guests, then send your invitations."
+            title={t("rsvp.title")}
+            empty={t("rsvp.empty")}
             href="/app/rsvp"
-            cta="View RSVPs"
+            cta={t("rsvp.cta")}
           >
             {rsvp.invited > 0 && (
               <dl className="grid grid-cols-3 gap-2 text-center">
                 {(
                   [
-                    ["Attending", rsvp.attending],
-                    ["Declined", rsvp.declined],
-                    ["Waiting", rsvp.waiting],
+                    [t("rsvp.attending"), rsvp.attending],
+                    [t("rsvp.declined"), rsvp.declined],
+                    [t("rsvp.waiting"), rsvp.waiting],
                   ] as const
                 ).map(([label, n]) => (
                   <div key={label} className="bg-muted rounded-lg p-2">
@@ -279,10 +283,10 @@ export default async function DashboardPage({
           </SummaryCard>
           <SummaryCard
             icon={Armchair}
-            title="Seating"
-            empty="No tables yet. Once guests reply, seat them with drag and drop."
+            title={t("seating.title")}
+            empty={t("seating.empty")}
             href="/app/seating"
-            cta="Open seating chart"
+            cta={t("seating.cta")}
           >
             {seating.tables > 0 && (
               <div className="space-y-2">
@@ -291,7 +295,7 @@ export default async function DashboardPage({
                     {seating.seated}
                   </span>{" "}
                   <span className="text-muted-foreground">
-                    of {rsvp.attending} attending guests seated at {seating.tables} tables
+                    {t("seating.seated", { attending: rsvp.attending, tables: seating.tables })}
                   </span>
                 </p>
                 <div className="bg-muted h-2 rounded-full">
@@ -307,17 +311,23 @@ export default async function DashboardPage({
           </SummaryCard>
           <SummaryCard
             icon={Lightbulb}
-            title="Inspiration"
-            empty="No pins yet. Collect ideas and pull a colour palette from them."
+            title={t("inspiration.title")}
+            empty={t("inspiration.empty")}
             href="/app/inspiration"
-            cta="Open boards"
+            cta={t("inspiration.cta")}
           >
             {inspiration.pins.length > 0 && (
               <div className="space-y-3">
                 <ul className="grid grid-cols-3 gap-2">
                   {inspiration.pins.map((p) => (
                     <li key={p.id} className="overflow-hidden rounded-lg">
-                      <PinImage src={p.src} alt={p.title || "Pin"} width={1} height={1} size={240} />
+                      <PinImage
+                        src={p.src}
+                        alt={p.title || t("inspiration.pin")}
+                        width={1}
+                        height={1}
+                        size={240}
+                      />
                     </li>
                   ))}
                 </ul>
@@ -327,29 +337,52 @@ export default async function DashboardPage({
           </SummaryCard>
           <SummaryCard
             icon={ListChecks}
-            title="To-dos"
-            empty="No to-dos yet. We'll build a timeline from your wedding date."
+            title={t("tasks.title")}
+            empty={t("tasks.empty")}
             href="/app/tasks"
-            cta="See to-dos"
+            cta={t("tasks.cta")}
           >
             {tasks.total > 0 && (
               <div className="space-y-3">
                 <p className="text-sm">
-                  <span className="font-serif text-3xl font-semibold tabular-nums">{tasks.done}</span>{" "}
-                  <span className="text-muted-foreground">of {tasks.total} done</span>
-                  {tasks.overdue > 0 && <span className="text-destructive"> · {tasks.overdue} overdue</span>}
+                  <span className="font-serif text-3xl font-semibold tabular-nums">
+                    {tasks.done}
+                  </span>{" "}
+                  <span className="text-muted-foreground">
+                    {t("tasks.ofDone", { total: tasks.total })}
+                  </span>
+                  {tasks.overdue > 0 && (
+                    <span className="text-destructive">
+                      {" "}
+                      · {t("tasks.overdue", { count: tasks.overdue })}
+                    </span>
+                  )}
                 </p>
                 <div className="bg-muted h-2 rounded-full">
-                  <div className="bg-primary h-2 rounded-full" style={{ width: `${(tasks.done / tasks.total) * 100}%` }} />
+                  <div
+                    className="bg-primary h-2 rounded-full"
+                    style={{ width: `${(tasks.done / tasks.total) * 100}%` }}
+                  />
                 </div>
                 {tasks.next.length > 0 && (
                   <ul className="space-y-1 text-xs">
-                    {tasks.next.map((t) => (
-                      <li key={t.id} className={cn("flex justify-between gap-2", t.due_date && t.due_date < today && "text-destructive")}>
-                        <Link href={`/app/tasks?task=${t.id}`} className="truncate hover:underline">
-                          {t.title}
+                    {tasks.next.map((task) => (
+                      <li
+                        key={task.id}
+                        className={cn(
+                          "flex justify-between gap-2",
+                          task.due_date && task.due_date < today && "text-destructive",
+                        )}
+                      >
+                        <Link
+                          href={`/app/tasks?task=${task.id}`}
+                          className="truncate hover:underline"
+                        >
+                          {task.title}
                         </Link>
-                        {t.due_date && <span className="shrink-0 tabular-nums">{formatWeddingDate(t.due_date, "d MMM")}</span>}
+                        {task.due_date && (
+                          <span className="shrink-0 tabular-nums">{shortDate(task.due_date)}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -434,18 +467,25 @@ async function rsvpSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
 async function tasksSummary(supabase: Awaited<ReturnType<typeof createClient>>, weddingId: string) {
   const today = new Date().toISOString().slice(0, 10);
   const head = { count: "exact" as const, head: true };
-  const [{ count: total }, { count: done }, { count: overdue }, { data: next }] = await Promise.all([
-    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId),
-    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId).eq("done", true),
-    supabase.from("tasks").select("id", head).eq("wedding_id", weddingId).eq("done", false).lt("due_date", today),
-    supabase
-      .from("tasks")
-      .select("id, title, due_date")
-      .eq("wedding_id", weddingId)
-      .eq("done", false)
-      .order("due_date", { nullsFirst: false })
-      .limit(3),
-  ]);
+  const [{ count: total }, { count: done }, { count: overdue }, { data: next }] = await Promise.all(
+    [
+      supabase.from("tasks").select("id", head).eq("wedding_id", weddingId),
+      supabase.from("tasks").select("id", head).eq("wedding_id", weddingId).eq("done", true),
+      supabase
+        .from("tasks")
+        .select("id", head)
+        .eq("wedding_id", weddingId)
+        .eq("done", false)
+        .lt("due_date", today),
+      supabase
+        .from("tasks")
+        .select("id, title, due_date")
+        .eq("wedding_id", weddingId)
+        .eq("done", false)
+        .order("due_date", { nullsFirst: false })
+        .limit(3),
+    ],
+  );
   return { total: total ?? 0, done: done ?? 0, overdue: overdue ?? 0, next: next ?? [] };
 }
 
@@ -461,7 +501,11 @@ async function inspirationSummary(
       .eq("wedding_id", weddingId)
       .order("created_at", { ascending: false })
       .limit(6),
-    supabase.from("palette_colors").select("id, hex").eq("wedding_id", weddingId).order("sort_order"),
+    supabase
+      .from("palette_colors")
+      .select("id, hex")
+      .eq("wedding_id", weddingId)
+      .order("sort_order"),
   ]);
   const signed = await signPaths(
     supabase,
