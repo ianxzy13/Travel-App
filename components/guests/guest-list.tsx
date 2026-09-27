@@ -163,7 +163,7 @@ function HouseholdHeader({ group, onEditHousehold, canEdit }: Props & { group: G
           onClick={() => onEditHousehold(group.id)}
           aria-label={`Edit household ${group.name}`}
         >
-          <Pencil aria-hidden /> <span className="hidden sm:inline">Edit household</span>
+          <Pencil aria-hidden /> <span className="sr-only sm:not-sr-only">Edit household</span>
         </Button>
       )}
     </div>
@@ -205,7 +205,7 @@ function Hint({ icon: Icon, label }: { icon: typeof Utensils; label: string }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span tabIndex={0} className="inline-flex" aria-label={label}>
+        <span tabIndex={0} role="img" className="inline-flex" aria-label={label}>
           <Icon className="size-3.5" aria-hidden />
         </span>
       </TooltipTrigger>

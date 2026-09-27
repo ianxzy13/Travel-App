@@ -646,7 +646,9 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
                   {h.price_per_night != null && (
                     <div>
                       <dt className="inline">From </dt>
-                      <dd className="inline font-medium">{formatMoney(Number(h.price_per_night), data.currency)}</dd> / night
+                      <dd className="inline">
+                        <span className="font-medium">{formatMoney(Number(h.price_per_night), data.currency)}</span> / night
+                      </dd>
                     </div>
                   )}
                   {h.discount_code && (

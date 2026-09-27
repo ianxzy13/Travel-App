@@ -296,53 +296,61 @@ function GuestRow({
     disabled: !canEdit,
   });
 
+  // The drag handle (role="button") sits inside the <li>, so the list stays a proper list.
   return (
-    <li
-      ref={setNodeRef}
-      {...listeners}
-      {...attributes}
-      onClick={() => canEdit && onPick(picked ? null : { guestIds: [g.id], label: g.name })}
-      aria-label={`${g.name}${seatLabel ? `, seated at ${seatLabel}` : ", not seated"}. Drag or tap to seat`}
-      className={cn(
-        "flex cursor-grab items-center gap-2 px-2 py-1.5 text-sm last:rounded-b-lg",
-        picked ? "bg-primary text-primary-foreground" : "hover:bg-accent",
-        isDragging && "opacity-40",
-      )}
-    >
-      <span className="min-w-0 flex-1">
-        <span className={cn("block truncate", !g.firstName && !g.lastName && "italic")}>
-          {g.name}
+    <li className="last:*:rounded-b-lg">
+      <div
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        onClick={() => canEdit && onPick(picked ? null : { guestIds: [g.id], label: g.name })}
+        aria-label={`${g.name}${seatLabel ? `, seated at ${seatLabel}` : ", not seated"}. Drag or tap to seat`}
+        className={cn(
+          "flex cursor-grab items-center gap-2 px-2 py-1.5 text-sm",
+          picked ? "bg-primary text-primary-foreground" : "hover:bg-accent",
+          isDragging && "opacity-40",
+        )}
+      >
+        <span className="min-w-0 flex-1">
+          <span className={cn("block truncate", !g.firstName && !g.lastName && "italic")}>
+            {g.name}
+          </span>
+          {(meal || g.rsvp !== "attending") && (
+            <span
+              className={cn(
+                "block truncate text-xs",
+                picked ? "opacity-80" : "text-muted-foreground",
+              )}
+            >
+              {g.rsvp === "declined" ? "Declined" : g.rsvp === null ? "No reply yet" : meal}
+            </span>
+          )}
         </span>
-        {(meal || g.rsvp !== "attending") && (
+        {g.dietary && (
+          <Utensils
+            className="size-3.5 shrink-0 opacity-60"
+            role="img"
+            aria-label={`Dietary: ${g.dietary}`}
+          />
+        )}
+        {g.accessibility && (
+          <Accessibility
+            className="size-3.5 shrink-0 opacity-60"
+            role="img"
+            aria-label={`Accessibility: ${g.accessibility}`}
+          />
+        )}
+        {seatLabel && (
           <span
             className={cn(
-              "block truncate text-xs",
-              picked ? "opacity-80" : "text-muted-foreground",
+              "shrink-0 rounded px-1.5 text-xs",
+              picked ? "bg-primary-foreground/20" : "bg-muted",
             )}
           >
-            {g.rsvp === "declined" ? "Declined" : g.rsvp === null ? "No reply yet" : meal}
+            {seatLabel}
           </span>
         )}
-      </span>
-      {g.dietary && (
-        <Utensils className="size-3.5 shrink-0 opacity-60" aria-label={`Dietary: ${g.dietary}`} />
-      )}
-      {g.accessibility && (
-        <Accessibility
-          className="size-3.5 shrink-0 opacity-60"
-          aria-label={`Accessibility: ${g.accessibility}`}
-        />
-      )}
-      {seatLabel && (
-        <span
-          className={cn(
-            "shrink-0 rounded px-1.5 text-xs",
-            picked ? "bg-primary-foreground/20" : "bg-muted",
-          )}
-        >
-          {seatLabel}
-        </span>
-      )}
+      </div>
     </li>
   );
 }

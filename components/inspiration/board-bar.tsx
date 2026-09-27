@@ -38,14 +38,31 @@ export function BoardBar({
             type="button"
             onClick={() => onSelect("all")}
             aria-current={selected === "all" ? "page" : undefined}
-            className={cn(chip, selected === "all" ? "bg-primary text-primary-foreground border-primary" : "hover:bg-accent")}
+            className={cn(
+              chip,
+              selected === "all"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "hover:bg-accent",
+            )}
           >
-            All pins <span className="opacity-70">{total}</span>
+            All pins{" "}
+            <span className={selected === "all" ? undefined : "text-muted-foreground"}>
+              {total}
+            </span>
           </button>
         </li>
-        <SortableContext items={boards.map((b) => `board:${b.id}`)} strategy={horizontalListSortingStrategy}>
+        <SortableContext
+          items={boards.map((b) => `board:${b.id}`)}
+          strategy={horizontalListSortingStrategy}
+        >
           {boards.map((b) => (
-            <BoardChip key={b.id} board={b} active={selected === b.id} canEdit={canEdit} onSelect={() => onSelect(b.id)} />
+            <BoardChip
+              key={b.id}
+              board={b}
+              active={selected === b.id}
+              canEdit={canEdit}
+              onSelect={() => onSelect(b.id)}
+            />
           ))}
         </SortableContext>
         {canEdit && (
@@ -110,7 +127,8 @@ function BoardChip({
           active ? "bg-primary text-primary-foreground border-primary" : "hover:bg-accent",
         )}
       >
-        {board.name} <span className="opacity-70">{board.count}</span>
+        {board.name}{" "}
+        <span className={active ? undefined : "text-muted-foreground"}>{board.count}</span>
       </button>
     </li>
   );

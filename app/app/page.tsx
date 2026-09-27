@@ -84,7 +84,7 @@ export default async function DashboardPage({
       .eq("wedding_id", wedding.id),
   ]);
 
-  // Suggestions based on what's still missing. More are added in later phases.
+  // Suggestions based on what's still missing.
   const steps: { label: string; href: string; done: boolean }[] = [
     { label: "Set your wedding date", href: "/app/settings", done: !!wedding.wedding_date },
     { label: "Choose a location", href: "/app/settings", done: !!wedding.location },
@@ -192,7 +192,7 @@ export default async function DashboardPage({
           </CardContent>
         </Card>
 
-        {/* Module summaries (filled with real numbers in later phases) */}
+        {/* Module summaries */}
         <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2">
           <SummaryCard
             icon={Wallet}

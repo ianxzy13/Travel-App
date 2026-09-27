@@ -83,5 +83,8 @@ export function textOn(hex: string) {
   const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
   const lin = (c: number) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
   const lum = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  return lum > 0.4 ? "#1c1917" : "#ffffff";
+  // whichever of near-black (luminance about 0.01) or white has more contrast
+  const darkContrast = (lum + 0.05) / 0.06;
+  const whiteContrast = 1.05 / (lum + 0.05);
+  return darkContrast >= whiteContrast ? "#1c1917" : "#ffffff";
 }

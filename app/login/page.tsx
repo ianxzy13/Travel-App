@@ -30,7 +30,9 @@ export default async function LoginPage({
       <Logo />
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="font-serif text-3xl">Welcome</CardTitle>
+          <CardTitle>
+            <h1 className="font-serif text-3xl">Welcome</h1>
+          </CardTitle>
           <CardDescription>Sign in or create your account. No password needed.</CardDescription>
         </CardHeader>
         <CardContent>

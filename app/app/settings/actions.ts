@@ -72,7 +72,7 @@ export async function inviteCollaborator(input: unknown): Promise<ActionResult<{
 
   if (error) return fail("inviteCollaborator", error);
 
-  // TODO (phase 3): also email this link automatically via Resend.
+  // The link is shown to the owner to share (WhatsApp, email…). Possible later: send it via Resend.
   revalidatePath("/app/settings");
   return { ok: true, data: { link: `${await getSiteUrl()}/invite/${data.token}` } };
 }

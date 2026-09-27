@@ -518,7 +518,7 @@ export function SeatingEditor(props: Props) {
                 )}
               >
                 <Icon className="size-4" aria-hidden />
-                <span className="hidden sm:inline">{label}</span>
+                <span className="sr-only sm:not-sr-only">{label}</span>
               </button>
             ))}
           </div>
@@ -526,7 +526,8 @@ export function SeatingEditor(props: Props) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
-                <CircleDashed aria-hidden /> <span className="hidden sm:inline">Colour by</span>
+                <CircleDashed aria-hidden />{" "}
+                <span className="sr-only sm:not-sr-only">Colour by</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -588,7 +589,7 @@ export function SeatingEditor(props: Props) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
-                <Printer aria-hidden /> <span className="hidden sm:inline">Print</span>
+                <Printer aria-hidden /> <span className="sr-only sm:not-sr-only">Print</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

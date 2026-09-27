@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import dynamic from "next/dynamic";
 import { format, parseISO } from "date-fns";
 import {
   AlertTriangle,
@@ -55,9 +56,14 @@ import {
   type CategorySummary,
 } from "@/lib/budget/stats";
 import { cn } from "@/lib/utils";
-import { BudgetCharts } from "./budget-charts";
 import { ExpenseSheet, type ExpenseSheetMode } from "./expense-sheet";
 import { MoneyInput } from "./money-input";
+
+// The charts library is large, so it's only downloaded when the charts are shown.
+const BudgetCharts = dynamic(() => import("./budget-charts").then((m) => m.BudgetCharts), {
+  ssr: false,
+  loading: () => <div className="bg-muted h-72 animate-pulse rounded-xl" aria-hidden />,
+});
 
 type Props = BudgetData & {
   weddingId: string;
@@ -265,19 +271,21 @@ function SummaryTiles({
             <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
               Remaining
             </dt>
-            <dd
-              className={cn(
-                "font-serif text-3xl font-semibold tabular-nums sm:text-4xl",
-                remaining != null && remaining < 0 && "text-destructive",
+            <dd>
+              <span
+                className={cn(
+                  "font-serif text-3xl font-semibold tabular-nums sm:text-4xl",
+                  remaining != null && remaining < 0 && "text-destructive",
+                )}
+              >
+                {remaining == null ? "–" : money(remaining)}
+              </span>
+              {remaining != null && remaining < 0 && (
+                <span className="text-destructive flex items-center gap-1 text-xs">
+                  <AlertTriangle className="size-3.5" aria-hidden /> Over budget
+                </span>
               )}
-            >
-              {remaining == null ? "–" : money(remaining)}
             </dd>
-            {remaining != null && remaining < 0 && (
-              <p className="text-destructive flex items-center gap-1 text-xs">
-                <AlertTriangle className="size-3.5" aria-hidden /> Over budget
-              </p>
-            )}
           </div>
         </dl>
         {/* paid | committed but unpaid | free */}
@@ -315,8 +323,10 @@ function Tile({ label, value, hint }: { label: string; value: string; hint?: str
   return (
     <div>
       <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">{label}</dt>
-      <dd className="font-serif text-3xl font-semibold tabular-nums sm:text-4xl">{value}</dd>
-      {hint && <p className="text-muted-foreground text-xs">{hint}</p>}
+      <dd>
+        <span className="font-serif text-3xl font-semibold tabular-nums sm:text-4xl">{value}</span>
+        {hint && <span className="text-muted-foreground block text-xs">{hint}</span>}
+      </dd>
     </div>
   );
 }
