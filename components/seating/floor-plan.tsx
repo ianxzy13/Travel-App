@@ -241,7 +241,11 @@ export function FloorPlan(props: Props) {
       className="bg-muted/40 relative size-full overflow-hidden rounded-xl border select-none"
       style={{ touchAction: "none" }}
     >
-      <svg className="absolute inset-0 size-full" role="application" aria-label={t("floorPlanLabel")}>
+      <svg
+        className="absolute inset-0 size-full"
+        role="application"
+        aria-label={t("floorPlanLabel")}
+      >
         <SeatingDefs />
         <defs>
           <pattern

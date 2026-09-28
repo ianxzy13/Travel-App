@@ -1,13 +1,8 @@
 import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
-const money = z
-  .number()
-  .finite()
-  .min(0, v("negative"))
-  .max(9_999_999_999, v("tooLarge"));
-const text = (max: number) =>
-  z.string().trim().max(max, v("tooLong", max));
+const money = z.number().finite().min(0, v("negative")).max(9_999_999_999, v("tooLarge"));
+const text = (max: number) => z.string().trim().max(max, v("tooLong", max));
 const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]);
 
 /** A file already uploaded to storage: its path and original name. */
@@ -56,10 +51,7 @@ export const vendorSchema = z.object({
   contactName: text(120),
   email: z.union([z.literal(""), z.email(v("email")).max(320)]),
   phone: text(50),
-  website: z.union([
-    z.literal(""),
-    z.url(v("url")).max(300),
-  ]),
+  website: z.union([z.literal(""), z.url(v("url")).max(300)]),
   instagram: text(100),
   address: text(300),
   quote: money.nullable(),

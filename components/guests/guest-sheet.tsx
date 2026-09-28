@@ -214,10 +214,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
 
         {/* ---------- household ---------- */}
         {!isPlusOne && (
-          <Section
-            title={t("household")}
-            hint={t("householdHint")}
-          >
+          <Section title={t("household")} hint={t("householdHint")}>
             <div className="grid gap-4 sm:grid-cols-2">
               <FormField id="g-household" label={t("household")}>
                 {(aria) => (
@@ -438,11 +435,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
               />
             )}
           </FormField>
-          <FormField
-            id="g-access"
-            label={t("accessibility")}
-            error={errors.accessibility?.message}
-          >
+          <FormField id="g-access" label={t("accessibility")} error={errors.accessibility?.message}>
             {(aria) => (
               <Input
                 {...aria}
@@ -457,10 +450,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         </Section>
 
         {editing && (
-          <Section
-            title={t("rules")}
-            hint={t("rulesHint")}
-          >
+          <Section title={t("rules")} hint={t("rulesHint")}>
             <RelationshipsEditor
               guest={editing}
               guests={guests}
@@ -537,20 +527,10 @@ function AddressFields({ form }: { form: UseFormReturn<GuestFormValues> }) {
         <span className="text-muted-foreground font-normal">{t("forHousehold")}</span>
       </summary>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <FormField
-          id="a-1"
-          label={t("line1")}
-          error={e?.line1?.message}
-          className="sm:col-span-2"
-        >
+        <FormField id="a-1" label={t("line1")} error={e?.line1?.message} className="sm:col-span-2">
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.line1")} />}
         </FormField>
-        <FormField
-          id="a-2"
-          label={t("line2")}
-          error={e?.line2?.message}
-          className="sm:col-span-2"
-        >
+        <FormField id="a-2" label={t("line2")} error={e?.line2?.message} className="sm:col-span-2">
           {(aria) => <Input {...aria} autoComplete="off" {...form.register("address.line2")} />}
         </FormField>
         <FormField id="a-city" label={t("city")} error={e?.city?.message}>

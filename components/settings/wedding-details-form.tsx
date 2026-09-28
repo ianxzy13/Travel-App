@@ -47,9 +47,7 @@ export function WeddingDetailsForm({
     <Card>
       <CardHeader>
         <CardTitle className="font-serif text-2xl">{t("detailsTitle")}</CardTitle>
-        <CardDescription>
-          {readOnly ? t("detailsViewOnly") : t("detailsText")}
-        </CardDescription>
+        <CardDescription>{readOnly ? t("detailsViewOnly") : t("detailsText")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-6" noValidate>

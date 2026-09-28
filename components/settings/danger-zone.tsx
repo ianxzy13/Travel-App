@@ -27,9 +27,7 @@ export function DangerZone({ isOwner, weddingName }: { isOwner: boolean; wedding
         <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <Row
-          text={t.rich("leaveText", { name: weddingName, b })}
-        >
+        <Row text={t.rich("leaveText", { name: weddingName, b })}>
           <ConfirmDialog
             trigger={<Button variant="outline">{t("leave")}</Button>}
             title={t("leaveTitle")}
@@ -42,9 +40,7 @@ export function DangerZone({ isOwner, weddingName }: { isOwner: boolean; wedding
         {isOwner && (
           <>
             <Separator />
-            <Row
-              text={t.rich("deleteText", { name: weddingName, b })}
-            >
+            <Row text={t.rich("deleteText", { name: weddingName, b })}>
               <ConfirmDialog
                 trigger={<Button variant="destructive">{t("delete")}</Button>}
                 title={t("deleteTitle")}

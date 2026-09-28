@@ -51,7 +51,11 @@ export function ListView({
   const tablePicker = (g: SeatingGuest, current?: string) =>
     canEdit && (
       <Select value={current ?? ""} onValueChange={(v) => onSeatAt(g.id, v)}>
-        <SelectTrigger size="sm" className="w-32" aria-label={t("listView.seatAt", { name: g.name })}>
+        <SelectTrigger
+          size="sm"
+          className="w-32"
+          aria-label={t("listView.seatAt", { name: g.name })}
+        >
           <SelectValue placeholder={t("listView.seatAtPlaceholder")} />
         </SelectTrigger>
         <SelectContent>
@@ -104,7 +108,8 @@ export function ListView({
                 </div>
                 {issues.map((i, n) => (
                   <p key={n} className="text-destructive mb-1 flex gap-1.5 text-xs">
-                    <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {issueText(i)}
+                    <AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden />{" "}
+                    {issueText(i)}
                   </p>
                 ))}
                 {people.length === 0 ? (

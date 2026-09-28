@@ -1,0 +1,195 @@
+/*
+ * ============================================================
+ *  Vow theme: every colour, font, corner and shadow in one place.
+ *  Change a value here and the whole app follows.
+ *
+ *  Style: nude, minimalist, feminine ("calm boutique").
+ *  Fonts are loaded in app/layout.tsx (Google Fonts via next/font):
+ *    --font-jost       body text           (Jost)
+ *    --font-garamond   headings            (EB Garamond)
+ *    --font-great-vibes accent words       (Great Vibes)
+ * ============================================================
+ */
+
+:root {
+  /* ---------- Fonts ---------- */
+  --font-body: var(--font-jost), "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    var(--font-garamond), "EB Garamond", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-accent: var(--font-great-vibes), "Great Vibes", cursive;
+
+  /* ---------- Shape ---------- */
+  --radius: 0.375rem; /* 6px; small corners everywhere */
+
+  /* ---------- Palette (light) ---------- */
+  --background: #faf6f2; /* warm off-white page */
+  --foreground: #4a3f3a; /* dark taupe text */
+  --card: #fffdfb; /* clean white cards */
+  --card-foreground: var(--foreground);
+  --popover: #fffdfb;
+  --popover-foreground: var(--foreground);
+  --muted: #f3ebe5; /* quiet fills (hover, tracks, table heads) */
+  /* Secondary text. The style guide's #8C7B72 is used for decoration below;
+     text uses this slightly deeper shade so small print stays readable (WCAG AA). */
+  --muted-foreground: #74635a;
+  --taupe-soft: #8c7b72;
+  --border: #e5d9d0; /* thin 1px lines */
+  --input: #dccdc2; /* form field borders */
+
+  /* sections */
+  --blush: #ebd5cc;
+  --sand: #e8ddd3;
+  /* highlights of the photo-style backdrop (soft-photo) */
+  --photo-light: #fffaf6;
+  --photo-glow: #f6e9e1;
+
+  /* dusty rose accent: button fills, highlights, decoration */
+  --primary: #c49a8a;
+  --primary-hover: #b08576;
+  /* Text on dusty rose. Deep taupe instead of white keeps button labels readable
+     (white on #C49A8A is only 2.5:1). Set to #ffffff here for white labels. */
+  --primary-foreground: #2e2521;
+  --primary-soft: #f3e4dd; /* soft blush highlight */
+  /* dusty rose deep enough for small text and icons on the light background */
+  --primary-ink: #855a4c;
+  --ring: #c49a8a;
+
+  /* states: muted, never bright */
+  --destructive: #a94f45;
+  --success: #587354;
+  --warning: #8a6636;
+
+  /* soft tints for status badges: background / text */
+  --tint-blush: #f3e1da;
+  --tint-blush-fg: #7a4e42;
+  --tint-sand: #efe6dc;
+  --tint-sand-fg: #6b5a48;
+  --tint-sage: #e4e8dd;
+  --tint-sage-fg: #4f6149;
+  --tint-mist: #e3e6e8;
+  --tint-mist-fg: #4e5a63;
+  --tint-mauve: #eadde3;
+  --tint-mauve-fg: #6a4d5b;
+  --tint-clay: #f1dad3;
+  --tint-clay-fg: #8e3f35;
+
+  /* dimmed backdrop behind dialogs and sheets */
+  --overlay: rgb(46 37 33 / 0.35);
+
+  /* soft, warm shadows */
+  --shadow-color: 30 20 15;
+  --soft-shadow-xs: 0 1px 2px rgb(var(--shadow-color) / 0.04);
+  --soft-shadow-sm: 0 1px 3px rgb(var(--shadow-color) / 0.05);
+  --soft-shadow-md: 0 4px 14px -4px rgb(var(--shadow-color) / 0.08);
+  --soft-shadow-lg: 0 12px 32px -12px rgb(var(--shadow-color) / 0.12);
+
+  /* seating chart: seat colours (white initials sit on them) */
+  --seat-side-a: #a8604e;
+  --seat-side-b: #4f7489;
+  --seat-side-both: #7a6960;
+  --seat-no-meal: #8c7b72;
+  --seat-1: #a8604e;
+  --seat-2: #4f7489;
+  --seat-3: #8f6a36;
+  --seat-4: #5f7a55;
+  --seat-5: #8a5f80;
+  --seat-6: #6b574d;
+  --seat-7: #9b4f45;
+  --seat-8: #5d6b7a;
+
+  /* charts (fixed order): rose, mist, sand, taupe, sage, blush, mauve.
+     Checked for colour-blind separation between neighbours. */
+  --chart-1: #b06a57;
+  --chart-2: #4f7489;
+  --chart-3: #c79b5e;
+  --chart-4: #57463e;
+  --chart-5: #6a845e;
+  --chart-6: #d1b2a4;
+  --chart-7: #94658a;
+  --chart-other: #cbbdb3;
+}
+
+/* Optional app accent (Settings → wedding details): sage instead of rose. */
+[data-accent="rose"] {
+  --primary: #c49a8a;
+  --primary-hover: #b08576;
+  --primary-soft: #f3e4dd;
+  --primary-ink: #855a4c;
+  --ring: #c49a8a;
+}
+[data-accent="sage"] {
+  --primary: #a3ad96;
+  --primary-hover: #8f9a82;
+  --primary-soft: #e8ebe2;
+  --primary-ink: #5b6b52;
+  --ring: #a3ad96;
+}
+
+/* ---------- Palette (dark): the same nude family, warm and low-light ---------- */
+.dark {
+  --background: #1f1a17;
+  --foreground: #efe6df;
+  --card: #27211d;
+  --popover: #27211d;
+  --muted: #2f2824;
+  --muted-foreground: #b5a398;
+  --taupe-soft: #a08f85;
+  --border: #3b322d;
+  --input: #4a3f39;
+  --blush: #3a2c28;
+  --sand: #332b26;
+  --photo-light: #4a3c36;
+  --photo-glow: #43352f;
+
+  --primary: #c49a8a;
+  --primary-hover: #d1ab9d;
+  --primary-foreground: #241c19;
+  --primary-soft: #3a2c28;
+  --primary-ink: #dbb5a7;
+  --ring: #c49a8a;
+
+  --destructive: #d9796c;
+  --success: #9db896;
+  --warning: #d6b07a;
+
+  --tint-blush: #3d2c27;
+  --tint-blush-fg: #efcfc3;
+  --tint-sand: #362d26;
+  --tint-sand-fg: #e6d6c5;
+  --tint-sage: #2b3129;
+  --tint-sage-fg: #cdd9c5;
+  --tint-mist: #2a2f33;
+  --tint-mist-fg: #cfd8df;
+  --tint-mauve: #352a30;
+  --tint-mauve-fg: #e6ccd8;
+  --tint-clay: #3f2622;
+  --tint-clay-fg: #f0bdb2;
+
+  --shadow-color: 0 0 0;
+  --overlay: rgb(0 0 0 / 0.55);
+
+  --chart-1: #c98672;
+  --chart-2: #7da3b8;
+  --chart-3: #d4ad72;
+  --chart-4: #a08c80;
+  --chart-5: #8fab82;
+  --chart-6: #e2c8bb;
+  --chart-7: #b88aae;
+  --chart-other: #5e524b;
+}
+.dark [data-accent="rose"],
+.dark[data-accent="rose"] {
+  --primary: #c49a8a;
+  --primary-hover: #d1ab9d;
+  --primary-soft: #3a2c28;
+  --primary-ink: #dbb5a7;
+  --ring: #c49a8a;
+}
+.dark [data-accent="sage"],
+.dark[data-accent="sage"] {
+  --primary: #a3ad96;
+  --primary-hover: #b5bea9;
+  --primary-soft: #2b3129;
+  --primary-ink: #c3cdb8;
+  --ring: #a3ad96;
+}

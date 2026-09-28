@@ -113,24 +113,26 @@ export default async function DashboardPage({
   const doneCount = steps.filter((s) => s.done).length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       {welcome && (
-        <div role="status" className="bg-primary-soft rounded-xl px-5 py-4">
-          <p className="font-serif text-2xl font-semibold">{t("welcome")}</p>
+        <div role="status" className="bg-blush/60 rounded-lg px-6 py-5">
+          <p className="font-script text-4xl leading-tight">{t("welcome")}</p>
           <p className="text-muted-foreground text-sm">{t("welcomeText")}</p>
         </div>
       )}
 
-      {/* Countdown hero */}
-      <Card className="overflow-hidden">
-        <CardContent className="relative p-6 sm:p-8">
-          <div
-            aria-hidden
-            className="bg-primary-soft pointer-events-none absolute -end-24 -top-24 size-72 rounded-full blur-2xl"
-          />
-          <div className="relative">
-            <h1 className="text-4xl sm:text-5xl">{coupleName(wedding)}</h1>
-            <p className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+      {/* Countdown hero: a soft photo-style backdrop with an overlapping card */}
+      <section className="relative lg:min-h-[22rem]">
+        <div
+          aria-hidden
+          className="soft-photo h-44 rounded-lg sm:h-56 lg:absolute lg:inset-y-0 lg:start-0 lg:h-auto lg:w-3/5"
+        />
+        <div className="bg-card relative mx-3 -mt-16 rounded-md border p-6 sm:mx-8 sm:p-10 lg:ms-auto lg:me-0 lg:mt-10 lg:w-[58%]">
+          <div>
+            <h1 className="font-script text-5xl leading-tight font-normal sm:text-6xl">
+              {coupleName(wedding)}
+            </h1>
+            <p className="caps text-muted-foreground mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
               <span>
                 {wedding.wedding_date ? fmtDate(wedding.wedding_date, locale, "full") : t("noDate")}
               </span>
@@ -155,8 +157,8 @@ export default async function DashboardPage({
               )}
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Next steps */}
@@ -209,7 +211,7 @@ export default async function DashboardPage({
             {(budget.summary.total != null || budget.summary.totals.committed > 0) && (
               <div className="space-y-3">
                 <p className="text-sm">
-                  <span className="font-serif text-3xl font-semibold tabular-nums">
+                  <span className="font-serif text-3xl font-medium tabular-nums">
                     {money(budget.summary.totals.committed)}
                   </span>{" "}
                   <span className="text-muted-foreground">
@@ -274,7 +276,7 @@ export default async function DashboardPage({
                   ] as const
                 ).map(([label, n]) => (
                   <div key={label} className="bg-muted rounded-lg p-2">
-                    <dd className="font-serif text-3xl font-semibold tabular-nums">{n}</dd>
+                    <dd className="font-serif text-3xl font-medium tabular-nums">{n}</dd>
                     <dt className="text-muted-foreground text-xs">{label}</dt>
                   </div>
                 ))}
@@ -291,7 +293,7 @@ export default async function DashboardPage({
             {seating.tables > 0 && (
               <div className="space-y-2">
                 <p className="text-sm">
-                  <span className="font-serif text-3xl font-semibold tabular-nums">
+                  <span className="font-serif text-3xl font-medium tabular-nums">
                     {seating.seated}
                   </span>{" "}
                   <span className="text-muted-foreground">
@@ -345,9 +347,7 @@ export default async function DashboardPage({
             {tasks.total > 0 && (
               <div className="space-y-3">
                 <p className="text-sm">
-                  <span className="font-serif text-3xl font-semibold tabular-nums">
-                    {tasks.done}
-                  </span>{" "}
+                  <span className="font-serif text-3xl font-medium tabular-nums">{tasks.done}</span>{" "}
                   <span className="text-muted-foreground">
                     {t("tasks.ofDone", { total: tasks.total })}
                   </span>
@@ -415,7 +415,7 @@ function SummaryCard({
   return (
     <Card>
       <CardHeader className="flex items-center gap-3">
-        <span className="bg-primary-soft text-primary inline-flex size-9 items-center justify-center rounded-full">
+        <span className="bg-primary-soft text-primary-ink inline-flex size-9 items-center justify-center rounded-full">
           <Icon className="size-4" aria-hidden />
         </span>
         <CardTitle className="font-serif text-2xl">{title}</CardTitle>

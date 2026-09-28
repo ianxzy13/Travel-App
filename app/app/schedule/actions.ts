@@ -160,8 +160,7 @@ export async function addTemplateDay(
   const ctx = await editor();
   if (!ctx || !day.safeParse(forDay).success || !/^([01]\d|2[0-3]):[0-5]\d$/.test(ceremonyTime))
     return noPermission();
-  if ((await itemsOfDay(ctx, forDay)).length)
-    return await err("scheduleNotEmpty");
+  if ((await itemsOfDay(ctx, forDay)).length) return await err("scheduleNotEmpty");
   const [{ data: events }, { data: venues }] = await Promise.all([
     ctx.sb.from("events").select("name, venue_name").eq("wedding_id", ctx.wedding.id),
     ctx.sb

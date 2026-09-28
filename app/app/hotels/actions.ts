@@ -8,7 +8,6 @@ import { hotelGuestsSchema, hotelSchema } from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 
-
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;

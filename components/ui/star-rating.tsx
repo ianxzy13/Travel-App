@@ -27,7 +27,7 @@ export function StarRating({
             key={n}
             className={cn(
               size,
-              n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40",
+              n <= (value ?? 0) ? "fill-primary text-primary" : "text-muted-foreground/40",
             )}
             aria-hidden
           />
@@ -50,7 +50,7 @@ export function StarRating({
           <Star
             className={cn(
               size,
-              n <= (value ?? 0) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/50",
+              n <= (value ?? 0) ? "fill-primary text-primary" : "text-muted-foreground/50",
             )}
             aria-hidden
           />

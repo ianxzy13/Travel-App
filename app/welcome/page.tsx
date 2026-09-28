@@ -23,15 +23,18 @@ export default async function WelcomePage({
   if (next.startsWith("/welcome")) redirect("/app");
   const t = await getTranslations("welcome");
   return (
-    <main className="bg-muted/40 min-h-dvh">
-      <header className="mx-auto flex max-w-3xl items-center px-4 py-5">
+    <main className="min-h-dvh">
+      <header className="mx-auto flex max-w-3xl items-center justify-center px-4 py-8">
         <Logo />
       </header>
       <div className="mx-auto max-w-3xl px-4 pb-16">
-        <h1 className="text-4xl sm:text-5xl">{t("title")}</h1>
-        <p className="text-muted-foreground mt-3 max-w-xl">{t("intro")}</p>
+        <div aria-hidden className="soft-photo mb-10 h-28 rounded-lg sm:h-36" />
+        <h1 className="text-center text-4xl font-light sm:text-5xl">{t("title")}</h1>
+        <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-center">{t("intro")}</p>
         <WelcomeLanguages suggested={await getLocale()} next={next} />
-        <p className="text-muted-foreground mt-8 max-w-xl text-sm">{t("guestsNote")}</p>
+        <p className="text-muted-foreground mx-auto mt-10 max-w-xl text-center text-sm">
+          {t("guestsNote")}
+        </p>
       </div>
     </main>
   );

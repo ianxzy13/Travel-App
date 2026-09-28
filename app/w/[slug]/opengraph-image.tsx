@@ -11,7 +11,7 @@ export const contentType = "image/png";
 
 // Google Fonts family for each heading font (the link-preview image is drawn on the server).
 const GOOGLE: Record<HeadingFont, string> = {
-  cormorant: "Cormorant Garamond:wght@500",
+  cormorant: "EB Garamond:wght@500",
   playfair: "Playfair Display:ital@1",
   fraunces: "Fraunces:wght@500",
   josefin: "Josefin Sans:wght@300",

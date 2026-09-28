@@ -32,10 +32,7 @@ export default async function ImportGuestsPage() {
           <ArrowLeft className="rtl:rotate-180" aria-hidden /> {t("backToGuests")}
         </Link>
       </Button>
-      <PageHeader
-        title={t("title")}
-        description={t("description")}
-      />
+      <PageHeader title={t("title")} description={t("description")} />
       <ImportWizard
         names={{ a: wedding.partner_a_name, b: wedding.partner_b_name }}
         eventNames={(events ?? []).map((e) => e.name)}

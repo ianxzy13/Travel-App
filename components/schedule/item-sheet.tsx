@@ -96,9 +96,7 @@ export function ItemSheet({
       <SheetContent className="w-full overflow-y-auto sm:max-w-md">
         <form onSubmit={submit} className="flex h-full flex-col">
           <SheetHeader>
-            <SheetTitle>
-              {item ? (canEdit ? t("edit") : t("view")) : t("new")}
-            </SheetTitle>
+            <SheetTitle>{item ? (canEdit ? t("edit") : t("view")) : t("new")}</SheetTitle>
             <SheetDescription>{t("hint")}</SheetDescription>
           </SheetHeader>
           <fieldset disabled={!canEdit} className="flex-1 space-y-4 px-4">
@@ -117,7 +115,11 @@ export function ItemSheet({
               <FormField id="item-start" label={t("starts")} error={errors.start_time?.message}>
                 {(a) => <Input {...a} type="time" {...form.register("start_time")} />}
               </FormField>
-              <FormField id="item-duration" label={t("minutes")} error={errors.duration_min?.message}>
+              <FormField
+                id="item-duration"
+                label={t("minutes")}
+                error={errors.duration_min?.message}
+              >
                 {(a) => (
                   <Input
                     {...a}
@@ -137,11 +139,7 @@ export function ItemSheet({
             <FormField id="item-location" label={t("where")}>
               {(a) => <Input {...a} {...form.register("location")} maxLength={200} />}
             </FormField>
-            <FormField
-              id="item-owner"
-              label={t("owner")}
-              hint={t("ownerHint")}
-            >
+            <FormField id="item-owner" label={t("owner")} hint={t("ownerHint")}>
               {(a) => <Input {...a} {...form.register("owner")} maxLength={120} />}
             </FormField>
             <div className="space-y-2">

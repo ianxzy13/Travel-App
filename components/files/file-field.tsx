@@ -21,7 +21,10 @@ const ALLOWED = [
 ];
 
 /** Opens a private file in a new tab using a link that expires after 5 minutes. */
-export async function openFile(path: string, failedText = "Couldn't open the file. Please try again.") {
+export async function openFile(
+  path: string,
+  failedText = "Couldn't open the file. Please try again.",
+) {
   // open the tab first (inside the click) so pop-up blockers allow it
   const tab = window.open("", "_blank");
   const { data, error } = await createClient().storage.from(BUCKET).createSignedUrl(path, 300);

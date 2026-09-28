@@ -1,14 +1,20 @@
 import {
   Fraunces,
   Great_Vibes,
+  Inter,
   Josefin_Sans,
   Lora,
   Nunito_Sans,
   Playfair_Display,
 } from "next/font/google";
 
-// Extra fonts for the wedding website (Inter and Cormorant are loaded in the
-// root layout). The browser only downloads the ones a site actually uses.
+// Extra fonts for the wedding website (Garamond is loaded in the root layout;
+// Great Vibes is shared with it). The browser only downloads the ones a site uses.
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-inter",
+  display: "swap",
+});
 const playfair = Playfair_Display({
   subsets: ["latin", "latin-ext"],
   variable: "--font-playfair",
@@ -25,7 +31,7 @@ const josefin = Josefin_Sans({
   variable: "--font-josefin",
   display: "swap",
 });
-const greatVibes = Great_Vibes({
+export const greatVibes = Great_Vibes({
   subsets: ["latin", "latin-ext"],
   weight: "400",
   variable: "--font-great-vibes",
@@ -44,6 +50,6 @@ const nunito = Nunito_Sans({
 });
 
 /** Put on the site's root element so the font variables exist. */
-export const siteFontVariables = [playfair, fraunces, josefin, greatVibes, lora, nunito]
+export const siteFontVariables = [inter, playfair, fraunces, josefin, lora, nunito]
   .map((f) => f.variable)
   .join(" ");

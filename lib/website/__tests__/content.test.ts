@@ -120,6 +120,6 @@ describe("templates", () => {
   });
   it("picks readable button text", () => {
     expect(onAccent("#0b0b0b")).toBe("#ffffff");
-    expect(onAccent("#f5e6a8")).toBe("#111111");
+    expect(onAccent("#f5e6a8")).toBe("#2e2521");
   });
 });

@@ -389,6 +389,7 @@ app/                      pages (Next.js App Router)
   b/[shareId]/            public shared inspiration board
   print/                  printable seating chart and run sheet
   api/resend/webhook/     email delivery status from Resend
+app/theme.css             the look: every colour, font, corner and shadow in one place
 i18n/, messages/          languages: which one to show, and every text in each language
 components/               UI, one folder per module; components/ui = shadcn/ui building blocks
 lib/                      logic shared by pages and server actions (one folder per module),
@@ -399,6 +400,12 @@ e2e/                      Playwright browser tests
 supabase/migrations/      SQL: tables, security rules, database functions
 middleware.ts             keeps the session fresh and protects /app pages
 ```
+
+**Look & feel:** a calm, nude "boutique" style: warm off-white, blush and sand, dusty-rose
+buttons, EB Garamond headings, Great Vibes for names and "Welcome", Jost for text. To change
+colours or fonts, edit `app/theme.css` (the fonts themselves are loaded in `app/layout.tsx`).
+Dark mode uses the same palette in low light. Small text in dusty rose uses a deeper "rose ink"
+shade, and button labels are dark taupe, so everything stays readable (WCAG AA).
 
 **Security:** every table has **Row Level Security**: people only see weddings they're a member of,
 and only owners/editors can change things. Public pages (website, RSVP, shared boards) go through

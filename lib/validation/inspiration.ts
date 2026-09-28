@@ -1,8 +1,7 @@
 import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
-const text = (max: number) =>
-  z.string().trim().max(max, v("tooLong", max));
+const text = (max: number) => z.string().trim().max(max, v("tooLong", max));
 const size = z.number().int().min(1).max(20000).nullable();
 
 export const boardSchema = z.object({

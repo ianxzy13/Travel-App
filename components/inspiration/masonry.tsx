@@ -47,9 +47,9 @@ export function Masonry<T extends { id: string; width: number | null; height: nu
   const index = new Map(items.map((it, i) => [it.id, i]));
   return (
     <div ref={ref}>
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-4 sm:gap-6">
         {masonryColumns(visible, cols).map((col, c) => (
-          <div key={c} className="flex min-w-0 flex-1 flex-col gap-3">
+          <div key={c} className="flex min-w-0 flex-1 flex-col gap-5 sm:gap-7">
             {col.map((item) => render(item, index.get(item.id)!))}
           </div>
         ))}

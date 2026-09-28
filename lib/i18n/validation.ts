@@ -6,7 +6,8 @@ export type ValidationKey = keyof Messages["validation"];
  * Form checks (zod) store a short code instead of an English sentence, e.g.
  * v("email") or v("tooLong", 120); the form shows it in the person's language.
  */
-export const v = (key: ValidationKey, n?: number) => (n === undefined ? `v.${key}` : `v.${key}:${n}`);
+export const v = (key: ValidationKey, n?: number) =>
+  n === undefined ? `v.${key}` : `v.${key}:${n}`;
 
 type T = (key: ValidationKey, values?: { n: number }) => string;
 

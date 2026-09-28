@@ -65,8 +65,7 @@ export function PhotosField({
     const chosen = files.slice(0, room);
     if (files.length > room) toast.warning(t("onlyFit", { count: room }));
     const ok = chosen.filter((f) => {
-      if (!TYPES.includes(f.type))
-        toast.error(t("notImage", { name: f.name }));
+      if (!TYPES.includes(f.type)) toast.error(t("notImage", { name: f.name }));
       else if (f.size > MAX_BYTES) toast.error(t("imageTooBig", { name: f.name }));
       else return true;
       return false;
@@ -133,7 +132,7 @@ export function PhotosField({
                 type="button"
                 onClick={() => remove(p)}
                 aria-label={t("removePhoto", { n: i + 1 })}
-                className="focus-visible:ring-ring absolute end-1 top-1 rounded-full bg-black/60 p-1 text-white focus-visible:ring-2 focus-visible:outline-none"
+                className="focus-visible:ring-ring absolute end-1 top-1 rounded-full bg-[rgb(46_37_33/0.6)] p-1 text-white focus-visible:ring-2 focus-visible:outline-none"
               >
                 <X className="size-3.5" aria-hidden />
               </button>
@@ -160,9 +159,7 @@ export function PhotosField({
           </li>
         )}
       </ul>
-      <p className="text-muted-foreground text-xs">
-        {t("photosHint", { max })}
-      </p>
+      <p className="text-muted-foreground text-xs">{t("photosHint", { max })}</p>
     </div>
   );
 }

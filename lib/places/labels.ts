@@ -8,11 +8,11 @@ import type {
 } from "@/lib/database.types";
 
 const muted = "bg-muted text-muted-foreground";
-const sky = "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-200";
-const amber = "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200";
-const violet = "bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200";
-const green = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200";
-const red = "bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200";
+const sky = "bg-tint-mist text-tint-mist-fg";
+const amber = "bg-tint-sand text-tint-sand-fg";
+const violet = "bg-tint-mauve text-tint-mauve-fg";
+const green = "bg-tint-sage text-tint-sage-fg";
+const red = "bg-tint-clay text-tint-clay-fg";
 
 // Labels are in messages "places.*"; these are the badge colours.
 

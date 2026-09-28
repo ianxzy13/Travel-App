@@ -46,23 +46,16 @@ export async function saveTask(taskId: string | null, input: unknown): Promise<A
       .update(row)
       .eq("id", taskId)
       .eq("wedding_id", ctx.wedding.id);
-    if (error)
-      return fail(
-        "saveTask",
-        error,
-        error.code === "23514" ? "notMember" : undefined,
-      );
+    if (error) return fail("saveTask", error, error.code === "23514" ? "notMember" : undefined);
   } else {
     // new to-dos go to the end of their day's list
     const days = row.due_date ? Math.floor(Date.parse(row.due_date) / 86_400_000) : 1e6;
-    const { error } = await ctx.sb
-      .from("tasks")
-      .insert({
-        ...row,
-        wedding_id: ctx.wedding.id,
-        created_by: user.id,
-        sort_order: days + 0.999,
-      });
+    const { error } = await ctx.sb.from("tasks").insert({
+      ...row,
+      wedding_id: ctx.wedding.id,
+      created_by: user.id,
+      sort_order: days + 0.999,
+    });
     if (error) return fail("saveTask", error);
   }
   return done();
@@ -110,8 +103,7 @@ export async function addSuggestedTasks(): Promise<ActionResult<{ added: number 
   const user = await requireUser();
   const ctx = await editor();
   if (!ctx) return noPermission();
-  if (!ctx.wedding.wedding_date)
-    return await err("setDateFirst");
+  if (!ctx.wedding.wedding_date) return await err("setDateFirst");
   const { data: existing, error: readError } = await ctx.sb
     .from("tasks")
     .select("suggestion_key")

@@ -9,7 +9,6 @@ import { vendorSchema } from "@/lib/validation/budget";
 import { canEdit, requireWedding } from "@/lib/wedding";
 import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
@@ -105,8 +104,7 @@ export async function addQuoteToBudget(id: string): Promise<ActionResult> {
     .eq("wedding_id", ctx.wedding.id)
     .maybeSingle();
   if (!vendor) return await err("notFound");
-  if (!vendor.category_id)
-    return await err("vendorNeedsCategory");
+  if (!vendor.category_id) return await err("vendorNeedsCategory");
 
   const { error } = await ctx.sb.from("expenses").insert({
     wedding_id: ctx.wedding.id,

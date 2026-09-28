@@ -3,7 +3,11 @@
     "title": "Wedding website",
     "notSetUp": "The website tables aren’t set up yet. Run the phase 8 migration (see README), then reload this page.",
     "offline": "Couldn’t reach the server. Check your connection; we’ll keep your changes here.",
-    "tabs": { "design": "Design", "sections": "Sections", "publish": "Publish" },
+    "tabs": {
+      "design": "Design",
+      "sections": "Sections",
+      "publish": "Publish"
+    },
     "published": "Published",
     "notPublished": "Not published yet",
     "password": "password",
@@ -63,11 +67,26 @@
       "heroHint": "The big photo at the top. Landscape photos work best (at least 1600 px wide).",
       "uploadPhoto": "Upload a photo",
       "templates": {
-        "classic": { "label": "Classic", "description": "Ivory, gold and serif type, centred and timeless." },
-        "modern": { "label": "Modern Minimal", "description": "Big bold type, black and white, lots of space." },
-        "garden": { "label": "Garden", "description": "Sage greens, soft paper and botanical sprigs." },
-        "boho": { "label": "Boho", "description": "Warm terracotta, sand and arches." },
-        "beach": { "label": "Beach", "description": "Light blues, airy type and gentle waves." }
+        "classic": {
+          "label": "Classic",
+          "description": "Nude and blush tones, serif names with a script accent."
+        },
+        "modern": {
+          "label": "Modern Minimal",
+          "description": "Big bold type, black and white, lots of space."
+        },
+        "garden": {
+          "label": "Garden",
+          "description": "Sage greens, soft paper and botanical sprigs."
+        },
+        "boho": {
+          "label": "Boho",
+          "description": "Warm terracotta, sand and arches."
+        },
+        "beach": {
+          "label": "Beach",
+          "description": "Light blues, airy type and gentle waves."
+        }
       },
       "fontStyles": {
         "elegantSerif": "elegant serif",

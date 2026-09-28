@@ -8,18 +8,14 @@ import { useSeatingWords } from "./use-seating-words";
 
 export type ColorMode = "side" | "meal" | "none";
 
-const SIDE_COLORS = { partner_a: "var(--primary)", partner_b: "#0ea5e9", both: "#a8a29e" };
-const MEAL_COLORS = [
-  "#b45309",
-  "#0f766e",
-  "#7c3aed",
-  "#be123c",
-  "#1d4ed8",
-  "#4d7c0f",
-  "#a21caf",
-  "#0e7490",
-];
-const NO_MEAL = "#a8a29e";
+// Colours come from app/theme.css.
+const SIDE_COLORS = {
+  partner_a: "var(--seat-side-a)",
+  partner_b: "var(--seat-side-b)",
+  both: "var(--seat-side-both)",
+};
+const MEAL_COLORS = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `var(--seat-${n})`);
+const NO_MEAL = "var(--seat-no-meal)";
 
 /** Colour of a seated guest in the chosen colour mode. */
 export function guestColor(guest: SeatingGuest | undefined, mode: ColorMode, mealIds: string[]) {
@@ -54,13 +50,13 @@ export function legendItems(
 const DECOR_STYLE: Partial<
   Record<SeatingObject["kind"], { fill: string; stroke: string; dash?: string }>
 > = {
-  dance_floor: { fill: "url(#dance-floor)", stroke: "#a8a29e" },
-  stage: { fill: "#e7e5e4", stroke: "#78716c" },
-  bar: { fill: "#d6d3d1", stroke: "#78716c" },
-  buffet: { fill: "#e7e5e4", stroke: "#78716c" },
-  cake: { fill: "#fce7f3", stroke: "#be185d" },
-  entrance: { fill: "#dcfce7", stroke: "#15803d", dash: "8 6" },
-  pillar: { fill: "#57534e", stroke: "#44403c" },
+  dance_floor: { fill: "url(#dance-floor)", stroke: "var(--taupe-soft)" },
+  stage: { fill: "var(--sand)", stroke: "var(--taupe-soft)" },
+  bar: { fill: "var(--blush)", stroke: "var(--taupe-soft)" },
+  buffet: { fill: "var(--sand)", stroke: "var(--taupe-soft)" },
+  cake: { fill: "var(--primary-soft)", stroke: "var(--primary)" },
+  entrance: { fill: "var(--tint-sage)", stroke: "var(--tint-sage-fg)", dash: "8 6" },
+  pillar: { fill: "var(--taupe-soft)", stroke: "var(--muted-foreground)" },
   label: { fill: "transparent", stroke: "transparent" },
 };
 
@@ -69,9 +65,9 @@ export function SeatingDefs() {
   return (
     <defs>
       <pattern id="dance-floor" width="50" height="50" patternUnits="userSpaceOnUse">
-        <rect width="50" height="50" fill="#f5f5f4" />
-        <rect width="25" height="25" fill="#e7e5e4" />
-        <rect x="25" y="25" width="25" height="25" fill="#e7e5e4" />
+        <rect width="50" height="50" fill="var(--card)" />
+        <rect width="25" height="25" fill="var(--sand)" />
+        <rect x="25" y="25" width="25" height="25" fill="var(--sand)" />
       </pattern>
     </defs>
   );
@@ -134,7 +130,7 @@ export function ObjectShape({ object: o, selected, warning, bodyProps, renderSea
             }
             fontFamily={table && !o.label ? "var(--font-serif)" : "var(--font-sans)"}
             fontWeight={table ? 600 : 500}
-            fill={o.kind === "pillar" ? "#fafaf9" : "var(--foreground)"}
+            fill={o.kind === "pillar" ? "var(--background)" : "var(--foreground)"}
             style={{ pointerEvents: "none", userSelect: "none" }}
           >
             {o.kind === "pillar" ? "" : labelText}
@@ -185,7 +181,7 @@ export function StaticSeat({
   rotation: number;
 }) {
   const r = SEAT_SIZE / 2;
-  if (!guest) return <circle r={r} fill="#fff" stroke="#a8a29e" strokeDasharray="4 3" />;
+  if (!guest) return <circle r={r} fill="#fff" stroke="var(--taupe-soft)" strokeDasharray="4 3" />;
   return (
     <g>
       <circle r={r} fill={color} />

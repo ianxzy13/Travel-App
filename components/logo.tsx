@@ -9,12 +9,12 @@ export function Logo({ href = "/", className }: { href?: string; className?: str
     <Link
       href={href}
       className={cn(
-        "text-foreground font-serif text-2xl font-semibold tracking-tight focus-visible:rounded-sm focus-visible:outline-2",
+        "text-foreground font-serif text-2xl font-medium tracking-[0.28em] uppercase focus-visible:rounded-sm focus-visible:outline-2",
         className,
       )}
     >
       {APP_NAME}
-      <span className="text-primary">.</span>
+      <span className="text-primary-ink">.</span>
     </Link>
   );
 }

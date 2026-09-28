@@ -40,11 +40,11 @@ export default async function LandingPage() {
   const t = await getTranslations("landing");
   return (
     <div className="min-h-dvh overflow-x-clip">
-      <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-5 sm:px-6">
+      <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 sm:px-6">
         <Logo />
         <nav className="flex flex-wrap items-center gap-2">
           <AppLanguagePicker />
-          <Button asChild variant="ghost">
+          <Button asChild variant="ghost" className="caps">
             <Link href="/login">{t("signIn")}</Link>
           </Button>
           <Button asChild>
@@ -54,42 +54,54 @@ export default async function LandingPage() {
       </header>
 
       <main>
-        {/* Hero */}
-        <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-10 pb-20 sm:px-6 lg:grid-cols-2 lg:pt-20">
-          <div>
-            <p className="text-primary mb-4 text-sm font-medium tracking-wide uppercase">
-              {t("eyebrow")}
-            </p>
-            <h1 className="text-5xl leading-[1.05] text-balance sm:text-6xl">{t("title")}</h1>
-            <p className="text-muted-foreground mt-6 max-w-lg text-lg">{t("intro")}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <Link href="/login">{t("start")}</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#features">{t("seeInside")}</a>
-              </Button>
+        {/* Hero: a photo-style image with the text card overlapping it, like a magazine */}
+        <section className="mx-auto max-w-6xl px-4 pt-4 pb-24 sm:px-6 lg:pt-10">
+          <div className="grid items-center lg:grid-cols-12">
+            <div className="soft-photo relative h-72 overflow-hidden rounded-lg sm:h-96 lg:col-span-8 lg:col-start-5 lg:row-start-1 lg:h-[36rem]">
+              <div className="absolute inset-0 hidden items-center justify-end pe-10 lg:flex xl:pe-16">
+                <HeroPreview />
+              </div>
+            </div>
+            <div className="bg-card relative z-10 mx-4 -mt-20 rounded-md border p-8 sm:mx-10 sm:p-12 lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0">
+              <p className="eyebrow text-primary-ink">{t("eyebrow")}</p>
+              <h1 className="mt-5 text-5xl leading-[1.05] font-light text-balance sm:text-6xl">
+                {t("title")}
+              </h1>
+              <p className="text-muted-foreground mt-6 max-w-lg text-lg leading-relaxed">
+                {t("intro")}
+              </p>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button asChild size="lg">
+                  <Link href="/login">{t("start")}</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <a href="#features">{t("seeInside")}</a>
+                </Button>
+              </div>
             </div>
           </div>
-
-          <HeroPreview />
         </section>
 
         {/* Features */}
-        <section id="features" className="bg-card/60 border-t py-20">
+        <section id="features" className="bg-blush/35 py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <h2 className="text-center text-4xl">{t("featuresTitle")}</h2>
-            <p className="text-muted-foreground mx-auto mt-3 max-w-xl text-center">
+            <p className="font-script text-primary-ink text-center text-5xl" aria-hidden>
+              Vow
+            </p>
+            <h2 className="mt-2 text-center text-4xl font-light sm:text-5xl">
+              {t("featuresTitle")}
+            </h2>
+            <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-center leading-relaxed">
               {t("featuresText")}
             </p>
-            <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="bg-border mt-16 grid gap-px overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-3">
               {FEATURES.map(({ icon: Icon, key }) => (
-                <li key={key} className="bg-background rounded-xl border p-6">
-                  <span className="bg-primary-soft text-primary mb-4 inline-flex size-10 items-center justify-center rounded-full">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
+                <li key={key} className="bg-card p-8">
+                  <Icon className="text-primary-ink mb-5 size-6" aria-hidden />
                   <h3 className="text-2xl">{t(`features.${key}.title`)}</h3>
-                  <p className="text-muted-foreground mt-1">{t(`features.${key}.text`)}</p>
+                  <p className="text-muted-foreground mt-2 leading-relaxed">
+                    {t(`features.${key}.text`)}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -97,16 +109,18 @@ export default async function LandingPage() {
         </section>
 
         {/* Closing call to action */}
-        <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-          <h2 className="text-4xl sm:text-5xl">{t("closingTitle")}</h2>
-          <p className="text-muted-foreground mt-4">{t("closingText")}</p>
-          <Button asChild size="lg" className="mt-8">
-            <Link href="/login">{t("create")}</Link>
-          </Button>
+        <section className="bg-sand/50 px-4 py-28 text-center sm:px-6">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-4xl font-light sm:text-5xl">{t("closingTitle")}</h2>
+            <p className="text-muted-foreground mt-5 leading-relaxed">{t("closingText")}</p>
+            <Button asChild size="lg" className="mt-10">
+              <Link href="/login">{t("create")}</Link>
+            </Button>
+          </div>
         </section>
       </main>
 
-      <footer className="text-muted-foreground border-t py-8 text-center text-sm">
+      <footer className="caps text-muted-foreground border-t py-10 text-center">
         {t("footer", { year: new Date().getFullYear() })}
       </footer>
     </div>
@@ -118,12 +132,11 @@ async function HeroPreview() {
   const t = await getTranslations("landing.preview");
   const locale = await getLocale();
   return (
-    <div aria-hidden className="relative mx-auto w-full max-w-md">
-      <div className="bg-primary-soft absolute -inset-6 -z-10 rounded-[2rem] blur-2xl" />
-      <div className="bg-card rounded-2xl border p-6 shadow-xl">
-        <p className="text-muted-foreground text-sm">{t("couple")}</p>
-        <p className="mt-1 font-serif text-6xl font-semibold">214</p>
-        <p className="text-muted-foreground text-sm">{t("daysToGo")}</p>
+    <div aria-hidden className="relative w-full max-w-sm">
+      <div className="bg-card/95 rounded-md border p-6 shadow-lg">
+        <p className="font-script text-3xl">{t("couple")}</p>
+        <p className="mt-2 font-serif text-6xl font-light">214</p>
+        <p className="eyebrow">{t("daysToGo")}</p>
 
         <div className="mt-6 grid grid-cols-3 gap-3 text-center">
           {(
@@ -134,7 +147,7 @@ async function HeroPreview() {
             ] as const
           ).map(([n, label]) => (
             <div key={label} className="bg-muted rounded-lg p-3">
-              <p className="font-serif text-2xl font-semibold">{n}</p>
+              <p className="font-serif text-2xl font-medium">{n}</p>
               <p className="text-muted-foreground text-xs">{t(label)}</p>
             </div>
           ))}
@@ -156,7 +169,7 @@ async function HeroPreview() {
         </div>
 
         {/* mini seating chart */}
-        <svg viewBox="0 0 300 110" className="text-primary mt-6 w-full">
+        <svg viewBox="0 0 300 110" className="text-primary-ink mt-6 w-full">
           {[50, 150, 250].map((cx, t) => (
             <g key={cx}>
               <circle cx={cx} cy={55} r={24} className="fill-muted stroke-border" />

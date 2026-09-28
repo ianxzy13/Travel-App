@@ -1,88 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* All colours, fonts, corners and shadows live in theme.css. */
+@import "./theme.css";
 
 /* Dark mode is toggled by next-themes adding a `dark` class to <html>. */
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Colour tokens. Light theme is the default; `.dark` overrides.
- * The accent colour (primary) is switched with a data-accent attribute:
- *   data-accent="rose" (default)  or  data-accent="sage"
- */
-:root {
-  --radius: 0.75rem;
-
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.25 0.015 50);
-  --card: oklch(0.995 0.004 85);
-  --card-foreground: var(--foreground);
-  --popover: oklch(0.995 0.004 85);
-  --popover-foreground: var(--foreground);
-  --muted: oklch(0.955 0.01 80);
-  --muted-foreground: oklch(0.46 0.015 55);
-  --border: oklch(0.9 0.012 75);
-  --input: oklch(0.88 0.012 75);
-  --destructive: oklch(0.55 0.19 27);
-  --success: oklch(0.52 0.11 150);
-  --warning: oklch(0.53 0.12 65);
-
-  /* dusty rose */
-  --primary: oklch(0.54 0.09 12);
-  --primary-foreground: oklch(0.99 0.005 85);
-  --primary-soft: oklch(0.94 0.025 15);
-  --ring: oklch(0.54 0.09 12 / 0.5);
-}
-
-/* Explicit rose rule so rose can be shown inside a sage area (e.g. colour pickers). */
-[data-accent="rose"] {
-  --primary: oklch(0.54 0.09 12);
-  --primary-soft: oklch(0.94 0.025 15);
-  --ring: oklch(0.54 0.09 12 / 0.5);
-}
-
-[data-accent="sage"] {
-  --primary: oklch(0.5 0.06 150);
-  --primary-soft: oklch(0.94 0.025 150);
-  --ring: oklch(0.5 0.06 150 / 0.5);
-}
-
-.dark {
-  --background: oklch(0.18 0.01 50);
-  --foreground: oklch(0.94 0.01 80);
-  --card: oklch(0.22 0.01 50);
-  --popover: oklch(0.22 0.01 50);
-  --muted: oklch(0.26 0.01 50);
-  --muted-foreground: oklch(0.72 0.015 70);
-  --border: oklch(0.32 0.012 50);
-  --input: oklch(0.36 0.012 50);
-  --destructive: oklch(0.65 0.18 25);
-  --success: oklch(0.72 0.12 150);
-  --warning: oklch(0.78 0.12 75);
-
-  --primary: oklch(0.76 0.08 15);
-  --primary-foreground: oklch(0.2 0.01 30);
-  --primary-soft: oklch(0.3 0.04 15);
-  --ring: oklch(0.76 0.08 15 / 0.5);
-}
-
-.dark [data-accent="rose"],
-.dark[data-accent="rose"] {
-  --primary: oklch(0.76 0.08 15);
-  --primary-soft: oklch(0.3 0.04 15);
-  --ring: oklch(0.76 0.08 15 / 0.5);
-}
-
-.dark [data-accent="sage"],
-.dark[data-accent="sage"] {
-  --primary: oklch(0.76 0.06 150);
-  --primary-soft: oklch(0.3 0.035 150);
-  --ring: oklch(0.76 0.06 150 / 0.5);
-}
-
-/* Expose the tokens to Tailwind as utilities like bg-primary, text-muted-foreground. */
+/* Expose the theme to Tailwind as utilities like bg-primary, text-muted-foreground. */
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+  --font-script: var(--font-accent);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -91,12 +19,15 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-soft: var(--primary-soft);
+  --color-primary-ink: var(--primary-ink);
   --color-secondary: var(--muted);
   --color-secondary-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-taupe-soft: var(--taupe-soft);
   --color-accent: var(--primary-soft);
   --color-accent-foreground: var(--foreground);
   --color-destructive: var(--destructive);
@@ -105,11 +36,41 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-blush: var(--blush);
+  --color-sand: var(--sand);
+  --color-overlay: var(--overlay);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --color-tint-blush: var(--tint-blush);
+  --color-tint-blush-fg: var(--tint-blush-fg);
+  --color-tint-sand: var(--tint-sand);
+  --color-tint-sand-fg: var(--tint-sand-fg);
+  --color-tint-sage: var(--tint-sage);
+  --color-tint-sage-fg: var(--tint-sage-fg);
+  --color-tint-mist: var(--tint-mist);
+  --color-tint-mist-fg: var(--tint-mist-fg);
+  --color-tint-mauve: var(--tint-mauve);
+  --color-tint-mauve-fg: var(--tint-mauve-fg);
+  --color-tint-clay: var(--tint-clay);
+  --color-tint-clay-fg: var(--tint-clay-fg);
+
+  /* small corners (4–8px) everywhere, even where a component asks for "2xl" */
+  --radius-xs: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 2px);
+  --radius-2xl: calc(var(--radius) + 2px);
+  --radius-3xl: calc(var(--radius) + 2px);
+
+  /* very soft shadows */
+  --shadow-2xs: var(--soft-shadow-xs);
+  --shadow-xs: var(--soft-shadow-xs);
+  --shadow-sm: var(--soft-shadow-sm);
+  --shadow: var(--soft-shadow-sm);
+  --shadow-md: var(--soft-shadow-md);
+  --shadow-lg: var(--soft-shadow-lg);
+  --shadow-xl: var(--soft-shadow-lg);
+  --shadow-2xl: var(--soft-shadow-lg);
 }
 
 @layer base {
@@ -118,15 +79,32 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-weight: 400;
+    letter-spacing: 0.01em;
   }
   h1,
   h2,
   h3 {
-    @apply font-serif font-semibold tracking-tight;
+    @apply font-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  h3 {
+    font-weight: 500;
+  }
+  /* headings and script words look best without the body's extra letter spacing */
+  .font-serif,
+  .font-script {
+    letter-spacing: 0;
+  }
+  /* thin line icons */
+  svg.lucide {
+    stroke-width: 1.5;
   }
 }
 
-/* Cormorant's default "old-style" numbers dip below the line; use lining numbers. */
+/* Garamond's default "old-style" numbers dip below the line; use lining numbers. */
 .font-serif,
 h1,
 h2,
@@ -134,28 +112,64 @@ h3 {
   font-variant-numeric: lining-nums;
 }
 
-/*
- * Chart colours (categorical palette, fixed order; validated for colour-blind
- * separation in light and dark). Use in order: --chart-1, --chart-2, ...
- * --chart-other is the neutral for "Other".
- */
-:root {
-  --chart-1: #2a78d6;
-  --chart-2: #eb6834;
-  --chart-3: #1baf7a;
-  --chart-4: #eda100;
-  --chart-5: #e87ba4;
-  --chart-6: #008300;
-  --chart-7: #4a3aa7;
-  --chart-other: #a8a29e;
+/* Small uppercase label with wide letter spacing ("eyebrow" above headings). */
+@utility eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
-.dark {
-  --chart-1: #3987e5;
-  --chart-2: #d95926;
-  --chart-3: #199e70;
-  --chart-4: #c98500;
-  --chart-5: #d55181;
-  --chart-6: #008300;
-  --chart-7: #9085e9;
-  --chart-other: #78716c;
+
+/* Uppercase, letter-spaced text for buttons and navigation. */
+@utility caps {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/*
+ * A soft, photo-like backdrop (blush and sand light with a fine grain) used
+ * where a real photo isn't available yet. Purely decorative.
+ */
+@utility soft-photo {
+  background-color: var(--sand);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.27 0 0 0 0 0.23 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 240' fill='none' stroke='%238f6456' stroke-opacity='.22' stroke-width='.9' stroke-linecap='round'%3E%3Cpath d='M62 238 C60 190 64 140 58 90 C55 64 57 40 64 14'/%3E%3Cpath d='M61 205 C54.2 189.7 37.2 184.60000000000002 30.4 186.3 C32.1 196.5 49.1 206.7 61 205Z'/%3E%3Cpath d='M62 182 C68.4 167.6 84.39999999999999 162.8 90.8 164.4 C89.2 174 73.2 183.6 62 182Z'/%3E%3Cpath d='M61 156 C55 142.5 40 138 34 139.5 C35.5 148.5 50.5 157.5 61 156Z'/%3E%3Cpath d='M61 132 C66.6 119.4 80.60000000000001 115.19999999999999 86.2 116.6 C84.8 125 70.8 133.4 61 132Z'/%3E%3Cpath d='M59 106 C53.8 94.3 40.8 90.4 35.599999999999994 91.7 C36.89999999999999 99.5 49.9 107.3 59 106Z'/%3E%3Cpath d='M58 82 C62.6 71.65 74.10000000000001 68.19999999999999 78.7 69.35 C77.55 76.25 66.05 83.15 58 82Z'/%3E%3Cpath d='M59 58 C55.2 49.45 45.699999999999996 46.599999999999994 41.9 47.55 C42.85 53.25 52.35 58.95 59 58Z'/%3E%3Cpath d='M61 38 C64 31.25 71.5 29 74.5 29.75 C73.75 34.25 66.25 38.75 61 38Z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 240' fill='none' stroke='%238f6456' stroke-opacity='.22' stroke-width='.9' stroke-linecap='round'%3E%3Cpath d='M62 238 C60 190 64 140 58 90 C55 64 57 40 64 14'/%3E%3Cpath d='M61 205 C54.2 189.7 37.2 184.60000000000002 30.4 186.3 C32.1 196.5 49.1 206.7 61 205Z'/%3E%3Cpath d='M62 182 C68.4 167.6 84.39999999999999 162.8 90.8 164.4 C89.2 174 73.2 183.6 62 182Z'/%3E%3Cpath d='M61 156 C55 142.5 40 138 34 139.5 C35.5 148.5 50.5 157.5 61 156Z'/%3E%3Cpath d='M61 132 C66.6 119.4 80.60000000000001 115.19999999999999 86.2 116.6 C84.8 125 70.8 133.4 61 132Z'/%3E%3Cpath d='M59 106 C53.8 94.3 40.8 90.4 35.599999999999994 91.7 C36.89999999999999 99.5 49.9 107.3 59 106Z'/%3E%3Cpath d='M58 82 C62.6 71.65 74.10000000000001 68.19999999999999 78.7 69.35 C77.55 76.25 66.05 83.15 58 82Z'/%3E%3Cpath d='M59 58 C55.2 49.45 45.699999999999996 46.599999999999994 41.9 47.55 C42.85 53.25 52.35 58.95 59 58Z'/%3E%3Cpath d='M61 38 C64 31.25 71.5 29 74.5 29.75 C73.75 34.25 66.25 38.75 61 38Z'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 70% 60% at 22% 28%,
+      color-mix(in srgb, var(--photo-light) 85%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60% 70% at 82% 72%,
+      color-mix(in srgb, var(--blush) 95%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 70% 20%,
+      color-mix(in srgb, var(--photo-glow) 90%, transparent),
+      transparent 70%
+    ),
+    linear-gradient(135deg, var(--sand), var(--blush));
+  background-size:
+    160px 160px,
+    auto 78%,
+    auto 46%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-position:
+    0 0,
+    88% 115%,
+    97% 108%,
+    center,
+    center,
+    center,
+    center;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }

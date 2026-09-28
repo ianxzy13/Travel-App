@@ -10,6 +10,8 @@ export const DEMO_SLUG = "sofia-and-lucas-demo";
  * Signs in once for all tests: asks Supabase (with the admin key) for a
  * one-time sign-in link for E2E_EMAIL, opens it, and saves the cookies.
  * Also selects the demo wedding from `npm run seed` if it exists.
+ * If the account hasn't picked an app language yet (so every page would show
+ * the welcome screen), English is set for the test run and cleared afterwards.
  */
 export default async function globalSetup(config: FullConfig) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -30,6 +32,13 @@ export default async function globalSetup(config: FullConfig) {
     .eq("slug", DEMO_SLUG)
     .maybeSingle();
 
+  const userId = data.user?.id;
+  const { data: profile } = userId
+    ? await admin.from("profiles").select("locale").eq("id", userId).maybeSingle()
+    : { data: null };
+  const setLanguage = !!userId && !!profile && !profile.locale;
+  if (setLanguage) await admin.from("profiles").update({ locale: "en" }).eq("id", userId);
+
   const baseURL = config.projects[0].use.baseURL!;
   const browser = await chromium.launch({ channel: config.projects[0].use.channel });
   const context = await browser.newContext({ baseURL });
@@ -45,4 +54,10 @@ export default async function globalSetup(config: FullConfig) {
   fs.mkdirSync(path.dirname(AUTH_FILE), { recursive: true });
   await context.storageState({ path: AUTH_FILE });
   await browser.close();
+
+  // Playwright runs the returned function after all tests (global teardown).
+  if (setLanguage)
+    return async () => {
+      await admin.from("profiles").update({ locale: null }).eq("id", userId);
+    };
 }

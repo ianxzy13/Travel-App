@@ -54,29 +54,29 @@ export function WelcomeLanguages({ suggested, next }: { suggested: string; next:
               }}
               className={cn(
                 "bg-card hover:border-primary/60 focus-visible:ring-ring relative flex min-h-24 flex-col items-start gap-2 rounded-xl border p-4 text-start transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
-                selected && "border-primary ring-primary/30 ring-2",
+                selected && "border-primary bg-primary-soft/50",
               )}
             >
               <Flag locale={l.code} className="h-6" />
-              <span className="font-medium">{l.native}</span>
+              <span className="font-serif text-xl leading-tight">{l.native}</span>
               {l.native !== l.english && (
                 <span className="text-muted-foreground -mt-1.5 text-xs" lang="en">
                   {l.english}
                 </span>
               )}
               {l.code === suggested && (
-                <span className="bg-primary-soft text-primary absolute end-2 top-2 rounded-full px-2 py-0.5 text-[0.7rem] font-medium">
+                <span className="bg-primary-soft text-primary-ink absolute end-2 top-2 rounded-full px-2 py-0.5 text-[0.7rem] font-medium">
                   {t("suggested")}
                 </span>
               )}
               {selected && l.code !== suggested && (
-                <Check className="text-primary absolute end-3 top-3 size-4" aria-hidden />
+                <Check className="text-primary-ink absolute end-3 top-3 size-4" aria-hidden />
               )}
             </button>
           );
         })}
       </div>
-      <div className="bg-muted/80 sticky bottom-0 mt-6 -mx-4 flex justify-end px-4 py-4 backdrop-blur">
+      <div className="bg-background/90 sticky bottom-0 -mx-4 mt-8 flex justify-center border-t px-4 py-4 backdrop-blur">
         <Button size="lg" onClick={go} disabled={pending}>
           {pending && <Loader2 className="animate-spin" aria-hidden />}
           <Flag locale={picked} />

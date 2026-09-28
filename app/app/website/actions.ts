@@ -10,7 +10,6 @@ import { sanitizeTranslation } from "@/lib/i18n/content";
 import { sectionSchemas, sitePaths } from "@/lib/website/content";
 import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
@@ -49,8 +48,7 @@ export async function saveWebsite(input: unknown): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx) return noPermission();
   const parsed = saveSchema.safeParse(input);
-  if (!parsed.success)
-    return await err("reload");
+  if (!parsed.success) return await err("reload");
   const { look, sections } = parsed.data;
   const wid = ctx.wedding.id;
 
@@ -128,8 +126,7 @@ export async function setSitePassword(password: string | null): Promise<ActionRe
   const ctx = await editor();
   if (!ctx) return noPermission();
   const pw = (password ?? "").trim();
-  if (pw && (pw.length < 4 || pw.length > 100))
-    return await err("passwordLength");
+  if (pw && (pw.length < 4 || pw.length > 100)) return await err("passwordLength");
   const { error } = await ctx.sb.rpc("set_site_password", {
     p_wedding_id: ctx.wedding.id,
     p_password: pw || null,
@@ -144,10 +141,7 @@ const slugSchema = z
   .toLowerCase()
   .min(3, v("slugLength"))
   .max(60, v("slugLength"))
-  .regex(
-    /^[a-z0-9]+(-[a-z0-9]+)*$/,
-    v("slugChars"),
-  );
+  .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, v("slugChars"));
 
 /** Changes the web address (/w/<slug>, also used by the RSVP page). */
 export async function updateSlug(input: string): Promise<ActionResult<{ slug: string }>> {

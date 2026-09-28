@@ -8,7 +8,6 @@ import { flightSchema } from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 
-
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
@@ -96,8 +95,7 @@ export async function setDestinationAirport(code: string): Promise<ActionResult>
   const ctx = await editor();
   if (!ctx) return noPermission();
   const c = code.trim().toUpperCase();
-  if (c && !/^[A-Z]{3}$/.test(c))
-    return await invalid({ issues: [{ message: "v.airport" }] });
+  if (c && !/^[A-Z]{3}$/.test(c)) return await invalid({ issues: [{ message: "v.airport" }] });
   const { error } = await ctx.sb
     .from("weddings")
     .update({ destination_airport: c || null })

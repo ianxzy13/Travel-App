@@ -28,7 +28,9 @@ export function PaletteStrip({
           <button
             type="button"
             onClick={() =>
-              navigator.clipboard?.writeText(c.hex).then(() => toast.success(t("copiedHex", { hex: c.hex })))
+              navigator.clipboard
+                ?.writeText(c.hex)
+                .then(() => toast.success(t("copiedHex", { hex: c.hex })))
             }
             className={cn(
               "focus-visible:ring-ring flex items-end justify-center rounded-lg border shadow-sm focus-visible:ring-2 focus-visible:outline-none",

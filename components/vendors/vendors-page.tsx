@@ -111,7 +111,7 @@ export function VendorsPage({
 
       {vendors.length === 0 ? (
         <div className="bg-card flex flex-col items-center gap-3 rounded-2xl border border-dashed px-6 py-16 text-center">
-          <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
+          <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
             <Store className="size-7" aria-hidden />
           </span>
           <h2 className="text-3xl">{t("emptyTitle")}</h2>
@@ -184,7 +184,7 @@ export function VendorsPage({
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
-                          <p className="truncate font-serif text-2xl font-semibold">{v.name}</p>
+                          <p className="truncate font-serif text-2xl font-medium">{v.name}</p>
                           <p className="text-muted-foreground text-xs">
                             {v.category_id ? categoryName.get(v.category_id) : t("noCategory")}
                             {v.contact_name && ` · ${v.contact_name}`}

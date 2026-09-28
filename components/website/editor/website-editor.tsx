@@ -237,9 +237,7 @@ export function WebsiteEditor(props: Props) {
         }
       />
 
-      {!canEdit && (
-        <p className="bg-muted mb-4 rounded-lg px-4 py-3 text-sm">{t("viewOnly")}</p>
-      )}
+      {!canEdit && <p className="bg-muted mb-4 rounded-lg px-4 py-3 text-sm">{t("viewOnly")}</p>}
 
       {/* Phones: switch between editing and the preview */}
       <div
@@ -283,7 +281,11 @@ export function WebsiteEditor(props: Props) {
             <p className="text-muted-foreground text-sm">
               {t("livePreview", { count: visibleWithContent })}
             </p>
-            <div className="flex rounded-lg border p-0.5" role="group" aria-label={t("previewSize")}>
+            <div
+              className="flex rounded-lg border p-0.5"
+              role="group"
+              aria-label={t("previewSize")}
+            >
               {(["desktop", "phone"] as const).map((d) => (
                 <Button
                   key={d}

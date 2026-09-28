@@ -200,7 +200,7 @@ function MealsCard({
       <CardContent className="space-y-3">
         {mealOptions.length === 0 && editing !== "new" && (
           <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed p-6 text-center">
-            <UtensilsCrossed className="text-primary size-6" aria-hidden />
+            <UtensilsCrossed className="text-primary-ink size-6" aria-hidden />
             <p className="text-muted-foreground text-sm">{t("noMeals")}</p>
           </div>
         )}
@@ -243,7 +243,11 @@ function MealsCard({
                     </Button>
                     <ConfirmDialog
                       trigger={
-                        <Button variant="ghost" size="icon-sm" aria-label={t("delete", { name: m.name })}>
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label={t("delete", { name: m.name })}
+                        >
                           <Trash2 aria-hidden />
                         </Button>
                       }

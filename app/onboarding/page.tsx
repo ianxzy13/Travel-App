@@ -18,7 +18,7 @@ export default async function OnboardingPage() {
   const t = await getTranslations("onboarding");
 
   return (
-    <main className="bg-muted/40 min-h-dvh">
+    <main className="min-h-dvh">
       <header className="mx-auto flex max-w-2xl items-center justify-between px-4 py-5">
         <Logo href={ctx ? "/app" : "/"} />
         {ctx && (

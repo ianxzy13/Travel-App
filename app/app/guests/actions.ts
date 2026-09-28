@@ -426,8 +426,7 @@ export async function createTag(input: unknown): Promise<ActionResult<{ tag: Tag
     .insert({ wedding_id: ctx.weddingId, ...parsed.data })
     .select("*")
     .single();
-  if (error?.code === DUPLICATE)
-    return await err("tagExists");
+  if (error?.code === DUPLICATE) return await err("tagExists");
   if (error) return fail("createTag", error);
   revalidatePath("/app/guests");
   return { ok: true, data: { tag: data } };
@@ -444,8 +443,7 @@ export async function updateTag(id: string, input: unknown): Promise<ActionResul
     .update(parsed.data)
     .eq("id", id)
     .eq("wedding_id", ctx.weddingId);
-  if (error?.code === DUPLICATE)
-    return await err("tagExists");
+  if (error?.code === DUPLICATE) return await err("tagExists");
   if (error) return fail("updateTag", error);
   return done();
 }

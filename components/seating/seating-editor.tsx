@@ -449,9 +449,7 @@ export function SeatingEditor(props: Props) {
                 {t("seatsShort", { count: totals.seatsShort })}
               </span>
             )}
-            {venueOver && (
-              <span className="text-destructive font-medium">{t("overCapacity")}</span>
-            )}
+            {venueOver && <span className="text-destructive font-medium">{t("overCapacity")}</span>}
           </p>
           <SaveIndicator status={store.saveStatus} canEdit={canEdit} />
         </div>
@@ -637,7 +635,8 @@ export function SeatingEditor(props: Props) {
             className="lg:hidden"
             onClick={() => setDetailSheet(true)}
           >
-            <SlidersHorizontal aria-hidden /> {selectedId || selectedSeat ? t("details") : t("room")}
+            <SlidersHorizontal aria-hidden />{" "}
+            {selectedId || selectedSeat ? t("details") : t("room")}
           </Button>
         </div>
 
@@ -646,7 +645,7 @@ export function SeatingEditor(props: Props) {
             role="status"
             className="bg-primary-soft flex flex-wrap items-center gap-3 rounded-xl px-4 py-2 text-sm"
           >
-            <Sparkles className="text-primary size-4" aria-hidden />
+            <Sparkles className="text-primary-ink size-4" aria-hidden />
             <span className="flex-1">
               {t.rich("arranged", { count: proposal.placed, b: (c) => <strong>{c}</strong> })}{" "}
               {proposal.unplaced > 0 && t("arrangedMissing", { count: proposal.unplaced })}{" "}

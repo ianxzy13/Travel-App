@@ -129,7 +129,11 @@ export function RsvpDashboard(props: Props) {
         actions={
           canEdit && (
             <>
-              <Button variant="outline" size="sm" onClick={() => copy(publicUrl, t("pageLinkCopied"))}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copy(publicUrl, t("pageLinkCopied"))}
+              >
                 <Copy aria-hidden /> {t("copyPage")}
               </Button>
               <Button
@@ -187,27 +191,33 @@ export function RsvpDashboard(props: Props) {
                         className="ps-9"
                       />
                     </div>
-                    <div role="radiogroup" aria-label={t("show")} className="flex flex-wrap gap-1.5">
-                      {(["all", "waiting", "partial", "replied", "not_emailed"] as const).map((value) => (
-                        <button
-                          key={value}
-                          type="button"
-                          role="radio"
-                          aria-checked={filter === value}
-                          onClick={() => setFilter(value)}
-                          className={cn(
-                            "focus-visible:ring-ring rounded-full border px-3 py-1 text-sm focus-visible:ring-2 focus-visible:outline-none",
-                            filter === value
-                              ? "border-primary bg-primary-soft font-medium"
-                              : "hover:bg-accent",
-                          )}
-                        >
-                          {t(`filters.${value}`)}{" "}
-                          <span className="text-muted-foreground tabular-nums">
-                            {counts[value]}
-                          </span>
-                        </button>
-                      ))}
+                    <div
+                      role="radiogroup"
+                      aria-label={t("show")}
+                      className="flex flex-wrap gap-1.5"
+                    >
+                      {(["all", "waiting", "partial", "replied", "not_emailed"] as const).map(
+                        (value) => (
+                          <button
+                            key={value}
+                            type="button"
+                            role="radio"
+                            aria-checked={filter === value}
+                            onClick={() => setFilter(value)}
+                            className={cn(
+                              "focus-visible:ring-ring rounded-full border px-3 py-1 text-sm focus-visible:ring-2 focus-visible:outline-none",
+                              filter === value
+                                ? "border-primary bg-primary-soft font-medium"
+                                : "hover:bg-accent",
+                            )}
+                          >
+                            {t(`filters.${value}`)}{" "}
+                            <span className="text-muted-foreground tabular-nums">
+                              {counts[value]}
+                            </span>
+                          </button>
+                        ),
+                      )}
                     </div>
                   </div>
                 </CardHeader>
@@ -236,7 +246,8 @@ export function RsvpDashboard(props: Props) {
                             variant="outline"
                             onClick={() => setEmailing({ ids: selectedIds, kind: "invitation" })}
                           >
-                            <Send aria-hidden /> {t("sendInvitationCount", { count: selectedIds.length })}
+                            <Send aria-hidden />{" "}
+                            {t("sendInvitationCount", { count: selectedIds.length })}
                           </Button>
                           <Button
                             size="sm"
@@ -354,10 +365,10 @@ function EventTotalsGrid({ data }: { data: RsvpDashboardData }) {
                 {e.name}
               </p>
               <p>
-                <span className="font-serif text-5xl font-semibold tabular-nums">
-                  {t.attending}
-                </span>{" "}
-                <span className="text-muted-foreground">{tr("attendingOf", { invited: t.invited })}</span>
+                <span className="font-serif text-5xl font-medium tabular-nums">{t.attending}</span>{" "}
+                <span className="text-muted-foreground">
+                  {tr("attendingOf", { invited: t.invited })}
+                </span>
               </p>
               <div className="bg-muted flex h-2 overflow-hidden rounded-full" aria-hidden>
                 <div className="bg-primary" style={{ width: pct(t.attending) }} />
@@ -415,8 +426,8 @@ function MealCountsCard({ data }: { data: RsvpDashboardData }) {
 }
 
 const STATUS_BADGE: Record<DashboardHousehold["reply"]["status"], string> = {
-  replied: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
-  partial: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
+  replied: "bg-tint-sage text-tint-sage-fg",
+  partial: "bg-tint-sand text-tint-sand-fg",
   waiting: "bg-muted text-muted-foreground",
   not_invited: "bg-muted text-muted-foreground",
 };

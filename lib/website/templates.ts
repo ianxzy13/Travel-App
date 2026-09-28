@@ -5,13 +5,23 @@ type FontInfo = { name: string; style: string; css: string };
 
 export const HEADING_FONTS: Record<HeadingFont, FontInfo> = {
   cormorant: {
-    name: "Cormorant",
+    // the key is still "cormorant" (saved in the database); drawn with EB Garamond,
+    // whose accents render correctly
+    name: "Garamond",
     style: "elegantSerif",
-    css: "var(--font-cormorant), Georgia, serif",
+    css: "var(--font-garamond), Georgia, serif",
   },
-  playfair: { name: "Playfair", style: "classicSerif", css: "var(--font-playfair), Georgia, serif" },
+  playfair: {
+    name: "Playfair",
+    style: "classicSerif",
+    css: "var(--font-playfair), Georgia, serif",
+  },
   fraunces: { name: "Fraunces", style: "softSerif", css: "var(--font-fraunces), Georgia, serif" },
-  josefin: { name: "Josefin", style: "airySans", css: "var(--font-josefin), system-ui, sans-serif" },
+  josefin: {
+    name: "Josefin",
+    style: "airySans",
+    css: "var(--font-josefin), system-ui, sans-serif",
+  },
   inter: { name: "Inter", style: "boldModern", css: "var(--font-inter), system-ui, sans-serif" },
   "great-vibes": { name: "Great Vibes", style: "script", css: "var(--font-great-vibes), cursive" },
 };
@@ -24,7 +34,11 @@ export const BODY_FONTS: Record<BodyFont, FontInfo> = {
     style: "friendlySans",
     css: "var(--font-nunito), system-ui, sans-serif",
   },
-  josefin: { name: "Josefin", style: "airySans", css: "var(--font-josefin), system-ui, sans-serif" },
+  josefin: {
+    name: "Josefin",
+    style: "airySans",
+    css: "var(--font-josefin), system-ui, sans-serif",
+  },
 };
 
 export type TemplateStyle = {
@@ -40,6 +54,8 @@ export type TemplateStyle = {
     card: string;
     line: string;
     accent: string;
+    /** accent for small text, when the accent itself is too light to read */
+    ink?: string;
   };
 };
 
@@ -50,16 +66,18 @@ export type TemplateStyle = {
 export const TEMPLATES: Record<SiteTemplate, TemplateStyle> = {
   classic: {
     label: "Classic",
-    description: "Ivory, gold and serif type, centred and timeless.",
+    description: "Nude and blush tones, serif names with a script accent.",
     heading: "cormorant",
-    body: "lora",
+    body: "josefin",
+    // the app theme palette (app/theme.css)
     colors: {
-      bg: "#fbf8f1",
-      fg: "#2d2621",
-      muted: "#6e635a",
-      card: "#f4eee2",
-      line: "#dcd0bb",
-      accent: "#806129",
+      bg: "#faf6f2",
+      fg: "#4a3f3a",
+      muted: "#74635a",
+      card: "#f1e6df",
+      line: "#e5d9d0",
+      accent: "#c49a8a",
+      ink: "#855a4c",
     },
   },
   modern: {
@@ -122,6 +140,7 @@ export const TEMPLATES: Record<SiteTemplate, TemplateStyle> = {
 
 /** Colour suggestions shown in the editor (plus a custom picker). */
 export const ACCENT_SWATCHES = [
+  "#c49a8a",
   "#806129",
   "#9a4424",
   "#a8505f",
@@ -142,7 +161,7 @@ export function onAccent(hex: string) {
   // whichever of near-black (luminance about 0.01) or white has more contrast
   const darkContrast = (lum + 0.05) / 0.06;
   const whiteContrast = 1.05 / (lum + 0.05);
-  return darkContrast >= whiteContrast ? "#111111" : "#ffffff";
+  return darkContrast >= whiteContrast ? "#2e2521" : "#ffffff";
 }
 
 /** The CSS variables a site uses; `look` values override the template's. */
@@ -161,6 +180,7 @@ export function siteVars(look: {
     "--site-card": t.colors.card,
     "--site-line": t.colors.line,
     "--site-accent": accent,
+    "--site-ink": look.accent_color ? accent : (t.colors.ink ?? accent),
     "--site-on-accent": onAccent(accent),
     "--site-heading": HEADING_FONTS[look.heading_font ?? t.heading].css,
     "--site-body": BODY_FONTS[look.body_font ?? t.body].css,

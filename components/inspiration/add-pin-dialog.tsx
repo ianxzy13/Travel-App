@@ -214,9 +214,7 @@ function UploadTab({ boardId, weddingId }: { boardId: string; weddingId: string 
       <p className="text-sm">{t("drop")}</p>
       <Button type="button" onClick={() => input.current?.click()} disabled={!!progress}>
         {progress ? <Loader2 className="animate-spin" aria-hidden /> : <Upload aria-hidden />}
-        {progress
-          ? t("uploading", { n: progress.done + 1, total: progress.total })
-          : t("choose")}
+        {progress ? t("uploading", { n: progress.done + 1, total: progress.total }) : t("choose")}
       </Button>
       <p className="text-muted-foreground text-xs">{t("uploadHint")}</p>
     </div>
@@ -432,22 +430,22 @@ function DiscoverTab({ boardId }: { boardId: string }) {
         {IDEAS.map((key) => {
           const idea = t(`ideas.${key}`);
           return (
-          <button
-            key={key}
-            type="button"
-            onClick={() => {
-              setQuery(idea);
-              void search(idea, 1);
-            }}
-            className={cn(
-              "focus-visible:ring-ring rounded-full border px-3 py-1 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
-              active === idea
-                ? "bg-primary text-primary-foreground border-primary"
-                : "hover:bg-accent",
-            )}
-          >
-            {idea}
-          </button>
+            <button
+              key={key}
+              type="button"
+              onClick={() => {
+                setQuery(idea);
+                void search(idea, 1);
+              }}
+              className={cn(
+                "focus-visible:ring-ring rounded-full border px-3 py-1 text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none",
+                active === idea
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "hover:bg-accent",
+              )}
+            >
+              {idea}
+            </button>
           );
         })}
       </div>
@@ -490,7 +488,12 @@ function DiscoverTab({ boardId }: { boardId: string }) {
               {t.rich("credit", {
                 name: p.photographer,
                 photographer: (c) => (
-                  <a href={p.photographerUrl} target="_blank" rel="noreferrer" className="underline">
+                  <a
+                    href={p.photographerUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
                     {c}
                   </a>
                 ),

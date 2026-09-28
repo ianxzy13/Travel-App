@@ -199,7 +199,7 @@ export function InspirationPage(props: Props) {
 
       {empty ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
-          <Lightbulb className="text-primary mx-auto size-10" aria-hidden />
+          <Lightbulb className="text-primary-ink mx-auto size-10" aria-hidden />
           <h2 className="mt-4 text-2xl">{t("startTitle")}</h2>
           <p className="text-muted-foreground mx-auto mt-2 max-w-md">
             {canEdit ? t("startEditor") : t("startViewer")}

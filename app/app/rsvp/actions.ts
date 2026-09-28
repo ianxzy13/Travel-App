@@ -22,7 +22,6 @@ import {
 import { canEdit, coupleName, requireUser, requireWedding } from "@/lib/wedding";
 import { fail, err, invalid, noPermission } from "@/lib/errors";
 
-
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
@@ -220,8 +219,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
   const parsed = sendEmailSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const resend = getResend();
-  if (!resend)
-    return await err("emailNotSetUp");
+  if (!resend) return await err("emailNotSetUp");
 
   const { householdIds, kind, note } = parsed.data;
   const { wedding, supabase } = ctx;

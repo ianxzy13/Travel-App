@@ -126,7 +126,9 @@ function HouseholdForm({
                   value={field.value ?? ""}
                   onChange={field.onChange}
                   featured={languages.filter((l) => l !== coupleLanguage)}
-                  empty={{ label: t("sameAsOurs", { language: localeInfo(coupleLanguage).native }) }}
+                  empty={{
+                    label: t("sameAsOurs", { language: localeInfo(coupleLanguage).native }),
+                  }}
                 />
               )}
             />

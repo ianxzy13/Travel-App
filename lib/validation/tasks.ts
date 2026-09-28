@@ -1,8 +1,7 @@
 import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
-const text = (max: number) =>
-  z.string().trim().max(max, v("tooLong", max));
+const text = (max: number) => z.string().trim().max(max, v("tooLong", max));
 const date = z.union([z.literal(""), z.iso.date(v("date"))]);
 
 export const taskSchema = z.object({

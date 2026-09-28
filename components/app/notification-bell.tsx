@@ -68,7 +68,11 @@ function noticeText(n: NotificationItem, t: NoticeT, locale: string) {
         title: t("hotelCutoff.title", { name: str("name") }),
         body:
           typeof d.held === "number"
-            ? t("hotelCutoff.bodyRooms", { date: date("due"), booked: num("booked"), held: num("held") })
+            ? t("hotelCutoff.bodyRooms", {
+                date: date("due"),
+                booked: num("booked"),
+                held: num("held"),
+              })
             : t("hotelCutoff.body", { date: date("due") }),
       };
     case "taskDueToday":
@@ -132,7 +136,7 @@ export function NotificationBell({
       </PopoverTrigger>
       <PopoverContent align={align} className="w-80 p-0">
         <div className="flex items-center justify-between border-b px-4 py-3">
-          <p className="font-serif text-xl font-semibold">{t("title")}</p>
+          <p className="font-serif text-xl font-medium">{t("title")}</p>
           {unread > 0 && (
             <Button
               variant="link"

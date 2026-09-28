@@ -102,7 +102,7 @@ export function DesignPanel({
                 <div className="bg-card p-2">
                   <p className="flex items-center gap-1 text-sm font-medium">
                     {tr(`templates.${key}.label`)}{" "}
-                    {on && <Check className="text-primary size-3.5" aria-hidden />}
+                    {on && <Check className="text-primary-ink size-3.5" aria-hidden />}
                   </p>
                   <p className="text-muted-foreground line-clamp-2 text-xs">
                     {tr(`templates.${key}.description`)}

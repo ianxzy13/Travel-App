@@ -36,8 +36,8 @@ export function Countdown({ date }: { date: string }) {
   return (
     <div className="flex flex-wrap items-end gap-x-8 gap-y-3" role="timer" aria-live="off">
       <div>
-        <p className="font-serif text-7xl leading-none font-semibold sm:text-8xl">{days}</p>
-        <p className="text-muted-foreground mt-1">{t("daysToGo", { count: days })}</p>
+        <p className="font-serif text-7xl leading-none font-light sm:text-8xl">{days}</p>
+        <p className="eyebrow mt-2">{t("daysToGo", { count: days })}</p>
       </div>
       <dl className="flex gap-4 pb-1 font-serif text-3xl tabular-nums">
         {[
@@ -46,8 +46,8 @@ export function Countdown({ date }: { date: string }) {
           [t("seconds"), seconds],
         ].map(([label, value]) => (
           <div key={label} className="text-center">
-            <dd className="font-semibold">{String(value).padStart(2, "0")}</dd>
-            <dt className="text-muted-foreground font-sans text-xs">{label}</dt>
+            <dd className="font-light">{String(value).padStart(2, "0")}</dd>
+            <dt className="eyebrow mt-1 text-[0.6rem] tracking-[0.18em]">{label}</dt>
           </div>
         ))}
       </dl>
@@ -58,7 +58,7 @@ export function Countdown({ date }: { date: string }) {
 function Message({ big, small }: { big: string; small: string }) {
   return (
     <div>
-      <p className="font-serif text-6xl leading-none font-semibold">{big}</p>
+      <p className="font-serif text-6xl leading-none font-medium">{big}</p>
       <p className="text-muted-foreground mt-2">{small}</p>
     </div>
   );

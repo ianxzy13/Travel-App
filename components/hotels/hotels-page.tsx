@@ -126,7 +126,7 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
 
       {hotels.length === 0 ? (
         <div className="bg-card flex flex-col items-center gap-3 rounded-2xl border border-dashed px-6 py-16 text-center">
-          <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
+          <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
             <BedDouble className="size-7" aria-hidden />
           </span>
           <h2 className="text-3xl">{t("emptyTitle")}</h2>
@@ -175,7 +175,7 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
                         </span>
                       )}
                     </div>
-                    <p className="font-serif text-2xl leading-tight font-semibold">{h.name}</p>
+                    <p className="font-serif text-2xl leading-tight font-medium">{h.name}</p>
                     <p className="text-muted-foreground text-sm">
                       {[
                         h.distance,
@@ -467,11 +467,7 @@ function HotelForm({
           <div className="grid gap-4 sm:grid-cols-2">
             {numberField("roomsHeld", t("roomsHeld"))}
             {numberField("roomsBooked", t("roomsBooked"))}
-            <FormField
-              id="h-code"
-              label={t("discount")}
-              error={errors.discountCode?.message}
-            >
+            <FormField id="h-code" label={t("discount")} error={errors.discountCode?.message}>
               {(aria) => <Input {...aria} {...form.register("discountCode")} />}
             </FormField>
             <FormField

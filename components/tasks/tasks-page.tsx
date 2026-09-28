@@ -213,7 +213,7 @@ export function TasksPage(props: Props) {
 
       {total === 0 ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
-          <ListChecks className="text-primary mx-auto size-10" aria-hidden />
+          <ListChecks className="text-primary-ink mx-auto size-10" aria-hidden />
           <h2 className="mt-4 text-2xl">{t("emptyTitle")}</h2>
           <p className="text-muted-foreground mx-auto mt-2 max-w-md">
             {weddingDate
@@ -247,7 +247,7 @@ export function TasksPage(props: Props) {
           <section aria-label={t("progress")} className="mb-6 grid gap-3 sm:grid-cols-3">
             <div className="bg-card rounded-xl border p-4 sm:col-span-1">
               <p className="text-sm">
-                <span className="font-serif text-3xl font-semibold tabular-nums">{doneCount}</span>{" "}
+                <span className="font-serif text-3xl font-medium tabular-nums">{doneCount}</span>{" "}
                 <span className="text-muted-foreground">{t("ofDone", { total })}</span>
               </p>
               <div
@@ -274,7 +274,7 @@ export function TasksPage(props: Props) {
             >
               <span
                 className={cn(
-                  "font-serif text-3xl font-semibold tabular-nums",
+                  "font-serif text-3xl font-medium tabular-nums",
                   overdueCount > 0 && "text-destructive",
                 )}
               >
@@ -283,7 +283,7 @@ export function TasksPage(props: Props) {
               <span className="text-muted-foreground text-sm">{t("overdueCount")}</span>
             </button>
             <div className="bg-card rounded-xl border p-4">
-              <span className="font-serif text-3xl font-semibold tabular-nums">{weekCount}</span>{" "}
+              <span className="font-serif text-3xl font-medium tabular-nums">{weekCount}</span>{" "}
               <span className="text-muted-foreground text-sm">{t("thisWeek")}</span>
             </div>
           </section>
@@ -508,7 +508,7 @@ function TaskItem({
           {task.link && (
             <Link
               href={task.link}
-              className="text-primary inline-flex items-center gap-0.5 underline-offset-2 hover:underline"
+              className="text-primary-ink inline-flex items-center gap-0.5 underline-offset-2 hover:underline"
             >
               {t("open")} <ArrowUpRight className="size-3 rtl:-scale-x-100" aria-hidden />
               <span className="sr-only">{t("pageFor", { title: task.title })}</span>

@@ -29,9 +29,9 @@ export const DEFAULT_FILTERS: GuestFilters = {
 
 /** How many filters (besides search) are active, for the "Filters (2)" badge. */
 export function activeFilterCount(f: GuestFilters) {
-  return (["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp", "language"] as const).filter(
-    (k) => f[k] !== "all",
-  ).length;
+  return (
+    ["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp", "language"] as const
+  ).filter((k) => f[k] !== "all").length;
 }
 
 /** Lower-case and strip accents so "José" matches "jose". */

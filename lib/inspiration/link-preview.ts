@@ -69,15 +69,12 @@ async function assertPublicUrl(raw: string) {
   } catch {
     throw new LinkError("notUrl");
   }
-  if (url.protocol !== "http:" && url.protocol !== "https:")
-    throw new LinkError("protocol");
+  if (url.protocol !== "http:" && url.protocol !== "https:") throw new LinkError("protocol");
   if (url.username || url.password) throw new LinkError("password");
-  if (url.port && !["80", "443"].includes(url.port))
-    throw new LinkError("port");
+  if (url.port && !["80", "443"].includes(url.port)) throw new LinkError("port");
   const host = url.hostname.replace(/^\[|\]$/g, "");
   const addresses = isIP(host) ? [host] : (await lookup(host, { all: true })).map((a) => a.address);
-  if (!addresses.length || addresses.some(isPrivateIp))
-    throw new LinkError("private");
+  if (!addresses.length || addresses.some(isPrivateIp)) throw new LinkError("private");
   return url;
 }
 

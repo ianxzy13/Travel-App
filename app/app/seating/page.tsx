@@ -92,7 +92,7 @@ export default async function SeatingPage({
 function Empty({ text, children }: { text: string; children?: React.ReactNode }) {
   return (
     <div className="bg-card flex flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-16 text-center">
-      <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
+      <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
         <Armchair className="size-7" aria-hidden />
       </span>
       <p className="text-muted-foreground max-w-sm">{text}</p>

@@ -75,7 +75,7 @@ function Stat({
     <div className="bg-card min-w-0 rounded-xl border p-3 sm:p-4">
       <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">{label}</p>
       {value !== undefined && (
-        <p className="font-serif text-4xl leading-tight font-semibold tabular-nums">{value}</p>
+        <p className="font-serif text-4xl leading-tight font-medium tabular-nums">{value}</p>
       )}
       <div className="text-muted-foreground mt-1 text-sm">{children}</div>
     </div>

@@ -514,9 +514,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
           <li key={c.id} className="group text-sm">
             <p>
               <span className="font-medium">{c.name}</span>{" "}
-              <span className="text-muted-foreground text-xs">
-                {relative(c.createdAt, locale)}
-              </span>
+              <span className="text-muted-foreground text-xs">{relative(c.createdAt, locale)}</span>
             </p>
             <p className="whitespace-pre-wrap">{c.body}</p>
             {c.userId === userId && (
@@ -566,12 +564,7 @@ function Comments({ pin, userId }: { pin: PinView; userId: string }) {
             }
           }}
         />
-        <Button
-          type="submit"
-          size="icon"
-          disabled={pending || !body.trim()}
-          aria-label={t("post")}
-        >
+        <Button type="submit" size="icon" disabled={pending || !body.trim()} aria-label={t("post")}>
           {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
         </Button>
       </form>

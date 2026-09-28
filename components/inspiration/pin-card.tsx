@@ -72,15 +72,18 @@ export function PinCard({
           </span>
         )}
       </button>
-      <div className="mt-1.5 flex items-start justify-between gap-2 px-0.5 text-sm">
+      <div className="mt-2.5 flex items-start justify-between gap-2 px-0.5 text-sm">
         <p className={cn("line-clamp-2 min-w-0", !pin.title && "text-muted-foreground")}>
           {pin.title || t("untitled")}
         </p>
         <div className="text-muted-foreground flex shrink-0 items-center gap-2 text-xs">
           {pin.hearts.length > 0 && (
-            <span className="flex items-center gap-0.5" aria-label={t("hearts", { count: pin.hearts.length })}>
+            <span
+              className="flex items-center gap-0.5"
+              aria-label={t("hearts", { count: pin.hearts.length })}
+            >
               <Heart
-                className={cn("size-3.5", hearted && "fill-primary text-primary")}
+                className={cn("size-3.5", hearted && "fill-primary text-primary-ink")}
                 aria-hidden
               />
               {pin.hearts.length}

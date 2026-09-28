@@ -2,16 +2,13 @@ import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 import { isLocale } from "@/i18n/locales";
 
-const text = (max: number) =>
-  z.string().trim().max(max, v("tooLong", max));
+const text = (max: number) => z.string().trim().max(max, v("tooLong", max));
 
 const sideSchema = z.enum(["partner_a", "partner_b", "both"]);
 const ageGroupSchema = z.enum(["adult", "child", "infant"]);
 const listSchema = z.enum(["a", "b"]);
 // "" = the couple's own language
-const languageSchema = z
-  .string()
-  .refine((l): boolean => l === "" || isLocale(l), v("language"));
+const languageSchema = z.string().refine((l): boolean => l === "" || isLocale(l), v("language"));
 
 export const addressSchema = z.object({
   line1: text(200),

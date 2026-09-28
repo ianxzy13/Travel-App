@@ -229,7 +229,7 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
             dragging ? "border-primary bg-primary-soft" : "hover:bg-muted/50",
           )}
         >
-          <Upload className="text-primary size-8" aria-hidden />
+          <Upload className="text-primary-ink size-8" aria-hidden />
           <span className="font-medium">{t("drop")}</span>
           <span className="text-muted-foreground text-sm">
             {t.rich("saveAs", { b: (x) => <strong>{x}</strong> })}
@@ -291,9 +291,11 @@ function MapStep({
     <Card>
       <CardContent className="space-y-5 p-6">
         <div className="flex items-center gap-2 text-sm">
-          <FileSpreadsheet className="text-primary size-5" aria-hidden />
+          <FileSpreadsheet className="text-primary-ink size-5" aria-hidden />
           <strong>{parsed.fileName}</strong>
-          <span className="text-muted-foreground">· {t("rows", { count: parsed.rows.length })}</span>
+          <span className="text-muted-foreground">
+            · {t("rows", { count: parsed.rows.length })}
+          </span>
         </div>
         <p className="text-muted-foreground text-sm">{t("guessed")}</p>
 
@@ -324,7 +326,10 @@ function MapStep({
                         value={mapping[h] ?? "ignore"}
                         onValueChange={(v) => setField(h, v as ImportFieldKey | "ignore")}
                       >
-                        <SelectTrigger className="w-56" aria-label={t("importColumnAs", { name: h })}>
+                        <SelectTrigger
+                          className="w-56"
+                          aria-label={t("importColumnAs", { name: h })}
+                        >
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -344,12 +349,8 @@ function MapStep({
           </table>
         </div>
 
-        {!hasName && (
-          <Notice tone="error">{t("needName")}</Notice>
-        )}
-        {hasName && !used.has("household") && (
-          <Notice tone="info">{t("noHousehold")}</Notice>
-        )}
+        {!hasName && <Notice tone="error">{t("needName")}</Notice>}
+        {hasName && !used.has("household") && <Notice tone="info">{t("noHousehold")}</Notice>}
 
         <div className="flex justify-between">
           <Button variant="ghost" onClick={onBack}>
@@ -532,7 +533,7 @@ function Figure({ label, value }: { label: string; value: number }) {
   return (
     <div className="bg-muted/50 rounded-lg p-3">
       <dt className="text-muted-foreground text-xs">{label}</dt>
-      <dd className="font-serif text-3xl font-semibold tabular-nums">{value}</dd>
+      <dd className="font-serif text-3xl font-medium tabular-nums">{value}</dd>
     </div>
   );
 }

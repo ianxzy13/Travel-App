@@ -42,7 +42,10 @@ export async function createWedding(input: unknown): Promise<ActionResult> {
  */
 async function startInOwnLanguage(sb: Awaited<ReturnType<typeof createClient>>, weddingId: string) {
   const locale = await getLocale();
-  const { error } = await sb.from("weddings").update({ languages: [locale] }).eq("id", weddingId);
+  const { error } = await sb
+    .from("weddings")
+    .update({ languages: [locale] })
+    .eq("id", weddingId);
   if (error) console.error("[createWedding languages]", error);
   if (locale === "en") return;
 
@@ -71,6 +74,9 @@ async function startInOwnLanguage(sb: Awaited<ReturnType<typeof createClient>>, 
         question: faq[i] ?? item.question,
       }));
     }
-    await sb.from("website_sections").update({ content: content as Json }).eq("id", s.id);
+    await sb
+      .from("website_sections")
+      .update({ content: content as Json })
+      .eq("id", s.id);
   }
 }

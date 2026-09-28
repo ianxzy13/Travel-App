@@ -39,7 +39,7 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
 
       {closed && (
         <div role="status" className="bg-card flex gap-3 rounded-2xl border p-5">
-          <CalendarClock className="text-primary mt-0.5 size-5 shrink-0" aria-hidden />
+          <CalendarClock className="text-primary-ink mt-0.5 size-5 shrink-0" aria-hidden />
           <div className="text-sm">
             <p className="font-medium">{t("closed")}</p>
             <p className="text-muted-foreground mt-1">
@@ -53,8 +53,8 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
 
       {view === "thanks" && (
         <div role="status" className="bg-card rounded-2xl border p-8 text-center shadow-sm">
-          <Heart className="text-primary mx-auto size-10" aria-hidden />
-          <h2 className="mt-3 text-4xl">{t("thanks")}</h2>
+          <Heart className="text-primary-ink mx-auto size-10" aria-hidden />
+          <h2 className="font-script mt-4 text-5xl font-normal">{t("thanks")}</h2>
           <p className="text-muted-foreground mt-2">
             {deadline
               ? t("thanksTextUntil", { couple, date: deadline })

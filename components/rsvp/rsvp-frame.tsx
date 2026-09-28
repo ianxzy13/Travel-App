@@ -27,24 +27,22 @@ export async function RsvpFrame({
   const [t, locale] = await Promise.all([getTranslations("rsvp"), getLocale()]);
   return (
     <div data-accent={accent} className="bg-background min-h-dvh">
-      <div
-        className="from-primary-soft absolute inset-x-0 top-0 h-96 bg-gradient-to-b to-transparent"
-        aria-hidden
-      />
+      <div className="soft-photo absolute inset-x-0 top-0 h-72 sm:h-80" aria-hidden />
       {languages && (
         <div className="relative flex justify-end px-4 pt-4">
           <RsvpLanguageSwitcher offered={languages} code={code} />
         </div>
       )}
-      <main className="relative mx-auto max-w-2xl px-4 pt-12 pb-16 sm:pt-16">
+      <main className="relative mx-auto max-w-2xl px-4 pt-20 pb-20 sm:pt-28">
         {couple && (
-          <header className="mb-10 text-center">
-            <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase">
-              {t("weddingOf")}
-            </p>
-            <h1 className="mt-3 text-5xl sm:text-6xl">{couple}</h1>
+          <header className="bg-card mb-12 rounded-md border px-6 py-12 text-center sm:px-12">
+            <p className="eyebrow text-primary-ink">{t("weddingOf")}</p>
+            <h1 className="font-script mt-4 text-6xl leading-tight font-normal sm:text-7xl">
+              {couple}
+            </h1>
+            <div aria-hidden className="bg-primary mx-auto my-6 h-px w-16" />
             {(date || location) && (
-              <p className="text-muted-foreground mt-3">
+              <p className="caps text-muted-foreground">
                 {[date ? fmtDate(date, locale, "full") : null, location]
                   .filter(Boolean)
                   .join(" · ")}
@@ -54,7 +52,7 @@ export async function RsvpFrame({
         )}
         {children}
       </main>
-      <footer className="text-muted-foreground pb-8 text-center text-xs">
+      <footer className="text-muted-foreground pb-10 text-center text-xs">
         {t.rich("rsvpsBy", {
           link: (chunks) => (
             <Link href="/" className="font-serif text-sm hover:underline">

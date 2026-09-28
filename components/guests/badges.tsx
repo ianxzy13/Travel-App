@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 
 /** Tailwind classes per tag colour (light + dark). */
 export const TAG_COLOR_CLASSES: Record<TagColor, string> = {
-  stone: "bg-stone-100 text-stone-800 dark:bg-stone-800 dark:text-stone-100",
-  rose: "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-100",
-  sage: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-100",
-  sky: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-100",
-  amber: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-100",
-  violet: "bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-100",
+  stone: "bg-muted text-foreground",
+  rose: "bg-tint-blush text-tint-blush-fg",
+  sage: "bg-tint-sage text-tint-sage-fg",
+  sky: "bg-tint-mist text-tint-mist-fg",
+  amber: "bg-tint-sand text-tint-sand-fg",
+  violet: "bg-tint-mauve text-tint-mauve-fg",
 };
 
 export function TagBadge({
@@ -41,8 +41,8 @@ export function SideDot({ side }: { side: GuestSide }) {
       className={cn(
         "inline-block size-2 shrink-0 rounded-full",
         side === "partner_a" && "bg-primary",
-        side === "partner_b" && "bg-sky-500",
-        side === "both" && "bg-stone-400",
+        side === "partner_b" && "bg-tint-mist-fg",
+        side === "both" && "bg-taupe-soft",
       )}
     />
   );

@@ -141,7 +141,8 @@ export function GuestPanel({
         </div>
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs">
           <Label className="text-xs font-normal">
-            <Switch checked={unseatedOnly} onCheckedChange={setUnseatedOnly} /> {t("panel.unseatedOnly")}
+            <Switch checked={unseatedOnly} onCheckedChange={setUnseatedOnly} />{" "}
+            {t("panel.unseatedOnly")}
           </Label>
           <Label className="text-xs font-normal">
             <Switch checked={!attendingOnly} onCheckedChange={(v) => setAttendingOnly(!v)} />{" "}
@@ -196,9 +197,7 @@ export function GuestPanel({
         )}
       </div>
       {canEdit && (
-        <p className="text-muted-foreground border-t px-3 py-2 text-[0.7rem]">
-          {t("panel.help")}
-        </p>
+        <p className="text-muted-foreground border-t px-3 py-2 text-[0.7rem]">{t("panel.help")}</p>
       )}
     </div>
   );

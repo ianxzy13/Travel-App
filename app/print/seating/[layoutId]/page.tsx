@@ -51,7 +51,7 @@ export default async function PrintSeatingPage({
   const title = `${wedding ? coupleName(wedding) : ""} · ${event?.name ?? ""}`;
 
   return (
-    <main className="mx-auto max-w-5xl bg-white p-6 text-stone-900 print:max-w-none print:p-0">
+    <main className="mx-auto max-w-5xl bg-white p-6 text-[#4a3f3a] print:max-w-none print:p-0">
       {/* page setup: landscape for the floor plan */}
       <style>{`@page { size: A4 ${view === "plan" ? "landscape" : "portrait"}; margin: 12mm; }
         @media print { body { background: white; } }`}</style>
@@ -70,7 +70,7 @@ export default async function PrintSeatingPage({
               aria-current={v === view ? "page" : undefined}
               className={cn(
                 "rounded-full border px-3 py-1 text-sm",
-                v === view ? "border-stone-900 bg-stone-900 text-white" : "hover:bg-stone-100",
+                v === view ? "border-[#4a3f3a] bg-[#4a3f3a] text-white" : "hover:bg-[#f3ebe5]",
               )}
             >
               {t(`printViews.${v}`)}

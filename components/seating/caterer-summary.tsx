@@ -56,7 +56,7 @@ export function CatererSummary({
   return (
     <section className="bg-card overflow-x-auto rounded-xl border p-4">
       <h3 className="mb-3 flex items-center gap-2 text-2xl">
-        <Utensils className="text-primary size-5" aria-hidden /> {tr("caterer.title")}
+        <Utensils className="text-primary-ink size-5" aria-hidden /> {tr("caterer.title")}
       </h3>
       <table className="w-full text-sm">
         <thead className="text-muted-foreground text-start text-xs">

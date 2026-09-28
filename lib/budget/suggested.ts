@@ -47,8 +47,8 @@ export function suggestedAllocations(
 /** Badge colours per vendor status (labels are in messages "vendors.statuses"). */
 export const VENDOR_STATUS_CLASSES = {
   researching: "bg-muted text-muted-foreground",
-  contacted: "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-200",
-  quoted: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200",
-  booked: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200",
+  contacted: "bg-tint-mist text-tint-mist-fg",
+  quoted: "bg-tint-sand text-tint-sand-fg",
+  booked: "bg-tint-sage text-tint-sage-fg",
   rejected: "bg-muted text-muted-foreground line-through",
 } as const;

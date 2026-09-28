@@ -125,9 +125,7 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
           <>
             <Button asChild variant="outline" size="sm">
               <a
-                href={mapsSearch(
-                  location ? t("mapsQuery", { place: location }) : t("mapsNearMe"),
-                )}
+                href={mapsSearch(location ? t("mapsQuery", { place: location }) : t("mapsNearMe"))}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -145,7 +143,7 @@ export function VenuesPage({ venues, weddingId, currency, location, guestCount, 
 
       {venues.length === 0 ? (
         <div className="bg-card flex flex-col items-center gap-3 rounded-2xl border border-dashed px-6 py-16 text-center">
-          <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
+          <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
             <Landmark className="size-7" aria-hidden />
           </span>
           <h2 className="text-3xl">{t("emptyTitle")}</h2>
@@ -286,7 +284,7 @@ function VenueCard({
     <li
       className={cn(
         "bg-card relative flex flex-col overflow-hidden rounded-xl border",
-        v.status === "booked" && "ring-2 ring-emerald-500/60",
+        v.status === "booked" && "ring-primary ring-1",
         compared && "ring-primary ring-2",
       )}
     >
@@ -318,7 +316,7 @@ function VenueCard({
               {p(`availability.${v.availability}`)}
             </Badge>
           </div>
-          <p className="font-serif text-2xl leading-tight font-semibold">{v.name}</p>
+          <p className="font-serif text-2xl leading-tight font-medium">{v.name}</p>
           <p className="text-muted-foreground text-xs">{p(`venueKind.${v.kind}`)}</p>
           <StarRating value={v.rating} size="size-4" />
           <dl className="text-muted-foreground mt-auto grid grid-cols-2 gap-1 pt-2 text-sm">
@@ -471,7 +469,7 @@ function CompareDialog({
                         />
                       </div>
                     )}
-                    <span className="font-serif text-xl font-semibold">{v.name}</span>
+                    <span className="font-serif text-xl font-medium">{v.name}</span>
                   </th>
                 ))}
               </tr>
@@ -553,8 +551,7 @@ function VenueForm({
         toast.error(r.error);
         return;
       }
-      if (values.status === "booked")
-        toast.success(t("bookedToast", { name: values.name }));
+      if (values.status === "booked") toast.success(t("bookedToast", { name: values.name }));
       else toast.success(venue ? t("saved") : t("added"));
       if (venue) onClose();
       else onCreated(r.data.id);
@@ -745,9 +742,7 @@ function VenueForm({
         <SheetTitle className="font-serif text-3xl">
           {venue ? venue.name : t("addTitle")}
         </SheetTitle>
-        <SheetDescription>
-          {venue ? p(`venueKind.${venue.kind}`) : p("onlyName")}
-        </SheetDescription>
+        <SheetDescription>{venue ? p(`venueKind.${venue.kind}`) : p("onlyName")}</SheetDescription>
       </SheetHeader>
       <div className="flex-1 overflow-y-auto px-6 py-4">
         {venue ? (

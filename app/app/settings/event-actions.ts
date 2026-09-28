@@ -102,8 +102,18 @@ export async function addDefaultEvents(): Promise<ActionResult> {
   const date = ctx.wedding.wedding_date;
   const names = await contentTranslations(ctx.wedding, "onboarding");
   const { error } = await ctx.supabase.from("events").insert([
-    { wedding_id: ctx.wedding.id, name: names("defaults.ceremony"), event_date: date, sort_order: 0 },
-    { wedding_id: ctx.wedding.id, name: names("defaults.reception"), event_date: date, sort_order: 1 },
+    {
+      wedding_id: ctx.wedding.id,
+      name: names("defaults.ceremony"),
+      event_date: date,
+      sort_order: 0,
+    },
+    {
+      wedding_id: ctx.wedding.id,
+      name: names("defaults.reception"),
+      event_date: date,
+      sort_order: 1,
+    },
   ]);
   if (error) return fail("addDefaultEvents", error);
   return done();

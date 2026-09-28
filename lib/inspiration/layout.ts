@@ -91,5 +91,5 @@ export function textOn(hex: string) {
   // whichever of near-black (luminance about 0.01) or white has more contrast
   const darkContrast = (lum + 0.05) / 0.06;
   const whiteContrast = 1.05 / (lum + 0.05);
-  return darkContrast >= whiteContrast ? "#1c1917" : "#ffffff";
+  return darkContrast >= whiteContrast ? "#2e2521" : "#ffffff";
 }

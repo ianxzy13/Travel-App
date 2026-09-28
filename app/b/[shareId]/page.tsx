@@ -82,7 +82,7 @@ export default async function SharedBoardPage({
     <div data-accent={board.accent} className="bg-background min-h-dvh">
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-16">
         <header className="mb-8 text-center">
-          <p className="text-primary text-xs font-medium tracking-[0.3em] uppercase">
+          <p className="text-primary-ink text-xs font-medium tracking-[0.3em] uppercase">
             {board.couple}
           </p>
           <h1 className="mt-3 text-5xl">{board.name}</h1>

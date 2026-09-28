@@ -90,10 +90,10 @@ export function AppShell({
           {collapsed ? (
             <Link
               href="/app"
-              className="font-serif text-2xl font-semibold"
+              className="font-serif text-2xl font-medium"
               aria-label={tn("dashboard")}
             >
-              V<span className="text-primary">.</span>
+              V<span className="text-primary-ink">.</span>
             </Link>
           ) : (
             <Logo href="/app" />
@@ -105,11 +105,11 @@ export function AppShell({
           <WeddingSwitcher current={current} weddings={weddings} compact={collapsed} />
         </div>
 
-        <nav className="mt-4 flex-1 space-y-5 overflow-y-auto px-3 pb-4">
+        <nav className="mt-6 flex-1 space-y-7 overflow-y-auto px-3 pb-4">
           {NAV_GROUPS.map((group) => (
             <div key={group.key}>
               {!collapsed && (
-                <p className="text-muted-foreground mb-1 px-3 text-xs font-medium tracking-wide uppercase">
+                <p className="eyebrow mb-2 px-3 text-[0.62rem] tracking-[0.26em]">
                   {tn(`groups.${group.key}`)}
                 </p>
               )}
@@ -219,14 +219,14 @@ function SidebarLink({
       aria-current={active ? "page" : undefined}
       aria-label={collapsed ? label : undefined}
       className={cn(
-        "focus-visible:ring-ring flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
+        "focus-visible:ring-ring relative flex items-center gap-3 rounded-md px-3 py-2 text-[0.72rem] tracking-[0.14em] uppercase transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
         collapsed && "justify-center px-0",
         active
-          ? "bg-primary-soft text-foreground font-medium"
-          : "text-muted-foreground hover:bg-accent hover:text-foreground",
+          ? "bg-primary-soft/70 text-foreground before:bg-primary font-medium before:absolute before:inset-y-2 before:start-0 before:w-px"
+          : "text-muted-foreground hover:bg-primary-soft/40 hover:text-foreground",
       )}
     >
-      <Icon className={cn("size-[1.15rem] shrink-0", active && "text-primary")} aria-hidden />
+      <Icon className={cn("size-[1.15rem] shrink-0", active && "text-primary-ink")} aria-hidden />
       {!collapsed && label}
     </Link>
   );
@@ -248,8 +248,8 @@ function TabLink({ item, active }: { item: NavItem; active: boolean }) {
       href={item.href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "focus-visible:bg-accent flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] focus-visible:outline-none",
-        active ? "text-primary font-medium" : "text-muted-foreground",
+        "focus-visible:bg-accent flex h-16 flex-col items-center justify-center gap-1 text-[0.6rem] tracking-[0.12em] uppercase focus-visible:outline-none",
+        active ? "text-primary-ink font-medium" : "text-muted-foreground",
       )}
     >
       <Icon className="size-5" aria-hidden />
@@ -270,14 +270,14 @@ function MoreSheet({ pathname }: { pathname: string }) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         className={cn(
-          "focus-visible:bg-accent flex h-16 w-full flex-col items-center justify-center gap-1 text-[0.7rem] focus-visible:outline-none",
-          activeInMore ? "text-primary font-medium" : "text-muted-foreground",
+          "focus-visible:bg-accent flex h-16 w-full flex-col items-center justify-center gap-1 text-[0.6rem] tracking-[0.12em] uppercase focus-visible:outline-none",
+          activeInMore ? "text-primary-ink font-medium" : "text-muted-foreground",
         )}
       >
         <Menu className="size-5" aria-hidden />
         {t("more")}
       </SheetTrigger>
-      <SheetContent side="bottom" className="max-h-[85dvh] overflow-y-auto rounded-t-2xl">
+      <SheetContent side="bottom" className="max-h-[85dvh] overflow-y-auto rounded-t-lg">
         <SheetHeader>
           <SheetTitle className="font-serif text-2xl">{t("allTools")}</SheetTitle>
         </SheetHeader>
@@ -292,11 +292,11 @@ function MoreSheet({ pathname }: { pathname: string }) {
                   onClick={() => setOpen(false)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex flex-col items-center gap-2 rounded-xl border p-3 text-center text-xs",
+                    "flex flex-col items-center gap-2 rounded-md border p-3 text-center text-[0.65rem] tracking-[0.12em] uppercase",
                     active ? "border-primary bg-primary-soft font-medium" : "bg-background",
                   )}
                 >
-                  <Icon className="text-primary size-5" aria-hidden />
+                  <Icon className="text-primary-ink size-5" aria-hidden />
                   {tn(item.key)}
                 </Link>
               </li>

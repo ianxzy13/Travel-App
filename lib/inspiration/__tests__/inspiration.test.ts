@@ -53,7 +53,7 @@ describe("palette", () => {
   });
 
   it("picks readable text colours", () => {
-    expect(textOn("#ffffff")).toBe("#1c1917");
+    expect(textOn("#ffffff")).toBe("#2e2521");
     expect(textOn("#1d3557")).toBe("#ffffff");
   });
 });

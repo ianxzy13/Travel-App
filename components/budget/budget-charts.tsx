@@ -43,11 +43,7 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
             <p className="text-muted-foreground text-sm">{t("charts.noSpend")}</p>
           ) : (
             <div className="flex flex-col items-center gap-6 sm:flex-row">
-              <div
-                className="size-48 shrink-0"
-                role="img"
-                aria-label={t("charts.donutLabel")}
-              >
+              <div className="size-48 shrink-0" role="img" aria-label={t("charts.donutLabel")}>
                 <ResponsiveContainer>
                   <PieChart>
                     <Pie

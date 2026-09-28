@@ -235,7 +235,11 @@ function InviteForm() {
             />
           )}
         </FormField>
-        <FormField id="invite-role" label={t("role")} hint={roles(`${form.watch("role")}.description`)}>
+        <FormField
+          id="invite-role"
+          label={t("role")}
+          hint={roles(`${form.watch("role")}.description`)}
+        >
           {(aria) => (
             <Controller
               control={form.control}

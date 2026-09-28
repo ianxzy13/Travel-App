@@ -42,14 +42,14 @@ export function WeddingSwitcher({
       >
         <span
           aria-hidden
-          className="bg-primary-soft text-primary flex size-8 shrink-0 items-center justify-center rounded-full font-serif text-base font-semibold"
+          className="bg-primary-soft text-primary-ink flex size-8 shrink-0 items-center justify-center rounded-full font-serif text-base font-medium"
         >
           {current.name.charAt(0)}
         </span>
         {!compact && (
           <>
             <span className="min-w-0 flex-1">
-              <span className="block truncate font-serif text-lg leading-tight font-semibold">
+              <span className="block truncate font-serif text-lg leading-tight font-medium">
                 {current.name}
               </span>
               <span className="text-muted-foreground block truncate text-xs">

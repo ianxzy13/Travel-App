@@ -22,11 +22,7 @@ import { ChevronDown, GripVertical } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useTranslations } from "next-intl";
 import { translationProgress } from "@/lib/i18n/content";
-import {
-  isSectionEmpty,
-  type Section,
-  type SiteData,
-} from "@/lib/website/content";
+import { isSectionEmpty, type Section, type SiteData } from "@/lib/website/content";
 import type { EditorSection } from "@/lib/website/load";
 import { cn } from "@/lib/utils";
 import { SectionForm } from "./section-forms";
@@ -206,9 +202,7 @@ function SectionRow({
               {label}
             </span>
             <span className="text-muted-foreground block truncate text-xs">
-              {section.visible && empty
-                ? ts("hiddenEmpty")
-                : ts(`hints.${section.kind}`)}
+              {section.visible && empty ? ts("hiddenEmpty") : ts(`hints.${section.kind}`)}
             </span>
             {badge && (
               <span

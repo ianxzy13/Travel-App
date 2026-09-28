@@ -62,7 +62,7 @@ export function OnboardingWizard() {
           <li
             key={s.key}
             aria-current={i === step ? "step" : undefined}
-            className={cn("h-1.5 flex-1 rounded-full", i <= step ? "bg-primary" : "bg-border")}
+            className={cn("h-px flex-1", i <= step ? "bg-primary" : "bg-border")}
           >
             <span className="sr-only">
               {t("stepOfTitle", {
@@ -85,10 +85,10 @@ export function OnboardingWizard() {
             }}
             noValidate
           >
-            <p className="text-muted-foreground text-sm">
-              {t("stepOf", { step: step + 1, total: STEPS.length })}
-            </p>
-            <h1 className="mt-1 text-4xl">{t(`steps.${current.key}.title`)}</h1>
+            <p className="eyebrow">{t("stepOf", { step: step + 1, total: STEPS.length })}</p>
+            <h1 className="mt-3 text-4xl font-light sm:text-5xl">
+              {t(`steps.${current.key}.title`)}
+            </h1>
             <p className="text-muted-foreground mt-2 mb-8">{t(`steps.${current.key}.text`)}</p>
 
             <current.Fields form={form} disabled={pending} />

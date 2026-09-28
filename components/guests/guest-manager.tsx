@@ -127,7 +127,7 @@ export function GuestManager(data: GuestPageData) {
 
       {guests.length === 0 ? (
         <div className="bg-card flex flex-col items-center rounded-2xl border border-dashed px-6 py-16 text-center">
-          <span className="bg-primary-soft text-primary mb-4 inline-flex size-14 items-center justify-center rounded-full">
+          <span className="bg-primary-soft text-primary-ink mb-4 inline-flex size-14 items-center justify-center rounded-full">
             <Users className="size-7" aria-hidden />
           </span>
           <h2 className="text-3xl">{t("emptyTitle")}</h2>

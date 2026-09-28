@@ -23,7 +23,7 @@ import { YourTime } from "./your-time";
 // Shorthands for the site's colour/font variables (set by siteVars()).
 const heading = "font-[family-name:var(--site-heading)]";
 const muted = "text-[var(--site-muted)]";
-const accentText = "text-[var(--site-accent)]";
+const accentText = "text-[var(--site-ink)]";
 const line = "border-[var(--site-line)]";
 
 type Tr = ReturnType<typeof useTranslations<"site">>;
@@ -47,8 +47,7 @@ function Pic({
   className?: string;
 }) {
   const src = path ? ctx.data.images[path] : null;
-  if (!src)
-    return <div className={cn("absolute inset-0 bg-[var(--site-card)]", className)} aria-hidden />;
+  if (!src) return <div className={cn("soft-photo absolute inset-0", className)} aria-hidden />;
   return (
     <Image
       src={src}
@@ -183,6 +182,14 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
         ["--border" as string]: "var(--site-line)",
         ["--input" as string]: "var(--site-line)",
         ["--primary" as string]: "var(--site-accent)",
+        ["--primary-hover" as string]: "var(--site-accent)",
+        ["--primary-ink" as string]: "var(--site-ink)",
+        ["--primary-soft" as string]: "color-mix(in srgb, var(--site-accent) 14%, var(--site-bg))",
+        // photo placeholders (soft-photo) in the site's own colours
+        ["--sand" as string]: "var(--site-card)",
+        ["--photo-light" as string]: "color-mix(in srgb, white 70%, var(--site-bg))",
+        ["--photo-glow" as string]: "var(--site-bg)",
+        ["--blush" as string]: "color-mix(in srgb, var(--site-accent) 24%, var(--site-card))",
         ["--primary-foreground" as string]: "var(--site-on-accent)",
         ["--ring" as string]: "var(--site-accent)",
         colorScheme: "light",
@@ -265,8 +272,9 @@ function Nav({ ctx, couple, sections }: { ctx: Ctx; couple: string; sections: Se
               <a
                 href={`#${s.kind}`}
                 className={cn(
-                  "hover:text-[var(--site-accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]",
-                  (modern || ctx.t === "beach") && "text-xs tracking-[0.15em] uppercase",
+                  "hover:text-[var(--site-ink)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--site-accent)]",
+                  (modern || ctx.t === "beach" || ctx.t === "classic") &&
+                    "text-xs tracking-[0.15em] uppercase",
                 )}
               >
                 {ctx.tr(`sections.${s.kind}`)}
@@ -465,33 +473,50 @@ function Hero({
     );
   }
 
-  // classic
+  // classic: an editorial hero, the photo with a card overlapping it
   return (
-    <section id="home" className="scroll-mt-16 px-5 pt-16 pb-12 text-center @3xl:pt-24">
-      {tagline && (
-        <p className={cn(accentText, "text-xs font-medium tracking-[0.35em] uppercase")}>
-          {tagline}
-        </p>
-      )}
-      <h1 className={cn(heading, "mt-6 text-6xl leading-none font-medium @3xl:text-8xl")}>
-        {w.partner_a_name}
-        <span className={cn(accentText, "my-2 block text-4xl italic @3xl:text-5xl")}>&amp;</span>
-        {w.partner_b_name}
-      </h1>
-      <Ornament t={t} className="my-8" />
-      <p className="text-sm tracking-[0.25em] uppercase">{date}</p>
-      {place && <p className={cn(muted, "mt-2")}>{place}</p>}
-      <p className={cn(muted, "mt-3 text-sm italic")}>
-        <SiteCountdown date={w.wedding_date} />
-      </p>
-      {cta && <div className="mt-8">{cta}</div>}
-      {hero && (
-        <div className={cn("mx-auto mt-12 max-w-4xl border p-2", line)}>
-          <div className="relative aspect-[3/2]">
-            <Pic ctx={ctx} path={hero} alt="" sizes="(min-width: 900px) 900px, 95vw" priority />
-          </div>
+    <section id="home" className="scroll-mt-16 px-4 pt-8 pb-16 @3xl:px-6 @3xl:pt-12 @3xl:pb-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-md @xl:aspect-[16/10] @5xl:aspect-[16/8]">
+          <Pic ctx={ctx} path={hero} alt="" sizes="(min-width: 1200px) 1150px, 100vw" priority />
         </div>
-      )}
+        <div
+          className={cn(
+            "relative mx-3 -mt-24 rounded-md border bg-[var(--site-bg)] px-6 py-12 text-center @xl:mx-auto @xl:-mt-36 @xl:max-w-2xl @xl:px-14",
+            line,
+          )}
+        >
+          {tagline && (
+            <p className={cn(accentText, "text-xs font-medium tracking-[0.35em] uppercase")}>
+              {tagline}
+            </p>
+          )}
+          <h1
+            className={cn(
+              heading,
+              "mt-6 text-5xl leading-none font-light @xl:text-6xl @3xl:text-7xl",
+            )}
+          >
+            {w.partner_a_name}
+            <span
+              className={cn(
+                accentText,
+                "my-1 block font-[family-name:var(--font-great-vibes)] text-5xl font-normal @3xl:text-6xl",
+              )}
+            >
+              &amp;
+            </span>
+            {w.partner_b_name}
+          </h1>
+          <Ornament t={t} className="my-8" />
+          <p className="text-sm tracking-[0.25em] uppercase">{date}</p>
+          {place && <p className={cn(muted, "mt-2")}>{place}</p>}
+          <p className={cn(muted, "mt-3 text-sm italic")}>
+            <SiteCountdown date={w.wedding_date} />
+          </p>
+          {cta && <div className="mt-10">{cta}</div>}
+        </div>
+      </div>
     </section>
   );
 }
@@ -598,7 +623,7 @@ function Heading({ ctx, kind, index }: { ctx: Ctx; kind: SiteSectionKind; index:
     default:
       return (
         <div className="text-center">
-          <h2 id={id} className={cn(heading, "text-4xl font-medium @3xl:text-5xl")}>
+          <h2 id={id} className={cn(heading, "text-4xl font-light @3xl:text-6xl")}>
             {title}
           </h2>
           <Ornament t="classic" className="mt-4" />
@@ -646,7 +671,7 @@ function SectionBody({ ctx, section }: { ctx: Ctx; section: Section }) {
 }
 
 const cardShape: Record<SiteTemplate, string> = {
-  classic: "border rounded-none",
+  classic: "border rounded-md bg-[color-mix(in_srgb,var(--site-bg)_40%,white)]",
   modern: "border-t-2 border-[var(--site-fg)] rounded-none px-0",
   garden: "rounded-3xl bg-[color-mix(in_srgb,var(--site-bg)_65%,white)]",
   boho: "rounded-t-[2.5rem] rounded-b-xl bg-[var(--site-bg)] border",

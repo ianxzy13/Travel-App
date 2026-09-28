@@ -23,9 +23,9 @@ describe("choosing a language", () => {
     expect(resolveGuestLocale({ cookie: "de", preferred: "sl", weddingLanguages: wedding })).toBe(
       "de",
     );
-    expect(resolveGuestLocale({ preferred: "it", acceptLanguage: "en", weddingLanguages: wedding })).toBe(
-      "it",
-    );
+    expect(
+      resolveGuestLocale({ preferred: "it", acceptLanguage: "en", weddingLanguages: wedding }),
+    ).toBe("it");
     expect(resolveGuestLocale({ acceptLanguage: "de-DE", weddingLanguages: wedding })).toBe("de");
     expect(resolveGuestLocale({ acceptLanguage: "xx", weddingLanguages: wedding })).toBe("sl");
     expect(resolveGuestLocale({})).toBe("en");

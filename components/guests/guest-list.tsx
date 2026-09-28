@@ -179,7 +179,8 @@ function HouseholdHeader({
           onClick={() => onEditHousehold(group.id)}
           aria-label={t("editHouseholdName", { name: group.name })}
         >
-          <Pencil aria-hidden /> <span className="sr-only sm:not-sr-only">{t("editHousehold")}</span>
+          <Pencil aria-hidden />{" "}
+          <span className="sr-only sm:not-sr-only">{t("editHousehold")}</span>
         </Button>
       )}
     </div>
@@ -203,7 +204,13 @@ function LanguageFlag({ code }: { code: string }) {
 }
 
 /** Name + little hints (plus-one, age, language, dietary, accessibility, B-list). */
-function NameCell({ guest, onEdit, guestNames, grouped, coupleLanguage }: Props & { guest: GuestView }) {
+function NameCell({
+  guest,
+  onEdit,
+  guestNames,
+  grouped,
+  coupleLanguage,
+}: Props & { guest: GuestView }) {
   const t = useTranslations("guests.list");
   const g = useTranslations("guests");
   return (
@@ -230,13 +237,11 @@ function NameCell({ guest, onEdit, guestNames, grouped, coupleLanguage }: Props 
           )}
         {guest.ageGroup !== "adult" && <span>{g(`ageGroups.${guest.ageGroup}`)}</span>}
         {guest.list === "b" && (
-          <span className="rounded bg-amber-100 px-1 font-medium text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <span className="bg-tint-sand text-tint-sand-fg rounded px-1 font-medium">
             {t("bList")}
           </span>
         )}
-        {guest.dietary && (
-          <Hint icon={Utensils} label={t("dietary", { text: guest.dietary })} />
-        )}
+        {guest.dietary && <Hint icon={Utensils} label={t("dietary", { text: guest.dietary })} />}
         {guest.accessibility && (
           <Hint icon={Accessibility} label={t("accessibility", { text: guest.accessibility })} />
         )}

@@ -96,7 +96,7 @@ export function EventsCard({
       <CardContent>
         {events.length === 0 ? (
           <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-8 text-center">
-            <CalendarDays className="text-primary size-8" aria-hidden />
+            <CalendarDays className="text-primary-ink size-8" aria-hidden />
             <p className="text-muted-foreground text-sm">{t("empty")}</p>
             {!readOnly && (
               <div className="flex flex-wrap justify-center gap-2">
@@ -142,9 +142,7 @@ export function EventsCard({
                         {event.dress_code}
                       </p>
                     )}
-                    <p>
-                      {t("invited", { count: event.invitedCount })}
-                    </p>
+                    <p>{t("invited", { count: event.invitedCount })}</p>
                   </div>
                 </div>
                 {!readOnly && (
@@ -197,7 +195,11 @@ export function EventsCard({
                     </Button>
                     <ConfirmDialog
                       trigger={
-                        <Button variant="ghost" size="icon" aria-label={t("deleteName", { name: event.name })}>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={t("deleteName", { name: event.name })}
+                        >
                           <Trash2 aria-hidden />
                         </Button>
                       }

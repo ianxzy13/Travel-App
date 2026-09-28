@@ -182,8 +182,7 @@ export async function previewLink(url: string): Promise<ActionResult<LinkPreview
     return { ok: true, data: await getLinkPreview(url) };
   } catch (e) {
     const t = await getTranslations("inspiration.linkErrors");
-    const message =
-      e instanceof LinkError ? t(e.key, { status: e.status ?? 0 }) : t("unreachable");
+    const message = e instanceof LinkError ? t(e.key, { status: e.status ?? 0 }) : t("unreachable");
     return { ok: false, error: message };
   }
 }
@@ -346,8 +345,7 @@ export async function toggleHeart(pinId: string): Promise<ActionResult> {
 export async function addComment(pinId: string, body: string): Promise<ActionResult> {
   const { user, wedding, sb } = await member();
   const text = body.trim();
-  if (!id.safeParse(pinId).success || !text || text.length > 2000)
-    return await err("commentEmpty");
+  if (!id.safeParse(pinId).success || !text || text.length > 2000) return await err("commentEmpty");
   const { error } = await sb
     .from("pin_comments")
     .insert({ pin_id: pinId, user_id: user.id, wedding_id: wedding.id, body: text });
@@ -384,8 +382,7 @@ export async function addPaletteColors(
     .eq("wedding_id", ctx.wedding.id);
   const have = new Set((existing ?? []).map((c) => c.hex));
   const fresh = [...new Set(parsed.data.map((h) => h.toLowerCase()))].filter((h) => !have.has(h));
-  if (have.size + fresh.length > 12)
-    return await err("paletteFull");
+  if (have.size + fresh.length > 12) return await err("paletteFull");
   if (!fresh.length) return { ok: true };
   const { error } = await ctx.sb.from("palette_colors").insert(
     fresh.map((hex, i) => ({

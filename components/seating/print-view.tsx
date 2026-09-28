@@ -34,7 +34,9 @@ export function PrintSeatingView({
     <>
       {view !== "cards" && (
         <header className="mb-6">
-          <p className="text-sm tracking-widest text-stone-500 uppercase">{t(`printViews.${view}`)}</p>
+          <p className="text-sm tracking-widest text-[#7a6960] uppercase">
+            {t(`printViews.${view}`)}
+          </p>
           <h1 className="text-4xl">{title}</h1>
         </header>
       )}
@@ -50,7 +52,7 @@ export function PrintSeatingView({
             width={state.room.width}
             height={state.room.height}
             fill="#fff"
-            stroke="#57534e"
+            stroke="#8c7b72"
             strokeWidth={4}
           />
           {Object.values(state.objects).map((o) => {
@@ -77,9 +79,9 @@ export function PrintSeatingView({
             const people = guestsAtTable(state, guestsById, t);
             return (
               <section key={t.id} className="mb-6 break-inside-avoid">
-                <h2 className="border-b border-stone-300 pb-1 text-2xl">
+                <h2 className="border-b border-[#e5d9d0] pb-1 text-2xl">
                   {tableName(t)}{" "}
-                  <span className="font-sans text-sm text-stone-500">
+                  <span className="font-sans text-sm text-[#7a6960]">
                     ({people.length}/{t.seatCount})
                   </span>
                 </h2>
@@ -87,7 +89,7 @@ export function PrintSeatingView({
                   {people.map((g) => (
                     <li key={g.id} className="flex justify-between gap-3">
                       <span>{g.name}</span>
-                      <span className="text-right text-stone-500">
+                      <span className="text-right text-[#7a6960]">
                         {[g.mealOptionId && meals.get(g.mealOptionId), g.dietary]
                           .filter(Boolean)
                           .join(" · ")}
@@ -110,9 +112,9 @@ export function PrintSeatingView({
               // A tent card: fold along the dashed line; the top half is upside down.
               <div
                 key={g.id}
-                className="flex h-[65mm] break-inside-avoid flex-col border border-dashed border-stone-300"
+                className="flex h-[65mm] break-inside-avoid flex-col border border-dashed border-[#e5d9d0]"
               >
-                <div className="flex flex-1 rotate-180 flex-col items-center justify-center border-b border-dashed border-stone-300">
+                <div className="flex flex-1 rotate-180 flex-col items-center justify-center border-b border-dashed border-[#e5d9d0]">
                   <PlaceCardText guest={g} table={tableName(t)} />
                 </div>
                 <div className="flex flex-1 flex-col items-center justify-center">
@@ -134,7 +136,7 @@ export function PrintSeatingView({
       )}
 
       {tables.length === 0 && (
-        <p className="py-10 text-center text-stone-500">{t("printPage.noTables")}</p>
+        <p className="py-10 text-center text-[#7a6960]">{t("printPage.noTables")}</p>
       )}
     </>
   );
@@ -144,7 +146,7 @@ function PlaceCardText({ guest, table }: { guest: SeatingGuest; table: string })
   return (
     <>
       <p className="px-4 text-center font-serif text-3xl leading-tight">{guest.name}</p>
-      <p className="mt-1 text-xs tracking-widest text-stone-500 uppercase">{table}</p>
+      <p className="mt-1 text-xs tracking-widest text-[#7a6960] uppercase">{table}</p>
     </>
   );
 }
@@ -166,7 +168,7 @@ function FindYourSeat({ state, guests }: { state: SeatingState; guests: SeatingG
       {rows.map(({ g, table }) => (
         <li key={g.id} className="flex break-inside-avoid items-baseline gap-2 py-0.5">
           <span>{g.lastName ? `${g.lastName}, ${g.firstName}` : g.name}</span>
-          <span className="flex-1 border-b border-dotted border-stone-300" aria-hidden />
+          <span className="flex-1 border-b border-dotted border-[#e5d9d0]" aria-hidden />
           <span className="font-medium">{table}</span>
         </li>
       ))}

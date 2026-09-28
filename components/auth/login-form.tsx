@@ -106,7 +106,7 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
   return (
     <div className="space-y-5">
       <div className="space-y-2 text-center" role="status">
-        <MailCheck className="text-primary mx-auto size-10" aria-hidden />
+        <MailCheck className="text-primary-ink mx-auto size-10" aria-hidden />
         <p className="font-medium">{t("checkInbox")}</p>
         <p className="text-muted-foreground text-sm">
           {t.rich("sentTo", {

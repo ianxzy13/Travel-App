@@ -118,11 +118,7 @@ export function BudgetPage(props: Props) {
 
   return (
     <>
-      <PageHeader
-        title={t("title")}
-        description={t("description")}
-        actions={actions}
-      />
+      <PageHeader title={t("title")} description={t("description")} actions={actions} />
 
       <div className="space-y-6">
         <SummaryTiles summary={summary} currency={currency} canEdit={canEdit} />
@@ -130,7 +126,7 @@ export function BudgetPage(props: Props) {
         {props.categories.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center gap-4 py-12 text-center">
-              <span className="bg-primary-soft text-primary inline-flex size-14 items-center justify-center rounded-full">
+              <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
                 <Wallet className="size-7" aria-hidden />
               </span>
               <h2 className="text-3xl">{t("startTitle")}</h2>
@@ -252,17 +248,13 @@ function SummaryTiles({
               {t("total")}
             </dt>
             <dd className="flex items-center gap-1">
-              <span className="font-serif text-3xl font-semibold tabular-nums sm:text-4xl">
+              <span className="font-serif text-3xl font-medium tabular-nums sm:text-4xl">
                 {total == null ? t("notSet") : money(total)}
               </span>
               {canEdit && <TotalEditor total={total} currency={currency} />}
             </dd>
           </div>
-          <Tile
-            label={t("committed")}
-            value={money(totals.committed)}
-            hint={t("committedHint")}
-          />
+          <Tile label={t("committed")} value={money(totals.committed)} hint={t("committedHint")} />
           <Tile
             label={t("paid")}
             value={money(totals.paid)}
@@ -275,7 +267,7 @@ function SummaryTiles({
             <dd>
               <span
                 className={cn(
-                  "font-serif text-3xl font-semibold tabular-nums sm:text-4xl",
+                  "font-serif text-3xl font-medium tabular-nums sm:text-4xl",
                   remaining != null && remaining < 0 && "text-destructive",
                 )}
               >
@@ -315,7 +307,8 @@ function SummaryTiles({
               <span className="bg-primary size-2.5 rounded-sm" aria-hidden /> {t("legendPaid")}
             </li>
             <li className="flex items-center gap-1.5">
-              <span className="bg-primary/40 size-2.5 rounded-sm" aria-hidden /> {t("legendCommitted")}
+              <span className="bg-primary/40 size-2.5 rounded-sm" aria-hidden />{" "}
+              {t("legendCommitted")}
             </li>
             <li className="flex items-center gap-1.5">
               <span className="bg-muted size-2.5 rounded-sm border" aria-hidden /> {t("legendFree")}
@@ -332,7 +325,7 @@ function Tile({ label, value, hint }: { label: string; value: string; hint?: str
     <div>
       <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">{label}</dt>
       <dd>
-        <span className="font-serif text-3xl font-semibold tabular-nums sm:text-4xl">{value}</span>
+        <span className="font-serif text-3xl font-medium tabular-nums sm:text-4xl">{value}</span>
         {hint && <span className="text-muted-foreground block text-xs">{hint}</span>}
       </dd>
     </div>
@@ -410,7 +403,7 @@ function UpcomingPayments({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 font-serif text-2xl">
-          <CalendarClock className="text-primary size-5" aria-hidden /> {t("upcoming")}
+          <CalendarClock className="text-primary-ink size-5" aria-hidden /> {t("upcoming")}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -543,7 +536,9 @@ function CategoryRow({
               <span className={cn(over && "text-destructive font-medium")}>
                 {money(c.totals.committed)}
               </span>
-              <span className="text-muted-foreground">{t("of", { amount: money(c.allocated) })}</span>
+              <span className="text-muted-foreground">
+                {t("of", { amount: money(c.allocated) })}
+              </span>
             </span>
             <span className="bg-muted mt-1 block h-1.5 rounded-full">
               <span
@@ -553,7 +548,8 @@ function CategoryRow({
             </span>
             {over && (
               <span className="text-destructive mt-0.5 flex items-center gap-1 text-xs">
-                <AlertTriangle className="size-3" aria-hidden /> {t("over", { amount: money(c.over) })}
+                <AlertTriangle className="size-3" aria-hidden />{" "}
+                {t("over", { amount: money(c.over) })}
               </span>
             )}
           </span>

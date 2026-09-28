@@ -60,7 +60,11 @@ export function currencyLabel(code: string, locale: string) {
   try {
     name = new Intl.DisplayNames([locale], { type: "currency" }).of(code) ?? code;
     symbol =
-      new Intl.NumberFormat(locale, { style: "currency", currency: code, currencyDisplay: "narrowSymbol" })
+      new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: code,
+        currencyDisplay: "narrowSymbol",
+      })
         .formatToParts(0)
         .find((p) => p.type === "currency")?.value ?? code;
   } catch {

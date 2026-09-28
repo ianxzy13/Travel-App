@@ -64,7 +64,7 @@ export function PasswordGate({
             required
           />
           {error && (
-            <p id="site-password-error" role="alert" className="text-sm text-red-700">
+            <p id="site-password-error" role="alert" className="text-sm text-[#a94f45]">
               {error}
             </p>
           )}

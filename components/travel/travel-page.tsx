@@ -372,7 +372,7 @@ function Board({
                     f.status === "considering" && "opacity-70",
                   )}
                 >
-                  <span className="w-14 font-serif text-2xl font-semibold tabular-nums">
+                  <span className="w-14 font-serif text-2xl font-medium tabular-nums">
                     {fmtTime(timeOf(f.time) || null, locale) || "–"}
                   </span>
                   <span className="w-28 text-sm">
@@ -390,13 +390,15 @@ function Board({
                   </span>
                   <span className="flex gap-1.5">
                     {f.needsPickup && (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+                      <span className="bg-tint-sand text-tint-sand-fg rounded-full px-2 py-0.5 text-xs font-medium">
                         <Car className="me-1 inline size-3" aria-hidden />
                         {t("pickup")}
                       </span>
                     )}
                     {f.status === "considering" && (
-                      <span className="bg-muted rounded-full px-2 py-0.5 text-xs">{t("notBooked")}</span>
+                      <span className="bg-muted rounded-full px-2 py-0.5 text-xs">
+                        {t("notBooked")}
+                      </span>
                     )}
                   </span>
                 </button>
@@ -589,16 +591,26 @@ function FlightForm({
             </FormField>
             <FormField id="f-number" label={t("number")} error={errors.flightNumber?.message}>
               {(aria) => (
-                <Input {...aria} placeholder={t("numberPlaceholder")} {...form.register("flightNumber")} />
+                <Input
+                  {...aria}
+                  placeholder={t("numberPlaceholder")}
+                  {...form.register("flightNumber")}
+                />
               )}
             </FormField>
             <FormField id="f-from" label={t("fromLabel")} error={errors.fromAirport?.message}>
               {(aria) => (
-                <Input {...aria} placeholder={t("fromPlaceholder")} {...form.register("fromAirport")} />
+                <Input
+                  {...aria}
+                  placeholder={t("fromPlaceholder")}
+                  {...form.register("fromAirport")}
+                />
               )}
             </FormField>
             <FormField id="f-to" label={t("toLabel")} error={errors.toAirport?.message}>
-              {(aria) => <Input {...aria} placeholder={t("toPlaceholder")} {...form.register("toAirport")} />}
+              {(aria) => (
+                <Input {...aria} placeholder={t("toPlaceholder")} {...form.register("toAirport")} />
+              )}
             </FormField>
             <FormField id="f-dep" label={t("departs")} error={errors.departAt?.message}>
               {(aria) => <Input {...aria} type="datetime-local" {...form.register("departAt")} />}

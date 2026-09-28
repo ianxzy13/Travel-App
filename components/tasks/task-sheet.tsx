@@ -118,11 +118,7 @@ export function TaskSheet({
                 </Select>
               </div>
             </div>
-            <FormField
-              id="task-category"
-              label={t("category")}
-              hint={t("categoryHint")}
-            >
+            <FormField id="task-category" label={t("category")} hint={t("categoryHint")}>
               {(a) => (
                 <Input
                   {...a}

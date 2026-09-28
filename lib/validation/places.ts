@@ -1,15 +1,11 @@
 import { v } from "@/lib/i18n/validation";
 import { z } from "zod";
 
-const text = (max: number) =>
-  z.string().trim().max(max, v("tooLong", max));
+const text = (max: number) => z.string().trim().max(max, v("tooLong", max));
 const money = z.number().finite().min(0, v("negative")).max(9_999_999_999).nullable();
 const date = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]);
 const count = (max: number) => z.number().int(v("wholeNumber")).min(0).max(max).nullable();
-const url = z.union([
-  z.literal(""),
-  z.url(v("url")).max(500),
-]);
+const url = z.union([z.literal(""), z.url(v("url")).max(500)]);
 
 export const venueSchema = z.object({
   name: text(120).min(1, v("name")),

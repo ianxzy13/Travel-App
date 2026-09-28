@@ -66,7 +66,11 @@ export function GuestToolbar(props: Props) {
 
       <div className="flex flex-wrap items-center gap-2">
         {/* A-list / B-list toggle */}
-        <div role="radiogroup" aria-label={t("whichList")} className="bg-muted flex rounded-lg p-0.5">
+        <div
+          role="radiogroup"
+          aria-label={t("whichList")}
+          className="bg-muted flex rounded-lg p-0.5"
+        >
           {lists.map((l) => (
             <button
               key={l.value}

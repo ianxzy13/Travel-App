@@ -27,7 +27,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
       <Logo />
       <Card className="w-full max-w-md">
         <CardContent className="space-y-4 p-8 text-center">
-          <HeartHandshake className="text-primary mx-auto size-10" aria-hidden />
+          <HeartHandshake className="text-primary-ink mx-auto size-10" aria-hidden />
           {!invite || invite.status !== "pending" ? (
             <>
               <h1 className="text-3xl">
@@ -52,7 +52,9 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
                   b: (c) => <strong className="text-foreground">{c}</strong>,
                 })}
               </p>
-              <p className="text-muted-foreground text-sm">{t("signedInAs", { email: user.email ?? "" })}</p>
+              <p className="text-muted-foreground text-sm">
+                {t("signedInAs", { email: user.email ?? "" })}
+              </p>
               <AcceptInviteButton token={token} />
             </>
           )}

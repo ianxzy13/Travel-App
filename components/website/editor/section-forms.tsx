@@ -182,11 +182,7 @@ export function SectionForm({
               travel: link("/app/travel"),
             })}
           </p>
-          <FormField
-            id={`${id}-notes`}
-            label={t("gettingAround")}
-            hint={t("gettingAroundHint")}
-          >
+          <FormField id={`${id}-notes`} label={t("gettingAround")} hint={t("gettingAroundHint")}>
             {(a) => (
               <Textarea
                 {...a}
@@ -284,11 +280,7 @@ export function SectionForm({
       const c = section.content;
       return (
         <div className="space-y-4">
-          <FormField
-            id={`${id}-intro`}
-            label={t("intro")}
-            hint={t("registryHint")}
-          >
+          <FormField id={`${id}-intro`} label={t("intro")} hint={t("registryHint")}>
             {(a) => (
               <Textarea
                 {...a}

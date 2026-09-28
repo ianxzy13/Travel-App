@@ -76,8 +76,9 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
   const vendorById = new Map(vendors.map((v) => [v.id, v]));
   // the ceremony: named so in English or the couple's language, else the first timed event
   const ceremony =
-    events.find((e) => (/ceremon/i.test(e.name) || e.name === t("template.ceremony")) && e.start_time) ??
-    events.find((e) => e.start_time);
+    events.find(
+      (e) => (/ceremon/i.test(e.name) || e.name === t("template.ceremony")) && e.start_time,
+    ) ?? events.find((e) => e.start_time);
   const [ceremonyTime, setCeremonyTime] = useState(ceremony?.start_time?.slice(0, 5) ?? "15:00");
   // events of this day that aren't on the schedule yet (linked, or an item with the same name)
   const dayEvents = events.filter(
@@ -94,9 +95,7 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
   function label(d: string) {
     const date = dateOf(d);
     if (d === WEDDING)
-      return date
-        ? t("weddingDayOn", { date: fmtDate(date, locale, "medium") })
-        : t("weddingDay");
+      return date ? t("weddingDayOn", { date: fmtDate(date, locale, "medium") }) : t("weddingDay");
     return fmtDate(d, locale, "medium");
   }
 
@@ -192,7 +191,7 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
 
       {dayItems.length === 0 ? (
         <div className="rounded-2xl border border-dashed p-8 text-center sm:p-12">
-          <Clock className="text-primary mx-auto size-10" aria-hidden />
+          <Clock className="text-primary-ink mx-auto size-10" aria-hidden />
           <h2 className="mt-4 text-2xl">{t("emptyTitle")}</h2>
           <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("emptyText")}</p>
           {canEdit && (
@@ -311,7 +310,7 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
                           {vendor.phone && (
                             <a
                               href={`tel:${vendor.phone.replace(/[^\d+]/g, "")}`}
-                              className="text-primary underline-offset-2 hover:underline"
+                              className="text-primary-ink underline-offset-2 hover:underline"
                             >
                               {vendor.phone}
                             </a>
