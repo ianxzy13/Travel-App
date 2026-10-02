@@ -1246,6 +1246,198 @@ async function main() {
     ),
   );
 
+  // ---------- hotel room types, rooms & room assignments (Phase 14) ----------
+  const roomTypes = check(
+    "room types",
+    await sb
+      .from("hotel_room_types")
+      .insert(
+        [
+          {
+            wedding_id: wid,
+            hotel_id: hotels[0].id,
+            name: "Superior Double",
+            beds: [{ kind: "double", count: 1 }],
+            max_guests: 2,
+            price_per_night: 240,
+            count: 8,
+            sort_order: 0,
+          },
+          {
+            wedding_id: wid,
+            hotel_id: hotels[0].id,
+            name: "Family Suite",
+            beds: [
+              { kind: "double", count: 1 },
+              { kind: "single", count: 2 },
+            ],
+            max_guests: 4,
+            has_crib: true,
+            price_per_night: 380,
+            count: 3,
+            sort_order: 1,
+          },
+          {
+            wedding_id: wid,
+            hotel_id: hotels[0].id,
+            name: "Accessible Double",
+            beds: [{ kind: "double", count: 1 }],
+            max_guests: 2,
+            accessible: true,
+            price_per_night: 240,
+            count: 2,
+            sort_order: 2,
+          },
+          {
+            wedding_id: wid,
+            hotel_id: hotels[0].id,
+            name: "Deluxe Twin",
+            beds: [{ kind: "single", count: 2 }],
+            max_guests: 2,
+            price_per_night: 220,
+            count: 4,
+            sort_order: 3,
+          },
+          {
+            wedding_id: wid,
+            hotel_id: hotels[1].id,
+            name: "Classic Double",
+            beds: [{ kind: "double", count: 1 }],
+            max_guests: 2,
+            price_per_night: 130,
+            count: 5,
+            sort_order: 0,
+          },
+          {
+            wedding_id: wid,
+            hotel_id: hotels[1].id,
+            name: "Triple Room",
+            beds: [
+              { kind: "double", count: 1 },
+              { kind: "single", count: 1 },
+            ],
+            max_guests: 3,
+            price_per_night: 170,
+            count: 3,
+            sort_order: 1,
+          },
+        ],
+        { defaultToNull: false },
+      )
+      .select("id, name, hotel_id"),
+  );
+  const rt = Object.fromEntries(roomTypes.map((r) => [r.name + ":" + r.hotel_id, r])) as Record<
+    string,
+    (typeof roomTypes)[number]
+  >;
+  const rtByName = (name: string, hotelIdx: number) => rt[name + ":" + hotels[hotelIdx].id];
+
+  const ROOM_DEFS: { hotel: number; type: string; number: string; floor: string; locked?: boolean }[] = [
+    { hotel: 0, type: "Superior Double", number: "201", floor: "2" },
+    { hotel: 0, type: "Superior Double", number: "202", floor: "2" },
+    { hotel: 0, type: "Family Suite", number: "203", floor: "2", locked: true },
+    { hotel: 0, type: "Accessible Double", number: "204", floor: "1" },
+    { hotel: 0, type: "Superior Double", number: "205", floor: "2" },
+    { hotel: 0, type: "Superior Double", number: "206", floor: "2" },
+    { hotel: 0, type: "Deluxe Twin", number: "207", floor: "2" },
+    { hotel: 0, type: "Superior Double", number: "301", floor: "3" },
+    { hotel: 0, type: "Superior Double", number: "302", floor: "3" },
+    { hotel: 0, type: "Deluxe Twin", number: "303", floor: "3" },
+    { hotel: 0, type: "Superior Double", number: "304", floor: "3" },
+    { hotel: 0, type: "Superior Double", number: "305", floor: "3" },
+    { hotel: 0, type: "Deluxe Twin", number: "306", floor: "3" },
+    { hotel: 0, type: "Family Suite", number: "307", floor: "3" },
+    { hotel: 0, type: "Accessible Double", number: "101", floor: "1" },
+    { hotel: 1, type: "Classic Double", number: "1", floor: "1" },
+    { hotel: 1, type: "Classic Double", number: "2", floor: "1" },
+    { hotel: 1, type: "Classic Double", number: "3", floor: "2" },
+    { hotel: 1, type: "Triple Room", number: "4", floor: "2" },
+    { hotel: 1, type: "Classic Double", number: "5", floor: "2" },
+    { hotel: 1, type: "Triple Room", number: "6", floor: "3" },
+  ];
+  const hotelRooms = check(
+    "hotel rooms",
+    await sb
+      .from("hotel_rooms")
+      .insert(
+        ROOM_DEFS.map((r, i) => ({
+          wedding_id: wid,
+          hotel_id: hotels[r.hotel].id,
+          room_type_id: rtByName(r.type, r.hotel).id,
+          room_number: r.number,
+          floor: r.floor,
+          is_locked: r.locked ?? false,
+          sort_order: i,
+        })),
+        { defaultToNull: false },
+      )
+      .select("id, room_number, hotel_id"),
+  );
+  const findRoom = (hotelIdx: number, num: string) =>
+    hotelRooms.find((r) => r.hotel_id === hotels[hotelIdx].id && r.room_number === num)!;
+
+  const roomCheckIn = beforeW(1);
+  const roomCheckOut = iso(addDays(weddingDay, 2));
+  const RA: { room: [number, string]; names: string[]; cribs?: string[] }[] = [
+    { room: [0, "201"], names: ["Helena Wright"] },
+    { room: [0, "202"], names: ["Richard Almeida", "Carla Mendes"] },
+    {
+      room: [0, "203"],
+      names: ["Emma Wright", "James Wright", "Olivia Wright", "Noah Wright"],
+      cribs: ["Noah Wright"],
+    },
+    { room: [0, "204"], names: ["Peter Wright"] },
+    { room: [0, "205"], names: ["Sarah Collins", "Mark Collins"] },
+    { room: [0, "206"], names: ["Tony Wright", "Julie Wright"] },
+    { room: [0, "301"], names: ["Tom Harris", "Hannah Harris"] },
+    { room: [0, "302"], names: ["Oliver Bennett", "Chloe Bennett"] },
+  ];
+  const roomAssignRows = RA.flatMap((ra) => {
+    const room = findRoom(ra.room[0], ra.room[1]);
+    return ra.names.map((fullName) => {
+      const [first, ...rest] = fullName.split(" ");
+      const last = rest.join(" ");
+      return {
+        wedding_id: wid,
+        room_id: room.id,
+        guest_id: byName(first, last),
+        check_in: roomCheckIn,
+        check_out: roomCheckOut,
+        needs_crib: ra.cribs?.includes(fullName) ?? false,
+      };
+    });
+  });
+  check(
+    "room assignments",
+    await sb.from("hotel_room_assignments").insert(roomAssignRows, { defaultToNull: false }),
+  );
+
+  const roomPrefUpdates: { id: string; wants: "yes" | "no" | "elsewhere"; share?: string; avoid?: string; crib?: boolean }[] = [];
+  for (const g of guests) {
+    if (!HOUSES[g.house].abroad || (HOUSES[g.house].list ?? "a") !== "a") continue;
+    if (g.person.age || g.plusOneOf) continue;
+    const u: (typeof roomPrefUpdates)[number] = { id: g.id, wants: "yes" };
+    if (g.person.first === "Helena" && g.person.last === "Wright") u.avoid = "Richard Almeida";
+    if (g.person.first === "Amelia" && g.person.last === "Clarke") u.share = "Grace Hughes";
+    if (g.person.first === "Grace" && g.person.last === "Hughes") u.share = "Amelia Clarke";
+    roomPrefUpdates.push(u);
+  }
+  for (const u of roomPrefUpdates) {
+    await sb
+      .from("guests")
+      .update({
+        wants_hotel_room: u.wants,
+        needs_crib: u.crib ?? false,
+        room_pref_share: u.share ?? null,
+        room_pref_avoid: u.avoid ?? null,
+      })
+      .eq("id", u.id);
+  }
+  check(
+    "crib pref",
+    await sb.from("guests").update({ needs_crib: true }).eq("id", byName("Noah", "Wright")),
+  );
+
   // ---------- flights ----------
   const FLIGHTS = [
     {
@@ -1877,6 +2069,7 @@ async function main() {
 Done! Demo wedding "Sofia & Lucas" (in ${daysLeft} days) is ready:
   ${guests.length} guests in ${houses.length} households, ${attending.size} attending so far
   ${EXPENSES.length} expenses, ${vendors.length} vendors, ${venues.length} venues, ${hotels.length} hotels, ${FLIGHTS.length + 1} flights
+  ${roomTypes.length} room types, ${hotelRooms.length} rooms, ${roomAssignRows.length} guests in rooms (${hotelRooms.length - RA.length} rooms empty for drag-and-drop)
   ${seats.length} guests seated at 3 of 10 tables, ${pinCount} pins${unsplashKey ? " (Unsplash)" : " (placeholder photos)"}, ${suggestions.length + 2} to-dos
   Public website: /w/${SLUG}
 
