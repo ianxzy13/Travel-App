@@ -44,6 +44,7 @@ function guest(id: string, extra: Partial<SeatingGuest> = {}): SeatingGuest {
     side: "both",
     ageGroup: "adult",
     tagIds: [],
+    languages: [],
     dietary: null,
     accessibility: null,
     plusOneOf: null,
@@ -228,5 +229,60 @@ describe("auto-arrange", () => {
     expect(bestStartSeat([1, 2, 4, 5, 6], 8, 3)).toBe(4);
     // run wrapping around the end: 6,7,0
     expect(bestStartSeat([0, 6, 7], 8, 3)).toBe(6);
+  });
+
+  it("prefers tables where guests share a language", () => {
+    let s = withTables(table("t1", 4), table("t2", 4));
+    s = assignSeat(s, "en1", "t1", 0);
+    s = assignSeat(s, "pt1", "t2", 0);
+    const allGuests = [
+      guest("en1", { languages: ["en"] }),
+      guest("pt1", { languages: ["pt"] }),
+      guest("en2", { languages: ["en"] }),
+    ];
+    const all = new Map(allGuests.map((g) => [g.id, g]));
+    const r = autoArrange(s, [guest("en2", { languages: ["en"] })], all, []);
+    expect(r.state.assignments.en2.objectId).toBe("t1");
+  });
+
+  it("prefers tables with a host-tagged guest for lonely guests", () => {
+    let s = withTables(table("t1", 4), table("t2", 4));
+    s = assignSeat(s, "h1", "t1", 0);
+    s = assignSeat(s, "x1", "t2", 0);
+    const allGuests = [
+      guest("h1", { tagIds: ["host-tag"] }),
+      guest("x1"),
+      guest("lonely"),
+    ];
+    const all = new Map(allGuests.map((g) => [g.id, g]));
+    const r = autoArrange(s, [guest("lonely")], all, [], { hostTagId: "host-tag" });
+    expect(r.state.assignments.lonely.objectId).toBe("t1");
+  });
+
+  it("disables a factor when its weight is 0", () => {
+    let s = withTables(table("t1", 4), table("t2", 4));
+    s = assignSeat(s, "en1", "t1", 0);
+    s = assignSeat(s, "pt1", "t2", 0);
+    const allGuests = [
+      guest("en1", { languages: ["en"] }),
+      guest("pt1", { languages: ["pt"] }),
+      guest("en2", { languages: ["en"] }),
+    ];
+    const all = new Map(allGuests.map((g) => [g.id, g]));
+    const r = autoArrange(s, [guest("en2", { languages: ["en"] })], all, [], {
+      weights: { language: 0 },
+    });
+    // with language disabled and both tables equally scored, snuggest fit wins
+    expect(r.placed).toContain("en2");
+  });
+
+  it("returns tableScores for occupied tables", () => {
+    const s = withTables(table("t1", 4));
+    const allGuests = [guest("a"), guest("b")];
+    const all = new Map(allGuests.map((g) => [g.id, g]));
+    const r = autoArrange(s, allGuests, all, []);
+    expect(r.tableScores.t1).toBeDefined();
+    expect(r.tableScores.t1.total).toBe(2);
+    expect(Array.isArray(r.tableScores.t1.reasons)).toBe(true);
   });
 });

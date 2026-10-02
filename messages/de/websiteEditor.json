@@ -175,7 +175,13 @@
       "captionPlaceholder": "Bildunterschrift (optional)",
       "moveUp": "Eintrag {n} nach oben",
       "moveDown": "Eintrag {n} nach unten",
-      "remove": "Eintrag {n} entfernen"
+      "remove": "Eintrag {n} entfernen",
+      "transport": "Anreise & Transport",
+      "transportHint": "Wie kommt man vom Flughafen zum Veranstaltungsort, Mietwagen, Busse…",
+      "visa": "Visa-Informationen",
+      "visaHint": "Brauchen Gäste ein Visum? Welche Länder sind befreit?",
+      "currency": "Währung",
+      "currencyHint": "Lokale Währung, Wechseltipps, Kartenakzeptanz…"
     },
     "image": {
       "wrongType": "Bitte wähle ein JPG-, PNG- oder WebP-Foto.",

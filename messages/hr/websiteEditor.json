@@ -175,7 +175,13 @@
       "captionPlaceholder": "Opis (neobavezno)",
       "moveUp": "Pomakni stavku {n} gore",
       "moveDown": "Pomakni stavku {n} dolje",
-      "remove": "Ukloni stavku {n}"
+      "remove": "Ukloni stavku {n}",
+      "transport": "Prijevoz i upute",
+      "transportHint": "Kako doći od aerodroma do lokacije, najam auta, autobusi…",
+      "visa": "Informacije o vizi",
+      "visaHint": "Trebaju li gosti vizu? Koje su zemlje izuzete?",
+      "currency": "Valuta",
+      "currencyHint": "Lokalna valuta, savjeti za mjenjačnicu, prihvaćanje kartica…"
     },
     "image": {
       "wrongType": "Odaberite fotografiju JPG, PNG ili WebP.",

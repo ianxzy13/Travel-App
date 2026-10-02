@@ -51,7 +51,10 @@
       "website": "ウェブサイト",
       "websiteOf": "{name}のウェブサイト",
       "map": "地図",
-      "mapOf": "{name}の地図"
+      "mapOf": "{name}の地図",
+      "transportTitle": "交通手段",
+      "visaTitle": "ビザ情報",
+      "currencyTitle": "通貨"
     },
     "rsvp": {
       "replyBy": "<b>{date}</b> までにご回答ください。",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "{couple}の結婚式",
       "website": "結婚式のウェブサイト"
+    },
+    "findSeat": {
+      "title": "席を探す",
+      "heading": "テーブルを探す",
+      "label": "お名前（フルネーム）",
+      "placeholder": "姓名",
+      "button": "席を探す",
+      "notFound": "その名前の席が見つかりませんでした。招待状の表記をご確認ください。",
+      "yourTable": "テーブルが見つかりました！",
+      "tableName": "テーブル {number}",
+      "tableNamed": "{label}（テーブル {number}）"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "全員について出席か欠席かを選択してください。",
       "not_allowed": "この結婚式の回答を記録する権限がありません。",
       "generic": "回答を保存できませんでした。少し経ってからもう一度お試しください。"
+    },
+    "travel": {
+      "prompt": "旅行の詳細を共有する",
+      "editTravel": "旅行の詳細を更新する",
+      "title": "旅行の詳細",
+      "subtitle": "空港送迎の計画にご協力ください — 到着と出発の日時をお知らせください。",
+      "arrival": "到着",
+      "departure": "出発",
+      "date": "日付",
+      "time": "時刻",
+      "airport": "空港",
+      "airportPlaceholder": "例：LHR",
+      "flightNumber": "便名",
+      "stayingAt": "宿泊先は？",
+      "chooseHotel": "ホテルを選択",
+      "otherAccommodation": "その他の宿泊施設",
+      "accommodationName": "ホテルまたは宿泊施設名",
+      "accommodationPlaceholder": "例：市内中心部のAirbnb",
+      "needsTransfer": "空港からの送迎を希望します",
+      "notes": "その他",
+      "notesPlaceholder": "例：車で到着、チャイルドシートが必要",
+      "save": "旅行の詳細を保存",
+      "skip": "スキップ",
+      "saved": "旅行の詳細が保存されました！"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "このリンクはご家族専用です。共有しないでください。",
     "subjectInvite": "ご招待：{couple}の結婚式",
     "subjectReminder": "リマインダー：{couple}の結婚式の出欠をご回答ください"
+  },
+  "travelEmail": {
+    "preview": "{couple}の結婚式の旅行プランを共有してください",
+    "eyebrow": "旅行の詳細",
+    "dear": "{name}様",
+    "body": "出欠のご回答ありがとうございます！空港送迎やシャトルの手配のため、以下のリンクから到着・出発の詳細をお知らせください。",
+    "button": "旅行の詳細を共有",
+    "fallback": "ボタンが動作しない場合は {link} を開いてください",
+    "love": "心を込めて、",
+    "subject": "{couple}の結婚式の旅行詳細"
   }
 }

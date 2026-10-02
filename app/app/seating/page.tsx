@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Armchair } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/app/page-header";
 import { SeatingEditor } from "@/components/seating/seating-editor";
 import { Button } from "@/components/ui/button";
-import { getOrCreateLayout, loadSeatingData } from "@/lib/seating/load";
+import { getOrCreateLayout, loadEventLayouts, loadSeatingData } from "@/lib/seating/load";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
@@ -22,11 +23,14 @@ export default async function SeatingPage({
   const editable = canEdit(role);
   const t = await getTranslations("seating");
   const supabase = await createClient();
-  const { data: events } = await supabase
+  const { data: rows } = await supabase
     .from("events")
     .select("id, name, meal_choice")
     .eq("wedding_id", wedding.id)
     .order("sort_order");
+  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  const shown = await starterTexts(await getLocale());
+  const events = rows?.map((e) => ({ ...e, name: shown(e.name) }));
 
   if (!events?.length) {
     return (
@@ -57,7 +61,7 @@ export default async function SeatingPage({
       </>
     );
   }
-  const [data, { data: venues }] = await Promise.all([
+  const [data, { data: venues }, layouts] = await Promise.all([
     loadSeatingData(supabase, layout),
     // the booked reception venue's capacity is used as a warning
     supabase
@@ -67,6 +71,7 @@ export default async function SeatingPage({
       .eq("status", "booked")
       .in("kind", ["reception", "both"])
       .not("capacity", "is", null),
+    loadEventLayouts(supabase, event.id),
   ]);
   const venue = venues?.[0] ? { name: venues[0].name, capacity: venues[0].capacity! } : null;
 
@@ -85,6 +90,7 @@ export default async function SeatingPage({
       names={{ a: wedding.partner_a_name, b: wedding.partner_b_name }}
       canEdit={editable}
       venue={venue}
+      layouts={layouts}
     />
   );
 }

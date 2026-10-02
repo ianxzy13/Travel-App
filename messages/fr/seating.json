@@ -192,6 +192,41 @@
       "what": "Éléments à imprimer",
       "button": "Imprimer ou enregistrer en PDF",
       "noTables": "Ce plan de table ne contient encore aucune table."
-    }
+    },
+    "arrangeSettings": "Reglages du placement automatique",
+    "arrangeSettingsHint": "Ajustez l'importance de chaque critere pour le placement.",
+    "weights": {
+      "keepTogether": "Garder ensemble",
+      "side": "Cote",
+      "tag": "Etiquette",
+      "language": "Langue",
+      "ageGroup": "Tranche d'age",
+      "hostPrefer": "Pres de l'hote",
+      "fillFirst": "Remplir d'abord"
+    },
+    "resetWeights": "Reinitialiser",
+    "noHostTag": "Ajoutez une etiquette host aux invites qui accueillent les autres.",
+    "rsvpChanged": {
+      "attending": "Un invite vient de confirmer sa presence!",
+      "declined": "Un invite a decline son invitation.",
+      "removed": "La reponse d un invite a ete retiree."
+    },
+    "scenarios": {
+      "title": "Scenarios de placement",
+      "plan": "Plan",
+      "active": "actif",
+      "duplicate": "Dupliquer",
+      "duplicated": "Scenario duplique",
+      "rename": "Renommer",
+      "delete": "Supprimer",
+      "deleted": "Scenario supprime",
+      "deleteConfirm": "Supprimer ce scenario? Les tables et attributions seront supprimees.",
+      "maxReached": "Vous pouvez avoir jusqu'a 3 scenarios par evenement.",
+      "switched": "Scenario change",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "Affiche QR pour trouver sa place",
+    "findSeatHeading": "Trouvez votre place",
+    "findSeatScan": "Scannez ce code avec votre telephone pour trouver votre table."
   }
 }

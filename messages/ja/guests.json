@@ -186,7 +186,13 @@
       "rule": "ルール",
       "guestLabel": "ゲスト",
       "chooseGuest": "ゲストを選ぶ",
-      "addRule": "ルールを追加"
+      "addRule": "ルールを追加",
+      "languages": "話せる言語",
+      "languagesHint": "座席表で同じ言語を話すゲストを一緒に配置するために使用されます。",
+      "addLanguage": "言語を追加",
+      "allLanguages": "すべての言語",
+      "remove": "削除",
+      "noLanguages": "言語が追加されていません"
     },
     "household": {
       "title": "世帯の設定",

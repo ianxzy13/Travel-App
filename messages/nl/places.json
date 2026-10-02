@@ -188,7 +188,8 @@
     "checkIn": "Inchecken voor {name}",
     "checkOut": "Uitchecken voor {name}",
     "guestsSaved": "Gasten opgeslagen",
-    "saveGuests": "Gasten opslaan"
+    "saveGuests": "Gasten opslaan",
+    "findOnBooking": "Zoeken op Booking.com"
   },
   "travel": {
     "title": "Reizen",
@@ -253,6 +254,24 @@
     "travellersHint": "bijv. Ian & Maria",
     "pickupNeeded": "Moet van de luchthaven worden opgehaald",
     "deleteTitle": "Deze vlucht verwijderen?",
-    "deleteText": "Dit kan niet ongedaan worden gemaakt."
+    "deleteText": "Dit kan niet ongedaan worden gemaakt.",
+    "guestTravel": "Gastenreizen ({count})",
+    "gt": {
+      "shared": "Gedeelde gegevens:",
+      "needTransfer": "Hebben transfer nodig:",
+      "unknown": "Onbekend huishouden",
+      "transferRequested": "Transfer aangevraagd",
+      "remind": "{count, plural, one {# huishouden} other {# huishoudens}} herinneren",
+      "reminded": "Herinnering verstuurd naar {count, plural, one {# huishouden} other {# huishoudens}}"
+    },
+    "shuttles": "Shuttles ({count})",
+    "shuttle": {
+      "empty": "Geen gasten hebben nog een transfer aangevraagd. Shuttleritten verschijnen hier automatisch.",
+      "window": "Tijdvenster",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# rit} other {# ritten}} · {people, plural, one {# persoon} other {# personen}}",
+      "print": "Afdrukken",
+      "dayPeople": "{count, plural, one {# persoon} other {# personen}}"
+    }
   }
 }

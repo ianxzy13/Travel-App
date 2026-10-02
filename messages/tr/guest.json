@@ -51,7 +51,10 @@
       "website": "Web sitesi",
       "websiteOf": "Web sitesi: {name}",
       "map": "Harita",
-      "mapOf": "Harita: {name}"
+      "mapOf": "Harita: {name}",
+      "transportTitle": "Ulaşım",
+      "visaTitle": "Vize bilgileri",
+      "currencyTitle": "Para birimi"
     },
     "rsvp": {
       "replyBy": "Lütfen <b>{date}</b> tarihine kadar yanıt verin.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Düğün: {couple}",
       "website": "Düğün sitesi"
+    },
+    "findSeat": {
+      "title": "Yerinizi bulun",
+      "heading": "Masanizi bulun",
+      "label": "Tam adiniz",
+      "placeholder": "Ad ve soyadi",
+      "button": "Yerimi bul",
+      "notFound": "Bu isim icin bir yer bulamadik. Davetiyenizdeki yazimi kontrol edin.",
+      "yourTable": "Masaniz hazir!",
+      "tableName": "Masa {number}",
+      "tableNamed": "{label} (Masa {number})"
     }
   },
   "rsvp": {
@@ -145,6 +159,30 @@
       "guestOf": "{name} kişisinin misafiri",
       "guest": "Misafir"
     },
+    "travel": {
+      "prompt": "Seyahat bilgilerinizi paylaşın",
+      "editTravel": "Seyahat bilgilerini güncelle",
+      "title": "Seyahat bilgileri",
+      "subtitle": "Havalimanı transferlerini planlamamıza yardımcı olun — ne zaman gelip ayrılacağınızı bildirin.",
+      "arrival": "Varış",
+      "departure": "Ayrılış",
+      "date": "Tarih",
+      "time": "Saat",
+      "airport": "Havalimanı",
+      "airportPlaceholder": "ör. IST",
+      "flightNumber": "Uçuş numarası",
+      "stayingAt": "Nerede kalıyorsunuz?",
+      "chooseHotel": "Otel seçin",
+      "otherAccommodation": "Başka bir yer",
+      "accommodationName": "Otel veya konaklama adı",
+      "accommodationPlaceholder": "ör. şehir merkezinde Airbnb",
+      "needsTransfer": "Havalimanından transfer istiyoruz",
+      "notes": "Başka bir şey var mı?",
+      "notesPlaceholder": "ör. arabayla geliyoruz, çocuk koltuğu gerekli",
+      "save": "Seyahat bilgilerini kaydet",
+      "skip": "Şimdilik atla",
+      "saved": "Seyahat bilgileri kaydedildi!"
+    },
     "errors": {
       "rsvp_not_found": "Bu davetiyeyi bulamadık. Lütfen bağlantıyı veya kodu kontrol edin.",
       "deadline_passed": "Katılım bildirme süresi doldu. Lütfen doğrudan çiftle iletişime geçin.",
@@ -176,5 +214,15 @@
     "personal": "Bu bağlantı yalnızca sizin haneniz içindir. Lütfen paylaşmayın.",
     "subjectInvite": "Davetlisiniz: {couple} düğünü",
     "subjectReminder": "Hatırlatma: {couple} düğünü için lütfen katılımınızı bildirin"
+  },
+  "travelEmail": {
+    "preview": "{couple} düğünü için seyahat planlarınızı paylaşın",
+    "eyebrow": "Seyahat bilgileri",
+    "dear": "Sevgili {name},",
+    "body": "Katılım bildiriminiz için teşekkürler! Havalimanı transferlerini planlamamız için varış ve ayrılış bilgilerinizi aşağıdaki bağlantıdan paylaşın.",
+    "button": "Seyahat bilgilerini paylaş",
+    "fallback": "Düğme çalışmıyor mu? {link} adresini açın",
+    "love": "Sevgiyle,",
+    "subject": "{couple} düğünü için seyahat bilgileri"
   }
 }

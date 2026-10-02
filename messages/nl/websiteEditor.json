@@ -175,7 +175,13 @@
       "captionPlaceholder": "Bijschrift (optioneel)",
       "moveUp": "Item {n} omhoog",
       "moveDown": "Item {n} omlaag",
-      "remove": "Item {n} verwijderen"
+      "remove": "Item {n} verwijderen",
+      "transport": "Vervoer & routebeschrijving",
+      "transportHint": "Hoe kom je van de luchthaven naar de locatie, autoverhuur, bussen…",
+      "visa": "Visuminformatie",
+      "visaHint": "Hebben gasten een visum nodig? Welke landen zijn vrijgesteld?",
+      "currency": "Valuta",
+      "currencyHint": "Lokale valuta, wisseltips, kaartacceptatie…"
     },
     "image": {
       "wrongType": "Kies een JPG-, PNG- of WebP-foto.",

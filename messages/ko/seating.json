@@ -192,6 +192,41 @@
       "what": "인쇄할 내용",
       "button": "인쇄 또는 PDF로 저장",
       "noTables": "이 좌석 배치도에는 아직 테이블이 없습니다."
-    }
+    },
+    "arrangeSettings": "자동 배치 설정",
+    "arrangeSettingsHint": "배치 시 각 요소의 중요도를 조정합니다.",
+    "weights": {
+      "keepTogether": "함께",
+      "side": "측면",
+      "tag": "태그",
+      "language": "언어",
+      "ageGroup": "연령대",
+      "hostPrefer": "호스트 근처",
+      "fillFirst": "먼저 채우기"
+    },
+    "resetWeights": "초기화",
+    "noHostTag": "다른 하객을 맞이하는 분에게 host 태그를 추가하세요.",
+    "rsvpChanged": {
+      "attending": "하객이 참석을 확인했습니다!",
+      "declined": "하객이 초대를 거절했습니다.",
+      "removed": "하객의 응답이 삭제되었습니다."
+    },
+    "scenarios": {
+      "title": "좌석 시나리오",
+      "plan": "플랜",
+      "active": "활성",
+      "duplicate": "복제",
+      "duplicated": "시나리오가 복제되었습니다",
+      "rename": "이름 변경",
+      "delete": "삭제",
+      "deleted": "시나리오가 삭제되었습니다",
+      "deleteConfirm": "이 시나리오를 삭제하시겠습니까? 테이블과 배치가 제거됩니다.",
+      "maxReached": "이벤트당 최대 3개의 시나리오를 만들 수 있습니다.",
+      "switched": "시나리오가 전환되었습니다",
+      "defaultName": "플랜 A"
+    },
+    "findSeatQr": "QR 포스터: 좌석 찾기",
+    "findSeatHeading": "좌석 찾기",
+    "findSeatScan": "휴대폰으로 이 코드를 스캔하여 테이블을 찾으세요."
   }
 }

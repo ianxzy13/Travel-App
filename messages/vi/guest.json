@@ -51,7 +51,10 @@
       "website": "Trang web",
       "websiteOf": "Trang web của {name}",
       "map": "Bản đồ",
-      "mapOf": "Bản đồ đến {name}"
+      "mapOf": "Bản đồ đến {name}",
+      "transportTitle": "Di chuyển",
+      "visaTitle": "Thông tin visa",
+      "currencyTitle": "Tiền tệ"
     },
     "rsvp": {
       "replyBy": "Vui lòng phản hồi trước <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Đám cưới của {couple}",
       "website": "Trang web đám cưới"
+    },
+    "findSeat": {
+      "title": "Tim cho ngoi",
+      "heading": "Tim ban cua ban",
+      "label": "Ho va ten day du",
+      "placeholder": "Ho va ten",
+      "button": "Tim cho ngoi",
+      "notFound": "Khong tim thay cho ngoi cho ten do. Vui long kiem tra lai chinh ta tren thiep moi.",
+      "yourTable": "Ban cua ban da san sang!",
+      "tableName": "Ban {number}",
+      "tableNamed": "{label} (Ban {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Hãy chọn tham dự hoặc không cho từng người.",
       "not_allowed": "Bạn không có quyền ghi phản hồi cho đám cưới này.",
       "generic": "Không thể lưu phản hồi. Vui lòng thử lại sau giây lát."
+    },
+    "travel": {
+      "prompt": "Chia sẻ thông tin chuyến đi",
+      "editTravel": "Cập nhật thông tin chuyến đi",
+      "title": "Thông tin chuyến đi",
+      "subtitle": "Giúp chúng tôi lên kế hoạch đưa đón sân bay — cho biết khi nào bạn đến và đi.",
+      "arrival": "Đến",
+      "departure": "Đi",
+      "date": "Ngày",
+      "time": "Giờ",
+      "airport": "Sân bay",
+      "airportPlaceholder": "vd. SGN",
+      "flightNumber": "Số hiệu chuyến bay",
+      "stayingAt": "Bạn ở đâu?",
+      "chooseHotel": "Chọn khách sạn",
+      "otherAccommodation": "Chỗ ở khác",
+      "accommodationName": "Tên khách sạn hoặc chỗ ở",
+      "accommodationPlaceholder": "vd. Airbnb ở trung tâm thành phố",
+      "needsTransfer": "Chúng tôi cần đưa đón từ sân bay",
+      "notes": "Có gì khác không?",
+      "notesPlaceholder": "vd. đến bằng ô tô, cần ghế trẻ em",
+      "save": "Lưu thông tin chuyến đi",
+      "skip": "Bỏ qua",
+      "saved": "Đã lưu thông tin chuyến đi!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Liên kết này dành riêng cho gia đình bạn. Vui lòng không chia sẻ.",
     "subjectInvite": "Thư mời: đám cưới của {couple}",
     "subjectReminder": "Lời nhắc: xác nhận tham dự đám cưới của {couple}"
+  },
+  "travelEmail": {
+    "preview": "Hãy chia sẻ kế hoạch di chuyển cho đám cưới của {couple}",
+    "eyebrow": "Thông tin chuyến đi",
+    "dear": "{name} thân mến,",
+    "body": "Cảm ơn bạn đã xác nhận! Để giúp chúng tôi sắp xếp đưa đón, vui lòng chia sẻ thông tin đến và đi qua liên kết bên dưới.",
+    "button": "Chia sẻ thông tin chuyến đi",
+    "fallback": "Nút không hoạt động? Mở {link}",
+    "love": "Thân ái,",
+    "subject": "Thông tin chuyến đi cho đám cưới của {couple}"
   }
 }

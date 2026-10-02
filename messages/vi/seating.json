@@ -192,6 +192,41 @@
       "what": "Nội dung in",
       "button": "In hoặc lưu PDF",
       "noTables": "Sơ đồ này chưa có bàn nào."
-    }
+    },
+    "arrangeSettings": "Cai dat sap xep tu dong",
+    "arrangeSettingsHint": "Dieu chinh muc do quan trong cua tung yeu to khi sap xep.",
+    "weights": {
+      "keepTogether": "Giu cung nhau",
+      "side": "Phia",
+      "tag": "Nhan",
+      "language": "Ngon ngu",
+      "ageGroup": "Nhom tuoi",
+      "hostPrefer": "Gan chu nha",
+      "fillFirst": "Uu tien lap day"
+    },
+    "resetWeights": "Dat lai",
+    "noHostTag": "Them nhan host cho khach don tiep nhung nguoi khac.",
+    "rsvpChanged": {
+      "attending": "Mot khach da xac nhan tham du!",
+      "declined": "Mot khach da tu choi loi moi.",
+      "removed": "Phan hoi cua mot khach da bi xoa."
+    },
+    "scenarios": {
+      "title": "Kich ban cho ngoi",
+      "plan": "Phuong an",
+      "active": "dang dung",
+      "duplicate": "Nhan doi",
+      "duplicated": "Da nhan doi kich ban",
+      "rename": "Doi ten",
+      "delete": "Xoa",
+      "deleted": "Da xoa kich ban",
+      "deleteConfirm": "Xoa kich ban nay? Ban va sap xep se bi xoa.",
+      "maxReached": "Ban co the co toi da 3 kich ban cho moi su kien.",
+      "switched": "Da chuyen kich ban",
+      "defaultName": "Phuong an A"
+    },
+    "findSeatQr": "Poster QR: tim cho ngoi",
+    "findSeatHeading": "Tim cho ngoi cua ban",
+    "findSeatScan": "Quet ma nay bang dien thoai de tim ban cua ban."
   }
 }

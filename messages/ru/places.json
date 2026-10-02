@@ -188,7 +188,8 @@
     "checkIn": "Заезд: {name}",
     "checkOut": "Выезд: {name}",
     "guestsSaved": "Гости сохранены",
-    "saveGuests": "Сохранить гостей"
+    "saveGuests": "Сохранить гостей",
+    "findOnBooking": "Искать на Booking.com"
   },
   "travel": {
     "title": "Поездки",
@@ -253,6 +254,24 @@
     "travellersHint": "например, Ян и Мария",
     "pickupNeeded": "Нужно встретить в аэропорту",
     "deleteTitle": "Удалить этот рейс?",
-    "deleteText": "Это нельзя отменить."
+    "deleteText": "Это нельзя отменить.",
+    "guestTravel": "Поездки гостей ({count})",
+    "gt": {
+      "shared": "Поделились:",
+      "needTransfer": "Нужен трансфер:",
+      "unknown": "Неизвестная семья",
+      "transferRequested": "Трансфер запрошен",
+      "remind": "Напомнить {count, plural, one {# семье} other {# семьям}}",
+      "reminded": "Напоминание отправлено {count, plural, one {# семье} other {# семьям}}"
+    },
+    "shuttles": "Трансферы ({count})",
+    "shuttle": {
+      "empty": "Ни один гость ещё не запросил трансфер. Рейсы появятся здесь автоматически.",
+      "window": "Временное окно",
+      "minutes": "мин",
+      "summary": "{runs, plural, one {# рейс} other {# рейсов}} · {people, plural, one {# человек} other {# человек}}",
+      "print": "Печать",
+      "dayPeople": "{count, plural, one {# человек} other {# человек}}"
+    }
   }
 }

@@ -33,7 +33,9 @@ export const rsvpSettingsSchema = z.object({
   deadline: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]),
   contact: z.string().trim().max(300, v("tooLong", 300)),
   askSong: z.boolean(),
+  askTravel: z.boolean(),
   notifyEmail: z.boolean(),
+  findSeatEnabled: z.boolean(),
 });
 
 export type RsvpSettingsValues = z.infer<typeof rsvpSettingsSchema>;
@@ -42,6 +44,26 @@ export const mealOptionSchema = z.object({
   name: z.string().trim().min(1, v("name")).max(80),
   description: z.string().trim().max(300),
 });
+
+const optDate = z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/)]).optional();
+const optTime = z.union([z.literal(""), z.string().regex(/^\d{2}:\d{2}$/)]).optional();
+
+export const guestTravelSchema = z.object({
+  arrival_date: optDate,
+  arrival_time: optTime,
+  arrival_airport: z.string().trim().max(10).optional(),
+  arrival_flight: z.string().trim().max(20).optional(),
+  departure_date: optDate,
+  departure_time: optTime,
+  departure_airport: z.string().trim().max(10).optional(),
+  departure_flight: z.string().trim().max(20).optional(),
+  staying_at: z.string().trim().max(200).optional(),
+  hotel_id: z.union([z.uuid(), z.literal(""), z.null()]).optional(),
+  needs_transfer: z.boolean().optional(),
+  transport_notes: z.string().trim().max(500).optional(),
+});
+
+export type GuestTravelPayload = z.infer<typeof guestTravelSchema>;
 
 export const sendEmailSchema = z.object({
   householdIds: z.array(z.uuid()).min(1, v("chooseHousehold")).max(1000),

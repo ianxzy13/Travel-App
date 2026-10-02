@@ -198,7 +198,11 @@
     "deleteTitle": "Usunąć {name}?",
     "deleteText": "Plik umowy zostanie usunięty. Powiązane wydatki zostaną w budżecie.",
     "cancel": "Anuluj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "find": "Znajdź usługodawców",
+    "findHint": "Szukaj w pobliżu {location}",
+    "pasteUrl": "Wklej link",
+    "pasteUrlHint": "Wklej stronę usługodawcy, aby automatycznie uzupełnić nazwę."
   },
   "files": {
     "openFailed": "Nie udało się otworzyć pliku. Spróbuj ponownie.",

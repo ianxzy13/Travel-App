@@ -192,6 +192,41 @@
       "what": "Was drucken",
       "button": "Drucken oder als PDF speichern",
       "noTables": "In diesem Sitzplan gibt es noch keine Tische."
-    }
+    },
+    "arrangeSettings": "Einstellungen der automatischen Anordnung",
+    "arrangeSettingsHint": "Passe die Gewichtung jedes Faktors bei der Anordnung an.",
+    "weights": {
+      "keepTogether": "Zusammen halten",
+      "side": "Seite",
+      "tag": "Tag",
+      "language": "Sprache",
+      "ageGroup": "Altersgruppe",
+      "hostPrefer": "Nahe zum Gastgeber",
+      "fillFirst": "Zuerst fullen"
+    },
+    "resetWeights": "Zurucksetzen",
+    "noHostTag": "Fuge ein Tag host fur Gaste hinzu, die die anderen empfangen.",
+    "rsvpChanged": {
+      "attending": "Ein Gast hat gerade zugesagt!",
+      "declined": "Ein Gast hat abgesagt.",
+      "removed": "Die Antwort eines Gastes wurde entfernt."
+    },
+    "scenarios": {
+      "title": "Sitzplan-Szenarien",
+      "plan": "Plan",
+      "active": "aktiv",
+      "duplicate": "Duplizieren",
+      "duplicated": "Szenario dupliziert",
+      "rename": "Umbenennen",
+      "delete": "Loschen",
+      "deleted": "Szenario geloscht",
+      "deleteConfirm": "Dieses Szenario loschen? Tische und Zuordnungen werden entfernt.",
+      "maxReached": "Du kannst bis zu 3 Szenarien pro Veranstaltung haben.",
+      "switched": "Szenario gewechselt",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR-Poster: Platz finden",
+    "findSeatHeading": "Finde deinen Platz",
+    "findSeatScan": "Scanne diesen Code mit deinem Handy, um deinen Tisch zu finden."
   }
 }

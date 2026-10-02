@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import type { GuestTravelRow } from "@/lib/database.types";
+import { planShuttleRuns } from "../shuttle";
 import {
   flightSearchLinks,
   groupByDay,
@@ -79,5 +81,67 @@ describe("room block reminders", () => {
         .level,
     ).toBe("ok");
     expect(roomBlockState({ ...block, cutoff_date: null }, "2027-04-25").level).toBe("none");
+  });
+});
+
+describe("shuttle planner", () => {
+  const gt = (
+    id: string,
+    householdId: string,
+    householdName: string,
+    arrival_date: string | null,
+    arrival_time: string | null,
+    arrival_airport: string | null,
+    needs_transfer: boolean,
+  ): GuestTravelRow & { householdName: string } => ({
+    id,
+    wedding_id: "w",
+    household_id: householdId,
+    householdName,
+    arrival_date,
+    arrival_time,
+    arrival_airport,
+    arrival_flight: null,
+    departure_date: null,
+    departure_time: null,
+    departure_airport: null,
+    departure_flight: null,
+    staying_at: null,
+    hotel_id: null,
+    needs_transfer,
+    transport_notes: null,
+    created_at: "",
+    updated_at: "",
+  });
+
+  it("groups by date and airport within a time window", () => {
+    const travel = [
+      gt("1", "h1", "Smith", "2027-06-10", "08:00", "LIS", true),
+      gt("2", "h2", "Jones", "2027-06-10", "08:30", "LIS", true),
+      gt("3", "h3", "Brown", "2027-06-10", "12:00", "LIS", true),
+      gt("4", "h4", "Davis", "2027-06-10", "09:00", "OPO", true),
+    ];
+    const days = planShuttleRuns(travel, [], { windowMinutes: 90 });
+    expect(days).toHaveLength(1);
+    expect(days[0].date).toBe("2027-06-10");
+    expect(days[0].runs).toHaveLength(3);
+    const lisRuns = days[0].runs.filter((r) => r.airport === "LIS");
+    expect(lisRuns).toHaveLength(2);
+    expect(lisRuns[0].passengers).toHaveLength(2);
+    expect(lisRuns[1].passengers).toHaveLength(1);
+  });
+
+  it("ignores guests who don't need transfer", () => {
+    const travel = [gt("1", "h1", "Smith", "2027-06-10", "08:00", "LIS", false)];
+    expect(planShuttleRuns(travel)).toEqual([]);
+  });
+
+  it("handles multiple days", () => {
+    const travel = [
+      gt("1", "h1", "Smith", "2027-06-10", "08:00", "LIS", true),
+      gt("2", "h2", "Jones", "2027-06-11", "10:00", "LIS", true),
+    ];
+    const days = planShuttleRuns(travel);
+    expect(days).toHaveLength(2);
   });
 });

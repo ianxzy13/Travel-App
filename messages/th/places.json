@@ -140,6 +140,7 @@
     "copied": "คัดลอกแล้ว",
     "copyFailed": "คัดลอกอัตโนมัติไม่ได้",
     "add": "เพิ่มโรงแรม",
+    "findOnBooking": "ค้นหาบน Booking.com",
     "cutoffSoon": "<b>{name}</b>: บล็อกห้องพักหมดเขตในอีก {days} วัน",
     "roomsFree": "ยังว่างอยู่ {count} ห้อง",
     "remind": "เตือนแขกให้จองเร็ว ๆ!",
@@ -199,6 +200,24 @@
     "departures": "เที่ยวบินขาออก ({count})",
     "ours": "เราและฮันนีมูน ({count})",
     "all": "เที่ยวบินทั้งหมด ({count})",
+    "guestTravel": "การเดินทางของแขก ({count})",
+    "gt": {
+      "shared": "แชร์ข้อมูลแล้ว:",
+      "needTransfer": "ต้องการรถรับส่ง:",
+      "unknown": "ครอบครัวไม่ทราบ",
+      "transferRequested": "ขอรถรับส่ง",
+      "remind": "เตือน {count, plural, one {# ครอบครัว} other {# ครอบครัว}}",
+      "reminded": "ส่งการเตือนไปแล้ว {count, plural, one {# ครอบครัว} other {# ครอบครัว}}"
+    },
+    "shuttles": "รถรับส่ง ({count})",
+    "shuttle": {
+      "empty": "ยังไม่มีแขกขอรถรับส่ง เมื่อมีแล้วจะแสดงตารางรถรับส่งที่นี่โดยอัตโนมัติ",
+      "window": "ช่วงเวลา",
+      "minutes": "นาที",
+      "summary": "{runs, plural, one {# เที่ยว} other {# เที่ยว}} · {people, plural, one {# คน} other {# คน}}",
+      "print": "พิมพ์",
+      "dayPeople": "{count, plural, one {# คน} other {# คน}}"
+    },
     "ourFlight": "เที่ยวบินของเรา",
     "honeymoonFlight": "เที่ยวบินฮันนีมูน",
     "search": "ค้นหาเที่ยวบิน",

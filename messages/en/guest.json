@@ -51,7 +51,10 @@
       "website": "Website",
       "websiteOf": "Website of {name}",
       "map": "Map",
-      "mapOf": "Map of {name}"
+      "mapOf": "Map of {name}",
+      "transportTitle": "Getting around",
+      "visaTitle": "Visa information",
+      "currencyTitle": "Currency"
     },
     "rsvp": {
       "replyBy": "Please reply by <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "The wedding of {couple}",
       "website": "Wedding website"
+    },
+    "findSeat": {
+      "title": "Find your seat",
+      "heading": "Find your table",
+      "label": "Your full name",
+      "placeholder": "First and last name",
+      "button": "Find my seat",
+      "notFound": "We couldn't find a seat for that name. Check the spelling on your invitation.",
+      "yourTable": "Your table is ready!",
+      "tableName": "Table {number}",
+      "tableNamed": "{label} (Table {number})"
     }
   },
   "rsvp": {
@@ -145,6 +159,30 @@
       "guestOf": "{name}’s guest",
       "guest": "Guest"
     },
+    "travel": {
+      "prompt": "Share your travel details",
+      "editTravel": "Update travel details",
+      "title": "Travel details",
+      "subtitle": "Help the couple plan logistics by sharing your travel plans. All fields are optional.",
+      "arrival": "Arrival",
+      "departure": "Departure",
+      "date": "Date",
+      "time": "Time",
+      "airport": "Airport",
+      "airportPlaceholder": "e.g. LHR",
+      "flightNumber": "Flight number",
+      "stayingAt": "Where are you staying?",
+      "chooseHotel": "Choose a hotel",
+      "otherAccommodation": "Somewhere else",
+      "accommodationName": "Hotel or accommodation name",
+      "accommodationPlaceholder": "e.g. Airbnb in the city centre",
+      "needsTransfer": "We’d appreciate a transfer from the airport",
+      "notes": "Anything else?",
+      "notesPlaceholder": "e.g. arriving by car, need a child seat",
+      "save": "Save travel details",
+      "skip": "Skip for now",
+      "saved": "Travel details saved!"
+    },
     "errors": {
       "rsvp_not_found": "We couldn’t find that invitation. Please check the link or code.",
       "deadline_passed": "The RSVP deadline has passed. Please contact the couple directly.",
@@ -176,5 +214,15 @@
     "personal": "This link is personal to your household. Please don’t share it.",
     "subjectInvite": "You’re invited: {couple}’s wedding",
     "subjectReminder": "Reminder: please RSVP for {couple}’s wedding"
+  },
+  "travelEmail": {
+    "preview": "Please share your travel plans for {couple}’s wedding",
+    "eyebrow": "Travel details",
+    "dear": "Dear {name},",
+    "body": "Thank you for RSVPing! To help us plan airport transfers and shuttles, please share your arrival and departure details using the link below.",
+    "button": "Share travel details",
+    "fallback": "Button not working? Open {link}",
+    "love": "With love,",
+    "subject": "Travel details for {couple}’s wedding"
   }
 }

@@ -13,7 +13,9 @@ export type RsvpData = {
     rsvp_deadline: string | null;
     rsvp_contact: string | null;
     rsvp_ask_song: boolean;
+    rsvp_ask_travel: boolean;
     deadline_passed: boolean;
+    destination_airport: string | null;
   };
   household: {
     id: string;
@@ -51,6 +53,21 @@ export type RsvpData = {
     meal_option_id: string | null;
   }[];
   meal_options: { id: string; name: string; description: string | null }[];
+  hotels: { id: string; name: string; address: string | null; distance: string | null }[];
+  travel: {
+    arrival_date: string | null;
+    arrival_time: string | null;
+    arrival_airport: string | null;
+    arrival_flight: string | null;
+    departure_date: string | null;
+    departure_time: string | null;
+    departure_airport: string | null;
+    departure_flight: string | null;
+    staying_at: string | null;
+    hotel_id: string | null;
+    needs_transfer: boolean;
+    transport_notes: string | null;
+  } | null;
 };
 
 /** Language details for one RSVP code (get_rsvp_extras()). */

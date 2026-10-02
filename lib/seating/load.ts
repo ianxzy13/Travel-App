@@ -58,7 +58,8 @@ export async function getOrCreateLayout(
   eventId: string,
   canEdit: boolean,
 ) {
-  const find = () => sb.from("seating_layouts").select("*").eq("event_id", eventId).maybeSingle();
+  const find = () =>
+    sb.from("seating_layouts").select("*").eq("event_id", eventId).eq("is_active", true).maybeSingle();
   const { data } = await find();
   if (data || !canEdit) return data;
   // ignoreDuplicates: if a collaborator created it at the same moment, just use theirs
@@ -69,6 +70,16 @@ export async function getOrCreateLayout(
       { onConflict: "event_id", ignoreDuplicates: true },
     );
   return (await find()).data;
+}
+
+/** All layouts (scenarios) for an event, ordered by creation time. */
+export async function loadEventLayouts(sb: Supabase, eventId: string) {
+  const { data } = await sb
+    .from("seating_layouts")
+    .select("id, name, is_active")
+    .eq("event_id", eventId)
+    .order("created_at");
+  return data ?? [];
 }
 
 /** Everything the seating editor needs for one floor plan. */
@@ -176,6 +187,7 @@ export async function loadSeatingData(
         side: g.side,
         ageGroup: g.age_group,
         tagIds: tagsOf.get(g.id) ?? [],
+        languages: g.languages ?? [],
         dietary: g.dietary,
         accessibility: g.accessibility,
         plusOneOf: g.plus_one_of,

@@ -188,7 +188,8 @@
     "checkIn": "{name} 入住",
     "checkOut": "{name} 退房",
     "guestsSaved": "宾客已保存",
-    "saveGuests": "保存宾客"
+    "saveGuests": "保存宾客",
+    "findOnBooking": "在Booking.com上搜索"
   },
   "travel": {
     "title": "行程",
@@ -253,6 +254,24 @@
     "travellersHint": "例如 Ian 和 Maria",
     "pickupNeeded": "需要接机",
     "deleteTitle": "删除此航班？",
-    "deleteText": "此操作无法撤销。"
+    "deleteText": "此操作无法撤销。",
+    "guestTravel": "宾客行程 ({count})",
+    "gt": {
+      "shared": "已分享：",
+      "needTransfer": "需要接送：",
+      "unknown": "未知家庭",
+      "transferRequested": "已请求接送",
+      "remind": "提醒 {count, plural, one {# 个家庭} other {# 个家庭}}",
+      "reminded": "已向 {count, plural, one {# 个家庭} other {# 个家庭}}发送提醒"
+    },
+    "shuttles": "班车 ({count})",
+    "shuttle": {
+      "empty": "目前还没有宾客请求接送。当有人请求时，班车行程将自动显示在这里。",
+      "window": "时间窗口",
+      "minutes": "分钟",
+      "summary": "{runs, plural, one {# 班次} other {# 班次}} · {people, plural, one {# 人} other {# 人}}",
+      "print": "打印",
+      "dayPeople": "{count, plural, one {# 人} other {# 人}}"
+    }
   }
 }

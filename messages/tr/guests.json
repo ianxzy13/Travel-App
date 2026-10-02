@@ -186,7 +186,13 @@
       "rule": "Kural",
       "guestLabel": "Misafir",
       "chooseGuest": "Misafir seçin",
-      "addRule": "Kural ekle"
+      "addRule": "Kural ekle",
+      "languages": "Konusulan diller",
+      "languagesHint": "Oturma duzeni ayni dili konusan konuklari bir araya getirmek icin kullanir.",
+      "addLanguage": "Dil ekle",
+      "allLanguages": "Tum diller",
+      "remove": "Kaldir",
+      "noLanguages": "Dil eklenmedi"
     },
     "household": {
       "title": "Hane ayarları",

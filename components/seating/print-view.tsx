@@ -1,3 +1,4 @@
+import { isRtl } from "@/i18n/locales";
 import { seatMap } from "@/lib/seating/state";
 import type { SeatingGuest, SeatingState } from "@/lib/seating/types";
 import { CatererSummary, guestsAtTable, sortedTables } from "./caterer-summary";
@@ -143,11 +144,13 @@ export function PrintSeatingView({
 }
 
 function PlaceCardText({ guest, table }: { guest: SeatingGuest; table: string }) {
+  const lang = guest.languages?.[0];
+  const dir = lang && isRtl(lang) ? "rtl" : undefined;
   return (
-    <>
+    <div lang={lang} dir={dir}>
       <p className="px-4 text-center font-serif text-3xl leading-tight">{guest.name}</p>
       <p className="mt-1 text-xs tracking-widest text-[#7a6960] uppercase">{table}</p>
-    </>
+    </div>
   );
 }
 

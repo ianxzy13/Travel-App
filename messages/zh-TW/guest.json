@@ -51,7 +51,10 @@
       "website": "網站",
       "websiteOf": "{name}的網站",
       "map": "地圖",
-      "mapOf": "{name}的地圖"
+      "mapOf": "{name}的地圖",
+      "transportTitle": "交通方式",
+      "visaTitle": "簽證資訊",
+      "currencyTitle": "貨幣"
     },
     "rsvp": {
       "replyBy": "請於 <b>{date}</b> 前回覆。",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "{couple}的婚禮",
       "website": "婚禮網站"
+    },
+    "findSeat": {
+      "title": "找到你的座位",
+      "heading": "找到你的桌子",
+      "label": "你的全名",
+      "placeholder": "姓名",
+      "button": "查找我的座位",
+      "notFound": "未找到該姓名的座位。請檢查邀請函上的拼寫。",
+      "yourTable": "你的桌子已準備好！",
+      "tableName": "桌 {number}",
+      "tableNamed": "{label}（桌 {number}）"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "請為每個人選擇出席或不出席。",
       "not_allowed": "你沒有權限為這場婚禮登記回覆。",
       "generic": "無法儲存你的回覆。請稍後再試。"
+    },
+    "travel": {
+      "prompt": "分享您的行程資訊",
+      "editTravel": "更新行程資訊",
+      "title": "行程資訊",
+      "subtitle": "幫助我們安排機場接送——告訴我們您何時到達和離開。",
+      "arrival": "抵達",
+      "departure": "離開",
+      "date": "日期",
+      "time": "時間",
+      "airport": "機場",
+      "airportPlaceholder": "例如 TPE",
+      "flightNumber": "航班號",
+      "stayingAt": "您住在哪裡？",
+      "chooseHotel": "選擇飯店",
+      "otherAccommodation": "其他住宿",
+      "accommodationName": "飯店或住宿名稱",
+      "accommodationPlaceholder": "例如 市中心的Airbnb",
+      "needsTransfer": "希望安排機場接送",
+      "notes": "還有其他需要嗎？",
+      "notesPlaceholder": "例如 自駕前往，需要兒童座椅",
+      "save": "儲存行程資訊",
+      "skip": "暫時跳過",
+      "saved": "行程資訊已儲存！"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "此連結僅供你們家庭使用，請勿分享。",
     "subjectInvite": "婚禮邀請：{couple}的婚禮",
     "subjectReminder": "提醒：請回覆是否出席{couple}的婚禮"
+  },
+  "travelEmail": {
+    "preview": "請分享您參加{couple}婚禮的行程計畫",
+    "eyebrow": "行程資訊",
+    "dear": "親愛的{name}，",
+    "body": "感謝您的回覆！為了幫助我們安排機場接送，請透過以下連結分享您的到達和離開資訊。",
+    "button": "分享行程資訊",
+    "fallback": "按鈕無法使用？請開啟 {link}",
+    "love": "愛您的，",
+    "subject": "{couple}婚禮行程資訊"
   }
 }

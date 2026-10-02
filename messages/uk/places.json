@@ -188,7 +188,8 @@
     "checkIn": "Заїзд: {name}",
     "checkOut": "Виїзд: {name}",
     "guestsSaved": "Гостей збережено",
-    "saveGuests": "Зберегти гостей"
+    "saveGuests": "Зберегти гостей",
+    "findOnBooking": "Шукати на Booking.com"
   },
   "travel": {
     "title": "Подорожі",
@@ -253,6 +254,24 @@
     "travellersHint": "наприклад, Ян і Марія",
     "pickupNeeded": "Потрібно зустріти в аеропорту",
     "deleteTitle": "Видалити цей рейс?",
-    "deleteText": "Це не можна скасувати."
+    "deleteText": "Це не можна скасувати.",
+    "guestTravel": "Подорожі гостей ({count})",
+    "gt": {
+      "shared": "Поділились:",
+      "needTransfer": "Потрібен трансфер:",
+      "unknown": "Невідома родина",
+      "transferRequested": "Трансфер запитано",
+      "remind": "Нагадати {count, plural, one {# родині} other {# родинам}}",
+      "reminded": "Нагадування надіслано {count, plural, one {# родині} other {# родинам}}"
+    },
+    "shuttles": "Трансфери ({count})",
+    "shuttle": {
+      "empty": "Жоден гість ще не запитав трансфер. Рейси з'являться тут автоматично.",
+      "window": "Часове вікно",
+      "minutes": "хв",
+      "summary": "{runs, plural, one {# рейс} other {# рейсів}} · {people, plural, one {# особа} other {# осіб}}",
+      "print": "Друк",
+      "dayPeople": "{count, plural, one {# особа} other {# осіб}}"
+    }
   }
 }

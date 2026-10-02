@@ -1,6 +1,8 @@
 import "server-only";
 import type { SiteSectionKind, Translations, WebsiteSettingsRow } from "@/lib/database.types";
 import { EVENT_TEXT_FIELDS, localizeContent, localized } from "@/lib/i18n/content";
+import { contentLocale } from "@/lib/i18n/content-locale";
+import { starterContent, starterTexts } from "@/lib/i18n/defaults";
 import { signPaths } from "@/lib/inspiration/load";
 import type { createClient } from "@/lib/supabase/server";
 import {
@@ -92,14 +94,17 @@ export async function loadEditor(
   ]);
   if (!settings || !rows) return null;
 
-  const sections = rows.map(
-    (r) =>
-      ({
-        ...toSection(r),
-        sortOrder: r.sort_order,
-        translations: r.translations ?? {},
-      }) as EditorSection,
-  );
+  // starter texts nobody has changed, in the couple's language
+  const shown = await starterTexts(contentLocale(wedding));
+  const sections = rows.map((r) => {
+    const section = toSection(r);
+    return {
+      ...section,
+      content: starterContent(section.kind, section.content as Record<string, unknown>, shown),
+      sortOrder: r.sort_order,
+      translations: r.translations ?? {},
+    } as EditorSection;
+  });
   const signed = await signPaths(sb, sitePaths(settings.hero_path, sections));
 
   return {
@@ -126,7 +131,7 @@ export async function loadEditor(
         languages: wedding.languages,
         time_zone: wedding.time_zone,
       },
-      events: (events ?? []) as TranslatableEvent[],
+      events: (events ?? []).map((e) => ({ ...e, name: shown(e.name) })) as TranslatableEvent[],
       hotels: (hotels ?? []) as SiteHotel[],
       currency: wedding.currency,
       images: Object.fromEntries(signed),
@@ -172,7 +177,9 @@ export async function loadPublicSite(
     };
   }
 
-  // The couple's texts in this language, falling back to the main language.
+  // The couple's texts in this language, falling back to the main language
+  // (starter texts nobody has changed are shown in this language too).
+  const shown = await starterTexts(locale);
   const sections = json.sections.map((s, i) => {
     const section = toSection({
       id: `${s.kind}-${i}`,
@@ -182,7 +189,11 @@ export async function loadPublicSite(
     });
     return {
       ...section,
-      content: localizeContent(s.kind, section.content, s.translations?.[locale]),
+      content: starterContent(
+        s.kind,
+        localizeContent(s.kind, section.content, s.translations?.[locale]),
+        shown,
+      ),
     } as Section;
   });
   const signed = await signPaths(sb, sitePaths(json.settings.hero_path, sections));
@@ -205,7 +216,10 @@ export async function loadPublicSite(
       ),
       look: json.settings,
       sections,
-      events: json.events.map((e) => localized(e, locale, [...EVENT_TEXT_FIELDS])),
+      events: json.events.map((e) => {
+        const ev = localized(e, locale, [...EVENT_TEXT_FIELDS]);
+        return { ...ev, name: shown(ev.name) };
+      }),
       hotels: json.hotels,
       currency: json.currency,
       images: Object.fromEntries(signed),

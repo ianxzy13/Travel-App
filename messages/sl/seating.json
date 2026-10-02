@@ -192,6 +192,41 @@
       "what": "Kaj natisniti",
       "button": "Natisni ali shrani kot PDF",
       "noTables": "V tem sedežnem redu še ni miz."
-    }
+    },
+    "arrangeSettings": "Nastavitve samodejne razporeditve",
+    "arrangeSettingsHint": "Prilagodite pomembnost posameznega dejavnika pri razporeditvi.",
+    "weights": {
+      "keepTogether": "Skupaj",
+      "side": "Stran",
+      "tag": "Oznaka",
+      "language": "Jezik",
+      "ageGroup": "Starostna skupina",
+      "hostPrefer": "Blizu gostitelja",
+      "fillFirst": "Najprej zapolni"
+    },
+    "resetWeights": "Ponastavi",
+    "noHostTag": "Dodajte oznako host gostom, ki sprejemajo druge.",
+    "rsvpChanged": {
+      "attending": "Gost je pravkar potrdil udelezbo!",
+      "declined": "Gost je zavrnil povabilo.",
+      "removed": "Odgovor gosta je bil odstranjen."
+    },
+    "scenarios": {
+      "title": "Scenariji razporeditve",
+      "plan": "Plan",
+      "active": "aktiven",
+      "duplicate": "Podvoji",
+      "duplicated": "Scenarij podvojen",
+      "rename": "Preimenuj",
+      "delete": "Izbrisi",
+      "deleted": "Scenarij izbrisan",
+      "deleteConfirm": "Izbrisati ta scenarij? Mize in dodelitve bodo odstranjene.",
+      "maxReached": "Imate lahko najvec 3 scenarije na dogodek.",
+      "switched": "Scenarij spremenjen",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR plakat: poiscite svoj sedez",
+    "findSeatHeading": "Poiscite svoj sedez",
+    "findSeatScan": "Skenirajte to kodo s telefonom in poiscite svojo mizo."
   }
 }

@@ -51,7 +51,10 @@
       "website": "웹사이트",
       "websiteOf": "{name} 웹사이트",
       "map": "지도",
-      "mapOf": "{name} 지도"
+      "mapOf": "{name} 지도",
+      "transportTitle": "교통편",
+      "visaTitle": "비자 정보",
+      "currencyTitle": "통화"
     },
     "rsvp": {
       "replyBy": "<b>{date}</b>까지 회신해 주세요.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "{couple}의 결혼식",
       "website": "결혼식 웹사이트"
+    },
+    "findSeat": {
+      "title": "좌석 찾기",
+      "heading": "테이블 찾기",
+      "label": "전체 이름",
+      "placeholder": "성과 이름",
+      "button": "좌석 찾기",
+      "notFound": "해당 이름의 좌석을 찾을 수 없습니다. 초대장의 철자를 확인해 주세요.",
+      "yourTable": "테이블이 준비되었습니다!",
+      "tableName": "테이블 {number}",
+      "tableNamed": "{label} (테이블 {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "모든 분에 대해 참석 또는 불참을 선택하세요.",
       "not_allowed": "이 결혼식의 회신을 기록할 권한이 없습니다.",
       "generic": "회신을 저장하지 못했습니다. 잠시 후 다시 시도해 주세요."
+    },
+    "travel": {
+      "prompt": "여행 세부 정보 공유하기",
+      "editTravel": "여행 세부 정보 수정하기",
+      "title": "여행 세부 정보",
+      "subtitle": "공항 픽업 계획에 도움을 주세요 — 도착 및 출발 일정을 알려주세요.",
+      "arrival": "도착",
+      "departure": "출발",
+      "date": "날짜",
+      "time": "시간",
+      "airport": "공항",
+      "airportPlaceholder": "예: LHR",
+      "flightNumber": "항공편 번호",
+      "stayingAt": "숙소는 어디인가요?",
+      "chooseHotel": "호텔 선택",
+      "otherAccommodation": "다른 숙소",
+      "accommodationName": "호텔 또는 숙소 이름",
+      "accommodationPlaceholder": "예: 시내 중심가의 Airbnb",
+      "needsTransfer": "공항 픽업을 원합니다",
+      "notes": "그 외 사항",
+      "notesPlaceholder": "예: 차로 도착, 카시트 필요",
+      "save": "여행 세부 정보 저장",
+      "skip": "나중에",
+      "saved": "여행 세부 정보가 저장되었습니다!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "이 링크는 귀하의 가족 전용입니다. 공유하지 마세요.",
     "subjectInvite": "초대: {couple}의 결혼식",
     "subjectReminder": "알림: {couple}의 결혼식 참석 여부를 알려 주세요"
+  },
+  "travelEmail": {
+    "preview": "{couple}의 결혼식 여행 계획을 공유해 주세요",
+    "eyebrow": "여행 세부 정보",
+    "dear": "{name}님께,",
+    "body": "참석 확인 감사합니다! 공항 픽업 및 셔틀 계획을 위해 아래 링크에서 도착 및 출발 정보를 알려 주세요.",
+    "button": "여행 세부 정보 공유",
+    "fallback": "버튼이 작동하지 않으면 {link} 을 열어 주세요",
+    "love": "사랑을 담아,",
+    "subject": "{couple}의 결혼식 여행 세부 정보"
   }
 }

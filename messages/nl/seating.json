@@ -192,6 +192,41 @@
       "what": "Wat afdrukken",
       "button": "Afdrukken of opslaan als PDF",
       "noTables": "Deze tafelindeling heeft nog geen tafels."
-    }
+    },
+    "arrangeSettings": "Instellingen automatische indeling",
+    "arrangeSettingsHint": "Pas het gewicht van elke factor bij de indeling aan.",
+    "weights": {
+      "keepTogether": "Bij elkaar houden",
+      "side": "Kant",
+      "tag": "Tag",
+      "language": "Taal",
+      "ageGroup": "Leeftijdsgroep",
+      "hostPrefer": "Dicht bij gastheer",
+      "fillFirst": "Eerst vullen"
+    },
+    "resetWeights": "Resetten",
+    "noHostTag": "Voeg een tag host toe aan gasten die de anderen ontvangen.",
+    "rsvpChanged": {
+      "attending": "Een gast heeft net bevestigd!",
+      "declined": "Een gast heeft afgeslagen.",
+      "removed": "Het antwoord van een gast is ingetrokken."
+    },
+    "scenarios": {
+      "title": "Tafelindeling-scenario's",
+      "plan": "Plan",
+      "active": "actief",
+      "duplicate": "Dupliceren",
+      "duplicated": "Scenario gedupliceerd",
+      "rename": "Hernoemen",
+      "delete": "Verwijderen",
+      "deleted": "Scenario verwijderd",
+      "deleteConfirm": "Dit scenario verwijderen? Tafels en plaatsingen worden verwijderd.",
+      "maxReached": "Je kunt maximaal 3 scenario's per evenement hebben.",
+      "switched": "Scenario gewisseld",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR-poster: vind je plek",
+    "findSeatHeading": "Vind je plek",
+    "findSeatScan": "Scan deze code met je telefoon om je tafel te vinden."
   }
 }

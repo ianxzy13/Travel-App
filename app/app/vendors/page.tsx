@@ -39,6 +39,7 @@ export default async function Vendors() {
         }))}
       weddingId={wedding.id}
       currency={wedding.currency}
+      location={wedding.location}
       canEdit={canEdit(role)}
     />
   );

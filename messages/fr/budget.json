@@ -198,7 +198,11 @@
     "deleteTitle": "Supprimer {name} ?",
     "deleteText": "Son contrat est supprimé. Les dépenses liées restent dans votre budget.",
     "cancel": "Annuler",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "find": "Trouver des prestataires",
+    "findHint": "Chercher près de {location}",
+    "pasteUrl": "Coller un lien",
+    "pasteUrlHint": "Collez le site du prestataire pour remplir son nom automatiquement."
   },
   "files": {
     "openFailed": "Impossible d’ouvrir le fichier. Veuillez réessayer.",

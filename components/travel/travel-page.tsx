@@ -9,6 +9,7 @@ import {
   Car,
   ExternalLink,
   Loader2,
+  Mail,
   Plane,
   PlaneLanding,
   PlaneTakeoff,
@@ -17,7 +18,13 @@ import {
   Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
-import { deleteFlight, saveFlight, setDestinationAirport } from "@/app/app/travel/actions";
+import {
+  deleteFlight,
+  saveFlight,
+  sendTravelReminder,
+  setDestinationAirport,
+} from "@/app/app/travel/actions";
+import { ShuttlePlanner } from "@/components/travel/shuttle-planner";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -45,7 +52,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import type { FlightRow } from "@/lib/database.types";
+import type { FlightRow, GuestTravelRow } from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
 import { fmtDate, fmtTime } from "@/lib/i18n/format";
 import { FLIGHT_CATEGORIES, FLIGHT_DIRECTIONS } from "@/lib/places/labels";
@@ -65,9 +72,13 @@ export type FlightItem = Omit<FlightRow, "price"> & {
   travellerIds: string[];
 };
 
+type HouseholdSummary = { id: string; name: string; rsvp_responded_at: string | null };
+
 type Props = {
   flights: FlightItem[];
   guests: PickerGuest[];
+  guestTravel: GuestTravelRow[];
+  households: HouseholdSummary[];
   destinationAirport: string | null;
   weddingDate: string | null;
   currency: string;
@@ -77,6 +88,8 @@ type Props = {
 export function TravelPage({
   flights,
   guests,
+  guestTravel,
+  households,
   destinationAirport,
   weddingDate,
   currency,
@@ -107,6 +120,12 @@ export function TravelPage({
     .map((f) => toBoard(f, "departure"));
   const ours = flights.filter((f) => f.category !== "guest");
   const current = typeof sheet === "string" ? (flights.find((f) => f.id === sheet) ?? null) : null;
+  const hhName = new Map(households.map((h) => [h.id, h.name]));
+  const enrichedTravel = guestTravel.map((gt) => ({
+    ...gt,
+    householdName: hhName.get(gt.household_id) ?? "",
+  }));
+  const shuttleCount = guestTravel.filter((gt) => gt.needs_transfer).length;
 
   return (
     <>
@@ -141,6 +160,16 @@ export function TravelPage({
               <Plane aria-hidden /> {t("ours", { count: ours.length })}
             </TabsTrigger>
             <TabsTrigger value="all">{t("all", { count: flights.length })}</TabsTrigger>
+            {guestTravel.length > 0 && (
+              <TabsTrigger value="guestTravel">
+                <Car aria-hidden /> {t("guestTravel", { count: guestTravel.length })}
+              </TabsTrigger>
+            )}
+            {shuttleCount > 0 && (
+              <TabsTrigger value="shuttles">
+                <Car aria-hidden /> {t("shuttles", { count: shuttleCount })}
+              </TabsTrigger>
+            )}
           </TabsList>
           <TabsContent value="arrivals">
             <Board
@@ -186,6 +215,19 @@ export function TravelPage({
               onOpen={setSheet}
             />
           </TabsContent>
+          {guestTravel.length > 0 && (
+            <TabsContent value="guestTravel">
+              <GuestTravelList
+                travel={guestTravel}
+                households={households}
+              />
+            </TabsContent>
+          )}
+          {shuttleCount > 0 && (
+            <TabsContent value="shuttles">
+              <ShuttlePlanner guestTravel={enrichedTravel} />
+            </TabsContent>
+          )}
         </Tabs>
       </div>
 
@@ -719,5 +761,89 @@ function FlightForm({
         </SheetFooter>
       )}
     </>
+  );
+}
+
+function GuestTravelList({
+  travel,
+  households,
+}: {
+  travel: GuestTravelRow[];
+  households: HouseholdSummary[];
+}) {
+  const t = useTranslations("travel");
+  const locale = useLocale();
+  const [pending, startTransition] = useTransition();
+  const hhName = new Map(households.map((h) => [h.id, h.name]));
+  const needsTransfer = travel.filter((gt) => gt.needs_transfer);
+  const travelHhIds = new Set(travel.map((gt) => gt.household_id));
+  const responded = households.filter((h) => h.rsvp_responded_at);
+  const noTravel = responded.filter((h) => !travelHhIds.has(h.id));
+
+  const remind = () =>
+    startTransition(async () => {
+      if (noTravel.length === 0) return;
+      const r = await sendTravelReminder(noTravel.map((h) => h.id));
+      if (r.ok) toast.success(t("gt.reminded", { count: r.data.sent }));
+      else toast.error(r.error);
+    });
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="bg-card rounded-xl border px-4 py-3 text-sm">
+          <span className="text-muted-foreground">{t("gt.shared")}</span>{" "}
+          <strong>{travel.length}</strong>
+        </div>
+        {needsTransfer.length > 0 && (
+          <div className="bg-card rounded-xl border px-4 py-3 text-sm">
+            <Car className="mr-1 inline size-4" aria-hidden />
+            <span className="text-muted-foreground">{t("gt.needTransfer")}</span>{" "}
+            <strong>{needsTransfer.length}</strong>
+          </div>
+        )}
+        {noTravel.length > 0 && (
+          <Button variant="outline" size="sm" onClick={remind} disabled={pending} className="ml-auto">
+            {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Mail aria-hidden />}
+            {t("gt.remind", { count: noTravel.length })}
+          </Button>
+        )}
+      </div>
+      <div className="space-y-3">
+        {travel.map((gt) => (
+          <div key={gt.id} className="bg-card rounded-xl border p-4">
+            <h3 className="font-medium">{hhName.get(gt.household_id) ?? t("gt.unknown")}</h3>
+            <div className="text-muted-foreground mt-2 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+              {gt.arrival_date && (
+                <div>
+                  <PlaneLanding className="mr-1 inline size-3.5" aria-hidden />
+                  {fmtDate(gt.arrival_date, locale, "medium")}
+                  {gt.arrival_time && ` ${gt.arrival_time.slice(0, 5)}`}
+                  {gt.arrival_airport && ` (${gt.arrival_airport})`}
+                  {gt.arrival_flight && ` · ${gt.arrival_flight}`}
+                </div>
+              )}
+              {gt.departure_date && (
+                <div>
+                  <PlaneTakeoff className="mr-1 inline size-3.5" aria-hidden />
+                  {fmtDate(gt.departure_date, locale, "medium")}
+                  {gt.departure_time && ` ${gt.departure_time.slice(0, 5)}`}
+                  {gt.departure_airport && ` (${gt.departure_airport})`}
+                  {gt.departure_flight && ` · ${gt.departure_flight}`}
+                </div>
+              )}
+              {gt.staying_at && <div>{gt.staying_at}</div>}
+              {gt.needs_transfer && (
+                <div>
+                  <Car className="mr-1 inline size-3.5" aria-hidden />
+                  {t("gt.transferRequested")}
+                </div>
+              )}
+              {gt.transport_notes && <div className="sm:col-span-2">{gt.transport_notes}</div>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

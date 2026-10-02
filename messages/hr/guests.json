@@ -186,7 +186,13 @@
       "rule": "Pravilo",
       "guestLabel": "Gost",
       "chooseGuest": "Odaberite gosta",
-      "addRule": "Dodaj pravilo"
+      "addRule": "Dodaj pravilo",
+      "languages": "Jezici",
+      "languagesHint": "Raspored sjedenja koristi ovo za smjestanje gostiju koji govore isti jezik zajedno.",
+      "addLanguage": "Dodaj jezik",
+      "allLanguages": "Svi jezici",
+      "remove": "Ukloni",
+      "noLanguages": "Nema dodanih jezika"
     },
     "household": {
       "title": "Postavke kućanstva",

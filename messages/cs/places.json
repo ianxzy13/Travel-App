@@ -140,6 +140,7 @@
     "copied": "Zkopírováno",
     "copyFailed": "Automatické kopírování se nepodařilo.",
     "add": "Přidat hotel",
+    "findOnBooking": "Najít na Booking.com",
     "cutoffSoon": "<b>{name}</b>: termín bloku pokojů za {days, plural, one {# den} few {# dny} other {# dní}}.",
     "roomsFree": "{count, plural, one {# pokoj je ještě volný.} few {# pokoje jsou ještě volné.} other {# pokojů je ještě volných.}}",
     "remind": "Připomeňte hostům, ať si rezervují!",
@@ -199,6 +200,24 @@
     "departures": "Odlety ({count})",
     "ours": "My a líbánky ({count})",
     "all": "Všechny lety ({count})",
+    "guestTravel": "Cestování hostů ({count})",
+    "gt": {
+      "shared": "Sdíleli údaje:",
+      "needTransfer": "Potřebují odvoz:",
+      "unknown": "Neznámá domácnost",
+      "transferRequested": "Odvoz vyžádán",
+      "remind": "Připomenout {count, plural, one {# domácnosti} other {# domácnostem}}",
+      "reminded": "Připomínka odeslána {count, plural, one {# domácnosti} other {# domácnostem}}"
+    },
+    "shuttles": "Svozové jízdy ({count})",
+    "shuttle": {
+      "empty": "Zatím žádný host nepožádal o odvoz. Jakmile to udělají, svozové jízdy se zobrazí automaticky.",
+      "window": "Časové okno",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# jízda} other {# jízd}} · {people, plural, one {# osoba} other {# osob}}",
+      "print": "Tisk",
+      "dayPeople": "{count, plural, one {# osoba} other {# osob}}"
+    },
     "ourFlight": "Náš let",
     "honeymoonFlight": "Let na líbánky",
     "search": "Hledat lety",

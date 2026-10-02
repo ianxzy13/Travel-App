@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { CodeForm } from "@/components/rsvp/code-form";
 import { RsvpExperience } from "@/components/rsvp/rsvp-experience";
 import { RsvpFrame } from "@/components/rsvp/rsvp-frame";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { localizeRsvp } from "@/lib/rsvp/localize";
 import { CODE_PATTERN, normalizeCode, type RsvpData, type RsvpExtras } from "@/lib/rsvp/types";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -23,7 +24,11 @@ const loadRsvp = cache(async (rawCode: string) => {
   if (error) console.error("[get_rsvp]", error);
   if (!data) return null;
   const x = extras as RsvpExtras | null;
-  return { data: localizeRsvp(data as RsvpData, x, locale), languages: x?.languages ?? [] };
+  const shown = await starterTexts(locale);
+  return {
+    data: localizeRsvp(data as RsvpData, x, locale, shown),
+    languages: x?.languages ?? [],
+  };
 });
 
 export async function generateMetadata({

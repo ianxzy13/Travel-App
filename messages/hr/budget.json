@@ -198,7 +198,11 @@
     "deleteTitle": "Izbrisati {name}?",
     "deleteText": "Datoteka ugovora se briše. Troškovi u proračunu povezani s njima ostaju.",
     "cancel": "Odustani",
-    "save": "Spremi"
+    "save": "Spremi",
+    "find": "Pronađi dobavljače",
+    "findHint": "Traži blizu {location}",
+    "pasteUrl": "Zalijepi poveznicu",
+    "pasteUrlHint": "Zalijepite web stranicu dobavljača za automatsko popunjavanje imena."
   },
   "files": {
     "openFailed": "Datoteku nije bilo moguće otvoriti. Pokušajte ponovno.",

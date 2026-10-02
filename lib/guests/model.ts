@@ -30,6 +30,7 @@ export type GuestView = {
   dietary: string | null;
   accessibility: string | null;
   notes: string | null;
+  languages: string[];
   list: GuestList;
   tagIds: string[];
   eventIds: string[];
@@ -110,6 +111,7 @@ export function buildGuestViews(data: {
     accessibility: g.accessibility,
     notes: g.notes,
     list: g.list,
+    languages: g.languages ?? [],
     tagIds: tagsByGuest.get(g.id) ?? [],
     eventIds: eventsByGuest.get(g.id) ?? [],
     rsvp: rsvpByGuest.get(g.id) ?? {},

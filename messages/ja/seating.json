@@ -192,6 +192,41 @@
       "what": "印刷する内容",
       "button": "印刷または PDF で保存",
       "noTables": "この席次表にはまだテーブルがありません。"
-    }
+    },
+    "arrangeSettings": "自動配置の設定",
+    "arrangeSettingsHint": "配置時の各要素の重要度を調整します。",
+    "weights": {
+      "keepTogether": "一緒に",
+      "side": "サイド",
+      "tag": "タグ",
+      "language": "言語",
+      "ageGroup": "年齢グループ",
+      "hostPrefer": "ホストの近く",
+      "fillFirst": "先に埋める"
+    },
+    "resetWeights": "リセット",
+    "noHostTag": "他のゲストを迎えるゲストに host タグを追加してください。",
+    "rsvpChanged": {
+      "attending": "ゲストが出席を確認しました！",
+      "declined": "ゲストが招待を辞退しました。",
+      "removed": "ゲストの回答が削除されました。"
+    },
+    "scenarios": {
+      "title": "座席シナリオ",
+      "plan": "プラン",
+      "active": "アクティブ",
+      "duplicate": "複製",
+      "duplicated": "シナリオを複製しました",
+      "rename": "名前を変更",
+      "delete": "削除",
+      "deleted": "シナリオを削除しました",
+      "deleteConfirm": "このシナリオを削除しますか？テーブルと配置が削除されます。",
+      "maxReached": "イベントごとに最大3つのシナリオを作成できます。",
+      "switched": "シナリオを切り替えました",
+      "defaultName": "プラン A"
+    },
+    "findSeatQr": "QRポスター：席を探す",
+    "findSeatHeading": "席を探す",
+    "findSeatScan": "スマートフォンでこのコードをスキャンしてテーブルを見つけてください。"
   }
 }

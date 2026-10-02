@@ -21,7 +21,13 @@ export const sectionSchemas = {
       .catch([]),
   }),
   events: z.object({ intro: text(1000) }),
-  travel: z.object({ intro: text(1500), notes: text(3000) }),
+  travel: z.object({
+    intro: text(1500),
+    notes: text(3000),
+    transport: text(3000),
+    visa: text(3000),
+    currency: text(2000),
+  }),
   rsvp: z.object({ intro: text(1000) }),
   party: z.object({
     people: z
@@ -166,6 +172,9 @@ export function isSectionEmpty(s: Section, data: Pick<SiteData, "events" | "hote
         data.hotels.length === 0 &&
         !s.content.intro.trim() &&
         !s.content.notes.trim() &&
+        !s.content.transport.trim() &&
+        !s.content.visa.trim() &&
+        !s.content.currency.trim() &&
         !data.wedding.destination_airport
       );
     case "party":

@@ -186,7 +186,13 @@
       "rule": "Regla",
       "guestLabel": "Invitado",
       "chooseGuest": "Elige un invitado",
-      "addRule": "Añadir regla"
+      "addRule": "Añadir regla",
+      "languages": "Idiomas que habla",
+      "languagesHint": "El plano de mesas lo usa para sentar juntos a invitados que comparten idioma.",
+      "addLanguage": "Anadir idioma",
+      "allLanguages": "Todos los idiomas",
+      "remove": "Quitar",
+      "noLanguages": "No se han anadido idiomas"
     },
     "household": {
       "title": "Ajustes del hogar",

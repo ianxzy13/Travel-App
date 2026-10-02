@@ -188,7 +188,8 @@
     "checkIn": "Zameldowanie: {name}",
     "checkOut": "Wymeldowanie: {name}",
     "guestsSaved": "Zapisano gości",
-    "saveGuests": "Zapisz gości"
+    "saveGuests": "Zapisz gości",
+    "findOnBooking": "Szukaj na Booking.com"
   },
   "travel": {
     "title": "Podróże",
@@ -253,6 +254,24 @@
     "travellersHint": "np. Ian i Maria",
     "pickupNeeded": "Potrzebny odbiór z lotniska",
     "deleteTitle": "Usunąć ten lot?",
-    "deleteText": "Tego nie można cofnąć."
+    "deleteText": "Tego nie można cofnąć.",
+    "guestTravel": "Podróże gości ({count})",
+    "gt": {
+      "shared": "Udostępnione dane:",
+      "needTransfer": "Potrzebują transferu:",
+      "unknown": "Nieznana rodzina",
+      "transferRequested": "Transfer zgłoszony",
+      "remind": "Przypomnij {count, plural, one {# rodzinie} other {# rodzinom}}",
+      "reminded": "Przypomnienie wysłane do {count, plural, one {# rodziny} other {# rodzin}}"
+    },
+    "shuttles": "Transfery ({count})",
+    "shuttle": {
+      "empty": "Żaden gość nie poprosił jeszcze o transfer. Gdy to zrobią, kursy pojawią się tutaj automatycznie.",
+      "window": "Okno czasowe",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# kurs} other {# kursów}} · {people, plural, one {# osoba} other {# osób}}",
+      "print": "Drukuj",
+      "dayPeople": "{count, plural, one {# osoba} other {# osób}}"
+    }
   }
 }

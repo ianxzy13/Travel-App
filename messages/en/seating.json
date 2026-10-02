@@ -48,6 +48,24 @@
     "undo": "Undo (Ctrl+Z)",
     "redo": "Redo (Ctrl+Y)",
     "autoArrange": "Auto-arrange",
+    "arrangeSettings": "Arrange settings",
+    "arrangeSettingsHint": "Adjust how much each factor matters when auto-arranging.",
+    "weights": {
+      "keepTogether": "Keep-together rules",
+      "side": "Same side",
+      "tag": "Shared tags",
+      "language": "Shared language",
+      "ageGroup": "Same age group",
+      "hostPrefer": "Seat lonely guests near hosts",
+      "fillFirst": "Fill tables before starting new ones"
+    },
+    "resetWeights": "Reset to defaults",
+    "noHostTag": "Tip: create a tag called \"Host\" to mark social guests who welcome newcomers.",
+    "rsvpChanged": {
+      "attending": "A guest just RSVP'd — they're attending!",
+      "declined": "A guest just declined their invitation.",
+      "removed": "A guest's RSVP was removed."
+    },
     "view": "View",
     "floorPlan": "Floor plan",
     "list": "List",
@@ -192,6 +210,23 @@
       "what": "What to print",
       "button": "Print or save as PDF",
       "noTables": "There are no tables in this seating chart yet."
-    }
+    },
+    "scenarios": {
+      "title": "Seating scenarios",
+      "plan": "Plan",
+      "active": "active",
+      "duplicate": "Duplicate",
+      "duplicated": "Scenario duplicated",
+      "rename": "Rename",
+      "delete": "Delete",
+      "deleted": "Scenario deleted",
+      "deleteConfirm": "Delete this seating scenario? Tables and assignments will be removed.",
+      "maxReached": "You can have up to 3 scenarios per event.",
+      "switched": "Switched scenario",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "Find-your-seat QR poster",
+    "findSeatHeading": "Find your seat",
+    "findSeatScan": "Scan this code with your phone to find your table."
   }
 }

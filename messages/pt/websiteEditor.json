@@ -175,7 +175,13 @@
       "captionPlaceholder": "Legenda (opcional)",
       "moveUp": "Subir o item {n}",
       "moveDown": "Descer o item {n}",
-      "remove": "Remover o item {n}"
+      "remove": "Remover o item {n}",
+      "transport": "Transporte e direções",
+      "transportHint": "Como chegar do aeroporto ao local, aluguer de carros, autocarros…",
+      "visa": "Informação de visto",
+      "visaHint": "Os convidados precisam de visto? Que países estão isentos?",
+      "currency": "Moeda",
+      "currencyHint": "Moeda local, dicas de câmbio, aceitação de cartões…"
     },
     "image": {
       "wrongType": "Escolham uma fotografia JPG, PNG ou WebP.",

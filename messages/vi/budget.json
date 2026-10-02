@@ -198,7 +198,11 @@
     "deleteTitle": "Xóa {name}?",
     "deleteText": "Tệp hợp đồng sẽ bị xóa. Các khoản chi liên kết vẫn ở trong ngân sách.",
     "cancel": "Hủy",
-    "save": "Lưu"
+    "save": "Lưu",
+    "find": "Tìm nhà cung cấp",
+    "findHint": "Tìm gần {location}",
+    "pasteUrl": "Dán liên kết",
+    "pasteUrlHint": "Dán trang web nhà cung cấp để tự động điền tên."
   },
   "files": {
     "openFailed": "Không thể mở tệp. Vui lòng thử lại.",

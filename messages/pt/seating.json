@@ -192,6 +192,41 @@
       "what": "O que imprimir",
       "button": "Imprimir ou guardar como PDF",
       "noTables": "Esta disposição ainda não tem mesas."
-    }
+    },
+    "arrangeSettings": "Ajustes da organizacao automatica",
+    "arrangeSettingsHint": "Ajuste a importancia de cada fator na organizacao.",
+    "weights": {
+      "keepTogether": "Manter juntos",
+      "side": "Lado",
+      "tag": "Etiqueta",
+      "language": "Idioma",
+      "ageGroup": "Faixa etaria",
+      "hostPrefer": "Perto do anfitriao",
+      "fillFirst": "Preencher primeiro"
+    },
+    "resetWeights": "Repor valores",
+    "noHostTag": "Adicione uma etiqueta host aos convidados que recebem os outros.",
+    "rsvpChanged": {
+      "attending": "Um convidado acabou de confirmar presenca.",
+      "declined": "Um convidado recusou o convite.",
+      "removed": "A resposta de um convidado foi removida."
+    },
+    "scenarios": {
+      "title": "Cenarios de mesas",
+      "plan": "Plano",
+      "active": "ativo",
+      "duplicate": "Duplicar",
+      "duplicated": "Cenario duplicado",
+      "rename": "Renomear",
+      "delete": "Eliminar",
+      "deleted": "Cenario eliminado",
+      "deleteConfirm": "Eliminar este cenario de mesas? As mesas e atribuicoes serao removidas.",
+      "maxReached": "Pode ter ate 3 cenarios por evento.",
+      "switched": "Cenario alterado",
+      "defaultName": "Plano A"
+    },
+    "findSeatQr": "Poster QR para encontrar o lugar",
+    "findSeatHeading": "Encontre o seu lugar",
+    "findSeatScan": "Leia este codigo com o telemovel para encontrar a sua mesa."
   }
 }

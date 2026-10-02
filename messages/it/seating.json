@@ -192,6 +192,41 @@
       "what": "Cosa stampare",
       "button": "Stampa o salva come PDF",
       "noTables": "In questa disposizione non ci sono ancora tavoli."
-    }
+    },
+    "arrangeSettings": "Impostazioni della disposizione automatica",
+    "arrangeSettingsHint": "Regola l'importanza di ogni fattore nella disposizione.",
+    "weights": {
+      "keepTogether": "Tenere insieme",
+      "side": "Lato",
+      "tag": "Tag",
+      "language": "Lingua",
+      "ageGroup": "Fascia d'eta",
+      "hostPrefer": "Vicino all'ospite",
+      "fillFirst": "Riempire prima"
+    },
+    "resetWeights": "Ripristina valori",
+    "noHostTag": "Aggiungi un tag host agli ospiti che accolgono gli altri.",
+    "rsvpChanged": {
+      "attending": "Un ospite ha appena confermato la presenza!",
+      "declined": "Un ospite ha declinato l invito.",
+      "removed": "La risposta di un ospite e stata rimossa."
+    },
+    "scenarios": {
+      "title": "Scenari di disposizione",
+      "plan": "Piano",
+      "active": "attivo",
+      "duplicate": "Duplica",
+      "duplicated": "Scenario duplicato",
+      "rename": "Rinomina",
+      "delete": "Elimina",
+      "deleted": "Scenario eliminato",
+      "deleteConfirm": "Eliminare questo scenario? Tavoli e assegnazioni saranno rimossi.",
+      "maxReached": "Puoi avere fino a 3 scenari per evento.",
+      "switched": "Scenario cambiato",
+      "defaultName": "Piano A"
+    },
+    "findSeatQr": "Poster QR: trova il tuo posto",
+    "findSeatHeading": "Trova il tuo posto",
+    "findSeatScan": "Scansiona questo codice con il telefono per trovare il tuo tavolo."
   }
 }

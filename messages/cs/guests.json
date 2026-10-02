@@ -186,7 +186,13 @@
       "rule": "Pravidlo",
       "guestLabel": "Host",
       "chooseGuest": "Vyberte hosta",
-      "addRule": "Přidat pravidlo"
+      "addRule": "Přidat pravidlo",
+      "languages": "Jazyky",
+      "languagesHint": "Zasedaci poradek to pouziva k posazeni hostu, kteri mluvi stejnym jazykem, k sobe.",
+      "addLanguage": "Pridat jazyk",
+      "allLanguages": "Vsechny jazyky",
+      "remove": "Odebrat",
+      "noLanguages": "Zadne jazyky nepridany"
     },
     "household": {
       "title": "Nastavení domácnosti",

@@ -15,7 +15,9 @@ const data: RsvpData = {
     rsvp_deadline: null,
     rsvp_contact: null,
     rsvp_ask_song: true,
+    rsvp_ask_travel: false,
     deadline_passed: false,
+    destination_airport: null,
   },
   household: {
     id: "h",
@@ -76,6 +78,8 @@ const data: RsvpData = {
   ],
   responses: [{ guest_id: "ann", event_id: "cer", status: "attending", meal_option_id: null }],
   meal_options: [{ id: "fish", name: "Fish", description: null }],
+  hotels: [],
+  travel: null,
 };
 
 describe("RSVP form", () => {

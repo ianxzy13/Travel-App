@@ -192,6 +192,41 @@
       "what": "打印内容",
       "button": "打印或另存为 PDF",
       "noTables": "此座位图中还没有桌子。"
-    }
+    },
+    "arrangeSettings": "自动排列设置",
+    "arrangeSettingsHint": "调整排列时各因素的重要性。",
+    "weights": {
+      "keepTogether": "保持在一起",
+      "side": "侧",
+      "tag": "标签",
+      "language": "语言",
+      "ageGroup": "年龄组",
+      "hostPrefer": "靠近主人",
+      "fillFirst": "优先填满"
+    },
+    "resetWeights": "重置",
+    "noHostTag": "为迎接其他来宾的人添加 host 标签。",
+    "rsvpChanged": {
+      "attending": "一位宾客已确认出席！",
+      "declined": "一位宾客已谢绝邀请。",
+      "removed": "一位宾客的回复已被删除。"
+    },
+    "scenarios": {
+      "title": "座位方案",
+      "plan": "方案",
+      "active": "活跃",
+      "duplicate": "复制",
+      "duplicated": "方案已复制",
+      "rename": "重命名",
+      "delete": "删除",
+      "deleted": "方案已删除",
+      "deleteConfirm": "删除此方案？桌子和分配将被移除。",
+      "maxReached": "每个活动最多可有 3 个方案。",
+      "switched": "已切换方案",
+      "defaultName": "方案 A"
+    },
+    "findSeatQr": "二维码海报：找到你的座位",
+    "findSeatHeading": "找到你的座位",
+    "findSeatScan": "用手机扫描此二维码以找到你的桌子。"
   }
 }

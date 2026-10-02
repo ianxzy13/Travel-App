@@ -54,6 +54,7 @@ export const guestFormSchema = z
     notes: text(2000),
     eventIds: z.array(z.uuid()),
     tagIds: z.array(z.uuid()),
+    languages: z.array(z.string()).max(10),
   })
   .refine((v) => v.isPlusOne || v.firstName || v.lastName, {
     path: ["firstName"],

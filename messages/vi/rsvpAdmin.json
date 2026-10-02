@@ -86,7 +86,11 @@
       "mealEventsHint": "Thường chỉ là bữa tối tiệc cưới.",
       "addMealsFirst": "Hãy thêm lựa chọn món ăn trước.",
       "noEvents": "Chưa có sự kiện. Thêm trong Cài đặt.",
-      "askAt": "Hỏi chọn món tại {name}"
+      "askAt": "Hỏi chọn món tại {name}",
+      "askTravel": "Hỏi khách về kế hoạch di chuyển",
+      "askTravelHint": "Sau khi xác nhận tham dự, khách có thể chia sẻ thông tin đến và đi, nơi ở và nhu cầu đưa đón.",
+      "findSeat": "Trang Tim cho ngoi",
+      "findSeatHint": "Khach co the nhap ten tren trang cong khai de xem ban duoc phan cong."
     },
     "email": {
       "title": "Gửi email cho khách",

@@ -140,6 +140,7 @@
     "copied": "تم النسخ",
     "copyFailed": "تعذّر النسخ تلقائيًا.",
     "add": "إضافة فندق",
+    "findOnBooking": "ابحث على Booking.com",
     "cutoffSoon": "<b>{name}</b>: ينتهي حجز الغرف الجماعي بعد {days} يوم.",
     "roomsFree": "الغرف الشاغرة: {count}.",
     "remind": "ذكّر ضيوفك بالحجز!",
@@ -199,6 +200,24 @@
     "departures": "المغادرة ({count})",
     "ours": "نحن وشهر العسل ({count})",
     "all": "كل الرحلات ({count})",
+    "guestTravel": "سفر الضيوف ({count})",
+    "gt": {
+      "shared": "شاركوا التفاصيل:",
+      "needTransfer": "يحتاجون نقلاً:",
+      "unknown": "أسرة غير معروفة",
+      "transferRequested": "تم طلب النقل",
+      "remind": "تذكير {count, plural, one {أسرة واحدة} other {# أسرة}}",
+      "reminded": "تم إرسال التذكير إلى {count, plural, one {أسرة واحدة} other {# أسرة}}"
+    },
+    "shuttles": "الحافلات ({count})",
+    "shuttle": {
+      "empty": "لم يطلب أي ضيف نقلاً بعد. عندما يطلبون، ستظهر جولات الحافلات هنا تلقائيًا.",
+      "window": "النافذة الزمنية",
+      "minutes": "د",
+      "summary": "{runs, plural, one {جولة واحدة} other {# جولة}} · {people, plural, one {شخص واحد} other {# شخص}}",
+      "print": "طباعة",
+      "dayPeople": "{count, plural, one {شخص واحد} other {# شخص}}"
+    },
     "ourFlight": "رحلتنا",
     "honeymoonFlight": "رحلة شهر العسل",
     "search": "البحث عن رحلات",

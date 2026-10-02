@@ -186,7 +186,13 @@
       "rule": "규칙",
       "guestLabel": "하객",
       "chooseGuest": "하객 선택",
-      "addRule": "규칙 추가"
+      "addRule": "규칙 추가",
+      "languages": "사용 언어",
+      "languagesHint": "좌석 배치표에서 같은 언어를 사용하는 하객을 함께 배치하는 데 사용됩니다.",
+      "addLanguage": "언어 추가",
+      "allLanguages": "모든 언어",
+      "remove": "제거",
+      "noLanguages": "추가된 언어 없음"
     },
     "household": {
       "title": "가족 설정",

@@ -86,7 +86,11 @@
       "mealEventsHint": "Zwykle tylko przy kolacji weselnej.",
       "addMealsFirst": "Najpierw dodaj menu.",
       "noEvents": "Brak wydarzeń. Dodaj je w Ustawieniach.",
-      "askAt": "Pytaj o menu przy: {name}"
+      "askAt": "Pytaj o menu przy: {name}",
+      "askTravel": "Pytaj gości o plany podróży",
+      "askTravelHint": "Po potwierdzeniu obecności goście mogą udostępnić dane przyjazdu i wyjazdu, zakwaterowanie i potrzebę transferu.",
+      "findSeat": "Strona Znajdz swoje miejsce",
+      "findSeatHint": "Goscie moga wpisac swoje imie na publicznej stronie, aby zobaczyc przypisany stol."
     },
     "email": {
       "title": "Napisz do gości",

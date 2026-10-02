@@ -51,7 +51,10 @@
       "website": "Sito web",
       "websiteOf": "Sito web di {name}",
       "map": "Mappa",
-      "mapOf": "Mappa di {name}"
+      "mapOf": "Mappa di {name}",
+      "transportTitle": "Come muoversi",
+      "visaTitle": "Informazioni sul visto",
+      "currencyTitle": "Valuta"
     },
     "rsvp": {
       "replyBy": "Rispondi entro il <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Il matrimonio di {couple}",
       "website": "Sito del matrimonio"
+    },
+    "findSeat": {
+      "title": "Trova il tuo posto",
+      "heading": "Trova il tuo tavolo",
+      "label": "Il tuo nome completo",
+      "placeholder": "Nome e cognome",
+      "button": "Trova il mio posto",
+      "notFound": "Non abbiamo trovato un posto per questo nome. Controlla l'ortografia sull'invito.",
+      "yourTable": "Il tuo tavolo e pronto!",
+      "tableName": "Tavolo {number}",
+      "tableNamed": "{label} (Tavolo {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Indica per ciascuno se sarà presente o no.",
       "not_allowed": "Non hai il permesso di registrare risposte per questo matrimonio.",
       "generic": "Non siamo riusciti a salvare la tua risposta. Riprova tra un momento."
+    },
+    "travel": {
+      "prompt": "Condividi i tuoi dettagli di viaggio",
+      "editTravel": "Aggiorna i dettagli di viaggio",
+      "title": "Dettagli di viaggio",
+      "subtitle": "Aiutaci a organizzare i trasferimenti dall'aeroporto — dicci quando arrivi e quando parti.",
+      "arrival": "Arrivo",
+      "departure": "Partenza",
+      "date": "Data",
+      "time": "Ora",
+      "airport": "Aeroporto",
+      "airportPlaceholder": "es. LHR",
+      "flightNumber": "Numero del volo",
+      "stayingAt": "Dove alloggi?",
+      "chooseHotel": "Scegli un hotel",
+      "otherAccommodation": "Altro alloggio",
+      "accommodationName": "Nome dell'hotel o dell'alloggio",
+      "accommodationPlaceholder": "es. Airbnb in centro città",
+      "needsTransfer": "Gradiremmo un trasferimento dall'aeroporto",
+      "notes": "Altro?",
+      "notesPlaceholder": "es. arrivo in auto, serve un seggiolino per bambini",
+      "save": "Salva dettagli di viaggio",
+      "skip": "Salta per ora",
+      "saved": "Dettagli di viaggio salvati!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Questo link è personale per la vostra famiglia. Per favore non condividetelo.",
     "subjectInvite": "Siete invitati: il matrimonio di {couple}",
     "subjectReminder": "Promemoria: confermate la presenza al matrimonio di {couple}"
+  },
+  "travelEmail": {
+    "preview": "Condividi i tuoi piani di viaggio per il matrimonio di {couple}",
+    "eyebrow": "Dettagli di viaggio",
+    "dear": "Cari {name},",
+    "body": "Grazie per aver confermato la presenza! Per aiutarci a organizzare i trasferimenti dall'aeroporto, condividi i dettagli di arrivo e partenza tramite il link qui sotto.",
+    "button": "Condividi i dettagli di viaggio",
+    "fallback": "Il pulsante non funziona? Apri {link}",
+    "love": "Con affetto,",
+    "subject": "Dettagli di viaggio per il matrimonio di {couple}"
   }
 }

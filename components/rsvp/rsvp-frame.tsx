@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Accent } from "@/lib/database.types";
 import { fmtDate } from "@/lib/i18n/format";
@@ -55,9 +54,12 @@ export async function RsvpFrame({
       <footer className="text-muted-foreground pb-10 text-center text-xs">
         {t.rich("rsvpsBy", {
           link: (chunks) => (
-            <Link href="/" className="font-serif text-sm hover:underline">
+            // a normal link (full page load): the app uses its own language, and an
+            // in-page switch would keep parts of this page in the guest's language
+            // eslint-disable-next-line @next/next/no-html-link-for-pages
+            <a href="/" className="font-serif text-sm hover:underline">
               {chunks}
-            </Link>
+            </a>
           ),
         })}
       </footer>

@@ -198,7 +198,11 @@
     "deleteTitle": "{name} verwijderen?",
     "deleteText": "Het contractbestand wordt verwijderd. Gekoppelde uitgaven blijven in je budget.",
     "cancel": "Annuleren",
-    "save": "Opslaan"
+    "save": "Opslaan",
+    "find": "Leveranciers zoeken",
+    "findHint": "Zoeken bij {location}",
+    "pasteUrl": "Link plakken",
+    "pasteUrlHint": "Plak de website van de leverancier om de naam automatisch in te vullen."
   },
   "files": {
     "openFailed": "Het bestand kon niet worden geopend. Probeer het opnieuw.",

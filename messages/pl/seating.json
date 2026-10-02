@@ -192,6 +192,41 @@
       "what": "Co wydrukować",
       "button": "Drukuj lub zapisz jako PDF",
       "noTables": "Ten plan nie ma jeszcze stołów."
-    }
+    },
+    "arrangeSettings": "Ustawienia automatycznego rozmieszczenia",
+    "arrangeSettingsHint": "Dostosuj wage kazdego czynnika przy rozmieszczaniu.",
+    "weights": {
+      "keepTogether": "Trzymac razem",
+      "side": "Strona",
+      "tag": "Tag",
+      "language": "Jezyk",
+      "ageGroup": "Grupa wiekowa",
+      "hostPrefer": "Blisko gospodarza",
+      "fillFirst": "Najpierw zapelnij"
+    },
+    "resetWeights": "Resetuj",
+    "noHostTag": "Dodaj tag host gosciom, ktorzy witaja pozostalych.",
+    "rsvpChanged": {
+      "attending": "Gosc wlasnie potwierdzil obecnosc!",
+      "declined": "Gosc odmowil zaproszenia.",
+      "removed": "Odpowiedz goscia zostala usunieta."
+    },
+    "scenarios": {
+      "title": "Scenariusze stolow",
+      "plan": "Plan",
+      "active": "aktywny",
+      "duplicate": "Duplikuj",
+      "duplicated": "Scenariusz zduplikowany",
+      "rename": "Zmien nazwe",
+      "delete": "Usun",
+      "deleted": "Scenariusz usuniety",
+      "deleteConfirm": "Usunac ten scenariusz? Stoly i przypisania zostana usuniete.",
+      "maxReached": "Mozesz miec do 3 scenariuszy na wydarzenie.",
+      "switched": "Zmieniono scenariusz",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "Plakat QR: znajdz swoje miejsce",
+    "findSeatHeading": "Znajdz swoje miejsce",
+    "findSeatScan": "Zeskanuj ten kod telefonem, aby znalezc swoj stol."
   }
 }

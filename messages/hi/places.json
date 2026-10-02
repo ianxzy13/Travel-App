@@ -188,7 +188,8 @@
     "checkIn": "{name} का चेक-इन",
     "checkOut": "{name} का चेक-आउट",
     "guestsSaved": "मेहमान सहेजे गए",
-    "saveGuests": "मेहमान सहेजें"
+    "saveGuests": "मेहमान सहेजें",
+    "findOnBooking": "Booking.com पर खोजें"
   },
   "travel": {
     "title": "यात्रा",
@@ -253,6 +254,24 @@
     "travellersHint": "जैसे इयान और मारिया",
     "pickupNeeded": "एयरपोर्ट पिकअप चाहिए",
     "deleteTitle": "यह उड़ान हटाएँ?",
-    "deleteText": "इसे वापस नहीं लिया जा सकता।"
+    "deleteText": "इसे वापस नहीं लिया जा सकता।",
+    "guestTravel": "मेहमान यात्रा ({count})",
+    "gt": {
+      "shared": "साझा विवरण:",
+      "needTransfer": "ट्रांसफर चाहिए:",
+      "unknown": "अज्ञात परिवार",
+      "transferRequested": "ट्रांसफर अनुरोधित",
+      "remind": "{count, plural, one {# परिवार} other {# परिवारों}} को याद दिलाएं",
+      "reminded": "{count, plural, one {# परिवार} other {# परिवारों}} को रिमाइंडर भेजा"
+    },
+    "shuttles": "शटल ({count})",
+    "shuttle": {
+      "empty": "अभी तक किसी मेहमान ने ट्रांसफर का अनुरोध नहीं किया है। जब वे करेंगे, शटल यहाँ स्वचालित रूप से दिखाई देंगे।",
+      "window": "समय अवधि",
+      "minutes": "मिनट",
+      "summary": "{runs, plural, one {# चक्कर} other {# चक्कर}} · {people, plural, one {# व्यक्ति} other {# व्यक्ति}}",
+      "print": "प्रिंट",
+      "dayPeople": "{count, plural, one {# व्यक्ति} other {# व्यक्ति}}"
+    }
   }
 }

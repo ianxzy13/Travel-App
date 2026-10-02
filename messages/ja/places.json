@@ -140,6 +140,7 @@
     "copied": "コピーしました",
     "copyFailed": "自動でコピーできませんでした。",
     "add": "ホテルを追加",
+    "findOnBooking": "Booking.comで検索",
     "cutoffSoon": "<b>{name}</b>：団体予約の締め切りまであと {days} 日です。",
     "roomsFree": "まだ {count} 室空いています。",
     "remind": "ゲストに早めの予約を呼びかけましょう！",
@@ -199,6 +200,24 @@
     "departures": "出発（{count}）",
     "ours": "私たちと新婚旅行（{count}）",
     "all": "すべてのフライト（{count}）",
+    "guestTravel": "ゲストの旅行（{count}）",
+    "gt": {
+      "shared": "共有済み：",
+      "needTransfer": "送迎が必要：",
+      "unknown": "不明な世帯",
+      "transferRequested": "送迎リクエスト済み",
+      "remind": "{count, plural, one {#世帯} other {#世帯}}にリマインド",
+      "reminded": "{count, plural, one {#世帯} other {#世帯}}にリマインダーを送信しました"
+    },
+    "shuttles": "シャトル（{count}）",
+    "shuttle": {
+      "empty": "送迎をリクエストしたゲストはまだいません。リクエストがあると、ここにシャトル便が自動的に表示されます。",
+      "window": "時間枠",
+      "minutes": "分",
+      "summary": "{runs, plural, one {#便} other {#便}} · {people, plural, one {#名} other {#名}}",
+      "print": "印刷",
+      "dayPeople": "{count, plural, one {#名} other {#名}}"
+    },
     "ourFlight": "私たちのフライト",
     "honeymoonFlight": "新婚旅行のフライト",
     "search": "フライトを検索",

@@ -192,6 +192,41 @@
       "what": "Što ispisati",
       "button": "Ispiši ili spremi kao PDF",
       "noTables": "U ovom rasporedu sjedenja još nema stolova."
-    }
+    },
+    "arrangeSettings": "Postavke automatskog rasporeda",
+    "arrangeSettingsHint": "Prilagodite vaznost svakog faktora pri rasporedu.",
+    "weights": {
+      "keepTogether": "Zajedno",
+      "side": "Strana",
+      "tag": "Oznaka",
+      "language": "Jezik",
+      "ageGroup": "Dobna skupina",
+      "hostPrefer": "Blizu domacina",
+      "fillFirst": "Prvo popuni"
+    },
+    "resetWeights": "Vrati izvorne",
+    "noHostTag": "Dodajte oznaku host gostima koji docekuju ostale.",
+    "rsvpChanged": {
+      "attending": "Gost je upravo potvrdio dolazak!",
+      "declined": "Gost je odbio pozivnicu.",
+      "removed": "Odgovor gosta je uklonjen."
+    },
+    "scenarios": {
+      "title": "Scenariji rasporeda",
+      "plan": "Plan",
+      "active": "aktivan",
+      "duplicate": "Dupliciraj",
+      "duplicated": "Scenarij dupliciran",
+      "rename": "Preimenuj",
+      "delete": "Obrisi",
+      "deleted": "Scenarij obrisan",
+      "deleteConfirm": "Obrisati ovaj scenarij? Stolovi i raspored bit ce uklonjeni.",
+      "maxReached": "Mozete imati do 3 scenarija po dogadaju.",
+      "switched": "Scenarij promijenjen",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR plakat: pronadite svoje mjesto",
+    "findSeatHeading": "Pronadite svoje mjesto",
+    "findSeatScan": "Skenirajte ovaj kod mobitelom da pronadete svoj stol."
   }
 }

@@ -51,7 +51,10 @@
       "website": "الموقع الإلكتروني",
       "websiteOf": "موقع {name}",
       "map": "الخريطة",
-      "mapOf": "خريطة {name}"
+      "mapOf": "خريطة {name}",
+      "transportTitle": "التنقل",
+      "visaTitle": "معلومات التأشيرة",
+      "currencyTitle": "العملة"
     },
     "rsvp": {
       "replyBy": "يُرجى الرد قبل <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "حفل زفاف {couple}",
       "website": "موقع حفل الزفاف"
+    },
+    "findSeat": {
+      "title": "اعثر على مقعدك",
+      "heading": "اعثر على طاولتك",
+      "label": "اسمك الكامل",
+      "placeholder": "الاسم الأول والأخير",
+      "button": "ابحث عن مقعدي",
+      "notFound": "لم نجد مقعداً لهذا الاسم. تحقق من الإملاء على دعوتك.",
+      "yourTable": "طاولتك جاهزة!",
+      "tableName": "طاولة {number}",
+      "tableNamed": "{label} (طاولة {number})"
     }
   },
   "rsvp": {
@@ -145,6 +159,30 @@
       "guestOf": "مرافق {name}",
       "guest": "ضيف"
     },
+    "travel": {
+      "prompt": "شاركنا تفاصيل سفرك",
+      "editTravel": "تحديث تفاصيل السفر",
+      "title": "تفاصيل السفر",
+      "subtitle": "ساعدنا في تنظيم النقل من المطار — أخبرنا بموعد وصولك ومغادرتك.",
+      "arrival": "الوصول",
+      "departure": "المغادرة",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "airport": "المطار",
+      "airportPlaceholder": "مثل LHR",
+      "flightNumber": "رقم الرحلة",
+      "stayingAt": "أين ستقيم؟",
+      "chooseHotel": "اختر فندقًا",
+      "otherAccommodation": "مكان آخر",
+      "accommodationName": "اسم الفندق أو مكان الإقامة",
+      "accommodationPlaceholder": "مثل: شقة Airbnb في وسط المدينة",
+      "needsTransfer": "نحتاج إلى نقل من المطار",
+      "notes": "أي شيء آخر؟",
+      "notesPlaceholder": "مثل: سنأتي بالسيارة، نحتاج مقعد طفل",
+      "save": "حفظ تفاصيل السفر",
+      "skip": "تخطّ الآن",
+      "saved": "تم حفظ تفاصيل السفر!"
+    },
     "errors": {
       "rsvp_not_found": "لم نعثر على هذه الدعوة. تحقق من الرابط أو الرمز.",
       "deadline_passed": "انتهت مهلة تأكيد الحضور. يُرجى التواصل مع العروسين مباشرة.",
@@ -176,5 +214,15 @@
     "personal": "هذا الرابط خاص بأسرتكم. يُرجى عدم مشاركته.",
     "subjectInvite": "دعوة: حفل زفاف {couple}",
     "subjectReminder": "تذكير: يُرجى تأكيد الحضور لحفل زفاف {couple}"
+  },
+  "travelEmail": {
+    "preview": "يُرجى مشاركة خطط سفركم لحفل زفاف {couple}",
+    "eyebrow": "تفاصيل السفر",
+    "dear": "أعزاءنا {name}،",
+    "body": "شكرًا لتأكيد حضوركم! لمساعدتنا في تنظيم النقل من المطار، يُرجى مشاركة تفاصيل وصولكم ومغادرتكم عبر الرابط أدناه.",
+    "button": "شاركنا تفاصيل السفر",
+    "fallback": "الزر لا يعمل؟ افتح {link}",
+    "love": "مع خالص المحبة،",
+    "subject": "تفاصيل السفر لحفل زفاف {couple}"
   }
 }

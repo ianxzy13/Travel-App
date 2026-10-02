@@ -86,7 +86,11 @@
       "mealEventsHint": "Meist nur beim Abendessen.",
       "addMealsFirst": "Füge zuerst Menüs hinzu.",
       "noEvents": "Noch keine Programmpunkte. Füge sie in den Einstellungen hinzu.",
-      "askAt": "Menüwahl bei {name}"
+      "askAt": "Menüwahl bei {name}",
+      "askTravel": "Gäste nach Reiseplänen fragen",
+      "askTravelHint": "Nach der Zusage können Gäste ihre An- und Abreisedaten, Unterkunft und Transferbedarf teilen.",
+      "findSeat": "Seite Platz finden",
+      "findSeatHint": "Gaste konnen ihren Namen auf einer offentlichen Seite eingeben, um ihren Tisch zu sehen."
     },
     "email": {
       "title": "E-Mail an eure Gäste",

@@ -188,7 +188,8 @@
     "checkIn": "Nhận phòng cho {name}",
     "checkOut": "Trả phòng cho {name}",
     "guestsSaved": "Đã lưu khách",
-    "saveGuests": "Lưu khách"
+    "saveGuests": "Lưu khách",
+    "findOnBooking": "Tìm trên Booking.com"
   },
   "travel": {
     "title": "Đi lại",
@@ -253,6 +254,24 @@
     "travellersHint": "ví dụ Ian và Maria",
     "pickupNeeded": "Cần đón",
     "deleteTitle": "Xóa chuyến bay này?",
-    "deleteText": "Không thể hoàn tác."
+    "deleteText": "Không thể hoàn tác.",
+    "guestTravel": "Chuyến đi của khách ({count})",
+    "gt": {
+      "shared": "Đã chia sẻ:",
+      "needTransfer": "Cần đưa đón:",
+      "unknown": "Gia đình không xác định",
+      "transferRequested": "Đã yêu cầu đưa đón",
+      "remind": "Nhắc {count, plural, one {# gia đình} other {# gia đình}}",
+      "reminded": "Đã gửi nhắc nhở cho {count, plural, one {# gia đình} other {# gia đình}}"
+    },
+    "shuttles": "Xe đưa đón ({count})",
+    "shuttle": {
+      "empty": "Chưa có khách nào yêu cầu đưa đón. Khi có, lịch trình sẽ tự động hiển thị ở đây.",
+      "window": "Khung giờ",
+      "minutes": "phút",
+      "summary": "{runs, plural, one {# chuyến} other {# chuyến}} · {people, plural, one {# người} other {# người}}",
+      "print": "In",
+      "dayPeople": "{count, plural, one {# người} other {# người}}"
+    }
   }
 }

@@ -86,7 +86,11 @@
       "mealEventsHint": "Obično samo na svečanoj večeri.",
       "addMealsFirst": "Najprije dodajte menije.",
       "noEvents": "Još nema događaja. Dodajte ih u postavkama.",
-      "askAt": "Pitaj za meni na: {name}"
+      "askAt": "Pitaj za meni na: {name}",
+      "askTravel": "Pitajte goste o putnim planovima",
+      "askTravelHint": "Nakon potvrde dolaska, gosti mogu podijeliti podatke o dolasku i odlasku, smještaju i potrebi za prijevozom.",
+      "findSeat": "Stranica Pronadite svoje mjesto",
+      "findSeatHint": "Gosti mogu upisati ime na javnoj stranici i vidjeti dodijeljeni stol."
     },
     "email": {
       "title": "Pošaljite e-poruku gostima",

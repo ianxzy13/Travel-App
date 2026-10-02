@@ -188,7 +188,8 @@
     "checkIn": "Arrivée de {name}",
     "checkOut": "Départ de {name}",
     "guestsSaved": "Invités enregistrés",
-    "saveGuests": "Enregistrer les invités"
+    "saveGuests": "Enregistrer les invités",
+    "findOnBooking": "Chercher sur Booking.com"
   },
   "travel": {
     "title": "Voyages",
@@ -253,6 +254,24 @@
     "travellersHint": "par ex. Ian & Maria",
     "pickupNeeded": "À accueillir à l’aéroport",
     "deleteTitle": "Supprimer ce vol ?",
-    "deleteText": "C’est irréversible."
+    "deleteText": "C’est irréversible.",
+    "guestTravel": "Voyage des invités ({count})",
+    "gt": {
+      "shared": "Détails partagés :",
+      "needTransfer": "Ont besoin d'un transfert :",
+      "unknown": "Famille inconnue",
+      "transferRequested": "Transfert demandé",
+      "remind": "Rappeler {count, plural, one {# famille} other {# familles}}",
+      "reminded": "Rappel envoyé à {count, plural, one {# famille} other {# familles}}"
+    },
+    "shuttles": "Navettes ({count})",
+    "shuttle": {
+      "empty": "Aucun invité n'a encore demandé de transfert. Les navettes apparaîtront ici automatiquement.",
+      "window": "Fenêtre horaire",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# navette} other {# navettes}} · {people, plural, one {# personne} other {# personnes}}",
+      "print": "Imprimer",
+      "dayPeople": "{count, plural, one {# personne} other {# personnes}}"
+    }
   }
 }

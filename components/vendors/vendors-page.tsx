@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   AtSign,
+  ExternalLink,
   Globe,
   Loader2,
   Mail,
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { previewLink } from "@/app/app/inspiration/actions";
 import { addQuoteToBudget, deleteVendor, saveVendor } from "@/app/app/vendors/actions";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
@@ -42,12 +44,14 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import type { VendorRow } from "@/lib/database.types";
 import { formatMoney, sumMoney } from "@/lib/budget/money";
 import { committedCost } from "@/lib/budget/stats";
 import { VENDOR_STATUS_CLASSES } from "@/lib/budget/suggested";
 import { normalize } from "@/lib/guests/filter";
 import { cn } from "@/lib/utils";
+import { vendorSearchLinks } from "@/lib/vendors/search-links";
 import { VENDOR_STATUS_VALUES, vendorSchema, type VendorValues } from "@/lib/validation/budget";
 
 export type VendorItem = Omit<VendorRow, "quote"> & { quote: number | null };
@@ -66,6 +70,7 @@ type Props = {
   expenses: LinkedExpense[];
   weddingId: string;
   currency: string;
+  location: string | null;
   canEdit: boolean;
 };
 
@@ -75,6 +80,7 @@ export function VendorsPage({
   expenses,
   weddingId,
   currency,
+  location,
   canEdit,
 }: Props) {
   const t = useTranslations("vendors");
@@ -102,9 +108,17 @@ export function VendorsPage({
         description={t("description")}
         actions={
           canEdit && (
-            <Button size="sm" onClick={() => setSheet("new")}>
-              <Plus aria-hidden /> {t("add")}
-            </Button>
+            <div className="flex gap-2">
+              {location && (
+                <FindVendorsDropdown
+                  location={location}
+                  category={category !== "all" ? categoryName.get(category) ?? null : null}
+                />
+              )}
+              <Button size="sm" onClick={() => setSheet("new")}>
+                <Plus aria-hidden /> {t("add")}
+              </Button>
+            </div>
           )
         }
       />
@@ -325,6 +339,30 @@ function VendorForm({
         className="flex-1 space-y-6 overflow-y-auto px-6 py-6"
       >
         <fieldset disabled={!canEdit || pending} className="space-y-5">
+          {!vendor && (
+            <FormField id="v-url" label={t("pasteUrl")} hint={t("pasteUrlHint")}>
+              {(aria) => (
+                <Input
+                  {...aria}
+                  type="url"
+                  placeholder="https://"
+                  onPaste={(e) => {
+                    const text = e.clipboardData.getData("text/plain").trim();
+                    if (!text || !/^https?:\/\//i.test(text)) return;
+                    startTransition(async () => {
+                      const r = await previewLink(text);
+                      if (r.ok) {
+                        if (r.data.title && !form.getValues("name"))
+                          form.setValue("name", r.data.title.slice(0, 100));
+                        if (!form.getValues("website"))
+                          form.setValue("website", text.slice(0, 500));
+                      }
+                    });
+                  }}
+                />
+              )}
+            </FormField>
+          )}
           <FormField id="v-name" label={t("business")} error={errors.name?.message}>
             {(aria) => <Input {...aria} {...form.register("name")} />}
           </FormField>
@@ -557,5 +595,60 @@ function VendorForm({
         </SheetFooter>
       )}
     </>
+  );
+}
+
+function FindVendorsDropdown({
+  location,
+  category,
+}: {
+  location: string;
+  category: string | null;
+}) {
+  const t = useTranslations("vendors");
+  const label = category ?? "wedding vendors";
+  const links = vendorSearchLinks(label, location);
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">
+          <Search aria-hidden /> {t("find")}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-56 p-2" align="end">
+        <p className="text-muted-foreground px-2 py-1 text-xs">{t("findHint", { location })}</p>
+        <a
+          href={links.google}
+          target="_blank"
+          rel="noreferrer"
+          className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1.5 text-sm"
+        >
+          <Globe className="size-4" aria-hidden /> Google Maps
+          <ExternalLink className="text-muted-foreground ml-auto size-3" aria-hidden />
+        </a>
+        {links.theKnot && (
+          <a
+            href={links.theKnot}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1.5 text-sm"
+          >
+            <Store className="size-4" aria-hidden /> The Knot
+            <ExternalLink className="text-muted-foreground ml-auto size-3" aria-hidden />
+          </a>
+        )}
+        {links.tripAdvisor && (
+          <a
+            href={links.tripAdvisor}
+            target="_blank"
+            rel="noreferrer"
+            className="hover:bg-accent flex items-center gap-2 rounded px-2 py-1.5 text-sm"
+          >
+            <Store className="size-4" aria-hidden /> TripAdvisor
+            <ExternalLink className="text-muted-foreground ml-auto size-3" aria-hidden />
+          </a>
+        )}
+      </PopoverContent>
+    </Popover>
   );
 }

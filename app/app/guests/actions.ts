@@ -213,6 +213,7 @@ export async function saveGuest(
       dietary: v.dietary || null,
       accessibility: v.accessibility || null,
       notes: v.notes || null,
+      languages: v.languages ?? [],
     };
 
     let id = guestId;

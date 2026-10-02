@@ -192,6 +192,41 @@
       "what": "Co tisknout",
       "button": "Vytisknout nebo uložit jako PDF",
       "noTables": "V tomto zasedacím pořádku zatím nejsou stoly."
-    }
+    },
+    "arrangeSettings": "Nastaveni automatickeho rozmisteni",
+    "arrangeSettingsHint": "Upravte dulezitost kazdeho faktoru pri rozmistovani.",
+    "weights": {
+      "keepTogether": "Drzet pohromade",
+      "side": "Strana",
+      "tag": "Stitek",
+      "language": "Jazyk",
+      "ageGroup": "Vekova skupina",
+      "hostPrefer": "Blizko hostitele",
+      "fillFirst": "Plnit nejdrive"
+    },
+    "resetWeights": "Obnovit",
+    "noHostTag": "Pridejte stitek host hostum, kteri ostatni prijimaji.",
+    "rsvpChanged": {
+      "attending": "Host prave potvrdil ucast!",
+      "declined": "Host odmitl pozvanku.",
+      "removed": "Odpoved hosta byla odstranena."
+    },
+    "scenarios": {
+      "title": "Scenare zasedaciho poradku",
+      "plan": "Plan",
+      "active": "aktivni",
+      "duplicate": "Duplikovat",
+      "duplicated": "Scenar zduplikovan",
+      "rename": "Prejmenovat",
+      "delete": "Smazat",
+      "deleted": "Scenar smazan",
+      "deleteConfirm": "Smazat tento scenar? Stoly a prirazeni budou odstraneny.",
+      "maxReached": "Muzete mit az 3 scenare na udalost.",
+      "switched": "Scenar prepnut",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR plakat: najdete sve misto",
+    "findSeatHeading": "Najdete sve misto",
+    "findSeatScan": "Naskenujte tento kod telefonem a najdete svuj stul."
   }
 }

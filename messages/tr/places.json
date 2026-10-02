@@ -140,6 +140,7 @@
     "copied": "Kopyalandı",
     "copyFailed": "Otomatik kopyalanamadı.",
     "add": "Otel ekle",
+    "findOnBooking": "Booking.com'da ara",
     "cutoffSoon": "<b>{name}</b>: oda bloğunun son tarihine {days, plural, one {# gün} other {# gün}} kaldı.",
     "roomsFree": "{count, plural, one {# oda hâlâ boş.} other {# oda hâlâ boş.}}",
     "remind": "Misafirlerinize rezervasyon yapmalarını hatırlatın!",
@@ -199,6 +200,24 @@
     "departures": "Kalkışlar ({count})",
     "ours": "Biz ve balayı ({count})",
     "all": "Tüm uçuşlar ({count})",
+    "guestTravel": "Misafir seyahatleri ({count})",
+    "gt": {
+      "shared": "Bilgi paylaşan:",
+      "needTransfer": "Transfer isteyen:",
+      "unknown": "Bilinmeyen hane",
+      "transferRequested": "Transfer talep edildi",
+      "remind": "{count, plural, one {# haneyi} other {# haneyi}} hatırlat",
+      "reminded": "{count, plural, one {# haneye} other {# haneye}} hatırlatma gönderildi"
+    },
+    "shuttles": "Servisler ({count})",
+    "shuttle": {
+      "empty": "Henüz hiçbir misafir transfer talep etmedi. Talep geldiğinde servis seferleri otomatik olarak burada görünecek.",
+      "window": "Zaman aralığı",
+      "minutes": "dk",
+      "summary": "{runs, plural, one {# sefer} other {# sefer}} · {people, plural, one {# kişi} other {# kişi}}",
+      "print": "Yazdır",
+      "dayPeople": "{count, plural, one {# kişi} other {# kişi}}"
+    },
     "ourFlight": "Uçuşumuz",
     "honeymoonFlight": "Balayı uçuşu",
     "search": "Uçuş ara",

@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Controller, useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Link2, Loader2, Plus, Trash2, Unlink } from "lucide-react";
+import { LanguageMultiSelect } from "@/components/guests/language-multi-select";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
@@ -104,6 +105,7 @@ function defaultValues(mode: NonNullable<SheetMode>, p: Props): GuestFormValues 
       notes: "",
       eventIds: allEvents,
       tagIds: [],
+      languages: [],
     };
   }
   const g = mode.guest;
@@ -129,6 +131,7 @@ function defaultValues(mode: NonNullable<SheetMode>, p: Props): GuestFormValues 
     notes: g.notes ?? "",
     eventIds: g.eventIds,
     tagIds: g.tagIds,
+    languages: g.languages ?? [],
   };
 }
 
@@ -422,6 +425,21 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
         {/* ---------- tags ---------- */}
         <Section title={t("tags")}>
           <TagPicker form={form} tags={props.tags} />
+        </Section>
+
+        {/* ---------- languages ---------- */}
+        <Section title={t("languages")} hint={t("languagesHint")}>
+          <Controller
+            control={form.control}
+            name="languages"
+            render={({ field }) => (
+              <LanguageMultiSelect
+                value={field.value}
+                onChange={field.onChange}
+                featured={usedLanguages}
+              />
+            )}
+          />
         </Section>
 
         {/* ---------- needs & notes ---------- */}

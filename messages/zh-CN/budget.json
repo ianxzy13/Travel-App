@@ -198,7 +198,11 @@
     "deleteTitle": "删除 {name}？",
     "deleteText": "其合同文件会被删除。关联的支出会保留在预算中。",
     "cancel": "取消",
-    "save": "保存"
+    "save": "保存",
+    "find": "查找供应商",
+    "findHint": "在{location}附近搜索",
+    "pasteUrl": "粘贴链接",
+    "pasteUrlHint": "粘贴供应商网站以自动填充名称。"
   },
   "files": {
     "openFailed": "无法打开文件，请重试。",

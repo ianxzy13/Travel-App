@@ -51,7 +51,10 @@
       "website": "网站",
       "websiteOf": "{name}的网站",
       "map": "地图",
-      "mapOf": "{name}的地图"
+      "mapOf": "{name}的地图",
+      "transportTitle": "交通出行",
+      "visaTitle": "签证信息",
+      "currencyTitle": "货币"
     },
     "rsvp": {
       "replyBy": "请在 <b>{date}</b> 前回复。",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "{couple}的婚礼",
       "website": "婚礼网站"
+    },
+    "findSeat": {
+      "title": "找到你的座位",
+      "heading": "找到你的桌子",
+      "label": "你的全名",
+      "placeholder": "姓名",
+      "button": "查找我的座位",
+      "notFound": "未找到该姓名的座位。请检查邀请函上的拼写。",
+      "yourTable": "你的桌子已准备好！",
+      "tableName": "桌 {number}",
+      "tableNamed": "{label}（桌 {number}）"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "请为每个人选择出席或不出席。",
       "not_allowed": "你没有权限为这场婚礼登记回复。",
       "generic": "无法保存你的回复。请稍后重试。"
+    },
+    "travel": {
+      "prompt": "分享您的行程信息",
+      "editTravel": "更新行程信息",
+      "title": "行程信息",
+      "subtitle": "帮助我们安排机场接送——告诉我们您何时到达和离开。",
+      "arrival": "到达",
+      "departure": "离开",
+      "date": "日期",
+      "time": "时间",
+      "airport": "机场",
+      "airportPlaceholder": "例如 PVG",
+      "flightNumber": "航班号",
+      "stayingAt": "您住在哪里？",
+      "chooseHotel": "选择酒店",
+      "otherAccommodation": "其他住宿",
+      "accommodationName": "酒店或住宿名称",
+      "accommodationPlaceholder": "例如 市中心的Airbnb",
+      "needsTransfer": "希望安排机场接送",
+      "notes": "还有其他需要吗？",
+      "notesPlaceholder": "例如 自驾前往，需要儿童座椅",
+      "save": "保存行程信息",
+      "skip": "暂时跳过",
+      "saved": "行程信息已保存！"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "此链接仅供你们家庭使用，请勿分享。",
     "subjectInvite": "婚礼邀请：{couple}的婚礼",
     "subjectReminder": "提醒：请回复是否出席{couple}的婚礼"
+  },
+  "travelEmail": {
+    "preview": "请分享您参加{couple}婚礼的行程计划",
+    "eyebrow": "行程信息",
+    "dear": "亲爱的{name}，",
+    "body": "感谢您的回复！为了帮助我们安排机场接送，请通过以下链接分享您的到达和离开信息。",
+    "button": "分享行程信息",
+    "fallback": "按钮不工作？打开 {link}",
+    "love": "爱你的，",
+    "subject": "{couple}婚礼行程信息"
   }
 }

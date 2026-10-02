@@ -188,7 +188,8 @@
     "checkIn": "Άφιξη για {name}",
     "checkOut": "Αναχώρηση για {name}",
     "guestsSaved": "Οι καλεσμένοι αποθηκεύτηκαν",
-    "saveGuests": "Αποθήκευση καλεσμένων"
+    "saveGuests": "Αποθήκευση καλεσμένων",
+    "findOnBooking": "Αναζήτηση στο Booking.com"
   },
   "travel": {
     "title": "Ταξίδια",
@@ -253,6 +254,24 @@
     "travellersHint": "π.χ. Ian και Maria",
     "pickupNeeded": "Χρειάζεται παραλαβή από το αεροδρόμιο",
     "deleteTitle": "Διαγραφή αυτής της πτήσης;",
-    "deleteText": "Δεν αναιρείται."
+    "deleteText": "Δεν αναιρείται.",
+    "guestTravel": "Ταξίδια καλεσμένων ({count})",
+    "gt": {
+      "shared": "Κοινά στοιχεία:",
+      "needTransfer": "Χρειάζονται μεταφορά:",
+      "unknown": "Άγνωστο νοικοκυριό",
+      "transferRequested": "Μεταφορά ζητήθηκε",
+      "remind": "Υπενθύμιση σε {count, plural, one {# νοικοκυριό} other {# νοικοκυριά}}",
+      "reminded": "Υπενθύμιση στάλθηκε σε {count, plural, one {# νοικοκυριό} other {# νοικοκυριά}}"
+    },
+    "shuttles": "Μεταφορές ({count})",
+    "shuttle": {
+      "empty": "Κανένας καλεσμένος δεν έχει ζητήσει μεταφορά ακόμα. Τα δρομολόγια θα εμφανιστούν αυτόματα.",
+      "window": "Χρονικό παράθυρο",
+      "minutes": "λεπ.",
+      "summary": "{runs, plural, one {# δρομολόγιο} other {# δρομολόγια}} · {people, plural, one {# άτομο} other {# άτομα}}",
+      "print": "Εκτύπωση",
+      "dayPeople": "{count, plural, one {# άτομο} other {# άτομα}}"
+    }
   }
 }

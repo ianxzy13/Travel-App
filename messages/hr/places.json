@@ -188,7 +188,8 @@
     "checkIn": "Prijava za {name}",
     "checkOut": "Odjava za {name}",
     "guestsSaved": "Gosti su spremljeni",
-    "saveGuests": "Spremi goste"
+    "saveGuests": "Spremi goste",
+    "findOnBooking": "Traži na Booking.com"
   },
   "travel": {
     "title": "Putovanja",
@@ -253,6 +254,24 @@
     "travellersHint": "npr. Ian i Maria",
     "pickupNeeded": "Treba prijevoz s aerodroma",
     "deleteTitle": "Izbrisati ovaj let?",
-    "deleteText": "To se ne može poništiti."
+    "deleteText": "To se ne može poništiti.",
+    "guestTravel": "Putovanja gostiju ({count})",
+    "gt": {
+      "shared": "Dijeljeni podaci:",
+      "needTransfer": "Trebaju prijevoz:",
+      "unknown": "Nepoznato kućanstvo",
+      "transferRequested": "Prijevoz zatražen",
+      "remind": "Podsjeti {count, plural, one {# kućanstvo} other {# kućanstava}}",
+      "reminded": "Podsjetnik poslan {count, plural, one {# kućanstvu} other {# kućanstvima}}"
+    },
+    "shuttles": "Prijevozi ({count})",
+    "shuttle": {
+      "empty": "Nijedan gost još nije zatražio prijevoz. Kad zatraže, vožnje će se prikazati ovdje automatski.",
+      "window": "Vremenski prozor",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# vožnja} other {# vožnji}} · {people, plural, one {# osoba} other {# osoba}}",
+      "print": "Ispis",
+      "dayPeople": "{count, plural, one {# osoba} other {# osoba}}"
+    }
   }
 }

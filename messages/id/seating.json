@@ -192,6 +192,41 @@
       "what": "Yang dicetak",
       "button": "Cetak atau simpan PDF",
       "noTables": "Denah ini belum memiliki meja."
-    }
+    },
+    "arrangeSettings": "Pengaturan penataan otomatis",
+    "arrangeSettingsHint": "Sesuaikan bobot setiap faktor dalam penataan.",
+    "weights": {
+      "keepTogether": "Satukan",
+      "side": "Sisi",
+      "tag": "Tag",
+      "language": "Bahasa",
+      "ageGroup": "Kelompok usia",
+      "hostPrefer": "Dekat tuan rumah",
+      "fillFirst": "Isi duluan"
+    },
+    "resetWeights": "Reset",
+    "noHostTag": "Tambahkan tag host ke tamu yang menyambut tamu lain.",
+    "rsvpChanged": {
+      "attending": "Seorang tamu baru saja mengonfirmasi kehadiran!",
+      "declined": "Seorang tamu menolak undangan.",
+      "removed": "Jawaban seorang tamu telah dihapus."
+    },
+    "scenarios": {
+      "title": "Skenario tempat duduk",
+      "plan": "Rencana",
+      "active": "aktif",
+      "duplicate": "Duplikat",
+      "duplicated": "Skenario diduplikasi",
+      "rename": "Ganti nama",
+      "delete": "Hapus",
+      "deleted": "Skenario dihapus",
+      "deleteConfirm": "Hapus skenario ini? Meja dan penempatan akan dihapus.",
+      "maxReached": "Anda bisa memiliki maksimal 3 skenario per acara.",
+      "switched": "Skenario diubah",
+      "defaultName": "Rencana A"
+    },
+    "findSeatQr": "Poster QR: temukan tempat dudukmu",
+    "findSeatHeading": "Temukan tempat dudukmu",
+    "findSeatScan": "Pindai kode ini dengan ponselmu untuk menemukan mejamu."
   }
 }

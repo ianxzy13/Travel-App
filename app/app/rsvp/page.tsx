@@ -29,7 +29,9 @@ export default async function RsvpPage({
         deadline: wedding.rsvp_deadline ?? "",
         contact: wedding.rsvp_contact ?? "",
         askSong: wedding.rsvp_ask_song,
+        askTravel: wedding.rsvp_ask_travel,
         notifyEmail: wedding.rsvp_notify_email,
+        findSeatEnabled: wedding.find_seat_enabled,
       }}
       siteUrl={await getSiteUrl()}
       slug={wedding.slug}

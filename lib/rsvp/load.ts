@@ -1,4 +1,6 @@
 import "server-only";
+import { getLocale } from "next-intl/server";
+import { starterTexts } from "@/lib/i18n/defaults";
 import type { Translations } from "@/lib/database.types";
 import type { EmailKind, EmailStatus, WeddingRow } from "@/lib/database.types";
 import { nameLabels } from "@/lib/guests/labels";
@@ -53,6 +55,8 @@ export async function loadRsvpDashboard(
 ): Promise<RsvpDashboardData> {
   const wid = wedding.id;
   const labels = await nameLabels();
+  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  const shown = await starterTexts(await getLocale());
   const [households, guests, invites, responses, events, mealOptions, emails] = await Promise.all([
     fetchAll((f, t) =>
       sb
@@ -156,7 +160,7 @@ export async function loadRsvpDashboard(
         ),
       };
     }),
-    events: events.map((e) => ({ id: e.id, name: e.name, mealChoice: e.meal_choice })),
+    events: events.map((e) => ({ id: e.id, name: shown(e.name), mealChoice: e.meal_choice })),
     mealOptions,
     totals: eventTotals(
       events.map((e) => e.id),

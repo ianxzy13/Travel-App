@@ -175,7 +175,13 @@
       "captionPlaceholder": "Podpis (opcjonalnie)",
       "moveUp": "Przesuń element {n} w górę",
       "moveDown": "Przesuń element {n} w dół",
-      "remove": "Usuń element {n}"
+      "remove": "Usuń element {n}",
+      "transport": "Transport i dojazd",
+      "transportHint": "Jak dostać się z lotniska do miejsca, wynajem aut, autobusy…",
+      "visa": "Informacje wizowe",
+      "visaHint": "Czy goście potrzebują wizy? Które kraje są zwolnione?",
+      "currency": "Waluta",
+      "currencyHint": "Lokalna waluta, kursy wymiany, akceptacja kart…"
     },
     "image": {
       "wrongType": "Wybierz zdjęcie JPG, PNG lub WebP.",

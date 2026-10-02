@@ -86,7 +86,11 @@
       "mealEventsHint": "Genellikle yalnızca düğün yemeğinde.",
       "addMealsFirst": "Önce menü ekleyin.",
       "noEvents": "Henüz etkinlik yok. Ayarlar’dan ekleyin.",
-      "askAt": "{name} için menü sor"
+      "askAt": "{name} için menü sor",
+      "askTravel": "Misafirlerden seyahat planlarını sorun",
+      "askTravelHint": "Katılımı onayladıktan sonra misafirler varış ve dönüş bilgilerini, konaklama yerlerini ve transfer ihtiyaçlarını paylaşabilir.",
+      "findSeat": "Yerinizi bulun sayfasi",
+      "findSeatHint": "Konuklar herkese acik bir sayfada adlarini yazarak masalarini gorebilir."
     },
     "email": {
       "title": "Misafirlerinize e-posta gönderin",

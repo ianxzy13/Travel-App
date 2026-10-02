@@ -175,7 +175,13 @@
       "captionPlaceholder": "說明（選填）",
       "moveUp": "上移第 {n} 項",
       "moveDown": "下移第 {n} 項",
-      "remove": "移除第 {n} 項"
+      "remove": "移除第 {n} 項",
+      "transport": "交通指南",
+      "transportHint": "從機場到場地怎麼走、租車、公車…",
+      "visa": "簽證資訊",
+      "visaHint": "賓客是否需要簽證？哪些國家免簽？",
+      "currency": "貨幣",
+      "currencyHint": "當地貨幣、換匯建議、刷卡情況…"
     },
     "image": {
       "wrongType": "請選擇 JPG、PNG 或 WebP 照片。",

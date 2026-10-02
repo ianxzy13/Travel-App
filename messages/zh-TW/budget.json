@@ -198,7 +198,11 @@
     "deleteTitle": "刪除 {name}？",
     "deleteText": "其合約檔案會被刪除。連結的支出會保留在預算中。",
     "cancel": "取消",
-    "save": "儲存"
+    "save": "儲存",
+    "find": "尋找供應商",
+    "findHint": "在{location}附近搜尋",
+    "pasteUrl": "貼上連結",
+    "pasteUrlHint": "貼上供應商網站以自動填入名稱。"
   },
   "files": {
     "openFailed": "無法開啟檔案，請重試。",

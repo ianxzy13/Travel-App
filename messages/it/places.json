@@ -140,6 +140,7 @@
     "copied": "Copiato",
     "copyFailed": "Copia automatica non riuscita.",
     "add": "Aggiungi hotel",
+    "findOnBooking": "Cerca su Booking.com",
     "cutoffSoon": "<b>{name}</b>: scadenza del blocco camere tra {days, plural, one {# giorno} other {# giorni}}.",
     "roomsFree": "{count, plural, one {# camera è ancora libera.} other {# camere sono ancora libere.}}",
     "remind": "Ricordate agli invitati di prenotare!",
@@ -199,6 +200,24 @@
     "departures": "Partenze ({count})",
     "ours": "Noi e luna di miele ({count})",
     "all": "Tutti i voli ({count})",
+    "guestTravel": "Viaggi degli ospiti ({count})",
+    "gt": {
+      "shared": "Dettagli condivisi:",
+      "needTransfer": "Necessitano trasferimento:",
+      "unknown": "Famiglia sconosciuta",
+      "transferRequested": "Trasferimento richiesto",
+      "remind": "Ricorda a {count, plural, one {# famiglia} other {# famiglie}}",
+      "reminded": "Promemoria inviato a {count, plural, one {# famiglia} other {# famiglie}}"
+    },
+    "shuttles": "Navette ({count})",
+    "shuttle": {
+      "empty": "Nessun ospite ha ancora richiesto un trasferimento. Quando lo faranno, le corse appariranno qui automaticamente.",
+      "window": "Finestra temporale",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# corsa} other {# corse}} · {people, plural, one {# persona} other {# persone}}",
+      "print": "Stampa",
+      "dayPeople": "{count, plural, one {# persona} other {# persone}}"
+    },
     "ourFlight": "Il nostro volo",
     "honeymoonFlight": "Volo della luna di miele",
     "search": "Cerca voli",

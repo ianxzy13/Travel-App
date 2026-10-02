@@ -51,7 +51,10 @@
       "website": "Strona",
       "websiteOf": "Strona: {name}",
       "map": "Mapa",
-      "mapOf": "Mapa: {name}"
+      "mapOf": "Mapa: {name}",
+      "transportTitle": "Dojazd",
+      "visaTitle": "Informacje wizowe",
+      "currencyTitle": "Waluta"
     },
     "rsvp": {
       "replyBy": "Prosimy o odpowiedź do <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Ślub: {couple}",
       "website": "Strona ślubna"
+    },
+    "findSeat": {
+      "title": "Znajdz swoje miejsce",
+      "heading": "Znajdz swoj stol",
+      "label": "Twoje imie i nazwisko",
+      "placeholder": "Imie i nazwisko",
+      "button": "Znajdz moje miejsce",
+      "notFound": "Nie znalezlismy miejsca dla tego nazwiska. Sprawdz pisownie na zaproszeniu.",
+      "yourTable": "Twoj stol jest gotowy!",
+      "tableName": "Stol {number}",
+      "tableNamed": "{label} (Stol {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Zaznacz dla każdej osoby, czy będzie, czy nie.",
       "not_allowed": "Nie masz uprawnień do zapisywania odpowiedzi dla tego ślubu.",
       "generic": "Nie udało się zapisać odpowiedzi. Spróbuj ponownie za chwilę."
+    },
+    "travel": {
+      "prompt": "Podziel się szczegółami podróży",
+      "editTravel": "Zaktualizuj dane podróży",
+      "title": "Szczegóły podróży",
+      "subtitle": "Pomóż nam zaplanować transfery — powiedz nam, kiedy przyjeżdżasz i kiedy wyjeżdżasz.",
+      "arrival": "Przyjazd",
+      "departure": "Wyjazd",
+      "date": "Data",
+      "time": "Godzina",
+      "airport": "Lotnisko",
+      "airportPlaceholder": "np. WAW",
+      "flightNumber": "Numer lotu",
+      "stayingAt": "Gdzie się zatrzymujesz?",
+      "chooseHotel": "Wybierz hotel",
+      "otherAccommodation": "Inne zakwaterowanie",
+      "accommodationName": "Nazwa hotelu lub zakwaterowania",
+      "accommodationPlaceholder": "np. Airbnb w centrum",
+      "needsTransfer": "Przyda nam się transfer z lotniska",
+      "notes": "Coś jeszcze?",
+      "notesPlaceholder": "np. przyjeżdżamy samochodem, potrzebujemy fotelik dziecięcy",
+      "save": "Zapisz dane podróży",
+      "skip": "Pomiń na razie",
+      "saved": "Dane podróży zapisane!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Ten link jest przeznaczony tylko dla Waszego gospodarstwa domowego. Prosimy go nie udostępniać.",
     "subjectInvite": "Zaproszenie na ślub: {couple}",
     "subjectReminder": "Przypomnienie: potwierdźcie obecność na ślubie: {couple}"
+  },
+  "travelEmail": {
+    "preview": "Podziel się planami podróży na ślub {couple}",
+    "eyebrow": "Dane podróży",
+    "dear": "Drogi/Droga {name},",
+    "body": "Dziękujemy za potwierdzenie! Aby pomóc nam zaplanować transfery, podziel się szczegółami przyjazdu i wyjazdu poniżej.",
+    "button": "Podziel się danymi podróży",
+    "fallback": "Przycisk nie działa? Otwórz {link}",
+    "love": "Z miłością,",
+    "subject": "Dane podróży na ślub {couple}"
   }
 }

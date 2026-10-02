@@ -86,7 +86,11 @@
       "mealEventsHint": "Biasanya hanya makan malam resepsi.",
       "addMealsFirst": "Tambahkan pilihan menu terlebih dahulu.",
       "noEvents": "Belum ada acara. Tambahkan di Pengaturan.",
-      "askAt": "Tanyakan pilihan menu di {name}"
+      "askAt": "Tanyakan pilihan menu di {name}",
+      "askTravel": "Tanyakan tamu tentang rencana perjalanan",
+      "askTravelHint": "Setelah mengonfirmasi kehadiran, tamu dapat membagikan detail kedatangan dan keberangkatan, tempat menginap, dan kebutuhan transfer.",
+      "findSeat": "Halaman Temukan tempat duduk",
+      "findSeatHint": "Tamu bisa mengetik nama mereka di halaman publik untuk melihat meja yang ditugaskan."
     },
     "email": {
       "title": "Email tamu Anda",

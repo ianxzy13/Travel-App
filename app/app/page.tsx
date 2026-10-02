@@ -22,6 +22,7 @@ import { loadBudget } from "@/lib/budget/load";
 import { summarizeBudget, upcomingPayments } from "@/lib/budget/stats";
 import { fmtDate, fmtMoney } from "@/lib/i18n/format";
 import { signPaths } from "@/lib/inspiration/load";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
@@ -486,7 +487,14 @@ async function tasksSummary(supabase: Awaited<ReturnType<typeof createClient>>, 
         .limit(3),
     ],
   );
-  return { total: total ?? 0, done: done ?? 0, overdue: overdue ?? 0, next: next ?? [] };
+  // suggested to-dos nobody has renamed are shown in the viewer's language
+  const shown = await starterTexts(await getLocale());
+  return {
+    total: total ?? 0,
+    done: done ?? 0,
+    overdue: overdue ?? 0,
+    next: (next ?? []).map((task) => ({ ...task, title: shown(task.title, "tasks.suggestions") })),
+  };
 }
 
 /** The newest pins (with temporary links for uploads) and the palette. */

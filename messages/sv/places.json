@@ -140,6 +140,7 @@
     "copied": "Kopierat",
     "copyFailed": "Kunde inte kopiera automatiskt.",
     "add": "Lägg till hotell",
+    "findOnBooking": "Sök på Booking.com",
     "cutoffSoon": "<b>{name}</b>: sista dag för rumsblocket om {days, plural, one {# dag} other {# dagar}}.",
     "roomsFree": "{count, plural, one {# rum är fortfarande ledigt.} other {# rum är fortfarande lediga.}}",
     "remind": "Påminn era gäster om att boka!",
@@ -199,6 +200,24 @@
     "departures": "Avgångar ({count})",
     "ours": "Vi och bröllopsresan ({count})",
     "all": "Alla flyg ({count})",
+    "guestTravel": "Gästers resor ({count})",
+    "gt": {
+      "shared": "Delat uppgifter:",
+      "needTransfer": "Behöver transfer:",
+      "unknown": "Okänt hushåll",
+      "transferRequested": "Transfer önskad",
+      "remind": "Påminn {count, plural, one {# hushåll} other {# hushåll}}",
+      "reminded": "Påminnelse skickad till {count, plural, one {# hushåll} other {# hushåll}}"
+    },
+    "shuttles": "Shuttle ({count})",
+    "shuttle": {
+      "empty": "Inga gäster har begärt transfer ännu. När de gör det visas shuttleturer här automatiskt.",
+      "window": "Tidsfönster",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# tur} other {# turer}} · {people, plural, one {# person} other {# personer}}",
+      "print": "Skriv ut",
+      "dayPeople": "{count, plural, one {# person} other {# personer}}"
+    },
     "ourFlight": "Vårt flyg",
     "honeymoonFlight": "Flyg för bröllopsresan",
     "search": "Sök flyg",

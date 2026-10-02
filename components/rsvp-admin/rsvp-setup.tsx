@@ -129,6 +129,40 @@ function SettingsCard({
             }
           />
           <Toggle
+            label={t("askTravel")}
+            hint={t("askTravelHint")}
+            control={
+              <Controller
+                control={form.control}
+                name="askTravel"
+                render={({ field }) => (
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    disabled={readOnly}
+                  />
+                )}
+              />
+            }
+          />
+          <Toggle
+            label={t("findSeat")}
+            hint={t("findSeatHint")}
+            control={
+              <Controller
+                control={form.control}
+                name="findSeatEnabled"
+                render={({ field }) => (
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    disabled={readOnly}
+                  />
+                )}
+              />
+            }
+          />
+          <Toggle
             label={t("notify")}
             hint={canNotify ? t("notifyOn") : t("notifyOff")}
             control={

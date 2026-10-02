@@ -192,6 +192,41 @@
       "what": "Ne yazdırılsın",
       "button": "Yazdır veya PDF olarak kaydet",
       "noTables": "Bu oturma planında henüz masa yok."
-    }
+    },
+    "arrangeSettings": "Otomatik yerlestirme ayarlari",
+    "arrangeSettingsHint": "Yerlestirme sirasinda her faktorun onemini ayarlayin.",
+    "weights": {
+      "keepTogether": "Bir arada tut",
+      "side": "Taraf",
+      "tag": "Etiket",
+      "language": "Dil",
+      "ageGroup": "Yas grubu",
+      "hostPrefer": "Ev sahibine yakin",
+      "fillFirst": "Once doldur"
+    },
+    "resetWeights": "Sifirla",
+    "noHostTag": "Diger konuklari karsilayan kisilere host etiketi ekleyin.",
+    "rsvpChanged": {
+      "attending": "Bir konuk katilacagini bildirdi!",
+      "declined": "Bir konuk daveti reddetti.",
+      "removed": "Bir konugun yaniti silindi."
+    },
+    "scenarios": {
+      "title": "Oturma senaryolari",
+      "plan": "Plan",
+      "active": "aktif",
+      "duplicate": "Kopyala",
+      "duplicated": "Senaryo kopyalandi",
+      "rename": "Yeniden adlandir",
+      "delete": "Sil",
+      "deleted": "Senaryo silindi",
+      "deleteConfirm": "Bu senaryoyu silmek istiyor musunuz? Masalar ve atamalar kaldirilacaktir.",
+      "maxReached": "Etkinlik basina en fazla 3 senaryo olabilir.",
+      "switched": "Senaryo degistirildi",
+      "defaultName": "Plan A"
+    },
+    "findSeatQr": "QR poster: yerinizi bulun",
+    "findSeatHeading": "Yerinizi bulun",
+    "findSeatScan": "Masanizi bulmak icin bu kodu telefonunuzla tarayin."
   }
 }

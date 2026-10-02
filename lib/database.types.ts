@@ -33,6 +33,7 @@ export type WeddingRow = Timestamps & {
   rsvp_deadline: string | null;
   rsvp_contact: string | null;
   rsvp_ask_song: boolean;
+  rsvp_ask_travel: boolean;
   rsvp_notify_email: boolean;
   budget_total: number | null;
   destination_airport: string | null;
@@ -42,6 +43,7 @@ export type WeddingRow = Timestamps & {
   /** IANA time zone of the venue, e.g. "Europe/Ljubljana" */
   time_zone: string | null;
   translations: Translations;
+  find_seat_enabled: boolean;
 };
 
 /** Per-language versions of texts: { "sl": { "name": "Poroka" } } */
@@ -186,6 +188,8 @@ export type SeatingLayoutRow = WeddingScoped & {
   event_id: string;
   room_width: number;
   room_height: number;
+  name: string;
+  is_active: boolean;
 };
 
 export type SeatingObjectRow = Timestamps & {
@@ -349,6 +353,24 @@ export type FlightTravellerRow = Timestamps & {
   flight_id: string;
   guest_id: string;
   wedding_id: string;
+};
+
+// ---------- Phase 12: guest travel ----------
+
+export type GuestTravelRow = WeddingScoped & {
+  household_id: string;
+  arrival_date: string | null;
+  arrival_time: string | null;
+  arrival_airport: string | null;
+  arrival_flight: string | null;
+  departure_date: string | null;
+  departure_time: string | null;
+  departure_airport: string | null;
+  departure_flight: string | null;
+  staying_at: string | null;
+  hotel_id: string | null;
+  needs_transfer: boolean;
+  transport_notes: string | null;
 };
 
 // ---------- Phase 7: inspiration ----------
@@ -525,6 +547,7 @@ export type Database = {
       hotel_guest_assignments: Table<HotelGuestRow, "wedding_id" | "hotel_id" | "guest_id">;
       flights: Table<FlightRow, "wedding_id">;
       flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
+      guest_travel: Table<GuestTravelRow, "wedding_id" | "household_id">;
       boards: Table<BoardRow, "wedding_id" | "name">;
       pins: Table<PinRow, "wedding_id" | "board_id">;
       pin_comments: Table<PinCommentRow, "wedding_id" | "pin_id" | "user_id" | "body">;
@@ -541,6 +564,10 @@ export type Database = {
     };
     Views: { [_ in never]: never };
     Functions: {
+      find_seat: {
+        Args: { p_slug: string; p_name: string };
+        Returns: Json | null;
+      };
       create_wedding: {
         Args: {
           p_partner_a_name: string;
@@ -594,6 +621,10 @@ export type Database = {
       apply_seating_changes: { Args: { p_layout_id: string; p_changes: Json }; Returns: undefined };
       record_email_event: {
         Args: { p_resend_id: string; p_event: string; p_at: string };
+        Returns: undefined;
+      };
+      submit_guest_travel: {
+        Args: { p_code: string; p_payload: Json };
         Returns: undefined;
       };
     };

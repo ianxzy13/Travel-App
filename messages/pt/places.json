@@ -188,7 +188,8 @@
     "checkIn": "Check-in de {name}",
     "checkOut": "Check-out de {name}",
     "guestsSaved": "Convidados guardados",
-    "saveGuests": "Guardar convidados"
+    "saveGuests": "Guardar convidados",
+    "findOnBooking": "Procurar no Booking.com"
   },
   "travel": {
     "title": "Viagens",
@@ -253,6 +254,24 @@
     "travellersHint": "p. ex. Ian e Maria",
     "pickupNeeded": "Precisa de transfere do aeroporto",
     "deleteTitle": "Eliminar este voo?",
-    "deleteText": "Não pode ser desfeito."
+    "deleteText": "Não pode ser desfeito.",
+    "guestTravel": "Viagem dos convidados ({count})",
+    "gt": {
+      "shared": "Detalhes partilhados:",
+      "needTransfer": "Precisam de transfer:",
+      "unknown": "Família desconhecida",
+      "transferRequested": "Transfer solicitado",
+      "remind": "Lembrar {count, plural, one {# família} other {# famílias}}",
+      "reminded": "Lembrete enviado a {count, plural, one {# família} other {# famílias}}"
+    },
+    "shuttles": "Transfers ({count})",
+    "shuttle": {
+      "empty": "Nenhum convidado solicitou transfer ainda. Quando solicitarem, os turnos aparecerão aqui automaticamente.",
+      "window": "Janela de tempo",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# turno} other {# turnos}} · {people, plural, one {# pessoa} other {# pessoas}}",
+      "print": "Imprimir",
+      "dayPeople": "{count, plural, one {# pessoa} other {# pessoas}}"
+    }
   }
 }

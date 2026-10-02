@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Travel() {
   const { wedding, role } = await requireWedding();
   const sb = await createClient();
-  const [flights, travellers, guests] = await Promise.all([
+  const [flights, travellers, guests, guestTravel, households] = await Promise.all([
     fetchAll((f, t) =>
       sb.from("flights").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t),
     ),
@@ -26,6 +26,22 @@ export default async function Travel() {
         .range(f, t),
     ),
     loadPickerGuests(sb, wedding.id),
+    fetchAll((f, t) =>
+      sb
+        .from("guest_travel")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("arrival_date")
+        .range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("households")
+        .select("id, name, rsvp_responded_at")
+        .eq("wedding_id", wedding.id)
+        .order("name")
+        .range(f, t),
+    ),
   ]);
 
   return (
@@ -36,6 +52,8 @@ export default async function Travel() {
         travellerIds: travellers.filter((t) => t.flight_id === f.id).map((t) => t.guest_id),
       }))}
       guests={guests}
+      guestTravel={guestTravel}
+      households={households}
       destinationAirport={wedding.destination_airport}
       weddingDate={wedding.wedding_date}
       currency={wedding.currency}

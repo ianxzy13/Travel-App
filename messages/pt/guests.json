@@ -186,7 +186,13 @@
       "rule": "Regra",
       "guestLabel": "Convidado",
       "chooseGuest": "Escolham um convidado",
-      "addRule": "Adicionar regra"
+      "addRule": "Adicionar regra",
+      "languages": "Idiomas falados",
+      "languagesHint": "Usado pelo plano de mesas para juntar convidados que falam a mesma lingua.",
+      "addLanguage": "Adicionar idioma",
+      "allLanguages": "Todos os idiomas",
+      "remove": "Remover",
+      "noLanguages": "Nenhum idioma adicionado"
     },
     "household": {
       "title": "Definições do agregado",

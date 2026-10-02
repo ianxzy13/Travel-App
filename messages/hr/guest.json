@@ -51,7 +51,10 @@
       "website": "Web stranica",
       "websiteOf": "Web stranica: {name}",
       "map": "Karta",
-      "mapOf": "Karta: {name}"
+      "mapOf": "Karta: {name}",
+      "transportTitle": "Kako doći",
+      "visaTitle": "Informacije o vizi",
+      "currencyTitle": "Valuta"
     },
     "rsvp": {
       "replyBy": "Molimo odgovorite do <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Vjenčanje: {couple}",
       "website": "Svadbena stranica"
+    },
+    "findSeat": {
+      "title": "Pronadite svoje mjesto",
+      "heading": "Pronadite svoj stol",
+      "label": "Vase puno ime",
+      "placeholder": "Ime i prezime",
+      "button": "Pronadi moje mjesto",
+      "notFound": "Nismo pronasli mjesto za to ime. Provjerite pravopis na pozivnici.",
+      "yourTable": "Vas stol je spreman!",
+      "tableName": "Stol {number}",
+      "tableNamed": "{label} (Stol {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Za svakoga označite dolazi li ili ne.",
       "not_allowed": "Nemate dopuštenje za upis odgovora za ovo vjenčanje.",
       "generic": "Odgovor nije spremljen. Pokušajte ponovno za trenutak."
+    },
+    "travel": {
+      "prompt": "Podijelite svoje putne podatke",
+      "editTravel": "Ažuriraj putne podatke",
+      "title": "Putni podaci",
+      "subtitle": "Pomozite nam planirati aerodromske transfere — recite nam kad stižete i kad odlazite.",
+      "arrival": "Dolazak",
+      "departure": "Odlazak",
+      "date": "Datum",
+      "time": "Vrijeme",
+      "airport": "Zračna luka",
+      "airportPlaceholder": "npr. ZAG",
+      "flightNumber": "Broj leta",
+      "stayingAt": "Gdje odsjedate?",
+      "chooseHotel": "Odaberite hotel",
+      "otherAccommodation": "Drugi smještaj",
+      "accommodationName": "Naziv hotela ili smještaja",
+      "accommodationPlaceholder": "npr. Airbnb u centru grada",
+      "needsTransfer": "Cijenili bismo prijevoz s aerodroma",
+      "notes": "Još nešto?",
+      "notesPlaceholder": "npr. dolazimo autom, trebamo dječje sjedalo",
+      "save": "Spremi putne podatke",
+      "skip": "Preskoči za sada",
+      "saved": "Putni podaci spremljeni!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Ova je poveznica samo za vaše kućanstvo. Molimo, ne dijelite je.",
     "subjectInvite": "Pozivnica za vjenčanje: {couple}",
     "subjectReminder": "Podsjetnik: potvrdite dolazak na vjenčanje: {couple}"
+  },
+  "travelEmail": {
+    "preview": "Molimo podijelite svoje putne planove za vjenčanje para {couple}",
+    "eyebrow": "Putni podaci",
+    "dear": "Dragi/Draga {name},",
+    "body": "Hvala na potvrdi! Kako bismo lakše planirali transfere, molimo podijelite podatke o dolasku i odlasku putem donje poveznice.",
+    "button": "Podijeli putne podatke",
+    "fallback": "Gumb ne radi? Otvorite {link}",
+    "love": "S ljubavlju,",
+    "subject": "Putni podaci za vjenčanje para {couple}"
   }
 }

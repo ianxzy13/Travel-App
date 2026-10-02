@@ -51,7 +51,10 @@
       "website": "Web",
       "websiteOf": "Web: {name}",
       "map": "Mapa",
-      "mapOf": "Mapa: {name}"
+      "mapOf": "Mapa: {name}",
+      "transportTitle": "Doprava na místě",
+      "visaTitle": "Vízové informace",
+      "currencyTitle": "Měna"
     },
     "rsvp": {
       "replyBy": "Prosíme o odpověď do <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Svatba: {couple}",
       "website": "Svatební web"
+    },
+    "findSeat": {
+      "title": "Najdete sve misto",
+      "heading": "Najdete svuj stul",
+      "label": "Vase cele jmeno",
+      "placeholder": "Jmeno a prijmeni",
+      "button": "Najit me misto",
+      "notFound": "Pro toto jmeno jsme misto nenasli. Zkontrolujte pravopis na pozvance.",
+      "yourTable": "Vas stul je pripraven!",
+      "tableName": "Stul {number}",
+      "tableNamed": "{label} (Stul {number})"
     }
   },
   "rsvp": {
@@ -145,6 +159,30 @@
       "guestOf": "Doprovod: {name}",
       "guest": "Host"
     },
+    "travel": {
+      "prompt": "Sdělte nám cestovní údaje",
+      "editTravel": "Upravit cestovní údaje",
+      "title": "Cestovní údaje",
+      "subtitle": "Pomozte nám naplánovat letištní transfery — řekněte nám, kdy přiletíte a odletíte.",
+      "arrival": "Přílet",
+      "departure": "Odlet",
+      "date": "Datum",
+      "time": "Čas",
+      "airport": "Letiště",
+      "airportPlaceholder": "např. LHR",
+      "flightNumber": "Číslo letu",
+      "stayingAt": "Kde budete ubytováni?",
+      "chooseHotel": "Vyberte hotel",
+      "otherAccommodation": "Jinde",
+      "accommodationName": "Název hotelu nebo ubytování",
+      "accommodationPlaceholder": "např. Airbnb v centru města",
+      "needsTransfer": "Uvítáme odvoz z letiště",
+      "notes": "Chcete nám něco sdělit?",
+      "notesPlaceholder": "např. přijedeme autem, potřebujeme dětskou sedačku",
+      "save": "Uložit cestovní údaje",
+      "skip": "Přeskočit",
+      "saved": "Cestovní údaje uloženy!"
+    },
     "errors": {
       "rsvp_not_found": "Tuto pozvánku jsme nenašli. Zkontrolujte odkaz nebo kód.",
       "deadline_passed": "Termín pro potvrzení už uplynul. Obraťte se přímo na novomanžele.",
@@ -176,5 +214,15 @@
     "personal": "Tento odkaz patří jen vaší domácnosti. Prosíme, nesdílejte ho.",
     "subjectInvite": "Pozvánka na svatbu: {couple}",
     "subjectReminder": "Připomínka: potvrďte účast na svatbě: {couple}"
+  },
+  "travelEmail": {
+    "preview": "Sdělte nám cestovní plány na svatbu: {couple}",
+    "eyebrow": "Cestovní údaje",
+    "dear": "Milí {name},",
+    "body": "Děkujeme za potvrzení účasti! Abyste nám pomohli naplánovat letištní transfery, sdělte nám prosím přes odkaz níže, kdy přiletíte a odletíte.",
+    "button": "Sdílet cestovní údaje",
+    "fallback": "Tlačítko nefunguje? Otevřete {link}",
+    "love": "S láskou",
+    "subject": "Cestovní údaje – svatba: {couple}"
   }
 }

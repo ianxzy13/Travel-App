@@ -186,7 +186,13 @@
       "rule": "القاعدة",
       "guestLabel": "الضيف",
       "chooseGuest": "اختر ضيفًا",
-      "addRule": "إضافة قاعدة"
+      "addRule": "إضافة قاعدة",
+      "languages": "اللغات المحكية",
+      "languagesHint": "يستخدمه مخطط الجلوس لوضع الضيوف الذين يتحدثون نفس اللغة معاً.",
+      "addLanguage": "إضافة لغة",
+      "allLanguages": "جميع اللغات",
+      "remove": "إزالة",
+      "noLanguages": "لم تُضف أي لغات"
     },
     "household": {
       "title": "إعدادات العائلة",

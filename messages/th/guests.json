@@ -186,7 +186,13 @@
       "rule": "กฎ",
       "guestLabel": "แขก",
       "chooseGuest": "เลือกแขก",
-      "addRule": "เพิ่มกฎ"
+      "addRule": "เพิ่มกฎ",
+      "languages": "ภาษาที่พูด",
+      "languagesHint": "ผังที่นั่งใช้ข้อมูลนี้เพื่อจัดให้แขกที่พูดภาษาเดียวกันนั่งด้วยกัน",
+      "addLanguage": "เพิ่มภาษา",
+      "allLanguages": "ทุกภาษา",
+      "remove": "ลบ",
+      "noLanguages": "ยังไม่ได้เพิ่มภาษา"
     },
     "household": {
       "title": "การตั้งค่าครอบครัว",

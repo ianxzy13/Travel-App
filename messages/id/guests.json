@@ -186,7 +186,13 @@
       "rule": "Aturan",
       "guestLabel": "Tamu",
       "chooseGuest": "Pilih tamu",
-      "addRule": "Tambah aturan"
+      "addRule": "Tambah aturan",
+      "languages": "Bahasa yang digunakan",
+      "languagesHint": "Digunakan oleh denah tempat duduk untuk menempatkan tamu yang berbicara bahasa sama bersama.",
+      "addLanguage": "Tambah bahasa",
+      "allLanguages": "Semua bahasa",
+      "remove": "Hapus",
+      "noLanguages": "Belum ada bahasa"
     },
     "household": {
       "title": "Pengaturan keluarga",

@@ -140,6 +140,7 @@
     "copied": "복사했습니다",
     "copyFailed": "자동으로 복사하지 못했습니다.",
     "add": "호텔 추가",
+    "findOnBooking": "Booking.com에서 찾기",
     "cutoffSoon": "<b>{name}</b>: 객실 블록 마감까지 {days}일 남았습니다.",
     "roomsFree": "아직 {count}실이 비어 있습니다.",
     "remind": "하객에게 빨리 예약하라고 알려 주세요!",
@@ -199,6 +200,24 @@
     "departures": "출발({count})",
     "ours": "우리와 신혼여행({count})",
     "all": "모든 항공편({count})",
+    "guestTravel": "하객 여행({count})",
+    "gt": {
+      "shared": "공유된 세부 정보:",
+      "needTransfer": "픽업 필요:",
+      "unknown": "알 수 없는 가정",
+      "transferRequested": "픽업 요청됨",
+      "remind": "{count, plural, one {#가정} other {#가정}}에게 알림",
+      "reminded": "{count, plural, one {#가정} other {#가정}}에게 알림을 보냈습니다"
+    },
+    "shuttles": "셔틀({count})",
+    "shuttle": {
+      "empty": "아직 픽업을 요청한 하객이 없습니다. 요청이 들어오면 여기에 셔틀 편이 자동으로 표시됩니다.",
+      "window": "시간 범위",
+      "minutes": "분",
+      "summary": "{runs, plural, one {#편} other {#편}} · {people, plural, one {#명} other {#명}}",
+      "print": "인쇄",
+      "dayPeople": "{count, plural, one {#명} other {#명}}"
+    },
     "ourFlight": "우리 항공편",
     "honeymoonFlight": "신혼여행 항공편",
     "search": "항공편 검색",

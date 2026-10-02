@@ -175,7 +175,13 @@
       "captionPlaceholder": "说明（可选）",
       "moveUp": "上移第 {n} 项",
       "moveDown": "下移第 {n} 项",
-      "remove": "移除第 {n} 项"
+      "remove": "移除第 {n} 项",
+      "transport": "交通指南",
+      "transportHint": "从机场到场地怎么走、租车、公交…",
+      "visa": "签证信息",
+      "visaHint": "宾客是否需要签证？哪些国家免签？",
+      "currency": "货币",
+      "currencyHint": "当地货币、换汇建议、刷卡情况…"
     },
     "image": {
       "wrongType": "请选择 JPG、PNG 或 WebP 照片。",

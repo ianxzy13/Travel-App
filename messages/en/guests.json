@@ -182,7 +182,13 @@
       "rule": "Rule",
       "guestLabel": "Guest",
       "chooseGuest": "Choose a guest",
-      "addRule": "Add rule"
+      "addRule": "Add rule",
+      "languages": "Languages spoken",
+      "languagesHint": "Used by the seating chart to seat guests who share a language together.",
+      "addLanguage": "Add language",
+      "allLanguages": "All languages",
+      "remove": "Remove",
+      "noLanguages": "No languages added"
     },
     "household": {
       "title": "Household settings",

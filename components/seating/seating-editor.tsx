@@ -53,7 +53,7 @@ import {
 } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { PartnerNames } from "@/lib/guests/model";
-import { autoArrange } from "@/lib/seating/auto-arrange";
+import { autoArrange, DEFAULT_WEIGHTS, type ArrangeWeights } from "@/lib/seating/auto-arrange";
 import { isTable, KINDS } from "@/lib/seating/geometry";
 import { allIssues, analyzeSeating } from "@/lib/seating/rules";
 import {
@@ -67,13 +67,17 @@ import {
   unassign,
   updateObject,
 } from "@/lib/seating/state";
+import type { RsvpStatus } from "@/lib/database.types";
 import type {
   SeatingGuest,
   SeatingKind,
   SeatingRelationship,
   SeatingState,
 } from "@/lib/seating/types";
+import { createClient as createBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import { ArrangeSettings } from "./arrange-settings";
+import { ScenarioSwitcher } from "./scenario-switcher";
 import { FloorPlan, type FloorPlanApi } from "./floor-plan";
 import { GuestPanel, type Picked } from "./guest-panel";
 import { Inspector } from "./inspector";
@@ -96,6 +100,7 @@ type Props = {
   venue?: { name: string; capacity: number } | null;
   /** only for tests: replaces saving to the database */
   saveChanges?: Parameters<typeof useSeatingStore>[3];
+  layouts?: { id: string; name: string; is_active: boolean }[];
 };
 
 const TABLE_KINDS: SeatingKind[] = ["round", "rect", "square", "head", "sweetheart"];
@@ -119,12 +124,13 @@ const collision: CollisionDetection = (args) => {
 };
 
 export function SeatingEditor(props: Props) {
-  const { guests, relationships, canEdit, names } = props;
+  const { relationships, canEdit, names } = props;
   const router = useRouter();
   const store = useSeatingStore(props.layoutId, props.initial, canEdit, props.saveChanges);
   const { t, words, tableName, issueText } = useSeatingWords();
   const { state, commit } = store;
 
+  const [guests, setGuests] = useState(props.guests);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedSeat, setSelectedSeat] = useState<{ objectId: string; seatIndex: number } | null>(
     null,
@@ -133,11 +139,51 @@ export function SeatingEditor(props: Props) {
   const [colorMode, setColorMode] = useState<ColorMode>("side");
   const [snap, setSnap] = useState(true);
   const [view, setView] = useState<"plan" | "list">("plan");
+  const [arrangeWeights, setArrangeWeights] = useState<ArrangeWeights>(DEFAULT_WEIGHTS);
   const [proposal, setProposal] = useState<{ placed: number; unplaced: number } | null>(null);
   const [dragLabel, setDragLabel] = useState<string | null>(null);
   const [guestSheet, setGuestSheet] = useState(false);
   const [detailSheet, setDetailSheet] = useState(false);
   const apiRef = useRef<FloorPlanApi | null>(null);
+
+  // Live RSVP sync: update guest RSVP status when responses change
+  useEffect(() => {
+    const sb = createBrowserClient();
+    const channel = sb
+      .channel(`rsvp-sync:${props.eventId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "rsvp_responses",
+          filter: `event_id=eq.${props.eventId}`,
+        },
+        (p) => {
+          if (p.eventType === "DELETE") {
+            const old = p.old as { guest_id?: string };
+            if (!old.guest_id) return;
+            setGuests((prev) =>
+              prev.map((g) => (g.id === old.guest_id ? { ...g, rsvp: null, mealOptionId: null } : g)),
+            );
+            toast.info(t("rsvpChanged.removed"));
+            return;
+          }
+          const row = p.new as { guest_id: string; status: RsvpStatus; meal_option_id: string | null };
+          setGuests((prev) =>
+            prev.map((g) =>
+              g.id === row.guest_id
+                ? { ...g, rsvp: row.status, mealOptionId: row.meal_option_id }
+                : g,
+            ),
+          );
+          if (row.status === "declined") toast.info(t("rsvpChanged.declined"));
+          else if (row.status === "attending") toast.info(t("rsvpChanged.attending"));
+        },
+      )
+      .subscribe();
+    return () => void sb.removeChannel(channel);
+  }, [props.eventId, t]);
 
   const guestsById = useMemo(() => new Map(guests.map((g) => [g.id, g])), [guests]);
   const mealLookup = useMemo(
@@ -231,13 +277,21 @@ export function SeatingEditor(props: Props) {
     }
   }
 
+  const hostTagId = useMemo(
+    () => props.tags.find((t) => t.name.toLowerCase() === "host")?.id ?? null,
+    [props.tags],
+  );
+
   function runAutoArrange() {
     const candidates = guests.filter((g) => g.rsvp === "attending" && !state.assignments[g.id]);
     if (candidates.length === 0) {
       toast.info(t("allSeated"));
       return;
     }
-    const r = autoArrange(state, candidates, guestsById, relationships);
+    const r = autoArrange(state, candidates, guestsById, relationships, {
+      weights: arrangeWeights,
+      hostTagId,
+    });
     if (r.placed.length === 0) {
       toast.warning(t("noFreeSeats"));
       return;
@@ -436,6 +490,13 @@ export function SeatingEditor(props: Props) {
               ))}
             </SelectContent>
           </Select>
+          {(props.layouts?.length ?? 0) > 0 && (
+            <ScenarioSwitcher
+              layouts={props.layouts!}
+              activeId={props.layoutId}
+              canEdit={canEdit}
+            />
+          )}
           <p className="text-muted-foreground text-sm">
             {t("totals", { tables: totals.tables, seats: totals.seats })}{" "}
             <span className={cn(totals.unseatedAttending > 0 && "text-foreground font-medium")}>
@@ -516,9 +577,31 @@ export function SeatingEditor(props: Props) {
               >
                 <Redo2 aria-hidden />
               </Button>
-              <Button variant="outline" size="sm" onClick={runAutoArrange}>
-                <Sparkles aria-hidden /> {t("autoArrange")}
-              </Button>
+              <div className="flex">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-e-none"
+                  onClick={runAutoArrange}
+                >
+                  <Sparkles aria-hidden /> {t("autoArrange")}
+                </Button>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" size="icon-sm" className="-ms-px rounded-s-none">
+                      <SlidersHorizontal className="size-3.5" aria-hidden />
+                      <span className="sr-only">{t("arrangeSettings")}</span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-64" align="end">
+                    <ArrangeSettings
+                      weights={arrangeWeights}
+                      onChange={setArrangeWeights}
+                      hasHostTag={!!hostTagId}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
             </>
           )}
 
@@ -626,6 +709,11 @@ export function SeatingEditor(props: Props) {
                   </a>
                 </DropdownMenuItem>
               ))}
+              <DropdownMenuItem asChild>
+                <a href="/print/find-seat-qr" target="_blank" rel="noreferrer">
+                  {t("findSeatQr")}
+                </a>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

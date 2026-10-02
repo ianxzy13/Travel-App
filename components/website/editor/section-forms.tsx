@@ -194,6 +194,42 @@ export function SectionForm({
               />
             )}
           </FormField>
+          <FormField id={`${id}-transport`} label={t("transport")} hint={t("transportHint")}>
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={3}
+                value={c.transport}
+                maxLength={3000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, transport: e.target.value })}
+              />
+            )}
+          </FormField>
+          <FormField id={`${id}-visa`} label={t("visa")} hint={t("visaHint")}>
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={3}
+                value={c.visa}
+                maxLength={3000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, visa: e.target.value })}
+              />
+            )}
+          </FormField>
+          <FormField id={`${id}-currency`} label={t("currency")} hint={t("currencyHint")}>
+            {(a) => (
+              <Textarea
+                {...a}
+                rows={2}
+                value={c.currency}
+                maxLength={2000}
+                disabled={common.disabled}
+                onChange={(e) => onChange({ ...c, currency: e.target.value })}
+              />
+            )}
+          </FormField>
         </div>
       );
     }

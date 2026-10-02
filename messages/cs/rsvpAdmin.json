@@ -64,6 +64,8 @@
       "contact": "Po termínu hostům vzkažte…",
       "contactHint": "např. „Napište Marii na +420 601 234 567“",
       "askSong": "Zeptat se na přání písně",
+      "askTravel": "Zeptat se hostů na cestovní plány",
+      "askTravelHint": "Po potvrzení účasti mohou hosté sdílet údaje o příjezdu a odjezdu, kde bydlí a zda potřebují odvoz.",
       "notify": "Poslat mi e-mail, když někdo odpoví",
       "notifyOn": "Posílá se vlastníkům a editorům, navíc ke zvonečku v aplikaci.",
       "notifyOff": "Vyžaduje Resend a tajný klíč Supabase (viz README). Upozornění v aplikaci budete dostávat dál.",
@@ -86,7 +88,9 @@
       "mealEventsHint": "Obvykle jen u hostiny.",
       "addMealsFirst": "Nejdřív přidejte menu.",
       "noEvents": "Zatím žádné události. Přidejte je v Nastavení.",
-      "askAt": "Ptát se na menu u: {name}"
+      "askAt": "Ptát se na menu u: {name}",
+      "findSeat": "Stranka Najdete sve misto",
+      "findSeatHint": "Hoste mohou zadat sve jmeno na verejne strance a zjistit svuj stul."
     },
     "email": {
       "title": "Napište hostům",

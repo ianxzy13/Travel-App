@@ -198,7 +198,11 @@
     "deleteTitle": "Izbrišem {name}?",
     "deleteText": "Datoteka s pogodbo bo izbrisana. Stroški v proračunu, povezani s ponudnikom, ostanejo.",
     "cancel": "Prekliči",
-    "save": "Shrani"
+    "save": "Shrani",
+    "find": "Najdi ponudnike",
+    "findHint": "Iskanje blizu {location}",
+    "pasteUrl": "Prilepi povezavo",
+    "pasteUrlHint": "Prilepite spletno stran ponudnika za samodejno izpolnitev imena."
   },
   "files": {
     "openFailed": "Datoteke ni bilo mogoče odpreti. Poskusite znova.",

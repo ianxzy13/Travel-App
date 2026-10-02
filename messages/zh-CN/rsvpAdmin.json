@@ -86,7 +86,11 @@
       "mealEventsHint": "通常只有婚宴晚餐。",
       "addMealsFirst": "请先添加餐点选项。",
       "noEvents": "还没有活动。请在设置中添加。",
-      "askAt": "在 {name} 询问餐点选择"
+      "askAt": "在 {name} 询问餐点选择",
+      "askTravel": "询问宾客行程计划",
+      "askTravelHint": "确认出席后，宾客可以分享到达和离开信息、住宿地点以及是否需要接送。",
+      "findSeat": "找到你的座位页面",
+      "findSeatHint": "来宾可以在公开页面输入姓名查看分配的桌号。"
     },
     "email": {
       "title": "给宾客发邮件",

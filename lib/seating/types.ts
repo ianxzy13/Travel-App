@@ -62,6 +62,7 @@ export type SeatingGuest = {
   dietary: string | null;
   accessibility: string | null;
   plusOneOf: string | null;
+  languages: string[];
   /** answer for THIS event (null = no reply yet) */
   rsvp: RsvpStatus | null;
   mealOptionId: string | null;

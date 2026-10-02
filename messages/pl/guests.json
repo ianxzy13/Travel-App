@@ -186,7 +186,13 @@
       "rule": "Reguła",
       "guestLabel": "Gość",
       "chooseGuest": "Wybierz gościa",
-      "addRule": "Dodaj regułę"
+      "addRule": "Dodaj regułę",
+      "languages": "Jezyki",
+      "languagesHint": "Plan stolow wykorzystuje to do sadzania razem gosci mowiacych tym samym jezykiem.",
+      "addLanguage": "Dodaj jezyk",
+      "allLanguages": "Wszystkie jezyki",
+      "remove": "Usun",
+      "noLanguages": "Nie dodano jezykow"
     },
     "household": {
       "title": "Ustawienia gospodarstwa",

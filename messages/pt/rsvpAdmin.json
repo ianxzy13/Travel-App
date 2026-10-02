@@ -86,7 +86,11 @@
       "mealEventsHint": "Normalmente só no jantar do copo-d’água.",
       "addMealsFirst": "Adicionem menus primeiro.",
       "noEvents": "Ainda não há eventos. Adicionem-nos nas Definições.",
-      "askAt": "Pedir menu em {name}"
+      "askAt": "Pedir menu em {name}",
+      "askTravel": "Perguntar aos convidados sobre planos de viagem",
+      "askTravelHint": "Após confirmar presença, os convidados podem partilhar detalhes de chegada e partida, onde ficam e se precisam de transfer.",
+      "findSeat": "Pagina para encontrar o lugar",
+      "findSeatHint": "Os convidados podem escrever o nome numa pagina publica para ver a mesa atribuida."
     },
     "email": {
       "title": "Enviem email aos vossos convidados",

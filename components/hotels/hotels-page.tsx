@@ -49,6 +49,7 @@ import { fmtDate } from "@/lib/i18n/format";
 import { HOTEL_STATUS_CLASS } from "@/lib/places/labels";
 import { roomBlockState } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
+import { bookingSearch } from "@/lib/vendors/search-links";
 import { hotelSchema, type HotelValues } from "@/lib/validation/places";
 
 export type HotelItem = Omit<HotelRow, "price_per_night"> & { price_per_night: number | null };
@@ -59,6 +60,7 @@ type Props = {
   stays: Stay[];
   guests: (PickerGuest & { attending: boolean })[];
   currency: string;
+  location: string | null;
   canEdit: boolean;
   today: string;
 };
@@ -75,7 +77,7 @@ function useCopy() {
   };
 }
 
-export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: Props) {
+export function HotelsPage({ hotels, stays, guests, currency, location, canEdit, today }: Props) {
   const t = useTranslations("hotels");
   const p = useTranslations("places");
   const locale = useLocale();
@@ -98,11 +100,24 @@ export function HotelsPage({ hotels, stays, guests, currency, canEdit, today }: 
         title={t("title")}
         description={t("description")}
         actions={
-          canEdit && (
-            <Button size="sm" onClick={() => setSheet("new")}>
-              <Plus aria-hidden /> {t("add")}
-            </Button>
-          )
+          <div className="flex gap-2">
+            {location && (
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href={bookingSearch(`hotels ${location}`)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <BedDouble aria-hidden /> {t("findOnBooking")}
+                </a>
+              </Button>
+            )}
+            {canEdit && (
+              <Button size="sm" onClick={() => setSheet("new")}>
+                <Plus aria-hidden /> {t("add")}
+              </Button>
+            )}
+          </div>
         }
       />
 

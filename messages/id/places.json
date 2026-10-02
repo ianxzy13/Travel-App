@@ -188,7 +188,8 @@
     "checkIn": "Check-in untuk {name}",
     "checkOut": "Check-out untuk {name}",
     "guestsSaved": "Tamu disimpan",
-    "saveGuests": "Simpan tamu"
+    "saveGuests": "Simpan tamu",
+    "findOnBooking": "Cari di Booking.com"
   },
   "travel": {
     "title": "Perjalanan",
@@ -253,6 +254,24 @@
     "travellersHint": "mis. Ian dan Maria",
     "pickupNeeded": "Perlu dijemput",
     "deleteTitle": "Hapus penerbangan ini?",
-    "deleteText": "Ini tidak dapat dibatalkan."
+    "deleteText": "Ini tidak dapat dibatalkan.",
+    "guestTravel": "Perjalanan tamu ({count})",
+    "gt": {
+      "shared": "Detail yang dibagikan:",
+      "needTransfer": "Butuh transfer:",
+      "unknown": "Keluarga tidak dikenal",
+      "transferRequested": "Transfer diminta",
+      "remind": "Ingatkan {count, plural, one {# keluarga} other {# keluarga}}",
+      "reminded": "Pengingat dikirim ke {count, plural, one {# keluarga} other {# keluarga}}"
+    },
+    "shuttles": "Antar-jemput ({count})",
+    "shuttle": {
+      "empty": "Belum ada tamu yang meminta transfer. Ketika mereka melakukannya, jadwal antar-jemput akan muncul di sini secara otomatis.",
+      "window": "Jangka waktu",
+      "minutes": "mnt",
+      "summary": "{runs, plural, one {# perjalanan} other {# perjalanan}} · {people, plural, one {# orang} other {# orang}}",
+      "print": "Cetak",
+      "dayPeople": "{count, plural, one {# orang} other {# orang}}"
+    }
   }
 }

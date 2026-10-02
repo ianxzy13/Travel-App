@@ -198,7 +198,11 @@
     "deleteTitle": "{name} silinsin mi?",
     "deleteText": "Sözleşme dosyası silinir. Bağlı harcamalar bütçenizde kalır.",
     "cancel": "İptal",
-    "save": "Kaydet"
+    "save": "Kaydet",
+    "find": "Tedarikçi bul",
+    "findHint": "{location} yakınında ara",
+    "pasteUrl": "Bağlantı yapıştır",
+    "pasteUrlHint": "Tedarikçinin web sitesini yapıştırarak adını otomatik doldurun."
   },
   "files": {
     "openFailed": "Dosya açılamadı. Lütfen tekrar deneyin.",

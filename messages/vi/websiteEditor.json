@@ -175,7 +175,13 @@
       "captionPlaceholder": "Chú thích (tùy chọn)",
       "moveUp": "Di chuyển mục {n} lên",
       "moveDown": "Di chuyển mục {n} xuống",
-      "remove": "Xóa mục {n}"
+      "remove": "Xóa mục {n}",
+      "transport": "Phương tiện & chỉ đường",
+      "transportHint": "Cách đi từ sân bay đến địa điểm, thuê xe, xe buýt…",
+      "visa": "Thông tin visa",
+      "visaHint": "Khách có cần visa không? Quốc gia nào được miễn?",
+      "currency": "Tiền tệ",
+      "currencyHint": "Tiền tệ địa phương, mẹo đổi tiền, chấp nhận thẻ…"
     },
     "image": {
       "wrongType": "Vui lòng chọn ảnh JPG, PNG hoặc WebP.",

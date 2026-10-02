@@ -175,7 +175,13 @@
       "captionPlaceholder": "Pie de foto (opcional)",
       "moveUp": "Subir elemento {n}",
       "moveDown": "Bajar elemento {n}",
-      "remove": "Quitar elemento {n}"
+      "remove": "Quitar elemento {n}",
+      "transport": "Transporte e indicaciones",
+      "transportHint": "Cómo llegar del aeropuerto al lugar, alquiler de coches, autobuses…",
+      "visa": "Información de visado",
+      "visaHint": "¿Necesitan visado los invitados? ¿Qué países están exentos?",
+      "currency": "Moneda",
+      "currencyHint": "Moneda local, consejos de cambio, aceptación de tarjetas…"
     },
     "image": {
       "wrongType": "Elige una foto JPG, PNG o WebP.",

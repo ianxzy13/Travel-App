@@ -175,7 +175,13 @@
       "captionPlaceholder": "Keterangan (opsional)",
       "moveUp": "Pindahkan item {n} ke atas",
       "moveDown": "Pindahkan item {n} ke bawah",
-      "remove": "Hapus item {n}"
+      "remove": "Hapus item {n}",
+      "transport": "Transportasi & petunjuk arah",
+      "transportHint": "Cara ke venue dari bandara, sewa mobil, bus…",
+      "visa": "Informasi visa",
+      "visaHint": "Apakah tamu memerlukan visa? Negara mana yang dikecualikan?",
+      "currency": "Mata uang",
+      "currencyHint": "Mata uang lokal, tips penukaran, penerimaan kartu…"
     },
     "image": {
       "wrongType": "Silakan pilih foto JPG, PNG, atau WebP.",

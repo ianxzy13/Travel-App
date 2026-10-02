@@ -198,7 +198,11 @@
     "deleteTitle": "Hapus {name}?",
     "deleteText": "File kontraknya akan dihapus. Pengeluaran terkait tetap ada di anggaran.",
     "cancel": "Batal",
-    "save": "Simpan"
+    "save": "Simpan",
+    "find": "Cari vendor",
+    "findHint": "Cari di dekat {location}",
+    "pasteUrl": "Tempel tautan",
+    "pasteUrlHint": "Tempel situs web vendor untuk mengisi nama secara otomatis."
   },
   "files": {
     "openFailed": "Tidak dapat membuka file. Silakan coba lagi.",

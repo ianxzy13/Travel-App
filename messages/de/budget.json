@@ -198,7 +198,11 @@
     "deleteTitle": "{name} löschen?",
     "deleteText": "Die Vertragsdatei wird gelöscht. Verknüpfte Ausgaben bleiben in eurem Budget.",
     "cancel": "Abbrechen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "find": "Dienstleister finden",
+    "findHint": "Suche in der Nähe von {location}",
+    "pasteUrl": "Link einfügen",
+    "pasteUrlHint": "Fügen Sie die Website des Dienstleisters ein, um den Namen automatisch auszufüllen."
   },
   "files": {
     "openFailed": "Die Datei konnte nicht geöffnet werden. Bitte versuch es erneut.",

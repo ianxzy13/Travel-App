@@ -6,6 +6,7 @@ import { PrintControls } from "@/components/seating/print-controls";
 import { Button } from "@/components/ui/button";
 import { fmtDate, fmtTime } from "@/lib/i18n/format";
 import { endTime, sortByTime } from "@/lib/schedule/time";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import { coupleName, requireWedding } from "@/lib/wedding";
 
@@ -38,7 +39,12 @@ export default async function PrintSchedule({
       : query.or(`day.is.null${wedding.wedding_date ? `,day.eq.${wedding.wedding_date}` : ""}`),
     sb.from("vendors").select("id, name, contact_name, phone, email").eq("wedding_id", wedding.id),
   ]);
-  const items = sortByTime(rows ?? []);
+  const shown = await starterTexts(locale);
+  const items = sortByTime(rows ?? []).map((i) => ({
+    ...i,
+    title: shown(i.title, "schedule.template"),
+    owner: shown(i.owner, "schedule.owners"),
+  }));
   const date = day ?? wedding.wedding_date;
   const byId = new Map((vendors ?? []).map((v) => [v.id, v]));
   const used = [...new Set(items.map((i) => i.vendor_id).filter((v): v is string => !!v))]

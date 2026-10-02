@@ -11,13 +11,8 @@ import type { SeatingGuest, SeatingRelationship, SeatingState } from "./types";
  *    the same household, joined with anyone linked by a "keep together" rule.
  * 2. Seat the biggest units first (they're the hardest to fit).
  * 3. For each unit, score every table that has enough free seats and where
- *    nobody has a "keep apart" rule with a unit member:
- *      +100  a "keep together" partner already sits there
- *      +3    per guest at the table from the same side (partner A / B)
- *      +2    per shared tag (e.g. both "University friends")
- *      +1    the table already has guests (fill tables before starting new ones)
- *    Ties go to the table with the fewest free seats (a snug fit).
- *    The unit sits in a row of neighbouring free seats where possible.
+ *    nobody has a "keep apart" rule with a unit member. Scores are configurable
+ *    via ArrangeWeights (all have sensible defaults).
  * 4. If no table can take the whole unit, its members are seated one by one
  *    using the same scoring (so a big family may be split across two tables).
  *
@@ -25,9 +20,45 @@ import type { SeatingGuest, SeatingRelationship, SeatingState } from "./types";
  * is good but not perfect. The editor shows it as a proposal you can undo.
  */
 
+export type ArrangeWeights = {
+  keepTogether: number;
+  side: number;
+  tag: number;
+  language: number;
+  ageGroup: number;
+  hostPrefer: number;
+  fillFirst: number;
+};
+
+export const DEFAULT_WEIGHTS: ArrangeWeights = {
+  keepTogether: 100,
+  side: 3,
+  tag: 2,
+  language: 4,
+  ageGroup: 2,
+  hostPrefer: 5,
+  fillFirst: 1,
+};
+
+export type TableScore = {
+  tableId: string;
+  total: number;
+  reasons: string[];
+};
+
 type Unit = { guests: SeatingGuest[]; key: string };
 
-export type AutoArrangeResult = { state: SeatingState; placed: string[]; unplaced: string[] };
+export type AutoArrangeResult = {
+  state: SeatingState;
+  placed: string[];
+  unplaced: string[];
+  tableScores: Record<string, TableScore>;
+};
+
+export type AutoArrangeOptions = {
+  weights?: Partial<ArrangeWeights>;
+  hostTagId?: string | null;
+};
 
 export function autoArrange(
   state: SeatingState,
@@ -36,11 +67,13 @@ export function autoArrange(
   /** every guest (to look up people already seated) */
   allGuests: Map<string, SeatingGuest>,
   relationships: SeatingRelationship[],
+  options?: AutoArrangeOptions,
 ): AutoArrangeResult {
+  const w: ArrangeWeights = { ...DEFAULT_WEIGHTS, ...options?.weights };
+  const hostTagId = options?.hostTagId ?? null;
   const toSeat = candidates.filter((g) => !state.assignments[g.id]);
   const assignments = { ...state.assignments };
 
-  // Who sits at each table, and which seats are free.
   const tables = Object.values(state.objects).filter((o) => isTable(o.kind) && o.seatCount > 0);
   const occupants = new Map<string, string[]>(tables.map((t) => [t.id, []]));
   for (const a of Object.values(assignments)) occupants.get(a.objectId)?.push(a.guestId);
@@ -65,19 +98,38 @@ export function autoArrange(
   }
 
   const units = buildUnits(toSeat, together);
+  const tableScores: Record<string, TableScore> = {};
+
+  function isLonely(g: SeatingGuest) {
+    return (
+      !together.has(g.id) &&
+      !apart.has(g.id) &&
+      !Object.values(assignments).some(
+        (a) => allGuests.get(a.guestId)?.householdId === g.householdId,
+      )
+    );
+  }
 
   function score(tableId: string, unit: SeatingGuest[]) {
     const here = occupants.get(tableId) ?? [];
-    // hard rule: nobody at the table may be on a unit member's keep-apart list
     if (unit.some((g) => here.some((o) => apart.get(g.id)?.has(o)))) return -Infinity;
-    let s = here.length > 0 ? 1 : 0;
+    let s = here.length > 0 ? w.fillFirst : 0;
     for (const g of unit) {
       for (const oid of here) {
-        if (together.get(g.id)?.has(oid)) s += 100;
+        if (together.get(g.id)?.has(oid)) s += w.keepTogether;
         const o = allGuests.get(oid);
         if (!o) continue;
-        if (o.side === g.side) s += 3;
-        s += 2 * g.tagIds.filter((t) => o.tagIds.includes(t)).length;
+        if (o.side === g.side && w.side > 0) s += w.side;
+        if (w.tag > 0) s += w.tag * g.tagIds.filter((t) => o.tagIds.includes(t)).length;
+        if (w.language > 0 && g.languages.length > 0 && o.languages.length > 0) {
+          s += w.language * g.languages.filter((l) => o.languages.includes(l)).length;
+        }
+        if (w.ageGroup > 0 && o.ageGroup === g.ageGroup) s += w.ageGroup;
+      }
+      if (w.hostPrefer > 0 && hostTagId && isLonely(g)) {
+        if (here.some((oid) => allGuests.get(oid)?.tagIds.includes(hostTagId))) {
+          s += w.hostPrefer;
+        }
       }
     }
     return s;
@@ -119,7 +171,6 @@ export function autoArrange(
       seat(unit.guests, tableId);
       continue;
     }
-    // Doesn't fit anywhere as a group: seat people individually (adults first).
     const members = [...unit.guests].sort(
       (a, b) => Number(a.ageGroup !== "adult") - Number(b.ageGroup !== "adult"),
     );
@@ -130,7 +181,28 @@ export function autoArrange(
     }
   }
 
-  return { state: { ...state, assignments }, placed, unplaced };
+  for (const t of tables) {
+    const here = occupants.get(t.id) ?? [];
+    if (here.length === 0) continue;
+    const reasons: string[] = [];
+    const langs = new Set<string>();
+    const sides = new Set<string>();
+    let hasHost = false;
+    for (const oid of here) {
+      const o = allGuests.get(oid);
+      if (!o) continue;
+      sides.add(o.side);
+      for (const l of o.languages) langs.add(l);
+      if (hostTagId && o.tagIds.includes(hostTagId)) hasHost = true;
+    }
+    if (langs.size > 0) reasons.push(`language:${[...langs].join(",")}`);
+    if (sides.size === 1 && sides.values().next().value !== "both")
+      reasons.push(`side:${sides.values().next().value}`);
+    if (hasHost) reasons.push("host");
+    tableScores[t.id] = { tableId: t.id, total: here.length, reasons };
+  }
+
+  return { state: { ...state, assignments }, placed, unplaced, tableScores };
 }
 
 /** Households + keep-together links → groups (union-find). Largest first. */

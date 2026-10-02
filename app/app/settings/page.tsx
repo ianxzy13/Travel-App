@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/app/page-header";
 import { Collaborators } from "@/components/settings/collaborators";
 import { DangerZone } from "@/components/settings/danger-zone";
@@ -7,6 +7,7 @@ import { EventsCard } from "@/components/settings/events-card";
 import { LanguagesCard } from "@/components/settings/languages-card";
 import { WeddingDetailsForm } from "@/components/settings/wedding-details-form";
 import { getSiteUrl } from "@/lib/site-url";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import type { WeddingFormValues } from "@/lib/validation/wedding";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
@@ -54,6 +55,7 @@ export default async function SettingsPage() {
     .select("*")
     .eq("wedding_id", wedding.id)
     .order("sort_order");
+  const shown = await starterTexts(await getLocale());
   // One small count query per event (events are few; invitations can be many).
   const invitedCounts = await Promise.all(
     (events ?? []).map(async (e) => {
@@ -108,7 +110,12 @@ export default async function SettingsPage() {
         <EventsCard
           languages={languages}
           readOnly={!canEdit(role)}
-          events={(events ?? []).map((e, i) => ({ ...e, invitedCount: invitedCounts[i] }))}
+          events={(events ?? []).map((e, i) => ({
+            ...e,
+            // default events nobody has renamed ("Ceremony"…) in the viewer's language
+            name: shown(e.name),
+            invitedCount: invitedCounts[i],
+          }))}
           bookedVenues={bookedVenues ?? []}
         />
         <Collaborators

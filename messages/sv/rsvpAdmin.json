@@ -64,6 +64,8 @@
       "contact": "Efter sista datum, säg till gästerna…",
       "contactHint": "t.ex. ”Skicka ett sms till Maria på 070-123 45 67”",
       "askSong": "Be om ett låtönskemål",
+      "askTravel": "Fråga gäster om reseplaner",
+      "askTravelHint": "Efter att de svarat ja kan gäster dela ankomst- och avreseuppgifter, var de bor och om de behöver transfer.",
       "notify": "Mejla mig när någon svarar",
       "notifyOn": "Skickas till ägare och redaktörer, utöver klockan i appen.",
       "notifyOff": "Kräver Resend och den hemliga Supabase-nyckeln (se README). Du får ändå aviseringar i appen.",
@@ -86,7 +88,9 @@
       "mealEventsHint": "Oftast bara middagen.",
       "addMealsFirst": "Lägg till menyer först.",
       "noEvents": "Inga programpunkter än. Lägg till dem i Inställningar.",
-      "askAt": "Fråga efter meny vid {name}"
+      "askAt": "Fråga efter meny vid {name}",
+      "findSeat": "Sida Hitta din plats",
+      "findSeatHint": "Gaster kan skriva sitt namn pa en offentlig sida for att se sitt bord."
     },
     "email": {
       "title": "Mejla era gäster",

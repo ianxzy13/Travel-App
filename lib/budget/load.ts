@@ -1,5 +1,7 @@
 import "server-only";
+import { getLocale } from "next-intl/server";
 import type { VendorStatus } from "@/lib/database.types";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import type { createClient } from "@/lib/supabase/server";
 import type { BudgetCategory, BudgetExpense, BudgetPayment } from "./stats";
@@ -57,10 +59,12 @@ export async function loadBudget(sb: Supabase, weddingId: string): Promise<Budge
     ),
   ]);
 
+  // suggested categories nobody has renamed are shown in the viewer's language
+  const shown = await starterTexts(await getLocale());
   return {
     categories: categories.map((c) => ({
       id: c.id,
-      name: c.name,
+      name: shown(c.name, "budget.suggested"),
       allocated: Number(c.allocated),
       sortOrder: c.sort_order,
     })),

@@ -51,7 +51,10 @@
       "website": "Situs web",
       "websiteOf": "Situs web {name}",
       "map": "Peta",
-      "mapOf": "Peta {name}"
+      "mapOf": "Peta {name}",
+      "transportTitle": "Transportasi",
+      "visaTitle": "Informasi visa",
+      "currencyTitle": "Mata uang"
     },
     "rsvp": {
       "replyBy": "Mohon konfirmasi sebelum <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Pernikahan {couple}",
       "website": "Situs pernikahan"
+    },
+    "findSeat": {
+      "title": "Temukan tempat dudukmu",
+      "heading": "Temukan mejamu",
+      "label": "Nama lengkapmu",
+      "placeholder": "Nama depan dan belakang",
+      "button": "Cari tempat dudukku",
+      "notFound": "Kami tidak menemukan tempat duduk untuk nama itu. Periksa ejaan di undanganmu.",
+      "yourTable": "Mejamu sudah siap!",
+      "tableName": "Meja {number}",
+      "tableNamed": "{label} (Meja {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Pilih hadir atau tidak hadir untuk setiap orang.",
       "not_allowed": "Anda tidak diizinkan mencatat jawaban untuk pernikahan ini.",
       "generic": "Jawaban Anda tidak dapat disimpan. Coba lagi sebentar lagi."
+    },
+    "travel": {
+      "prompt": "Bagikan detail perjalanan Anda",
+      "editTravel": "Perbarui detail perjalanan",
+      "title": "Detail perjalanan",
+      "subtitle": "Bantu kami merencanakan transfer bandara — beri tahu kami kapan Anda datang dan pergi.",
+      "arrival": "Kedatangan",
+      "departure": "Keberangkatan",
+      "date": "Tanggal",
+      "time": "Waktu",
+      "airport": "Bandara",
+      "airportPlaceholder": "mis. CGK",
+      "flightNumber": "Nomor penerbangan",
+      "stayingAt": "Di mana Anda menginap?",
+      "chooseHotel": "Pilih hotel",
+      "otherAccommodation": "Akomodasi lain",
+      "accommodationName": "Nama hotel atau akomodasi",
+      "accommodationPlaceholder": "mis. Airbnb di pusat kota",
+      "needsTransfer": "Kami menghargai transfer dari bandara",
+      "notes": "Ada yang lain?",
+      "notesPlaceholder": "mis. datang dengan mobil, butuh kursi anak",
+      "save": "Simpan detail perjalanan",
+      "skip": "Lewati untuk sekarang",
+      "saved": "Detail perjalanan tersimpan!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Tautan ini khusus untuk keluarga Anda. Mohon jangan dibagikan.",
     "subjectInvite": "Anda diundang: pernikahan {couple}",
     "subjectReminder": "Pengingat: konfirmasi kehadiran di pernikahan {couple}"
+  },
+  "travelEmail": {
+    "preview": "Bagikan rencana perjalanan Anda untuk pernikahan {couple}",
+    "eyebrow": "Detail perjalanan",
+    "dear": "{name} yang terhormat,",
+    "body": "Terima kasih telah mengonfirmasi kehadiran! Untuk membantu kami merencanakan transfer, silakan bagikan detail kedatangan dan keberangkatan melalui tautan di bawah.",
+    "button": "Bagikan detail perjalanan",
+    "fallback": "Tombol tidak berfungsi? Buka {link}",
+    "love": "Dengan kasih,",
+    "subject": "Detail perjalanan untuk pernikahan {couple}"
   }
 }

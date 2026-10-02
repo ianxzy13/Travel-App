@@ -186,7 +186,13 @@
       "rule": "Regel",
       "guestLabel": "Gäst",
       "chooseGuest": "Välj en gäst",
-      "addRule": "Lägg till regel"
+      "addRule": "Lägg till regel",
+      "languages": "Talade sprak",
+      "languagesHint": "Bordsplaceringen anvander detta for att placera gaster som talar samma sprak tillsammans.",
+      "addLanguage": "Lagg till sprak",
+      "allLanguages": "Alla sprak",
+      "remove": "Ta bort",
+      "noLanguages": "Inga sprak tillagda"
     },
     "household": {
       "title": "Hushållsinställningar",

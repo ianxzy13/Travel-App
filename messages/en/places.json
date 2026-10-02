@@ -136,6 +136,7 @@
     "copied": "Copied",
     "copyFailed": "Couldn’t copy automatically.",
     "add": "Add hotel",
+    "findOnBooking": "Find on Booking.com",
     "cutoffSoon": "<b>{name}</b>: room block cut-off in {days, plural, one {# day} other {# days}}.",
     "roomsFree": "{count, plural, one {# room is still free.} other {# rooms are still free.}}",
     "remind": "Remind your guests to book!",
@@ -195,6 +196,24 @@
     "departures": "Departures ({count})",
     "ours": "Us & honeymoon ({count})",
     "all": "All flights ({count})",
+    "guestTravel": "Guest travel ({count})",
+    "gt": {
+      "shared": "Shared details:",
+      "needTransfer": "Need a transfer:",
+      "unknown": "Unknown household",
+      "transferRequested": "Transfer requested",
+      "remind": "Remind {count, plural, one {# household} other {# households}}",
+      "reminded": "Reminder sent to {count, plural, one {# household} other {# households}}"
+    },
+    "shuttles": "Shuttles ({count})",
+    "shuttle": {
+      "empty": "No guests have requested a transfer yet. When they do, shuttle runs will appear here automatically.",
+      "window": "Time window",
+      "minutes": "min",
+      "summary": "{runs, plural, one {# run} other {# runs}} · {people, plural, one {# person} other {# people}}",
+      "print": "Print",
+      "dayPeople": "{count, plural, one {# person} other {# people}}"
+    },
     "ourFlight": "Our flight",
     "honeymoonFlight": "Honeymoon flight",
     "search": "Search flights",

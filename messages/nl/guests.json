@@ -186,7 +186,13 @@
       "rule": "Regel",
       "guestLabel": "Gast",
       "chooseGuest": "Kies een gast",
-      "addRule": "Regel toevoegen"
+      "addRule": "Regel toevoegen",
+      "languages": "Gesproken talen",
+      "languagesHint": "Wordt gebruikt door de tafelschikking om gasten die dezelfde taal spreken bij elkaar te zetten.",
+      "addLanguage": "Taal toevoegen",
+      "allLanguages": "Alle talen",
+      "remove": "Verwijderen",
+      "noLanguages": "Geen talen toegevoegd"
     },
     "household": {
       "title": "Instellingen huishouden",

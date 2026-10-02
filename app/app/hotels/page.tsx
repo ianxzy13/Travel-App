@@ -37,6 +37,7 @@ export default async function Hotels() {
       stays={stays}
       guests={guests}
       currency={wedding.currency}
+      location={wedding.location}
       canEdit={canEdit(role)}
       today={new Date().toISOString().slice(0, 10)}
     />

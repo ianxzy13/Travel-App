@@ -33,6 +33,7 @@ function guest(overrides: Partial<GuestView>): GuestView {
     dietary: null,
     accessibility: null,
     notes: null,
+    languages: [],
     list: "a",
     tagIds: [],
     eventIds: [],

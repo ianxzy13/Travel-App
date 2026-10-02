@@ -51,7 +51,10 @@
       "website": "Site",
       "websiteOf": "Site de {name}",
       "map": "Mapa",
-      "mapOf": "Mapa de {name}"
+      "mapOf": "Mapa de {name}",
+      "transportTitle": "Como chegar",
+      "visaTitle": "Informação de visto",
+      "currencyTitle": "Moeda"
     },
     "rsvp": {
       "replyBy": "Por favor, responda até <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "O casamento de {couple}",
       "website": "Site do casamento"
+    },
+    "findSeat": {
+      "title": "Encontre o seu lugar",
+      "heading": "Encontre a sua mesa",
+      "label": "O seu nome completo",
+      "placeholder": "Nome e apelido",
+      "button": "Encontrar o meu lugar",
+      "notFound": "Nao encontramos um lugar para esse nome. Verifique a ortografia do seu convite.",
+      "yourTable": "A sua mesa esta pronta!",
+      "tableName": "Mesa {number}",
+      "tableNamed": "{label} (Mesa {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Indique para cada pessoa se vai ou não.",
       "not_allowed": "Não tem permissão para registar respostas deste casamento.",
       "generic": "Não conseguimos guardar a sua resposta. Tente de novo daqui a pouco."
+    },
+    "travel": {
+      "prompt": "Partilhe os seus dados de viagem",
+      "editTravel": "Atualizar dados de viagem",
+      "title": "Dados de viagem",
+      "subtitle": "Ajude-nos a planear os transfers — diga-nos quando chega e quando parte.",
+      "arrival": "Chegada",
+      "departure": "Partida",
+      "date": "Data",
+      "time": "Hora",
+      "airport": "Aeroporto",
+      "airportPlaceholder": "ex. LIS",
+      "flightNumber": "Número do voo",
+      "stayingAt": "Onde vai ficar?",
+      "chooseHotel": "Escolher um hotel",
+      "otherAccommodation": "Outro alojamento",
+      "accommodationName": "Nome do hotel ou alojamento",
+      "accommodationPlaceholder": "ex. Airbnb no centro da cidade",
+      "needsTransfer": "Gostaríamos de um transfer do aeroporto",
+      "notes": "Mais alguma coisa?",
+      "notesPlaceholder": "ex. chegamos de carro, precisamos de cadeira infantil",
+      "save": "Guardar dados de viagem",
+      "skip": "Saltar por agora",
+      "saved": "Dados de viagem guardados!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Este link é pessoal para a sua família. Por favor, não o partilhe.",
     "subjectInvite": "Está convidado: casamento de {couple}",
     "subjectReminder": "Lembrete: confirme presença no casamento de {couple}"
+  },
+  "travelEmail": {
+    "preview": "Partilhe os seus planos de viagem para o casamento de {couple}",
+    "eyebrow": "Dados de viagem",
+    "dear": "Caro/a {name},",
+    "body": "Obrigado por confirmar a sua presença! Para nos ajudar a planear transfers, partilhe os seus detalhes de chegada e partida no link abaixo.",
+    "button": "Partilhar dados de viagem",
+    "fallback": "Botão não funciona? Abra {link}",
+    "love": "Com carinho,",
+    "subject": "Dados de viagem para o casamento de {couple}"
   }
 }

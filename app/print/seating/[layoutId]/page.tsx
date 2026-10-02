@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { PrintControls } from "@/components/seating/print-controls";
 import { PrintSeatingView, VIEWS, type ViewKey } from "@/components/seating/print-view";
 import { Button } from "@/components/ui/button";
 import { loadSeatingData } from "@/lib/seating/load";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { coupleName, requireUser } from "@/lib/wedding";
@@ -48,7 +49,8 @@ export default async function PrintSeatingPage({
   ]);
 
   const { state } = data;
-  const title = `${wedding ? coupleName(wedding) : ""} · ${event?.name ?? ""}`;
+  const shown = await starterTexts(await getLocale());
+  const title = `${wedding ? coupleName(wedding) : ""} · ${shown(event?.name) ?? ""}`;
 
   return (
     <main className="mx-auto max-w-5xl bg-white p-6 text-[#4a3f3a] print:max-w-none print:p-0">

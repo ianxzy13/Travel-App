@@ -86,7 +86,11 @@
       "mealEventsHint": "Meestal alleen bij het diner.",
       "addMealsFirst": "Voeg eerst menu’s toe.",
       "noEvents": "Nog geen onderdelen. Voeg ze toe bij Instellingen.",
-      "askAt": "Vraag naar menu bij {name}"
+      "askAt": "Vraag naar menu bij {name}",
+      "askTravel": "Gasten vragen naar reisplannen",
+      "askTravelHint": "Na bevestiging kunnen gasten aankomst- en vertrekgegevens, verblijf en transferbehoefte delen.",
+      "findSeat": "Pagina Vind je plek",
+      "findSeatHint": "Gasten kunnen hun naam typen op een openbare pagina om hun tafel te zien."
     },
     "email": {
       "title": "Mail je gasten",

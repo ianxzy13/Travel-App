@@ -9,8 +9,9 @@ import { fmtDate } from "@/lib/i18n/format";
 import { answerKey, initialFormState, rsvpGuestName, type RsvpFormState } from "@/lib/rsvp/form";
 import type { RsvpData } from "@/lib/rsvp/types";
 import { RsvpForm, useGuestNameLabels } from "./rsvp-form";
+import { RsvpTravelForm } from "./rsvp-travel-form";
 
-type View = "summary" | "form" | "thanks";
+type View = "summary" | "form" | "thanks" | "travel";
 
 /** The guest's journey on /r/[code]: see answers → edit → thank you. */
 export function RsvpExperience({ data }: { data: RsvpData }) {
@@ -24,6 +25,9 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
     ? fmtDate(data.wedding.rsvp_deadline, locale, "long")
     : null;
   const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
+
+  const anyAttending = Object.values(state.answers).some((a) => a.status === "attending");
+  const showTravelPrompt = data.wedding.rsvp_ask_travel && anyAttending;
 
   return (
     <div className="space-y-6">
@@ -52,15 +56,43 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
       )}
 
       {view === "thanks" && (
-        <div role="status" className="bg-card rounded-2xl border p-8 text-center shadow-sm">
-          <Heart className="text-primary-ink mx-auto size-10" aria-hidden />
-          <h2 className="font-script mt-4 text-5xl font-normal">{t("thanks")}</h2>
-          <p className="text-muted-foreground mt-2">
-            {deadline
-              ? t("thanksTextUntil", { couple, date: deadline })
-              : t("thanksText", { couple })}
-          </p>
-        </div>
+        <>
+          <div role="status" className="bg-card rounded-2xl border p-8 text-center shadow-sm">
+            <Heart className="text-primary-ink mx-auto size-10" aria-hidden />
+            <h2 className="font-script mt-4 text-5xl font-normal">{t("thanks")}</h2>
+            <p className="text-muted-foreground mt-2">
+              {deadline
+                ? t("thanksTextUntil", { couple, date: deadline })
+                : t("thanksText", { couple })}
+            </p>
+          </div>
+          {showTravelPrompt && (
+            <Button
+              size="lg"
+              className="w-full"
+              onClick={() => {
+                setView("travel");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              {t("travel.prompt")}
+            </Button>
+          )}
+        </>
+      )}
+
+      {view === "travel" && (
+        <RsvpTravelForm
+          data={data}
+          onSaved={() => {
+            setView("summary");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          onSkip={() => {
+            setView("summary");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
       )}
 
       {view === "form" && !closed ? (
@@ -76,16 +108,36 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
           }}
           submitLabel={answered ? t("save") : t("send")}
         />
-      ) : (
+      ) : view !== "travel" ? (
         <>
           <AnswerSummary data={data} state={state} />
           {!closed && (
-            <Button size="lg" variant="outline" className="w-full" onClick={() => setView("form")}>
-              {t("change")}
-            </Button>
+            <div className="space-y-3">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full"
+                onClick={() => setView("form")}
+              >
+                {t("change")}
+              </Button>
+              {showTravelPrompt && (
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    setView("travel");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  {t("travel.editTravel")}
+                </Button>
+              )}
+            </div>
           )}
         </>
-      )}
+      ) : null}
     </div>
   );
 }

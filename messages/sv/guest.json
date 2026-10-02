@@ -51,7 +51,10 @@
       "website": "Webbplats",
       "websiteOf": "Webbplats för {name}",
       "map": "Karta",
-      "mapOf": "Karta över {name}"
+      "mapOf": "Karta över {name}",
+      "transportTitle": "Att ta sig runt",
+      "visaTitle": "Visuminformation",
+      "currencyTitle": "Valuta"
     },
     "rsvp": {
       "replyBy": "OSA senast <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Bröllopet för {couple}",
       "website": "Bröllopswebbplats"
+    },
+    "findSeat": {
+      "title": "Hitta din plats",
+      "heading": "Hitta ditt bord",
+      "label": "Ditt fullstandiga namn",
+      "placeholder": "For- och efternamn",
+      "button": "Hitta min plats",
+      "notFound": "Vi kunde inte hitta en plats for det namnet. Kontrollera stavningen pa din inbjudan.",
+      "yourTable": "Ditt bord ar klart!",
+      "tableName": "Bord {number}",
+      "tableNamed": "{label} (Bord {number})"
     }
   },
   "rsvp": {
@@ -145,6 +159,30 @@
       "guestOf": "{name}s sällskap",
       "guest": "Gäst"
     },
+    "travel": {
+      "prompt": "Dela dina reseuppgifter",
+      "editTravel": "Uppdatera reseuppgifter",
+      "title": "Reseuppgifter",
+      "subtitle": "Hjälp oss planera flygplatstransfer — berätta när du anländer och reser hem.",
+      "arrival": "Ankomst",
+      "departure": "Avresa",
+      "date": "Datum",
+      "time": "Tid",
+      "airport": "Flygplats",
+      "airportPlaceholder": "t.ex. ARN",
+      "flightNumber": "Flightnummer",
+      "stayingAt": "Var bor du?",
+      "chooseHotel": "Välj hotell",
+      "otherAccommodation": "Annan plats",
+      "accommodationName": "Hotell- eller boendenamn",
+      "accommodationPlaceholder": "t.ex. Airbnb i centrum",
+      "needsTransfer": "Vi vill gärna ha transfer från flygplatsen",
+      "notes": "Något annat?",
+      "notesPlaceholder": "t.ex. kommer med bil, behöver barnstol",
+      "save": "Spara reseuppgifter",
+      "skip": "Hoppa över",
+      "saved": "Reseuppgifterna sparade!"
+    },
     "errors": {
       "rsvp_not_found": "Vi hittade inte den inbjudan. Kontrollera länken eller koden.",
       "deadline_passed": "Sista dag för OSA har passerat. Kontakta brudparet direkt.",
@@ -176,5 +214,15 @@
     "personal": "Den här länken är personlig för ert hushåll. Dela den inte.",
     "subjectInvite": "Ni är bjudna: bröllopet för {couple}",
     "subjectReminder": "Påminnelse: OSA till bröllopet för {couple}"
+  },
+  "travelEmail": {
+    "preview": "Dela dina reseplaner inför bröllopet för {couple}",
+    "eyebrow": "Reseuppgifter",
+    "dear": "Kära {name},",
+    "body": "Tack för din OSA! För att hjälpa oss planera flygplatstransfer, dela gärna dina ankomst- och avreseuppgifter via länken nedan.",
+    "button": "Dela reseuppgifter",
+    "fallback": "Fungerar inte knappen? Öppna {link}",
+    "love": "Varma hälsningar,",
+    "subject": "Reseuppgifter för bröllopet {couple}"
   }
 }

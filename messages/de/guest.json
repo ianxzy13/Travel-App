@@ -51,7 +51,10 @@
       "website": "Website",
       "websiteOf": "Website von {name}",
       "map": "Karte",
-      "mapOf": "Karte von {name}"
+      "mapOf": "Karte von {name}",
+      "transportTitle": "Anreise & Mobilität",
+      "visaTitle": "Visa-Informationen",
+      "currencyTitle": "Währung"
     },
     "rsvp": {
       "replyBy": "Bitte antworte bis <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "Die Hochzeit von {couple}",
       "website": "Hochzeitswebsite"
+    },
+    "findSeat": {
+      "title": "Finde deinen Platz",
+      "heading": "Finde deinen Tisch",
+      "label": "Dein vollstandiger Name",
+      "placeholder": "Vor- und Nachname",
+      "button": "Meinen Platz finden",
+      "notFound": "Wir konnten keinen Platz fur diesen Namen finden. Prufe die Schreibweise auf deiner Einladung.",
+      "yourTable": "Dein Tisch ist bereit!",
+      "tableName": "Tisch {number}",
+      "tableNamed": "{label} (Tisch {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Bitte gib für alle an, ob sie kommen oder nicht.",
       "not_allowed": "Du darfst für diese Hochzeit keine Antworten eintragen.",
       "generic": "Wir konnten deine Antwort nicht speichern. Bitte versuche es gleich noch einmal."
+    },
+    "travel": {
+      "prompt": "Teilen Sie Ihre Reisedaten",
+      "editTravel": "Reisedaten aktualisieren",
+      "title": "Reisedaten",
+      "subtitle": "Helfen Sie uns bei der Planung der Flughafentransfers — sagen Sie uns, wann Sie ankommen und abreisen.",
+      "arrival": "Ankunft",
+      "departure": "Abreise",
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "airport": "Flughafen",
+      "airportPlaceholder": "z.B. FRA",
+      "flightNumber": "Flugnummer",
+      "stayingAt": "Wo übernachten Sie?",
+      "chooseHotel": "Hotel auswählen",
+      "otherAccommodation": "Andere Unterkunft",
+      "accommodationName": "Name des Hotels oder der Unterkunft",
+      "accommodationPlaceholder": "z.B. Airbnb im Stadtzentrum",
+      "needsTransfer": "Wir würden uns über einen Transfer vom Flughafen freuen",
+      "notes": "Sonst noch etwas?",
+      "notesPlaceholder": "z.B. wir kommen mit dem Auto, brauchen einen Kindersitz",
+      "save": "Reisedaten speichern",
+      "skip": "Vorerst überspringen",
+      "saved": "Reisedaten gespeichert!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Dieser Link ist nur für euren Haushalt. Bitte gebt ihn nicht weiter.",
     "subjectInvite": "Einladung: Hochzeit von {couple}",
     "subjectReminder": "Erinnerung: bitte antwortet zur Hochzeit von {couple}"
+  },
+  "travelEmail": {
+    "preview": "Bitte teilen Sie Ihre Reisepläne für die Hochzeit von {couple}",
+    "eyebrow": "Reisedaten",
+    "dear": "Liebe/r {name},",
+    "body": "Danke für Ihre Zusage! Um Flughafentransfers zu planen, teilen Sie uns bitte Ihre An- und Abreisedaten über den Link unten mit.",
+    "button": "Reisedaten teilen",
+    "fallback": "Button funktioniert nicht? Öffnen Sie {link}",
+    "love": "Mit Liebe,",
+    "subject": "Reisedaten für die Hochzeit von {couple}"
   }
 }

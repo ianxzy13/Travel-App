@@ -1,4 +1,6 @@
 import "server-only";
+import { getLocale } from "next-intl/server";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import type { createClient } from "@/lib/supabase/server";
 
@@ -63,5 +65,16 @@ export async function loadGuestData(sb: Supabase, weddingId: string) {
           .range(from, to),
       ),
     ]);
-  return { guests, households, invites, guestTags, events, tags, relationships, responses };
+  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  const shown = await starterTexts(await getLocale());
+  return {
+    guests,
+    households,
+    invites,
+    guestTags,
+    events: events.map((e) => ({ ...e, name: shown(e.name) })),
+    tags,
+    relationships,
+    responses,
+  };
 }

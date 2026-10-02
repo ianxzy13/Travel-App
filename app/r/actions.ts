@@ -9,7 +9,7 @@ import { rsvpErrorKey, type RsvpResult } from "@/lib/rsvp/types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import { rsvpPayloadSchema } from "@/lib/validation/rsvp";
+import { guestTravelSchema, rsvpPayloadSchema } from "@/lib/validation/rsvp";
 
 // These actions are used by guests WITHOUT an account. They only call the
 // get_rsvp / submit_rsvp / find_rsvp_code database functions, which check the
@@ -121,5 +121,42 @@ export async function setRsvpLanguage(code: string, language: string): Promise<A
   const supabase = await createClient();
   const { error } = await supabase.rpc("set_rsvp_language", { p_code: code, p_language: language });
   if (error) console.error("[setRsvpLanguage]", error);
+  return { ok: true };
+}
+
+/** Guest submits their travel details after RSVPing "yes". */
+export async function submitGuestTravel(
+  code: string,
+  payload: unknown,
+): Promise<ActionResult> {
+  const t = await getTranslations("rsvp.errors");
+  const parsedCode = codeSchema.safeParse(code);
+  const parsed = guestTravelSchema.safeParse(payload);
+  if (!parsedCode.success) return { ok: false, error: t("rsvp_not_found") };
+  if (!parsed.success) return { ok: false, error: t("generic") };
+
+  const data = parsed.data;
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("submit_guest_travel", {
+    p_code: parsedCode.data,
+    p_payload: {
+      arrival_date: data.arrival_date || null,
+      arrival_time: data.arrival_time || null,
+      arrival_airport: data.arrival_airport || null,
+      arrival_flight: data.arrival_flight || null,
+      departure_date: data.departure_date || null,
+      departure_time: data.departure_time || null,
+      departure_airport: data.departure_airport || null,
+      departure_flight: data.departure_flight || null,
+      staying_at: data.staying_at || null,
+      hotel_id: data.hotel_id || null,
+      needs_transfer: data.needs_transfer ?? false,
+      transport_notes: data.transport_notes || null,
+    },
+  });
+  if (error) {
+    console.error("[submitGuestTravel]", error);
+    return { ok: false, error: t("generic") };
+  }
   return { ok: true };
 }

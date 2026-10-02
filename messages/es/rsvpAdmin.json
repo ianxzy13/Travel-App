@@ -86,7 +86,11 @@
       "mealEventsHint": "Normalmente solo en la cena del banquete.",
       "addMealsFirst": "Añade menús primero.",
       "noEvents": "Aún no hay eventos. Añádelos en Ajustes.",
-      "askAt": "Pedir menú en {name}"
+      "askAt": "Pedir menú en {name}",
+      "askTravel": "Preguntar a los invitados por sus planes de viaje",
+      "askTravelHint": "Tras confirmar asistencia, los invitados pueden compartir detalles de llegada y salida, dónde se alojan y si necesitan traslado.",
+      "findSeat": "Pagina de encontrar tu mesa",
+      "findSeatHint": "Los invitados pueden escribir su nombre en una pagina publica para ver su mesa asignada."
     },
     "email": {
       "title": "Escribe a tus invitados",

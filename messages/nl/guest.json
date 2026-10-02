@@ -51,7 +51,10 @@
       "website": "Website",
       "websiteOf": "Website van {name}",
       "map": "Kaart",
-      "mapOf": "Kaart van {name}"
+      "mapOf": "Kaart van {name}",
+      "transportTitle": "Vervoer",
+      "visaTitle": "Visuminformatie",
+      "currencyTitle": "Valuta"
     },
     "rsvp": {
       "replyBy": "Laat het ons weten vóór <b>{date}</b>.",
@@ -76,6 +79,17 @@
     "meta": {
       "weddingOf": "De bruiloft van {couple}",
       "website": "Trouwwebsite"
+    },
+    "findSeat": {
+      "title": "Vind je plek",
+      "heading": "Vind je tafel",
+      "label": "Je volledige naam",
+      "placeholder": "Voor- en achternaam",
+      "button": "Vind mijn plek",
+      "notFound": "We konden geen plek vinden voor die naam. Controleer de spelling op je uitnodiging.",
+      "yourTable": "Je tafel is klaar!",
+      "tableName": "Tafel {number}",
+      "tableNamed": "{label} (Tafel {number})"
     }
   },
   "rsvp": {
@@ -152,6 +166,30 @@
       "invalid_status": "Geef voor iedereen aan of die komt of niet.",
       "not_allowed": "Je mag geen antwoorden invoeren voor deze bruiloft.",
       "generic": "We konden je antwoord niet opslaan. Probeer het zo opnieuw."
+    },
+    "travel": {
+      "prompt": "Deel uw reisgegevens",
+      "editTravel": "Reisgegevens bijwerken",
+      "title": "Reisgegevens",
+      "subtitle": "Help ons bij het plannen van luchthaven transfers — vertel ons wanneer u aankomt en vertrekt.",
+      "arrival": "Aankomst",
+      "departure": "Vertrek",
+      "date": "Datum",
+      "time": "Tijd",
+      "airport": "Luchthaven",
+      "airportPlaceholder": "bijv. AMS",
+      "flightNumber": "Vluchtnummer",
+      "stayingAt": "Waar verblijft u?",
+      "chooseHotel": "Kies een hotel",
+      "otherAccommodation": "Andere accommodatie",
+      "accommodationName": "Naam van hotel of accommodatie",
+      "accommodationPlaceholder": "bijv. Airbnb in het centrum",
+      "needsTransfer": "We zouden graag een transfer van de luchthaven willen",
+      "notes": "Nog iets anders?",
+      "notesPlaceholder": "bijv. we komen met de auto, hebben een kinderzitje nodig",
+      "save": "Reisgegevens opslaan",
+      "skip": "Voorlopig overslaan",
+      "saved": "Reisgegevens opgeslagen!"
     }
   },
   "board": {
@@ -176,5 +214,15 @@
     "personal": "Deze link is persoonlijk voor jullie huishouden. Deel hem alsjeblieft niet.",
     "subjectInvite": "Uitnodiging: de bruiloft van {couple}",
     "subjectReminder": "Herinnering: laat ons weten of je komt naar de bruiloft van {couple}"
+  },
+  "travelEmail": {
+    "preview": "Deel uw reisplannen voor de bruiloft van {couple}",
+    "eyebrow": "Reisgegevens",
+    "dear": "Beste {name},",
+    "body": "Bedankt voor het bevestigen! Om transfers te plannen, deel uw aankomst- en vertrekgegevens via de link hieronder.",
+    "button": "Reisgegevens delen",
+    "fallback": "Knop werkt niet? Open {link}",
+    "love": "Met liefde,",
+    "subject": "Reisgegevens voor de bruiloft van {couple}"
   }
 }

@@ -186,7 +186,13 @@
       "rule": "规则",
       "guestLabel": "宾客",
       "chooseGuest": "选择宾客",
-      "addRule": "添加规则"
+      "addRule": "添加规则",
+      "languages": "使用语言",
+      "languagesHint": "座位图会用这个信息将说同一种语言的来宾安排在一起。",
+      "addLanguage": "添加语言",
+      "allLanguages": "所有语言",
+      "remove": "移除",
+      "noLanguages": "未添加语言"
     },
     "household": {
       "title": "家庭设置",

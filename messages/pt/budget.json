@@ -198,7 +198,11 @@
     "deleteTitle": "Eliminar {name}?",
     "deleteText": "O ficheiro do contrato é eliminado. As despesas ligadas ficam no vosso orçamento.",
     "cancel": "Cancelar",
-    "save": "Guardar"
+    "save": "Guardar",
+    "find": "Procurar fornecedores",
+    "findHint": "Procurar perto de {location}",
+    "pasteUrl": "Colar um link",
+    "pasteUrlHint": "Cole o site do fornecedor para preencher o nome automaticamente."
   },
   "files": {
     "openFailed": "Não foi possível abrir o ficheiro. Tentem novamente.",

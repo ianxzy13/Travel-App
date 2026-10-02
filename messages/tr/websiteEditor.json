@@ -175,7 +175,13 @@
       "captionPlaceholder": "Açıklama (isteğe bağlı)",
       "moveUp": "{n}. öğeyi yukarı taşı",
       "moveDown": "{n}. öğeyi aşağı taşı",
-      "remove": "{n}. öğeyi kaldır"
+      "remove": "{n}. öğeyi kaldır",
+      "transport": "Ulaşım ve yol tarifi",
+      "transportHint": "Havalimanından mekana nasıl gidilir, araç kiralama, otobüsler…",
+      "visa": "Vize bilgileri",
+      "visaHint": "Misafirlerin vizeye ihtiyacı var mı? Hangi ülkeler muaf?",
+      "currency": "Para birimi",
+      "currencyHint": "Yerel para birimi, döviz ipuçları, kart kabul durumu…"
     },
     "image": {
       "wrongType": "Lütfen JPG, PNG veya WebP fotoğraf seçin.",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { SchedulePage } from "@/components/schedule/schedule-page";
+import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
 
@@ -26,10 +27,16 @@ export default async function Schedule() {
       .order("name"),
   ]);
 
+  // starter texts nobody has changed are shown in the viewer's language
+  const shown = await starterTexts(await getLocale());
   return (
     <SchedulePage
-      items={items ?? []}
-      events={events ?? []}
+      items={(items ?? []).map((i) => ({
+        ...i,
+        title: shown(i.title, "schedule.template"),
+        owner: shown(i.owner, "schedule.owners"),
+      }))}
+      events={(events ?? []).map((e) => ({ ...e, name: shown(e.name) }))}
       vendors={vendors ?? []}
       weddingDate={wedding.wedding_date}
       canEdit={canEdit(role)}

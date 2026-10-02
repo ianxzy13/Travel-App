@@ -47,7 +47,9 @@ export async function updateRsvpSettings(input: unknown): Promise<ActionResult> 
       rsvp_deadline: v.deadline || null,
       rsvp_contact: v.contact || null,
       rsvp_ask_song: v.askSong,
+      rsvp_ask_travel: v.askTravel,
       rsvp_notify_email: v.notifyEmail,
+      find_seat_enabled: v.findSeatEnabled,
     })
     .eq("id", ctx.wedding.id);
   if (error) return fail("updateRsvpSettings", error);
