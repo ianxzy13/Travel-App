@@ -52,8 +52,8 @@
       "websiteOf": "Sitio web de {name}",
       "map": "Mapa",
       "mapOf": "Mapa de {name}",
-      "transportTitle": "Cómo llegar",
-      "visaTitle": "Información de visado",
+      "transportTitle": "Cómo moverse",
+      "visaTitle": "Información sobre visados",
       "currencyTitle": "Moneda"
     },
     "rsvp": {
@@ -81,15 +81,15 @@
       "website": "Sitio web de la boda"
     },
     "findSeat": {
-      "title": "Encuentra tu mesa",
+      "title": "Encuentra tu sitio",
       "heading": "Encuentra tu mesa",
       "label": "Tu nombre completo",
-      "placeholder": "Nombre y apellido",
-      "button": "Buscar mi mesa",
-      "notFound": "No encontramos una mesa para ese nombre. Revisa la ortografia de tu invitacion.",
-      "yourTable": "Tu mesa esta lista!",
+      "placeholder": "Nombre y apellidos",
+      "button": "Buscar mi sitio",
+      "notFound": "No encontramos ningún sitio para ese nombre. Revisa cómo está escrito en tu invitación.",
+      "yourTable": "¡Tu mesa está lista!",
       "tableName": "Mesa {number}",
-      "tableNamed": "{label} (Mesa {number})"
+      "tableNamed": "{label} (mesa {number})"
     }
   },
   "rsvp": {
@@ -168,49 +168,49 @@
       "generic": "No pudimos guardar tu respuesta. Inténtalo de nuevo en un momento."
     },
     "travel": {
-      "prompt": "Comparte tus datos de viaje",
+      "prompt": "Comparte los datos de tu viaje",
       "editTravel": "Actualizar datos de viaje",
       "title": "Datos de viaje",
-      "subtitle": "Ayúdanos a planificar los traslados — cuéntanos cuándo llegas y cuándo te vas.",
+      "subtitle": "Ayuda a los novios a organizar la logística compartiendo tus planes de viaje. Todos los campos son opcionales.",
       "arrival": "Llegada",
       "departure": "Salida",
       "date": "Fecha",
       "time": "Hora",
       "airport": "Aeropuerto",
-      "airportPlaceholder": "ej. MAD",
+      "airportPlaceholder": "p. ej. LHR",
       "flightNumber": "Número de vuelo",
       "stayingAt": "¿Dónde te alojas?",
-      "chooseHotel": "Elegir un hotel",
-      "otherAccommodation": "Otro alojamiento",
+      "chooseHotel": "Elige un hotel",
+      "otherAccommodation": "En otro sitio",
       "accommodationName": "Nombre del hotel o alojamiento",
-      "accommodationPlaceholder": "ej. Airbnb en el centro",
+      "accommodationPlaceholder": "p. ej. Airbnb en el centro",
       "needsTransfer": "Nos vendría bien un traslado desde el aeropuerto",
       "notes": "¿Algo más?",
-      "notesPlaceholder": "ej. llegamos en coche, necesitamos silla infantil",
+      "notesPlaceholder": "p. ej. llegamos en coche, necesitamos silla infantil",
       "save": "Guardar datos de viaje",
-      "skip": "Omitir por ahora",
+      "skip": "Ahora no",
       "saved": "¡Datos de viaje guardados!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Preferencias de habitación",
+      "subtitle": "Cuéntales a los novios tus preferencias de alojamiento para que puedan organizar las habitaciones.",
+      "wantRoom": "¿Necesitas habitación de hotel?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Sí, por favor",
+        "no": "No, gracias",
+        "elsewhere": "Me alojo en otro sitio"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Necesitamos cuna en la habitación",
+      "share": "Me gustaría compartir habitación con",
+      "sharePlaceholder": "p. ej. Anna y Tom",
+      "avoid": "Prefiero no compartir con",
+      "avoidPlaceholder": "Déjalo en blanco si no tienes preferencia"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Tu habitación",
+      "room": "Habitación {number}",
+      "checkIn": "Entrada: {date}",
+      "checkOut": "Salida: {date}"
     }
   },
   "board": {
@@ -237,12 +237,12 @@
     "subjectReminder": "Recordatorio: confirma tu asistencia a la boda de {couple}"
   },
   "travelEmail": {
-    "preview": "Por favor comparte tus planes de viaje para la boda de {couple}",
+    "preview": "Comparte tus planes de viaje para la boda de {couple}",
     "eyebrow": "Datos de viaje",
-    "dear": "Querido/a {name},",
-    "body": "¡Gracias por confirmar tu asistencia! Para ayudarnos a organizar los traslados, por favor comparte tus datos de llegada y salida usando el enlace de abajo.",
+    "dear": "Hola, {name}:",
+    "body": "¡Gracias por confirmar tu asistencia! Para ayudarnos a organizar los traslados desde el aeropuerto, comparte tus datos de llegada y salida en el enlace de abajo.",
     "button": "Compartir datos de viaje",
-    "fallback": "¿El botón no funciona? Abre {link}",
+    "fallback": "¿No funciona el botón? Abre {link}",
     "love": "Con cariño,",
     "subject": "Datos de viaje para la boda de {couple}"
   }

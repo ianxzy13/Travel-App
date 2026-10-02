@@ -171,7 +171,7 @@
       "prompt": "旅行の詳細を共有する",
       "editTravel": "旅行の詳細を更新する",
       "title": "旅行の詳細",
-      "subtitle": "空港送迎の計画にご協力ください — 到着と出発の日時をお知らせください。",
+      "subtitle": "旅行のご予定をお知らせいただくと、おふたりが当日の手配をしやすくなります。すべての項目は任意です。",
       "arrival": "到着",
       "departure": "出発",
       "date": "日付",
@@ -192,25 +192,25 @@
       "saved": "旅行の詳細が保存されました！"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "お部屋のご希望",
+      "subtitle": "お部屋の手配のため、ご宿泊のご希望をおふたりにお知らせください。",
+      "wantRoom": "ホテルのお部屋は必要ですか？",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "はい、お願いします",
+        "no": "いいえ、結構です",
+        "elsewhere": "別の場所に宿泊します"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "お部屋にベビーベッドが必要",
+      "share": "同室を希望する方",
+      "sharePlaceholder": "例：花子さんと太郎さん",
+      "avoid": "同室を希望しない方",
+      "avoidPlaceholder": "特になければ空欄のままで結構です"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "ご宿泊のお部屋",
+      "room": "{number} 号室",
+      "checkIn": "チェックイン：{date}",
+      "checkOut": "チェックアウト：{date}"
     }
   },
   "board": {

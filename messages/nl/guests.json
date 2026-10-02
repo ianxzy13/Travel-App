@@ -188,7 +188,7 @@
       "chooseGuest": "Kies een gast",
       "addRule": "Regel toevoegen",
       "languages": "Gesproken talen",
-      "languagesHint": "Wordt gebruikt door de tafelschikking om gasten die dezelfde taal spreken bij elkaar te zetten.",
+      "languagesHint": "Wordt door de tafelindeling gebruikt om gasten die een taal delen bij elkaar te zetten.",
       "addLanguage": "Taal toevoegen",
       "allLanguages": "Alle talen",
       "remove": "Verwijderen",

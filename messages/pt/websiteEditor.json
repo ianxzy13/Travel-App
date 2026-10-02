@@ -176,9 +176,9 @@
       "moveUp": "Subir o item {n}",
       "moveDown": "Descer o item {n}",
       "remove": "Remover o item {n}",
-      "transport": "Transporte e direções",
-      "transportHint": "Como chegar do aeroporto ao local, aluguer de carros, autocarros…",
-      "visa": "Informação de visto",
+      "transport": "Transportes e como chegar",
+      "transportHint": "Como ir do aeroporto ao local, aluguer de carro, autocarros locais…",
+      "visa": "Informação sobre vistos",
       "visaHint": "Os convidados precisam de visto? Que países estão isentos?",
       "currency": "Moeda",
       "currencyHint": "Moeda local, dicas de câmbio, aceitação de cartões…"

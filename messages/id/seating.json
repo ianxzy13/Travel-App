@@ -193,23 +193,23 @@
       "button": "Cetak atau simpan PDF",
       "noTables": "Denah ini belum memiliki meja."
     },
-    "arrangeSettings": "Pengaturan penataan otomatis",
-    "arrangeSettingsHint": "Sesuaikan bobot setiap faktor dalam penataan.",
+    "arrangeSettings": "Pengaturan penataan",
+    "arrangeSettingsHint": "Atur seberapa penting setiap faktor saat penataan otomatis.",
     "weights": {
-      "keepTogether": "Satukan",
-      "side": "Sisi",
-      "tag": "Tag",
-      "language": "Bahasa",
-      "ageGroup": "Kelompok usia",
-      "hostPrefer": "Dekat tuan rumah",
-      "fillFirst": "Isi duluan"
+      "keepTogether": "Aturan duduk bersama",
+      "side": "Pihak yang sama",
+      "tag": "Tag yang sama",
+      "language": "Bahasa yang sama",
+      "ageGroup": "Kelompok usia yang sama",
+      "hostPrefer": "Dudukkan tamu yang sendirian dekat tuan rumah",
+      "fillFirst": "Penuhi meja sebelum mengisi meja baru"
     },
-    "resetWeights": "Reset",
-    "noHostTag": "Tambahkan tag host ke tamu yang menyambut tamu lain.",
+    "resetWeights": "Kembalikan ke default",
+    "noHostTag": "Tips: buat tag bernama “Host” untuk menandai tamu yang ramah dan senang menyambut orang baru.",
     "rsvpChanged": {
-      "attending": "Seorang tamu baru saja mengonfirmasi kehadiran!",
-      "declined": "Seorang tamu menolak undangan.",
-      "removed": "Jawaban seorang tamu telah dihapus."
+      "attending": "Seorang tamu baru saja mengirim RSVP — dia akan hadir!",
+      "declined": "Seorang tamu baru saja menolak undangan.",
+      "removed": "RSVP seorang tamu telah dihapus."
     },
     "scenarios": {
       "title": "Skenario tempat duduk",
@@ -220,13 +220,13 @@
       "rename": "Ganti nama",
       "delete": "Hapus",
       "deleted": "Skenario dihapus",
-      "deleteConfirm": "Hapus skenario ini? Meja dan penempatan akan dihapus.",
-      "maxReached": "Anda bisa memiliki maksimal 3 skenario per acara.",
-      "switched": "Skenario diubah",
+      "deleteConfirm": "Hapus skenario tempat duduk ini? Meja dan penempatan akan dihapus.",
+      "maxReached": "Anda bisa memiliki hingga 3 skenario per acara.",
+      "switched": "Skenario dialihkan",
       "defaultName": "Rencana A"
     },
-    "findSeatQr": "Poster QR: temukan tempat dudukmu",
-    "findSeatHeading": "Temukan tempat dudukmu",
-    "findSeatScan": "Pindai kode ini dengan ponselmu untuk menemukan mejamu."
+    "findSeatQr": "Poster QR “Temukan tempat duduk Anda”",
+    "findSeatHeading": "Temukan tempat duduk Anda",
+    "findSeatScan": "Pindai kode ini dengan ponsel Anda untuk menemukan meja Anda."
   }
 }

@@ -196,16 +196,16 @@
     "arrangeSettings": "自動排列設定",
     "arrangeSettingsHint": "調整排列時各因素的重要性。",
     "weights": {
-      "keepTogether": "保持在一起",
-      "side": "側",
-      "tag": "標籤",
-      "language": "語言",
-      "ageGroup": "年齡組",
-      "hostPrefer": "靠近主人",
-      "fillFirst": "優先填滿"
+      "keepTogether": "同坐規則",
+      "side": "同一方",
+      "tag": "相同標籤",
+      "language": "相同語言",
+      "ageGroup": "相同年齡層",
+      "hostPrefer": "將落單賓客安排在主人附近",
+      "fillFirst": "先坐滿再開新桌"
     },
-    "resetWeights": "重設",
-    "noHostTag": "為迎接其他賓客的人新增 host 標籤。",
+    "resetWeights": "恢復預設",
+    "noHostTag": "提示：建立名為「Host」的標籤，標記樂於認識新朋友的社交型賓客。",
     "rsvpChanged": {
       "attending": "一位賓客已確認出席！",
       "declined": "一位賓客已婉拒邀請。",
@@ -220,12 +220,12 @@
       "rename": "重新命名",
       "delete": "刪除",
       "deleted": "方案已刪除",
-      "deleteConfirm": "刪除此方案？桌子和分配將被移除。",
+      "deleteConfirm": "刪除此座位方案？桌子和座位分配將被移除。",
       "maxReached": "每個活動最多可有 3 個方案。",
       "switched": "已切換方案",
       "defaultName": "方案 A"
     },
-    "findSeatQr": "QR 海報：找到你的座位",
+    "findSeatQr": "「找座位」QR 海報",
     "findSeatHeading": "找到你的座位",
     "findSeatScan": "用手機掃描此 QR 碼以找到你的桌子。"
   }

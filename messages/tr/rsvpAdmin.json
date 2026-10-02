@@ -89,8 +89,8 @@
       "askAt": "{name} için menü sor",
       "askTravel": "Misafirlerden seyahat planlarını sorun",
       "askTravelHint": "Katılımı onayladıktan sonra misafirler varış ve dönüş bilgilerini, konaklama yerlerini ve transfer ihtiyaçlarını paylaşabilir.",
-      "findSeat": "Yerinizi bulun sayfasi",
-      "findSeatHint": "Konuklar herkese acik bir sayfada adlarini yazarak masalarini gorebilir."
+      "findSeat": "“Yerinizi bulun” sayfası",
+      "findSeatHint": "Misafirler herkese açık bir sayfaya adlarını yazarak masalarını görebilir."
     },
     "email": {
       "title": "Misafirlerinize e-posta gönderin",

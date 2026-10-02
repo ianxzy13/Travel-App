@@ -89,8 +89,8 @@
       "askAt": "Pytaj o menu przy: {name}",
       "askTravel": "Pytaj gości o plany podróży",
       "askTravelHint": "Po potwierdzeniu obecności goście mogą udostępnić dane przyjazdu i wyjazdu, zakwaterowanie i potrzebę transferu.",
-      "findSeat": "Strona Znajdz swoje miejsce",
-      "findSeatHint": "Goscie moga wpisac swoje imie na publicznej stronie, aby zobaczyc przypisany stol."
+      "findSeat": "Strona „Znajdź swoje miejsce”",
+      "findSeatHint": "Goście mogą wpisać imię i nazwisko na publicznej stronie, aby zobaczyć przydzielony stół."
     },
     "email": {
       "title": "Napisz do gości",

@@ -187,11 +187,11 @@
       "guestLabel": "Misafir",
       "chooseGuest": "Misafir seçin",
       "addRule": "Kural ekle",
-      "languages": "Konusulan diller",
-      "languagesHint": "Oturma duzeni ayni dili konusan konuklari bir araya getirmek icin kullanir.",
+      "languages": "Konuştuğu diller",
+      "languagesHint": "Oturma planı, aynı dili konuşan misafirleri bir araya oturtmak için bunu kullanır.",
       "addLanguage": "Dil ekle",
-      "allLanguages": "Tum diller",
-      "remove": "Kaldir",
+      "allLanguages": "Tüm diller",
+      "remove": "Kaldır",
       "noLanguages": "Dil eklenmedi"
     },
     "household": {

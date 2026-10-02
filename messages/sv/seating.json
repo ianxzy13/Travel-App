@@ -193,40 +193,40 @@
       "button": "Skriv ut eller spara som PDF",
       "noTables": "Det finns inga bord i den här bordsplaceringen än."
     },
-    "arrangeSettings": "Installningar for automatisk placering",
-    "arrangeSettingsHint": "Justera vikten av varje faktor vid placeringen.",
+    "arrangeSettings": "Placeringsinställningar",
+    "arrangeSettingsHint": "Justera hur mycket varje faktor väger vid automatisk placering.",
     "weights": {
-      "keepTogether": "Hall ihop",
-      "side": "Sida",
-      "tag": "Tagg",
-      "language": "Sprak",
-      "ageGroup": "Aldersgrupp",
-      "hostPrefer": "Nara vard",
-      "fillFirst": "Fyll forst"
+      "keepTogether": "Håll ihop-regler",
+      "side": "Samma sida",
+      "tag": "Gemensamma taggar",
+      "language": "Gemensamt språk",
+      "ageGroup": "Samma åldersgrupp",
+      "hostPrefer": "Placera ensamma gäster nära värdar",
+      "fillFirst": "Fyll bord innan nya påbörjas"
     },
-    "resetWeights": "Aterstall",
-    "noHostTag": "Lagg till en tagg host for gaster som tar emot de andra.",
+    "resetWeights": "Återställ standard",
+    "noHostTag": "Tips: skapa en tagg som heter ”Host” för att markera sociala gäster som gärna tar hand om nya ansikten.",
     "rsvpChanged": {
-      "attending": "En gast har just bekraftat narvaro!",
-      "declined": "En gast har tackat nej.",
-      "removed": "En gasts svar har tagits bort."
+      "attending": "En gäst har just svarat – hen kommer!",
+      "declined": "En gäst har just tackat nej till inbjudan.",
+      "removed": "En gästs OSA-svar har tagits bort."
     },
     "scenarios": {
       "title": "Placeringsscenarier",
       "plan": "Plan",
       "active": "aktiv",
       "duplicate": "Duplicera",
-      "duplicated": "Scenario duplicerat",
+      "duplicated": "Scenariot duplicerat",
       "rename": "Byt namn",
-      "delete": "Radera",
-      "deleted": "Scenario raderat",
-      "deleteConfirm": "Radera detta scenario? Bord och placeringar tas bort.",
-      "maxReached": "Du kan ha upp till 3 scenarier per evenemang.",
-      "switched": "Scenario bytt",
+      "delete": "Ta bort",
+      "deleted": "Scenariot borttaget",
+      "deleteConfirm": "Ta bort det här placeringsscenariot? Bord och placeringar tas bort.",
+      "maxReached": "Du kan ha upp till 3 scenarier per programpunkt.",
+      "switched": "Bytte scenario",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "QR-affisch: hitta din plats",
+    "findSeatQr": "QR-affisch: Hitta din plats",
     "findSeatHeading": "Hitta din plats",
-    "findSeatScan": "Skanna koden med din telefon for att hitta ditt bord."
+    "findSeatScan": "Skanna koden med telefonen för att hitta ditt bord."
   }
 }

@@ -196,16 +196,16 @@
     "arrangeSettings": "自动排列设置",
     "arrangeSettingsHint": "调整排列时各因素的重要性。",
     "weights": {
-      "keepTogether": "保持在一起",
-      "side": "侧",
-      "tag": "标签",
-      "language": "语言",
-      "ageGroup": "年龄组",
-      "hostPrefer": "靠近主人",
-      "fillFirst": "优先填满"
+      "keepTogether": "同坐规则",
+      "side": "同一方",
+      "tag": "相同标签",
+      "language": "相同语言",
+      "ageGroup": "相同年龄段",
+      "hostPrefer": "将落单宾客安排在主人附近",
+      "fillFirst": "先坐满再开新桌"
     },
-    "resetWeights": "重置",
-    "noHostTag": "为迎接其他来宾的人添加 host 标签。",
+    "resetWeights": "恢复默认",
+    "noHostTag": "提示：创建一个名为“Host”的标签，标记乐于结识新朋友的社交型宾客。",
     "rsvpChanged": {
       "attending": "一位宾客已确认出席！",
       "declined": "一位宾客已谢绝邀请。",
@@ -214,18 +214,18 @@
     "scenarios": {
       "title": "座位方案",
       "plan": "方案",
-      "active": "活跃",
+      "active": "当前",
       "duplicate": "复制",
       "duplicated": "方案已复制",
       "rename": "重命名",
       "delete": "删除",
       "deleted": "方案已删除",
-      "deleteConfirm": "删除此方案？桌子和分配将被移除。",
+      "deleteConfirm": "删除此座位方案？桌子和座位分配将被移除。",
       "maxReached": "每个活动最多可有 3 个方案。",
       "switched": "已切换方案",
       "defaultName": "方案 A"
     },
-    "findSeatQr": "二维码海报：找到你的座位",
+    "findSeatQr": "“查找座位”二维码海报",
     "findSeatHeading": "找到你的座位",
     "findSeatScan": "用手机扫描此二维码以找到你的桌子。"
   }

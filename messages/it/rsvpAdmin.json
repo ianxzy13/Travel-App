@@ -64,8 +64,8 @@
       "contact": "Dopo la scadenza, dite agli invitati…",
       "contactHint": "ad es. «Scrivete a Maria al +39 333 123 4567»",
       "askSong": "Chiedi una canzone",
-      "askTravel": "Chiedi agli ospiti i piani di viaggio",
-      "askTravelHint": "Dopo aver confermato la presenza, gli ospiti possono condividere i dettagli di arrivo e partenza, dove alloggiano e se necessitano di un trasferimento.",
+      "askTravel": "Chiedi agli invitati i piani di viaggio",
+      "askTravelHint": "Dopo aver confermato, gli invitati possono indicare arrivo e partenza, dove alloggiano e se hanno bisogno di un transfer.",
       "notify": "Mandami un’email quando qualcuno risponde",
       "notifyOn": "Inviata a proprietari ed editor, oltre alla campanella nell’app.",
       "notifyOff": "Richiede Resend e la chiave segreta di Supabase (vedi README). Riceverete comunque le notifiche nell’app.",
@@ -89,8 +89,8 @@
       "addMealsFirst": "Aggiungete prima i menu.",
       "noEvents": "Nessun evento per ora. Aggiungeteli nelle Impostazioni.",
       "askAt": "Chiedi il menu per {name}",
-      "findSeat": "Pagina Trova il tuo posto",
-      "findSeatHint": "Gli ospiti possono digitare il loro nome su una pagina pubblica per vedere il tavolo assegnato."
+      "findSeat": "Pagina «Trova il tuo posto»",
+      "findSeatHint": "Gli invitati possono scrivere il proprio nome su una pagina pubblica per vedere il tavolo assegnato."
     },
     "email": {
       "title": "Scrivete ai vostri invitati",

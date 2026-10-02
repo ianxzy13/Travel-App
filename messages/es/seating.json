@@ -193,22 +193,22 @@
       "button": "Imprimir o guardar como PDF",
       "noTables": "Aún no hay mesas en esta distribución."
     },
-    "arrangeSettings": "Ajustes del auto-organizar",
-    "arrangeSettingsHint": "Ajusta la importancia de cada factor al organizar.",
+    "arrangeSettings": "Ajustes de distribución",
+    "arrangeSettingsHint": "Ajusta cuánto importa cada factor al distribuir automáticamente.",
     "weights": {
-      "keepTogether": "Mantener juntos",
-      "side": "Lado",
-      "tag": "Etiqueta",
-      "language": "Idioma",
-      "ageGroup": "Grupo de edad",
-      "hostPrefer": "Cerca del anfitrion",
-      "fillFirst": "Llenar primero"
+      "keepTogether": "Reglas de sentar juntos",
+      "side": "Misma parte",
+      "tag": "Etiquetas en común",
+      "language": "Idioma en común",
+      "ageGroup": "Mismo grupo de edad",
+      "hostPrefer": "Sentar a los invitados solos cerca de anfitriones",
+      "fillFirst": "Llenar mesas antes de empezar otras"
     },
-    "resetWeights": "Restablecer valores",
-    "noHostTag": "Anade una etiqueta host a los invitados que reciben a los demas.",
+    "resetWeights": "Restablecer valores predeterminados",
+    "noHostTag": "Consejo: crea una etiqueta llamada «Host» para marcar a los invitados sociables que acogen bien a los recién llegados.",
     "rsvpChanged": {
-      "attending": "Un invitado acaba de confirmar asistencia.",
-      "declined": "Un invitado ha declinado la invitacion.",
+      "attending": "Un invitado acaba de confirmar: ¡asistirá!",
+      "declined": "Un invitado acaba de rechazar la invitación.",
       "removed": "Se ha eliminado la respuesta de un invitado."
     },
     "scenarios": {
@@ -220,13 +220,13 @@
       "rename": "Renombrar",
       "delete": "Eliminar",
       "deleted": "Escenario eliminado",
-      "deleteConfirm": "Eliminar este escenario de mesas? Se borraran las mesas y asignaciones.",
+      "deleteConfirm": "¿Eliminar este escenario de mesas? Se eliminarán las mesas y las asignaciones.",
       "maxReached": "Puedes tener hasta 3 escenarios por evento.",
       "switched": "Escenario cambiado",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "Poster QR para encontrar tu mesa",
-    "findSeatHeading": "Encuentra tu asiento",
-    "findSeatScan": "Escanea este codigo con tu movil para encontrar tu mesa."
+    "findSeatQr": "Póster QR «Encuentra tu sitio»",
+    "findSeatHeading": "Encuentra tu sitio",
+    "findSeatScan": "Escanea este código con tu móvil para encontrar tu mesa."
   }
 }

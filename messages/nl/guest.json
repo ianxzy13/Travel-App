@@ -52,7 +52,7 @@
       "websiteOf": "Website van {name}",
       "map": "Kaart",
       "mapOf": "Kaart van {name}",
-      "transportTitle": "Vervoer",
+      "transportTitle": "Vervoer ter plaatse",
       "visaTitle": "Visuminformatie",
       "currencyTitle": "Valuta"
     },
@@ -87,9 +87,9 @@
       "placeholder": "Voor- en achternaam",
       "button": "Vind mijn plek",
       "notFound": "We konden geen plek vinden voor die naam. Controleer de spelling op je uitnodiging.",
-      "yourTable": "Je tafel is klaar!",
+      "yourTable": "Je tafel staat klaar!",
       "tableName": "Tafel {number}",
-      "tableNamed": "{label} (Tafel {number})"
+      "tableNamed": "{label} (tafel {number})"
     }
   },
   "rsvp": {
@@ -168,49 +168,49 @@
       "generic": "We konden je antwoord niet opslaan. Probeer het zo opnieuw."
     },
     "travel": {
-      "prompt": "Deel uw reisgegevens",
+      "prompt": "Deel je reisgegevens",
       "editTravel": "Reisgegevens bijwerken",
       "title": "Reisgegevens",
-      "subtitle": "Help ons bij het plannen van luchthaven transfers — vertel ons wanneer u aankomt en vertrekt.",
+      "subtitle": "Help het bruidspaar met de planning door je reisplannen te delen. Alle velden zijn optioneel.",
       "arrival": "Aankomst",
       "departure": "Vertrek",
       "date": "Datum",
       "time": "Tijd",
       "airport": "Luchthaven",
-      "airportPlaceholder": "bijv. AMS",
+      "airportPlaceholder": "bijv. LHR",
       "flightNumber": "Vluchtnummer",
-      "stayingAt": "Waar verblijft u?",
+      "stayingAt": "Waar verblijf je?",
       "chooseHotel": "Kies een hotel",
-      "otherAccommodation": "Andere accommodatie",
+      "otherAccommodation": "Ergens anders",
       "accommodationName": "Naam van hotel of accommodatie",
       "accommodationPlaceholder": "bijv. Airbnb in het centrum",
-      "needsTransfer": "We zouden graag een transfer van de luchthaven willen",
-      "notes": "Nog iets anders?",
+      "needsTransfer": "We zouden graag een transfer vanaf de luchthaven hebben",
+      "notes": "Verder nog iets?",
       "notesPlaceholder": "bijv. we komen met de auto, hebben een kinderzitje nodig",
       "save": "Reisgegevens opslaan",
-      "skip": "Voorlopig overslaan",
+      "skip": "Nu overslaan",
       "saved": "Reisgegevens opgeslagen!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Kamervoorkeuren",
+      "subtitle": "Laat het bruidspaar je voorkeuren voor overnachting weten, zodat ze de kamers kunnen regelen.",
+      "wantRoom": "Heb je een hotelkamer nodig?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Ja, graag",
+        "no": "Nee, bedankt",
+        "elsewhere": "Ik verblijf ergens anders"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Babybedje nodig in de kamer",
+      "share": "Wil graag een kamer delen met",
+      "sharePlaceholder": "bijv. Anna & Tom",
+      "avoid": "Liever niet delen met",
+      "avoidPlaceholder": "Laat leeg als je geen voorkeur hebt"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Je kamer",
+      "room": "Kamer {number}",
+      "checkIn": "Inchecken: {date}",
+      "checkOut": "Uitchecken: {date}"
     }
   },
   "board": {
@@ -237,13 +237,13 @@
     "subjectReminder": "Herinnering: laat ons weten of je komt naar de bruiloft van {couple}"
   },
   "travelEmail": {
-    "preview": "Deel uw reisplannen voor de bruiloft van {couple}",
+    "preview": "Deel je reisplannen voor de bruiloft van {couple}",
     "eyebrow": "Reisgegevens",
     "dear": "Beste {name},",
-    "body": "Bedankt voor het bevestigen! Om transfers te plannen, deel uw aankomst- en vertrekgegevens via de link hieronder.",
+    "body": "Bedankt voor je reactie! Deel via de link hieronder je aankomst- en vertrekgegevens, zodat we de luchthaventransfers en shuttles kunnen plannen.",
     "button": "Reisgegevens delen",
-    "fallback": "Knop werkt niet? Open {link}",
-    "love": "Met liefde,",
+    "fallback": "Werkt de knop niet? Open {link}",
+    "love": "Liefs,",
     "subject": "Reisgegevens voor de bruiloft van {couple}"
   }
 }

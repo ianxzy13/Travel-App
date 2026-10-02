@@ -193,40 +193,40 @@
       "button": "Vytisknout nebo uložit jako PDF",
       "noTables": "V tomto zasedacím pořádku zatím nejsou stoly."
     },
-    "arrangeSettings": "Nastaveni automatickeho rozmisteni",
-    "arrangeSettingsHint": "Upravte dulezitost kazdeho faktoru pri rozmistovani.",
+    "arrangeSettings": "Nastavení automatického rozsazení",
+    "arrangeSettingsHint": "Upravte, jak moc má každý faktor vliv při automatickém rozsazení.",
     "weights": {
-      "keepTogether": "Drzet pohromade",
-      "side": "Strana",
-      "tag": "Stitek",
-      "language": "Jazyk",
-      "ageGroup": "Vekova skupina",
-      "hostPrefer": "Blizko hostitele",
-      "fillFirst": "Plnit nejdrive"
+      "keepTogether": "Pravidla „sedět spolu“",
+      "side": "Stejná strana",
+      "tag": "Společné štítky",
+      "language": "Společný jazyk",
+      "ageGroup": "Stejná věková skupina",
+      "hostPrefer": "Osamělé hosty posadit k hostitelům",
+      "fillFirst": "Zaplnit stoly před otevřením nových"
     },
-    "resetWeights": "Obnovit",
-    "noHostTag": "Pridejte stitek host hostum, kteri ostatni prijimaji.",
+    "resetWeights": "Obnovit výchozí",
+    "noHostTag": "Tip: vytvořte štítek „Host“ pro společenské hosty, kteří rádi přijmou nováčky.",
     "rsvpChanged": {
-      "attending": "Host prave potvrdil ucast!",
-      "declined": "Host odmitl pozvanku.",
-      "removed": "Odpoved hosta byla odstranena."
+      "attending": "Host právě potvrdil účast!",
+      "declined": "Host právě odmítl pozvání.",
+      "removed": "Odpověď hosta byla odstraněna."
     },
     "scenarios": {
-      "title": "Scenare zasedaciho poradku",
-      "plan": "Plan",
-      "active": "aktivni",
+      "title": "Scénáře zasedacího pořádku",
+      "plan": "Plán",
+      "active": "aktivní",
       "duplicate": "Duplikovat",
-      "duplicated": "Scenar zduplikovan",
-      "rename": "Prejmenovat",
+      "duplicated": "Scénář zduplikován",
+      "rename": "Přejmenovat",
       "delete": "Smazat",
-      "deleted": "Scenar smazan",
-      "deleteConfirm": "Smazat tento scenar? Stoly a prirazeni budou odstraneny.",
-      "maxReached": "Muzete mit az 3 scenare na udalost.",
-      "switched": "Scenar prepnut",
-      "defaultName": "Plan A"
+      "deleted": "Scénář smazán",
+      "deleteConfirm": "Smazat tento scénář zasedacího pořádku? Stoly a přiřazení budou odstraněny.",
+      "maxReached": "Na jednu událost můžete mít nejvýše 3 scénáře.",
+      "switched": "Scénář přepnut",
+      "defaultName": "Plán A"
     },
-    "findSeatQr": "QR plakat: najdete sve misto",
-    "findSeatHeading": "Najdete sve misto",
-    "findSeatScan": "Naskenujte tento kod telefonem a najdete svuj stul."
+    "findSeatQr": "QR plakát „Najděte své místo“",
+    "findSeatHeading": "Najděte své místo",
+    "findSeatScan": "Naskenujte tento kód telefonem a najděte svůj stůl."
   }
 }

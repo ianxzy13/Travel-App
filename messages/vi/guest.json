@@ -81,15 +81,15 @@
       "website": "Trang web đám cưới"
     },
     "findSeat": {
-      "title": "Tim cho ngoi",
-      "heading": "Tim ban cua ban",
-      "label": "Ho va ten day du",
-      "placeholder": "Ho va ten",
-      "button": "Tim cho ngoi",
-      "notFound": "Khong tim thay cho ngoi cho ten do. Vui long kiem tra lai chinh ta tren thiep moi.",
-      "yourTable": "Ban cua ban da san sang!",
-      "tableName": "Ban {number}",
-      "tableNamed": "{label} (Ban {number})"
+      "title": "Tìm chỗ ngồi",
+      "heading": "Tìm bàn của bạn",
+      "label": "Họ và tên đầy đủ",
+      "placeholder": "Họ và tên",
+      "button": "Tìm chỗ ngồi của tôi",
+      "notFound": "Không tìm thấy chỗ ngồi cho tên này. Vui lòng kiểm tra lại chính tả trên thiệp mời.",
+      "yourTable": "Bàn của bạn đã sẵn sàng!",
+      "tableName": "Bàn {number}",
+      "tableNamed": "{label} (Bàn {number})"
     }
   },
   "rsvp": {
@@ -171,7 +171,7 @@
       "prompt": "Chia sẻ thông tin chuyến đi",
       "editTravel": "Cập nhật thông tin chuyến đi",
       "title": "Thông tin chuyến đi",
-      "subtitle": "Giúp chúng tôi lên kế hoạch đưa đón sân bay — cho biết khi nào bạn đến và đi.",
+      "subtitle": "Hãy chia sẻ kế hoạch di chuyển để giúp cặp đôi sắp xếp hậu cần. Tất cả các trường đều không bắt buộc.",
       "arrival": "Đến",
       "departure": "Đi",
       "date": "Ngày",
@@ -181,10 +181,10 @@
       "flightNumber": "Số hiệu chuyến bay",
       "stayingAt": "Bạn ở đâu?",
       "chooseHotel": "Chọn khách sạn",
-      "otherAccommodation": "Chỗ ở khác",
+      "otherAccommodation": "Nơi khác",
       "accommodationName": "Tên khách sạn hoặc chỗ ở",
       "accommodationPlaceholder": "vd. Airbnb ở trung tâm thành phố",
-      "needsTransfer": "Chúng tôi cần đưa đón từ sân bay",
+      "needsTransfer": "Chúng tôi mong được đưa đón từ sân bay",
       "notes": "Có gì khác không?",
       "notesPlaceholder": "vd. đến bằng ô tô, cần ghế trẻ em",
       "save": "Lưu thông tin chuyến đi",
@@ -192,25 +192,25 @@
       "saved": "Đã lưu thông tin chuyến đi!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Mong muốn về phòng",
+      "subtitle": "Hãy cho cặp đôi biết mong muốn về chỗ ở của bạn để họ sắp xếp phòng.",
+      "wantRoom": "Bạn có cần phòng khách sạn không?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Có, cảm ơn",
+        "no": "Không, cảm ơn",
+        "elsewhere": "Ở nơi khác"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Cần nôi trong phòng",
+      "share": "Muốn ở chung phòng với",
+      "sharePlaceholder": "vd. Anna & Tom",
+      "avoid": "Không muốn ở chung với",
+      "avoidPlaceholder": "Để trống nếu không có yêu cầu"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Phòng của bạn",
+      "room": "Phòng {number}",
+      "checkIn": "Nhận phòng: {date}",
+      "checkOut": "Trả phòng: {date}"
     }
   },
   "board": {
@@ -240,7 +240,7 @@
     "preview": "Hãy chia sẻ kế hoạch di chuyển cho đám cưới của {couple}",
     "eyebrow": "Thông tin chuyến đi",
     "dear": "{name} thân mến,",
-    "body": "Cảm ơn bạn đã xác nhận! Để giúp chúng tôi sắp xếp đưa đón, vui lòng chia sẻ thông tin đến và đi qua liên kết bên dưới.",
+    "body": "Cảm ơn bạn đã xác nhận tham dự! Để giúp chúng tôi sắp xếp đưa đón sân bay và xe đưa đón, vui lòng chia sẻ thông tin đến và đi qua liên kết bên dưới.",
     "button": "Chia sẻ thông tin chuyến đi",
     "fallback": "Nút không hoạt động? Mở {link}",
     "love": "Thân ái,",

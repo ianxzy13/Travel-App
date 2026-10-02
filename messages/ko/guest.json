@@ -171,7 +171,7 @@
       "prompt": "여행 세부 정보 공유하기",
       "editTravel": "여행 세부 정보 수정하기",
       "title": "여행 세부 정보",
-      "subtitle": "공항 픽업 계획에 도움을 주세요 — 도착 및 출발 일정을 알려주세요.",
+      "subtitle": "여행 계획을 알려 주시면 두 사람이 일정을 준비하는 데 도움이 됩니다. 모든 항목은 선택 사항입니다.",
       "arrival": "도착",
       "departure": "출발",
       "date": "날짜",
@@ -192,25 +192,25 @@
       "saved": "여행 세부 정보가 저장되었습니다!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "객실 희망 사항",
+      "subtitle": "두 사람이 객실을 준비할 수 있도록 숙박 희망 사항을 알려 주세요.",
+      "wantRoom": "호텔 객실이 필요하신가요?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "네, 필요합니다",
+        "no": "아니요, 괜찮습니다",
+        "elsewhere": "다른 곳에 묵습니다"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "객실에 아기 침대가 필요합니다",
+      "share": "같은 방을 쓰고 싶은 분",
+      "sharePlaceholder": "예: 지민 & 민준",
+      "avoid": "같은 방을 원하지 않는 분",
+      "avoidPlaceholder": "특별히 없으면 비워 두세요"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "내 객실",
+      "room": "{number}호",
+      "checkIn": "체크인: {date}",
+      "checkOut": "체크아웃: {date}"
     }
   },
   "board": {
@@ -242,7 +242,7 @@
     "dear": "{name}님께,",
     "body": "참석 확인 감사합니다! 공항 픽업 및 셔틀 계획을 위해 아래 링크에서 도착 및 출발 정보를 알려 주세요.",
     "button": "여행 세부 정보 공유",
-    "fallback": "버튼이 작동하지 않으면 {link} 을 열어 주세요",
+    "fallback": "버튼이 작동하지 않나요? {link} 링크를 열어 주세요",
     "love": "사랑을 담아,",
     "subject": "{couple}의 결혼식 여행 세부 정보"
   }

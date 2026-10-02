@@ -193,40 +193,40 @@
       "button": "Drukuj lub zapisz jako PDF",
       "noTables": "Ten plan nie ma jeszcze stołów."
     },
-    "arrangeSettings": "Ustawienia automatycznego rozmieszczenia",
-    "arrangeSettingsHint": "Dostosuj wage kazdego czynnika przy rozmieszczaniu.",
+    "arrangeSettings": "Ustawienia rozmieszczania",
+    "arrangeSettingsHint": "Określ, jak ważny jest każdy czynnik przy automatycznym rozsadzaniu.",
     "weights": {
-      "keepTogether": "Trzymac razem",
-      "side": "Strona",
-      "tag": "Tag",
-      "language": "Jezyk",
-      "ageGroup": "Grupa wiekowa",
-      "hostPrefer": "Blisko gospodarza",
-      "fillFirst": "Najpierw zapelnij"
+      "keepTogether": "Zasady „razem”",
+      "side": "Ta sama strona",
+      "tag": "Wspólne tagi",
+      "language": "Wspólny język",
+      "ageGroup": "Ta sama grupa wiekowa",
+      "hostPrefer": "Samotni goście blisko gospodarzy",
+      "fillFirst": "Zapełniaj stoły przed zajęciem nowych"
     },
-    "resetWeights": "Resetuj",
-    "noHostTag": "Dodaj tag host gosciom, ktorzy witaja pozostalych.",
+    "resetWeights": "Przywróć domyślne",
+    "noHostTag": "Wskazówka: utwórz tag „Host”, aby oznaczyć towarzyskich gości, którzy chętnie przyjmą nowe osoby.",
     "rsvpChanged": {
-      "attending": "Gosc wlasnie potwierdzil obecnosc!",
-      "declined": "Gosc odmowil zaproszenia.",
-      "removed": "Odpowiedz goscia zostala usunieta."
+      "attending": "Gość właśnie odpowiedział — będzie obecny!",
+      "declined": "Gość właśnie odrzucił zaproszenie.",
+      "removed": "Odpowiedź gościa została usunięta."
     },
     "scenarios": {
-      "title": "Scenariusze stolow",
+      "title": "Scenariusze rozsadzenia",
       "plan": "Plan",
       "active": "aktywny",
       "duplicate": "Duplikuj",
-      "duplicated": "Scenariusz zduplikowany",
-      "rename": "Zmien nazwe",
-      "delete": "Usun",
-      "deleted": "Scenariusz usuniety",
-      "deleteConfirm": "Usunac ten scenariusz? Stoly i przypisania zostana usuniete.",
-      "maxReached": "Mozesz miec do 3 scenariuszy na wydarzenie.",
+      "duplicated": "Zduplikowano scenariusz",
+      "rename": "Zmień nazwę",
+      "delete": "Usuń",
+      "deleted": "Usunięto scenariusz",
+      "deleteConfirm": "Usunąć ten scenariusz rozsadzenia? Stoły i przypisania zostaną usunięte.",
+      "maxReached": "Możesz mieć maksymalnie 3 scenariusze na wydarzenie.",
       "switched": "Zmieniono scenariusz",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "Plakat QR: znajdz swoje miejsce",
-    "findSeatHeading": "Znajdz swoje miejsce",
-    "findSeatScan": "Zeskanuj ten kod telefonem, aby znalezc swoj stol."
+    "findSeatQr": "Plakat QR „Znajdź swoje miejsce”",
+    "findSeatHeading": "Znajdź swoje miejsce",
+    "findSeatScan": "Zeskanuj ten kod telefonem, aby znaleźć swój stół."
   }
 }

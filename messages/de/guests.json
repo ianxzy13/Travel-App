@@ -188,11 +188,11 @@
       "chooseGuest": "Gast wählen",
       "addRule": "Regel hinzufügen",
       "languages": "Gesprochene Sprachen",
-      "languagesHint": "Der Sitzplan nutzt dies, um Gaste mit gleicher Sprache zusammenzusetzen.",
-      "addLanguage": "Sprache hinzufugen",
+      "languagesHint": "Der Sitzplan nutzt dies, um Gäste mit gemeinsamer Sprache zusammenzusetzen.",
+      "addLanguage": "Sprache hinzufügen",
       "allLanguages": "Alle Sprachen",
       "remove": "Entfernen",
-      "noLanguages": "Keine Sprachen hinzugefugt"
+      "noLanguages": "Keine Sprachen hinzugefügt"
     },
     "household": {
       "title": "Haushaltseinstellungen",

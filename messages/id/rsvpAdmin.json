@@ -89,8 +89,8 @@
       "askAt": "Tanyakan pilihan menu di {name}",
       "askTravel": "Tanyakan tamu tentang rencana perjalanan",
       "askTravelHint": "Setelah mengonfirmasi kehadiran, tamu dapat membagikan detail kedatangan dan keberangkatan, tempat menginap, dan kebutuhan transfer.",
-      "findSeat": "Halaman Temukan tempat duduk",
-      "findSeatHint": "Tamu bisa mengetik nama mereka di halaman publik untuk melihat meja yang ditugaskan."
+      "findSeat": "Halaman “Temukan tempat duduk”",
+      "findSeatHint": "Tamu dapat mengetik nama mereka di halaman publik untuk melihat meja mereka."
     },
     "email": {
       "title": "Email tamu Anda",

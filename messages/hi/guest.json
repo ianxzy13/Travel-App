@@ -171,7 +171,7 @@
       "prompt": "अपनी यात्रा की जानकारी साझा करें",
       "editTravel": "यात्रा विवरण अपडेट करें",
       "title": "यात्रा विवरण",
-      "subtitle": "एयरपोर्ट ट्रांसफर की योजना बनाने में हमारी मदद करें — हमें बताएं कि आप कब आ रहे हैं और कब जा रहे हैं।",
+      "subtitle": "अपनी यात्रा योजनाएँ साझा करके जोड़े को व्यवस्था करने में मदद करें। सभी फ़ील्ड वैकल्पिक हैं।",
       "arrival": "आगमन",
       "departure": "प्रस्थान",
       "date": "तारीख",
@@ -184,7 +184,7 @@
       "otherAccommodation": "अन्य आवास",
       "accommodationName": "होटल या आवास का नाम",
       "accommodationPlaceholder": "जैसे शहर के केंद्र में Airbnb",
-      "needsTransfer": "हवाई अड्डे से ट्रांसफर की सराहना होगी",
+      "needsTransfer": "हमें हवाई अड्डे से ट्रांसफर चाहिए",
       "notes": "कुछ और?",
       "notesPlaceholder": "जैसे कार से आ रहे हैं, बच्चे की सीट चाहिए",
       "save": "यात्रा विवरण सहेजें",
@@ -192,25 +192,25 @@
       "saved": "यात्रा विवरण सहेजे गए!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "कमरे की प्राथमिकताएँ",
+      "subtitle": "जोड़े को अपनी ठहरने की प्राथमिकताएँ बताएँ ताकि वे कमरों की व्यवस्था कर सकें।",
+      "wantRoom": "क्या आपको होटल का कमरा चाहिए?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "हाँ, कृपया",
+        "no": "नहीं, धन्यवाद",
+        "elsewhere": "कहीं और ठहरेंगे"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "कमरे में पालना चाहिए",
+      "share": "इनके साथ कमरा साझा करना चाहेंगे",
+      "sharePlaceholder": "जैसे अन्ना और टॉम",
+      "avoid": "इनके साथ कमरा साझा न करना पसंद करेंगे",
+      "avoidPlaceholder": "कोई प्राथमिकता न हो तो खाली छोड़ें"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "आपका कमरा",
+      "room": "कमरा {number}",
+      "checkIn": "चेक-इन: {date}",
+      "checkOut": "चेक-आउट: {date}"
     }
   },
   "board": {
@@ -240,7 +240,7 @@
     "preview": "{couple} की शादी के लिए अपनी यात्रा योजनाएं साझा करें",
     "eyebrow": "यात्रा विवरण",
     "dear": "प्रिय {name},",
-    "body": "RSVP करने के लिए धन्यवाद! ट्रांसफर की योजना बनाने में मदद के लिए, नीचे दिए गए लिंक से अपने आगमन और प्रस्थान विवरण साझा करें।",
+    "body": "RSVP करने के लिए धन्यवाद! एयरपोर्ट ट्रांसफर और शटल की योजना बनाने में हमारी मदद के लिए, कृपया नीचे दिए गए लिंक से अपने आगमन और प्रस्थान का विवरण साझा करें।",
     "button": "यात्रा विवरण साझा करें",
     "fallback": "बटन काम नहीं कर रहा? {link} खोलें",
     "love": "प्यार से,",

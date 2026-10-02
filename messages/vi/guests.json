@@ -187,12 +187,12 @@
       "guestLabel": "Khách",
       "chooseGuest": "Chọn khách",
       "addRule": "Thêm quy tắc",
-      "languages": "Ngon ngu su dung",
-      "languagesHint": "So do cho ngoi su dung thong tin nay de xep khach noi cung ngon ngu ngoi canh nhau.",
-      "addLanguage": "Them ngon ngu",
-      "allLanguages": "Tat ca ngon ngu",
-      "remove": "Xoa",
-      "noLanguages": "Chua them ngon ngu nao"
+      "languages": "Ngôn ngữ sử dụng",
+      "languagesHint": "Sơ đồ chỗ ngồi dùng thông tin này để xếp những khách nói cùng ngôn ngữ ngồi cạnh nhau.",
+      "addLanguage": "Thêm ngôn ngữ",
+      "allLanguages": "Tất cả ngôn ngữ",
+      "remove": "Xóa",
+      "noLanguages": "Chưa thêm ngôn ngữ nào"
     },
     "household": {
       "title": "Cài đặt gia đình",

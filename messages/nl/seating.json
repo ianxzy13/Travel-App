@@ -193,26 +193,26 @@
       "button": "Afdrukken of opslaan als PDF",
       "noTables": "Deze tafelindeling heeft nog geen tafels."
     },
-    "arrangeSettings": "Instellingen automatische indeling",
-    "arrangeSettingsHint": "Pas het gewicht van elke factor bij de indeling aan.",
+    "arrangeSettings": "Instellingen voor indelen",
+    "arrangeSettingsHint": "Bepaal hoe zwaar elke factor meetelt bij automatisch indelen.",
     "weights": {
-      "keepTogether": "Bij elkaar houden",
-      "side": "Kant",
-      "tag": "Tag",
-      "language": "Taal",
-      "ageGroup": "Leeftijdsgroep",
-      "hostPrefer": "Dicht bij gastheer",
-      "fillFirst": "Eerst vullen"
+      "keepTogether": "Regels voor bij elkaar zitten",
+      "side": "Zelfde kant",
+      "tag": "Gedeelde labels",
+      "language": "Gedeelde taal",
+      "ageGroup": "Zelfde leeftijdsgroep",
+      "hostPrefer": "Gasten die alleen komen bij gastheren zetten",
+      "fillFirst": "Tafels vullen voordat nieuwe worden begonnen"
     },
-    "resetWeights": "Resetten",
-    "noHostTag": "Voeg een tag host toe aan gasten die de anderen ontvangen.",
+    "resetWeights": "Standaardwaarden herstellen",
+    "noHostTag": "Tip: maak een label met de naam ‘Host’ voor sociale gasten die nieuwkomers graag verwelkomen.",
     "rsvpChanged": {
-      "attending": "Een gast heeft net bevestigd!",
-      "declined": "Een gast heeft afgeslagen.",
-      "removed": "Het antwoord van een gast is ingetrokken."
+      "attending": "Een gast heeft net gereageerd: komt!",
+      "declined": "Een gast heeft net de uitnodiging afgeslagen.",
+      "removed": "De reactie van een gast is verwijderd."
     },
     "scenarios": {
-      "title": "Tafelindeling-scenario's",
+      "title": "Tafelindelingsscenario’s",
       "plan": "Plan",
       "active": "actief",
       "duplicate": "Dupliceren",
@@ -220,12 +220,12 @@
       "rename": "Hernoemen",
       "delete": "Verwijderen",
       "deleted": "Scenario verwijderd",
-      "deleteConfirm": "Dit scenario verwijderen? Tafels en plaatsingen worden verwijderd.",
-      "maxReached": "Je kunt maximaal 3 scenario's per evenement hebben.",
+      "deleteConfirm": "Dit tafelindelingsscenario verwijderen? Tafels en toewijzingen worden verwijderd.",
+      "maxReached": "Je kunt maximaal 3 scenario’s per onderdeel hebben.",
       "switched": "Scenario gewisseld",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "QR-poster: vind je plek",
+    "findSeatQr": "QR-poster ‘Vind je plek’",
     "findSeatHeading": "Vind je plek",
     "findSeatScan": "Scan deze code met je telefoon om je tafel te vinden."
   }

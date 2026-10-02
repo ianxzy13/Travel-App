@@ -202,7 +202,7 @@
     "find": "Buscar proveedores",
     "findHint": "Buscar cerca de {location}",
     "pasteUrl": "Pegar un enlace",
-    "pasteUrlHint": "Pega la web del proveedor para completar su nombre automáticamente."
+    "pasteUrlHint": "Pega la web de un proveedor para rellenar su nombre automáticamente."
   },
   "files": {
     "openFailed": "No se pudo abrir el archivo. Inténtalo de nuevo.",

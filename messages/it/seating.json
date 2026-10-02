@@ -193,26 +193,26 @@
       "button": "Stampa o salva come PDF",
       "noTables": "In questa disposizione non ci sono ancora tavoli."
     },
-    "arrangeSettings": "Impostazioni della disposizione automatica",
-    "arrangeSettingsHint": "Regola l'importanza di ogni fattore nella disposizione.",
+    "arrangeSettings": "Impostazioni di disposizione",
+    "arrangeSettingsHint": "Regolate quanto conta ogni fattore nella disposizione automatica.",
     "weights": {
-      "keepTogether": "Tenere insieme",
-      "side": "Lato",
-      "tag": "Tag",
-      "language": "Lingua",
-      "ageGroup": "Fascia d'eta",
-      "hostPrefer": "Vicino all'ospite",
-      "fillFirst": "Riempire prima"
+      "keepTogether": "Regole «tenere insieme»",
+      "side": "Stesso lato",
+      "tag": "Etichette in comune",
+      "language": "Lingua in comune",
+      "ageGroup": "Stessa fascia d’età",
+      "hostPrefer": "Mettere gli invitati soli vicino ai padroni di casa",
+      "fillFirst": "Riempire i tavoli prima di iniziarne di nuovi"
     },
-    "resetWeights": "Ripristina valori",
-    "noHostTag": "Aggiungi un tag host agli ospiti che accolgono gli altri.",
+    "resetWeights": "Ripristina predefiniti",
+    "noHostTag": "Suggerimento: create un’etichetta chiamata «Host» per segnalare gli invitati socievoli che accolgono volentieri i nuovi arrivati.",
     "rsvpChanged": {
-      "attending": "Un ospite ha appena confermato la presenza!",
-      "declined": "Un ospite ha declinato l invito.",
-      "removed": "La risposta di un ospite e stata rimossa."
+      "attending": "Un invitato ha appena risposto: ci sarà!",
+      "declined": "Un invitato ha appena declinato l’invito.",
+      "removed": "La risposta di un invitato è stata rimossa."
     },
     "scenarios": {
-      "title": "Scenari di disposizione",
+      "title": "Scenari dei tavoli",
       "plan": "Piano",
       "active": "attivo",
       "duplicate": "Duplica",
@@ -220,13 +220,13 @@
       "rename": "Rinomina",
       "delete": "Elimina",
       "deleted": "Scenario eliminato",
-      "deleteConfirm": "Eliminare questo scenario? Tavoli e assegnazioni saranno rimossi.",
-      "maxReached": "Puoi avere fino a 3 scenari per evento.",
+      "deleteConfirm": "Eliminare questo scenario dei tavoli? Tavoli e assegnazioni verranno rimossi.",
+      "maxReached": "Potete avere al massimo 3 scenari per evento.",
       "switched": "Scenario cambiato",
       "defaultName": "Piano A"
     },
-    "findSeatQr": "Poster QR: trova il tuo posto",
+    "findSeatQr": "Poster QR «Trova il tuo posto»",
     "findSeatHeading": "Trova il tuo posto",
-    "findSeatScan": "Scansiona questo codice con il telefono per trovare il tuo tavolo."
+    "findSeatScan": "Inquadra questo codice con il telefono per trovare il tuo tavolo."
   }
 }

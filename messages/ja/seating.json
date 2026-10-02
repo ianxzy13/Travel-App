@@ -196,16 +196,16 @@
     "arrangeSettings": "自動配置の設定",
     "arrangeSettingsHint": "配置時の各要素の重要度を調整します。",
     "weights": {
-      "keepTogether": "一緒に",
-      "side": "サイド",
-      "tag": "タグ",
-      "language": "言語",
-      "ageGroup": "年齢グループ",
-      "hostPrefer": "ホストの近く",
-      "fillFirst": "先に埋める"
+      "keepTogether": "「近くの席」ルール",
+      "side": "同じ新郎新婦側",
+      "tag": "共通のタグ",
+      "language": "共通の言語",
+      "ageGroup": "同じ年齢層",
+      "hostPrefer": "ひとりのゲストをホストの近くに",
+      "fillFirst": "新しいテーブルより先に既存のテーブルを埋める"
     },
-    "resetWeights": "リセット",
-    "noHostTag": "他のゲストを迎えるゲストに host タグを追加してください。",
+    "resetWeights": "初期設定に戻す",
+    "noHostTag": "ヒント：「Host」というタグを作成し、初対面の人を歓迎してくれる社交的なゲストに付けましょう。",
     "rsvpChanged": {
       "attending": "ゲストが出席を確認しました！",
       "declined": "ゲストが招待を辞退しました。",
@@ -225,7 +225,7 @@
       "switched": "シナリオを切り替えました",
       "defaultName": "プラン A"
     },
-    "findSeatQr": "QRポスター：席を探す",
+    "findSeatQr": "「席を探す」QRポスター",
     "findSeatHeading": "席を探す",
     "findSeatScan": "スマートフォンでこのコードをスキャンしてテーブルを見つけてください。"
   }

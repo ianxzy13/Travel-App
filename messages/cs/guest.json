@@ -81,15 +81,15 @@
       "website": "Svatební web"
     },
     "findSeat": {
-      "title": "Najdete sve misto",
-      "heading": "Najdete svuj stul",
-      "label": "Vase cele jmeno",
-      "placeholder": "Jmeno a prijmeni",
-      "button": "Najit me misto",
-      "notFound": "Pro toto jmeno jsme misto nenasli. Zkontrolujte pravopis na pozvance.",
-      "yourTable": "Vas stul je pripraven!",
-      "tableName": "Stul {number}",
-      "tableNamed": "{label} (Stul {number})"
+      "title": "Najděte své místo",
+      "heading": "Najděte svůj stůl",
+      "label": "Vaše celé jméno",
+      "placeholder": "Jméno a příjmení",
+      "button": "Najít mé místo",
+      "notFound": "Pro toto jméno jsme místo nenašli. Zkontrolujte, jak je napsáno na pozvánce.",
+      "yourTable": "Váš stůl je připraven!",
+      "tableName": "Stůl {number}",
+      "tableNamed": "{label} (stůl {number})"
     }
   },
   "rsvp": {
@@ -163,9 +163,9 @@
       "prompt": "Sdělte nám cestovní údaje",
       "editTravel": "Upravit cestovní údaje",
       "title": "Cestovní údaje",
-      "subtitle": "Pomozte nám naplánovat letištní transfery — řekněte nám, kdy přiletíte a odletíte.",
-      "arrival": "Přílet",
-      "departure": "Odlet",
+      "subtitle": "Pomozte novomanželům s plánováním a sdělte jim své cestovní plány. Všechna pole jsou nepovinná.",
+      "arrival": "Příjezd",
+      "departure": "Odjezd",
       "date": "Datum",
       "time": "Čas",
       "airport": "Letiště",
@@ -180,7 +180,7 @@
       "notes": "Chcete nám něco sdělit?",
       "notesPlaceholder": "např. přijedeme autem, potřebujeme dětskou sedačku",
       "save": "Uložit cestovní údaje",
-      "skip": "Přeskočit",
+      "skip": "Prozatím přeskočit",
       "saved": "Cestovní údaje uloženy!"
     },
     "errors": {
@@ -192,25 +192,25 @@
       "generic": "Odpověď se nepodařilo uložit. Zkuste to za chvíli znovu."
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Požadavky na pokoj",
+      "subtitle": "Dejte novomanželům vědět, jaké ubytování preferujete, aby mohli zajistit pokoje.",
+      "wantRoom": "Potřebujete hotelový pokoj?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Ano, prosím",
+        "no": "Ne, děkujeme",
+        "elsewhere": "Bydlíme jinde"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Potřebujeme na pokoji dětskou postýlku",
+      "share": "Rádi bychom sdíleli pokoj s",
+      "sharePlaceholder": "např. Anna a Tomáš",
+      "avoid": "Raději bychom pokoj nesdíleli s",
+      "avoidPlaceholder": "Pokud nemáte preferenci, nechte prázdné"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Váš pokoj",
+      "room": "Pokoj {number}",
+      "checkIn": "Příjezd: {date}",
+      "checkOut": "Odjezd: {date}"
     }
   },
   "board": {
@@ -240,7 +240,7 @@
     "preview": "Sdělte nám cestovní plány na svatbu: {couple}",
     "eyebrow": "Cestovní údaje",
     "dear": "Milí {name},",
-    "body": "Děkujeme za potvrzení účasti! Abyste nám pomohli naplánovat letištní transfery, sdělte nám prosím přes odkaz níže, kdy přiletíte a odletíte.",
+    "body": "Děkujeme za odpověď! Abychom mohli naplánovat letištní transfery a svozy, sdělte nám prosím přes odkaz níže údaje o příjezdu a odjezdu.",
     "button": "Sdílet cestovní údaje",
     "fallback": "Tlačítko nefunguje? Otevřete {link}",
     "love": "S láskou",

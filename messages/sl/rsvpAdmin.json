@@ -89,8 +89,8 @@
       "askAt": "Vprašaj za meni pri: {name}",
       "askTravel": "Vprašajte goste o potovalnih načrtih",
       "askTravelHint": "Po potrditvi udeležbe lahko gostje delijo podrobnosti prihoda in odhoda, nastanitev in potrebo po prevozu.",
-      "findSeat": "Stran Poiscite svoj sedez",
-      "findSeatHint": "Gostje lahko na javni strani vpisejo ime in vidijo dodeljeno mizo."
+      "findSeat": "Stran »Poiščite svoj sedež«",
+      "findSeatHint": "Gostje lahko na javni strani vpišejo svoje ime in vidijo, za katero mizo sedijo."
     },
     "email": {
       "title": "Pošljite e-pošto gostom",

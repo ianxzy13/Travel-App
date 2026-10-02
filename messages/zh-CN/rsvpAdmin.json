@@ -89,7 +89,7 @@
       "askAt": "在 {name} 询问餐点选择",
       "askTravel": "询问宾客行程计划",
       "askTravelHint": "确认出席后，宾客可以分享到达和离开信息、住宿地点以及是否需要接送。",
-      "findSeat": "找到你的座位页面",
+      "findSeat": "“查找座位”页面",
       "findSeatHint": "来宾可以在公开页面输入姓名查看分配的桌号。"
     },
     "email": {

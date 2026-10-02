@@ -86,7 +86,7 @@
       "label": "اسمك الكامل",
       "placeholder": "الاسم الأول والأخير",
       "button": "ابحث عن مقعدي",
-      "notFound": "لم نجد مقعداً لهذا الاسم. تحقق من الإملاء على دعوتك.",
+      "notFound": "لم نجد مقعدًا لهذا الاسم. تحقّق من كتابة الاسم كما في دعوتك.",
       "yourTable": "طاولتك جاهزة!",
       "tableName": "طاولة {number}",
       "tableNamed": "{label} (طاولة {number})"
@@ -163,7 +163,7 @@
       "prompt": "شاركنا تفاصيل سفرك",
       "editTravel": "تحديث تفاصيل السفر",
       "title": "تفاصيل السفر",
-      "subtitle": "ساعدنا في تنظيم النقل من المطار — أخبرنا بموعد وصولك ومغادرتك.",
+      "subtitle": "ساعد العروسين في تنظيم الترتيبات بمشاركة خطط سفرك. جميع الحقول اختيارية.",
       "arrival": "الوصول",
       "departure": "المغادرة",
       "date": "التاريخ",
@@ -176,11 +176,11 @@
       "otherAccommodation": "مكان آخر",
       "accommodationName": "اسم الفندق أو مكان الإقامة",
       "accommodationPlaceholder": "مثل: شقة Airbnb في وسط المدينة",
-      "needsTransfer": "نحتاج إلى نقل من المطار",
+      "needsTransfer": "نرجو توفير نقل من المطار",
       "notes": "أي شيء آخر؟",
       "notesPlaceholder": "مثل: سنأتي بالسيارة، نحتاج مقعد طفل",
       "save": "حفظ تفاصيل السفر",
-      "skip": "تخطّ الآن",
+      "skip": "تخطَّ الآن",
       "saved": "تم حفظ تفاصيل السفر!"
     },
     "errors": {
@@ -192,25 +192,25 @@
       "generic": "تعذّر حفظ ردك. يُرجى المحاولة مرة أخرى بعد قليل."
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "تفضيلات الغرفة",
+      "subtitle": "أخبر العروسين بتفضيلات إقامتك ليتمكّنا من تنظيم الغرف.",
+      "wantRoom": "هل تحتاج إلى غرفة في فندق؟",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "نعم، من فضلك",
+        "no": "لا، شكرًا",
+        "elsewhere": "سأقيم في مكان آخر"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "نحتاج سرير أطفال في الغرفة",
+      "share": "نرغب في مشاركة الغرفة مع",
+      "sharePlaceholder": "مثل: آنا وتوم",
+      "avoid": "نفضّل عدم مشاركة الغرفة مع",
+      "avoidPlaceholder": "اتركه فارغًا إن لم يكن لديك تفضيل"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "غرفتك",
+      "room": "الغرفة {number}",
+      "checkIn": "تسجيل الوصول: {date}",
+      "checkOut": "تسجيل المغادرة: {date}"
     }
   },
   "board": {

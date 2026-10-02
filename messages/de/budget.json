@@ -200,9 +200,9 @@
     "cancel": "Abbrechen",
     "save": "Speichern",
     "find": "Dienstleister finden",
-    "findHint": "Suche in der Nähe von {location}",
+    "findHint": "In der Nähe von {location} suchen",
     "pasteUrl": "Link einfügen",
-    "pasteUrlHint": "Fügen Sie die Website des Dienstleisters ein, um den Namen automatisch auszufüllen."
+    "pasteUrlHint": "Füge die Website eines Dienstleisters ein, um den Namen automatisch auszufüllen."
   },
   "files": {
     "openFailed": "Die Datei konnte nicht geöffnet werden. Bitte versuch es erneut.",

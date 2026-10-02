@@ -200,9 +200,9 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "find": "Procurar fornecedores",
-    "findHint": "Procurar perto de {location}",
+    "findHint": "Pesquisar perto de {location}",
     "pasteUrl": "Colar um link",
-    "pasteUrlHint": "Cole o site do fornecedor para preencher o nome automaticamente."
+    "pasteUrlHint": "Colem o site de um fornecedor para preencher o nome automaticamente."
   },
   "files": {
     "openFailed": "Não foi possível abrir o ficheiro. Tentem novamente.",

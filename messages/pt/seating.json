@@ -193,40 +193,40 @@
       "button": "Imprimir ou guardar como PDF",
       "noTables": "Esta disposição ainda não tem mesas."
     },
-    "arrangeSettings": "Ajustes da organizacao automatica",
-    "arrangeSettingsHint": "Ajuste a importancia de cada fator na organizacao.",
+    "arrangeSettings": "Definições de distribuição",
+    "arrangeSettingsHint": "Ajustem a importância de cada fator na distribuição automática.",
     "weights": {
-      "keepTogether": "Manter juntos",
-      "side": "Lado",
-      "tag": "Etiqueta",
-      "language": "Idioma",
-      "ageGroup": "Faixa etaria",
-      "hostPrefer": "Perto do anfitriao",
-      "fillFirst": "Preencher primeiro"
+      "keepTogether": "Regras de manter juntos",
+      "side": "Mesmo lado",
+      "tag": "Etiquetas em comum",
+      "language": "Idioma em comum",
+      "ageGroup": "Mesma faixa etária",
+      "hostPrefer": "Sentar convidados sozinhos perto de anfitriões",
+      "fillFirst": "Encher mesas antes de começar novas"
     },
-    "resetWeights": "Repor valores",
-    "noHostTag": "Adicione uma etiqueta host aos convidados que recebem os outros.",
+    "resetWeights": "Repor predefinições",
+    "noHostTag": "Dica: criem uma etiqueta chamada «Host» para marcar os convidados sociáveis que acolhem bem quem chega de novo.",
     "rsvpChanged": {
-      "attending": "Um convidado acabou de confirmar presenca.",
-      "declined": "Um convidado recusou o convite.",
+      "attending": "Um convidado acabou de responder: vem!",
+      "declined": "Um convidado acabou de recusar o convite.",
       "removed": "A resposta de um convidado foi removida."
     },
     "scenarios": {
-      "title": "Cenarios de mesas",
+      "title": "Cenários de mesas",
       "plan": "Plano",
       "active": "ativo",
       "duplicate": "Duplicar",
-      "duplicated": "Cenario duplicado",
-      "rename": "Renomear",
+      "duplicated": "Cenário duplicado",
+      "rename": "Mudar o nome",
       "delete": "Eliminar",
-      "deleted": "Cenario eliminado",
-      "deleteConfirm": "Eliminar este cenario de mesas? As mesas e atribuicoes serao removidas.",
-      "maxReached": "Pode ter ate 3 cenarios por evento.",
-      "switched": "Cenario alterado",
+      "deleted": "Cenário eliminado",
+      "deleteConfirm": "Eliminar este cenário de mesas? As mesas e as atribuições serão removidas.",
+      "maxReached": "Podem ter até 3 cenários por evento.",
+      "switched": "Cenário alterado",
       "defaultName": "Plano A"
     },
-    "findSeatQr": "Poster QR para encontrar o lugar",
+    "findSeatQr": "Póster QR «Encontre o seu lugar»",
     "findSeatHeading": "Encontre o seu lugar",
-    "findSeatScan": "Leia este codigo com o telemovel para encontrar a sua mesa."
+    "findSeatScan": "Leia este código com o telemóvel para encontrar a sua mesa."
   }
 }
