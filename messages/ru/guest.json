@@ -81,11 +81,11 @@
       "website": "Свадебный сайт"
     },
     "findSeat": {
-      "title": "Найдите свое место",
+      "title": "Найдите своё место",
       "heading": "Найдите свой стол",
       "label": "Ваше полное имя",
       "placeholder": "Имя и фамилия",
-      "button": "Найти мое место",
+      "button": "Найти моё место",
       "notFound": "Мы не нашли место для этого имени. Проверьте написание на приглашении.",
       "yourTable": "Ваш стол готов!",
       "tableName": "Стол {number}",
@@ -171,7 +171,7 @@
       "prompt": "Поделитесь данными о поездке",
       "editTravel": "Обновить данные о поездке",
       "title": "Данные о поездке",
-      "subtitle": "Помогите нам спланировать трансферы — расскажите, когда вы прибываете и уезжаете.",
+      "subtitle": "Помогите паре спланировать логистику — расскажите о своих планах поездки. Все поля необязательны.",
       "arrival": "Прибытие",
       "departure": "Отъезд",
       "date": "Дата",
@@ -184,33 +184,33 @@
       "otherAccommodation": "Другое жильё",
       "accommodationName": "Название отеля или жилья",
       "accommodationPlaceholder": "напр. Airbnb в центре города",
-      "needsTransfer": "Нам бы пригодился трансфер из аэропорта",
+      "needsTransfer": "Нам пригодился бы трансфер из аэропорта",
       "notes": "Что-нибудь ещё?",
       "notesPlaceholder": "напр. приедем на машине, нужно детское кресло",
       "save": "Сохранить данные о поездке",
-      "skip": "Пропустить",
+      "skip": "Пропустить пока",
       "saved": "Данные о поездке сохранены!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Пожелания по проживанию",
+      "subtitle": "Расскажите паре о своих пожеланиях по проживанию, чтобы они могли распределить номера.",
+      "wantRoom": "Вам нужен номер в отеле?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Да, пожалуйста",
+        "no": "Нет, спасибо",
+        "elsewhere": "Остановимся в другом месте"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Нужна детская кроватка в номере",
+      "share": "Хотели бы жить в одном номере с",
+      "sharePlaceholder": "напр. Анна и Том",
+      "avoid": "Предпочли бы не жить в одном номере с",
+      "avoidPlaceholder": "Оставьте пустым, если нет пожеланий"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Ваш номер",
+      "room": "Номер {number}",
+      "checkIn": "Заезд: {date}",
+      "checkOut": "Выезд: {date}"
     }
   },
   "board": {
@@ -239,8 +239,8 @@
   "travelEmail": {
     "preview": "Поделитесь планами поездки на свадьбу {couple}",
     "eyebrow": "Данные о поездке",
-    "dear": "Дорогой/Дорогая {name},",
-    "body": "Спасибо за подтверждение! Чтобы помочь нам организовать трансферы, поделитесь данными о прибытии и отъезде по ссылке ниже.",
+    "dear": "Дорогие {name},",
+    "body": "Спасибо за ответ на приглашение! Чтобы мы могли спланировать трансферы из аэропорта, поделитесь, пожалуйста, данными о прибытии и отъезде по ссылке ниже.",
     "button": "Поделиться данными о поездке",
     "fallback": "Кнопка не работает? Откройте {link}",
     "love": "С любовью,",

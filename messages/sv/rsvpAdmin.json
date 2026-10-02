@@ -64,7 +64,7 @@
       "contact": "Efter sista datum, säg till gästerna…",
       "contactHint": "t.ex. ”Skicka ett sms till Maria på 070-123 45 67”",
       "askSong": "Be om ett låtönskemål",
-      "askTravel": "Fråga gäster om reseplaner",
+      "askTravel": "Fråga gästerna om resplaner",
       "askTravelHint": "Efter att de svarat ja kan gäster dela ankomst- och avreseuppgifter, var de bor och om de behöver transfer.",
       "notify": "Mejla mig när någon svarar",
       "notifyOn": "Skickas till ägare och redaktörer, utöver klockan i appen.",
@@ -89,8 +89,8 @@
       "addMealsFirst": "Lägg till menyer först.",
       "noEvents": "Inga programpunkter än. Lägg till dem i Inställningar.",
       "askAt": "Fråga efter meny vid {name}",
-      "findSeat": "Sida Hitta din plats",
-      "findSeatHint": "Gaster kan skriva sitt namn pa en offentlig sida for att se sitt bord."
+      "findSeat": "Sidan Hitta din plats",
+      "findSeatHint": "Gäster kan skriva sitt namn på en offentlig sida för att se vilket bord de har."
     },
     "email": {
       "title": "Mejla era gäster",

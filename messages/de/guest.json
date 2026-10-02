@@ -83,10 +83,10 @@
     "findSeat": {
       "title": "Finde deinen Platz",
       "heading": "Finde deinen Tisch",
-      "label": "Dein vollstandiger Name",
+      "label": "Dein vollständiger Name",
       "placeholder": "Vor- und Nachname",
       "button": "Meinen Platz finden",
-      "notFound": "Wir konnten keinen Platz fur diesen Namen finden. Prufe die Schreibweise auf deiner Einladung.",
+      "notFound": "Wir konnten keinen Platz für diesen Namen finden. Prüfe die Schreibweise auf deiner Einladung.",
       "yourTable": "Dein Tisch ist bereit!",
       "tableName": "Tisch {number}",
       "tableNamed": "{label} (Tisch {number})"
@@ -168,47 +168,47 @@
       "generic": "Wir konnten deine Antwort nicht speichern. Bitte versuche es gleich noch einmal."
     },
     "travel": {
-      "prompt": "Teilen Sie Ihre Reisedaten",
+      "prompt": "Teile deine Reisedaten",
       "editTravel": "Reisedaten aktualisieren",
       "title": "Reisedaten",
-      "subtitle": "Helfen Sie uns bei der Planung der Flughafentransfers — sagen Sie uns, wann Sie ankommen und abreisen.",
+      "subtitle": "Hilf dem Brautpaar bei der Planung, indem du deine Reisepläne teilst. Alle Felder sind optional.",
       "arrival": "Ankunft",
       "departure": "Abreise",
       "date": "Datum",
       "time": "Uhrzeit",
       "airport": "Flughafen",
-      "airportPlaceholder": "z.B. FRA",
+      "airportPlaceholder": "z. B. FRA",
       "flightNumber": "Flugnummer",
-      "stayingAt": "Wo übernachten Sie?",
+      "stayingAt": "Wo übernachtest du?",
       "chooseHotel": "Hotel auswählen",
       "otherAccommodation": "Andere Unterkunft",
       "accommodationName": "Name des Hotels oder der Unterkunft",
-      "accommodationPlaceholder": "z.B. Airbnb im Stadtzentrum",
+      "accommodationPlaceholder": "z. B. Airbnb im Stadtzentrum",
       "needsTransfer": "Wir würden uns über einen Transfer vom Flughafen freuen",
       "notes": "Sonst noch etwas?",
-      "notesPlaceholder": "z.B. wir kommen mit dem Auto, brauchen einen Kindersitz",
+      "notesPlaceholder": "z. B. wir kommen mit dem Auto, brauchen einen Kindersitz",
       "save": "Reisedaten speichern",
       "skip": "Vorerst überspringen",
       "saved": "Reisedaten gespeichert!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Zimmerwünsche",
+      "subtitle": "Teile dem Brautpaar deine Unterkunftswünsche mit, damit es die Zimmer planen kann.",
+      "wantRoom": "Brauchst du ein Hotelzimmer?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Ja, gern",
+        "no": "Nein, danke",
+        "elsewhere": "Wir übernachten woanders"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Wir brauchen ein Kinderbett im Zimmer",
+      "share": "Wir würden das Zimmer gern teilen mit",
+      "sharePlaceholder": "z. B. Anna & Tom",
+      "avoid": "Lieber nicht im selben Zimmer mit",
+      "avoidPlaceholder": "Leer lassen, wenn egal"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
+      "title": "Dein Zimmer",
+      "room": "Zimmer {number}",
       "checkIn": "Check-in: {date}",
       "checkOut": "Check-out: {date}"
     }
@@ -237,13 +237,13 @@
     "subjectReminder": "Erinnerung: bitte antwortet zur Hochzeit von {couple}"
   },
   "travelEmail": {
-    "preview": "Bitte teilen Sie Ihre Reisepläne für die Hochzeit von {couple}",
+    "preview": "Teilt uns bitte eure Reisepläne für die Hochzeit von {couple} mit",
     "eyebrow": "Reisedaten",
-    "dear": "Liebe/r {name},",
-    "body": "Danke für Ihre Zusage! Um Flughafentransfers zu planen, teilen Sie uns bitte Ihre An- und Abreisedaten über den Link unten mit.",
+    "dear": "Liebe {name},",
+    "body": "Danke für eure Antwort! Damit wir Flughafentransfers und Shuttles planen können, teilt uns bitte über den Link unten eure An- und Abreisedaten mit.",
     "button": "Reisedaten teilen",
-    "fallback": "Button funktioniert nicht? Öffnen Sie {link}",
-    "love": "Mit Liebe,",
+    "fallback": "Der Button funktioniert nicht? Öffnet {link}",
+    "love": "Alles Liebe,",
     "subject": "Reisedaten für die Hochzeit von {couple}"
   }
 }

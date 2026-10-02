@@ -17,9 +17,7 @@ import {
 import {
   AlertTriangle,
   Baby,
-  BedDouble,
   Download,
-  Filter,
   Loader2,
   Lock,
   Printer,
@@ -52,12 +50,10 @@ import type {
   HotelRoomAssignmentRow,
   HotelRoomRow,
   HotelRoomTypeRow,
-  HotelRow,
-  RelationshipType,
 } from "@/lib/database.types";
 import type { PickerGuest } from "@/components/guests/guest-picker";
 import { computeRoomCosts } from "@/lib/hotels/room-costs";
-import { checkRoomRules, warningCountByRoom, type RoomWarning } from "@/lib/hotels/room-rules";
+import { checkRoomRules, warningCountByRoom } from "@/lib/hotels/room-rules";
 import { formatMoney } from "@/lib/budget/money";
 import { cn } from "@/lib/utils";
 
@@ -69,7 +65,14 @@ type BoardGuest = PickerGuest & {
   attending: boolean;
   ageGroup: string;
   householdId: string;
+  accessibility: string | null;
+  /** the guest's answer on the RSVP page: "no" / "elsewhere" means they don't need a room */
+  wantsRoom: string | null;
 };
+
+/** Coming, and didn't say they'll sleep somewhere else. */
+const needsRoom = (g: BoardGuest) =>
+  g.attending && g.wantsRoom !== "no" && g.wantsRoom !== "elsewhere";
 
 type Relationship = {
   guestA: string;
@@ -151,11 +154,12 @@ export function RoomBoard({
           name: g.name,
           householdId: g.householdId,
           ageGroup: g.ageGroup,
-          accessibility: null,
+          accessibility: g.accessibility,
         },
       ]),
     );
-    const attendingIds = new Set(guests.filter((g) => g.attending).map((g) => g.id));
+    const attendingIds = new Set(guests.filter(needsRoom).map((g) => g.id));
+    // an empty room is normal while planning, not a problem to warn about
     return checkRoomRules({
       rooms,
       roomTypes: new Map(roomTypes.map((rt) => [rt.id, rt as unknown as HotelRoomTypeRow])),
@@ -163,14 +167,10 @@ export function RoomBoard({
       guests: ruleGuests,
       relationships,
       attendingGuestIds: attendingIds,
-    });
+    }).filter((w) => w.kind !== "empty_room");
   }, [rooms, roomTypes, roomAssignments, guests, relationships]);
 
   const warningsByRoom = useMemo(() => warningCountByRoom(warnings), [warnings]);
-  const globalWarnings = useMemo(
-    () => warnings.filter((w) => !w.roomId || w.kind === "no_room"),
-    [warnings],
-  );
 
   const costs = useMemo(
     () =>
@@ -192,13 +192,13 @@ export function RoomBoard({
   }, [rooms, hotelFilter]);
 
   const filteredGuests = useMemo(() => {
-    let list = guests.filter((g) => g.attending);
+    let list = guests.filter(needsRoom);
     if (showFilter === "unassigned") {
       list = list.filter((g) => !assignedGuestIds.has(g.id));
     } else if (showFilter === "kids") {
       list = list.filter((g) => g.ageGroup === "child" || g.ageGroup === "infant");
     } else if (showFilter === "accessible") {
-      list = list.filter((g) => (g as unknown as { accessibility: string | null }).accessibility);
+      list = list.filter((g) => g.accessibility);
     }
     if (search) {
       const q = search.toLowerCase();
@@ -208,7 +208,7 @@ export function RoomBoard({
   }, [guests, showFilter, search, assignedGuestIds]);
 
   const unassignedCount = useMemo(
-    () => guests.filter((g) => g.attending && !assignedGuestIds.has(g.id)).length,
+    () => guests.filter((g) => needsRoom(g) && !assignedGuestIds.has(g.id)).length,
     [guests, assignedGuestIds],
   );
 
@@ -277,9 +277,9 @@ export function RoomBoard({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex h-full gap-4">
-        {/* Guest sidebar */}
-        <div className="flex w-72 shrink-0 flex-col gap-3 overflow-hidden rounded-xl border p-3">
+      <div className="flex flex-col gap-4 md:h-full md:min-h-0 md:flex-row">
+        {/* Guest sidebar (on top on phones) */}
+        <div className="flex max-h-[45vh] w-full shrink-0 flex-col gap-3 overflow-hidden rounded-xl border p-3 md:max-h-none md:w-72">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium">
               <Users className="me-1 inline size-4" aria-hidden />
@@ -300,7 +300,7 @@ export function RoomBoard({
             />
           </div>
 
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {(["all", "unassigned", "kids", "accessible"] as const).map((f) => (
               <Button
                 key={f}
@@ -329,8 +329,8 @@ export function RoomBoard({
         </div>
 
         {/* Room grid */}
-        <div className="flex flex-1 flex-col gap-3 overflow-hidden">
-          <div className="flex items-center gap-2">
+        <div className="flex min-h-0 flex-1 flex-col gap-3 md:overflow-hidden">
+          <div className="flex flex-wrap items-center gap-2">
             {hotels.length > 1 && (
               <Select value={hotelFilter} onValueChange={setHotelFilter}>
                 <SelectTrigger className="h-8 w-48">
@@ -357,15 +357,13 @@ export function RoomBoard({
                 disabled={pending}
                 onClick={() =>
                   startTransition(async () => {
-                    const ruleGuests = guests
-                      .filter((g) => g.attending)
-                      .map((g) => ({
-                        id: g.id,
-                        name: g.name,
-                        householdId: g.householdId,
-                        ageGroup: g.ageGroup,
-                        accessibility: null,
-                      }));
+                    const ruleGuests = guests.filter(needsRoom).map((g) => ({
+                      id: g.id,
+                      name: g.name,
+                      householdId: g.householdId,
+                      ageGroup: g.ageGroup,
+                      accessibility: g.accessibility,
+                    }));
                     const result = autoArrangeRooms({
                       rooms,
                       roomTypes: new Map(
@@ -401,7 +399,7 @@ export function RoomBoard({
                 {t("board.autoArrange")}
               </Button>
             )}
-            <div className="ml-auto flex items-center gap-2">
+            <div className="ms-auto flex flex-wrap items-center gap-2">
               {warnings.length > 0 && (
                 <span className="flex items-center gap-1 text-sm text-amber-600">
                   <AlertTriangle className="size-4" aria-hidden />
@@ -423,7 +421,7 @@ export function RoomBoard({
             </div>
           </div>
 
-          <div className="grid flex-1 grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] content-start gap-3 overflow-y-auto">
+          <div className="grid flex-1 grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] content-start gap-3 md:overflow-y-auto">
             {filteredRooms.map((room) => (
               <RoomCard
                 key={room.id}

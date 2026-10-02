@@ -171,7 +171,7 @@
       "prompt": "Поділіться деталями подорожі",
       "editTravel": "Оновити дані подорожі",
       "title": "Дані подорожі",
-      "subtitle": "Допоможіть нам спланувати трансфери — розкажіть, коли ви прибуваєте та від'їжджаєте.",
+      "subtitle": "Допоможіть парі спланувати логістику — поділіться планами подорожі. Усі поля необов'язкові.",
       "arrival": "Прибуття",
       "departure": "Від'їзд",
       "date": "Дата",
@@ -192,25 +192,25 @@
       "saved": "Дані подорожі збережено!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Побажання щодо проживання",
+      "subtitle": "Розкажіть парі про свої побажання щодо проживання, щоб вони могли розподілити номери.",
+      "wantRoom": "Вам потрібен номер у готелі?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Так, будь ласка",
+        "no": "Ні, дякую",
+        "elsewhere": "Зупинимося деінде"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Потрібне дитяче ліжечко в номері",
+      "share": "Хотіли б жити в одному номері з",
+      "sharePlaceholder": "напр. Анна і Том",
+      "avoid": "Воліли б не жити в одному номері з",
+      "avoidPlaceholder": "Залиште порожнім, якщо немає побажань"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Ваш номер",
+      "room": "Номер {number}",
+      "checkIn": "Заїзд: {date}",
+      "checkOut": "Виїзд: {date}"
     }
   },
   "board": {
@@ -239,8 +239,8 @@
   "travelEmail": {
     "preview": "Поділіться планами подорожі на весілля {couple}",
     "eyebrow": "Дані подорожі",
-    "dear": "Дорогий/Дорога {name},",
-    "body": "Дякуємо за підтвердження! Щоб допомогти нам організувати трансфери, поділіться даними прибуття та від'їзду за посиланням нижче.",
+    "dear": "Дорогі {name},",
+    "body": "Дякуємо за відповідь на запрошення! Щоб ми могли спланувати трансфери з аеропорту, поділіться, будь ласка, даними про прибуття та від'їзд за посиланням нижче.",
     "button": "Поділитися даними подорожі",
     "fallback": "Кнопка не працює? Відкрийте {link}",
     "love": "З любов'ю,",

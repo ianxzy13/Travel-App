@@ -81,13 +81,13 @@
       "website": "Svadbena stranica"
     },
     "findSeat": {
-      "title": "Pronadite svoje mjesto",
-      "heading": "Pronadite svoj stol",
-      "label": "Vase puno ime",
+      "title": "Pronađite svoje mjesto",
+      "heading": "Pronađite svoj stol",
+      "label": "Vaše puno ime",
       "placeholder": "Ime i prezime",
-      "button": "Pronadi moje mjesto",
-      "notFound": "Nismo pronasli mjesto za to ime. Provjerite pravopis na pozivnici.",
-      "yourTable": "Vas stol je spreman!",
+      "button": "Pronađi moje mjesto",
+      "notFound": "Nismo pronašli mjesto za to ime. Provjerite kako je napisano na pozivnici.",
+      "yourTable": "Vaš stol je spreman!",
       "tableName": "Stol {number}",
       "tableNamed": "{label} (Stol {number})"
     }
@@ -171,7 +171,7 @@
       "prompt": "Podijelite svoje putne podatke",
       "editTravel": "Ažuriraj putne podatke",
       "title": "Putni podaci",
-      "subtitle": "Pomozite nam planirati aerodromske transfere — recite nam kad stižete i kad odlazite.",
+      "subtitle": "Pomozite paru u planiranju logistike tako da podijelite svoje planove putovanja. Sva su polja neobavezna.",
       "arrival": "Dolazak",
       "departure": "Odlazak",
       "date": "Datum",
@@ -184,7 +184,7 @@
       "otherAccommodation": "Drugi smještaj",
       "accommodationName": "Naziv hotela ili smještaja",
       "accommodationPlaceholder": "npr. Airbnb u centru grada",
-      "needsTransfer": "Cijenili bismo prijevoz s aerodroma",
+      "needsTransfer": "Cijenili bismo prijevoz iz zračne luke",
       "notes": "Još nešto?",
       "notesPlaceholder": "npr. dolazimo autom, trebamo dječje sjedalo",
       "save": "Spremi putne podatke",
@@ -192,25 +192,25 @@
       "saved": "Putni podaci spremljeni!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Želje za smještaj",
+      "subtitle": "Javite paru svoje želje za smještaj kako bi mogli organizirati sobe.",
+      "wantRoom": "Trebate li hotelsku sobu?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Da, molim",
+        "no": "Ne, hvala",
+        "elsewhere": "Odsjedamo drugdje"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Treba nam dječji krevetić u sobi",
+      "share": "Željeli bismo dijeliti sobu s",
+      "sharePlaceholder": "npr. Ana i Tomo",
+      "avoid": "Radije ne bismo dijelili sobu s",
+      "avoidPlaceholder": "Ostavite prazno ako nemate želja"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Vaša soba",
+      "room": "Soba {number}",
+      "checkIn": "Prijava: {date}",
+      "checkOut": "Odjava: {date}"
     }
   },
   "board": {
@@ -237,13 +237,13 @@
     "subjectReminder": "Podsjetnik: potvrdite dolazak na vjenčanje: {couple}"
   },
   "travelEmail": {
-    "preview": "Molimo podijelite svoje putne planove za vjenčanje para {couple}",
+    "preview": "Molimo podijelite svoje planove putovanja za vjenčanje: {couple}",
     "eyebrow": "Putni podaci",
-    "dear": "Dragi/Draga {name},",
-    "body": "Hvala na potvrdi! Kako bismo lakše planirali transfere, molimo podijelite podatke o dolasku i odlasku putem donje poveznice.",
+    "dear": "Dragi {name},",
+    "body": "Hvala na odgovoru! Kako bismo lakše planirali prijevoze iz zračne luke i transfere, molimo podijelite podatke o dolasku i odlasku putem poveznice u nastavku.",
     "button": "Podijeli putne podatke",
     "fallback": "Gumb ne radi? Otvorite {link}",
     "love": "S ljubavlju,",
-    "subject": "Putni podaci za vjenčanje para {couple}"
+    "subject": "Putni podaci za vjenčanje: {couple}"
   }
 }

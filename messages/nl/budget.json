@@ -200,9 +200,9 @@
     "cancel": "Annuleren",
     "save": "Opslaan",
     "find": "Leveranciers zoeken",
-    "findHint": "Zoeken bij {location}",
+    "findHint": "Zoeken in de buurt van {location}",
     "pasteUrl": "Link plakken",
-    "pasteUrlHint": "Plak de website van de leverancier om de naam automatisch in te vullen."
+    "pasteUrlHint": "Plak de website van een leverancier om de naam automatisch in te vullen."
   },
   "files": {
     "openFailed": "Het bestand kon niet worden geopend. Probeer het opnieuw.",

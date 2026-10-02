@@ -59,8 +59,9 @@ export default async function HotelRooms() {
   const guestRows = await fetchAll((f, t) =>
     sb
       .from("guests")
-      .select("id, age_group, household_id, accessibility")
+      .select("id, age_group, household_id, accessibility, wants_hotel_room")
       .eq("wedding_id", wedding.id)
+      .order("id")
       .range(f, t),
   );
   const guestExtra = new Map(guestRows.map((g) => [g.id, g]));
@@ -71,11 +72,13 @@ export default async function HotelRooms() {
       ...pg,
       ageGroup: extra?.age_group ?? "adult",
       householdId: extra?.household_id ?? pg.householdId,
+      accessibility: extra?.accessibility ?? null,
+      wantsRoom: extra?.wants_hotel_room ?? null,
     };
   });
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4 p-4 md:h-[calc(100vh-4rem)]">
       <RoomBoard
         hotels={hotels.map((h) => ({
           ...h,

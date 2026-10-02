@@ -200,9 +200,9 @@
     "cancel": "Annuler",
     "save": "Enregistrer",
     "find": "Trouver des prestataires",
-    "findHint": "Chercher près de {location}",
+    "findHint": "Rechercher près de {location}",
     "pasteUrl": "Coller un lien",
-    "pasteUrlHint": "Collez le site du prestataire pour remplir son nom automatiquement."
+    "pasteUrlHint": "Collez le site web d’un prestataire pour remplir automatiquement son nom."
   },
   "files": {
     "openFailed": "Impossible d’ouvrir le fichier. Veuillez réessayer.",

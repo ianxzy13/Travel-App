@@ -187,12 +187,12 @@
       "guestLabel": "Invité",
       "chooseGuest": "Choisir un invité",
       "addRule": "Ajouter une règle",
-      "languages": "Langues parlees",
-      "languagesHint": "Le plan de table l'utilise pour placer ensemble les invites qui parlent la meme langue.",
+      "languages": "Langues parlées",
+      "languagesHint": "Utilisé par le plan de table pour placer ensemble les invités qui parlent la même langue.",
       "addLanguage": "Ajouter une langue",
       "allLanguages": "Toutes les langues",
       "remove": "Retirer",
-      "noLanguages": "Aucune langue ajoutee"
+      "noLanguages": "Aucune langue ajoutée"
     },
     "household": {
       "title": "Réglages du foyer",

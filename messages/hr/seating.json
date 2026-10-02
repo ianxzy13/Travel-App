@@ -193,40 +193,40 @@
       "button": "Ispiši ili spremi kao PDF",
       "noTables": "U ovom rasporedu sjedenja još nema stolova."
     },
-    "arrangeSettings": "Postavke automatskog rasporeda",
-    "arrangeSettingsHint": "Prilagodite vaznost svakog faktora pri rasporedu.",
+    "arrangeSettings": "Postavke rasporeda",
+    "arrangeSettingsHint": "Prilagodite koliko je svaki čimbenik važan pri automatskom rasporedu.",
     "weights": {
-      "keepTogether": "Zajedno",
-      "side": "Strana",
-      "tag": "Oznaka",
-      "language": "Jezik",
-      "ageGroup": "Dobna skupina",
-      "hostPrefer": "Blizu domacina",
-      "fillFirst": "Prvo popuni"
+      "keepTogether": "Pravila o zajedničkom sjedenju",
+      "side": "Ista strana",
+      "tag": "Zajedničke oznake",
+      "language": "Zajednički jezik",
+      "ageGroup": "Ista dobna skupina",
+      "hostPrefer": "Usamljene goste smjesti uz domaćine",
+      "fillFirst": "Popuni stolove prije otvaranja novih"
     },
-    "resetWeights": "Vrati izvorne",
-    "noHostTag": "Dodajte oznaku host gostima koji docekuju ostale.",
+    "resetWeights": "Vrati na zadano",
+    "noHostTag": "Savjet: izradite oznaku „Host” za društvene goste koji rado prihvaćaju nove ljude.",
     "rsvpChanged": {
       "attending": "Gost je upravo potvrdio dolazak!",
-      "declined": "Gost je odbio pozivnicu.",
+      "declined": "Gost je upravo odbio pozivnicu.",
       "removed": "Odgovor gosta je uklonjen."
     },
     "scenarios": {
-      "title": "Scenariji rasporeda",
+      "title": "Scenariji rasporeda sjedenja",
       "plan": "Plan",
       "active": "aktivan",
       "duplicate": "Dupliciraj",
       "duplicated": "Scenarij dupliciran",
       "rename": "Preimenuj",
-      "delete": "Obrisi",
+      "delete": "Obriši",
       "deleted": "Scenarij obrisan",
-      "deleteConfirm": "Obrisati ovaj scenarij? Stolovi i raspored bit ce uklonjeni.",
-      "maxReached": "Mozete imati do 3 scenarija po dogadaju.",
+      "deleteConfirm": "Obrisati ovaj scenarij rasporeda? Stolovi i raspored bit će uklonjeni.",
+      "maxReached": "Možete imati najviše 3 scenarija po događaju.",
       "switched": "Scenarij promijenjen",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "QR plakat: pronadite svoje mjesto",
-    "findSeatHeading": "Pronadite svoje mjesto",
-    "findSeatScan": "Skenirajte ovaj kod mobitelom da pronadete svoj stol."
+    "findSeatQr": "QR plakat „Pronađite svoje mjesto”",
+    "findSeatHeading": "Pronađite svoje mjesto",
+    "findSeatScan": "Skenirajte ovaj kod mobitelom i pronađite svoj stol."
   }
 }

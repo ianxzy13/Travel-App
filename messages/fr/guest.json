@@ -53,7 +53,7 @@
       "map": "Plan",
       "mapOf": "Plan de {name}",
       "transportTitle": "Se déplacer",
-      "visaTitle": "Informations visa",
+      "visaTitle": "Informations sur les visas",
       "currencyTitle": "Devise"
     },
     "rsvp": {
@@ -84,12 +84,12 @@
       "title": "Trouvez votre place",
       "heading": "Trouvez votre table",
       "label": "Votre nom complet",
-      "placeholder": "Prenom et nom",
+      "placeholder": "Prénom et nom",
       "button": "Trouver ma place",
-      "notFound": "Nous n'avons pas trouve de place pour ce nom. Verifiez l'orthographe sur votre invitation.",
-      "yourTable": "Votre table est prete!",
+      "notFound": "Nous n’avons pas trouvé de place pour ce nom. Vérifiez l’orthographe sur votre invitation.",
+      "yourTable": "Votre table est prête !",
       "tableName": "Table {number}",
-      "tableNamed": "{label} (Table {number})"
+      "tableNamed": "{label} (table {number})"
     }
   },
   "rsvp": {
@@ -168,49 +168,49 @@
       "generic": "Nous n’avons pas pu enregistrer votre réponse. Réessayez dans un instant."
     },
     "travel": {
-      "prompt": "Partagez vos détails de voyage",
-      "editTravel": "Mettre à jour les détails de voyage",
-      "title": "Détails de voyage",
-      "subtitle": "Aidez-nous à organiser les transferts — dites-nous quand vous arrivez et quand vous repartez.",
+      "prompt": "Partagez vos informations de voyage",
+      "editTravel": "Modifier vos informations de voyage",
+      "title": "Informations de voyage",
+      "subtitle": "Aidez les mariés à organiser la logistique en partageant vos projets de voyage. Tous les champs sont facultatifs.",
       "arrival": "Arrivée",
       "departure": "Départ",
       "date": "Date",
       "time": "Heure",
       "airport": "Aéroport",
-      "airportPlaceholder": "ex. CDG",
+      "airportPlaceholder": "ex. LHR",
       "flightNumber": "Numéro de vol",
       "stayingAt": "Où logez-vous ?",
       "chooseHotel": "Choisir un hôtel",
-      "otherAccommodation": "Autre hébergement",
-      "accommodationName": "Nom de l'hôtel ou hébergement",
-      "accommodationPlaceholder": "ex. Airbnb dans le centre-ville",
-      "needsTransfer": "Un transfert depuis l'aéroport serait apprécié",
+      "otherAccommodation": "Ailleurs",
+      "accommodationName": "Nom de l’hôtel ou de l’hébergement",
+      "accommodationPlaceholder": "ex. Airbnb en centre-ville",
+      "needsTransfer": "Nous aimerions un transfert depuis l’aéroport",
       "notes": "Autre chose ?",
-      "notesPlaceholder": "ex. nous arrivons en voiture, besoin d'un siège enfant",
-      "save": "Enregistrer les détails de voyage",
-      "skip": "Passer pour le moment",
-      "saved": "Détails de voyage enregistrés !"
+      "notesPlaceholder": "ex. arrivée en voiture, besoin d’un siège enfant",
+      "save": "Enregistrer les informations de voyage",
+      "skip": "Plus tard",
+      "saved": "Informations de voyage enregistrées !"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Préférences de chambre",
+      "subtitle": "Indiquez aux mariés vos préférences d’hébergement pour qu’ils puissent organiser les chambres.",
+      "wantRoom": "Avez-vous besoin d’une chambre d’hôtel ?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Oui, volontiers",
+        "no": "Non merci",
+        "elsewhere": "Logement ailleurs"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Besoin d’un lit bébé dans la chambre",
+      "share": "Souhaite partager une chambre avec",
+      "sharePlaceholder": "ex. Anna et Tom",
+      "avoid": "Préfère ne pas partager avec",
+      "avoidPlaceholder": "Laissez vide si aucune préférence"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Votre chambre",
+      "room": "Chambre {number}",
+      "checkIn": "Arrivée : {date}",
+      "checkOut": "Départ : {date}"
     }
   },
   "board": {
@@ -237,13 +237,13 @@
     "subjectReminder": "Rappel : merci de répondre pour le mariage de {couple}"
   },
   "travelEmail": {
-    "preview": "Veuillez partager vos plans de voyage pour le mariage de {couple}",
-    "eyebrow": "Détails de voyage",
-    "dear": "Cher/Chère {name},",
-    "body": "Merci d'avoir confirmé votre présence ! Pour nous aider à organiser les transferts, veuillez partager vos détails d'arrivée et de départ via le lien ci-dessous.",
-    "button": "Partager les détails de voyage",
+    "preview": "Partagez vos projets de voyage pour le mariage de {couple}",
+    "eyebrow": "Informations de voyage",
+    "dear": "Bonjour {name},",
+    "body": "Merci pour votre réponse ! Pour nous aider à organiser les transferts depuis l’aéroport et les navettes, indiquez-nous vos dates d’arrivée et de départ via le lien ci-dessous.",
+    "button": "Partager mes informations de voyage",
     "fallback": "Le bouton ne fonctionne pas ? Ouvrez {link}",
-    "love": "Avec amour,",
-    "subject": "Détails de voyage pour le mariage de {couple}"
+    "love": "Avec toute notre affection,",
+    "subject": "Informations de voyage pour le mariage de {couple}"
   }
 }

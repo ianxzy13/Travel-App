@@ -89,8 +89,8 @@
       "askAt": "Menüwahl bei {name}",
       "askTravel": "Gäste nach Reiseplänen fragen",
       "askTravelHint": "Nach der Zusage können Gäste ihre An- und Abreisedaten, Unterkunft und Transferbedarf teilen.",
-      "findSeat": "Seite Platz finden",
-      "findSeatHint": "Gaste konnen ihren Namen auf einer offentlichen Seite eingeben, um ihren Tisch zu sehen."
+      "findSeat": "Seite „Finde deinen Platz“",
+      "findSeatHint": "Gäste können auf einer öffentlichen Seite ihren Namen eingeben und sehen, an welchem Tisch sie sitzen."
     },
     "email": {
       "title": "E-Mail an eure Gäste",

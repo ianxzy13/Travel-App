@@ -83,11 +83,11 @@
     "findSeat": {
       "title": "Hitta din plats",
       "heading": "Hitta ditt bord",
-      "label": "Ditt fullstandiga namn",
-      "placeholder": "For- och efternamn",
+      "label": "Ditt fullständiga namn",
+      "placeholder": "För- och efternamn",
       "button": "Hitta min plats",
-      "notFound": "Vi kunde inte hitta en plats for det namnet. Kontrollera stavningen pa din inbjudan.",
-      "yourTable": "Ditt bord ar klart!",
+      "notFound": "Vi kunde inte hitta någon plats för det namnet. Kontrollera stavningen på din inbjudan.",
+      "yourTable": "Ditt bord väntar!",
       "tableName": "Bord {number}",
       "tableNamed": "{label} (Bord {number})"
     }
@@ -163,7 +163,7 @@
       "prompt": "Dela dina reseuppgifter",
       "editTravel": "Uppdatera reseuppgifter",
       "title": "Reseuppgifter",
-      "subtitle": "Hjälp oss planera flygplatstransfer — berätta när du anländer och reser hem.",
+      "subtitle": "Hjälp paret att planera logistiken genom att dela dina resplaner. Alla fält är frivilliga.",
       "arrival": "Ankomst",
       "departure": "Avresa",
       "date": "Datum",
@@ -173,7 +173,7 @@
       "flightNumber": "Flightnummer",
       "stayingAt": "Var bor du?",
       "chooseHotel": "Välj hotell",
-      "otherAccommodation": "Annan plats",
+      "otherAccommodation": "Någon annanstans",
       "accommodationName": "Hotell- eller boendenamn",
       "accommodationPlaceholder": "t.ex. Airbnb i centrum",
       "needsTransfer": "Vi vill gärna ha transfer från flygplatsen",
@@ -192,25 +192,25 @@
       "generic": "Vi kunde inte spara ditt svar. Försök igen om en stund."
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Rumsönskemål",
+      "subtitle": "Berätta för paret vad du önskar för boende så att de kan ordna rummen.",
+      "wantRoom": "Behöver du ett hotellrum?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Ja tack",
+        "no": "Nej tack",
+        "elsewhere": "Bor någon annanstans"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Behöver spjälsäng i rummet",
+      "share": "Vill gärna dela rum med",
+      "sharePlaceholder": "t.ex. Anna & Tom",
+      "avoid": "Vill helst inte dela rum med",
+      "avoidPlaceholder": "Lämna tomt om du inte har några önskemål"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Ditt rum",
+      "room": "Rum {number}",
+      "checkIn": "Incheckning: {date}",
+      "checkOut": "Utcheckning: {date}"
     }
   },
   "board": {
@@ -237,13 +237,13 @@
     "subjectReminder": "Påminnelse: OSA till bröllopet för {couple}"
   },
   "travelEmail": {
-    "preview": "Dela dina reseplaner inför bröllopet för {couple}",
+    "preview": "Dela dina resplaner inför bröllopet för {couple}",
     "eyebrow": "Reseuppgifter",
     "dear": "Kära {name},",
-    "body": "Tack för din OSA! För att hjälpa oss planera flygplatstransfer, dela gärna dina ankomst- och avreseuppgifter via länken nedan.",
+    "body": "Tack för ditt OSA-svar! För att hjälpa oss planera flygplatstransfer och shuttlar, dela gärna dina ankomst- och avreseuppgifter via länken nedan.",
     "button": "Dela reseuppgifter",
     "fallback": "Fungerar inte knappen? Öppna {link}",
     "love": "Varma hälsningar,",
-    "subject": "Reseuppgifter för bröllopet {couple}"
+    "subject": "Reseuppgifter inför bröllopet för {couple}"
   }
 }

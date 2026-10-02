@@ -28,7 +28,10 @@ export async function findSeat(
     p_slug: parsed.data.slug,
     p_name: parsed.data.name,
   });
-  if (error) return { ok: false, error: "Something went wrong. Please try again." };
+  if (error) {
+    console.error("[findSeat]", error);
+    return { ok: false, error: "find_seat_failed" };
+  }
   if (!data) return { ok: true, data: null };
   const r = data as { guest_name: string; table_label: string | null; table_number: number | null; table_kind: string };
   return {

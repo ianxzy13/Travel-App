@@ -35,7 +35,6 @@ export default async function PrintRoomsPage() {
   ]);
 
   const typeName = new Map(roomTypes.map((rt) => [rt.id, rt.name]));
-  const typeMax = new Map(roomTypes.map((rt) => [rt.id, rt.max_guests]));
   const guestName = new Map(guests.map((g) => [g.id, `${g.first_name} ${g.last_name}`.trim()]));
 
   const assignmentsByRoom = new Map<string, typeof assignments>();

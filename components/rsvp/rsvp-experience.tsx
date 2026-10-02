@@ -14,12 +14,18 @@ import { RsvpTravelForm } from "./rsvp-travel-form";
 type View = "summary" | "form" | "thanks" | "travel";
 
 /** The guest's journey on /r/[code]: see answers → edit → thank you. */
-export function RsvpExperience({ data }: { data: RsvpData }) {
+export function RsvpExperience({
+  data,
+  openTravel = false,
+}: {
+  data: RsvpData;
+  /** came from the travel reminder email (?travel=1): go straight to the travel form */
+  openTravel?: boolean;
+}) {
   const t = useTranslations("rsvp");
   const locale = useLocale();
   const [answered, setAnswered] = useState(!!data.household.responded_at);
   const closed = data.wedding.deadline_passed;
-  const [view, setView] = useState<View>(answered || closed ? "summary" : "form");
   const [state, setState] = useState<RsvpFormState>(() => initialFormState(data));
   const deadline = data.wedding.rsvp_deadline
     ? fmtDate(data.wedding.rsvp_deadline, locale, "long")
@@ -27,7 +33,17 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
   const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
 
   const anyAttending = Object.values(state.answers).some((a) => a.status === "attending");
-  const showTravelPrompt = data.wedding.rsvp_ask_travel && anyAttending;
+  // travel and hotel-room questions; still open after the RSVP deadline, since
+  // travel plans usually come later
+  const showTravelPrompt =
+    (data.wedding.rsvp_ask_travel || (data.hotels ?? []).length > 0) && anyAttending;
+  const [view, setView] = useState<View>(() =>
+    openTravel && answered && showTravelPrompt
+      ? "travel"
+      : answered || closed
+        ? "summary"
+        : "form",
+  );
 
   return (
     <div className="space-y-6">
@@ -114,16 +130,18 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
           {(data.room_assignments ?? []).length > 0 && (
             <RoomAssignmentCard data={data} />
           )}
-          {!closed && (
+          {(!closed || showTravelPrompt) && (
             <div className="space-y-3">
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full"
-                onClick={() => setView("form")}
-              >
-                {t("change")}
-              </Button>
+              {!closed && (
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => setView("form")}
+                >
+                  {t("change")}
+                </Button>
+              )}
               {showTravelPrompt && (
                 <Button
                   size="lg"

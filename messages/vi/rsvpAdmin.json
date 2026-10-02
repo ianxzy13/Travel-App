@@ -89,8 +89,8 @@
       "askAt": "Hỏi chọn món tại {name}",
       "askTravel": "Hỏi khách về kế hoạch di chuyển",
       "askTravelHint": "Sau khi xác nhận tham dự, khách có thể chia sẻ thông tin đến và đi, nơi ở và nhu cầu đưa đón.",
-      "findSeat": "Trang Tim cho ngoi",
-      "findSeatHint": "Khach co the nhap ten tren trang cong khai de xem ban duoc phan cong."
+      "findSeat": "Trang “Tìm chỗ ngồi”",
+      "findSeatHint": "Khách có thể nhập tên trên trang công khai để xem bàn được xếp."
     },
     "email": {
       "title": "Gửi email cho khách",

@@ -193,40 +193,40 @@
       "button": "Imprimer ou enregistrer en PDF",
       "noTables": "Ce plan de table ne contient encore aucune table."
     },
-    "arrangeSettings": "Reglages du placement automatique",
-    "arrangeSettingsHint": "Ajustez l'importance de chaque critere pour le placement.",
+    "arrangeSettings": "Réglages du placement",
+    "arrangeSettingsHint": "Ajustez l’importance de chaque critère lors du placement automatique.",
     "weights": {
-      "keepTogether": "Garder ensemble",
-      "side": "Cote",
-      "tag": "Etiquette",
-      "language": "Langue",
-      "ageGroup": "Tranche d'age",
-      "hostPrefer": "Pres de l'hote",
-      "fillFirst": "Remplir d'abord"
+      "keepTogether": "Règles « placer ensemble »",
+      "side": "Même côté",
+      "tag": "Étiquettes communes",
+      "language": "Langue commune",
+      "ageGroup": "Même tranche d’âge",
+      "hostPrefer": "Placer les invités isolés près des hôtes",
+      "fillFirst": "Remplir les tables avant d’en entamer de nouvelles"
     },
-    "resetWeights": "Reinitialiser",
-    "noHostTag": "Ajoutez une etiquette host aux invites qui accueillent les autres.",
+    "resetWeights": "Rétablir les valeurs par défaut",
+    "noHostTag": "Astuce : créez une étiquette nommée « Host » pour repérer les invités sociables qui accueillent volontiers les nouveaux venus.",
     "rsvpChanged": {
-      "attending": "Un invite vient de confirmer sa presence!",
-      "declined": "Un invite a decline son invitation.",
-      "removed": "La reponse d un invite a ete retiree."
+      "attending": "Un invité vient de répondre : il sera présent !",
+      "declined": "Un invité vient de décliner son invitation.",
+      "removed": "La réponse d’un invité a été supprimée."
     },
     "scenarios": {
-      "title": "Scenarios de placement",
+      "title": "Scénarios de placement",
       "plan": "Plan",
       "active": "actif",
       "duplicate": "Dupliquer",
-      "duplicated": "Scenario duplique",
+      "duplicated": "Scénario dupliqué",
       "rename": "Renommer",
       "delete": "Supprimer",
-      "deleted": "Scenario supprime",
-      "deleteConfirm": "Supprimer ce scenario? Les tables et attributions seront supprimees.",
-      "maxReached": "Vous pouvez avoir jusqu'a 3 scenarios par evenement.",
-      "switched": "Scenario change",
+      "deleted": "Scénario supprimé",
+      "deleteConfirm": "Supprimer ce scénario de placement ? Les tables et les placements seront supprimés.",
+      "maxReached": "Vous pouvez avoir jusqu’à 3 scénarios par événement.",
+      "switched": "Scénario changé",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "Affiche QR pour trouver sa place",
+    "findSeatQr": "Affiche QR « Trouvez votre place »",
     "findSeatHeading": "Trouvez votre place",
-    "findSeatScan": "Scannez ce code avec votre telephone pour trouver votre table."
+    "findSeatScan": "Scannez ce code avec votre téléphone pour trouver votre table."
   }
 }

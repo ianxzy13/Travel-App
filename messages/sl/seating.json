@@ -193,40 +193,40 @@
       "button": "Natisni ali shrani kot PDF",
       "noTables": "V tem sedežnem redu še ni miz."
     },
-    "arrangeSettings": "Nastavitve samodejne razporeditve",
-    "arrangeSettingsHint": "Prilagodite pomembnost posameznega dejavnika pri razporeditvi.",
+    "arrangeSettings": "Nastavitve razporejanja",
+    "arrangeSettingsHint": "Prilagodite, kako pomemben je posamezen dejavnik pri samodejni razporeditvi.",
     "weights": {
-      "keepTogether": "Skupaj",
-      "side": "Stran",
-      "tag": "Oznaka",
-      "language": "Jezik",
-      "ageGroup": "Starostna skupina",
-      "hostPrefer": "Blizu gostitelja",
-      "fillFirst": "Najprej zapolni"
+      "keepTogether": "Pravila za skupno sedenje",
+      "side": "Ista stran",
+      "tag": "Skupne oznake",
+      "language": "Skupni jezik",
+      "ageGroup": "Ista starostna skupina",
+      "hostPrefer": "Osamljene goste posedi blizu gostiteljev",
+      "fillFirst": "Zapolni mize pred začetkom novih"
     },
-    "resetWeights": "Ponastavi",
-    "noHostTag": "Dodajte oznako host gostom, ki sprejemajo druge.",
+    "resetWeights": "Ponastavi na privzeto",
+    "noHostTag": "Namig: ustvarite oznako »Host« za družabne goste, ki radi sprejmejo nove ljudi.",
     "rsvpChanged": {
-      "attending": "Gost je pravkar potrdil udelezbo!",
-      "declined": "Gost je zavrnil povabilo.",
+      "attending": "Gost je pravkar potrdil udeležbo!",
+      "declined": "Gost je pravkar zavrnil povabilo.",
       "removed": "Odgovor gosta je bil odstranjen."
     },
     "scenarios": {
-      "title": "Scenariji razporeditve",
-      "plan": "Plan",
+      "title": "Scenariji sedežnega reda",
+      "plan": "Načrt",
       "active": "aktiven",
       "duplicate": "Podvoji",
       "duplicated": "Scenarij podvojen",
       "rename": "Preimenuj",
-      "delete": "Izbrisi",
+      "delete": "Izbriši",
       "deleted": "Scenarij izbrisan",
-      "deleteConfirm": "Izbrisati ta scenarij? Mize in dodelitve bodo odstranjene.",
-      "maxReached": "Imate lahko najvec 3 scenarije na dogodek.",
+      "deleteConfirm": "Izbrišem ta scenarij sedežnega reda? Mize in dodelitve bodo odstranjene.",
+      "maxReached": "Na dogodek imate lahko največ 3 scenarije.",
       "switched": "Scenarij spremenjen",
-      "defaultName": "Plan A"
+      "defaultName": "Načrt A"
     },
-    "findSeatQr": "QR plakat: poiscite svoj sedez",
-    "findSeatHeading": "Poiscite svoj sedez",
-    "findSeatScan": "Skenirajte to kodo s telefonom in poiscite svojo mizo."
+    "findSeatQr": "QR-plakat »Poiščite svoj sedež«",
+    "findSeatHeading": "Poiščite svoj sedež",
+    "findSeatScan": "Skenirajte to kodo s telefonom in poiščite svojo mizo."
   }
 }

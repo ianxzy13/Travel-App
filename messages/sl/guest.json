@@ -81,13 +81,13 @@
       "website": "Poročna spletna stran"
     },
     "findSeat": {
-      "title": "Poiscite svoj sedez",
-      "heading": "Poiscite svojo mizo",
-      "label": "Vase polno ime",
+      "title": "Poiščite svoj sedež",
+      "heading": "Poiščite svojo mizo",
+      "label": "Vaše polno ime",
       "placeholder": "Ime in priimek",
-      "button": "Poisci moj sedez",
-      "notFound": "Za to ime nismo nasli sedeza. Preverite crkovanje na vabilu.",
-      "yourTable": "Vasa miza je pripravljena!",
+      "button": "Poišči moj sedež",
+      "notFound": "Za to ime nismo našli sedeža. Preverite črkovanje na vabilu.",
+      "yourTable": "Vaša miza je pripravljena!",
       "tableName": "Miza {number}",
       "tableNamed": "{label} (Miza {number})"
     }
@@ -171,7 +171,7 @@
       "prompt": "Delite podrobnosti potovanja",
       "editTravel": "Posodobite podrobnosti potovanja",
       "title": "Podrobnosti potovanja",
-      "subtitle": "Pomagajte nam načrtovati letališke transferje — povejte nam, kdaj prihajate in odhajate.",
+      "subtitle": "Pomagajte paru pri načrtovanju logistike in delite svoje potovalne načrte. Vsa polja so neobvezna.",
       "arrival": "Prihod",
       "departure": "Odhod",
       "date": "Datum",
@@ -198,12 +198,12 @@
       "option": {
         "yes": "Da, prosim",
         "no": "Ne, hvala",
-        "elsewhere": "Nastanjen/-a drugje"
+        "elsewhere": "Bivamo drugje"
       },
-      "needsCrib": "Potrebuje otroško posteljico v sobi",
-      "share": "Želim si deliti sobo z",
+      "needsCrib": "V sobi potrebujemo otroško posteljico",
+      "share": "Sobo bi radi delili z",
       "sharePlaceholder": "npr. Ana in Tom",
-      "avoid": "Raje ne bi delil/-a sobe z",
+      "avoid": "Sobe raje ne bi delili z",
       "avoidPlaceholder": "Pustite prazno, če nimate želje"
     },
     "yourRoom": {
@@ -237,13 +237,13 @@
     "subjectReminder": "Opomnik: potrdite udeležbo na poroki: {couple}"
   },
   "travelEmail": {
-    "preview": "Prosimo, delite svoje potovalne načrte za poroko {couple}",
+    "preview": "Prosimo, delite svoje potovalne načrte za poroko: {couple}",
     "eyebrow": "Podrobnosti potovanja",
-    "dear": "Dragi/Draga {name},",
-    "body": "Hvala za potrditev! Da nam pomagate pri načrtovanju prevozov, prosimo delite podrobnosti prihoda in odhoda prek spodnje povezave.",
+    "dear": "Dragi {name},",
+    "body": "Hvala za vaš odgovor! Da bomo lažje načrtovali letališke prevoze in prevoze do prizorišča, prosimo, delite podrobnosti prihoda in odhoda prek spodnje povezave.",
     "button": "Deli podrobnosti potovanja",
     "fallback": "Gumb ne deluje? Odprite {link}",
     "love": "Z ljubeznijo,",
-    "subject": "Podrobnosti potovanja za poroko {couple}"
+    "subject": "Podrobnosti potovanja za poroko: {couple}"
   }
 }

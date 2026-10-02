@@ -14,7 +14,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import { flightSchema } from "@/lib/validation/places";
 import { canEdit, coupleName, requireUser, requireWedding } from "@/lib/wedding";
-import { fail, invalid, noPermission } from "@/lib/errors";
+import { err, fail, invalid, noPermission } from "@/lib/errors";
 
 async function editor() {
   const { wedding, role } = await requireWedding();
@@ -133,7 +133,7 @@ export async function sendTravelReminder(
   if (!ctx) return noPermission();
   const resend = getResend();
   if (!resend) {
-    return { ok: false, error: "Email is not set up (RESEND_API_KEY)." };
+    return err("emailNotSetUp");
   }
 
   const { wedding, sb } = ctx;
@@ -220,7 +220,7 @@ export async function sendTravelReminder(
       }),
     );
 
-    const { data, error } = await resend.batch.send(messages);
+    const { error } = await resend.batch.send(messages);
     if (error) {
       console.error("[sendTravelReminder] Resend error", error);
       failed += chunk.length;
@@ -231,7 +231,7 @@ export async function sendTravelReminder(
 
   revalidatePath("/app/travel");
   if (sent === 0 && failed > 0) {
-    return { ok: false, error: "Resend refused the emails." };
+    return err("emailNotSent");
   }
   return { ok: true, data: { sent, failed, noEmail } };
 }

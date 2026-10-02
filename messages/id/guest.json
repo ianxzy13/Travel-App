@@ -81,13 +81,13 @@
       "website": "Situs pernikahan"
     },
     "findSeat": {
-      "title": "Temukan tempat dudukmu",
-      "heading": "Temukan mejamu",
-      "label": "Nama lengkapmu",
+      "title": "Temukan tempat duduk Anda",
+      "heading": "Temukan meja Anda",
+      "label": "Nama lengkap Anda",
       "placeholder": "Nama depan dan belakang",
-      "button": "Cari tempat dudukku",
-      "notFound": "Kami tidak menemukan tempat duduk untuk nama itu. Periksa ejaan di undanganmu.",
-      "yourTable": "Mejamu sudah siap!",
+      "button": "Cari tempat duduk saya",
+      "notFound": "Kami tidak menemukan tempat duduk untuk nama tersebut. Periksa ejaan di undangan Anda.",
+      "yourTable": "Meja Anda sudah siap!",
       "tableName": "Meja {number}",
       "tableNamed": "{label} (Meja {number})"
     }
@@ -171,7 +171,7 @@
       "prompt": "Bagikan detail perjalanan Anda",
       "editTravel": "Perbarui detail perjalanan",
       "title": "Detail perjalanan",
-      "subtitle": "Bantu kami merencanakan transfer bandara — beri tahu kami kapan Anda datang dan pergi.",
+      "subtitle": "Bantu pasangan merencanakan logistik dengan membagikan rencana perjalanan Anda. Semua kolom bersifat opsional.",
       "arrival": "Kedatangan",
       "departure": "Keberangkatan",
       "date": "Tanggal",
@@ -181,10 +181,10 @@
       "flightNumber": "Nomor penerbangan",
       "stayingAt": "Di mana Anda menginap?",
       "chooseHotel": "Pilih hotel",
-      "otherAccommodation": "Akomodasi lain",
+      "otherAccommodation": "Tempat lain",
       "accommodationName": "Nama hotel atau akomodasi",
       "accommodationPlaceholder": "mis. Airbnb di pusat kota",
-      "needsTransfer": "Kami menghargai transfer dari bandara",
+      "needsTransfer": "Kami ingin dijemput dari bandara",
       "notes": "Ada yang lain?",
       "notesPlaceholder": "mis. datang dengan mobil, butuh kursi anak",
       "save": "Simpan detail perjalanan",
@@ -192,23 +192,23 @@
       "saved": "Detail perjalanan tersimpan!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Preferensi kamar",
+      "subtitle": "Beri tahu pasangan preferensi akomodasi Anda agar mereka dapat mengatur kamar.",
+      "wantRoom": "Apakah Anda memerlukan kamar hotel?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Ya, tolong",
+        "no": "Tidak, terima kasih",
+        "elsewhere": "Menginap di tempat lain"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Perlu boks bayi di kamar",
+      "share": "Ingin sekamar dengan",
+      "sharePlaceholder": "mis. Anna & Tom",
+      "avoid": "Lebih suka tidak sekamar dengan",
+      "avoidPlaceholder": "Kosongkan jika tidak ada preferensi"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
+      "title": "Kamar Anda",
+      "room": "Kamar {number}",
       "checkIn": "Check-in: {date}",
       "checkOut": "Check-out: {date}"
     }
@@ -240,7 +240,7 @@
     "preview": "Bagikan rencana perjalanan Anda untuk pernikahan {couple}",
     "eyebrow": "Detail perjalanan",
     "dear": "{name} yang terhormat,",
-    "body": "Terima kasih telah mengonfirmasi kehadiran! Untuk membantu kami merencanakan transfer, silakan bagikan detail kedatangan dan keberangkatan melalui tautan di bawah.",
+    "body": "Terima kasih telah mengonfirmasi kehadiran! Untuk membantu kami merencanakan transfer bandara dan antar-jemput, silakan bagikan detail kedatangan dan keberangkatan Anda melalui tautan di bawah.",
     "button": "Bagikan detail perjalanan",
     "fallback": "Tombol tidak berfungsi? Buka {link}",
     "love": "Dengan kasih,",

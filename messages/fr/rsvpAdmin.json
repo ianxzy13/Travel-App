@@ -87,10 +87,10 @@
       "addMealsFirst": "Ajoutez d’abord des menus.",
       "noEvents": "Aucun événement pour l’instant. Ajoutez-les dans les Paramètres.",
       "askAt": "Demander un menu pour {name}",
-      "askTravel": "Demander aux invités leurs plans de voyage",
-      "askTravelHint": "Après avoir confirmé leur présence, les invités peuvent partager leurs détails d'arrivée et départ, leur hébergement et s'ils ont besoin d'un transfert.",
-      "findSeat": "Page Trouvez votre place",
-      "findSeatHint": "Les invites peuvent taper leur nom sur une page publique pour voir leur table."
+      "askTravel": "Demander aux invités leurs projets de voyage",
+      "askTravelHint": "Après avoir répondu oui, les invités peuvent indiquer leurs dates d’arrivée et de départ, leur hébergement et s’ils ont besoin d’un transfert.",
+      "findSeat": "Page « Trouvez votre place »",
+      "findSeatHint": "Les invités peuvent saisir leur nom sur une page publique pour voir leur table."
     },
     "email": {
       "title": "Écrire à vos invités",

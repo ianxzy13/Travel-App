@@ -193,40 +193,40 @@
       "button": "In hoặc lưu PDF",
       "noTables": "Sơ đồ này chưa có bàn nào."
     },
-    "arrangeSettings": "Cai dat sap xep tu dong",
-    "arrangeSettingsHint": "Dieu chinh muc do quan trong cua tung yeu to khi sap xep.",
+    "arrangeSettings": "Cài đặt sắp xếp",
+    "arrangeSettingsHint": "Điều chỉnh mức độ quan trọng của từng yếu tố khi tự động sắp xếp.",
     "weights": {
-      "keepTogether": "Giu cung nhau",
-      "side": "Phia",
-      "tag": "Nhan",
-      "language": "Ngon ngu",
-      "ageGroup": "Nhom tuoi",
-      "hostPrefer": "Gan chu nha",
-      "fillFirst": "Uu tien lap day"
+      "keepTogether": "Quy tắc ngồi cùng nhau",
+      "side": "Cùng bên",
+      "tag": "Nhãn chung",
+      "language": "Cùng ngôn ngữ",
+      "ageGroup": "Cùng nhóm tuổi",
+      "hostPrefer": "Xếp khách đi một mình gần chủ nhà",
+      "fillFirst": "Lấp đầy bàn trước khi mở bàn mới"
     },
-    "resetWeights": "Dat lai",
-    "noHostTag": "Them nhan host cho khach don tiep nhung nguoi khac.",
+    "resetWeights": "Khôi phục mặc định",
+    "noHostTag": "Mẹo: tạo nhãn tên “Host” để đánh dấu những vị khách hòa đồng, sẵn lòng chào đón người mới.",
     "rsvpChanged": {
-      "attending": "Mot khach da xac nhan tham du!",
-      "declined": "Mot khach da tu choi loi moi.",
-      "removed": "Phan hoi cua mot khach da bi xoa."
+      "attending": "Một khách vừa phản hồi — họ sẽ tham dự!",
+      "declined": "Một khách vừa từ chối lời mời.",
+      "removed": "Phản hồi của một khách đã bị xóa."
     },
     "scenarios": {
-      "title": "Kich ban cho ngoi",
-      "plan": "Phuong an",
-      "active": "dang dung",
-      "duplicate": "Nhan doi",
-      "duplicated": "Da nhan doi kich ban",
-      "rename": "Doi ten",
-      "delete": "Xoa",
-      "deleted": "Da xoa kich ban",
-      "deleteConfirm": "Xoa kich ban nay? Ban va sap xep se bi xoa.",
-      "maxReached": "Ban co the co toi da 3 kich ban cho moi su kien.",
-      "switched": "Da chuyen kich ban",
-      "defaultName": "Phuong an A"
+      "title": "Kịch bản chỗ ngồi",
+      "plan": "Phương án",
+      "active": "đang dùng",
+      "duplicate": "Nhân bản",
+      "duplicated": "Đã nhân bản kịch bản",
+      "rename": "Đổi tên",
+      "delete": "Xóa",
+      "deleted": "Đã xóa kịch bản",
+      "deleteConfirm": "Xóa kịch bản chỗ ngồi này? Bàn và việc xếp chỗ sẽ bị xóa.",
+      "maxReached": "Bạn có thể có tối đa 3 kịch bản cho mỗi sự kiện.",
+      "switched": "Đã chuyển kịch bản",
+      "defaultName": "Phương án A"
     },
-    "findSeatQr": "Poster QR: tim cho ngoi",
-    "findSeatHeading": "Tim cho ngoi cua ban",
-    "findSeatScan": "Quet ma nay bang dien thoai de tim ban cua ban."
+    "findSeatQr": "Áp phích QR “Tìm chỗ ngồi”",
+    "findSeatHeading": "Tìm chỗ ngồi của bạn",
+    "findSeatScan": "Quét mã này bằng điện thoại để tìm bàn của bạn."
   }
 }

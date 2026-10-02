@@ -46,7 +46,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function RsvpPage({ params }: { params: Promise<{ code: string }> }) {
+export default async function RsvpPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ code: string }>;
+  searchParams: Promise<{ travel?: string }>;
+}) {
   const [found, t] = await Promise.all([loadRsvp((await params).code), getTranslations("rsvp")]);
 
   if (!found) {
@@ -75,7 +81,7 @@ export default async function RsvpPage({ params }: { params: Promise<{ code: str
       {data.invites.length === 0 ? (
         <p className="bg-card rounded-2xl border p-8 text-center">{t("nothingYet")}</p>
       ) : (
-        <RsvpExperience data={data} />
+        <RsvpExperience data={data} openTravel={(await searchParams).travel === "1"} />
       )}
     </RsvpFrame>
   );

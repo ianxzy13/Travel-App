@@ -82,14 +82,14 @@
     },
     "findSeat": {
       "title": "找到你的座位",
-      "heading": "找到你的桌子",
+      "heading": "找到你的桌位",
       "label": "你的全名",
       "placeholder": "姓名",
       "button": "查找我的座位",
       "notFound": "未找到該姓名的座位。請檢查邀請函上的拼寫。",
-      "yourTable": "你的桌子已準備好！",
-      "tableName": "桌 {number}",
-      "tableNamed": "{label}（桌 {number}）"
+      "yourTable": "找到你的桌位了！",
+      "tableName": "{number} 號桌",
+      "tableNamed": "{label}（{number} 號桌）"
     }
   },
   "rsvp": {
@@ -171,7 +171,7 @@
       "prompt": "分享您的行程資訊",
       "editTravel": "更新行程資訊",
       "title": "行程資訊",
-      "subtitle": "幫助我們安排機場接送——告訴我們您何時到達和離開。",
+      "subtitle": "分享您的行程計畫，幫助新人安排各項事宜。所有欄位皆為選填。",
       "arrival": "抵達",
       "departure": "離開",
       "date": "日期",
@@ -192,25 +192,25 @@
       "saved": "行程資訊已儲存！"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "住宿偏好",
+      "subtitle": "告訴新人您的住宿偏好，方便他們安排房間。",
+      "wantRoom": "您需要飯店房間嗎？",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "需要",
+        "no": "不需要，謝謝",
+        "elsewhere": "住在別處"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "房間需要嬰兒床",
+      "share": "希望與誰同住",
+      "sharePlaceholder": "例如 小王和小李",
+      "avoid": "不希望與誰同住",
+      "avoidPlaceholder": "如無偏好請留空"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "您的房間",
+      "room": "{number} 號房",
+      "checkIn": "入住：{date}",
+      "checkOut": "退房：{date}"
     }
   },
   "board": {
@@ -240,10 +240,10 @@
     "preview": "請分享您參加{couple}婚禮的行程計畫",
     "eyebrow": "行程資訊",
     "dear": "親愛的{name}，",
-    "body": "感謝您的回覆！為了幫助我們安排機場接送，請透過以下連結分享您的到達和離開資訊。",
+    "body": "感謝您的回覆！為了幫助我們安排機場接送和接駁車，請透過以下連結分享您的抵達和離開資訊。",
     "button": "分享行程資訊",
     "fallback": "按鈕無法使用？請開啟 {link}",
-    "love": "愛您的，",
+    "love": "滿懷愛意，",
     "subject": "{couple}婚禮行程資訊"
   }
 }

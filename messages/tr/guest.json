@@ -82,12 +82,12 @@
     },
     "findSeat": {
       "title": "Yerinizi bulun",
-      "heading": "Masanizi bulun",
-      "label": "Tam adiniz",
-      "placeholder": "Ad ve soyadi",
+      "heading": "Masanızı bulun",
+      "label": "Adınız soyadınız",
+      "placeholder": "Ad ve soyad",
       "button": "Yerimi bul",
-      "notFound": "Bu isim icin bir yer bulamadik. Davetiyenizdeki yazimi kontrol edin.",
-      "yourTable": "Masaniz hazir!",
+      "notFound": "Bu isimle bir yer bulamadık. Davetiyenizdeki yazımı kontrol edin.",
+      "yourTable": "Masanız hazır!",
       "tableName": "Masa {number}",
       "tableNamed": "{label} (Masa {number})"
     }
@@ -163,7 +163,7 @@
       "prompt": "Seyahat bilgilerinizi paylaşın",
       "editTravel": "Seyahat bilgilerini güncelle",
       "title": "Seyahat bilgileri",
-      "subtitle": "Havalimanı transferlerini planlamamıza yardımcı olun — ne zaman gelip ayrılacağınızı bildirin.",
+      "subtitle": "Seyahat planlarınızı paylaşarak çiftin organizasyonu planlamasına yardımcı olun. Tüm alanlar isteğe bağlıdır.",
       "arrival": "Varış",
       "departure": "Ayrılış",
       "date": "Tarih",
@@ -192,25 +192,25 @@
       "generic": "Yanıtınızı kaydedemedik. Lütfen biraz sonra tekrar deneyin."
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Oda tercihleri",
+      "subtitle": "Odaları ayarlayabilmeleri için konaklama tercihlerinizi çifte bildirin.",
+      "wantRoom": "Otel odasına ihtiyacınız var mı?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Evet, lütfen",
+        "no": "Hayır, teşekkürler",
+        "elsewhere": "Başka bir yerde kalacağım"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Odada bebek yatağı gerekli",
+      "share": "Odayı paylaşmak istediğim kişiler",
+      "sharePlaceholder": "ör. Anna ve Tom",
+      "avoid": "Odayı paylaşmak istemediğim kişiler",
+      "avoidPlaceholder": "Tercihiniz yoksa boş bırakın"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Odanız",
+      "room": "Oda {number}",
+      "checkIn": "Giriş: {date}",
+      "checkOut": "Çıkış: {date}"
     }
   },
   "board": {
@@ -240,7 +240,7 @@
     "preview": "{couple} düğünü için seyahat planlarınızı paylaşın",
     "eyebrow": "Seyahat bilgileri",
     "dear": "Sevgili {name},",
-    "body": "Katılım bildiriminiz için teşekkürler! Havalimanı transferlerini planlamamız için varış ve ayrılış bilgilerinizi aşağıdaki bağlantıdan paylaşın.",
+    "body": "Katılım bildiriminiz için teşekkürler! Havalimanı transferlerini ve servisleri planlayabilmemiz için lütfen varış ve ayrılış bilgilerinizi aşağıdaki bağlantıdan paylaşın.",
     "button": "Seyahat bilgilerini paylaş",
     "fallback": "Düğme çalışmıyor mu? {link} adresini açın",
     "love": "Sevgiyle,",

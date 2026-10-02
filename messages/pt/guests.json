@@ -188,7 +188,7 @@
       "chooseGuest": "Escolham um convidado",
       "addRule": "Adicionar regra",
       "languages": "Idiomas falados",
-      "languagesHint": "Usado pelo plano de mesas para juntar convidados que falam a mesma lingua.",
+      "languagesHint": "Usado na disposição das mesas para sentar juntos os convidados que falam o mesmo idioma.",
       "addLanguage": "Adicionar idioma",
       "allLanguages": "Todos os idiomas",
       "remove": "Remover",

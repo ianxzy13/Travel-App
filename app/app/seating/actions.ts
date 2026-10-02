@@ -120,29 +120,28 @@ export async function duplicateLayout(
     .select("*")
     .eq("layout_id", layoutId);
   if (objects?.length) {
-    const idMap = new Map<string, string>();
-    for (const o of objects) {
-      const newId = crypto.randomUUID();
-      const { data: inserted } = await sb
-        .from("seating_objects")
-        .insert({
-          id: newId,
-          wedding_id: o.wedding_id,
-          layout_id: layout.id,
-          kind: o.kind,
-          label: o.label,
-          number: o.number,
-          x: o.x,
-          y: o.y,
-          rotation: o.rotation,
-          width: o.width,
-          height: o.height,
-          seat_count: o.seat_count,
-          ends: o.ends,
-        })
-        .select("id")
-        .single();
-      if (inserted) idMap.set(o.id, inserted.id);
+    // one insert for all tables (ids are made here, so seats can be mapped right away)
+    const idMap = new Map(objects.map((o) => [o.id, crypto.randomUUID()]));
+    const { error: objErr } = await sb.from("seating_objects").insert(
+      objects.map((o) => ({
+        id: idMap.get(o.id)!,
+        wedding_id: o.wedding_id,
+        layout_id: layout.id,
+        kind: o.kind,
+        label: o.label,
+        number: o.number,
+        x: o.x,
+        y: o.y,
+        rotation: o.rotation,
+        width: o.width,
+        height: o.height,
+        seat_count: o.seat_count,
+        ends: o.ends,
+      })),
+    );
+    if (objErr) {
+      await sb.from("seating_layouts").delete().eq("id", layout.id);
+      return fail("duplicateLayout", objErr);
     }
     const { data: assignments } = await sb
       .from("seat_assignments")
@@ -158,7 +157,10 @@ export async function duplicateLayout(
           object_id: idMap.get(a.object_id)!,
           seat_index: a.seat_index,
         }));
-      if (mapped.length) await sb.from("seat_assignments").insert(mapped);
+      if (mapped.length) {
+        const { error: seatErr } = await sb.from("seat_assignments").insert(mapped);
+        if (seatErr) console.error("[duplicateLayout] seats", seatErr);
+      }
     }
   }
 

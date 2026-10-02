@@ -193,40 +193,40 @@
       "button": "Yazdır veya PDF olarak kaydet",
       "noTables": "Bu oturma planında henüz masa yok."
     },
-    "arrangeSettings": "Otomatik yerlestirme ayarlari",
-    "arrangeSettingsHint": "Yerlestirme sirasinda her faktorun onemini ayarlayin.",
+    "arrangeSettings": "Yerleştirme ayarları",
+    "arrangeSettingsHint": "Otomatik yerleştirmede her faktörün ne kadar önemli olduğunu ayarlayın.",
     "weights": {
-      "keepTogether": "Bir arada tut",
-      "side": "Taraf",
-      "tag": "Etiket",
-      "language": "Dil",
-      "ageGroup": "Yas grubu",
-      "hostPrefer": "Ev sahibine yakin",
-      "fillFirst": "Once doldur"
+      "keepTogether": "Birlikte oturma kuralları",
+      "side": "Aynı taraf",
+      "tag": "Ortak etiketler",
+      "language": "Ortak dil",
+      "ageGroup": "Aynı yaş grubu",
+      "hostPrefer": "Yalnız misafirleri ev sahiplerinin yanına oturt",
+      "fillFirst": "Yeni masaya geçmeden masaları doldur"
     },
-    "resetWeights": "Sifirla",
-    "noHostTag": "Diger konuklari karsilayan kisilere host etiketi ekleyin.",
+    "resetWeights": "Varsayılanlara sıfırla",
+    "noHostTag": "İpucu: Yeni gelenleri sıcak karşılayan sosyal misafirleri işaretlemek için “Host” adlı bir etiket oluşturun.",
     "rsvpChanged": {
-      "attending": "Bir konuk katilacagini bildirdi!",
-      "declined": "Bir konuk daveti reddetti.",
-      "removed": "Bir konugun yaniti silindi."
+      "attending": "Bir misafir az önce yanıt verdi — katılıyor!",
+      "declined": "Bir misafir az önce davetinizi reddetti.",
+      "removed": "Bir misafirin katılım yanıtı kaldırıldı."
     },
     "scenarios": {
-      "title": "Oturma senaryolari",
+      "title": "Oturma senaryoları",
       "plan": "Plan",
       "active": "aktif",
       "duplicate": "Kopyala",
-      "duplicated": "Senaryo kopyalandi",
-      "rename": "Yeniden adlandir",
+      "duplicated": "Senaryo kopyalandı",
+      "rename": "Yeniden adlandır",
       "delete": "Sil",
       "deleted": "Senaryo silindi",
-      "deleteConfirm": "Bu senaryoyu silmek istiyor musunuz? Masalar ve atamalar kaldirilacaktir.",
-      "maxReached": "Etkinlik basina en fazla 3 senaryo olabilir.",
-      "switched": "Senaryo degistirildi",
+      "deleteConfirm": "Bu oturma senaryosu silinsin mi? Masalar ve atamalar kaldırılacak.",
+      "maxReached": "Etkinlik başına en fazla 3 senaryo oluşturabilirsiniz.",
+      "switched": "Senaryo değiştirildi",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "QR poster: yerinizi bulun",
+    "findSeatQr": "“Yerinizi bulun” QR afişi",
     "findSeatHeading": "Yerinizi bulun",
-    "findSeatScan": "Masanizi bulmak icin bu kodu telefonunuzla tarayin."
+    "findSeatScan": "Masanızı bulmak için bu kodu telefonunuzla tarayın."
   }
 }

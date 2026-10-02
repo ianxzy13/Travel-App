@@ -163,7 +163,7 @@
       "prompt": "แชร์ข้อมูลการเดินทางของคุณ",
       "editTravel": "อัปเดตข้อมูลการเดินทาง",
       "title": "ข้อมูลการเดินทาง",
-      "subtitle": "ช่วยเราวางแผนรับส่งจากสนามบิน — บอกเราว่าคุณเดินทางถึงและออกเมื่อไหร่",
+      "subtitle": "แชร์แผนการเดินทางของคุณเพื่อช่วยคู่บ่าวสาววางแผน ทุกช่องไม่บังคับ",
       "arrival": "ขาเข้า",
       "departure": "ขาออก",
       "date": "วันที่",
@@ -176,7 +176,7 @@
       "otherAccommodation": "ที่พักอื่น",
       "accommodationName": "ชื่อโรงแรมหรือที่พัก",
       "accommodationPlaceholder": "เช่น Airbnb ในเมือง",
-      "needsTransfer": "เราอยากได้รถรับจากสนามบิน",
+      "needsTransfer": "ต้องการรถรับจากสนามบิน",
       "notes": "มีอะไรเพิ่มเติมไหม?",
       "notesPlaceholder": "เช่น เดินทางด้วยรถยนต์ ต้องการเบาะเด็ก",
       "save": "บันทึกข้อมูลการเดินทาง",
@@ -192,25 +192,25 @@
       "generic": "ไม่สามารถบันทึกคำตอบได้ กรุณาลองใหม่อีกครั้งในอีกสักครู่"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "ความต้องการด้านห้องพัก",
+      "subtitle": "แจ้งความต้องการด้านที่พักให้คู่บ่าวสาวทราบ เพื่อให้จัดห้องได้สะดวก",
+      "wantRoom": "คุณต้องการห้องพักในโรงแรมไหม?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "ต้องการ",
+        "no": "ไม่ต้องการ ขอบคุณ",
+        "elsewhere": "พักที่อื่น"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "ต้องการเปลเด็กในห้อง",
+      "share": "อยากพักห้องเดียวกับ",
+      "sharePlaceholder": "เช่น แอนนาและทอม",
+      "avoid": "ไม่อยากพักห้องเดียวกับ",
+      "avoidPlaceholder": "เว้นว่างไว้หากไม่มีความต้องการ"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "ห้องพักของคุณ",
+      "room": "ห้อง {number}",
+      "checkIn": "เช็กอิน: {date}",
+      "checkOut": "เช็กเอาต์: {date}"
     }
   },
   "board": {

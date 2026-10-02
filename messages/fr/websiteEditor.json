@@ -176,12 +176,12 @@
       "moveUp": "Monter l’élément {n}",
       "moveDown": "Descendre l’élément {n}",
       "remove": "Retirer l’élément {n}",
-      "transport": "Transport et itinéraires",
-      "transportHint": "Comment aller de l'aéroport au lieu, location de voiture, bus…",
-      "visa": "Informations visa",
-      "visaHint": "Les invités ont-ils besoin d'un visa ? Quels pays sont exemptés ?",
+      "transport": "Transport et accès",
+      "transportHint": "Comment aller de l’aéroport au lieu, location de voiture, bus locaux…",
+      "visa": "Informations sur les visas",
+      "visaHint": "Les invités ont-ils besoin d’un visa ? Quels pays en sont exemptés ?",
       "currency": "Devise",
-      "currencyHint": "Devise locale, conseils de change, acceptation des cartes…"
+      "currencyHint": "Monnaie locale, conseils de change, cartes acceptées…"
     },
     "image": {
       "wrongType": "Choisissez une photo JPG, PNG ou WebP.",

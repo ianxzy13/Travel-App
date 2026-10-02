@@ -189,7 +189,7 @@
     "checkOut": "Odjava za {name}",
     "guestsSaved": "Gostje so shranjeni",
     "saveGuests": "Shrani goste",
-    "findOnBooking": "Išči na Booking.com",
+    "findOnBooking": "Poišči na Booking.com",
     "roomsTab": "Sobe ({count})",
     "rooms": {
       "types": "Tipi sob",
@@ -202,32 +202,32 @@
       "addBed": "Dodaj posteljo",
       "bed": {
         "double": "Zakonska",
-        "single": "Enojn",
-        "sofa_bed": "Kavč",
-        "bunk": "Pogradi"
+        "single": "Enojna",
+        "sofa_bed": "Raztegljiv kavč",
+        "bunk": "Pograd"
       },
-      "crib": "otroška postelja",
+      "crib": "otroška posteljica",
       "maxGuests": "{count, plural, one {# gost maks.} two {# gosta maks.} few {# gostje maks.} other {# gostov maks.}}",
       "night": "noč",
-      "ofType": "{created} od {total} sob ustvarjenih",
+      "ofType": "Ustvarjenih {created} od {total} sob",
       "typeCount": "Koliko sob tega tipa",
-      "hasCrib": "Soba ima otroško posteljo",
-      "accessible": "Invalidski dostop / pritličje",
+      "hasCrib": "Soba ima otroško posteljico",
+      "accessible": "Dostopno za invalidske vozičke / pritličje",
       "generate": "Samodejno ustvari sobe iz tipov",
-      "generated": "Sobe ustvarjene iz števila tipov",
+      "generated": "Sobe ustvarjene glede na število po tipih",
       "list": "{count, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}}",
       "addRoom": "Dodaj sobo",
-      "noRooms": "Še ni sob. Dodajte tipe sob in uporabite \"Samodejno ustvari\" ali dodajte ročno.",
+      "noRooms": "Sob še ni. Dodajte tipe sob, nato uporabite »Samodejno ustvari sobe« ali jih dodajte ročno.",
       "editRoom": "Uredi sobo",
       "deleteRoom": "Izbriši sobo?",
-      "deleteRoomText": "Gostje v tej sobi bodo odstranjeni.",
+      "deleteRoomText": "Gostje, dodeljeni tej sobi, bodo odstranjeni iz nje.",
       "number": "Številka sobe",
       "type": "Tip sobe",
       "selectType": "Izberite tip",
       "noType": "Brez tipa",
       "untyped": "Brez tipa",
       "floor": "Nadstropje",
-      "locked": "Zaklenjeno (samodejno razporejanje ne spreminja te sobe)",
+      "locked": "Zaklenjeno (samodejna razporeditev te sobe ne bo spremenila)",
       "guests": "gostov"
     },
     "board": {
@@ -239,9 +239,9 @@
         "all": "Vsi",
         "unassigned": "Nedodeljeni",
         "kids": "Otroci",
-        "accessible": "Dostopnost"
+        "accessible": "Dostopno"
       },
-      "dropToUnassign": "Povlecite sem za odstranitev",
+      "dropToUnassign": "Spustite sem za odstranitev iz sobe",
       "allHotels": "Vsi hoteli",
       "roomCount": "{count, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}}",
       "emptyRoom": "Povlecite gosta sem",
@@ -251,7 +251,7 @@
       "noGuests": "Noben gost ne ustreza filtrom",
       "warnings": "{count, plural, one {# opozorilo} two {# opozorili} few {# opozorila} other {# opozoril}}",
       "autoArrange": "Samodejno razporedi",
-      "arranged": "Končano! {placed, plural, one {# gost razporejen} two {# gosta razporejena} few {# gostje razporejeni} other {# gostov razporejenih}}{unplaced, plural, =0 {} one {, # ni bil razporejen} other {, # ni bilo razporejenih}}.",
+      "arranged": "Končano! {placed, plural, one {# gost razporejen} two {# gosta razporejena} few {# gostje razporejeni} other {# gostov razporejenih}}{unplaced, plural, =0 {} one {, # gosta ni bilo mogoče razporediti} other {, # gostov ni bilo mogoče razporediti}}.",
       "noRoomsAvailable": "Ni prostih sob za zapolnitev",
       "costSummary": "Pregled stroškov",
       "costPerNight": "{amount} / noč (samo zasedene sobe)",
@@ -266,12 +266,12 @@
       "ageGroup": "Starostna skupina",
       "checkIn": "Prijava",
       "checkOut": "Odjava",
-      "crib": "Otroška postelja",
+      "crib": "Otroška posteljica",
       "yes": "Da",
       "empty": "Prazno",
       "back": "Nazaj",
       "print": "Natisni",
-      "roomingList": "Seznam sob",
+      "roomingList": "Seznam razporeditve po sobah",
       "csv": "Izvozi CSV",
       "pdf": "Natisni / PDF"
     }
@@ -346,17 +346,17 @@
       "needTransfer": "Potrebujejo prevoz:",
       "unknown": "Neznano gospodinjstvo",
       "transferRequested": "Prevoz zahtevan",
-      "remind": "Opomni {count, plural, one {# gospodinjstvo} other {# gospodinjstev}}",
-      "reminded": "Opomnik poslan {count, plural, one {# gospodinjstvu} other {# gospodinjstvom}}"
+      "remind": "Opomni {count, plural, one {# gospodinjstvo} two {# gospodinjstvi} few {# gospodinjstva} other {# gospodinjstev}}",
+      "reminded": "Opomnik poslan {count, plural, one {# gospodinjstvu} two {# gospodinjstvoma} few {# gospodinjstvom} other {# gospodinjstvom}}"
     },
     "shuttles": "Prevozi ({count})",
     "shuttle": {
-      "empty": "Noben gost še ni zahteval prevoza. Ko bodo, se bodo vožnje prikazale tukaj samodejno.",
+      "empty": "Noben gost še ni zahteval prevoza. Ko ga bodo, se bodo vožnje tukaj prikazale samodejno.",
       "window": "Časovno okno",
       "minutes": "min",
-      "summary": "{runs, plural, one {# vožnja} other {# voženj}} · {people, plural, one {# oseba} other {# oseb}}",
+      "summary": "{runs, plural, one {# vožnja} two {# vožnji} few {# vožnje} other {# voženj}} · {people, plural, one {# oseba} two {# osebi} few {# osebe} other {# oseb}}",
       "print": "Natisni",
-      "dayPeople": "{count, plural, one {# oseba} other {# oseb}}"
+      "dayPeople": "{count, plural, one {# oseba} two {# osebi} few {# osebe} other {# oseb}}"
     }
   }
 }

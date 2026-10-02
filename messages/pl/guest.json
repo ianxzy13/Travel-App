@@ -81,15 +81,15 @@
       "website": "Strona ślubna"
     },
     "findSeat": {
-      "title": "Znajdz swoje miejsce",
-      "heading": "Znajdz swoj stol",
-      "label": "Twoje imie i nazwisko",
-      "placeholder": "Imie i nazwisko",
-      "button": "Znajdz moje miejsce",
-      "notFound": "Nie znalezlismy miejsca dla tego nazwiska. Sprawdz pisownie na zaproszeniu.",
-      "yourTable": "Twoj stol jest gotowy!",
-      "tableName": "Stol {number}",
-      "tableNamed": "{label} (Stol {number})"
+      "title": "Znajdź swoje miejsce",
+      "heading": "Znajdź swój stół",
+      "label": "Twoje imię i nazwisko",
+      "placeholder": "Imię i nazwisko",
+      "button": "Znajdź moje miejsce",
+      "notFound": "Nie znaleźliśmy miejsca dla tego imienia i nazwiska. Sprawdź pisownię na zaproszeniu.",
+      "yourTable": "Twój stół już czeka!",
+      "tableName": "Stół {number}",
+      "tableNamed": "{label} (Stół {number})"
     }
   },
   "rsvp": {
@@ -171,7 +171,7 @@
       "prompt": "Podziel się szczegółami podróży",
       "editTravel": "Zaktualizuj dane podróży",
       "title": "Szczegóły podróży",
-      "subtitle": "Pomóż nam zaplanować transfery — powiedz nam, kiedy przyjeżdżasz i kiedy wyjeżdżasz.",
+      "subtitle": "Pomóż parze zaplanować logistykę, dzieląc się planami podróży. Wszystkie pola są opcjonalne.",
       "arrival": "Przyjazd",
       "departure": "Wyjazd",
       "date": "Data",
@@ -181,7 +181,7 @@
       "flightNumber": "Numer lotu",
       "stayingAt": "Gdzie się zatrzymujesz?",
       "chooseHotel": "Wybierz hotel",
-      "otherAccommodation": "Inne zakwaterowanie",
+      "otherAccommodation": "Gdzie indziej",
       "accommodationName": "Nazwa hotelu lub zakwaterowania",
       "accommodationPlaceholder": "np. Airbnb w centrum",
       "needsTransfer": "Przyda nam się transfer z lotniska",
@@ -192,25 +192,25 @@
       "saved": "Dane podróży zapisane!"
     },
     "room": {
-      "title": "Room preferences",
-      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
-      "wantRoom": "Do you need a hotel room?",
+      "title": "Preferencje dotyczące pokoju",
+      "subtitle": "Daj parze znać, jakie masz preferencje noclegowe, aby mogła zorganizować pokoje.",
+      "wantRoom": "Potrzebujesz pokoju w hotelu?",
       "option": {
-        "yes": "Yes please",
-        "no": "No thanks",
-        "elsewhere": "Staying elsewhere"
+        "yes": "Tak, poproszę",
+        "no": "Nie, dziękuję",
+        "elsewhere": "Nocuję gdzie indziej"
       },
-      "needsCrib": "Needs a crib in the room",
-      "share": "Would like to share a room with",
-      "sharePlaceholder": "e.g. Anna & Tom",
-      "avoid": "Prefer not to share with",
-      "avoidPlaceholder": "Leave blank if no preference"
+      "needsCrib": "Potrzebne łóżeczko w pokoju",
+      "share": "Chcę dzielić pokój z",
+      "sharePlaceholder": "np. Anna i Tomek",
+      "avoid": "Wolę nie dzielić pokoju z",
+      "avoidPlaceholder": "Zostaw puste, jeśli nie masz preferencji"
     },
     "yourRoom": {
-      "title": "Your room",
-      "room": "Room {number}",
-      "checkIn": "Check-in: {date}",
-      "checkOut": "Check-out: {date}"
+      "title": "Twój pokój",
+      "room": "Pokój {number}",
+      "checkIn": "Zameldowanie: {date}",
+      "checkOut": "Wymeldowanie: {date}"
     }
   },
   "board": {
@@ -240,7 +240,7 @@
     "preview": "Podziel się planami podróży na ślub {couple}",
     "eyebrow": "Dane podróży",
     "dear": "Drogi/Droga {name},",
-    "body": "Dziękujemy za potwierdzenie! Aby pomóc nam zaplanować transfery, podziel się szczegółami przyjazdu i wyjazdu poniżej.",
+    "body": "Dziękujemy za potwierdzenie obecności! Aby pomóc nam zaplanować transfery z lotniska i przejazdy, podaj szczegóły przyjazdu i wyjazdu, korzystając z poniższego linku.",
     "button": "Podziel się danymi podróży",
     "fallback": "Przycisk nie działa? Otwórz {link}",
     "love": "Z miłością,",
