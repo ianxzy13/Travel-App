@@ -2064,12 +2064,58 @@ async function main() {
     ),
   );
 
+  // ── Gifts ───────────────────────────────────────────────────────────
+  const GIFTS: {
+    description: string;
+    amount: number | null;
+    houseIdx: number | null;
+    fromName: string;
+    category: "cash" | "registry" | "handmade" | "experience" | "other";
+    receivedOn: string | null;
+    thankYouSent: boolean;
+  }[] = [
+    { description: "Cash gift", amount: 500, houseIdx: 0, fromName: "Ana & João Ferreira", category: "cash", receivedOn: subDays(today, 14).toISOString().slice(0, 10), thankYouSent: true },
+    { description: "KitchenAid mixer", amount: 350, houseIdx: 2, fromName: "The Ferreira family", category: "registry", receivedOn: subDays(today, 12).toISOString().slice(0, 10), thankYouSent: true },
+    { description: "Handmade quilt", amount: null, houseIdx: 3, fromName: "Grandma Lurdes", category: "handmade", receivedOn: subDays(today, 10).toISOString().slice(0, 10), thankYouSent: true },
+    { description: "Le Creuset set", amount: 280, houseIdx: 4, fromName: "Clara & Paulo Santos", category: "registry", receivedOn: subDays(today, 8).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Cash gift", amount: 200, houseIdx: 5, fromName: "Beatriz & Duarte Santos", category: "cash", receivedOn: subDays(today, 7).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Spa weekend voucher", amount: 180, houseIdx: 7, fromName: "Helena Wright", category: "experience", receivedOn: subDays(today, 5).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Dyson vacuum", amount: 400, houseIdx: 8, fromName: "Richard Almeida & Carla Mendes", category: "registry", receivedOn: subDays(today, 4).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Cash gift", amount: 1000, houseIdx: 9, fromName: "The Wright family", category: "cash", receivedOn: subDays(today, 3).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Engraved wine glasses", amount: null, houseIdx: null, fromName: "Aunt Maria", category: "handmade", receivedOn: subDays(today, 2).toISOString().slice(0, 10), thankYouSent: false },
+    { description: "Cooking class for two", amount: 120, houseIdx: null, fromName: "University friends", category: "experience", receivedOn: null, thankYouSent: false },
+  ];
+
+  const giftRows = check(
+    "gifts",
+    await sb
+      .from("gifts")
+      .insert(
+        GIFTS.map((g, i) => ({
+          wedding_id: wid,
+          description: g.description,
+          amount: g.amount,
+          household_id: g.houseIdx != null ? houses[g.houseIdx].id : null,
+          from_name: g.fromName,
+          category: g.category,
+          received_on: g.receivedOn,
+          thank_you_sent: g.thankYouSent,
+          thank_you_sent_on: g.thankYouSent && g.receivedOn ? g.receivedOn : null,
+          notes: null,
+          sort_order: i,
+        })),
+        { defaultToNull: false },
+      )
+      .select("id"),
+  );
+
   const daysLeft = differenceInCalendarDays(weddingDay, today);
   console.log(`
 Done! Demo wedding "Sofia & Lucas" (in ${daysLeft} days) is ready:
   ${guests.length} guests in ${houses.length} households, ${attending.size} attending so far
   ${EXPENSES.length} expenses, ${vendors.length} vendors, ${venues.length} venues, ${hotels.length} hotels, ${FLIGHTS.length + 1} flights
   ${roomTypes.length} room types, ${hotelRooms.length} rooms, ${roomAssignRows.length} guests in rooms (${hotelRooms.length - RA.length} rooms empty for drag-and-drop)
+  ${giftRows.length} gifts (${GIFTS.filter((g) => g.thankYouSent).length} thanked)
   ${seats.length} guests seated at 3 of 10 tables, ${pinCount} pins${unsplashKey ? " (Unsplash)" : " (placeholder photos)"}, ${suggestions.length + 2} to-dos
   Public website: /w/${SLUG}
 

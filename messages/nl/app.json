@@ -21,7 +21,8 @@
         "people": "Mensen",
         "places": "Plaatsen",
         "style": "Stijl"
-      }
+      },
+      "gifts": "Gifts"
     },
     "shell": {
       "mainNav": "Hoofdnavigatie",
@@ -123,6 +124,14 @@
         "cta": "Taken bekijken",
         "ofDone": "van {total} klaar",
         "overdue": "{count} te laat"
+      },
+      "gifts": {
+        "title": "Gifts",
+        "empty": "No gifts yet. Track what you receive and who to thank.",
+        "cta": "View gifts",
+        "received": "gifts worth {value}",
+        "receivedCount": "gifts received",
+        "thankYouProgress": "Thank-you notes: {done} of {total} sent"
       }
     },
     "settings": {
@@ -172,6 +181,58 @@
         "question": "Vraag",
         "answer": "Antwoord",
         "caption": "Bijschrift"
+      }
+    },
+    "gifts": {
+      "title": "Gifts",
+      "description": "Track gifts received from your guests and keep on top of thank-you notes.",
+      "add": "Add gift",
+      "addFirst": "Add your first gift",
+      "addTitle": "Add a gift",
+      "editTitle": "Edit gift",
+      "formHint": "Link the gift to a household on your guest list, or type a name.",
+      "emptyTitle": "No gifts yet",
+      "emptyText": "Start adding gifts as they arrive. You can track thank-you notes here too.",
+      "noResults": "No gifts match your filters",
+      "search": "Search gifts…",
+      "from": "from",
+      "save": "Save",
+      "saved": "Gift saved",
+      "added": "Gift added",
+      "delete": "Delete",
+      "deleted": "Gift deleted",
+      "deleteTitle": "Delete this gift?",
+      "deleteText": "This can’t be undone.",
+      "toggleThankYou": "Toggle thank-you note",
+      "stats": {
+        "total": "Gifts received",
+        "totalValue": "Total value",
+        "thankYou": "Thank-you notes sent"
+      },
+      "filter": {
+        "allCategories": "All categories",
+        "allThankYou": "All thank-you status",
+        "sent": "Thank-you sent",
+        "pending": "Thank-you pending"
+      },
+      "category": {
+        "cash": "Cash / transfer",
+        "registry": "Registry item",
+        "handmade": "Handmade",
+        "experience": "Experience",
+        "other": "Other"
+      },
+      "field": {
+        "description": "Gift description",
+        "fromName": "From",
+        "household": "Household (optional)",
+        "noHousehold": "Not on the guest list",
+        "amount": "Value",
+        "category": "Category",
+        "receivedOn": "Date received",
+        "thankYouSent": "Thank-you note sent",
+        "thankYouSentOn": "Date sent",
+        "notes": "Notes"
       }
     }
   }

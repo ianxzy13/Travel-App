@@ -4,6 +4,7 @@
       "dashboard": "Pregled",
       "tasks": "Opravila",
       "budget": "Proračun",
+      "gifts": "Darila",
       "vendors": "Ponudniki",
       "guests": "Gostje",
       "rsvp": "Potrditve",
@@ -123,6 +124,66 @@
         "cta": "Poglej opravila",
         "ofDone": "od {total} opravljenih",
         "overdue": "zamujenih: {count}"
+      },
+      "gifts": {
+        "title": "Darila",
+        "empty": "Daril še ni. Sledite, kaj prejmete in komu se zahvalite.",
+        "cta": "Poglej darila",
+        "received": "daril v vrednosti {value}",
+        "receivedCount": "prejetih daril",
+        "thankYouProgress": "Zahvale: {done} od {total} poslanih"
+      }
+    },
+    "gifts": {
+      "title": "Darila",
+      "description": "Sledite prejetim darilom in pošiljanju zahval.",
+      "add": "Dodaj darilo",
+      "addFirst": "Dodajte prvo darilo",
+      "addTitle": "Dodaj darilo",
+      "editTitle": "Uredi darilo",
+      "formHint": "Povežite darilo z gospodinjstvom na seznamu gostov ali vpišite ime.",
+      "emptyTitle": "Še ni daril",
+      "emptyText": "Začnite dodajati darila, ko prispejo. Tu lahko spremljate tudi zahvale.",
+      "noResults": "Noben dar ne ustreza filtrom",
+      "search": "Išči darila…",
+      "from": "od",
+      "save": "Shrani",
+      "saved": "Darilo shranjeno",
+      "added": "Darilo dodano",
+      "delete": "Izbriši",
+      "deleted": "Darilo izbrisano",
+      "deleteTitle": "Izbrisati to darilo?",
+      "deleteText": "Tega ni mogoče razveljaviti.",
+      "toggleThankYou": "Preklopi zahvalo",
+      "stats": {
+        "total": "Prejetih daril",
+        "totalValue": "Skupna vrednost",
+        "thankYou": "Poslanih zahval"
+      },
+      "filter": {
+        "allCategories": "Vse kategorije",
+        "allThankYou": "Vse zahvale",
+        "sent": "Zahvala poslana",
+        "pending": "Zahvala čaka"
+      },
+      "category": {
+        "cash": "Denar / nakazilo",
+        "registry": "S seznama želja",
+        "handmade": "Ročno delo",
+        "experience": "Doživetje",
+        "other": "Drugo"
+      },
+      "field": {
+        "description": "Opis darila",
+        "fromName": "Od koga",
+        "household": "Gospodinjstvo (neobvezno)",
+        "noHousehold": "Ni na seznamu gostov",
+        "amount": "Vrednost",
+        "category": "Kategorija",
+        "receivedOn": "Datum prejema",
+        "thankYouSent": "Zahvala poslana",
+        "thankYouSentOn": "Datum pošiljanja",
+        "notes": "Opombe"
       }
     },
     "settings": {

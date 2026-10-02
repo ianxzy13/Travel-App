@@ -2,6 +2,7 @@ import {
   Armchair,
   BedDouble,
   Clock,
+  Gift,
   Globe,
   Images,
   Landmark,
@@ -24,6 +25,7 @@ export type NavKey =
   | "dashboard"
   | "tasks"
   | "budget"
+  | "gifts"
   | "vendors"
   | "guests"
   | "rsvp"
@@ -47,6 +49,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
       { href: "/app", key: "dashboard", icon: LayoutDashboard },
       { href: "/app/tasks", key: "tasks", icon: ListChecks },
       { href: "/app/budget", key: "budget", icon: Wallet },
+      { href: "/app/gifts", key: "gifts", icon: Gift },
       { href: "/app/vendors", key: "vendors", icon: Store },
     ],
   },

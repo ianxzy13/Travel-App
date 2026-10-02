@@ -483,6 +483,23 @@ export type TaskRow = WeddingScoped & {
   created_by: string | null;
 };
 
+// ---------- Phase 15: gifts ----------
+
+export type GiftCategory = "cash" | "registry" | "handmade" | "experience" | "other";
+
+export type GiftRow = WeddingScoped & {
+  description: string;
+  amount: number | null;
+  household_id: string | null;
+  from_name: string;
+  category: GiftCategory;
+  received_on: string | null;
+  thank_you_sent: boolean;
+  thank_you_sent_on: string | null;
+  notes: string | null;
+  sort_order: number;
+};
+
 export type ScheduleItemRow = WeddingScoped & {
   day: string | null;
   start_time: string;
@@ -597,6 +614,7 @@ export type Database = {
       website_settings: Table<WebsiteSettingsRow, "wedding_id">;
       website_sections: Table<WebsiteSectionRow, "wedding_id" | "kind">;
       tasks: Table<TaskRow, "wedding_id" | "title">;
+      gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
       schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
       guest_relationships: Table<
         GuestRelationshipRow,
@@ -686,6 +704,7 @@ export type Database = {
       venue_availability: VenueAvailability;
       hotel_status: HotelStatus;
       bed_kind: BedKind;
+      gift_category: GiftCategory;
       flight_category: FlightCategory;
       flight_direction: FlightDirection;
       flight_status: FlightStatus;

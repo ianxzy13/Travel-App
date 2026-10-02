@@ -6,6 +6,7 @@ import {
   CalendarPlus,
   CheckCircle2,
   Circle,
+  Gift,
   Lightbulb,
   ListChecks,
   MailCheck,
@@ -45,7 +46,7 @@ export default async function DashboardPage({
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -78,6 +79,7 @@ export default async function DashboardPage({
       .maybeSingle()
       .then(({ data }) => ({ published: !!data?.published })),
     tasksSummary(supabase, wedding.id),
+    giftSummary(supabase, wedding.id),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -391,6 +393,44 @@ export default async function DashboardPage({
               </div>
             )}
           </SummaryCard>
+          <SummaryCard
+            icon={Gift}
+            title={t("gifts.title")}
+            empty={t("gifts.empty")}
+            href="/app/gifts"
+            cta={t("gifts.cta")}
+          >
+            {giftStats.total > 0 && (
+              <div className="space-y-3">
+                <p className="text-sm">
+                  <span className="font-serif text-3xl font-medium tabular-nums">
+                    {giftStats.total}
+                  </span>{" "}
+                  <span className="text-muted-foreground">
+                    {giftStats.totalValue > 0
+                      ? t("gifts.received", { value: money(giftStats.totalValue) })
+                      : t("gifts.receivedCount")}
+                  </span>
+                </p>
+                <p className="text-sm">
+                  <span className="text-muted-foreground">
+                    {t("gifts.thankYouProgress", {
+                      done: giftStats.thankYouDone,
+                      total: giftStats.total,
+                    })}
+                  </span>
+                </p>
+                <div className="bg-muted h-2 rounded-full">
+                  <div
+                    className="bg-primary h-2 rounded-full"
+                    style={{
+                      width: `${giftStats.total ? (giftStats.thankYouDone / giftStats.total) * 100 : 0}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </SummaryCard>
         </div>
       </div>
     </div>
@@ -545,4 +585,17 @@ async function seatingSummary(
       .eq("wedding_id", weddingId),
   ]);
   return { tables: tables ?? 0, seated: seated ?? 0 };
+}
+
+async function giftSummary(supabase: Awaited<ReturnType<typeof createClient>>, weddingId: string) {
+  const { data } = await supabase
+    .from("gifts")
+    .select("amount, thank_you_sent")
+    .eq("wedding_id", weddingId);
+  const gifts = data ?? [];
+  return {
+    total: gifts.length,
+    totalValue: gifts.reduce((s, g) => s + (g.amount == null ? 0 : Number(g.amount)), 0),
+    thankYouDone: gifts.filter((g) => g.thank_you_sent).length,
+  };
 }
