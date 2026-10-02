@@ -62,13 +62,22 @@ export async function getOrCreateLayout(
     sb.from("seating_layouts").select("*").eq("event_id", eventId).eq("is_active", true).maybeSingle();
   const { data } = await find();
   if (data || !canEdit) return data;
-  // ignoreDuplicates: if a collaborator created it at the same moment, just use theirs
-  await sb
+  // Plans exist but none is marked active (e.g. a switch failed half-way): use the oldest.
+  const { data: existing } = await sb
     .from("seating_layouts")
-    .upsert(
-      { wedding_id: weddingId, event_id: eventId },
-      { onConflict: "event_id", ignoreDuplicates: true },
-    );
+    .select("id")
+    .eq("event_id", eventId)
+    .order("created_at")
+    .limit(1)
+    .maybeSingle();
+  if (existing) {
+    await sb.from("seating_layouts").update({ is_active: true }).eq("id", existing.id);
+    return (await find()).data;
+  }
+  // A plain insert: since seating scenarios, "one active plan per event" is a partial
+  // unique index, which upsert's onConflict can't target. If a collaborator created
+  // the plan at the same moment, the insert fails and we just use theirs.
+  await sb.from("seating_layouts").insert({ wedding_id: weddingId, event_id: eventId });
   return (await find()).data;
 }
 

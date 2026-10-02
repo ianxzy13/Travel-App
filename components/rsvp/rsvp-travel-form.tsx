@@ -57,6 +57,7 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
     );
 
   const hasHotels = (data.hotels ?? []).length > 0;
+  const askTravel = data.wedding.rsvp_ask_travel;
 
   const travel = data.travel;
   const [form, setForm] = useState<GuestTravelPayload>({
@@ -81,13 +82,17 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
     e.preventDefault();
     startTransition(async () => {
       const [travelResult, roomResult] = await Promise.all([
-        submitGuestTravel(data.household.code, form),
+        // travel questions are only on when the couple switched them on;
+        // the room questions show whenever there are hotels
+        askTravel
+          ? submitGuestTravel(data.household.code, form)
+          : Promise.resolve({ ok: true } as const),
         hasHotels
           ? submitRoomPreferences(data.household.code, roomPrefs)
           : Promise.resolve({ ok: true } as const),
       ]);
       if (!travelResult.ok) {
-        toast.error(travelResult.error ?? te("generic"));
+        toast.error("error" in travelResult ? travelResult.error : te("generic"));
         return;
       }
       if (!roomResult.ok) {
@@ -103,6 +108,7 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {askTravel && (
       <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
         <div className="flex items-center gap-3">
           <Plane className="text-primary-ink size-6 shrink-0" aria-hidden />
@@ -274,6 +280,7 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
           />
         </div>
       </div>
+      )}
 
       {/* Room preferences */}
       {hasHotels && (

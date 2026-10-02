@@ -34,7 +34,6 @@ export function computeRoomCosts({
     assignmentsByRoom.set(a.room_id, (assignmentsByRoom.get(a.room_id) ?? 0) + 1);
   }
 
-  const hotelMap = new Map(hotels.map((h) => [h.id, h]));
   let totalPerNight = 0;
   let totalRooms = 0;
   let occupiedRooms = 0;

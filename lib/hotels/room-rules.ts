@@ -1,4 +1,4 @@
-import type { BedConfig, HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow } from "../database.types";
+import type { HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow } from "../database.types";
 
 export type RoomWarning = {
   roomId: string;

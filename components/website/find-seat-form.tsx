@@ -18,12 +18,13 @@ export function FindSeatForm({ slug }: { slug: string }) {
     if (!name.trim()) return;
     startTransition(async () => {
       const r = await findSeat(slug, name.trim());
-      if (r.ok) setResult(r.data ?? "not-found");
+      // a failed lookup shows the same "check the spelling" hint instead of doing nothing
+      setResult(r.ok && r.data ? r.data : "not-found");
     });
   }
 
   function tableName(r: SeatResult) {
-    if (r.tableLabel && r.tableNumber) return t("tableNamed", { label: r.tableLabel, number: r.tableNumber });
+    if (r.tableLabel && r.tableNumber != null) return t("tableNamed", { label: r.tableLabel, number: r.tableNumber });
     if (r.tableLabel) return r.tableLabel;
     return t("tableName", { number: r.tableNumber ?? 1 });
   }
@@ -31,8 +32,11 @@ export function FindSeatForm({ slug }: { slug: string }) {
   return (
     <div className="space-y-6">
       <form onSubmit={submit} className="space-y-4">
-        <label className="block text-sm font-medium">{t("label")}</label>
+        <label htmlFor="find-seat-name" className="block text-sm font-medium">
+          {t("label")}
+        </label>
         <Input
+          id="find-seat-name"
           type="text"
           placeholder={t("placeholder")}
           value={name}
@@ -50,11 +54,14 @@ export function FindSeatForm({ slug }: { slug: string }) {
       </form>
 
       {result === "not-found" && (
-        <p className="text-muted-foreground text-center text-sm">{t("notFound")}</p>
+        <p role="status" className="text-muted-foreground text-center text-sm">{t("notFound")}</p>
       )}
 
       {result && result !== "not-found" && (
-        <div className="bg-accent/50 flex flex-col items-center gap-3 rounded-xl p-6 text-center">
+        <div
+          role="status"
+          className="bg-accent/50 flex flex-col items-center gap-3 rounded-xl p-6 text-center"
+        >
           <MapPin className="text-primary size-8" aria-hidden />
           <p className="text-lg font-medium">{result.guestName}</p>
           <p className="text-3xl font-bold">{tableName(result)}</p>
