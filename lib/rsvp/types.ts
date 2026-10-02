@@ -32,6 +32,10 @@ export type RsvpData = {
     plus_one_of: string | null;
     age_group: AgeGroup;
     dietary: string | null;
+    wants_hotel_room: "yes" | "no" | "elsewhere" | null;
+    needs_crib: boolean;
+    room_pref_share: string | null;
+    room_pref_avoid: string | null;
   }[];
   events: {
     id: string;
@@ -54,6 +58,13 @@ export type RsvpData = {
   }[];
   meal_options: { id: string; name: string; description: string | null }[];
   hotels: { id: string; name: string; address: string | null; distance: string | null }[];
+  room_assignments?: {
+    guest_id: string;
+    room_number: string;
+    hotel_name: string;
+    check_in: string | null;
+    check_out: string | null;
+  }[];
   travel: {
     arrival_date: string | null;
     arrival_time: string | null;

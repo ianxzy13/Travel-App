@@ -190,6 +190,27 @@
       "save": "Shrani podrobnosti potovanja",
       "skip": "Preskoči za zdaj",
       "saved": "Podrobnosti potovanja shranjene!"
+    },
+    "room": {
+      "title": "Želje glede sobe",
+      "subtitle": "Sporočite paru svoje želje glede nastanitve, da lahko organizirata sobe.",
+      "wantRoom": "Ali potrebujete hotelsko sobo?",
+      "option": {
+        "yes": "Da, prosim",
+        "no": "Ne, hvala",
+        "elsewhere": "Nastanjen/-a drugje"
+      },
+      "needsCrib": "Potrebuje otroško posteljico v sobi",
+      "share": "Želim si deliti sobo z",
+      "sharePlaceholder": "npr. Ana in Tom",
+      "avoid": "Raje ne bi delil/-a sobe z",
+      "avoidPlaceholder": "Pustite prazno, če nimate želje"
+    },
+    "yourRoom": {
+      "title": "Vaša soba",
+      "room": "Soba {number}",
+      "checkIn": "Prijava: {date}",
+      "checkOut": "Odjava: {date}"
     }
   },
   "board": {

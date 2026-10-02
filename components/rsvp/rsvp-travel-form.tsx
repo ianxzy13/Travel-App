@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Loader2, Plane, PlaneLanding, PlaneTakeoff } from "lucide-react";
+import { BedDouble, Loader2, Plane, PlaneLanding, PlaneTakeoff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { submitGuestTravel } from "@/app/r/actions";
+import { submitGuestTravel, submitRoomPreferences } from "@/app/r/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,6 +31,33 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
   const te = useTranslations("rsvp.errors");
   const [busy, startTransition] = useTransition();
 
+  const tr = useTranslations("rsvp.room");
+
+  type RoomPref = {
+    guest_id: string;
+    wants_hotel_room: "yes" | "no" | "elsewhere" | null;
+    needs_crib: boolean;
+    room_pref_share: string | null;
+    room_pref_avoid: string | null;
+  };
+
+  const [roomPrefs, setRoomPrefs] = useState<RoomPref[]>(() =>
+    data.guests.map((g) => ({
+      guest_id: g.id,
+      wants_hotel_room: g.wants_hotel_room,
+      needs_crib: g.needs_crib,
+      room_pref_share: g.room_pref_share,
+      room_pref_avoid: g.room_pref_avoid,
+    })),
+  );
+
+  const setRoomPref = (guestId: string, patch: Partial<RoomPref>) =>
+    setRoomPrefs((prev) =>
+      prev.map((p) => (p.guest_id === guestId ? { ...p, ...patch } : p)),
+    );
+
+  const hasHotels = (data.hotels ?? []).length > 0;
+
   const travel = data.travel;
   const [form, setForm] = useState<GuestTravelPayload>({
     arrival_date: travel?.arrival_date ?? "",
@@ -53,9 +80,18 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     startTransition(async () => {
-      const result = await submitGuestTravel(data.household.code, form);
-      if (!result.ok) {
-        toast.error(result.error ?? te("generic"));
+      const [travelResult, roomResult] = await Promise.all([
+        submitGuestTravel(data.household.code, form),
+        hasHotels
+          ? submitRoomPreferences(data.household.code, roomPrefs)
+          : Promise.resolve({ ok: true } as const),
+      ]);
+      if (!travelResult.ok) {
+        toast.error(travelResult.error ?? te("generic"));
+        return;
+      }
+      if (!roomResult.ok) {
+        toast.error("error" in roomResult ? roomResult.error : te("generic"));
         return;
       }
       toast.success(t("saved"));
@@ -238,6 +274,89 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
           />
         </div>
       </div>
+
+      {/* Room preferences */}
+      {hasHotels && (
+        <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
+          <div className="flex items-center gap-3">
+            <BedDouble className="text-primary-ink size-6 shrink-0" aria-hidden />
+            <h2 className="text-2xl">{tr("title")}</h2>
+          </div>
+          <p className="text-muted-foreground mt-1 text-sm">{tr("subtitle")}</p>
+
+          <div className="mt-5 space-y-6">
+            {data.guests.map((guest) => {
+              const pref = roomPrefs.find((p) => p.guest_id === guest.id);
+              if (!pref) return null;
+              const guestName = `${guest.first_name} ${guest.last_name}`.trim();
+              return (
+                <div key={guest.id} className="space-y-3 border-t pt-4 first:border-0 first:pt-0">
+                  <p className="font-medium">{guestName}</p>
+                  <div>
+                    <Label>{tr("wantRoom")}</Label>
+                    <div className="mt-1.5 flex flex-wrap gap-2">
+                      {(["yes", "no", "elsewhere"] as const).map((opt) => (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => setRoomPref(guest.id, { wants_hotel_room: opt })}
+                          className={`rounded-full border px-4 py-1.5 text-sm transition-colors ${
+                            pref.wants_hotel_room === opt
+                              ? "border-primary bg-primary text-primary-foreground font-medium"
+                              : "bg-background hover:bg-accent"
+                          }`}
+                        >
+                          {tr(`option.${opt}`)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {pref.wants_hotel_room === "yes" && (
+                    <>
+                      {(guest.age_group === "child" || guest.age_group === "infant") && (
+                        <div className="flex items-center gap-3">
+                          <Switch
+                            id={`crib-${guest.id}`}
+                            checked={pref.needs_crib}
+                            onCheckedChange={(v) => setRoomPref(guest.id, { needs_crib: v })}
+                          />
+                          <Label htmlFor={`crib-${guest.id}`} className="cursor-pointer">
+                            {tr("needsCrib")}
+                          </Label>
+                        </div>
+                      )}
+                      <div>
+                        <Label htmlFor={`share-${guest.id}`}>{tr("share")}</Label>
+                        <Input
+                          id={`share-${guest.id}`}
+                          placeholder={tr("sharePlaceholder")}
+                          maxLength={200}
+                          value={pref.room_pref_share ?? ""}
+                          onChange={(e) =>
+                            setRoomPref(guest.id, { room_pref_share: e.target.value || null })
+                          }
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor={`avoid-${guest.id}`}>{tr("avoid")}</Label>
+                        <Input
+                          id={`avoid-${guest.id}`}
+                          placeholder={tr("avoidPlaceholder")}
+                          maxLength={200}
+                          value={pref.room_pref_avoid ?? ""}
+                          onChange={(e) =>
+                            setRoomPref(guest.id, { room_pref_avoid: e.target.value || null })
+                          }
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <div className="flex gap-3">
         <Button type="submit" size="lg" className="flex-1" disabled={busy}>

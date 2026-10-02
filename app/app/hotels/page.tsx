@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Hotels() {
   const { wedding, role } = await requireWedding();
   const sb = await createClient();
-  const [hotels, stays, guests] = await Promise.all([
+  const [hotels, stays, guests, roomTypes, rooms, roomAssignments] = await Promise.all([
     fetchAll((f, t) =>
       sb.from("hotels").select("*").eq("wedding_id", wedding.id).order("created_at").range(f, t),
     ),
@@ -26,6 +26,30 @@ export default async function Hotels() {
         .range(f, t),
     ),
     loadPickerGuests(sb, wedding.id),
+    fetchAll((f, t) =>
+      sb
+        .from("hotel_room_types")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("sort_order")
+        .range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("hotel_rooms")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("sort_order")
+        .range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("hotel_room_assignments")
+        .select("*")
+        .eq("wedding_id", wedding.id)
+        .order("id")
+        .range(f, t),
+    ),
   ]);
 
   return (
@@ -36,6 +60,12 @@ export default async function Hotels() {
       }))}
       stays={stays}
       guests={guests}
+      roomTypes={roomTypes.map((rt) => ({
+        ...rt,
+        price_per_night: rt.price_per_night == null ? null : Number(rt.price_per_night),
+      }))}
+      rooms={rooms}
+      roomAssignments={roomAssignments}
       currency={wedding.currency}
       location={wedding.location}
       canEdit={canEdit(role)}

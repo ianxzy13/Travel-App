@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CalendarClock, Check, Heart, Minus, X } from "lucide-react";
+import { BedDouble, CalendarClock, Check, Heart, Minus, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { submitRsvp } from "@/app/r/actions";
 import { Button } from "@/components/ui/button";
@@ -111,6 +111,9 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
       ) : view !== "travel" ? (
         <>
           <AnswerSummary data={data} state={state} />
+          {(data.room_assignments ?? []).length > 0 && (
+            <RoomAssignmentCard data={data} />
+          )}
           {!closed && (
             <div className="space-y-3">
               <Button
@@ -202,6 +205,40 @@ function AnswerSummary({ data, state }: { data: RsvpData; state: RsvpFormState }
           {state.message && <p className="whitespace-pre-line">“{state.message}”</p>}
         </div>
       )}
+    </div>
+  );
+}
+
+function RoomAssignmentCard({ data }: { data: RsvpData }) {
+  const t = useTranslations("rsvp.yourRoom");
+  const assignments = data.room_assignments ?? [];
+  const guestName = new Map(
+    data.guests.map((g) => [g.id, `${g.first_name} ${g.last_name}`.trim()]),
+  );
+
+  return (
+    <div className="bg-card space-y-4 rounded-2xl border p-5 shadow-sm sm:p-7">
+      <h2 className="flex items-center gap-2 text-3xl">
+        <BedDouble className="size-6" aria-hidden />
+        {t("title")}
+      </h2>
+      <ul className="space-y-3">
+        {assignments.map((a) => (
+          <li key={a.guest_id} className="rounded-xl border p-4">
+            <p className="font-medium">{guestName.get(a.guest_id) ?? ""}</p>
+            <p className="text-muted-foreground mt-1 text-sm">
+              {a.hotel_name} · {t("room", { number: a.room_number })}
+            </p>
+            {(a.check_in || a.check_out) && (
+              <p className="text-muted-foreground text-sm">
+                {a.check_in && t("checkIn", { date: a.check_in })}
+                {a.check_in && a.check_out && " — "}
+                {a.check_out && t("checkOut", { date: a.check_out })}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

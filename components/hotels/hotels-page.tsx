@@ -10,13 +10,22 @@ import {
   ExternalLink,
   Globe,
   Heart,
+  LayoutGrid,
   Loader2,
   Plus,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteHotel, saveHotel, setHotelGuests } from "@/app/app/hotels/actions";
+import {
+  deleteRoom,
+  deleteRoomType,
+  generateRooms,
+  saveRoom,
+  saveRoomType,
+} from "@/app/app/hotels/room-actions";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -43,22 +52,41 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import type { HotelGuestRow, HotelRow } from "@/lib/database.types";
+import type {
+  HotelGuestRow,
+  HotelRoomAssignmentRow,
+  HotelRoomRow,
+  HotelRoomTypeRow,
+  HotelRow,
+} from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
 import { fmtDate } from "@/lib/i18n/format";
 import { HOTEL_STATUS_CLASS } from "@/lib/places/labels";
 import { roomBlockState } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
 import { bookingSearch } from "@/lib/vendors/search-links";
-import { hotelSchema, type HotelValues } from "@/lib/validation/places";
+import {
+  hotelSchema,
+  roomSchema,
+  roomTypeSchema,
+  type HotelValues,
+  type RoomTypeValues,
+  type RoomValues,
+} from "@/lib/validation/places";
 
 export type HotelItem = Omit<HotelRow, "price_per_night"> & { price_per_night: number | null };
+export type RoomTypeItem = Omit<HotelRoomTypeRow, "price_per_night"> & {
+  price_per_night: number | null;
+};
 type Stay = Pick<HotelGuestRow, "hotel_id" | "guest_id" | "room" | "check_in" | "check_out">;
 
 type Props = {
   hotels: HotelItem[];
   stays: Stay[];
   guests: (PickerGuest & { attending: boolean })[];
+  roomTypes: RoomTypeItem[];
+  rooms: HotelRoomRow[];
+  roomAssignments: HotelRoomAssignmentRow[];
   currency: string;
   location: string | null;
   canEdit: boolean;
@@ -77,7 +105,18 @@ function useCopy() {
   };
 }
 
-export function HotelsPage({ hotels, stays, guests, currency, location, canEdit, today }: Props) {
+export function HotelsPage({
+  hotels,
+  stays,
+  guests,
+  roomTypes,
+  rooms,
+  roomAssignments,
+  currency,
+  location,
+  canEdit,
+  today,
+}: Props) {
   const t = useTranslations("hotels");
   const p = useTranslations("places");
   const locale = useLocale();
@@ -101,6 +140,13 @@ export function HotelsPage({ hotels, stays, guests, currency, location, canEdit,
         description={t("description")}
         actions={
           <div className="flex gap-2">
+            {rooms.length > 0 && (
+              <Button asChild variant="outline" size="sm">
+                <Link href="/app/hotels/rooms">
+                  <LayoutGrid aria-hidden /> {t("board.title")}
+                </Link>
+              </Button>
+            )}
             {location && (
               <Button asChild variant="outline" size="sm">
                 <a
@@ -321,6 +367,9 @@ export function HotelsPage({ hotels, stays, guests, currency, location, canEdit,
                       : undefined,
                 };
               })}
+              roomTypes={current ? roomTypes.filter((rt) => rt.hotel_id === current.id) : []}
+              rooms={current ? rooms.filter((r) => r.hotel_id === current.id) : []}
+              roomAssignments={roomAssignments}
               currency={currency}
               canEdit={canEdit}
               onClose={() => setSheet(null)}
@@ -337,6 +386,9 @@ function HotelForm({
   hotel,
   stays,
   guests,
+  roomTypes,
+  rooms,
+  roomAssignments,
   currency,
   canEdit,
   onClose,
@@ -345,6 +397,9 @@ function HotelForm({
   hotel: HotelItem | null;
   stays: Stay[];
   guests: PickerGuest[];
+  roomTypes: RoomTypeItem[];
+  rooms: HotelRoomRow[];
+  roomAssignments: HotelRoomAssignmentRow[];
   currency: string;
   canEdit: boolean;
   onClose: () => void;
@@ -537,11 +592,24 @@ function HotelForm({
           <Tabs defaultValue="details">
             <TabsList className="mb-4">
               <TabsTrigger value="details">{p("details")}</TabsTrigger>
+              <TabsTrigger value="rooms">
+                {t("roomsTab", { count: rooms.length })}
+              </TabsTrigger>
               <TabsTrigger value="guests">
                 {t("guestsTab", { count: stays.filter((s) => s.hotel_id === hotel.id).length })}
               </TabsTrigger>
             </TabsList>
             <TabsContent value="details">{details}</TabsContent>
+            <TabsContent value="rooms">
+              <HotelRooms
+                hotelId={hotel.id}
+                roomTypes={roomTypes}
+                rooms={rooms}
+                roomAssignments={roomAssignments}
+                currency={currency}
+                canEdit={canEdit}
+              />
+            </TabsContent>
             <TabsContent value="guests">
               <HotelGuests hotelId={hotel.id} stays={stays} guests={guests} canEdit={canEdit} />
             </TabsContent>
@@ -583,6 +651,561 @@ function HotelForm({
         </SheetFooter>
       )}
     </>
+  );
+}
+
+const BED_ICONS: Record<string, string> = {
+  double: "🛏️",
+  single: "🛏️",
+  sofa_bed: "🛋️",
+  bunk: "🪜",
+};
+
+function useBedLabels() {
+  const t = useTranslations("hotels");
+  return {
+    double: t("rooms.bed.double"),
+    single: t("rooms.bed.single"),
+    sofa_bed: t("rooms.bed.sofa_bed"),
+    bunk: t("rooms.bed.bunk"),
+  } as Record<string, string>;
+}
+
+function HotelRooms({
+  hotelId,
+  roomTypes,
+  rooms,
+  roomAssignments,
+  currency,
+  canEdit,
+}: {
+  hotelId: string;
+  roomTypes: RoomTypeItem[];
+  rooms: HotelRoomRow[];
+  roomAssignments: HotelRoomAssignmentRow[];
+  currency: string;
+  canEdit: boolean;
+}) {
+  const t = useTranslations("hotels");
+  const [pending, startTransition] = useTransition();
+  const [editingType, setEditingType] = useState<string | "new" | null>(null);
+  const [editingRoom, setEditingRoom] = useState<string | "new" | null>(null);
+  const [forTypeId, setForTypeId] = useState<string | null>(null);
+  const bedLabels = useBedLabels();
+
+  const editType = editingType && editingType !== "new"
+    ? roomTypes.find((rt) => rt.id === editingType) ?? null
+    : null;
+  const editRoom = editingRoom && editingRoom !== "new"
+    ? rooms.find((r) => r.id === editingRoom) ?? null
+    : null;
+
+  return (
+    <div className="space-y-6">
+      {/* Room types section */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-medium">{t("rooms.types")}</h3>
+          {canEdit && (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setEditingType("new")}
+            >
+              <Plus aria-hidden /> {t("rooms.addType")}
+            </Button>
+          )}
+        </div>
+        {roomTypes.length === 0 ? (
+          <p className="text-muted-foreground text-sm">{t("rooms.noTypes")}</p>
+        ) : (
+          <ul className="space-y-2">
+            {roomTypes.map((rt) => {
+              const roomCount = rooms.filter((r) => r.room_type_id === rt.id).length;
+              return (
+                <li
+                  key={rt.id}
+                  className="bg-muted/50 flex items-center justify-between gap-2 rounded-lg border p-3"
+                >
+                  <button
+                    type="button"
+                    className="flex-1 text-start"
+                    onClick={() => setEditingType(rt.id)}
+                  >
+                    <p className="text-sm font-medium">{rt.name}</p>
+                    <p className="text-muted-foreground text-xs">
+                      {(rt.beds as { kind: string; count: number }[]).map(
+                        (b, i) =>
+                          `${b.count}× ${BED_ICONS[b.kind] ?? ""} ${bedLabels[b.kind] ?? b.kind}${i < rt.beds.length - 1 ? ", " : ""}`,
+                      )}
+                      {rt.has_crib && ` + ${t("rooms.crib")}`}
+                      {" · "}
+                      {t("rooms.maxGuests", { count: rt.max_guests })}
+                      {rt.price_per_night != null &&
+                        ` · ${formatMoney(rt.price_per_night, currency)}/${t("rooms.night")}`}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {t("rooms.ofType", { created: roomCount, total: rt.count })}
+                    </p>
+                  </button>
+                  {rt.accessible && (
+                    <span className="text-xs" title={t("rooms.accessible")}>♿</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        {canEdit && roomTypes.length > 0 && (
+          <Button
+            size="sm"
+            variant="outline"
+            disabled={pending}
+            onClick={() =>
+              startTransition(async () => {
+                const r = await generateRooms(hotelId);
+                if (r.ok) toast.success(t("rooms.generated"));
+                else toast.error(r.error);
+              })
+            }
+          >
+            {pending && <Loader2 className="animate-spin" aria-hidden />}
+            {t("rooms.generate")}
+          </Button>
+        )}
+      </section>
+
+      {/* Individual rooms section */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm font-medium">
+            {t("rooms.list", { count: rooms.length })}
+          </h3>
+          {canEdit && (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                setForTypeId(null);
+                setEditingRoom("new");
+              }}
+            >
+              <Plus aria-hidden /> {t("rooms.addRoom")}
+            </Button>
+          )}
+        </div>
+        {rooms.length === 0 ? (
+          <p className="text-muted-foreground text-sm">{t("rooms.noRooms")}</p>
+        ) : (
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2">
+            {rooms.map((room) => {
+              const assigned = roomAssignments.filter((a) => a.room_id === room.id).length;
+              const rt = roomTypes.find((t) => t.id === room.room_type_id);
+              return (
+                <button
+                  key={room.id}
+                  type="button"
+                  className={cn(
+                    "flex flex-col items-start gap-1 rounded-lg border p-2 text-start text-xs transition-colors",
+                    room.is_locked
+                      ? "border-amber-500/30 bg-amber-50 dark:bg-amber-950/20"
+                      : "hover:bg-muted/50",
+                  )}
+                  onClick={() => setEditingRoom(room.id)}
+                >
+                  <span className="font-mono font-medium">{room.room_number}</span>
+                  <span className="text-muted-foreground truncate">
+                    {rt?.name ?? t("rooms.untyped")}
+                  </span>
+                  <span className="text-muted-foreground">
+                    {assigned}/{rt?.max_guests ?? "?"} {t("rooms.guests")}
+                  </span>
+                  {room.is_locked && <span title={t("rooms.locked")}>🔒</span>}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
+      {/* Room type edit dialog */}
+      {editingType && (
+        <RoomTypeForm
+          hotelId={hotelId}
+          roomType={editType}
+          currency={currency}
+          canEdit={canEdit}
+          onClose={() => setEditingType(null)}
+        />
+      )}
+
+      {/* Room edit dialog */}
+      {editingRoom && (
+        <RoomForm
+          hotelId={hotelId}
+          room={editRoom}
+          roomTypes={roomTypes}
+          defaultTypeId={forTypeId}
+          canEdit={canEdit}
+          onClose={() => setEditingRoom(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function RoomTypeForm({
+  hotelId,
+  roomType,
+  currency,
+  canEdit,
+  onClose,
+}: {
+  hotelId: string;
+  roomType: RoomTypeItem | null;
+  currency: string;
+  canEdit: boolean;
+  onClose: () => void;
+}) {
+  const t = useTranslations("hotels");
+  const p = useTranslations("places");
+  const bedLabels = useBedLabels();
+  const [pending, startTransition] = useTransition();
+  const form = useForm({
+    resolver: zodResolver(roomTypeSchema),
+    defaultValues: {
+      name: roomType?.name ?? "",
+      beds: (roomType?.beds ?? [{ kind: "double", count: 1 }]) as { kind: "double" | "single" | "sofa_bed" | "bunk"; count: number }[],
+      maxGuests: roomType?.max_guests ?? 2,
+      hasCrib: roomType?.has_crib ?? false,
+      accessible: roomType?.accessible ?? false,
+      pricePerNight: roomType?.price_per_night ?? null,
+      count: roomType?.count ?? 1,
+      notes: roomType?.notes ?? "",
+    } satisfies RoomTypeValues,
+  });
+  const { errors } = form.formState;
+  const beds = form.watch("beds");
+
+  const onSubmit = form.handleSubmit((values) =>
+    startTransition(async () => {
+      const r = await saveRoomType(hotelId, values, roomType?.id);
+      if (!r.ok) {
+        toast.error(r.error);
+        return;
+      }
+      toast.success(roomType ? t("saved") : t("added"));
+      onClose();
+    }),
+  );
+
+  return (
+    <div className="bg-card fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+      <div className="bg-card mx-4 max-h-[85vh] w-full max-w-md overflow-y-auto rounded-xl border p-6 shadow-lg">
+        <h3 className="mb-4 font-serif text-xl">
+          {roomType ? t("rooms.editType") : t("rooms.addType")}
+        </h3>
+        <form onSubmit={onSubmit} noValidate>
+          <fieldset disabled={!canEdit || pending} className="space-y-4">
+            <FormField id="rt-name" label={p("name")} error={errors.name?.message}>
+              {(aria) => <Input {...aria} {...form.register("name")} />}
+            </FormField>
+
+            <div>
+              <Label className="mb-2 block text-sm">{t("rooms.beds")}</Label>
+              {beds.map((bed, i) => (
+                <div key={i} className="mb-2 flex items-center gap-2">
+                  <Controller
+                    control={form.control}
+                    name={`beds.${i}.kind`}
+                    render={({ field }) => (
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <SelectTrigger className="w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {(["double", "single", "sofa_bed", "bunk"] as const).map((k) => (
+                            <SelectItem key={k} value={k}>
+                              {BED_ICONS[k]} {bedLabels[k] ?? k}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  <Controller
+                    control={form.control}
+                    name={`beds.${i}.count`}
+                    render={({ field }) => (
+                      <Input
+                        className="w-16"
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={field.value}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
+                      />
+                    )}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="size-8 p-0"
+                    onClick={() => {
+                      const next = [...beds];
+                      next.splice(i, 1);
+                      form.setValue("beds", next.length ? next : [{ kind: "double", count: 1 }]);
+                    }}
+                  >
+                    <Trash2 className="size-3.5" aria-hidden />
+                  </Button>
+                </div>
+              ))}
+              {beds.length < 10 && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => form.setValue("beds", [...beds, { kind: "single", count: 1 }])}
+                >
+                  <Plus className="size-3.5" aria-hidden /> {t("rooms.addBed")}
+                </Button>
+              )}
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField id="rt-max" label={t("rooms.maxGuests", { count: 0 }).replace("0 ", "")} error={errors.maxGuests?.message}>
+                {(aria) => (
+                  <Input
+                    {...aria}
+                    type="number"
+                    min={1}
+                    max={20}
+                    {...form.register("maxGuests", { valueAsNumber: true })}
+                  />
+                )}
+              </FormField>
+              <FormField id="rt-count" label={t("rooms.typeCount")} error={errors.count?.message}>
+                {(aria) => (
+                  <Input
+                    {...aria}
+                    type="number"
+                    min={0}
+                    max={500}
+                    {...form.register("count", { valueAsNumber: true })}
+                  />
+                )}
+              </FormField>
+            </div>
+
+            <FormField id="rt-price" label={t("pricePerNight")} error={errors.pricePerNight?.message}>
+              {(aria) => (
+                <Controller
+                  control={form.control}
+                  name="pricePerNight"
+                  render={({ field }) => (
+                    <MoneyInput
+                      {...aria}
+                      currency={currency}
+                      allowEmpty
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+            </FormField>
+
+            <Label className="justify-between font-normal">
+              {t("rooms.hasCrib")}
+              <Controller
+                control={form.control}
+                name="hasCrib"
+                render={({ field }) => (
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                )}
+              />
+            </Label>
+
+            <Label className="justify-between font-normal">
+              {t("rooms.accessible")}
+              <Controller
+                control={form.control}
+                name="accessible"
+                render={({ field }) => (
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                )}
+              />
+            </Label>
+
+            <FormField id="rt-notes" label={p("notes")} error={errors.notes?.message}>
+              {(aria) => <Textarea {...aria} rows={2} {...form.register("notes")} />}
+            </FormField>
+          </fieldset>
+
+          <div className="mt-6 flex justify-between gap-2">
+            {roomType && canEdit && (
+              <ConfirmDialog
+                trigger={
+                  <Button variant="ghost" className="text-destructive" disabled={pending}>
+                    <Trash2 aria-hidden /> {p("delete")}
+                  </Button>
+                }
+                title={t("rooms.deleteType")}
+                description={t("rooms.deleteTypeText")}
+                onConfirm={async () => {
+                  const r = await deleteRoomType(roomType.id);
+                  if (!r.ok) {
+                    toast.error(r.error);
+                    return false;
+                  }
+                  onClose();
+                }}
+              />
+            )}
+            <div className="ms-auto flex gap-2">
+              <Button type="button" variant="outline" onClick={onClose}>
+                {p("cancel")}
+              </Button>
+              <Button type="submit" disabled={pending}>
+                {pending && <Loader2 className="animate-spin" aria-hidden />}
+                {p("save")}
+              </Button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function RoomForm({
+  hotelId,
+  room,
+  roomTypes,
+  defaultTypeId,
+  canEdit,
+  onClose,
+}: {
+  hotelId: string;
+  room: HotelRoomRow | null;
+  roomTypes: RoomTypeItem[];
+  defaultTypeId: string | null;
+  canEdit: boolean;
+  onClose: () => void;
+}) {
+  const t = useTranslations("hotels");
+  const p = useTranslations("places");
+  const [pending, startTransition] = useTransition();
+  const form = useForm({
+    resolver: zodResolver(roomSchema),
+    defaultValues: {
+      roomNumber: room?.room_number ?? "",
+      roomTypeId: room?.room_type_id ?? defaultTypeId ?? "",
+      floor: room?.floor ?? "",
+      isLocked: room?.is_locked ?? false,
+      notes: room?.notes ?? "",
+    } satisfies RoomValues,
+  });
+  const { errors } = form.formState;
+
+  const onSubmit = form.handleSubmit((values) =>
+    startTransition(async () => {
+      const r = await saveRoom(hotelId, values, room?.id);
+      if (!r.ok) {
+        toast.error(r.error);
+        return;
+      }
+      toast.success(room ? t("saved") : t("added"));
+      onClose();
+    }),
+  );
+
+  return (
+    <div className="bg-card fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+      <div className="bg-card mx-4 max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-xl border p-6 shadow-lg">
+        <h3 className="mb-4 font-serif text-xl">
+          {room ? t("rooms.editRoom") : t("rooms.addRoom")}
+        </h3>
+        <form onSubmit={onSubmit} noValidate>
+          <fieldset disabled={!canEdit || pending} className="space-y-4">
+            <FormField id="rm-num" label={t("rooms.number")} error={errors.roomNumber?.message}>
+              {(aria) => <Input {...aria} {...form.register("roomNumber")} />}
+            </FormField>
+            <FormField id="rm-type" label={t("rooms.type")}>
+              {(aria) => (
+                <Controller
+                  control={form.control}
+                  name="roomTypeId"
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger {...aria} className="w-full">
+                        <SelectValue placeholder={t("rooms.selectType")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">{t("rooms.noType")}</SelectItem>
+                        {roomTypes.map((rt) => (
+                          <SelectItem key={rt.id} value={rt.id}>
+                            {rt.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              )}
+            </FormField>
+            <FormField id="rm-floor" label={t("rooms.floor")} error={errors.floor?.message}>
+              {(aria) => <Input {...aria} {...form.register("floor")} />}
+            </FormField>
+            <Label className="justify-between font-normal">
+              {t("rooms.locked")}
+              <Controller
+                control={form.control}
+                name="isLocked"
+                render={({ field }) => (
+                  <Switch checked={field.value} onCheckedChange={field.onChange} />
+                )}
+              />
+            </Label>
+            <FormField id="rm-notes" label={p("notes")} error={errors.notes?.message}>
+              {(aria) => <Textarea {...aria} rows={2} {...form.register("notes")} />}
+            </FormField>
+          </fieldset>
+          <div className="mt-6 flex justify-between gap-2">
+            {room && canEdit && (
+              <ConfirmDialog
+                trigger={
+                  <Button variant="ghost" className="text-destructive" disabled={pending}>
+                    <Trash2 aria-hidden /> {p("delete")}
+                  </Button>
+                }
+                title={t("rooms.deleteRoom")}
+                description={t("rooms.deleteRoomText")}
+                onConfirm={async () => {
+                  const r = await deleteRoom(room.id);
+                  if (!r.ok) {
+                    toast.error(r.error);
+                    return false;
+                  }
+                  onClose();
+                }}
+              />
+            )}
+            <div className="ms-auto flex gap-2">
+              <Button type="button" variant="outline" onClick={onClose}>
+                {p("cancel")}
+              </Button>
+              <Button type="submit" disabled={pending}>
+                {pending && <Loader2 className="animate-spin" aria-hidden />}
+                {p("save")}
+              </Button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 

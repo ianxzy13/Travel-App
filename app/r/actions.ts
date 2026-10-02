@@ -124,6 +124,39 @@ export async function setRsvpLanguage(code: string, language: string): Promise<A
   return { ok: true };
 }
 
+/** Guest submits room preferences for each person in the household. */
+export async function submitRoomPreferences(
+  code: string,
+  prefs: unknown,
+): Promise<ActionResult> {
+  const t = await getTranslations("rsvp.errors");
+  const parsedCode = codeSchema.safeParse(code);
+  if (!parsedCode.success) return { ok: false, error: t("rsvp_not_found") };
+
+  const schema = z.array(
+    z.object({
+      guest_id: z.uuid(),
+      wants_hotel_room: z.enum(["yes", "no", "elsewhere"]).nullable(),
+      needs_crib: z.boolean(),
+      room_pref_share: z.string().max(200).nullable(),
+      room_pref_avoid: z.string().max(200).nullable(),
+    }),
+  ).max(100);
+  const parsed = schema.safeParse(prefs);
+  if (!parsed.success) return { ok: false, error: t("generic") };
+
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("submit_room_preferences", {
+    p_code: parsedCode.data,
+    p_prefs: parsed.data,
+  });
+  if (error) {
+    console.error("[submitRoomPreferences]", error);
+    return { ok: false, error: t("generic") };
+  }
+  return { ok: true };
+}
+
 /** Guest submits their travel details after RSVPing "yes". */
 export async function submitGuestTravel(
   code: string,

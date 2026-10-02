@@ -53,6 +53,44 @@ export const hotelSchema = z.object({
 });
 export type HotelValues = z.infer<typeof hotelSchema>;
 
+export const bedConfigSchema = z.object({
+  kind: z.enum(["double", "single", "sofa_bed", "bunk"]),
+  count: z.number().int().min(1).max(10),
+});
+
+export const roomTypeSchema = z.object({
+  name: text(80).min(1, v("name")),
+  beds: z.array(bedConfigSchema).max(10),
+  maxGuests: z.number().int().min(1).max(20),
+  hasCrib: z.boolean(),
+  accessible: z.boolean(),
+  pricePerNight: money,
+  count: z.number().int().min(0).max(500),
+  notes: text(1000),
+});
+export type RoomTypeValues = z.infer<typeof roomTypeSchema>;
+
+export const roomSchema = z.object({
+  roomNumber: text(30).min(1, v("name")),
+  roomTypeId: z.union([z.literal(""), z.uuid()]),
+  floor: text(20),
+  isLocked: z.boolean(),
+  notes: text(500),
+});
+export type RoomValues = z.infer<typeof roomSchema>;
+
+export const roomAssignmentSchema = z
+  .object({
+    roomId: z.uuid(),
+    guestId: z.uuid(),
+    checkIn: date,
+    checkOut: date,
+    needsCrib: z.boolean(),
+  })
+  .refine((a) => !a.checkIn || !a.checkOut || a.checkOut >= a.checkIn, {
+    message: v("checkOut"),
+  });
+
 export const hotelGuestsSchema = z
   .array(
     z.object({

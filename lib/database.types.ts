@@ -124,6 +124,10 @@ export type GuestRow = WeddingScoped & {
   list: GuestList;
   /** languages this guest speaks */
   languages: string[];
+  wants_hotel_room: "yes" | "no" | "elsewhere" | null;
+  needs_crib: boolean;
+  room_pref_share: string | null;
+  room_pref_avoid: string | null;
 };
 
 export type GuestEventInviteRow = WeddingScoped & { guest_id: string; event_id: string };
@@ -326,6 +330,40 @@ export type HotelGuestRow = WeddingScoped & {
   room: string | null;
   check_in: string | null;
   check_out: string | null;
+};
+
+export type BedKind = "double" | "single" | "sofa_bed" | "bunk";
+export type BedConfig = { kind: BedKind; count: number };
+
+export type HotelRoomTypeRow = WeddingScoped & {
+  hotel_id: string;
+  name: string;
+  beds: BedConfig[];
+  max_guests: number;
+  has_crib: boolean;
+  accessible: boolean;
+  price_per_night: number | null;
+  count: number;
+  notes: string | null;
+  sort_order: number;
+};
+
+export type HotelRoomRow = WeddingScoped & {
+  hotel_id: string;
+  room_type_id: string | null;
+  room_number: string;
+  floor: string | null;
+  is_locked: boolean;
+  notes: string | null;
+  sort_order: number;
+};
+
+export type HotelRoomAssignmentRow = WeddingScoped & {
+  room_id: string;
+  guest_id: string;
+  check_in: string | null;
+  check_out: string | null;
+  needs_crib: boolean;
 };
 
 export type FlightRow = WeddingScoped & {
@@ -545,6 +583,9 @@ export type Database = {
       venue_checklist_items: Table<VenueChecklistRow, "wedding_id" | "venue_id" | "question">;
       hotels: Table<HotelRow, "wedding_id" | "name">;
       hotel_guest_assignments: Table<HotelGuestRow, "wedding_id" | "hotel_id" | "guest_id">;
+      hotel_room_types: Table<HotelRoomTypeRow, "wedding_id" | "hotel_id" | "name">;
+      hotel_rooms: Table<HotelRoomRow, "wedding_id" | "hotel_id" | "room_number">;
+      hotel_room_assignments: Table<HotelRoomAssignmentRow, "wedding_id" | "room_id" | "guest_id">;
       flights: Table<FlightRow, "wedding_id">;
       flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
       guest_travel: Table<GuestTravelRow, "wedding_id" | "household_id">;
@@ -627,6 +668,10 @@ export type Database = {
         Args: { p_code: string; p_payload: Json };
         Returns: undefined;
       };
+      submit_room_preferences: {
+        Args: { p_code: string; p_prefs: Json };
+        Returns: Json;
+      };
     };
     Enums: {
       member_role: MemberRole;
@@ -640,6 +685,7 @@ export type Database = {
       venue_status: VenueStatus;
       venue_availability: VenueAvailability;
       hotel_status: HotelStatus;
+      bed_kind: BedKind;
       flight_category: FlightCategory;
       flight_direction: FlightDirection;
       flight_status: FlightStatus;

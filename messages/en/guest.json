@@ -183,6 +183,27 @@
       "skip": "Skip for now",
       "saved": "Travel details saved!"
     },
+    "room": {
+      "title": "Room preferences",
+      "subtitle": "Let the couple know your accommodation preferences so they can organise rooms.",
+      "wantRoom": "Do you need a hotel room?",
+      "option": {
+        "yes": "Yes please",
+        "no": "No thanks",
+        "elsewhere": "Staying elsewhere"
+      },
+      "needsCrib": "Needs a crib in the room",
+      "share": "Would like to share a room with",
+      "sharePlaceholder": "e.g. Anna & Tom",
+      "avoid": "Prefer not to share with",
+      "avoidPlaceholder": "Leave blank if no preference"
+    },
+    "yourRoom": {
+      "title": "Your room",
+      "room": "Room {number}",
+      "checkIn": "Check-in: {date}",
+      "checkOut": "Check-out: {date}"
+    },
     "errors": {
       "rsvp_not_found": "We couldn’t find that invitation. Please check the link or code.",
       "deadline_passed": "The RSVP deadline has passed. Please contact the couple directly.",

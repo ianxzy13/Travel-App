@@ -270,6 +270,10 @@ describe("buildGuestViews", () => {
       accessibility: null,
       notes: null,
       list: "a" as const,
+      wants_hotel_room: null,
+      needs_crib: false,
+      room_pref_share: null,
+      room_pref_avoid: null,
       created_at: "",
       updated_at: "",
     };

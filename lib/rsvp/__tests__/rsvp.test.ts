@@ -35,6 +35,10 @@ const data: RsvpData = {
       plus_one_of: null,
       age_group: "adult",
       dietary: null,
+      wants_hotel_room: null,
+      needs_crib: false,
+      room_pref_share: null,
+      room_pref_avoid: null,
     },
     {
       id: "p1",
@@ -43,6 +47,10 @@ const data: RsvpData = {
       plus_one_of: "ann",
       age_group: "adult",
       dietary: null,
+      wants_hotel_room: null,
+      needs_crib: false,
+      room_pref_share: null,
+      room_pref_avoid: null,
     },
   ],
   events: [
