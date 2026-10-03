@@ -177,6 +177,21 @@ Without it you can still copy each household's RSVP link or share it on WhatsApp
    credited as Unsplash requires. (Pinterest isn't used: its API needs app approval, so it's a
    possible future integration.)
 
+### Affiliate links (Booking.com, Skyscanner, Travelpayouts)
+
+Outbound hotel and flight links can carry affiliate parameters so you earn a commission when
+guests book through your app. **All three are optional** — with empty env vars the links work
+normally and no disclosure is shown.
+
+| Program | Env var | How to apply |
+|---|---|---|
+| **Booking.com** | `NEXT_PUBLIC_BOOKING_AFFILIATE_ID` | <https://www.booking.com/affiliate-program.html> — sign up, get your affiliate ID (numeric). |
+| **Skyscanner / Impact** | `NEXT_PUBLIC_SKYSCANNER_AFFILIATE_URL_PREFIX` | <https://www.partners.skyscanner.net/> — sign up via Impact Radius. Your tracking link prefix looks like `https://goto.skyscanner.com/aff_c?offer_id=…&aff_id=…&url=`. |
+| **Travelpayouts / Aviasales** | `NEXT_PUBLIC_TRAVELPAYOUTS_MARKER` + `TRAVELPAYOUTS_API_TOKEN` | <https://www.travelpayouts.com/> — sign up, get your marker (partner ID) and API token. The marker goes in client-side links; the token (server only) enables fare-hint estimates on the travel page. |
+
+When any affiliate ID is set, a small disclosure note appears under booking and flight links.
+All outgoing booking links use `rel="sponsored noopener noreferrer"`.
+
 ---
 
 ## 4. Demo data

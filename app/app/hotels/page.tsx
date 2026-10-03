@@ -68,6 +68,8 @@ export default async function Hotels() {
       roomAssignments={roomAssignments}
       currency={wedding.currency}
       location={wedding.location}
+      weddingDate={wedding.wedding_date}
+      coupleName={`${wedding.partner_a_name} & ${wedding.partner_b_name}`}
       canEdit={canEdit(role)}
       today={new Date().toISOString().slice(0, 10)}
     />

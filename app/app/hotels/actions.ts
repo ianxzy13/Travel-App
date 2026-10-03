@@ -44,6 +44,10 @@ export async function saveHotel(
     show_on_website: v.showOnWebsite,
     for_couple: v.forCouple,
     notes: v.notes || null,
+    group_rate_email: v.groupRateEmail || null,
+    group_rate_notes: v.groupRateNotes || null,
+    hold_date: v.holdDate || null,
+    release_date: v.releaseDate || null,
   };
 
   if (id) {

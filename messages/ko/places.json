@@ -23,7 +23,10 @@
       "considering": "검토 중",
       "contacted": "연락함",
       "block_confirmed": "객실 블록 확정",
-      "rejected": "선택 안 함"
+      "rejected": "선택 안 함",
+      "rate_requested": "Rate requested",
+      "rate_received": "Offer received",
+      "rate_signed": "Rate signed"
     },
     "flightCategory": {
       "guest": "하객",
@@ -274,7 +277,20 @@
       "roomingList": "Rooming List",
       "csv": "Export CSV",
       "pdf": "Print / PDF"
-    }
+    },
+    "groupRate": "Group rate request",
+    "groupRateEmail": "Hotel contact email",
+    "groupRateNotes": "Notes for the hotel",
+    "holdDate": "Hold date",
+    "releaseDate": "Release date",
+    "requestGroupRate": "Draft group rate email",
+    "groupRateSubject": "Group room rate enquiry — {hotel}",
+    "groupRateBodyGreeting": "Dear {hotel} reservations team,",
+    "groupRateBodyIntro": "We are {couple} and would like to request a group rate for our wedding guests.",
+    "groupRateBodyDate": "Wedding date: {date}",
+    "groupRateBodyRooms": "Estimated rooms needed: {count}",
+    "groupRateBodyClosing": "We look forward to hearing from you.",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you."
   },
   "travel": {
     "title": "여행",
@@ -357,6 +373,9 @@
     "travellersHint": "예: Ian과 Maria",
     "pickupNeeded": "픽업 필요",
     "deleteTitle": "이 항공편을 삭제할까요?",
-    "deleteText": "되돌릴 수 없습니다."
+    "deleteText": "되돌릴 수 없습니다.",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you.",
+    "fareHintsTitle": "Fare estimates",
+    "fareHintsDisclaimer": "Estimates only — prices change. Check the airline for final fares."
   }
 }

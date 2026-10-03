@@ -39,6 +39,9 @@ export const HOTEL_STATUS_CLASS: Record<HotelStatus, string> = {
   contacted: sky,
   block_confirmed: green,
   rejected: `${muted} line-through`,
+  rate_requested: amber,
+  rate_received: violet,
+  rate_signed: green,
 };
 
 export const FLIGHT_CATEGORIES: FlightCategory[] = ["guest", "couple", "honeymoon"];

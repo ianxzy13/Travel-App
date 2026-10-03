@@ -23,7 +23,10 @@
       "considering": "विचाराधीन",
       "contacted": "संपर्क किया",
       "block_confirmed": "रूम ब्लॉक पक्का",
-      "rejected": "नहीं चुना"
+      "rejected": "नहीं चुना",
+      "rate_requested": "Rate requested",
+      "rate_received": "Offer received",
+      "rate_signed": "Rate signed"
     },
     "flightCategory": {
       "guest": "मेहमान",
@@ -274,7 +277,20 @@
       "roomingList": "Rooming List",
       "csv": "Export CSV",
       "pdf": "Print / PDF"
-    }
+    },
+    "groupRate": "Group rate request",
+    "groupRateEmail": "Hotel contact email",
+    "groupRateNotes": "Notes for the hotel",
+    "holdDate": "Hold date",
+    "releaseDate": "Release date",
+    "requestGroupRate": "Draft group rate email",
+    "groupRateSubject": "Group room rate enquiry — {hotel}",
+    "groupRateBodyGreeting": "Dear {hotel} reservations team,",
+    "groupRateBodyIntro": "We are {couple} and would like to request a group rate for our wedding guests.",
+    "groupRateBodyDate": "Wedding date: {date}",
+    "groupRateBodyRooms": "Estimated rooms needed: {count}",
+    "groupRateBodyClosing": "We look forward to hearing from you.",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you."
   },
   "travel": {
     "title": "यात्रा",
@@ -357,6 +373,9 @@
       "summary": "{runs, plural, one {# चक्कर} other {# चक्कर}} · {people, plural, one {# व्यक्ति} other {# व्यक्ति}}",
       "print": "प्रिंट",
       "dayPeople": "{count, plural, one {# व्यक्ति} other {# व्यक्ति}}"
-    }
+    },
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you.",
+    "fareHintsTitle": "Fare estimates",
+    "fareHintsDisclaimer": "Estimates only — prices change. Check the airline for final fares."
   }
 }

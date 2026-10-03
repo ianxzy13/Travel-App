@@ -80,11 +80,21 @@ export function flightSearchLinks(opts: {
   // Skyscanner needs airport codes: /transport/flights/lis/lhr/270610/270615/
   const yymmdd = (d?: string | null) => (d ? d.slice(2).replace(/-/g, "") : "");
   const skyTo = iata(opts.to);
-  const skyscanner =
-    skyTo && opts.depart
-      ? `https://www.skyscanner.net/transport/flights/${(from ?? "anywhere").toLowerCase()}/${skyTo.toLowerCase()}/${yymmdd(opts.depart)}/${opts.ret ? `${yymmdd(opts.ret)}/` : ""}`
+  let skyscanner: string | null = null;
+  if (skyTo && opts.depart) {
+    const base = `https://www.skyscanner.net/transport/flights/${(from ?? "anywhere").toLowerCase()}/${skyTo.toLowerCase()}/${yymmdd(opts.depart)}/${opts.ret ? `${yymmdd(opts.ret)}/` : ""}`;
+    const prefix = process.env.NEXT_PUBLIC_SKYSCANNER_AFFILIATE_URL_PREFIX;
+    skyscanner = prefix ? `${prefix}${encodeURIComponent(base)}` : base;
+  }
+
+  // Travelpayouts marker on the Aviasales redirect
+  const tpMarker = process.env.NEXT_PUBLIC_TRAVELPAYOUTS_MARKER;
+  const aviasales =
+    skyTo && opts.depart && tpMarker
+      ? `https://www.aviasales.com/search/${(from ?? "MOW").toUpperCase()}${yymmdd(opts.depart)}${skyTo.toUpperCase()}${opts.ret ? yymmdd(opts.ret) : ""}1?marker=${encodeURIComponent(tpMarker)}`
       : null;
-  return { google, skyscanner };
+
+  return { google, skyscanner, aviasales };
 }
 
 /** Google Maps search, e.g. "wedding venues near Sintra". */

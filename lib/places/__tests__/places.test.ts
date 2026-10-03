@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type { GuestTravelRow } from "@/lib/database.types";
 import { planShuttleRuns } from "../shuttle";
 import {
@@ -9,6 +9,7 @@ import {
   timeOf,
   type BoardFlight,
 } from "../travel";
+import { bookingSearch, hasAnyAffiliate } from "@/lib/vendors/search-links";
 
 const f = (id: string, time: string | null, travellers: string[] = []): BoardFlight => ({
   id,
@@ -81,6 +82,57 @@ describe("room block reminders", () => {
         .level,
     ).toBe("ok");
     expect(roomBlockState({ ...block, cutoff_date: null }, "2027-04-25").level).toBe("none");
+  });
+});
+
+describe("affiliate links", () => {
+  it("bookingSearch appends aid when affiliate ID is given", () => {
+    const url = bookingSearch("Hotel Sintra", "12345");
+    expect(url).toContain("&aid=12345");
+    expect(url).toContain("ss=Hotel%20Sintra");
+  });
+
+  it("bookingSearch omits aid when no affiliate ID", () => {
+    const url = bookingSearch("Hotel Sintra");
+    expect(url).not.toContain("&aid=");
+  });
+
+  it("bookingSearch reads NEXT_PUBLIC_BOOKING_AFFILIATE_ID from env", () => {
+    vi.stubEnv("NEXT_PUBLIC_BOOKING_AFFILIATE_ID", "99999");
+    const url = bookingSearch("Test");
+    expect(url).toContain("&aid=99999");
+    vi.unstubAllEnvs();
+  });
+
+  it("hasAnyAffiliate returns false with no env vars", () => {
+    expect(hasAnyAffiliate()).toBe(false);
+  });
+
+  it("hasAnyAffiliate returns true when any env var is set", () => {
+    vi.stubEnv("NEXT_PUBLIC_BOOKING_AFFILIATE_ID", "abc");
+    expect(hasAnyAffiliate()).toBe(true);
+    vi.unstubAllEnvs();
+  });
+
+  it("flightSearchLinks wraps Skyscanner URL with affiliate prefix", () => {
+    vi.stubEnv("NEXT_PUBLIC_SKYSCANNER_AFFILIATE_URL_PREFIX", "https://goto.skyscanner.com/?url=");
+    const l = flightSearchLinks({ from: "LHR", to: "LIS", depart: "2027-06-10" });
+    expect(l.skyscanner).toContain("https://goto.skyscanner.com/?url=");
+    expect(l.skyscanner).toContain(encodeURIComponent("https://www.skyscanner.net/"));
+    vi.unstubAllEnvs();
+  });
+
+  it("flightSearchLinks builds Aviasales link with marker", () => {
+    vi.stubEnv("NEXT_PUBLIC_TRAVELPAYOUTS_MARKER", "my_marker");
+    const l = flightSearchLinks({ from: "LHR", to: "LIS", depart: "2027-06-10" });
+    expect(l.aviasales).toContain("marker=my_marker");
+    expect(l.aviasales).toContain("aviasales.com/search/LHR");
+    vi.unstubAllEnvs();
+  });
+
+  it("flightSearchLinks omits Aviasales without marker", () => {
+    const l = flightSearchLinks({ from: "LHR", to: "LIS", depart: "2027-06-10" });
+    expect(l.aviasales).toBeNull();
   });
 });
 

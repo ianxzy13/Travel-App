@@ -23,7 +23,10 @@
       "considering": "検討中",
       "contacted": "連絡済み",
       "block_confirmed": "団体予約確定",
-      "rejected": "見送り"
+      "rejected": "見送り",
+      "rate_requested": "Rate requested",
+      "rate_received": "Offer received",
+      "rate_signed": "Rate signed"
     },
     "flightCategory": {
       "guest": "ゲスト",
@@ -274,7 +277,20 @@
       "roomingList": "Rooming List",
       "csv": "Export CSV",
       "pdf": "Print / PDF"
-    }
+    },
+    "groupRate": "Group rate request",
+    "groupRateEmail": "Hotel contact email",
+    "groupRateNotes": "Notes for the hotel",
+    "holdDate": "Hold date",
+    "releaseDate": "Release date",
+    "requestGroupRate": "Draft group rate email",
+    "groupRateSubject": "Group room rate enquiry — {hotel}",
+    "groupRateBodyGreeting": "Dear {hotel} reservations team,",
+    "groupRateBodyIntro": "We are {couple} and would like to request a group rate for our wedding guests.",
+    "groupRateBodyDate": "Wedding date: {date}",
+    "groupRateBodyRooms": "Estimated rooms needed: {count}",
+    "groupRateBodyClosing": "We look forward to hearing from you.",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you."
   },
   "travel": {
     "title": "旅行",
@@ -357,6 +373,9 @@
     "travellersHint": "例：Ian と Maria",
     "pickupNeeded": "送迎が必要",
     "deleteTitle": "このフライトを削除しますか？",
-    "deleteText": "元に戻せません。"
+    "deleteText": "元に戻せません。",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you.",
+    "fareHintsTitle": "Fare estimates",
+    "fareHintsDisclaimer": "Estimates only — prices change. Check the airline for final fares."
   }
 }

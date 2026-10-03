@@ -66,6 +66,15 @@ export function vendorSearchLinks(
 }
 
 export function bookingSearch(query: string, affiliateId?: string): string {
+  const aid = affiliateId ?? process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_ID ?? "";
   const url = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(query)}`;
-  return affiliateId ? `${url}&aid=${encodeURIComponent(affiliateId)}` : url;
+  return aid ? `${url}&aid=${encodeURIComponent(aid)}` : url;
+}
+
+export function hasAnyAffiliate(): boolean {
+  return !!(
+    process.env.NEXT_PUBLIC_BOOKING_AFFILIATE_ID ||
+    process.env.NEXT_PUBLIC_SKYSCANNER_AFFILIATE_URL_PREFIX ||
+    process.env.NEXT_PUBLIC_TRAVELPAYOUTS_MARKER
+  );
 }

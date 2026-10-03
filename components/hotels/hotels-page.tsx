@@ -12,6 +12,7 @@ import {
   Heart,
   LayoutGrid,
   Loader2,
+  Mail,
   Plus,
   Trash2,
 } from "lucide-react";
@@ -64,7 +65,7 @@ import { fmtDate } from "@/lib/i18n/format";
 import { HOTEL_STATUS_CLASS } from "@/lib/places/labels";
 import { roomBlockState } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
-import { bookingSearch } from "@/lib/vendors/search-links";
+import { bookingSearch, hasAnyAffiliate } from "@/lib/vendors/search-links";
 import {
   hotelSchema,
   roomSchema,
@@ -73,6 +74,30 @@ import {
   type RoomTypeValues,
   type RoomValues,
 } from "@/lib/validation/places";
+
+function buildGroupRateMailto(opts: {
+  email: string;
+  hotelName: string;
+  coupleName: string;
+  weddingDate: string | null;
+  roomsHeld: number | null;
+  notes: string;
+  t: (key: string, values?: Record<string, unknown>) => string;
+}) {
+  const subject = opts.t("groupRateSubject", { hotel: opts.hotelName });
+  const lines = [
+    opts.t("groupRateBodyGreeting", { hotel: opts.hotelName }),
+    "",
+    opts.t("groupRateBodyIntro", { couple: opts.coupleName }),
+    opts.weddingDate ? opts.t("groupRateBodyDate", { date: opts.weddingDate }) : "",
+    opts.roomsHeld ? opts.t("groupRateBodyRooms", { count: opts.roomsHeld }) : "",
+    opts.notes ? `\n${opts.notes}` : "",
+    "",
+    opts.t("groupRateBodyClosing"),
+    opts.coupleName,
+  ].filter(Boolean);
+  return `mailto:${encodeURIComponent(opts.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+}
 
 export type HotelItem = Omit<HotelRow, "price_per_night"> & { price_per_night: number | null };
 export type RoomTypeItem = Omit<HotelRoomTypeRow, "price_per_night"> & {
@@ -89,6 +114,8 @@ type Props = {
   roomAssignments: HotelRoomAssignmentRow[];
   currency: string;
   location: string | null;
+  weddingDate: string | null;
+  coupleName: string;
   canEdit: boolean;
   today: string;
 };
@@ -114,6 +141,8 @@ export function HotelsPage({
   roomAssignments,
   currency,
   location,
+  weddingDate,
+  coupleName,
   canEdit,
   today,
 }: Props) {
@@ -139,31 +168,36 @@ export function HotelsPage({
         title={t("title")}
         description={t("description")}
         actions={
-          <div className="flex gap-2">
-            {rooms.length > 0 && (
-              <Button asChild variant="outline" size="sm">
-                <Link href="/app/hotels/rooms">
-                  <LayoutGrid aria-hidden /> {t("board.title")}
-                </Link>
-              </Button>
+          <>
+            <div className="flex gap-2">
+              {rooms.length > 0 && (
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/app/hotels/rooms">
+                    <LayoutGrid aria-hidden /> {t("board.title")}
+                  </Link>
+                </Button>
+              )}
+              {location && (
+                <Button asChild variant="outline" size="sm">
+                  <a
+                    href={bookingSearch(`hotels ${location}`)}
+                    target="_blank"
+                    rel="sponsored noopener noreferrer"
+                  >
+                    <BedDouble aria-hidden /> {t("findOnBooking")}
+                  </a>
+                </Button>
+              )}
+              {canEdit && (
+                <Button size="sm" onClick={() => setSheet("new")}>
+                  <Plus aria-hidden /> {t("add")}
+                </Button>
+              )}
+            </div>
+            {hasAnyAffiliate() && (
+              <p className="text-muted-foreground mt-2 text-xs">{t("affiliateDisclosure")}</p>
             )}
-            {location && (
-              <Button asChild variant="outline" size="sm">
-                <a
-                  href={bookingSearch(`hotels ${location}`)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <BedDouble aria-hidden /> {t("findOnBooking")}
-                </a>
-              </Button>
-            )}
-            {canEdit && (
-              <Button size="sm" onClick={() => setSheet("new")}>
-                <Plus aria-hidden /> {t("add")}
-              </Button>
-            )}
-          </div>
+          </>
         }
       />
 
@@ -292,7 +326,7 @@ export function HotelsPage({
                       )}
                       {h.booking_url && (
                         <Button asChild variant="ghost" size="sm">
-                          <a href={h.booking_url} target="_blank" rel="noreferrer">
+                          <a href={h.booking_url} target="_blank" rel="sponsored noopener noreferrer">
                             <ExternalLink aria-hidden /> {t("bookingLink")}
                           </a>
                         </Button>
@@ -371,6 +405,8 @@ export function HotelsPage({
               rooms={current ? rooms.filter((r) => r.hotel_id === current.id) : []}
               roomAssignments={roomAssignments}
               currency={currency}
+              weddingDate={weddingDate}
+              coupleName={coupleName}
               canEdit={canEdit}
               onClose={() => setSheet(null)}
               onCreated={(id) => setSheet(id)}
@@ -390,6 +426,8 @@ function HotelForm({
   rooms,
   roomAssignments,
   currency,
+  weddingDate,
+  coupleName,
   canEdit,
   onClose,
   onCreated,
@@ -401,6 +439,8 @@ function HotelForm({
   rooms: HotelRoomRow[];
   roomAssignments: HotelRoomAssignmentRow[];
   currency: string;
+  weddingDate: string | null;
+  coupleName: string;
   canEdit: boolean;
   onClose: () => void;
   onCreated: (id: string) => void;
@@ -425,6 +465,10 @@ function HotelForm({
       showOnWebsite: hotel?.show_on_website ?? false,
       forCouple: hotel?.for_couple ?? false,
       notes: hotel?.notes ?? "",
+      groupRateEmail: hotel?.group_rate_email ?? "",
+      groupRateNotes: hotel?.group_rate_notes ?? "",
+      holdDate: hotel?.hold_date ?? "",
+      releaseDate: hotel?.release_date ?? "",
     } satisfies HotelValues,
   });
   const { errors } = form.formState;
@@ -548,6 +592,64 @@ function HotelForm({
             >
               {(aria) => <Input {...aria} type="date" {...form.register("cutoffDate")} />}
             </FormField>
+          </div>
+          <div className="border-t pt-4">
+            <p className="mb-3 text-sm font-medium">{t("groupRate")}</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField
+                id="h-gr-email"
+                label={t("groupRateEmail")}
+                error={errors.groupRateEmail?.message}
+              >
+                {(aria) => (
+                  <Input {...aria} type="email" {...form.register("groupRateEmail")} />
+                )}
+              </FormField>
+              <FormField
+                id="h-hold"
+                label={t("holdDate")}
+                error={errors.holdDate?.message}
+              >
+                {(aria) => <Input {...aria} type="date" {...form.register("holdDate")} />}
+              </FormField>
+              <FormField
+                id="h-release"
+                label={t("releaseDate")}
+                error={errors.releaseDate?.message}
+              >
+                {(aria) => <Input {...aria} type="date" {...form.register("releaseDate")} />}
+              </FormField>
+            </div>
+            <FormField
+              id="h-gr-notes"
+              label={t("groupRateNotes")}
+              error={errors.groupRateNotes?.message}
+            >
+              {(aria) => <Textarea {...aria} rows={2} {...form.register("groupRateNotes")} />}
+            </FormField>
+            {form.watch("groupRateEmail") && (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                asChild
+              >
+                <a
+                  href={buildGroupRateMailto({
+                    email: form.watch("groupRateEmail"),
+                    hotelName: form.watch("name"),
+                    coupleName,
+                    weddingDate,
+                    roomsHeld: form.watch("roomsHeld"),
+                    notes: form.watch("groupRateNotes"),
+                    t: t as unknown as (key: string, values?: Record<string, unknown>) => string,
+                  })}
+                >
+                  <Mail aria-hidden /> {t("requestGroupRate")}
+                </a>
+              </Button>
+            )}
           </div>
         </fieldset>
         <Label className="justify-between font-normal">

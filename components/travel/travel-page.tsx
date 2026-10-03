@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDays, format, parseISO } from "date-fns";
@@ -64,7 +64,9 @@ import {
   toInputValue,
   type BoardFlight,
 } from "@/lib/places/travel";
+import { getFareHints, type FareHint } from "@/lib/places/fares";
 import { cn } from "@/lib/utils";
+import { hasAnyAffiliate } from "@/lib/vendors/search-links";
 import { flightSchema, type FlightValues } from "@/lib/validation/places";
 
 export type FlightItem = Omit<FlightRow, "price"> & {
@@ -269,6 +271,17 @@ function SearchFlights({
   const [ret, setRet] = useState(shift(weddingDate, 2));
   const [pending, startTransition] = useTransition();
   const links = to.trim() ? flightSearchLinks({ from, to, depart, ret }) : null;
+  const [fares, setFares] = useState<FareHint[]>([]);
+
+  useEffect(() => {
+    const f = from.trim();
+    const d = to.trim();
+    if (f.length === 3 && d.length === 3) {
+      getFareHints(f, d, depart || null).then(setFares);
+    } else {
+      setFares([]);
+    }
+  }, [from, to, depart]);
 
   return (
     <Card>
@@ -335,7 +348,7 @@ function SearchFlights({
         <div className="mt-4 flex flex-wrap gap-2">
           <Button asChild={!!links} disabled={!links} variant="outline" size="sm">
             {links ? (
-              <a href={links.google} target="_blank" rel="noreferrer">
+              <a href={links.google} target="_blank" rel="sponsored noopener noreferrer">
                 <ExternalLink aria-hidden /> Google Flights
               </a>
             ) : (
@@ -349,14 +362,41 @@ function SearchFlights({
             size="sm"
           >
             {links?.skyscanner ? (
-              <a href={links.skyscanner} target="_blank" rel="noreferrer">
+              <a href={links.skyscanner} target="_blank" rel="sponsored noopener noreferrer">
                 <ExternalLink aria-hidden /> Skyscanner
               </a>
             ) : (
               <span>{t("skyscannerNeeds")}</span>
             )}
           </Button>
+          {links?.aviasales && (
+            <Button asChild variant="outline" size="sm">
+              <a href={links.aviasales} target="_blank" rel="sponsored noopener noreferrer">
+                <ExternalLink aria-hidden /> Aviasales
+              </a>
+            </Button>
+          )}
+          {hasAnyAffiliate() && (
+            <p className="text-muted-foreground mt-2 text-xs">{t("affiliateDisclosure")}</p>
+          )}
         </div>
+        {fares.length > 0 && (
+          <div className="mt-4 rounded-lg border p-3">
+            <p className="text-muted-foreground mb-2 text-xs font-medium">{t("fareHintsTitle")}</p>
+            <ul className="space-y-1 text-sm">
+              {fares.map((f, i) => (
+                <li key={i} className="flex justify-between">
+                  <span>
+                    {f.origin} → {f.destination}
+                    {f.airline && <span className="text-muted-foreground ml-1">({f.airline})</span>}
+                  </span>
+                  <span className="font-medium">~€{Math.round(f.price_eur)}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-muted-foreground mt-2 text-[11px]">{t("fareHintsDisclaimer")}</p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

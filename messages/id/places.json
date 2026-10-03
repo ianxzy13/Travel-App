@@ -23,7 +23,10 @@
       "considering": "Dipertimbangkan",
       "contacted": "Sudah dihubungi",
       "block_confirmed": "Blok kamar dikonfirmasi",
-      "rejected": "Tidak dipilih"
+      "rejected": "Tidak dipilih",
+      "rate_requested": "Rate requested",
+      "rate_received": "Offer received",
+      "rate_signed": "Rate signed"
     },
     "flightCategory": {
       "guest": "Tamu",
@@ -274,7 +277,20 @@
       "roomingList": "Rooming List",
       "csv": "Export CSV",
       "pdf": "Print / PDF"
-    }
+    },
+    "groupRate": "Group rate request",
+    "groupRateEmail": "Hotel contact email",
+    "groupRateNotes": "Notes for the hotel",
+    "holdDate": "Hold date",
+    "releaseDate": "Release date",
+    "requestGroupRate": "Draft group rate email",
+    "groupRateSubject": "Group room rate enquiry — {hotel}",
+    "groupRateBodyGreeting": "Dear {hotel} reservations team,",
+    "groupRateBodyIntro": "We are {couple} and would like to request a group rate for our wedding guests.",
+    "groupRateBodyDate": "Wedding date: {date}",
+    "groupRateBodyRooms": "Estimated rooms needed: {count}",
+    "groupRateBodyClosing": "We look forward to hearing from you.",
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you."
   },
   "travel": {
     "title": "Perjalanan",
@@ -357,6 +373,9 @@
       "summary": "{runs, plural, one {# perjalanan} other {# perjalanan}} · {people, plural, one {# orang} other {# orang}}",
       "print": "Cetak",
       "dayPeople": "{count, plural, one {# orang} other {# orang}}"
-    }
+    },
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you.",
+    "fareHintsTitle": "Fare estimates",
+    "fareHintsDisclaimer": "Estimates only — prices change. Check the airline for final fares."
   }
 }

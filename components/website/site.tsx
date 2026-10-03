@@ -901,7 +901,7 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
           <a
             href={flightSearchLinks({ to: airport }).google}
             target="_blank"
-            rel="noreferrer"
+            rel="sponsored noopener noreferrer"
             className={cn(accentText, "text-sm underline underline-offset-2")}
           >
             {ctx.tr("travel.searchFlights")}
@@ -962,7 +962,7 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
                     <a
                       href={book}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="sponsored noopener noreferrer"
                       className="inline-flex h-9 items-center rounded-full bg-[var(--site-accent)] px-4 text-[var(--site-on-accent)]"
                     >
                       <span aria-hidden>{ctx.tr("travel.bookRoom")}</span>

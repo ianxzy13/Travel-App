@@ -277,7 +277,7 @@ export type VenueKind = "ceremony" | "reception" | "both";
 export type VenueStatus =
   "researching" | "contacted" | "visited" | "shortlisted" | "booked" | "rejected";
 export type VenueAvailability = "unknown" | "available" | "tentative" | "unavailable";
-export type HotelStatus = "considering" | "contacted" | "block_confirmed" | "rejected";
+export type HotelStatus = "considering" | "contacted" | "block_confirmed" | "rejected" | "rate_requested" | "rate_received" | "rate_signed";
 export type FlightCategory = "guest" | "couple" | "honeymoon";
 export type FlightDirection = "arrival" | "departure" | "other";
 export type FlightStatus = "considering" | "booked";
@@ -326,6 +326,27 @@ export type HotelRow = WeddingScoped & {
   show_on_website: boolean;
   for_couple: boolean;
   notes: string | null;
+  group_rate_email: string | null;
+  group_rate_notes: string | null;
+  hold_date: string | null;
+  release_date: string | null;
+};
+
+export type OutboundClickRow = WeddingScoped & {
+  provider: string;
+  guest_id: string | null;
+  url: string;
+  created_at: string;
+};
+
+export type FareCacheRow = {
+  id: string;
+  origin: string;
+  destination: string;
+  depart_month: string;
+  price_eur: number;
+  airline: string | null;
+  fetched_at: string;
 };
 
 export type HotelGuestRow = WeddingScoped & {
@@ -623,6 +644,14 @@ export type Database = {
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
+      >;
+      outbound_clicks: Table<
+        OutboundClickRow,
+        "wedding_id" | "provider" | "url"
+      >;
+      fare_cache: Table<
+        FareCacheRow,
+        "origin" | "destination" | "depart_month" | "price_eur"
       >;
     };
     Views: { [_ in never]: never };

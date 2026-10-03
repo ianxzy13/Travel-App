@@ -37,7 +37,7 @@ export const checklistItemSchema = z.object({
 
 export const hotelSchema = z.object({
   name: text(120).min(1, v("name")),
-  status: z.enum(["considering", "contacted", "block_confirmed", "rejected"]),
+  status: z.enum(["considering", "contacted", "block_confirmed", "rejected", "rate_requested", "rate_received", "rate_signed"]),
   address: text(300),
   distance: text(100),
   website: url,
@@ -50,6 +50,10 @@ export const hotelSchema = z.object({
   showOnWebsite: z.boolean(),
   forCouple: z.boolean(),
   notes: text(4000),
+  groupRateEmail: z.union([z.literal(""), z.email(v("email")).max(300)]),
+  groupRateNotes: text(1000),
+  holdDate: date,
+  releaseDate: date,
 });
 export type HotelValues = z.infer<typeof hotelSchema>;
 
