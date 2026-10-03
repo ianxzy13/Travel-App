@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 /* All colours, fonts, corners and shadows live in theme.css. */
 @import "./theme.css";
 

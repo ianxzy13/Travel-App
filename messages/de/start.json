@@ -65,7 +65,9 @@
       "waiting": "offen",
       "budget": "Budget",
       "budgetOf": "{spent} von {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Anmelden",

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { fmtDate } from "@/lib/i18n/format";
 import { answerKey, initialFormState, rsvpGuestName, type RsvpFormState } from "@/lib/rsvp/form";
 import type { RsvpData } from "@/lib/rsvp/types";
+import { DataRights } from "./data-rights";
 import { RsvpForm, useGuestNameLabels } from "./rsvp-form";
 import { RsvpTravelForm } from "./rsvp-travel-form";
 
@@ -139,6 +140,7 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
               )}
             </div>
           )}
+          <DataRights code={data.household.code} />
         </>
       ) : null}
     </div>

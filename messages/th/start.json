@@ -65,7 +65,9 @@
       "waiting": "รอตอบ",
       "budget": "งบประมาณ",
       "budgetOf": "{spent} จาก {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "เข้าสู่ระบบ",

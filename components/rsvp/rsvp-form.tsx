@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { Check, Loader2, MapPin, Shirt, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -275,7 +277,7 @@ export function RsvpForm({
             </div>
           ))}
           {peopleComing.map((g) => (
-            <div key={g.id} className="space-y-1.5">
+            <div key={g.id} className="space-y-2">
               <Label htmlFor={`d-${g.id}`}>{tf("dietary", { name: name(g.id) })}</Label>
               <Input
                 id={`d-${g.id}`}
@@ -284,6 +286,18 @@ export function RsvpForm({
                 placeholder={tf("dietaryPlaceholder")}
                 onChange={(e) => setPerson(g.id, { dietary: e.target.value })}
               />
+              {state.people[g.id].dietary && (
+                <div className="flex items-start gap-2">
+                  <Checkbox
+                    id={`dc-${g.id}`}
+                    checked={state.people[g.id].dietaryConsent}
+                    onCheckedChange={(v) => setPerson(g.id, { dietaryConsent: !!v })}
+                  />
+                  <label htmlFor={`dc-${g.id}`} className="text-muted-foreground text-xs leading-snug">
+                    {tf("dietaryConsent")}
+                  </label>
+                </div>
+              )}
             </div>
           ))}
         </section>
@@ -313,6 +327,13 @@ export function RsvpForm({
           />
         </div>
       </section>
+
+      <p className="text-muted-foreground text-center text-xs leading-relaxed">
+        {tf("consentNotice", { couple })}{" "}
+        <Link href="/privacy" target="_blank" className="underline underline-offset-2 hover:text-foreground">
+          {tf("privacyLink")}
+        </Link>
+      </p>
 
       <Button type="submit" size="lg" className="w-full" disabled={pending}>
         {pending && <Loader2 className="animate-spin" aria-hidden />}

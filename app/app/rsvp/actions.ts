@@ -233,7 +233,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     rsvp_code: string;
     preferred_language: string | null;
   }[] = [];
-  const guests: { household_id: string; email: string | null }[] = [];
+  const guests: { id: string; household_id: string; email: string | null }[] = [];
   for (let i = 0; i < householdIds.length; i += 100) {
     const batch = householdIds.slice(i, i + 100);
     const [h, g] = await Promise.all([
@@ -244,11 +244,12 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
         .in("id", batch),
       supabase
         .from("guests")
-        .select("household_id, email")
+        .select("id, household_id, email")
         .eq("wedding_id", wedding.id)
         .in("household_id", batch)
         .is("plus_one_of", null)
-        .not("email", "is", null),
+        .not("email", "is", null)
+        .eq("email_unsubscribed", false),
     ]);
     if (h.error || g.error) return fail("sendRsvpEmails", h.error ?? g.error);
     households.push(...h.data);
@@ -256,12 +257,16 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
   }
 
   const emailsByHousehold = new Map<string, string[]>();
+  const firstGuestByHousehold = new Map<string, string>();
   for (const g of guests) {
     const email = g.email?.trim().toLowerCase();
     if (!email) continue;
     const list = emailsByHousehold.get(g.household_id) ?? [];
     if (!list.includes(email)) list.push(email);
     emailsByHousehold.set(g.household_id, list);
+    if (!firstGuestByHousehold.has(g.household_id)) {
+      firstGuestByHousehold.set(g.household_id, g.id);
+    }
   }
 
   const noEmail = households.filter((h) => !emailsByHousehold.has(h.id)).map((h) => h.name);
@@ -283,6 +288,10 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
           { name: h.name, code: h.rsvp_code, language: h.preferred_language },
           siteUrl,
         );
+        const guestId = firstGuestByHousehold.get(h.id);
+        if (guestId) {
+          props.unsubscribeUrl = `${siteUrl}/r/unsubscribe?code=${h.rsvp_code}&guest=${guestId}`;
+        }
         const element = RsvpEmail(props);
         return {
           from: emailFrom(couple),

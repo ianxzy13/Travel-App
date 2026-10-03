@@ -65,7 +65,9 @@
       "waiting": "in attesa",
       "budget": "Budget",
       "budgetOf": "{spent} su {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Accedi",

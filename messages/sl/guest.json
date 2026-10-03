@@ -20,6 +20,8 @@
     "dateTbd": "Datum bo določen",
     "newTab": "(odpre se v novem zavihku)",
     "rsvpButton": "Potrdi udeležbo",
+    "privacy": "Zasebnost",
+    "terms": "Pogoji",
     "countdown": {
       "days": "{count, plural, one {Še # dan} two {Še # dneva} few {Še # dnevi} other {Še # dni}}",
       "daysWord": "{count, plural, one {dan do poroke} two {dneva do poroke} few {dnevi do poroke} other {dni do poroke}}",
@@ -97,6 +99,8 @@
     "dateTbd": "Datum bo določen",
     "weddingOf": "Poroka",
     "rsvpsBy": "Potrditve prek <link>Vow</link>",
+    "footerPrivacy": "Zasebnost",
+    "footerTerms": "Pogoji",
     "enterCode": "Vnesite kodo z vabila (e-pošta ali kartica).",
     "findIntro": "Poiščite svoje vabilo tako, da vpišete ime, kot je napisano na vabilu.",
     "orCode": "Ali uporabite kodo z vabila",
@@ -157,7 +161,26 @@
       "songPlaceholder": "Izvajalec – pesem",
       "message": "Sporočilo za: {couple}",
       "guestOf": "Spremljevalec: {name}",
-      "guest": "Gost"
+      "guest": "Gost",
+      "dietaryConsent": "Strinjam se, da se moje prehranske zahteve in podatki o alergijah delijo s parom in gostinsko službo.",
+      "consentNotice": "Vaši odgovori se delijo s parom {couple} za načrtovanje poroke.",
+      "privacyLink": "Politika zasebnosti"
+    },
+    "privacy": {
+      "title": "Vaši podatki",
+      "description": "Svoje osebne podatke lahko kadar koli prenesete ali izbrišete.",
+      "privacyLink": "Preberite našo politiko zasebnosti",
+      "download": "Prenesi moje podatke",
+      "downloaded": "Vaši podatki so bili preneseni.",
+      "delete": "Izbriši moje podatke",
+      "deleteTitle": "Izbrisati vaše podatke?",
+      "deleteDescription": "To bo trajno odstranilo vaše osebne podatke (ime, kontakt, prehranske opombe, potovalne načrte). Anonimni zapis bo ostal, da bo štetje gostov natančno. Tega ni mogoče razveljaviti.",
+      "cancel": "Prekliči",
+      "confirmDelete": "Da, izbriši moje podatke",
+      "deleted": "Vaši podatki so bili izbrisani.",
+      "deletedTitle": "Podatki izbrisani",
+      "deletedText": "Vaši osebni podatki so bili odstranjeni. Par je bil obveščen.",
+      "error": "Nekaj je šlo narobe. Poskusite znova."
     },
     "errors": {
       "rsvp_not_found": "Tega vabila nismo našli. Preverite povezavo ali kodo.",

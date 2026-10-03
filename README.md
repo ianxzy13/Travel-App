@@ -411,3 +411,18 @@ shade, and button labels are dark taupe, so everything stays readable (WCAG AA).
 and only owners/editors can change things. Public pages (website, RSVP, shared boards) go through
 database functions that return only what's meant to be public. Uploaded files are private (links
 expire after an hour). The database guarantees every wedding keeps at least one owner.
+
+### Privacy checklist for the owner
+
+Before going live, review these items:
+
+- [ ] **Edit the privacy policy** (`content/privacy-en.md`, `content/privacy-sl.md`): replace placeholder text with your real details (names, DPA, contact email). The template is not legal advice.
+- [ ] **Edit the terms of use** (`content/terms-en.md`, `content/terms-sl.md`): same as above.
+- [ ] **Set `CRON_SECRET`** in Vercel environment variables. The daily data-retention cron (`/api/cron/data-retention`) requires this to run.
+- [ ] **Check the retention period**: `lib/privacy/retention.ts` defaults to 12 months after the wedding date. Adjust `RETENTION_MONTHS` if needed.
+- [ ] **Verify Resend sender name**: emails are sent as the couple's names via Resend. Confirm your Resend domain is verified.
+- [ ] **Review data processors**: the privacy policy lists Supabase, Vercel, Resend and Unsplash. If you add services (analytics, payments), update the policy.
+- [ ] **Cookie banner**: the app uses only essential cookies (session). If you add analytics or tracking, you will need a cookie consent banner.
+- [ ] **RSVP consent**: dietary info requires an unticked checkbox. The consent timestamp is stored per guest. Dietary text is stripped if consent is withdrawn.
+- [ ] **Guest data rights**: guests can download (JSON) or delete their data from the RSVP page. Deletion anonymises the row and notifies the couple.
+- [ ] **Email unsubscribe**: every guest email includes an unsubscribe link. Unsubscribed guests are skipped in future sends.

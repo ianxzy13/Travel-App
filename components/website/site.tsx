@@ -239,6 +239,11 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
             ),
           })}
         </p>
+        <p className={cn(muted, "mt-2 text-xs")}>
+          <a href="/privacy" className="underline underline-offset-2">{tr("privacy")}</a>
+          {" · "}
+          <a href="/terms" className="underline underline-offset-2">{tr("terms")}</a>
+        </p>
       </footer>
     </div>
   );

@@ -6,6 +6,7 @@ import {
   Heading,
   Hr,
   Html,
+  Link,
   Preview,
   Section,
   Text,
@@ -41,6 +42,7 @@ export type RsvpEmailProps = {
   /** optional personal note from the couple */
   note: string;
   accent: "rose" | "sage";
+  unsubscribeUrl?: string;
 };
 
 const ACCENTS = { rose: "#9b5a63", sage: "#4f6b58" };
@@ -137,6 +139,13 @@ export function RsvpEmail(p: RsvpEmailProps) {
           </Text>
         </Container>
         <Text style={{ ...smallText, textAlign: "center" }}>{t.personal}</Text>
+        {p.unsubscribeUrl && (
+          <Text style={{ ...smallText, textAlign: "center", marginTop: 4 }}>
+            <Link href={p.unsubscribeUrl} style={{ color: "#8a7b74" }}>
+              Unsubscribe from future emails
+            </Link>
+          </Text>
+        )}
       </Body>
     </Html>
   );

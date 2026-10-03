@@ -6,6 +6,7 @@ import {
   Heading,
   Hr,
   Html,
+  Link,
   Preview,
   Section,
   Text,
@@ -31,6 +32,7 @@ export type TravelReminderProps = {
   location: string | null;
   link: string;
   accent: "rose" | "sage";
+  unsubscribeUrl?: string;
 };
 
 const ACCENTS = { rose: "#9b5a63", sage: "#4f6b58" };
@@ -106,6 +108,13 @@ export function TravelReminderEmail(p: TravelReminderProps) {
             <Text style={{ color: "#333", fontSize: "16px" }}>{t.love}</Text>
             <Text style={{ color: "#333", fontSize: "16px", fontWeight: 600 }}>{p.couple}</Text>
           </Section>
+          {p.unsubscribeUrl && (
+            <Text style={{ textAlign: "center" as const, marginTop: "12px", fontSize: "12px" }}>
+              <Link href={p.unsubscribeUrl} style={{ color: "#888" }}>
+                Unsubscribe from future emails
+              </Link>
+            </Text>
+          )}
         </Container>
       </Body>
     </Html>

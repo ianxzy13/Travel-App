@@ -65,7 +65,9 @@
       "waiting": "čeká",
       "budget": "Rozpočet",
       "budgetOf": "{spent} z {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Přihlásit se",

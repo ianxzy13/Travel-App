@@ -90,7 +90,9 @@
       "yourTable": "Il tuo tavolo e pronto!",
       "tableName": "Tavolo {number}",
       "tableNamed": "{label} (Tavolo {number})"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "rsvp": {
     "title": "Conferma la presenza",
@@ -157,7 +159,10 @@
       "songPlaceholder": "Artista – brano",
       "message": "Un messaggio per {couple}",
       "guestOf": "Accompagnatore di {name}",
-      "guest": "Ospite"
+      "guest": "Ospite",
+      "dietaryConsent": "I agree that my dietary and allergy information is shared with the couple and their caterer.",
+      "consentNotice": "Your answers are shared with {couple} to plan the wedding.",
+      "privacyLink": "Privacy policy"
     },
     "errors": {
       "rsvp_not_found": "Non abbiamo trovato questo invito. Controlla il link o il codice.",
@@ -211,6 +216,24 @@
       "room": "Room {number}",
       "checkIn": "Check-in: {date}",
       "checkOut": "Check-out: {date}"
+    },
+    "footerPrivacy": "Privacy",
+    "footerTerms": "Terms",
+    "privacy": {
+      "title": "Your data",
+      "description": "You can download or delete your personal data at any time.",
+      "privacyLink": "Read our privacy policy",
+      "download": "Download my data",
+      "downloaded": "Your data has been downloaded.",
+      "delete": "Delete my data",
+      "deleteTitle": "Delete your data?",
+      "deleteDescription": "This will permanently remove your personal details (name, contact, dietary notes, travel plans). An anonymous placeholder will remain so the couple’s guest count stays accurate. This cannot be undone.",
+      "cancel": "Cancel",
+      "confirmDelete": "Yes, delete my data",
+      "deleted": "Your data has been deleted.",
+      "deletedTitle": "Data deleted",
+      "deletedText": "Your personal details have been removed. The couple has been notified.",
+      "error": "Something went wrong. Please try again."
     }
   },
   "board": {

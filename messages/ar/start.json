@@ -65,7 +65,9 @@
       "waiting": "بانتظار الرد",
       "budget": "الميزانية",
       "budgetOf": "{spent} من {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "تسجيل الدخول",

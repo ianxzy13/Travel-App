@@ -65,7 +65,9 @@
       "waiting": "väntar",
       "budget": "Budget",
       "budgetOf": "{spent} av {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Logga in",

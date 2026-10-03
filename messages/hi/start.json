@@ -65,7 +65,9 @@
       "waiting": "इंतज़ार",
       "budget": "बजट",
       "budgetOf": "{total} में से {spent}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "साइन इन करें",

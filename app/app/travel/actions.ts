@@ -144,7 +144,7 @@ export async function sendTravelReminder(
     rsvp_code: string;
     preferred_language: string | null;
   }[] = [];
-  const guests: { household_id: string; email: string | null }[] = [];
+  const guests: { id: string; household_id: string; email: string | null }[] = [];
   for (let i = 0; i < householdIds.length; i += 100) {
     const batch = householdIds.slice(i, i + 100);
     const [h, g] = await Promise.all([
@@ -155,11 +155,12 @@ export async function sendTravelReminder(
         .in("id", batch),
       sb
         .from("guests")
-        .select("household_id, email")
+        .select("id, household_id, email")
         .eq("wedding_id", wedding.id)
         .in("household_id", batch)
         .is("plus_one_of", null)
-        .not("email", "is", null),
+        .not("email", "is", null)
+        .eq("email_unsubscribed", false),
     ]);
     if (h.error || g.error) return fail("sendTravelReminder", h.error ?? g.error);
     households.push(...h.data);
@@ -167,12 +168,16 @@ export async function sendTravelReminder(
   }
 
   const emailsByHousehold = new Map<string, string[]>();
+  const firstGuestByHousehold = new Map<string, string>();
   for (const g of guests) {
     const email = g.email?.trim().toLowerCase();
     if (!email) continue;
     const list = emailsByHousehold.get(g.household_id) ?? [];
     if (!list.includes(email)) list.push(email);
     emailsByHousehold.set(g.household_id, list);
+    if (!firstGuestByHousehold.has(g.household_id)) {
+      firstGuestByHousehold.set(g.household_id, g.id);
+    }
   }
 
   const noEmail = households.filter((h) => !emailsByHousehold.has(h.id)).map((h) => h.name);
@@ -190,6 +195,7 @@ export async function sendTravelReminder(
         const t = await getTranslations({ locale, namespace: "travelEmail" });
         const link = `${siteUrl}/r/${h.rsvp_code}?lang=${locale}&travel=1`;
         const place = localized(wedding, locale, ["location"]).location;
+        const guestId = firstGuestByHousehold.get(h.id);
         const element = TravelReminderEmail({
           lang: locale,
           rtl: isRtl(locale),
@@ -208,6 +214,9 @@ export async function sendTravelReminder(
           location: place,
           link,
           accent: wedding.accent,
+          unsubscribeUrl: guestId
+            ? `${siteUrl}/r/unsubscribe?code=${h.rsvp_code}&guest=${guestId}`
+            : undefined,
         });
         return {
           from: emailFrom(couple),

@@ -51,7 +51,7 @@ export async function RsvpFrame({
         )}
         {children}
       </main>
-      <footer className="text-muted-foreground pb-10 text-center text-xs">
+      <footer className="text-muted-foreground space-y-2 pb-10 text-center text-xs">
         {t.rich("rsvpsBy", {
           link: (chunks) => (
             // a normal link (full page load): the app uses its own language, and an
@@ -62,6 +62,15 @@ export async function RsvpFrame({
             </a>
           ),
         })}
+        <p>
+          <a href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+            {t("footerPrivacy")}
+          </a>
+          {" · "}
+          <a href="/terms" className="underline underline-offset-2 hover:text-foreground">
+            {t("footerTerms")}
+          </a>
+        </p>
       </footer>
     </div>
   );

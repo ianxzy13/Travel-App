@@ -65,7 +65,9 @@
       "waiting": "đang chờ",
       "budget": "Ngân sách",
       "budgetOf": "{spent} / {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Đăng nhập",

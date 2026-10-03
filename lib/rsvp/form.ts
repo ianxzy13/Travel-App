@@ -7,8 +7,8 @@ export type Answer = { status: RsvpStatus | null; mealOptionId: string | null };
 export type RsvpFormState = {
   /** key: `${guestId}:${eventId}` */
   answers: Record<string, Answer>;
-  /** per person: plus-one names and dietary notes */
-  people: Record<string, { firstName: string; lastName: string; dietary: string }>;
+  /** per person: plus-one names, dietary notes, and dietary consent */
+  people: Record<string, { firstName: string; lastName: string; dietary: string; dietaryConsent: boolean }>;
   songRequest: string;
   message: string;
 };
@@ -30,7 +30,12 @@ export function initialFormState(data: RsvpData): RsvpFormState {
   }
   const people: RsvpFormState["people"] = {};
   for (const g of data.guests) {
-    people[g.id] = { firstName: g.first_name, lastName: g.last_name, dietary: g.dietary ?? "" };
+    people[g.id] = {
+      firstName: g.first_name,
+      lastName: g.last_name,
+      dietary: g.dietary ?? "",
+      dietaryConsent: g.dietary_consent ?? false,
+    };
   }
   return {
     answers,
@@ -74,9 +79,10 @@ export function toPayload(data: RsvpData, state: RsvpFormState) {
     }),
     guests: data.guests.map((g) => {
       const p = state.people[g.id];
+      const dietary = p.dietaryConsent ? p.dietary : "";
       return plusOnes.has(g.id)
-        ? { id: g.id, dietary: p.dietary, first_name: p.firstName, last_name: p.lastName }
-        : { id: g.id, dietary: p.dietary };
+        ? { id: g.id, dietary, dietary_consent: p.dietaryConsent, first_name: p.firstName, last_name: p.lastName }
+        : { id: g.id, dietary, dietary_consent: p.dietaryConsent };
     }),
     song_request: state.songRequest,
     message: state.message,

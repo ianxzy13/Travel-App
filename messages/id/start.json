@@ -65,7 +65,9 @@
       "waiting": "menunggu",
       "budget": "Anggaran",
       "budgetOf": "{spent} dari {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Masuk",

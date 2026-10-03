@@ -35,6 +35,7 @@ const data: RsvpData = {
       plus_one_of: null,
       age_group: "adult",
       dietary: null,
+      dietary_consent: false,
       wants_hotel_room: null,
       needs_crib: false,
       room_pref_share: null,
@@ -47,6 +48,7 @@ const data: RsvpData = {
       plus_one_of: "ann",
       age_group: "adult",
       dietary: null,
+      dietary_consent: false,
       wants_hotel_room: null,
       needs_crib: false,
       room_pref_share: null,
@@ -114,7 +116,7 @@ describe("RSVP form", () => {
     const s = initialFormState(data);
     s.answers[answerKey("ann", "rec")] = { status: "attending", mealOptionId: "fish" };
     s.answers[answerKey("p1", "rec")] = { status: "declined", mealOptionId: "fish" };
-    s.people.p1 = { firstName: "Tom", lastName: "Jones", dietary: "vegan" };
+    s.people.p1 = { firstName: "Tom", lastName: "Jones", dietary: "vegan", dietaryConsent: true };
     const p = toPayload(data, s);
     expect(p.responses).toEqual([
       { guest_id: "ann", event_id: "cer", status: "attending", meal_option_id: null },
@@ -122,8 +124,8 @@ describe("RSVP form", () => {
       { guest_id: "p1", event_id: "rec", status: "declined", meal_option_id: null },
     ]);
     expect(p.guests).toEqual([
-      { id: "ann", dietary: "" },
-      { id: "p1", dietary: "vegan", first_name: "Tom", last_name: "Jones" },
+      { id: "ann", dietary: "", dietary_consent: false },
+      { id: "p1", dietary: "vegan", dietary_consent: true, first_name: "Tom", last_name: "Jones" },
     ]);
   });
 

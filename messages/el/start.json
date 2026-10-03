@@ -65,7 +65,9 @@
       "waiting": "αναμονή",
       "budget": "Προϋπολογισμός",
       "budgetOf": "{spent} από {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Σύνδεση",

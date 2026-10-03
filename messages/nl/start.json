@@ -65,7 +65,9 @@
       "waiting": "wachten",
       "budget": "Budget",
       "budgetOf": "{spent} van {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Inloggen",

@@ -65,7 +65,9 @@
       "waiting": "대기 중",
       "budget": "예산",
       "budgetOf": "{spent} / {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "로그인",

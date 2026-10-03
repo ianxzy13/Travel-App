@@ -65,7 +65,9 @@
       "waiting": "čeka",
       "budget": "Proračun",
       "budgetOf": "{spent} od {total}"
-    }
+    },
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "title": "Prijava",

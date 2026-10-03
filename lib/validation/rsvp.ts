@@ -18,6 +18,7 @@ export const rsvpPayloadSchema = z.object({
       z.object({
         id: z.uuid(),
         dietary: z.string().max(500, v("tooLong", 500)),
+        dietary_consent: z.boolean().optional(),
         first_name: z.string().max(80).optional(),
         last_name: z.string().max(80).optional(),
       }),

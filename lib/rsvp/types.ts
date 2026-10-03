@@ -32,6 +32,7 @@ export type RsvpData = {
     plus_one_of: string | null;
     age_group: AgeGroup;
     dietary: string | null;
+    dietary_consent: boolean;
     wants_hotel_room: "yes" | "no" | "elsewhere" | null;
     needs_crib: boolean;
     room_pref_share: string | null;

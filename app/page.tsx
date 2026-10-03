@@ -120,8 +120,17 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      <footer className="caps text-muted-foreground border-t py-10 text-center">
-        {t("footer", { year: new Date().getFullYear() })}
+      <footer className="caps text-muted-foreground space-y-2 border-t py-10 text-center">
+        <p>{t("footer", { year: new Date().getFullYear() })}</p>
+        <p className="text-xs normal-case">
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+            {t("privacy")}
+          </Link>
+          {" · "}
+          <Link href="/terms" className="underline underline-offset-2 hover:text-foreground">
+            {t("terms")}
+          </Link>
+        </p>
       </footer>
     </div>
   );

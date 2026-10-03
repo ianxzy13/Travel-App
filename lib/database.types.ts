@@ -44,6 +44,7 @@ export type WeddingRow = Timestamps & {
   time_zone: string | null;
   translations: Translations;
   find_seat_enabled: boolean;
+  anonymised_at: string | null;
 };
 
 /** Per-language versions of texts: { "sl": { "name": "Poroka" } } */
@@ -128,6 +129,9 @@ export type GuestRow = WeddingScoped & {
   needs_crib: boolean;
   room_pref_share: string | null;
   room_pref_avoid: string | null;
+  dietary_consent: boolean;
+  dietary_consent_at: string | null;
+  email_unsubscribed: boolean;
 };
 
 export type GuestEventInviteRow = WeddingScoped & { guest_id: string; event_id: string };
@@ -689,6 +693,10 @@ export type Database = {
       submit_room_preferences: {
         Args: { p_code: string; p_prefs: Json };
         Returns: Json;
+      };
+      anonymise_wedding_guests: {
+        Args: { p_wedding_id: string };
+        Returns: undefined;
       };
     };
     Enums: {
