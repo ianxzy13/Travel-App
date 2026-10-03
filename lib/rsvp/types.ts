@@ -16,6 +16,8 @@ export type RsvpData = {
     rsvp_ask_travel: boolean;
     deadline_passed: boolean;
     destination_airport: string | null;
+    time_zone: string | null;
+    find_seat_enabled: boolean;
   };
   household: {
     id: string;
@@ -24,6 +26,7 @@ export type RsvpData = {
     song_request: string | null;
     message: string | null;
     responded_at: string | null;
+    country_code: string | null;
   };
   guests: {
     id: string;
@@ -79,6 +82,12 @@ export type RsvpData = {
     hotel_id: string | null;
     needs_transfer: boolean;
     transport_notes: string | null;
+  } | null;
+  checklist?: { item_key: string; done: boolean }[];
+  seat?: {
+    guest_name: string;
+    table_label: string | null;
+    table_number: number | null;
   } | null;
 };
 

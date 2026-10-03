@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CalendarDays, Clock, ExternalLink, Gift, MapPin, Plane, Shirt } from "lucide-react";
+import { Calendar, CalendarDays, Clock, ExternalLink, Gift, MapPin, Plane, Shirt } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { CodeForm } from "@/components/rsvp/code-form";
 import { FindInvitation } from "@/components/rsvp/find-invitation";
@@ -7,6 +7,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import type { SiteSectionKind, SiteTemplate } from "@/lib/database.types";
 import { fmtDate, fmtMoney, fmtTime } from "@/lib/i18n/format";
 import { flightSearchLinks, mapsSearch } from "@/lib/places/travel";
+import { googleCalendarUrl } from "@/lib/trip/calendar";
 import { cn } from "@/lib/utils";
 import {
   isSectionEmpty,
@@ -857,6 +858,47 @@ function Events({ ctx, intro }: { ctx: Ctx; intro: string }) {
               </dl>
               {e.description && (
                 <p className={cn(muted, "mt-4 text-sm whitespace-pre-wrap")}>{e.description}</p>
+              )}
+              {e.event_date && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <a
+                    href={`/api/calendar?${new URLSearchParams({
+                      title: e.name,
+                      date: e.event_date,
+                      ...(e.start_time && { start: e.start_time }),
+                      ...(e.end_time && { end: e.end_time }),
+                      ...(ctx.data.wedding.time_zone && { tz: ctx.data.wedding.time_zone }),
+                      ...(where && { location: where }),
+                    }).toString()}`}
+                    download
+                    className={cn(
+                      accentText,
+                      "inline-flex items-center gap-1 text-sm underline underline-offset-2",
+                    )}
+                  >
+                    <Calendar className="size-3.5" aria-hidden />
+                    {ctx.tr("event.addToCalendar")}
+                  </a>
+                  <a
+                    href={googleCalendarUrl({
+                      title: e.name,
+                      date: e.event_date,
+                      startTime: e.start_time,
+                      endTime: e.end_time,
+                      timeZone: ctx.data.wedding.time_zone,
+                      location: where || null,
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      accentText,
+                      "inline-flex items-center gap-1 text-sm underline underline-offset-2",
+                    )}
+                  >
+                    <ExternalLink className="size-3.5" aria-hidden />
+                    Google Calendar
+                  </a>
+                </div>
               )}
             </li>
           );

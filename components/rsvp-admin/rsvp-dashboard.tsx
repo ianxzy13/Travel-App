@@ -455,9 +455,11 @@ function HouseholdRow({
   const locale = useLocale();
   const copy = useCopy();
   const hasEmail = h.guests.some((g) => g.email && !g.isPlusOne);
-  const whatsapp = `https://wa.me/?text=${encodeURIComponent(
-    t("whatsappText", { name: h.name, couple, link }),
-  )}`;
+  const guestPhone = h.guests.find((g) => g.phone)?.phone;
+  const waText = encodeURIComponent(t("whatsappText", { name: h.name, couple, link }));
+  const whatsapp = guestPhone
+    ? `https://wa.me/${guestPhone.replace(/\D/g, "")}?text=${waText}`
+    : `https://wa.me/?text=${waText}`;
 
   return (
     <li

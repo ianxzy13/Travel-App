@@ -38,7 +38,8 @@
       "time": "Heure",
       "place": "Lieu",
       "dressCode": "Tenue",
-      "openMap": "Ouvrir dans Google Maps"
+      "openMap": "Ouvrir dans Google Maps",
+      "addToCalendar": "Add to calendar"
     },
     "travel": {
       "airport": "Aéroport le plus proche : <b>{code}</b>",
@@ -234,6 +235,53 @@
       "deletedTitle": "Data deleted",
       "deletedText": "Your personal details have been removed. The couple has been notified.",
       "error": "Something went wrong. Please try again."
+    },
+    "viewTrip": "My trip",
+    "backToRsvp": "Back to RSVP",
+    "trip": {
+      "title": "My trip",
+      "subtitle": "Everything you need for {couple}'s wedding",
+      "events": "Schedule",
+      "downloadIcs": "Add to calendar",
+      "flights": "Your flights",
+      "arrival": "Arrival",
+      "departure": "Departure",
+      "flight": "Flight",
+      "transferRequested": "Airport transfer requested",
+      "hotel": "Your accommodation",
+      "room": "Room {number}",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "yourSeat": "Your table",
+      "table": "Table {number}",
+      "share": "Share",
+      "shareDesc": "Invite others to the wedding via WhatsApp.",
+      "shareWhatsApp": "Share on WhatsApp",
+      "whatsappText": "You're invited to {couple}'s wedding! RSVP here: {link}",
+      "checklistTitle": "Travel checklist",
+      "checklistProgress": "{done} of {total} done",
+      "checklistDisclaimer": "Rules change — always check official sources before you travel.",
+      "learnMore": "Learn more",
+      "checklist": {
+        "passport": "Valid passport",
+        "passportDesc": "Must be valid 3+ months after leaving the Schengen area and issued within the last 10 years.",
+        "passportEu": "ID card or passport",
+        "passportEuDesc": "EU/EEA citizens can enter with a valid national ID card or passport.",
+        "ees": "EU Entry/Exit System (EES)",
+        "eesDesc": "Non-EU visitors provide fingerprints and a photo at the border on entry.",
+        "etias": "ETIAS travel authorisation",
+        "etiasDesc": "Visa-free non-EU visitors (e.g. US, UK, Canada) will need an ETIAS. Check the launch date.",
+        "currency": "Currency: Euro (€)",
+        "currencyDesc": "Slovenia uses the euro. Cards are widely accepted.",
+        "plug": "Power plug: Type F (230V)",
+        "plugDesc": "Bring an adapter if your country uses a different plug type.",
+        "timezone": "Time zone: CET / CEST",
+        "timezoneDesc": "Central European Time (UTC+1), summer time UTC+2.",
+        "emergency": "Emergency: 112",
+        "emergencyDesc": "The EU-wide emergency number works throughout Slovenia.",
+        "insurance": "Travel insurance",
+        "insuranceDesc": "EU citizens: bring your European Health Insurance Card (EHIC). Others: get travel insurance."
+      }
     }
   },
   "board": {

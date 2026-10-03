@@ -25,7 +25,7 @@ export type DashboardHousehold = {
   respondedAt: string | null;
   songRequest: string | null;
   message: string | null;
-  guests: { id: string; name: string; email: string | null; isPlusOne: boolean }[];
+  guests: { id: string; name: string; email: string | null; phone: string | null; isPlusOne: boolean }[];
   lastEmail: {
     kind: EmailKind;
     status: EmailStatus;
@@ -69,7 +69,7 @@ export async function loadRsvpDashboard(
     fetchAll((f, t) =>
       sb
         .from("guests")
-        .select("id, household_id, first_name, last_name, email, plus_one_of")
+        .select("id, household_id, first_name, last_name, email, phone, plus_one_of")
         .eq("wedding_id", wid)
         .order("id")
         .range(f, t),
@@ -143,6 +143,7 @@ export async function loadRsvpDashboard(
           id: g.id,
           name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null, labels),
           email: g.email,
+          phone: g.phone,
           isPlusOne: !!g.plus_one_of,
         })),
         lastEmail: email

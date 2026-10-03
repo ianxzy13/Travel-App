@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { EB_Garamond, Jost } from "next/font/google";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { PwaRegister } from "@/components/pwa-register";
 import { Providers } from "@/components/providers";
 import { isRtl } from "@/i18n/locales";
 import { GUEST_NAMESPACES } from "@/i18n/messages";
@@ -56,6 +58,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider messages={clientMessages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
+        <Analytics />
+        <PwaRegister />
       </body>
     </html>
   );

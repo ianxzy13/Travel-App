@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 /** A language's flag and its own name ("🇸🇮 Slovenščina"). */
 export function LanguageName({ code, className }: { code: string; className?: string }) {
   return (
-    <span className={cn("inline-flex min-w-0 items-center gap-2", className)}>
+    <span className={cn("inline-flex min-w-0 items-center gap-2", className)} translate="no">
       <Flag locale={code} />
       <span lang={code} className="truncate">
         {localeInfo(code).native}
@@ -98,7 +98,7 @@ export function LanguageSelect({
         )}
         <ChevronDown className="size-4 shrink-0 opacity-60" aria-hidden />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="max-h-80 w-72">
+      <DropdownMenuContent align="start" className="max-h-80 w-72" translate="no">
         <DropdownMenuRadioGroup value={value} onValueChange={onChange}>
           {empty && (
             <DropdownMenuRadioItem value="" className="gap-2">

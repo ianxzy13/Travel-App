@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BedDouble, CalendarClock, Check, Heart, Minus, X } from "lucide-react";
+import { BedDouble, CalendarClock, Check, Heart, Map, Minus, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { submitRsvp } from "@/app/r/actions";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,12 @@ import type { RsvpData } from "@/lib/rsvp/types";
 import { DataRights } from "./data-rights";
 import { RsvpForm, useGuestNameLabels } from "./rsvp-form";
 import { RsvpTravelForm } from "./rsvp-travel-form";
+import { TripPage } from "./trip-page";
 
-type View = "summary" | "form" | "thanks" | "travel";
+type View = "summary" | "form" | "thanks" | "travel" | "trip";
 
-/** The guest's journey on /r/[code]: see answers → edit → thank you. */
-export function RsvpExperience({ data }: { data: RsvpData }) {
+/** The guest's journey on /r/[code]: see answers → edit → thank you → trip. */
+export function RsvpExperience({ data, siteUrl }: { data: RsvpData; siteUrl: string }) {
   const t = useTranslations("rsvp");
   const locale = useLocale();
   const [answered, setAnswered] = useState(!!data.household.responded_at);
@@ -109,11 +110,39 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
           }}
           submitLabel={answered ? t("save") : t("send")}
         />
+      ) : view === "trip" ? (
+        <>
+          <TripPage data={data} siteUrl={siteUrl} />
+          <Button
+            size="lg"
+            variant="outline"
+            className="w-full"
+            onClick={() => {
+              setView("summary");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            {t("backToRsvp")}
+          </Button>
+        </>
       ) : view !== "travel" ? (
         <>
           <AnswerSummary data={data} state={state} />
           {(data.room_assignments ?? []).length > 0 && (
             <RoomAssignmentCard data={data} />
+          )}
+          {answered && (
+            <Button
+              size="lg"
+              className="w-full"
+              onClick={() => {
+                setView("trip");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <Map className="size-4" aria-hidden />
+              {t("viewTrip")}
+            </Button>
           )}
           {!closed && (
             <div className="space-y-3">
@@ -151,7 +180,8 @@ export function RsvpExperience({ data }: { data: RsvpData }) {
 function AnswerSummary({ data, state }: { data: RsvpData; state: RsvpFormState }) {
   const t = useTranslations("rsvp");
   const labels = useGuestNameLabels();
-  const meals = new Map(data.meal_options.map((m) => [m.id, m.name]));
+  const meals: Record<string, string> = {};
+  for (const m of data.meal_options) meals[m.id] = m.name;
   return (
     <div className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
       <h2 className="text-3xl">{t("yourAnswers")}</h2>
@@ -163,7 +193,7 @@ function AnswerSummary({ data, state }: { data: RsvpData; state: RsvpFormState }
               .filter((i) => i.event_id === event.id)
               .map((i) => {
                 const a = state.answers[answerKey(i.guest_id, event.id)];
-                const meal = a?.mealOptionId ? meals.get(a.mealOptionId) : null;
+                const meal = a?.mealOptionId ? meals[a.mealOptionId] ?? null : null;
                 return (
                   <li key={i.guest_id} className="flex items-center gap-2 text-sm">
                     {a?.status === "attending" ? (
@@ -214,9 +244,8 @@ function AnswerSummary({ data, state }: { data: RsvpData; state: RsvpFormState }
 function RoomAssignmentCard({ data }: { data: RsvpData }) {
   const t = useTranslations("rsvp.yourRoom");
   const assignments = data.room_assignments ?? [];
-  const guestName = new Map(
-    data.guests.map((g) => [g.id, `${g.first_name} ${g.last_name}`.trim()]),
-  );
+  const guestName: Record<string, string> = {};
+  for (const g of data.guests) guestName[g.id] = `${g.first_name} ${g.last_name}`.trim();
 
   return (
     <div className="bg-card space-y-4 rounded-2xl border p-5 shadow-sm sm:p-7">
@@ -227,7 +256,7 @@ function RoomAssignmentCard({ data }: { data: RsvpData }) {
       <ul className="space-y-3">
         {assignments.map((a) => (
           <li key={a.guest_id} className="rounded-xl border p-4">
-            <p className="font-medium">{guestName.get(a.guest_id) ?? ""}</p>
+            <p className="font-medium">{guestName[a.guest_id] ?? ""}</p>
             <p className="text-muted-foreground mt-1 text-sm">
               {a.hotel_name} · {t("room", { number: a.room_number })}
             </p>

@@ -101,6 +101,7 @@ export type HouseholdRow = WeddingScoped & {
   region: string | null;
   postal_code: string | null;
   country: string | null;
+  country_code: string | null;
   notes: string | null;
   rsvp_code: string;
   rsvp_song_request: string | null;
@@ -510,6 +511,13 @@ export type TaskRow = WeddingScoped & {
 
 // ---------- Phase 15: gifts ----------
 
+export type GuestChecklistItemRow = WeddingScoped & {
+  household_id: string;
+  item_key: string;
+  done: boolean;
+  done_at: string | null;
+};
+
 export type GiftCategory = "cash" | "registry" | "handmade" | "experience" | "other";
 
 export type GiftRow = WeddingScoped & {
@@ -631,6 +639,7 @@ export type Database = {
       flights: Table<FlightRow, "wedding_id">;
       flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
       guest_travel: Table<GuestTravelRow, "wedding_id" | "household_id">;
+      guest_checklist_items: Table<GuestChecklistItemRow, "wedding_id" | "household_id" | "item_key">;
       boards: Table<BoardRow, "wedding_id" | "name">;
       pins: Table<PinRow, "wedding_id" | "board_id">;
       pin_comments: Table<PinCommentRow, "wedding_id" | "pin_id" | "user_id" | "body">;
@@ -726,6 +735,10 @@ export type Database = {
       anonymise_wedding_guests: {
         Args: { p_wedding_id: string };
         Returns: undefined;
+      };
+      toggle_checklist_item: {
+        Args: { p_code: string; p_item_key: string; p_done: boolean };
+        Returns: Json;
       };
     };
     Enums: {
