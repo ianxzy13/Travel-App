@@ -533,6 +533,31 @@ export type GiftRow = WeddingScoped & {
   sort_order: number;
 };
 
+// ---------- Prompt D: paperwork ----------
+
+export type PaperworkStatus =
+  | "not_started"
+  | "requested"
+  | "received"
+  | "apostilled"
+  | "translated"
+  | "submitted";
+export type PaperworkPerson = "partner_a" | "partner_b" | "shared";
+
+export type PaperworkItemRow = WeddingScoped & {
+  person: PaperworkPerson;
+  title: string;
+  template_key: string | null;
+  status: PaperworkStatus;
+  responsible_id: string | null;
+  due_date: string | null;
+  notes: string | null;
+  file_path: string | null;
+  issue_date: string | null;
+  max_age_months: number | null;
+  sort_order: number;
+};
+
 export type ScheduleItemRow = WeddingScoped & {
   day: string | null;
   start_time: string;
@@ -650,6 +675,10 @@ export type Database = {
       tasks: Table<TaskRow, "wedding_id" | "title">;
       gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
       schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
+      paperwork_items: Table<
+        PaperworkItemRow,
+        "wedding_id" | "person" | "title"
+      >;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"

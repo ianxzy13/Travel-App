@@ -1,6 +1,7 @@
 import {
   Armchair,
   BedDouble,
+  ClipboardList,
   Clock,
   Gift,
   Globe,
@@ -27,6 +28,7 @@ export type NavKey =
   | "budget"
   | "gifts"
   | "vendors"
+  | "paperwork"
   | "guests"
   | "rsvp"
   | "seating"
@@ -51,6 +53,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
       { href: "/app/budget", key: "budget", icon: Wallet },
       { href: "/app/gifts", key: "gifts", icon: Gift },
       { href: "/app/vendors", key: "vendors", icon: Store },
+      { href: "/app/paperwork", key: "paperwork", icon: ClipboardList },
     ],
   },
   {

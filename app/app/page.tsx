@@ -6,6 +6,7 @@ import {
   CalendarPlus,
   CheckCircle2,
   Circle,
+  ClipboardList,
   Gift,
   Lightbulb,
   ListChecks,
@@ -46,7 +47,7 @@ export default async function DashboardPage({
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -80,6 +81,7 @@ export default async function DashboardPage({
       .then(({ data }) => ({ published: !!data?.published })),
     tasksSummary(supabase, wedding.id),
     giftSummary(supabase, wedding.id),
+    paperworkSummary(supabase, wedding.id),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -431,6 +433,42 @@ export default async function DashboardPage({
               </div>
             )}
           </SummaryCard>
+          <SummaryCard
+            icon={ClipboardList}
+            title={t("paperwork.title")}
+            empty={t("paperwork.empty")}
+            href="/app/paperwork"
+            cta={t("paperwork.cta")}
+          >
+            {paperworkStats.total > 0 && (
+              <div className="space-y-3">
+                <p className="text-sm">
+                  <span className="font-serif text-3xl font-medium tabular-nums">
+                    {paperworkStats.done}
+                  </span>{" "}
+                  <span className="text-muted-foreground">
+                    {t("paperwork.progress", {
+                      done: paperworkStats.done,
+                      total: paperworkStats.total,
+                    })}
+                  </span>
+                </p>
+                <div className="bg-muted h-2 rounded-full">
+                  <div
+                    className="bg-primary h-2 rounded-full"
+                    style={{
+                      width: `${paperworkStats.total ? (paperworkStats.done / paperworkStats.total) * 100 : 0}%`,
+                    }}
+                  />
+                </div>
+                {paperworkStats.nextDue && (
+                  <p className="text-muted-foreground text-xs">
+                    {t("paperwork.nextDue", { title: paperworkStats.nextDue })}
+                  </p>
+                )}
+              </div>
+            )}
+          </SummaryCard>
         </div>
       </div>
     </div>
@@ -597,5 +635,26 @@ async function giftSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     total: gifts.length,
     totalValue: gifts.reduce((s, g) => s + (g.amount == null ? 0 : Number(g.amount)), 0),
     thankYouDone: gifts.filter((g) => g.thank_you_sent).length,
+  };
+}
+
+async function paperworkSummary(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  weddingId: string,
+) {
+  const { data } = await supabase
+    .from("paperwork_items")
+    .select("title, status, due_date")
+    .eq("wedding_id", weddingId)
+    .order("due_date", { nullsFirst: false })
+    .order("sort_order");
+  const items = data ?? [];
+  const nextItem = items.find(
+    (i) => i.status !== "submitted" && i.due_date,
+  );
+  return {
+    total: items.length,
+    done: items.filter((i) => i.status === "submitted").length,
+    nextDue: nextItem?.title ?? null,
   };
 }

@@ -6,6 +6,7 @@
       "budget": "Proračun",
       "gifts": "Darila",
       "vendors": "Ponudniki",
+      "paperwork": "Dokumenti",
       "guests": "Gostje",
       "rsvp": "Potrditve",
       "seating": "Razpored sedežev",
@@ -132,6 +133,13 @@
         "received": "daril v vrednosti {value}",
         "receivedCount": "prejetih daril",
         "thankYouProgress": "Zahvale: {done} od {total} poslanih"
+      },
+      "paperwork": {
+        "title": "Dokumenti",
+        "empty": "Dokumentov za poroko še ni.",
+        "cta": "Poglej dokumente",
+        "progress": "{done} od {total} opravljenih",
+        "nextDue": "Naslednji: {title}"
       }
     },
     "gifts": {
@@ -184,6 +192,55 @@
         "thankYouSent": "Zahvala poslana",
         "thankYouSentOn": "Datum pošiljanja",
         "notes": "Opombe"
+      }
+    },
+    "paperwork": {
+      "title": "Dokumenti za poroko",
+      "description": "Sledite dokumentom, ki jih potrebujete za poroko v tujini. Naložite predlogo in posodabljajte stanje.",
+      "empty": "Dokumentov še ni. Naložite predlogo za vašo ciljno državo ali dodajte ročno.",
+      "loadTemplate": "Naloži slovensko predlogo",
+      "addManual": "Dodaj ročno",
+      "add": "Dodaj dokument",
+      "addTitle": "Dodaj dokument",
+      "addDesc": "Dodajte dokument na seznam potrebnih dokumentov.",
+      "editTitle": "Uredi dokument",
+      "editDesc": "Posodobite stanje, rok ali naložite sken.",
+      "save": "Shrani",
+      "saved": "Dokument shranjen",
+      "added": "Dokument dodan",
+      "delete": "Izbriši",
+      "deleted": "Dokument izbrisan",
+      "deleteTitle": "Izbrisati ta dokument?",
+      "deleteDesc": "Tega ni mogoče razveljaviti.",
+      "shared": "Oba / skupno",
+      "noOne": "Ni dodeljeno",
+      "overdue": "Nekateri dokumenti zamujajo",
+      "ofDone": "od {total} opravljenih",
+      "templateLoaded": "Slovenska predloga naložena",
+      "createTasks": "Ustvari opravila",
+      "tasksCreated": "Opravila ustvarjena iz dokumentov",
+      "uploadScan": "Naloži sken",
+      "scanUploaded": "Sken naložen",
+      "scanRemoved": "Sken odstranjen",
+      "disclaimer": "Preverite pri krajevnem matičnem uradu — to ni pravni nasvet.",
+      "status": {
+        "not_started": "Ni začeto",
+        "requested": "Zaprošeno",
+        "received": "Prejeto",
+        "apostilled": "Apostilirano",
+        "translated": "Prevedeno",
+        "submitted": "Oddano"
+      },
+      "field": {
+        "title": "Ime dokumenta",
+        "person": "Oseba",
+        "status": "Stanje",
+        "responsible": "Odgovorna oseba",
+        "dueDate": "Rok",
+        "issueDate": "Datum izdaje",
+        "maxAge": "Največ mesecev",
+        "notes": "Opombe",
+        "scan": "Sken dokumenta"
       }
     },
     "settings": {

@@ -22,7 +22,8 @@
         "places": "地點",
         "style": "風格"
       },
-      "gifts": "Gifts"
+      "gifts": "Gifts",
+      "paperwork": "Paperwork"
     },
     "shell": {
       "mainNav": "主要導覽",
@@ -132,6 +133,13 @@
         "received": "gifts worth {value}",
         "receivedCount": "gifts received",
         "thankYouProgress": "Thank-you notes: {done} of {total} sent"
+      },
+      "paperwork": {
+        "title": "Paperwork",
+        "empty": "No marriage paperwork yet.",
+        "cta": "View paperwork",
+        "progress": "{done} of {total} done",
+        "nextDue": "Next: {title}"
       }
     },
     "settings": {
@@ -233,6 +241,55 @@
         "thankYouSent": "Thank-you note sent",
         "thankYouSentOn": "Date sent",
         "notes": "Notes"
+      }
+    },
+    "paperwork": {
+      "title": "Marriage Paperwork",
+      "description": "Track the documents you need for marrying abroad. Load a template, then update the status as you go.",
+      "empty": "No documents yet. Load a template for your destination country, or add items manually.",
+      "loadTemplate": "Load Slovenia template",
+      "addManual": "Add manually",
+      "add": "Add document",
+      "addTitle": "Add a document",
+      "addDesc": "Add a document to your paperwork checklist.",
+      "editTitle": "Edit document",
+      "editDesc": "Update the status, due date, or upload a scan.",
+      "save": "Save",
+      "saved": "Document saved",
+      "added": "Document added",
+      "delete": "Delete",
+      "deleted": "Document deleted",
+      "deleteTitle": "Delete this document?",
+      "deleteDesc": "This can't be undone.",
+      "shared": "Both / shared",
+      "noOne": "No one assigned",
+      "overdue": "Some documents are overdue",
+      "ofDone": "of {total} done",
+      "templateLoaded": "Slovenia template loaded",
+      "createTasks": "Create to-dos",
+      "tasksCreated": "To-dos created from paperwork",
+      "uploadScan": "Upload scan",
+      "scanUploaded": "Scan uploaded",
+      "scanRemoved": "Scan removed",
+      "disclaimer": "Check with the local registry office — this is not legal advice.",
+      "status": {
+        "not_started": "Not started",
+        "requested": "Requested",
+        "received": "Received",
+        "apostilled": "Apostilled",
+        "translated": "Translated",
+        "submitted": "Submitted"
+      },
+      "field": {
+        "title": "Document name",
+        "person": "Person",
+        "status": "Status",
+        "responsible": "Responsible",
+        "dueDate": "Due date",
+        "issueDate": "Issue date",
+        "maxAge": "Max age (months)",
+        "notes": "Notes",
+        "scan": "Document scan"
       }
     }
   }
