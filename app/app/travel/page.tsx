@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { TravelPage } from "@/components/travel/travel-page";
 import { loadPickerGuests } from "@/lib/guests/picker";
+import { getSiteUrl } from "@/lib/site-url";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, requireWedding } from "@/lib/wedding";
@@ -55,9 +56,11 @@ export default async function Travel() {
       guestTravel={guestTravel}
       households={households}
       destinationAirport={wedding.destination_airport}
-      weddingDate={wedding.wedding_date}
       currency={wedding.currency}
       canEdit={canEdit(role)}
+      flightFormUrl={
+        wedding.rsvp_ask_travel ? `${await getSiteUrl()}/w/${wedding.slug}/flights` : null
+      }
     />
   );
 }

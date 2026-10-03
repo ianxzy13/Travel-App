@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
+import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDays, format, parseISO } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 import {
   Car,
-  ExternalLink,
+  Copy,
+  Globe,
   Loader2,
   Mail,
   Plane,
@@ -23,6 +24,7 @@ import {
   saveFlight,
   sendTravelReminder,
   setDestinationAirport,
+  setFlightPickup,
 } from "@/app/app/travel/actions";
 import { ShuttlePlanner } from "@/components/travel/shuttle-planner";
 import { PageHeader } from "@/components/app/page-header";
@@ -56,17 +58,9 @@ import type { FlightRow, GuestTravelRow } from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
 import { fmtDate, fmtTime } from "@/lib/i18n/format";
 import { FLIGHT_CATEGORIES, FLIGHT_DIRECTIONS } from "@/lib/places/labels";
-import {
-  flightSearchLinks,
-  groupByDay,
-  iata,
-  timeOf,
-  toInputValue,
-  type BoardFlight,
-} from "@/lib/places/travel";
-import { getFareHints, type FareHint } from "@/lib/places/fares";
+import { shuttleArrivals } from "@/lib/places/shuttle";
+import { groupByDay, iata, timeOf, toInputValue, type BoardFlight } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
-import { hasAnyAffiliate } from "@/lib/vendors/search-links";
 import { flightSchema, type FlightValues } from "@/lib/validation/places";
 
 export type FlightItem = Omit<FlightRow, "price"> & {
@@ -82,9 +76,10 @@ type Props = {
   guestTravel: GuestTravelRow[];
   households: HouseholdSummary[];
   destinationAirport: string | null;
-  weddingDate: string | null;
   currency: string;
   canEdit: boolean;
+  /** link to the website's flight form, or null while it's switched off */
+  flightFormUrl: string | null;
 };
 
 export function TravelPage({
@@ -93,11 +88,12 @@ export function TravelPage({
   guestTravel,
   households,
   destinationAirport,
-  weddingDate,
   currency,
   canEdit,
+  flightFormUrl,
 }: Props) {
   const t = useTranslations("travel");
+  const fb = useTranslations("flightBoard");
   const [sheet, setSheet] = useState<string | { new: FlightValues["category"] } | null>(null);
   const guestName = new Map(guests.map((g) => [g.id, g.name]));
   const travellers = (f: FlightItem) => [
@@ -113,6 +109,8 @@ export function TravelPage({
     travellers: travellers(f),
     needsPickup: f.needs_pickup,
     status: f.status,
+    fromGuest: !!f.guest_travel_id,
+    pickupRequested: f.pickup_requested,
   });
   const arrivals = flights
     .filter((f) => f.direction === "arrival" && f.category !== "honeymoon")
@@ -122,12 +120,10 @@ export function TravelPage({
     .map((f) => toBoard(f, "departure"));
   const ours = flights.filter((f) => f.category !== "guest");
   const current = typeof sheet === "string" ? (flights.find((f) => f.id === sheet) ?? null) : null;
-  const hhName = new Map(households.map((h) => [h.id, h.name]));
-  const enrichedTravel = guestTravel.map((gt) => ({
-    ...gt,
-    householdName: hhName.get(gt.household_id) ?? "",
-  }));
-  const shuttleCount = guestTravel.filter((gt) => gt.needs_transfer).length;
+  const shuttle = shuttleArrivals(flights, (id) => guestName.get(id) ?? t("guestFallback"));
+  const askedForRide = flights.filter(
+    (f) => f.direction === "arrival" && f.pickup_requested && !f.needs_pickup,
+  ).length;
 
   return (
     <>
@@ -144,11 +140,21 @@ export function TravelPage({
       />
 
       <div className="space-y-6">
-        <SearchFlights
+        <GuestFormCard
+          url={flightFormUrl}
           destinationAirport={destinationAirport}
-          weddingDate={weddingDate}
           canEdit={canEdit}
         />
+
+        {askedForRide > 0 && (
+          <p
+            role="status"
+            className="bg-tint-sand text-tint-sand-fg flex items-center gap-2 rounded-xl px-4 py-3 text-sm"
+          >
+            <Car className="size-4 shrink-0" aria-hidden />
+            {fb("toDecide", { count: askedForRide })}
+          </p>
+        )}
 
         <Tabs defaultValue="arrivals" className="gap-4">
           <TabsList className="flex-wrap">
@@ -167,11 +173,9 @@ export function TravelPage({
                 <Car aria-hidden /> {t("guestTravel", { count: guestTravel.length })}
               </TabsTrigger>
             )}
-            {shuttleCount > 0 && (
-              <TabsTrigger value="shuttles">
-                <Car aria-hidden /> {t("shuttles", { count: shuttleCount })}
-              </TabsTrigger>
-            )}
+            <TabsTrigger value="shuttles">
+              <Car aria-hidden /> {t("shuttles", { count: shuttle.length })}
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="arrivals">
             <Board
@@ -225,11 +229,9 @@ export function TravelPage({
               />
             </TabsContent>
           )}
-          {shuttleCount > 0 && (
-            <TabsContent value="shuttles">
-              <ShuttlePlanner guestTravel={enrichedTravel} />
-            </TabsContent>
-          )}
+          <TabsContent value="shuttles">
+            <ShuttlePlanner arrivals={shuttle} emptyText={fb("shuttleEmpty")} />
+          </TabsContent>
         </Tabs>
       </div>
 
@@ -253,65 +255,69 @@ export function TravelPage({
   );
 }
 
-function SearchFlights({
+function GuestFormCard({
+  url,
   destinationAirport,
-  weddingDate,
   canEdit,
 }: {
+  url: string | null;
   destinationAirport: string | null;
-  weddingDate: string | null;
   canEdit: boolean;
 }) {
   const t = useTranslations("travel");
-  const shift = (d: string | null, n: number) =>
-    d ? format(addDays(parseISO(d), n), "yyyy-MM-dd") : "";
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState(destinationAirport ?? "");
-  const [depart, setDepart] = useState(shift(weddingDate, -2));
-  const [ret, setRet] = useState(shift(weddingDate, 2));
+  const fb = useTranslations("flightBoard");
+  const [airport, setAirport] = useState(destinationAirport ?? "");
   const [pending, startTransition] = useTransition();
-  const links = to.trim() ? flightSearchLinks({ from, to, depart, ret }) : null;
-  const [fares, setFares] = useState<FareHint[]>([]);
-
-  useEffect(() => {
-    const f = from.trim();
-    const d = to.trim();
-    if (f.length === 3 && d.length === 3) {
-      getFareHints(f, d, depart || null).then(setFares);
-    } else {
-      setFares([]);
-    }
-  }, [from, to, depart]);
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">{t("search")}</CardTitle>
-        <p className="text-muted-foreground text-sm">{t("searchHint")}</p>
+        <CardTitle className="flex items-center gap-2 font-serif text-2xl">
+          <Globe className="size-5" aria-hidden /> {fb("formTitle")}
+        </CardTitle>
+        <p className="text-muted-foreground text-sm">{fb("formText")}</p>
       </CardHeader>
-      <CardContent>
-        <div className="grid gap-3 sm:grid-cols-[1fr_1fr_1fr_1fr]">
+      <CardContent className="space-y-4">
+        {url ? (
           <div className="space-y-1.5">
-            <Label htmlFor="sf-from">{t("from")}</Label>
-            <Input
-              id="sf-from"
-              value={from}
-              maxLength={3}
-              placeholder={t("fromPlaceholder")}
-              onChange={(e) => setFrom(e.target.value.toUpperCase())}
-            />
+            <p className="text-sm">{fb("formOn")}</p>
+            <div className="flex gap-2">
+              <Input readOnly value={url} dir="ltr" onFocus={(e) => e.target.select()} />
+              <Button
+                variant="outline"
+                onClick={() =>
+                  navigator.clipboard
+                    .writeText(url)
+                    .then(() => toast.success(fb("copied")))
+                    .catch(() => {})
+                }
+              >
+                <Copy aria-hidden /> {fb("copy")}
+              </Button>
+            </div>
           </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="sf-to">{t("to")}</Label>
-            <div className="flex gap-1">
-              <Input
-                id="sf-to"
-                value={to}
-                maxLength={3}
-                placeholder={t("toPlaceholder")}
-                onChange={(e) => setTo(e.target.value.toUpperCase())}
-              />
-              {canEdit && iata(to) && iata(to) !== destinationAirport && (
+        ) : (
+          <div className="bg-muted flex flex-wrap items-center gap-3 rounded-lg p-3 text-sm">
+            <p className="flex-1">{fb("formOff")}</p>
+            <Button asChild variant="outline" size="sm">
+              <Link href="/app/rsvp">{fb("openRsvpSettings")}</Link>
+            </Button>
+          </div>
+        )}
+        <div className="max-w-xs space-y-1.5">
+          <Label htmlFor="wedding-airport">{fb("airportLabel")}</Label>
+          <div className="flex gap-1">
+            <Input
+              id="wedding-airport"
+              value={airport}
+              maxLength={3}
+              placeholder={t("toPlaceholder")}
+              disabled={!canEdit}
+              onChange={(e) => setAirport(e.target.value.toUpperCase())}
+            />
+            {canEdit &&
+              (iata(airport) || airport === "") &&
+              airport !== (destinationAirport ?? "") && (
                 <Button
                   variant="ghost"
                   size="icon"
@@ -320,8 +326,8 @@ function SearchFlights({
                   disabled={pending}
                   onClick={() =>
                     startTransition(async () => {
-                      const r = await setDestinationAirport(to);
-                      if (r.ok) toast.success(t("airportSaved", { code: to }));
+                      const r = await setDestinationAirport(airport);
+                      if (r.ok) toast.success(t("airportSaved", { code: airport }));
                       else toast.error(r.error);
                     })
                   }
@@ -329,74 +335,8 @@ function SearchFlights({
                   <Save aria-hidden />
                 </Button>
               )}
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="sf-depart">{t("out")}</Label>
-            <Input
-              id="sf-depart"
-              type="date"
-              value={depart}
-              onChange={(e) => setDepart(e.target.value)}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="sf-ret">{t("back")}</Label>
-            <Input id="sf-ret" type="date" value={ret} onChange={(e) => setRet(e.target.value)} />
           </div>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Button asChild={!!links} disabled={!links} variant="outline" size="sm">
-            {links ? (
-              <a href={links.google} target="_blank" rel="sponsored noopener noreferrer">
-                <ExternalLink aria-hidden /> Google Flights
-              </a>
-            ) : (
-              <span>Google Flights</span>
-            )}
-          </Button>
-          <Button
-            asChild={!!links?.skyscanner}
-            disabled={!links?.skyscanner}
-            variant="outline"
-            size="sm"
-          >
-            {links?.skyscanner ? (
-              <a href={links.skyscanner} target="_blank" rel="sponsored noopener noreferrer">
-                <ExternalLink aria-hidden /> Skyscanner
-              </a>
-            ) : (
-              <span>{t("skyscannerNeeds")}</span>
-            )}
-          </Button>
-          {links?.aviasales && (
-            <Button asChild variant="outline" size="sm">
-              <a href={links.aviasales} target="_blank" rel="sponsored noopener noreferrer">
-                <ExternalLink aria-hidden /> Aviasales
-              </a>
-            </Button>
-          )}
-          {hasAnyAffiliate() && (
-            <p className="text-muted-foreground mt-2 text-xs">{t("affiliateDisclosure")}</p>
-          )}
-        </div>
-        {fares.length > 0 && (
-          <div className="mt-4 rounded-lg border p-3">
-            <p className="text-muted-foreground mb-2 text-xs font-medium">{t("fareHintsTitle")}</p>
-            <ul className="space-y-1 text-sm">
-              {fares.map((f, i) => (
-                <li key={i} className="flex justify-between">
-                  <span>
-                    {f.origin} → {f.destination}
-                    {f.airline && <span className="text-muted-foreground ml-1">({f.airline})</span>}
-                  </span>
-                  <span className="font-medium">~€{Math.round(f.price_eur)}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-muted-foreground mt-2 text-[11px]">{t("fareHintsDisclaimer")}</p>
-          </div>
-        )}
       </CardContent>
     </Card>
   );
@@ -416,6 +356,7 @@ function Board({
   onAdd: () => void;
 }) {
   const t = useTranslations("travel");
+  const fb = useTranslations("flightBoard");
   const locale = useLocale();
   if (flights.length === 0) {
     return (
@@ -445,12 +386,12 @@ function Board({
           </h3>
           <ul className="divide-y">
             {day.flights.map((f) => (
-              <li key={f.id}>
+              <li key={f.id} className="flex items-center">
                 <button
                   type="button"
                   onClick={() => onOpen(f.id)}
                   className={cn(
-                    "hover:bg-accent focus-visible:ring-ring flex w-full flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-start focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset",
+                    "hover:bg-accent focus-visible:ring-ring flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-1 px-4 py-3 text-start focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset",
                     f.status === "considering" && "opacity-70",
                   )}
                 >
@@ -470,11 +411,15 @@ function Board({
                       <span className="text-muted-foreground">{t("noTravellers")}</span>
                     )}
                   </span>
-                  <span className="flex gap-1.5">
-                    {f.needsPickup && (
+                  <span className="flex flex-wrap gap-1.5">
+                    {f.fromGuest && (
+                      <span className="bg-muted rounded-full px-2 py-0.5 text-xs">
+                        {fb("fromGuest")}
+                      </span>
+                    )}
+                    {f.pickupRequested && !f.needsPickup && (
                       <span className="bg-tint-sand text-tint-sand-fg rounded-full px-2 py-0.5 text-xs font-medium">
-                        <Car className="me-1 inline size-3" aria-hidden />
-                        {t("pickup")}
+                        {fb("asked")}
                       </span>
                     )}
                     {f.status === "considering" && (
@@ -484,12 +429,51 @@ function Board({
                     )}
                   </span>
                 </button>
+                {direction === "arrival" && (
+                  <ShuttleToggle key={`${f.id}-${f.needsPickup}`} flight={f} canEdit={canEdit} />
+                )}
               </li>
             ))}
           </ul>
         </section>
       ))}
     </div>
+  );
+}
+
+/** The couple's yes/no on an airport shuttle for one arrival. */
+function ShuttleToggle({ flight, canEdit }: { flight: BoardFlight; canEdit: boolean }) {
+  const fb = useTranslations("flightBoard");
+  const [on, setOn] = useState(flight.needsPickup);
+  const [pending, startTransition] = useTransition();
+  const who = flight.travellers.join(", ") || flight.flightNumber || "";
+  return (
+    <label
+      className={cn(
+        "flex shrink-0 items-center gap-2 px-4 py-3 text-xs font-medium",
+        on && "text-tint-sand-fg",
+      )}
+    >
+      <Car className="size-4" aria-hidden />
+      <span className="hidden sm:inline">{fb("shuttle")}</span>
+      <Switch
+        checked={on}
+        disabled={!canEdit || pending}
+        aria-label={on ? fb("shuttleOn") : fb("shuttleOff")}
+        onCheckedChange={(v) => {
+          setOn(v);
+          startTransition(async () => {
+            const r = await setFlightPickup(flight.id, v);
+            if (!r.ok) {
+              setOn(!v);
+              toast.error(r.error);
+            } else {
+              toast.success(v ? fb("shuttleYes", { name: who }) : fb("shuttleNo", { name: who }));
+            }
+          });
+        }}
+      />
+    </label>
   );
 }
 
@@ -570,6 +554,7 @@ function FlightForm({
 }) {
   const t = useTranslations("travel");
   const p = useTranslations("places");
+  const fb = useTranslations("flightBoard");
   const [pending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(flightSchema),
@@ -645,7 +630,10 @@ function FlightForm({
             ? [flight.airline, flight.flight_number].filter(Boolean).join(" ") || t("flight")
             : t("addTitle")}
         </SheetTitle>
-        <SheetDescription>{t("localTimes")}</SheetDescription>
+        <SheetDescription>
+          {t("localTimes")}
+          {flight?.guest_travel_id && <span className="mt-1 block">{fb("guestOwned")}</span>}
+        </SheetDescription>
       </SheetHeader>
       <form
         id="flight-form"

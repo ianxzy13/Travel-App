@@ -99,6 +99,19 @@ export async function deleteFlight(id: string): Promise<ActionResult> {
   return done();
 }
 
+/** The couple decides whether a flight's travellers get an airport shuttle. */
+export async function setFlightPickup(id: string, needsPickup: boolean): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx || !z.uuid().safeParse(id).success) return noPermission();
+  const { error } = await ctx.sb
+    .from("flights")
+    .update({ needs_pickup: needsPickup === true })
+    .eq("id", id)
+    .eq("wedding_id", ctx.wedding.id);
+  if (error) return fail("setFlightPickup", error);
+  return done();
+}
+
 export async function setDestinationAirport(code: string): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx) return noPermission();

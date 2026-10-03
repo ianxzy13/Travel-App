@@ -71,3 +71,21 @@ export const sendEmailSchema = z.object({
   kind: z.enum(["invitation", "reminder"]),
   note: z.string().trim().max(1000, v("tooLong", 1000)),
 });
+
+/** The website flight form (submit_guest_flights() re-checks everything). */
+export const guestFlightsSchema = z.object({
+  arrival_from: z.string().trim().max(60),
+  arrival_airport: z.string().trim().max(10),
+  arrival_date: optDate,
+  arrival_time: optTime,
+  arrival_flight: z.string().trim().max(20),
+  departure_airport: z.string().trim().max(10),
+  departure_to: z.string().trim().max(60),
+  departure_date: optDate,
+  departure_time: optTime,
+  departure_flight: z.string().trim().max(20),
+  needs_transfer: z.boolean(),
+  transport_notes: z.string().trim().max(500),
+});
+
+export type GuestFlightsPayload = z.infer<typeof guestFlightsSchema>;

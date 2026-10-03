@@ -330,6 +330,12 @@ export type HotelRow = WeddingScoped & {
   group_rate_notes: string | null;
   hold_date: string | null;
   release_date: string | null;
+  /** on the couple's shortlist of hotels they're comparing */
+  shortlisted: boolean;
+  image_url: string | null;
+  stars: number | null;
+  /** guest review score out of 10 (e.g. 8.7 on Booking.com) */
+  review_score: number | null;
 };
 
 export type OutboundClickRow = WeddingScoped & {
@@ -410,6 +416,10 @@ export type FlightRow = WeddingScoped & {
   notes: string | null;
   provider: string | null;
   provider_ref: string | null;
+  /** set when the flight came from a guest's travel form (kept in step by the database) */
+  guest_travel_id: string | null;
+  /** the guest asked for an airport ride (needs_pickup is the couple's decision) */
+  pickup_requested: boolean;
 };
 
 export type FlightTravellerRow = Timestamps & {
@@ -434,6 +444,9 @@ export type GuestTravelRow = WeddingScoped & {
   hotel_id: string | null;
   needs_transfer: boolean;
   transport_notes: string | null;
+  /** where the guest flies in from / back to */
+  arrival_from: string | null;
+  departure_to: string | null;
 };
 
 // ---------- Phase 7: inspiration ----------
@@ -718,6 +731,12 @@ export type Database = {
       submit_guest_travel: {
         Args: { p_code: string; p_payload: Json };
         Returns: undefined;
+      };
+      get_flight_form: { Args: { p_slug: string }; Returns: Json | null };
+      get_guest_flights: { Args: { p_slug: string; p_code: string }; Returns: Json | null };
+      submit_guest_flights: {
+        Args: { p_slug: string; p_code: string; p_payload: Json };
+        Returns: Json;
       };
       submit_room_preferences: {
         Args: { p_code: string; p_prefs: Json };

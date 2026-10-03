@@ -9,8 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-/** "Find your invitation" by full name, for one wedding. */
-export function FindInvitation({ slug }: { slug: string }) {
+/**
+ * "Find your invitation" by full name, for one wedding. Opens the RSVP page,
+ * or the website's flight form when next="flights".
+ */
+export function FindInvitation({
+  slug,
+  next = "rsvp",
+}: {
+  slug: string;
+  next?: "rsvp" | "flights";
+}) {
   const t = useTranslations("rsvp.find");
   const router = useRouter();
   const [name, setName] = useState("");
@@ -25,7 +34,12 @@ export function FindInvitation({ slug }: { slug: string }) {
         setError(null);
         startTransition(async () => {
           const result = await findInvitation(slug, name);
-          if (result.ok) router.push(`/r/${result.data.code}`);
+          if (result.ok)
+            router.push(
+              next === "flights"
+                ? `/w/${slug}/flights?code=${result.data.code}`
+                : `/r/${result.data.code}`,
+            );
           else setError(result.error);
         });
       }}

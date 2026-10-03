@@ -57,6 +57,7 @@ export default async function Hotels() {
       hotels={hotels.map((h) => ({
         ...h,
         price_per_night: h.price_per_night == null ? null : Number(h.price_per_night),
+        review_score: h.review_score == null ? null : Number(h.review_score),
       }))}
       stays={stays}
       guests={guests}

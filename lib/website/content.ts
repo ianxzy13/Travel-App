@@ -140,6 +140,8 @@ export type SiteData = {
     languages: string[];
     /** IANA time zone of the venue; event times are local times there */
     time_zone: string | null;
+    /** guests can share their flights at /w/[slug]/flights */
+    flight_form?: boolean;
   };
   look: {
     template: SiteTemplate;
@@ -175,7 +177,8 @@ export function isSectionEmpty(s: Section, data: Pick<SiteData, "events" | "hote
         !s.content.transport.trim() &&
         !s.content.visa.trim() &&
         !s.content.currency.trim() &&
-        !data.wedding.destination_airport
+        !data.wedding.destination_airport &&
+        !data.wedding.flight_form
       );
     case "party":
       return !s.content.people.some((p) => p.name.trim());

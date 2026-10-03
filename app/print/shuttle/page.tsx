@@ -5,7 +5,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PrintControls } from "@/components/seating/print-controls";
 import { Button } from "@/components/ui/button";
 import { fmtDate } from "@/lib/i18n/format";
-import { planShuttleRuns } from "@/lib/places/shuttle";
+import { planShuttleRuns, shuttleArrivals } from "@/lib/places/shuttle";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
 import { coupleName, requireWedding } from "@/lib/wedding";
@@ -23,31 +23,45 @@ export default async function PrintShuttle() {
   const t = await getTranslations("travel.shuttle");
   const sb = await createClient();
 
-  const [guestTravel, households] = await Promise.all([
+  const [flights, travellers, guests] = await Promise.all([
     fetchAll((f, to) =>
       sb
-        .from("guest_travel")
-        .select("*")
+        .from("flights")
+        .select(
+          "id, category, direction, needs_pickup, arrive_at, to_airport, flight_number, other_travellers",
+        )
         .eq("wedding_id", wedding.id)
-        .order("arrival_date")
+        .eq("needs_pickup", true)
+        .order("arrive_at")
         .range(f, to),
     ),
     fetchAll((f, to) =>
       sb
-        .from("households")
-        .select("id, name")
+        .from("flight_travellers")
+        .select("flight_id, guest_id")
         .eq("wedding_id", wedding.id)
-        .order("name")
+        .order("flight_id")
+        .range(f, to),
+    ),
+    fetchAll((f, to) =>
+      sb
+        .from("guests")
+        .select("id, first_name, last_name")
+        .eq("wedding_id", wedding.id)
+        .order("id")
         .range(f, to),
     ),
   ]);
 
-  const hhName = new Map(households.map((h) => [h.id, h.name]));
-  const enriched = guestTravel.map((gt) => ({
-    ...gt,
-    householdName: hhName.get(gt.household_id) ?? "?",
-  }));
-  const days = planShuttleRuns(enriched, [], { locale });
+  const guestName = new Map(guests.map((g) => [g.id, `${g.first_name} ${g.last_name}`.trim()]));
+  const arrivals = shuttleArrivals(
+    flights.map((fl) => ({
+      ...fl,
+      travellerIds: travellers.filter((tr) => tr.flight_id === fl.id).map((tr) => tr.guest_id),
+    })),
+    (id) => guestName.get(id) ?? "?",
+  );
+  const days = planShuttleRuns(arrivals, { locale });
 
   return (
     <div className="mx-auto max-w-3xl p-4 print:max-w-none print:p-0">
@@ -104,7 +118,7 @@ export default async function PrintShuttle() {
                   <tbody>
                     {run.passengers.map((p, i) => (
                       <tr key={i} className="border-b last:border-0">
-                        <td className="py-1">{p.householdName}</td>
+                        <td className="py-1">{p.name}</td>
                         <td className="py-1">{p.arrivalTime ?? "—"}</td>
                         <td className="py-1">{p.flightNumber ?? "—"}</td>
                       </tr>

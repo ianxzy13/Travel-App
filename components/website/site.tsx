@@ -6,7 +6,7 @@ import { FindInvitation } from "@/components/rsvp/find-invitation";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import type { SiteSectionKind, SiteTemplate } from "@/lib/database.types";
 import { fmtDate, fmtMoney, fmtTime } from "@/lib/i18n/format";
-import { flightSearchLinks, mapsSearch } from "@/lib/places/travel";
+import { mapsSearch } from "@/lib/places/travel";
 import { cn } from "@/lib/utils";
 import {
   isSectionEmpty,
@@ -889,24 +889,32 @@ function Row({
 function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
   const { data } = ctx;
   const airport = data.wedding.destination_airport;
+  const ff = useTranslations("flightForm");
   return (
     <>
       <Intro ctx={ctx} text={c.intro} />
-      {airport && (
+      {(airport || data.wedding.flight_form) && (
         <div className={cn(card(ctx.t), "mb-5 flex flex-wrap items-center gap-3")}>
           <Plane className={cn("size-5", accentText)} aria-hidden />
-          <p className="flex-1">
-            {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}
-          </p>
-          <a
-            href={flightSearchLinks({ to: airport }).google}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            className={cn(accentText, "text-sm underline underline-offset-2")}
-          >
-            {ctx.tr("travel.searchFlights")}
-            <span className="sr-only"> {ctx.tr("newTab")}</span>
-          </a>
+          <div className="min-w-48 flex-1">
+            {airport && (
+              <p>
+                {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}
+              </p>
+            )}
+            {data.wedding.flight_form && <p className={cn(muted, "text-sm")}>{ff("siteHint")}</p>}
+          </div>
+          {data.wedding.flight_form && (
+            <a
+              href={`/w/${data.wedding.slug}/flights`}
+              className={cn(
+                "rounded-full border border-current px-4 py-2 text-sm font-medium",
+                accentText,
+              )}
+            >
+              {ff("siteButton")}
+            </a>
+          )}
         </div>
       )}
       {data.hotels.length > 0 && (

@@ -13,6 +13,10 @@ export type BoardFlight = {
   travellers: string[];
   needsPickup: boolean;
   status: "considering" | "booked";
+  /** shared by a guest on the website */
+  fromGuest?: boolean;
+  /** the guest asked for an airport ride */
+  pickupRequested?: boolean;
 };
 
 export type BoardDay = {

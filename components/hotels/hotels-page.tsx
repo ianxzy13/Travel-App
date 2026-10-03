@@ -32,6 +32,7 @@ import { MoneyInput } from "@/components/budget/money-input";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { FormField } from "@/components/form-field";
 import { GuestPicker, type PickerGuest } from "@/components/guests/guest-picker";
+import { HotelShortlist, ShortlistHeart } from "@/components/hotels/hotel-shortlist";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -219,6 +220,10 @@ export function HotelsPage({
         </div>
       )}
 
+      <div className="mb-8">
+        <HotelShortlist hotels={hotels} currency={currency} canEdit={canEdit} onOpen={setSheet} />
+      </div>
+
       {hotels.length === 0 ? (
         <div className="bg-card flex flex-col items-center gap-3 rounded-2xl border border-dashed px-6 py-16 text-center">
           <span className="bg-primary-soft text-primary-ink inline-flex size-14 items-center justify-center rounded-full">
@@ -242,13 +247,14 @@ export function HotelsPage({
                 ? Math.min(100, ((h.rooms_booked ?? 0) / h.rooms_held) * 100)
                 : 0;
               return (
-                <li key={h.id} className="bg-card flex flex-col rounded-xl border">
+                <li key={h.id} className="bg-card relative flex flex-col rounded-xl border">
+                  {canEdit && <ShortlistHeart hotel={h} />}
                   <button
                     type="button"
                     onClick={() => setSheet(h.id)}
                     className="focus-visible:ring-ring flex flex-1 flex-col gap-2 rounded-xl p-4 text-start focus-visible:ring-2 focus-visible:outline-none"
                   >
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 pe-10">
                       <span
                         className={cn(
                           "rounded-full px-2 py-0.5 text-xs font-medium",

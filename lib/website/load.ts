@@ -62,6 +62,7 @@ export async function loadEditor(
     languages: string[];
     time_zone: string | null;
     translations: Translations;
+    rsvp_ask_travel?: boolean;
   },
 ): Promise<EditorData | null> {
   const [
@@ -130,6 +131,7 @@ export async function loadEditor(
         rsvp_deadline: wedding.rsvp_deadline,
         languages: wedding.languages,
         time_zone: wedding.time_zone,
+        flight_form: !!wedding.rsvp_ask_travel,
       },
       events: (events ?? []).map((e) => ({ ...e, name: shown(e.name) })) as TranslatableEvent[],
       hotels: (hotels ?? []) as SiteHotel[],
@@ -164,7 +166,10 @@ export async function loadPublicSite(
   token: string | null,
   locale: string,
 ): Promise<PublicSite | null> {
-  const { data, error } = await sb.rpc("get_public_site", { p_slug: slug, p_token: token });
+  const [{ data, error }, { data: flightForm }] = await Promise.all([
+    sb.rpc("get_public_site", { p_slug: slug, p_token: token }),
+    sb.rpc("get_flight_form", { p_slug: slug }),
+  ]);
   if (error) console.error("[loadPublicSite]", error);
   const json = data as PublicSiteJson | null;
   if (!json) return null;
@@ -209,6 +214,7 @@ export async function loadPublicSite(
           ...wedding,
           languages: wedding.languages ?? ["en"],
           time_zone: wedding.time_zone ?? null,
+          flight_form: !!flightForm,
           translations: weddingTr,
         },
         locale,

@@ -1,12 +1,10 @@
-import type { GuestTravelRow } from "@/lib/database.types";
 import { fmtDate } from "@/lib/i18n/format";
 
 export type ShuttlePassenger = {
-  householdId: string;
-  householdName: string;
+  name: string;
   arrivalTime: string | null;
   flightNumber: string | null;
-  needsTransfer: boolean;
+  people: number;
 };
 
 export type ShuttleRun = {
@@ -25,41 +23,72 @@ export type ShuttleDay = {
   totalPeople: number;
 };
 
-type ArrivalEntry = {
+/** One arriving flight the couple picks up. */
+export type ShuttleArrival = {
   date: string;
   time: string;
   airport: string;
-  householdId: string;
-  householdName: string;
+  name: string;
   flightNumber: string | null;
+  people: number;
+};
+
+type ArrivalEntry = ShuttleArrival;
+
+/** The flight-board fields the shuttle plan needs. */
+type BoardFlightLike = {
+  category: string;
+  direction: string;
+  needs_pickup: boolean;
+  arrive_at: string | null;
+  to_airport: string | null;
+  flight_number: string | null;
+  other_travellers: string | null;
+  travellerIds: string[];
 };
 
 /**
- * Groups arrivals that need transfers into shuttle pickup runs.
+ * Arrivals the couple switched "Shuttle" on for (needs_pickup), ready for
+ * planShuttleRuns(). Guests' own requests don't count until the couple decides.
+ */
+export function shuttleArrivals(
+  flights: BoardFlightLike[],
+  nameOf: (guestId: string) => string,
+): ShuttleArrival[] {
+  return flights
+    .filter(
+      (f) =>
+        f.direction === "arrival" && f.category !== "honeymoon" && f.needs_pickup && f.arrive_at,
+    )
+    .map((f) => {
+      const names = [
+        ...f.travellerIds.map(nameOf),
+        ...(f.other_travellers ? [f.other_travellers] : []),
+      ];
+      return {
+        date: f.arrive_at!.slice(0, 10),
+        time: f.arrive_at!.slice(11, 16) || "12:00",
+        airport: (f.to_airport ?? "").toUpperCase() || "???",
+        name: names.join(", ") || "?",
+        flightNumber: f.flight_number,
+        people: Math.max(1, f.travellerIds.length + (f.other_travellers ? 1 : 0)),
+      };
+    });
+}
+
+/**
+ * Groups arrivals into shuttle pickup runs.
  * Each run covers one airport within a time window (default 90 minutes).
  * Returns days sorted by date, runs sorted by earliest arrival time.
  */
 export function planShuttleRuns(
-  guestTravel: (GuestTravelRow & { householdName: string })[],
-  _coupleFlights?: unknown[],
+  arrivals: ShuttleArrival[],
   opts: { windowMinutes?: number; locale?: string } = {},
 ): ShuttleDay[] {
   const windowMs = (opts.windowMinutes ?? 90) * 60_000;
   const locale = opts.locale ?? "en";
 
-  const entries: ArrivalEntry[] = [];
-
-  for (const gt of guestTravel) {
-    if (!gt.needs_transfer || !gt.arrival_date) continue;
-    entries.push({
-      date: gt.arrival_date,
-      time: gt.arrival_time ?? "12:00",
-      airport: (gt.arrival_airport ?? "").toUpperCase() || "???",
-      householdId: gt.household_id,
-      householdName: gt.householdName,
-      flightNumber: gt.arrival_flight,
-    });
-  }
+  const entries: ArrivalEntry[] = [...arrivals];
 
   if (entries.length === 0) return [];
 
@@ -131,13 +160,12 @@ function buildRun(airport: string, entries: ArrivalEntry[], idx: number): Shuttl
     windowStart: times[0],
     windowEnd: times[times.length - 1],
     passengers: entries.map((e) => ({
-      householdId: e.householdId,
-      householdName: e.householdName,
+      name: e.name,
       arrivalTime: e.time,
       flightNumber: e.flightNumber,
-      needsTransfer: true,
+      people: e.people,
     })),
-    peopleCount: entries.length,
+    peopleCount: entries.reduce((n, e) => n + e.people, 0),
   };
 }
 

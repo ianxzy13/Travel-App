@@ -9,8 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CODE_PATTERN, normalizeCode } from "@/lib/rsvp/types";
 
-/** "Enter the code from your invitation" box. */
-export function CodeForm() {
+/**
+ * "Enter the code from your invitation" box. Opens the RSVP page, or `next`
+ * with ?code=… (e.g. the website's flight form).
+ */
+export function CodeForm({ next }: { next?: string } = {}) {
   const t = useTranslations("rsvp.code");
   const router = useRouter();
   const [code, setCode] = useState("");
@@ -26,7 +29,7 @@ export function CodeForm() {
           setError(t("invalid"));
           return;
         }
-        router.push(`/r/${clean}`);
+        router.push(next ? `${next}?code=${clean}` : `/r/${clean}`);
       }}
     >
       <Label htmlFor="rsvp-code">{t("label")}</Label>

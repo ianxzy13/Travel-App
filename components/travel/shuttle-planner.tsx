@@ -7,30 +7,32 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { GuestTravelRow } from "@/lib/database.types";
-import { planShuttleRuns, type ShuttleDay } from "@/lib/places/shuttle";
+import { planShuttleRuns, type ShuttleArrival, type ShuttleDay } from "@/lib/places/shuttle";
 
 type Props = {
-  guestTravel: (GuestTravelRow & { householdName: string })[];
+  /** arrivals the couple put on a shuttle */
+  arrivals: ShuttleArrival[];
+  /** shown when there are none yet */
+  emptyText: string;
 };
 
-export function ShuttlePlanner({ guestTravel }: Props) {
+export function ShuttlePlanner({ arrivals, emptyText }: Props) {
   const t = useTranslations("travel.shuttle");
   const locale = useLocale();
   const [windowMinutes, setWindowMinutes] = useState(90);
 
   const days = useMemo(
-    () => planShuttleRuns(guestTravel, [], { windowMinutes, locale }),
-    [guestTravel, windowMinutes, locale],
+    () => planShuttleRuns(arrivals, { windowMinutes, locale }),
+    [arrivals, windowMinutes, locale],
   );
 
   const totalRuns = days.reduce((n, d) => n + d.runs.length, 0);
   const totalPeople = days.reduce((n, d) => n + d.totalPeople, 0);
 
-  if (guestTravel.filter((gt) => gt.needs_transfer).length === 0) {
+  if (arrivals.length === 0) {
     return (
       <div className="text-muted-foreground rounded-xl border-2 border-dashed p-8 text-center text-sm">
-        {t("empty")}
+        {emptyText}
       </div>
     );
   }
@@ -99,7 +101,7 @@ function ShuttleDayCard({ day }: { day: ShuttleDay }) {
           <ul className="mt-2 space-y-1">
             {run.passengers.map((p, i) => (
               <li key={i} className="text-sm">
-                <span className="font-medium">{p.householdName}</span>
+                <span className="font-medium">{p.name}</span>
                 {p.arrivalTime && (
                   <span className="text-muted-foreground"> · {p.arrivalTime}</span>
                 )}
