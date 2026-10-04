@@ -52,8 +52,11 @@ import { Textarea } from "@/components/ui/textarea";
 import type { PaperworkItemRow } from "@/lib/database.types";
 import {
   COUNTRY_LIST,
+  NATIONALITIES,
   REGIONS,
   TEMPLATES,
+  getNationalityHague,
+  getNationalityName,
   isDocumentExpired,
 } from "@/lib/paperwork/templates";
 import { cn } from "@/lib/utils";
@@ -108,9 +111,13 @@ export function PaperworkPage({
     return groups;
   }, [items]);
 
-  function handleLoadTemplate(countryCode: string) {
+  function handleLoadTemplate(
+    countryCode: string,
+    nationalityA?: string,
+    nationalityB?: string,
+  ) {
     startTransition(async () => {
-      const r = await loadFromTemplate(countryCode);
+      const r = await loadFromTemplate(countryCode, nationalityA, nationalityB);
       if (r.ok) {
         const tmpl = TEMPLATES[countryCode];
         toast.success(t("templateLoaded", { country: tmpl?.countryName ?? countryCode }));
@@ -191,6 +198,8 @@ export function PaperworkPage({
           onSelect={handleLoadTemplate}
           onCancel={() => setShowPicker(false)}
           pending={pending}
+          partnerA={partnerA}
+          partnerB={partnerB}
           t={t}
         />
       ) : (
@@ -273,19 +282,94 @@ export function PaperworkPage({
 
 // ── Country picker ──────────────────────────────────────────────────────
 
+function NationalitySelect({
+  value,
+  onChange,
+  label,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  label: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [q, setQ] = useState("");
+  const lc = q.toLowerCase();
+  const list = lc
+    ? NATIONALITIES.filter((n) => n.name.toLowerCase().includes(lc))
+    : NATIONALITIES;
+  const selected = NATIONALITIES.find((n) => n.code === value);
+
+  return (
+    <div className="relative flex-1">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={cn(
+          "flex w-full items-center justify-between rounded-lg border px-3 py-2 text-left text-sm transition",
+          open ? "border-primary ring-primary/20 ring-2" : "hover:bg-accent/30",
+        )}
+      >
+        <span className={selected ? "" : "text-muted-foreground"}>
+          {selected ? selected.name : label}
+        </span>
+        <Globe className="text-muted-foreground size-4 shrink-0" aria-hidden />
+      </button>
+      {open && (
+        <div className="bg-popover absolute z-10 mt-1 w-full rounded-lg border shadow-lg">
+          <div className="border-b p-2">
+            <Input
+              placeholder={label}
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="h-8 text-sm"
+              autoFocus
+            />
+          </div>
+          <div className="max-h-48 overflow-y-auto p-1">
+            {list.map((n) => (
+              <button
+                key={n.code}
+                type="button"
+                onClick={() => { onChange(n.code); setOpen(false); setQ(""); }}
+                className={cn(
+                  "flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm",
+                  value === n.code ? "bg-primary/10 font-medium" : "hover:bg-accent/30",
+                )}
+              >
+                {n.name}
+              </button>
+            ))}
+            {list.length === 0 && (
+              <p className="text-muted-foreground py-3 text-center text-xs">
+                No match
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CountryPicker({
   onSelect,
   onCancel,
   pending,
+  partnerA,
+  partnerB,
   t,
 }: {
-  onSelect: (code: string) => void;
+  onSelect: (code: string, natA?: string, natB?: string) => void;
   onCancel: () => void;
   pending: boolean;
+  partnerA: string;
+  partnerB: string;
   t: ReturnType<typeof useTranslations<"app.paperwork">>;
 }) {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<string | null>(null);
+  const [natA, setNatA] = useState("");
+  const [natB, setNatB] = useState("");
 
   const lc = search.toLowerCase();
   const filtered = lc
@@ -294,8 +378,52 @@ function CountryPicker({
 
   const selectedTemplate = selected ? TEMPLATES[selected] : null;
 
+  const natAName = natA ? getNationalityName(natA) : null;
+  const natBName = natB ? getNationalityName(natB) : null;
+  const natAHague = natA ? getNationalityHague(natA) : null;
+  const natBHague = natB ? getNationalityHague(natB) : null;
+
   return (
     <div className="space-y-4">
+      <Card>
+        <CardContent className="space-y-4 py-6">
+          <div>
+            <h2 className="font-serif text-lg font-medium">{t("nationality.title")}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">{t("nationality.desc")}</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex-1 space-y-1">
+              <label className="text-xs font-medium">{partnerA}</label>
+              <NationalitySelect value={natA} onChange={setNatA} label={t("nationality.search")} />
+            </div>
+            <div className="flex-1 space-y-1">
+              <label className="text-xs font-medium">{partnerB}</label>
+              <NationalitySelect value={natB} onChange={setNatB} label={t("nationality.search")} />
+            </div>
+          </div>
+          {(natAName || natBName) && selectedTemplate && (
+            <div className="bg-muted/50 space-y-1 rounded-lg p-3">
+              {natAName && (
+                <p className="text-xs">
+                  <strong>{partnerA}</strong> ({natAName}):{" "}
+                  {natAHague && selectedTemplate.hagueConvention
+                    ? t("nationality.apostilleOk")
+                    : t("nationality.legalizationNeeded")}
+                </p>
+              )}
+              {natBName && (
+                <p className="text-xs">
+                  <strong>{partnerB}</strong> ({natBName}):{" "}
+                  {natBHague && selectedTemplate.hagueConvention
+                    ? t("nationality.apostilleOk")
+                    : t("nationality.legalizationNeeded")}
+                </p>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
       <Card>
         <CardContent className="space-y-4 py-6">
           <div className="text-center">
@@ -401,7 +529,7 @@ function CountryPicker({
           {t("cancel")}
         </Button>
         <Button
-          onClick={() => selected && onSelect(selected)}
+          onClick={() => selected && onSelect(selected, natA || undefined, natB || undefined)}
           disabled={!selected || pending}
           className="flex-1"
         >

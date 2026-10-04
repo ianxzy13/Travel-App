@@ -230,6 +230,13 @@
       "searchCountries": "Išči države…",
       "noCountryMatch": "Nobena država ne ustreza iskanju.",
       "loadCountryTemplate": "Naloži predlogo za {country}",
+      "nationality": {
+        "title": "Vaši državljanstvi",
+        "desc": "Povejte nam državljanstvo vsakega partnerja, da označimo dokumente z državo izdaje in preverimo združljivost apostile.",
+        "search": "Išči državljanstva…",
+        "apostilleOk": "Dokumente je mogoče apostilirati (Haaška konvencija)",
+        "legalizationNeeded": "Dokumenti potrebujejo polno konzularno legalizacijo (ni Haag)"
+      },
       "countryInfo": {
         "language": "Jezik",
         "residency": "Bivanje",

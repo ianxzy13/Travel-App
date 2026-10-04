@@ -230,6 +230,13 @@
       "searchCountries": "Search countries…",
       "noCountryMatch": "No countries match your search.",
       "loadCountryTemplate": "Load {country} template",
+      "nationality": {
+        "title": "Your nationalities",
+        "desc": "Tell us each partner's nationality so we can tag documents with where to get them and check apostille compatibility.",
+        "search": "Search nationalities…",
+        "apostilleOk": "Documents can be apostilled (Hague Convention)",
+        "legalizationNeeded": "Documents need full consular legalization (not Hague)"
+      },
       "countryInfo": {
         "language": "Language",
         "residency": "Residency",

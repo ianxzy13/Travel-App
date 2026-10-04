@@ -308,6 +308,13 @@
         "documents": "Documents",
         "items": "items",
         "officialSite": "Official government site"
+      },
+      "nationality": {
+        "title": "Your nationalities",
+        "desc": "Tell us each partner's nationality so we can tag documents with where to get them and check apostille compatibility.",
+        "search": "Search nationalities…",
+        "apostilleOk": "Documents can be apostilled (Hague Convention)",
+        "legalizationNeeded": "Documents need full consular legalization (not Hague)"
       }
     }
   }

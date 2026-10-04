@@ -1217,6 +1217,88 @@ export const REGIONS: { key: PaperworkTemplate["region"]; label: string }[] = [
   { key: "africa", label: "Africa" },
 ];
 
+// ── Nationalities ──────────────────────────────────────────────────────
+
+export type NationalityInfo = { code: string; name: string; hague: boolean };
+
+const EXTRA_NATIONALITIES: NationalityInfo[] = [
+  { code: "RO", name: "Romania", hague: true },
+  { code: "BG", name: "Bulgaria", hague: true },
+  { code: "RS", name: "Serbia", hague: true },
+  { code: "BA", name: "Bosnia and Herzegovina", hague: true },
+  { code: "MK", name: "North Macedonia", hague: true },
+  { code: "AL", name: "Albania", hague: true },
+  { code: "XK", name: "Kosovo", hague: false },
+  { code: "SK", name: "Slovakia", hague: true },
+  { code: "LT", name: "Lithuania", hague: true },
+  { code: "LV", name: "Latvia", hague: true },
+  { code: "EE", name: "Estonia", hague: true },
+  { code: "RU", name: "Russia", hague: true },
+  { code: "UA", name: "Ukraine", hague: true },
+  { code: "BY", name: "Belarus", hague: true },
+  { code: "MD", name: "Moldova", hague: true },
+  { code: "AM", name: "Armenia", hague: true },
+  { code: "AZ", name: "Azerbaijan", hague: true },
+  { code: "KZ", name: "Kazakhstan", hague: true },
+  { code: "UZ", name: "Uzbekistan", hague: true },
+  { code: "CN", name: "China", hague: true },
+  { code: "TW", name: "Taiwan", hague: false },
+  { code: "HK", name: "Hong Kong", hague: true },
+  { code: "SG", name: "Singapore", hague: false },
+  { code: "MY", name: "Malaysia", hague: false },
+  { code: "VN", name: "Vietnam", hague: false },
+  { code: "PK", name: "Pakistan", hague: false },
+  { code: "BD", name: "Bangladesh", hague: false },
+  { code: "NP", name: "Nepal", hague: false },
+  { code: "NG", name: "Nigeria", hague: false },
+  { code: "GH", name: "Ghana", hague: false },
+  { code: "ET", name: "Ethiopia", hague: false },
+  { code: "DZ", name: "Algeria", hague: false },
+  { code: "TN", name: "Tunisia", hague: true },
+  { code: "LU", name: "Luxembourg", hague: true },
+  { code: "BE", name: "Belgium", hague: true },
+  { code: "IL", name: "Israel", hague: true },
+  { code: "LB", name: "Lebanon", hague: false },
+  { code: "JO", name: "Jordan", hague: false },
+  { code: "SA", name: "Saudi Arabia", hague: false },
+  { code: "QA", name: "Qatar", hague: false },
+  { code: "KW", name: "Kuwait", hague: false },
+  { code: "BH", name: "Bahrain", hague: false },
+  { code: "OM", name: "Oman", hague: true },
+  { code: "IR", name: "Iran", hague: false },
+  { code: "EC", name: "Ecuador", hague: true },
+  { code: "VE", name: "Venezuela", hague: true },
+  { code: "UY", name: "Uruguay", hague: true },
+  { code: "PY", name: "Paraguay", hague: true },
+  { code: "BO", name: "Bolivia", hague: true },
+  { code: "PA", name: "Panama", hague: true },
+  { code: "CU", name: "Cuba", hague: false },
+  { code: "DO_NAT", name: "Dominican (nationality)", hague: true },
+];
+
+const templateNats: NationalityInfo[] = Object.values(TEMPLATES).map((t) => ({
+  code: t.country,
+  name: t.countryName,
+  hague: t.hagueConvention,
+}));
+
+const seen = new Set<string>();
+export const NATIONALITIES: NationalityInfo[] = [...templateNats, ...EXTRA_NATIONALITIES]
+  .filter((n) => {
+    if (seen.has(n.code)) return false;
+    seen.add(n.code);
+    return true;
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+export function getNationalityName(code: string): string {
+  return NATIONALITIES.find((n) => n.code === code)?.name ?? code;
+}
+
+export function getNationalityHague(code: string): boolean {
+  return NATIONALITIES.find((n) => n.code === code)?.hague ?? false;
+}
+
 export function dueDateFromWedding(
   weddingDate: string,
   monthsBefore: number,

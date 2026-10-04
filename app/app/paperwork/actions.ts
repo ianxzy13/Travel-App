@@ -10,6 +10,7 @@ import { fail, invalid, noPermission } from "@/lib/errors";
 import {
   TEMPLATES,
   dueDateFromWedding,
+  getNationalityName,
 } from "@/lib/paperwork/templates";
 
 const idSchema = z.uuid();
@@ -151,6 +152,8 @@ export async function removeScan(id: string): Promise<ActionResult> {
 
 export async function loadFromTemplate(
   countryCode: string,
+  nationalityA?: string,
+  nationalityB?: string,
 ): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx) return noPermission();
@@ -159,20 +162,30 @@ export async function loadFromTemplate(
   if (!template) return { ok: false, error: "No template for this country" };
 
   const weddingDate = ctx.wedding.wedding_date;
+  const natNameA = nationalityA ? getNationalityName(nationalityA) : null;
+  const natNameB = nationalityB ? getNationalityName(nationalityB) : null;
 
   const rows = template.items.map(
-    (item, i: number) => ({
-      wedding_id: ctx.wedding.id,
-      person: item.person,
-      title: item.title,
-      template_key: item.key,
-      status: "not_started" as const,
-      due_date: weddingDate
-        ? dueDateFromWedding(weddingDate, item.monthsBefore)
-        : null,
-      max_age_months: item.maxAgeMonths ?? null,
-      sort_order: i,
-    }),
+    (item, i: number) => {
+      let title = item.title;
+      if (item.person === "partner_a" && natNameA) {
+        title = `${item.title} (${natNameA})`;
+      } else if (item.person === "partner_b" && natNameB) {
+        title = `${item.title} (${natNameB})`;
+      }
+      return {
+        wedding_id: ctx.wedding.id,
+        person: item.person,
+        title,
+        template_key: item.key,
+        status: "not_started" as const,
+        due_date: weddingDate
+          ? dueDateFromWedding(weddingDate, item.monthsBefore)
+          : null,
+        max_age_months: item.maxAgeMonths ?? null,
+        sort_order: i,
+      };
+    },
   );
 
   const { error } = await ctx.sb.from("paperwork_items").insert(rows);
