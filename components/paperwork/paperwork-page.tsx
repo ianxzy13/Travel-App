@@ -10,9 +10,12 @@ import {
   ClipboardList,
   ExternalLink,
   FileText,
+  Globe,
+  Info,
   ListChecks,
   Loader2,
   Plus,
+  Search,
   Trash2,
   Upload,
 } from "lucide-react";
@@ -47,7 +50,12 @@ import {
 } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
 import type { PaperworkItemRow } from "@/lib/database.types";
-import { isDocumentExpired } from "@/lib/paperwork/templates";
+import {
+  COUNTRY_LIST,
+  REGIONS,
+  TEMPLATES,
+  isDocumentExpired,
+} from "@/lib/paperwork/templates";
 import { cn } from "@/lib/utils";
 
 const STATUSES = [
@@ -80,6 +88,7 @@ export function PaperworkPage({
   const [editing, setEditing] = useState<PaperworkItemRow | null>(null);
   const [adding, setAdding] = useState(false);
   const [pending, startTransition] = useTransition();
+  const [showPicker, setShowPicker] = useState(false);
 
   const personLabel = (p: string) => {
     if (p === "partner_a") return partnerA;
@@ -99,11 +108,16 @@ export function PaperworkPage({
     return groups;
   }, [items]);
 
-  function handleLoadTemplate() {
+  function handleLoadTemplate(countryCode: string) {
     startTransition(async () => {
-      const r = await loadFromTemplate("SI");
-      if (r.ok) toast.success(t("templateLoaded"));
-      else toast.error(r.error);
+      const r = await loadFromTemplate(countryCode);
+      if (r.ok) {
+        const tmpl = TEMPLATES[countryCode];
+        toast.success(t("templateLoaded", { country: tmpl?.countryName ?? countryCode }));
+        setShowPicker(false);
+      } else {
+        toast.error(r.error);
+      }
     });
   }
 
@@ -126,6 +140,15 @@ export function PaperworkPage({
               <Button
                 variant="outline"
                 size="sm"
+                onClick={() => setShowPicker(true)}
+                disabled={pending}
+              >
+                <Globe className="size-4" aria-hidden />
+                {t("loadTemplate")}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={handleCreateTasks}
                 disabled={pending}
               >
@@ -141,7 +164,7 @@ export function PaperworkPage({
         }
       />
 
-      {items.length === 0 ? (
+      {items.length === 0 && !showPicker ? (
         <Card>
           <CardContent className="py-12 text-center">
             <ClipboardList
@@ -151,9 +174,9 @@ export function PaperworkPage({
             <p className="text-muted-foreground mb-4 text-sm">{t("empty")}</p>
             {editable && (
               <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <Button onClick={handleLoadTemplate} disabled={pending}>
-                  {pending && <Loader2 className="size-4 animate-spin" aria-hidden />}
-                  {t("loadTemplate")}
+                <Button onClick={() => setShowPicker(true)} disabled={pending}>
+                  <Globe className="size-4" aria-hidden />
+                  {t("pickCountry")}
                 </Button>
                 <Button variant="outline" onClick={() => setAdding(true)}>
                   <Plus className="size-4" aria-hidden />
@@ -163,9 +186,15 @@ export function PaperworkPage({
             )}
           </CardContent>
         </Card>
+      ) : showPicker ? (
+        <CountryPicker
+          onSelect={handleLoadTemplate}
+          onCancel={() => setShowPicker(false)}
+          pending={pending}
+          t={t}
+        />
       ) : (
         <>
-          {/* Progress summary */}
           <Card>
             <CardContent className="py-4">
               <div className="flex items-center justify-between">
@@ -197,7 +226,6 @@ export function PaperworkPage({
             </CardContent>
           </Card>
 
-          {/* Items grouped by person */}
           {PERSONS.map(
             (person) =>
               grouped[person].length > 0 && (
@@ -222,15 +250,7 @@ export function PaperworkPage({
           )}
 
           <p className="text-muted-foreground text-xs">
-            {t("disclaimer")}{" "}
-            <a
-              href="https://e-uprava.gov.si/podrocja/druzina-otroci-zakonska-zveza/sklenitev-zakonske-zveze.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary inline-flex items-center gap-1 underline underline-offset-2"
-            >
-              e-uprava.gov.si <ExternalLink className="size-3" aria-hidden />
-            </a>
+            {t("disclaimer")}
           </p>
         </>
       )}
@@ -250,6 +270,152 @@ export function PaperworkPage({
     </div>
   );
 }
+
+// ── Country picker ──────────────────────────────────────────────────────
+
+function CountryPicker({
+  onSelect,
+  onCancel,
+  pending,
+  t,
+}: {
+  onSelect: (code: string) => void;
+  onCancel: () => void;
+  pending: boolean;
+  t: ReturnType<typeof useTranslations<"app.paperwork">>;
+}) {
+  const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState<string | null>(null);
+
+  const lc = search.toLowerCase();
+  const filtered = lc
+    ? COUNTRY_LIST.filter((c) => c.name.toLowerCase().includes(lc))
+    : COUNTRY_LIST;
+
+  const selectedTemplate = selected ? TEMPLATES[selected] : null;
+
+  return (
+    <div className="space-y-4">
+      <Card>
+        <CardContent className="space-y-4 py-6">
+          <div className="text-center">
+            <Globe className="text-muted-foreground mx-auto mb-3 size-10" aria-hidden />
+            <h2 className="font-serif text-xl font-medium">{t("pickCountryTitle")}</h2>
+            <p className="text-muted-foreground mt-1 text-sm">{t("pickCountryDesc")}</p>
+          </div>
+
+          <div className="relative">
+            <Search className="text-muted-foreground absolute left-3 top-1/2 size-4 -translate-y-1/2" aria-hidden />
+            <Input
+              placeholder={t("searchCountries")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+
+          <div className="max-h-80 space-y-4 overflow-y-auto">
+            {REGIONS.map((region) => {
+              const countries = filtered.filter((c) => c.region === region.key);
+              if (countries.length === 0) return null;
+              return (
+                <div key={region.key}>
+                  <p className="text-muted-foreground mb-2 text-xs font-medium uppercase tracking-wider">
+                    {region.label}
+                  </p>
+                  <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+                    {countries.map((c) => (
+                      <button
+                        key={c.code}
+                        type="button"
+                        onClick={() => setSelected(c.code)}
+                        className={cn(
+                          "rounded-lg border px-3 py-2 text-left text-sm transition",
+                          selected === c.code
+                            ? "border-primary bg-primary/5 font-medium"
+                            : "hover:bg-accent/30",
+                        )}
+                      >
+                        {c.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+            {filtered.length === 0 && (
+              <p className="text-muted-foreground py-6 text-center text-sm">
+                {t("noCountryMatch")}
+              </p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {selectedTemplate && (
+        <Card>
+          <CardContent className="space-y-3 py-4">
+            <h3 className="font-serif text-lg font-medium">
+              {selectedTemplate.countryName}
+            </h3>
+            <p className="text-muted-foreground text-sm">{selectedTemplate.notes}</p>
+            <div className="text-muted-foreground flex flex-wrap gap-x-4 gap-y-1 text-xs">
+              <span>
+                <strong>{t("countryInfo.language")}:</strong> {selectedTemplate.languageRequired}
+              </span>
+              {selectedTemplate.residencyDays > 0 && (
+                <span>
+                  <strong>{t("countryInfo.residency")}:</strong>{" "}
+                  {t("countryInfo.residencyDays", { days: selectedTemplate.residencyDays })}
+                </span>
+              )}
+              <span>
+                <strong>{t("countryInfo.apostille")}:</strong>{" "}
+                {selectedTemplate.hagueConvention ? t("countryInfo.yes") : t("countryInfo.legalization")}
+              </span>
+              <span>
+                <strong>{t("countryInfo.documents")}:</strong>{" "}
+                {selectedTemplate.items.length} {t("countryInfo.items")}
+              </span>
+            </div>
+            {selectedTemplate.officialLink && (
+              <a
+                href={selectedTemplate.officialLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary inline-flex items-center gap-1 text-xs underline underline-offset-2"
+              >
+                {t("countryInfo.officialSite")} <ExternalLink className="size-3" aria-hidden />
+              </a>
+            )}
+            <div className="bg-muted/50 flex items-start gap-2 rounded-lg p-3">
+              <Info className="text-muted-foreground mt-0.5 size-4 shrink-0" aria-hidden />
+              <p className="text-muted-foreground text-xs">{t("disclaimer")}</p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <div className="flex gap-2">
+        <Button variant="outline" onClick={onCancel}>
+          {t("cancel")}
+        </Button>
+        <Button
+          onClick={() => selected && onSelect(selected)}
+          disabled={!selected || pending}
+          className="flex-1"
+        >
+          {pending && <Loader2 className="size-4 animate-spin" aria-hidden />}
+          {selected
+            ? t("loadCountryTemplate", { country: TEMPLATES[selected]?.countryName ?? selected })
+            : t("pickCountry")}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// ── Item card ───────────────────────────────────────────────────────────
 
 function ItemCard({
   item,
@@ -336,6 +502,8 @@ function ItemCard({
     </button>
   );
 }
+
+// ── Item edit sheet ─────────────────────────────────────────────────────
 
 function ItemSheet({
   open,

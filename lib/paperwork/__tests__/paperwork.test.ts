@@ -4,6 +4,8 @@ import {
   isDocumentExpired,
   SLOVENIA_TEMPLATE,
   TEMPLATES,
+  COUNTRY_LIST,
+  REGIONS,
 } from "../templates";
 
 describe("dueDateFromWedding", () => {
@@ -65,13 +67,13 @@ describe("SLOVENIA_TEMPLATE", () => {
 
   it("includes key documents", () => {
     const keys = SLOVENIA_TEMPLATE.items.map((i) => i.key);
-    expect(keys).toContain("birth_extract");
+    expect(keys).toContain("birth_certificate");
     expect(keys).toContain("no_impediment");
     expect(keys).toContain("passport");
     expect(keys).toContain("apostille");
     expect(keys).toContain("translation");
     expect(keys).toContain("interpreter");
-    expect(keys).toContain("apply_admin_unit");
+    expect(keys).toContain("apply_registry");
   });
 
   it("all items have positive monthsBefore", () => {
@@ -85,6 +87,57 @@ describe("SLOVENIA_TEMPLATE", () => {
       if (item.maxAgeMonths !== undefined) {
         expect(item.maxAgeMonths).toBeGreaterThan(0);
       }
+    }
+  });
+});
+
+describe("TEMPLATES index", () => {
+  it("has 64 country templates", () => {
+    expect(Object.keys(TEMPLATES).length).toBe(64);
+  });
+
+  it("every template has items", () => {
+    for (const [code, tpl] of Object.entries(TEMPLATES)) {
+      expect(tpl.items.length, `${code} has no items`).toBeGreaterThan(0);
+    }
+  });
+
+  it("every template has metadata", () => {
+    for (const [code, tpl] of Object.entries(TEMPLATES)) {
+      expect(tpl.countryName, `${code} missing countryName`).toBeTruthy();
+      expect(tpl.region, `${code} missing region`).toBeTruthy();
+      expect(tpl.officialLink, `${code} missing officialLink`).toBeTruthy();
+      expect(tpl.languageRequired, `${code} missing languageRequired`).toBeTruthy();
+      expect(tpl.notes, `${code} missing notes`).toBeTruthy();
+    }
+  });
+
+  it("Dominican Republic template has local lawyer item", () => {
+    const dr = TEMPLATES["DO"];
+    expect(dr).toBeDefined();
+    const keys = dr.items.map((i) => i.key);
+    expect(keys).toContain("local_lawyer");
+    expect(keys).toContain("procuraduria");
+  });
+
+  it("Georgia template is minimal (passport only)", () => {
+    const ge = TEMPLATES["GE"];
+    expect(ge).toBeDefined();
+    const perPartner = ge.items.filter((i) => i.person === "partner_a");
+    expect(perPartner.length).toBe(1);
+    expect(perPartner[0].key).toBe("passport");
+  });
+});
+
+describe("COUNTRY_LIST", () => {
+  it("matches TEMPLATES count", () => {
+    expect(COUNTRY_LIST.length).toBe(Object.keys(TEMPLATES).length);
+  });
+
+  it("every country has a valid region", () => {
+    const regionKeys = REGIONS.map((r) => r.key);
+    for (const c of COUNTRY_LIST) {
+      expect(regionKeys, `${c.code} has invalid region ${c.region}`).toContain(c.region);
     }
   });
 });
