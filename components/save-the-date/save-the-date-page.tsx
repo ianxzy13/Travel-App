@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState, useTransition } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
@@ -9,6 +10,7 @@ import {
   ExternalLink,
   ImagePlus,
   Trash2,
+  Users,
 } from "lucide-react";
 import {
   ensureSaveTheDate,
@@ -379,6 +381,12 @@ export function SaveTheDatePage({ wedding, std: initial, siteUrl, canEdit: edita
                 {!published && (
                   <p className="text-muted-foreground text-xs">{t("unpublishedHint")}</p>
                 )}
+                <Button variant="outline" className="w-full" asChild>
+                  <Link href="/app/save-the-date/recipients">
+                    <Users className="mr-2 size-4" />
+                    {t("recipientsTitle")}
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           )}

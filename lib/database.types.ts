@@ -582,6 +582,28 @@ export type SaveTheDateRow = {
   updated_at: string;
 };
 
+export type StdSendMethod = "email" | "sms" | "whatsapp" | "manual";
+export type StdSendStatus = "not_sent" | "queued" | "sent" | "delivered" | "opened" | "failed" | "opted_out";
+
+export type StdSendRow = {
+  id: string;
+  wedding_id: string;
+  save_the_date_id: string;
+  household_id: string;
+  token: string;
+  method: StdSendMethod | null;
+  method_override: boolean;
+  status: StdSendStatus;
+  to_address: string | null;
+  resend_id: string | null;
+  error: string | null;
+  sent_at: string | null;
+  delivered_at: string | null;
+  opened_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type WeddingPhotoRow = {
   id: string;
   wedding_id: string;
@@ -721,6 +743,10 @@ export type Database = {
       save_the_dates: Table<
         SaveTheDateRow,
         "wedding_id"
+      >;
+      save_the_date_sends: Table<
+        StdSendRow,
+        "wedding_id" | "save_the_date_id" | "household_id"
       >;
       guest_relationships: Table<
         GuestRelationshipRow,
