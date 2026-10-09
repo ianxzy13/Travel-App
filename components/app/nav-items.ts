@@ -1,6 +1,7 @@
 import {
   Armchair,
   BedDouble,
+  Camera,
   ClipboardList,
   Clock,
   Gift,
@@ -38,6 +39,7 @@ export type NavKey =
   | "inspiration"
   | "website"
   | "schedule"
+  | "photos"
   | "settings"
   | "home";
 export type NavItem = { href: string; key: NavKey; icon: LucideIcon };
@@ -76,6 +78,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
     key: "style",
     items: [
       { href: "/app/inspiration", key: "inspiration", icon: Images },
+      { href: "/app/photos", key: "photos", icon: Camera },
       { href: "/app/website", key: "website", icon: Globe },
       { href: "/app/schedule", key: "schedule", icon: Clock },
     ],

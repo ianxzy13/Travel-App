@@ -23,7 +23,8 @@
         "style": "Estilo"
       },
       "gifts": "Gifts",
-      "paperwork": "Paperwork"
+      "paperwork": "Paperwork",
+      "photos": "Photos"
     },
     "shell": {
       "mainNav": "Navegação principal",
@@ -316,6 +317,25 @@
         "apostilleOk": "Documents can be apostilled (Hague Convention)",
         "legalizationNeeded": "Documents need full consular legalization (not Hague)"
       }
+    },
+    "photos": {
+      "title": "Guest photos",
+      "description": "Photos shared by your wedding guests. Enable sharing, print QR codes for tables, and moderate uploads.",
+      "toggle": "Enable photo sharing",
+      "toggleDesc": "Guests can upload photos by scanning a QR code at your wedding.",
+      "enabled": "Photo sharing enabled",
+      "disabled": "Photo sharing disabled",
+      "deleted": "Photo deleted",
+      "linkCopied": "Link copied",
+      "printQr": "Print QR",
+      "copyLink": "Copy link",
+      "empty": "No photos yet",
+      "emptyHint": "Share the QR code with your guests so they can upload their photos.",
+      "count": "{count, plural, one {# photo} other {# photos}}",
+      "deleteTitle": "Delete photo",
+      "deleteDesc": "This photo will be permanently removed.",
+      "qrHeading": "Share your photos",
+      "qrScan": "Scan to upload your wedding photos"
     }
   }
 }

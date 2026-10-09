@@ -93,6 +93,17 @@
       "yourTable": "Vasa miza je pripravljena!",
       "tableName": "Miza {number}",
       "tableNamed": "{label} (Miza {number})"
+    },
+    "photos": {
+      "title": "Porocne fotografije",
+      "heading": "Delite svoje fotografije",
+      "desc": "Nalozite svoje najljubse trenutke z danasnjega dne!",
+      "yourName": "Vase ime",
+      "captionPlaceholder": "Dodajte opis (neobvezno)",
+      "upload": "Izberite fotografije",
+      "uploaded": "{count, plural, one {# fotografija nalozena!} two {# fotografiji nalozeni!} few {# fotografije nalozene!} other {# fotografij nalozenih!}}",
+      "gallery": "{count, plural, one {# fotografija} two {# fotografiji} few {# fotografije} other {# fotografij}}",
+      "photoBy": "Fotografija: {name}"
     }
   },
   "rsvp": {

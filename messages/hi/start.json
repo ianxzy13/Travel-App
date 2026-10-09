@@ -84,9 +84,12 @@
     "sentTo": "हमने <b>{email}</b> पर एक ईमेल भेजा है। उसमें दिए लिंक पर क्लिक करें (इसी ब्राउज़र में), या नीचे ईमेल का कोड लिखें।",
     "code": "ईमेल का कोड",
     "signInWithCode": "कोड से साइन इन करें",
-    "again": "नया ईमेल भेजें या दूसरा पता इस्तेमाल करें",
+    "again": "Use a different email address",
     "setupTitle": "लगभग तैयार: Supabase अभी जुड़ा नहीं है।",
-    "setupText": "अपने Supabase URL और पब्लिक की के साथ एक <code>.env.local</code> फ़ाइल बनाएँ (<code>.env.example</code> और README देखें), फिर <code>npm run dev</code> दोबारा शुरू करें।"
+    "setupText": "अपने Supabase URL और पब्लिक की के साथ एक <code>.env.local</code> फ़ाइल बनाएँ (<code>.env.example</code> और README देखें), फिर <code>npm run dev</code> दोबारा शुरू करें।",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "अपनी भाषा चुनें",

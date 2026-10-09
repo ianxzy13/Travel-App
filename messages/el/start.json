@@ -84,9 +84,12 @@
     "sentTo": "Στείλαμε email στο <b>{email}</b>. Πατήστε τον σύνδεσμο (σε αυτό το πρόγραμμα περιήγησης) ή γράψτε παρακάτω τον κωδικό από το email.",
     "code": "Κωδικός από το email",
     "signInWithCode": "Σύνδεση με κωδικό",
-    "again": "Νέο email ή άλλη διεύθυνση",
+    "again": "Use a different email address",
     "setupTitle": "Σχεδόν έτοιμο: το Supabase δεν έχει συνδεθεί ακόμα.",
-    "setupText": "Δημιουργήστε αρχείο <code>.env.local</code> με το URL και το δημόσιο κλειδί του Supabase (δείτε <code>.env.example</code> και README) και επανεκκινήστε το <code>npm run dev</code>."
+    "setupText": "Δημιουργήστε αρχείο <code>.env.local</code> με το URL και το δημόσιο κλειδί του Supabase (δείτε <code>.env.example</code> και README) και επανεκκινήστε το <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Επιλέξτε τη γλώσσα σας",

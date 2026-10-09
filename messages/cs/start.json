@@ -84,9 +84,12 @@
     "sentTo": "Poslali jsme e-mail na <b>{email}</b>. Klikněte na odkaz v něm (v tomto prohlížeči) nebo níže zadejte kód z e-mailu.",
     "code": "Kód z e-mailu",
     "signInWithCode": "Přihlásit se kódem",
-    "again": "Poslat nový e-mail nebo použít jinou adresu",
+    "again": "Use a different email address",
     "setupTitle": "Skoro hotovo: Supabase ještě není připojen.",
-    "setupText": "Vytvořte soubor <code>.env.local</code> s URL a veřejným klíčem Supabase (viz <code>.env.example</code> a README) a pak znovu spusťte <code>npm run dev</code>."
+    "setupText": "Vytvořte soubor <code>.env.local</code> s URL a veřejným klíčem Supabase (viz <code>.env.example</code> a README) a pak znovu spusťte <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Vyberte svůj jazyk",

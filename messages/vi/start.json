@@ -84,9 +84,12 @@
     "sentTo": "Chúng tôi đã gửi email đến <b>{email}</b>. Nhấp vào liên kết trong đó (trên trình duyệt này), hoặc nhập mã từ email bên dưới.",
     "code": "Mã trong email",
     "signInWithCode": "Đăng nhập bằng mã",
-    "again": "Gửi email mới hoặc dùng địa chỉ khác",
+    "again": "Use a different email address",
     "setupTitle": "Sắp xong rồi: Supabase chưa được kết nối.",
-    "setupText": "Tạo tệp <code>.env.local</code> với URL Supabase và khóa công khai (xem <code>.env.example</code> và README), rồi khởi động lại <code>npm run dev</code>."
+    "setupText": "Tạo tệp <code>.env.local</code> với URL Supabase và khóa công khai (xem <code>.env.example</code> và README), rồi khởi động lại <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Chọn ngôn ngữ của bạn",

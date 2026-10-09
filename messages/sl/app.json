@@ -15,6 +15,7 @@
       "travel": "Potovanja",
       "inspiration": "Navdih",
       "website": "Spletna stran",
+      "photos": "Fotografije",
       "schedule": "Potek dneva",
       "settings": "Nastavitve",
       "home": "Domov",
@@ -316,6 +317,25 @@
         "answer": "Odgovor",
         "caption": "Napis"
       }
+    },
+    "photos": {
+      "title": "Fotografije gostov",
+      "description": "Fotografije, ki so jih delili vaši poročni gostje. Omogočite deljenje, natisnite QR kode za mize in upravljajte naložene fotografije.",
+      "toggle": "Omogoči deljenje fotografij",
+      "toggleDesc": "Gostje lahko naložijo fotografije s skeniranjem QR kode na vaši poroki.",
+      "enabled": "Deljenje fotografij omogočeno",
+      "disabled": "Deljenje fotografij onemogočeno",
+      "deleted": "Fotografija izbrisana",
+      "linkCopied": "Povezava kopirana",
+      "printQr": "Natisni QR",
+      "copyLink": "Kopiraj povezavo",
+      "empty": "Še ni fotografij",
+      "emptyHint": "Delite QR kodo z gosti, da bodo lahko naložili svoje fotografije.",
+      "count": "{count, plural, one {# fotografija} two {# fotografiji} few {# fotografije} other {# fotografij}}",
+      "deleteTitle": "Izbriši fotografijo",
+      "deleteDesc": "Ta fotografija bo trajno odstranjena.",
+      "qrHeading": "Delite svoje fotografije",
+      "qrScan": "Skenirajte za nalaganje poročnih fotografij"
     }
   }
 }

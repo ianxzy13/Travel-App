@@ -84,7 +84,10 @@
     "sentTo": "Poslali smo e-pošto na <b>{email}</b>. Kliknite povezavo v njej (v tem brskalniku) ali spodaj vpišite kodo iz e-pošte.",
     "code": "Koda iz e-pošte",
     "signInWithCode": "Prijava s kodo",
-    "again": "Pošlji novo e-pošto ali uporabi drug naslov",
+    "resend": "Pošlji kodo znova",
+    "resendWait": "Pošlji kodo znova ({seconds}s)",
+    "resent": "Nova koda je bila poslana na vaš e-naslov.",
+    "again": "Uporabi drug e-naslov",
     "setupTitle": "Skoraj: Supabase še ni povezan.",
     "setupText": "Ustvarite datoteko <code>.env.local</code> z URL-jem in javnim ključem za Supabase (glejte <code>.env.example</code> in README), nato znova zaženite <code>npm run dev</code>."
   },

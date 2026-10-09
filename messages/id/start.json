@@ -84,9 +84,12 @@
     "sentTo": "Kami mengirim email ke <b>{email}</b>. Klik tautan di dalamnya (di browser ini), atau ketik kode dari email di bawah.",
     "code": "Kode dari email",
     "signInWithCode": "Masuk dengan kode",
-    "again": "Kirim email baru atau gunakan alamat lain",
+    "again": "Use a different email address",
     "setupTitle": "Hampir selesai: Supabase belum terhubung.",
-    "setupText": "Buat file <code>.env.local</code> dengan URL Supabase dan kunci publikasi Anda (lihat <code>.env.example</code> dan README), lalu mulai ulang <code>npm run dev</code>."
+    "setupText": "Buat file <code>.env.local</code> dengan URL Supabase dan kunci publikasi Anda (lihat <code>.env.example</code> dan README), lalu mulai ulang <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Pilih bahasa Anda",

@@ -84,9 +84,12 @@
     "sentTo": "<b>{email}</b>(으)로 이메일을 보냈습니다. 이메일의 링크를 (이 브라우저에서) 클릭하거나 아래에 이메일의 코드를 입력하세요.",
     "code": "이메일의 코드",
     "signInWithCode": "코드로 로그인",
-    "again": "이메일 다시 보내기 또는 다른 주소 사용",
+    "again": "Use a different email address",
     "setupTitle": "거의 다 됐습니다: Supabase가 아직 연결되지 않았습니다.",
-    "setupText": "Supabase URL과 공개 키가 담긴 <code>.env.local</code> 파일을 만들고(<code>.env.example</code>과 README 참고) <code>npm run dev</code>를 다시 시작하세요."
+    "setupText": "Supabase URL과 공개 키가 담긴 <code>.env.local</code> 파일을 만들고(<code>.env.example</code>과 README 참고) <code>npm run dev</code>를 다시 시작하세요.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "언어를 선택하세요",

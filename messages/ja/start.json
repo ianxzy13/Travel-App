@@ -84,9 +84,12 @@
     "sentTo": "<b>{email}</b> にメールを送信しました。メール内のリンクを（このブラウザで）クリックするか、下にメールのコードを入力してください。",
     "code": "メールのコード",
     "signInWithCode": "コードでログイン",
-    "again": "メールを再送信する、または別のアドレスを使う",
+    "again": "Use a different email address",
     "setupTitle": "あと少し：Supabase がまだ接続されていません。",
-    "setupText": "Supabase の URL と公開キーを記載した <code>.env.local</code> ファイルを作成し（<code>.env.example</code> と README を参照）、<code>npm run dev</code> を再起動してください。"
+    "setupText": "Supabase の URL と公開キーを記載した <code>.env.local</code> ファイルを作成し（<code>.env.example</code> と README を参照）、<code>npm run dev</code> を再起動してください。",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "言語を選んでください",

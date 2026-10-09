@@ -84,9 +84,12 @@
     "sentTo": "أرسلنا رسالة إلى <b>{email}</b>. انقر الرابط فيها (في هذا المتصفح) أو اكتب الرمز من الرسالة أدناه.",
     "code": "الرمز من البريد",
     "signInWithCode": "الدخول بالرمز",
-    "again": "إرسال رسالة جديدة أو استخدام عنوان آخر",
+    "again": "Use a different email address",
     "setupTitle": "اقتربنا: Supabase غير متصل بعد.",
-    "setupText": "أنشئ ملف <code>.env.local</code> يحتوي على رابط Supabase والمفتاح العام (راجع <code>.env.example</code> وملف README)، ثم أعد تشغيل <code>npm run dev</code>."
+    "setupText": "أنشئ ملف <code>.env.local</code> يحتوي على رابط Supabase والمفتاح العام (راجع <code>.env.example</code> وملف README)، ثم أعد تشغيل <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "اختر لغتك",

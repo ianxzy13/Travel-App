@@ -84,9 +84,12 @@
     "sentTo": "Nous avons envoyé un e-mail à <b>{email}</b>. Cliquez sur le lien (dans ce navigateur) ou saisissez ci-dessous le code de l’e-mail.",
     "code": "Code de l’e-mail",
     "signInWithCode": "Se connecter avec le code",
-    "again": "Renvoyer un e-mail ou utiliser une autre adresse",
+    "again": "Use a different email address",
     "setupTitle": "Presque prêt : Supabase n’est pas encore connecté.",
-    "setupText": "Créez un fichier <code>.env.local</code> avec l’URL Supabase et la clé publique (voir <code>.env.example</code> et le README), puis relancez <code>npm run dev</code>."
+    "setupText": "Créez un fichier <code>.env.local</code> avec l’URL Supabase et la clé publique (voir <code>.env.example</code> et le README), puis relancez <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Choisissez votre langue",

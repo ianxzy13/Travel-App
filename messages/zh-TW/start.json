@@ -84,9 +84,12 @@
     "sentTo": "我們已寄一封郵件到 <b>{email}</b>。點擊其中的連結（在此瀏覽器中），或在下方輸入郵件中的驗證碼。",
     "code": "郵件中的驗證碼",
     "signInWithCode": "使用驗證碼登入",
-    "again": "重新寄送郵件或使用其他地址",
+    "again": "Use a different email address",
     "setupTitle": "快好了：Supabase 尚未連線。",
-    "setupText": "建立 <code>.env.local</code> 檔案，填入 Supabase 網址和公開金鑰（見 <code>.env.example</code> 和 README），然後重新執行 <code>npm run dev</code>。"
+    "setupText": "建立 <code>.env.local</code> 檔案，填入 Supabase 網址和公開金鑰（見 <code>.env.example</code> 和 README），然後重新執行 <code>npm run dev</code>。",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "選擇你的語言",

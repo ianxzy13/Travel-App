@@ -44,6 +44,7 @@ export type WeddingRow = Timestamps & {
   time_zone: string | null;
   translations: Translations;
   find_seat_enabled: boolean;
+  photos_enabled: boolean;
   anonymised_at: string | null;
 };
 
@@ -558,6 +559,17 @@ export type PaperworkItemRow = WeddingScoped & {
   sort_order: number;
 };
 
+export type WeddingPhotoRow = {
+  id: string;
+  wedding_id: string;
+  uploader_name: string;
+  file_path: string;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  created_at: string;
+};
+
 export type ScheduleItemRow = WeddingScoped & {
   day: string | null;
   start_time: string;
@@ -679,6 +691,10 @@ export type Database = {
         PaperworkItemRow,
         "wedding_id" | "person" | "title"
       >;
+      wedding_photos: Table<
+        WeddingPhotoRow,
+        "wedding_id" | "uploader_name" | "file_path"
+      >;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -767,6 +783,25 @@ export type Database = {
       };
       toggle_checklist_item: {
         Args: { p_code: string; p_item_key: string; p_done: boolean };
+        Returns: Json;
+      };
+      upload_wedding_photo: {
+        Args: {
+          p_slug: string;
+          p_uploader_name: string;
+          p_file_path: string;
+          p_caption?: string | null;
+          p_width?: number | null;
+          p_height?: number | null;
+        };
+        Returns: string;
+      };
+      list_wedding_photos: {
+        Args: { p_slug: string };
+        Returns: Json;
+      };
+      get_photo_page: {
+        Args: { p_slug: string };
         Returns: Json;
       };
     };

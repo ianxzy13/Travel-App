@@ -93,7 +93,18 @@
       "tableNamed": "{label}（テーブル {number}）"
     },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "photos": {
+      "title": "Wedding photos",
+      "heading": "Share your photos",
+      "desc": "Upload your favourite moments from today!",
+      "yourName": "Your name",
+      "captionPlaceholder": "Add a caption (optional)",
+      "upload": "Choose photos",
+      "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
+      "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
+      "photoBy": "Photo by {name}"
+    }
   },
   "rsvp": {
     "title": "出欠のご回答",

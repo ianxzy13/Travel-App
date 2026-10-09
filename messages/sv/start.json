@@ -84,9 +84,12 @@
     "sentTo": "Vi har skickat ett mejl till <b>{email}</b>. Klicka på länken (i den här webbläsaren) eller skriv koden från mejlet nedan.",
     "code": "Kod från mejlet",
     "signInWithCode": "Logga in med kod",
-    "again": "Skicka nytt mejl eller använd en annan adress",
+    "again": "Use a different email address",
     "setupTitle": "Nästan klart: Supabase är inte anslutet än.",
-    "setupText": "Skapa en fil <code>.env.local</code> med din Supabase-URL och publika nyckel (se <code>.env.example</code> och README) och starta sedan om <code>npm run dev</code>."
+    "setupText": "Skapa en fil <code>.env.local</code> med din Supabase-URL och publika nyckel (se <code>.env.example</code> och README) och starta sedan om <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Välj ditt språk",

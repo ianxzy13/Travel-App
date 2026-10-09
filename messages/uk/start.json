@@ -84,9 +84,12 @@
     "sentTo": "Ми надіслали лист на <b>{email}</b>. Натисніть посилання в ньому (у цьому браузері) або введіть код із листа нижче.",
     "code": "Код із листа",
     "signInWithCode": "Увійти за кодом",
-    "again": "Надіслати новий лист або вказати іншу адресу",
+    "again": "Use a different email address",
     "setupTitle": "Майже готово: Supabase ще не під’єднано.",
-    "setupText": "Створіть файл <code>.env.local</code> з URL і публічним ключем Supabase (див. <code>.env.example</code> і README), потім перезапустіть <code>npm run dev</code>."
+    "setupText": "Створіть файл <code>.env.local</code> з URL і публічним ключем Supabase (див. <code>.env.example</code> і README), потім перезапустіть <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Виберіть мову",

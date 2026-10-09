@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,6 +9,7 @@ import { Loader2, MailCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { sendMagicLink, signInWithGoogle, verifyEmailCode } from "@/app/login/actions";
+import { OtpInput } from "@/components/auth/otp-input";
 import { Button } from "@/components/ui/button";
 import { FieldError } from "@/components/form-field";
 import { Input } from "@/components/ui/input";
@@ -81,27 +82,51 @@ export function LoginForm({ next, error }: { next: string; error?: string }) {
   );
 }
 
-/** "Check your inbox" + a box to type the code from the email instead of clicking the link. */
 function CheckInbox({ email, next, onBack }: { email: string; next: string; onBack: () => void }) {
   const t = useTranslations("login");
   const router = useRouter();
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [cooldown, setCooldown] = useState(60);
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const timer = setTimeout(() => setCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [cooldown]);
+
+  const submit = useCallback(
+    (value: string) => {
+      if (value.length < 6 || pending) return;
+      setError(null);
+      startTransition(async () => {
+        const result = await verifyEmailCode({ email, code: value });
+        if (result.ok) {
+          router.replace(next);
+          router.refresh();
+        } else {
+          setError(result.error);
+        }
+      });
+    },
+    [email, next, pending, router],
+  );
+
+  function handleChange(value: string) {
+    setCode(value);
     setError(null);
+    if (value.length === 6) submit(value);
+  }
+
+  function handleResend() {
+    setCooldown(60);
     startTransition(async () => {
-      const result = await verifyEmailCode({ email, code });
-      if (result.ok) {
-        router.replace(next);
-        router.refresh();
-      } else {
-        setError(result.error);
-      }
+      const result = await sendMagicLink({ email, next });
+      if (result.ok) toast.success(t("resent"));
+      else toast.error(result.error);
     });
-  };
+  }
 
   return (
     <div className="space-y-5">
@@ -115,31 +140,35 @@ function CheckInbox({ email, next, onBack }: { email: string; next: string; onBa
           })}
         </p>
       </div>
-      <form onSubmit={submit} className="space-y-3" noValidate>
-        <div className="space-y-2">
-          <Label htmlFor="code">{t("code")}</Label>
-          <Input
-            id="code"
-            inputMode="numeric"
-            autoComplete="one-time-code"
-            placeholder="123456"
-            maxLength={10}
-            value={code}
-            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-            aria-invalid={!!error}
-            aria-describedby={error ? "code-error" : undefined}
-            className="text-center text-lg tracking-[0.3em]"
-          />
-          <FieldError id="code-error" message={error ?? undefined} />
-        </div>
-        <Button type="submit" className="w-full" disabled={pending || code.length < 6}>
-          {pending && <Loader2 className="animate-spin" aria-hidden />}
-          {t("signInWithCode")}
-        </Button>
-      </form>
-      <Button variant="link" className="w-full" onClick={onBack}>
-        {t("again")}
+
+      <div className="space-y-2">
+        <Label className="block text-center text-sm">{t("code")}</Label>
+        <OtpInput value={code} onChange={handleChange} disabled={pending} error={!!error} />
+        <FieldError id="code-error" message={error ?? undefined} />
+      </div>
+
+      <Button
+        onClick={() => submit(code)}
+        className="w-full"
+        disabled={pending || code.length < 6}
+      >
+        {pending && <Loader2 className="animate-spin" aria-hidden />}
+        {t("signInWithCode")}
       </Button>
+
+      <div className="flex flex-col items-center gap-1">
+        <Button
+          variant="link"
+          className="text-muted-foreground text-xs"
+          onClick={handleResend}
+          disabled={cooldown > 0 || pending}
+        >
+          {cooldown > 0 ? t("resendWait", { seconds: cooldown }) : t("resend")}
+        </Button>
+        <Button variant="link" className="text-xs" onClick={onBack}>
+          {t("again")}
+        </Button>
+      </div>
     </div>
   );
 }

@@ -84,9 +84,12 @@
     "sentTo": "We hebben een e-mail gestuurd naar <b>{email}</b>. Klik op de link (in deze browser) of typ hieronder de code uit de e-mail.",
     "code": "Code uit de e-mail",
     "signInWithCode": "Inloggen met code",
-    "again": "Nieuwe e-mail sturen of ander adres gebruiken",
+    "again": "Use a different email address",
     "setupTitle": "Bijna klaar: Supabase is nog niet gekoppeld.",
-    "setupText": "Maak een bestand <code>.env.local</code> met je Supabase-URL en publieke sleutel (zie <code>.env.example</code> en de README) en start <code>npm run dev</code> opnieuw."
+    "setupText": "Maak een bestand <code>.env.local</code> met je Supabase-URL en publieke sleutel (zie <code>.env.example</code> en de README) en start <code>npm run dev</code> opnieuw.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Kies je taal",

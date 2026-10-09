@@ -84,9 +84,12 @@
     "sentTo": "เราส่งอีเมลไปที่ <b>{email}</b> แล้ว คลิกลิงก์ในอีเมล (ในเบราว์เซอร์นี้) หรือพิมพ์รหัสจากอีเมลด้านล่าง",
     "code": "รหัสจากอีเมล",
     "signInWithCode": "เข้าสู่ระบบด้วยรหัส",
-    "again": "ส่งอีเมลใหม่หรือใช้อีเมลอื่น",
+    "again": "Use a different email address",
     "setupTitle": "เกือบเสร็จแล้ว: ยังไม่ได้เชื่อมต่อ Supabase",
-    "setupText": "สร้างไฟล์ <code>.env.local</code> ที่มี URL ของ Supabase และคีย์สาธารณะ (ดู <code>.env.example</code> และ README) แล้วรีสตาร์ต <code>npm run dev</code>"
+    "setupText": "สร้างไฟล์ <code>.env.local</code> ที่มี URL ของ Supabase และคีย์สาธารณะ (ดู <code>.env.example</code> และ README) แล้วรีสตาร์ต <code>npm run dev</code>",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "เลือกภาษาของคุณ",

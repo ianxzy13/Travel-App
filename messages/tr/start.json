@@ -84,9 +84,12 @@
     "sentTo": "<b>{email}</b> adresine bir e-posta gönderdik. İçindeki bağlantıya (bu tarayıcıda) tıklayın veya e-postadaki kodu aşağıya yazın.",
     "code": "E-postadaki kod",
     "signInWithCode": "Kodla giriş yap",
-    "again": "Yeni e-posta gönder veya başka adres kullan",
+    "again": "Use a different email address",
     "setupTitle": "Neredeyse hazır: Supabase henüz bağlı değil.",
-    "setupText": "Supabase URL’niz ve herkese açık anahtarınızla bir <code>.env.local</code> dosyası oluşturun (<code>.env.example</code> ve README’ye bakın), ardından <code>npm run dev</code> komutunu yeniden başlatın."
+    "setupText": "Supabase URL’niz ve herkese açık anahtarınızla bir <code>.env.local</code> dosyası oluşturun (<code>.env.example</code> ve README’ye bakın), ardından <code>npm run dev</code> komutunu yeniden başlatın.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Dilinizi seçin",

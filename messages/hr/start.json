@@ -84,9 +84,12 @@
     "sentTo": "Poslali smo e-poruku na <b>{email}</b>. Kliknite poveznicu u njoj (u ovom pregledniku) ili upišite kôd iz e-poruke ispod.",
     "code": "Kôd iz e-poruke",
     "signInWithCode": "Prijava kôdom",
-    "again": "Pošalji novu e-poruku ili koristi drugu adresu",
+    "again": "Use a different email address",
     "setupTitle": "Skoro gotovo: Supabase još nije povezan.",
-    "setupText": "Stvorite datoteku <code>.env.local</code> sa svojim Supabase URL-om i javnim ključem (vidi <code>.env.example</code> i README), zatim ponovno pokrenite <code>npm run dev</code>."
+    "setupText": "Stvorite datoteku <code>.env.local</code> sa svojim Supabase URL-om i javnim ključem (vidi <code>.env.example</code> i README), zatim ponovno pokrenite <code>npm run dev</code>.",
+    "resend": "Resend code",
+    "resendWait": "Resend code ({seconds}s)",
+    "resent": "A new code has been sent to your email."
   },
   "welcome": {
     "title": "Odaberite svoj jezik",
