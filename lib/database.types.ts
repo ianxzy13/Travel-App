@@ -559,6 +559,29 @@ export type PaperworkItemRow = WeddingScoped & {
   sort_order: number;
 };
 
+// ---------- Save the Date ----------
+
+export type StdTemplateEnum = "elegant" | "modern" | "playful";
+
+export type SaveTheDateRow = {
+  id: string;
+  wedding_id: string;
+  media_path: string | null;
+  media_type: "image" | "video" | null;
+  template: StdTemplateEnum;
+  headline: string;
+  subline: string | null;
+  message: string | null;
+  token: string;
+  show_date: boolean;
+  show_location: boolean;
+  show_countdown: boolean;
+  published: boolean;
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type WeddingPhotoRow = {
   id: string;
   wedding_id: string;
@@ -695,6 +718,10 @@ export type Database = {
         WeddingPhotoRow,
         "wedding_id" | "uploader_name" | "file_path"
       >;
+      save_the_dates: Table<
+        SaveTheDateRow,
+        "wedding_id"
+      >;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
@@ -804,6 +831,10 @@ export type Database = {
         Args: { p_slug: string };
         Returns: Json;
       };
+      get_save_the_date: {
+        Args: { p_token: string };
+        Returns: Json;
+      };
     };
     Enums: {
       member_role: MemberRole;
@@ -822,6 +853,7 @@ export type Database = {
       flight_category: FlightCategory;
       flight_direction: FlightDirection;
       flight_status: FlightStatus;
+      std_template: StdTemplateEnum;
       pin_status: PinStatus;
       site_template: SiteTemplate;
       site_section: SiteSectionKind;

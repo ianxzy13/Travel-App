@@ -12,6 +12,7 @@ import {
   ListChecks,
   MailCheck,
   Plane,
+  Send,
   Settings,
   Store,
   Users,
@@ -40,6 +41,7 @@ export type NavKey =
   | "website"
   | "schedule"
   | "photos"
+  | "saveTheDate"
   | "settings"
   | "home";
 export type NavItem = { href: string; key: NavKey; icon: LucideIcon };
@@ -79,6 +81,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
     items: [
       { href: "/app/inspiration", key: "inspiration", icon: Images },
       { href: "/app/photos", key: "photos", icon: Camera },
+      { href: "/app/save-the-date", key: "saveTheDate", icon: Send },
       { href: "/app/website", key: "website", icon: Globe },
       { href: "/app/schedule", key: "schedule", icon: Clock },
     ],

@@ -24,7 +24,8 @@
       },
       "gifts": "Gifts",
       "paperwork": "Paperwork",
-      "photos": "Photos"
+      "photos": "Photos",
+      "saveTheDate": "Save the Date"
     },
     "shell": {
       "mainNav": "Hoofdnavigatie",
@@ -336,6 +337,35 @@
       "deleteDesc": "This photo will be permanently removed.",
       "qrHeading": "Share your photos",
       "qrScan": "Scan to upload your wedding photos"
+    },
+    "saveTheDate": {
+      "title": "Save the Date",
+      "description": "Design your Save the Date card, upload a photo or video, and share a beautiful link with your guests.",
+      "media": "Photo or video",
+      "addMedia": "Upload photo / video",
+      "changeMedia": "Change media",
+      "removeMedia": "Remove",
+      "uploading": "Uploading…",
+      "mediaUploaded": "Media uploaded",
+      "mediaRemoved": "Media removed",
+      "template": "Card style",
+      "headline": "Headline",
+      "subline": "Subtitle",
+      "sublinePlaceholder": "e.g. We're getting married!",
+      "message": "Personal message",
+      "messagePlaceholder": "An optional message shown on the public page",
+      "showDate": "Show wedding date",
+      "showLocation": "Show location",
+      "showCountdown": "Show countdown",
+      "save": "Save design",
+      "saved": "Design saved",
+      "publish": "Publish",
+      "published": "Save the Date is live!",
+      "unpublished": "Save the Date unpublished",
+      "shareLink": "Share link",
+      "linkCopied": "Link copied",
+      "unpublishedHint": "Publish the page first so guests can see it.",
+      "preview": "Preview"
     }
   }
 }

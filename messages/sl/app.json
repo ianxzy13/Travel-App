@@ -16,6 +16,7 @@
       "inspiration": "Navdih",
       "website": "Spletna stran",
       "photos": "Fotografije",
+      "saveTheDate": "Najava poroke",
       "schedule": "Potek dneva",
       "settings": "Nastavitve",
       "home": "Domov",
@@ -336,6 +337,35 @@
       "deleteDesc": "Ta fotografija bo trajno odstranjena.",
       "qrHeading": "Delite svoje fotografije",
       "qrScan": "Skenirajte za nalaganje poročnih fotografij"
+    },
+    "saveTheDate": {
+      "title": "Najava poroke",
+      "description": "Oblikujte najavo poroke, naložite fotografijo ali video in delite lep link z gosti.",
+      "media": "Fotografija ali video",
+      "addMedia": "Naloži fotografijo / video",
+      "changeMedia": "Zamenjaj",
+      "removeMedia": "Odstrani",
+      "uploading": "Nalaganje…",
+      "mediaUploaded": "Medij naložen",
+      "mediaRemoved": "Medij odstranjen",
+      "template": "Slog kartice",
+      "headline": "Naslov",
+      "subline": "Podnaslov",
+      "sublinePlaceholder": "npr. Poročiva se!",
+      "message": "Osebno sporočilo",
+      "messagePlaceholder": "Neobvezno sporočilo, ki se prikaže na javni strani",
+      "showDate": "Prikaži datum poroke",
+      "showLocation": "Prikaži lokacijo",
+      "showCountdown": "Prikaži odštevalnik",
+      "save": "Shrani oblikovanje",
+      "saved": "Oblikovanje shranjeno",
+      "publish": "Objavi",
+      "published": "Najava poroke je objavljena!",
+      "unpublished": "Najava poroke je skrita",
+      "shareLink": "Povezava za deljenje",
+      "linkCopied": "Povezava kopirana",
+      "unpublishedHint": "Najprej objavite stran, da jo gostje vidijo.",
+      "preview": "Predogled"
     }
   }
 }
