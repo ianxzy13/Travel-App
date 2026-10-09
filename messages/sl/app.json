@@ -142,6 +142,13 @@
         "cta": "Poglej dokumente",
         "progress": "{done} od {total} opravljenih",
         "nextDue": "Naslednji: {title}"
+      },
+      "saveTheDate": {
+        "title": "Najava poroke",
+        "empty": "Oblikujte in delite lepo najavo poroke s svojimi gosti.",
+        "cta": "Odpri najavo",
+        "draft": "Osnutek — še ni objavljeno",
+        "published": "Objavljeno in aktivno"
       }
     },
     "gifts": {

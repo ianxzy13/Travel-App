@@ -142,6 +142,13 @@
         "cta": "View paperwork",
         "progress": "{done} of {total} done",
         "nextDue": "Next: {title}"
+      },
+      "saveTheDate": {
+        "title": "Save the Date",
+        "empty": "Design and share a beautiful Save the Date with your guests.",
+        "cta": "Open Save the Date",
+        "draft": "Draft — not published yet",
+        "published": "Published and live"
       }
     },
     "settings": {

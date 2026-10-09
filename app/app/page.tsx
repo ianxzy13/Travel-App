@@ -12,6 +12,7 @@ import {
   ListChecks,
   MailCheck,
   MapPin,
+  Send,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -47,7 +48,7 @@ export default async function DashboardPage({
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -82,6 +83,12 @@ export default async function DashboardPage({
     tasksSummary(supabase, wedding.id),
     giftSummary(supabase, wedding.id),
     paperworkSummary(supabase, wedding.id),
+    supabase
+      .from("save_the_dates")
+      .select("published, template, media_path")
+      .eq("wedding_id", wedding.id)
+      .maybeSingle()
+      .then(({ data }) => data),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -466,6 +473,31 @@ export default async function DashboardPage({
                     {t("paperwork.nextDue", { title: paperworkStats.nextDue })}
                   </p>
                 )}
+              </div>
+            )}
+          </SummaryCard>
+          <SummaryCard
+            icon={Send}
+            title={t("saveTheDate.title")}
+            empty={t("saveTheDate.empty")}
+            href="/app/save-the-date"
+            cta={t("saveTheDate.cta")}
+          >
+            {stdData && (
+              <div className="space-y-2">
+                <p className="text-sm">
+                  {stdData.published ? (
+                    <span className="text-success inline-flex items-center gap-1.5">
+                      <span className="bg-success inline-block size-2 rounded-full" />
+                      {t("saveTheDate.published")}
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground inline-flex items-center gap-1.5">
+                      <span className="bg-muted-foreground inline-block size-2 rounded-full" />
+                      {t("saveTheDate.draft")}
+                    </span>
+                  )}
+                </p>
               </div>
             )}
           </SummaryCard>
