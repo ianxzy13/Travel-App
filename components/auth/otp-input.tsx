@@ -20,7 +20,14 @@ export function OtpInput({ value, onChange, length = 6, disabled, error }: Props
   }, [length]);
 
   function handleInput(i: number, char: string) {
-    const digit = char.replace(/\D/g, "").slice(0, 1);
+    const typed = char.replace(/\D/g, "");
+    // the phone's keyboard can fill in the whole code from the email at once
+    if (typed.length >= length) {
+      onChange(typed.slice(0, length));
+      focus(length - 1);
+      return;
+    }
+    const digit = typed.slice(-1);
     if (!digit) return;
     const next = digits.map((d, j) => (j === i ? digit : d)).join("").replace(/ /g, "");
     onChange(next);
@@ -65,7 +72,7 @@ export function OtpInput({ value, onChange, length = 6, disabled, error }: Props
           type="text"
           inputMode="numeric"
           autoComplete={i === 0 ? "one-time-code" : "off"}
-          maxLength={1}
+          maxLength={i === 0 ? length : 1}
           value={digit.trim()}
           disabled={disabled}
           aria-label={`Digit ${i + 1}`}
