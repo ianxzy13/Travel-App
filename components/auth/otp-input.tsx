@@ -13,7 +13,7 @@ type Props = {
 
 export function OtpInput({ value, onChange, length = 6, disabled, error }: Props) {
   const refs = useRef<(HTMLInputElement | null)[]>([]);
-  const digits = value.padEnd(length, "").split("").slice(0, length);
+  const digits = value.padEnd(length, " ").split("").slice(0, length);
 
   const focus = useCallback((i: number) => {
     if (i >= 0 && i < length) refs.current[i]?.focus();
