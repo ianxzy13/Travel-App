@@ -108,6 +108,8 @@
     "guestsPlaceholder": "e.g. 120",
     "currency": "Currency",
     "chooseCurrency": "Choose a currency",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies",
     "style": "Style (pick any that feel like you)",
     "accent": "Accent colour for the app",
     "accents": { "rose": "Dusty rose", "sage": "Sage" },

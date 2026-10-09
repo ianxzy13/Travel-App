@@ -150,6 +150,8 @@
     "guestsPlaceholder": "npr. 120",
     "currency": "Valuta",
     "chooseCurrency": "Izberite valuto",
+    "popularCurrencies": "Priljubljene",
+    "allCurrencies": "Vse valute",
     "style": "Slog (izberite, kar vama je blizu)",
     "accent": "Barva poudarka v aplikaciji",
     "accents": {

@@ -174,7 +174,9 @@
     "detailsViewOnly": "你只有查看权限。如需修改，请联系所有者。",
     "detailsText": "名字、日期、地点和风格。更改会应用到整个应用。",
     "saveChanges": "保存更改",
-    "saved": "婚礼详情已保存"
+    "saved": "婚礼详情已保存",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

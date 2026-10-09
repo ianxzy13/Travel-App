@@ -174,7 +174,9 @@
     "detailsViewOnly": "Avete accesso in sola lettura. Chiedete a un proprietario se serve modificare qualcosa.",
     "detailsText": "Nomi, data, luogo e stile. Le modifiche valgono in tutta l’app.",
     "saveChanges": "Salva modifiche",
-    "saved": "Dettagli del matrimonio salvati"
+    "saved": "Dettagli del matrimonio salvati",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

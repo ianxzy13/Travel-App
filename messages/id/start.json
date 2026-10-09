@@ -174,7 +174,9 @@
     "detailsViewOnly": "Anda hanya memiliki akses lihat. Minta pemilik jika Anda perlu melakukan perubahan.",
     "detailsText": "Nama, tanggal, lokasi, dan gaya. Perubahan berlaku di seluruh aplikasi.",
     "saveChanges": "Simpan perubahan",
-    "saved": "Detail pernikahan disimpan"
+    "saved": "Detail pernikahan disimpan",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

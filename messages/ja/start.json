@@ -174,7 +174,9 @@
     "detailsViewOnly": "閲覧のみの権限です。変更が必要な場合はオーナーに依頼してください。",
     "detailsText": "名前、日付、場所、スタイル。変更はアプリ全体に反映されます。",
     "saveChanges": "変更を保存",
-    "saved": "結婚式の詳細を保存しました"
+    "saved": "結婚式の詳細を保存しました",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

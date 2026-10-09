@@ -174,7 +174,9 @@
     "detailsViewOnly": "Imate pristup samo za pregled. Ako trebate nešto promijeniti, zamolite vlasnika.",
     "detailsText": "Imena, datum, mjesto i stil. Promjene vrijede posvuda u aplikaciji.",
     "saveChanges": "Spremi promjene",
-    "saved": "Detalji vjenčanja su spremljeni"
+    "saved": "Detalji vjenčanja su spremljeni",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

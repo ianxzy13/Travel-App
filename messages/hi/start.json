@@ -174,7 +174,9 @@
     "detailsViewOnly": "आपके पास केवल देखने की पहुँच है। बदलाव करना हो तो किसी मालिक से कहें।",
     "detailsText": "नाम, तारीख, स्थान और शैली। बदलाव पूरे ऐप में लागू होते हैं।",
     "saveChanges": "बदलाव सहेजें",
-    "saved": "शादी का विवरण सहेजा गया"
+    "saved": "शादी का विवरण सहेजा गया",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

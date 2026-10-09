@@ -174,7 +174,9 @@
     "detailsViewOnly": "Du hast nur Lesezugriff. Frag einen Eigentümer, wenn du etwas ändern musst.",
     "detailsText": "Namen, Datum, Ort und Stil. Änderungen gelten überall in der App.",
     "saveChanges": "Änderungen speichern",
-    "saved": "Hochzeitsdetails gespeichert"
+    "saved": "Hochzeitsdetails gespeichert",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

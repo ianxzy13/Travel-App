@@ -174,7 +174,9 @@
     "detailsViewOnly": "Je hebt alleen leesrechten. Vraag een eigenaar als je iets wilt wijzigen.",
     "detailsText": "Namen, datum, plaats en stijl. Wijzigingen gelden overal in de app.",
     "saveChanges": "Wijzigingen opslaan",
-    "saved": "Details van de bruiloft opgeslagen"
+    "saved": "Details van de bruiloft opgeslagen",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

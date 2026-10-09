@@ -174,7 +174,9 @@
     "detailsViewOnly": "لديك صلاحية العرض فقط. اطلب من مالك إذا احتجت إلى تغيير شيء.",
     "detailsText": "الأسماء والتاريخ والمكان والأسلوب. تنطبق التغييرات في كل أنحاء التطبيق.",
     "saveChanges": "حفظ التغييرات",
-    "saved": "تم حفظ تفاصيل الزفاف"
+    "saved": "تم حفظ تفاصيل الزفاف",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

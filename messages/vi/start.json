@@ -174,7 +174,9 @@
     "detailsViewOnly": "Bạn chỉ có quyền xem. Hãy nhờ chủ sở hữu nếu cần thay đổi.",
     "detailsText": "Tên, ngày, địa điểm và phong cách. Thay đổi áp dụng cho toàn bộ ứng dụng.",
     "saveChanges": "Lưu thay đổi",
-    "saved": "Đã lưu thông tin đám cưới"
+    "saved": "Đã lưu thông tin đám cưới",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

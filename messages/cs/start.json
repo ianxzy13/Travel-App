@@ -174,7 +174,9 @@
     "detailsViewOnly": "Máte přístup jen pro čtení. Pokud potřebujete něco změnit, požádejte vlastníka.",
     "detailsText": "Jména, datum, místo a styl. Změny platí v celé aplikaci.",
     "saveChanges": "Uložit změny",
-    "saved": "Podrobnosti svatby uloženy"
+    "saved": "Podrobnosti svatby uloženy",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

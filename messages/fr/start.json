@@ -174,7 +174,9 @@
     "detailsViewOnly": "Vous avez un accès en lecture seule. Demandez à un propriétaire si vous devez modifier quelque chose.",
     "detailsText": "Prénoms, date, lieu et style. Les modifications s’appliquent partout dans l’appli.",
     "saveChanges": "Enregistrer",
-    "saved": "Détails du mariage enregistrés"
+    "saved": "Détails du mariage enregistrés",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {

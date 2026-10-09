@@ -174,7 +174,9 @@
     "detailsViewOnly": "Du har bara läsbehörighet. Fråga en ägare om du behöver ändra något.",
     "detailsText": "Namn, datum, plats och stil. Ändringar gäller överallt i appen.",
     "saveChanges": "Spara ändringar",
-    "saved": "Bröllopsdetaljer sparade"
+    "saved": "Bröllopsdetaljer sparade",
+    "popularCurrencies": "Popular",
+    "allCurrencies": "All currencies"
   },
   "roles": {
     "owner": {
