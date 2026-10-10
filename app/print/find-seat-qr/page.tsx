@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PrintFindSeatQr() {
   const { wedding } = await requireWedding();
   const t = await getTranslations("seating");
-  const url = `${getSiteUrl()}/w/${wedding.slug}/seat`;
+  const url = `${await getSiteUrl()}/w/${wedding.slug}/seat`;
 
   return (
     <div className="bg-background min-h-dvh">
