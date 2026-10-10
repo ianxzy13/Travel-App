@@ -174,3 +174,46 @@ h3 {
     center;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
+
+/* Start page picture (components/hero-art.tsx): petals drift down, lights twinkle. */
+.hero-petal {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: hero-petal-fall var(--petal-duration, 16s) linear var(--petal-delay, 0s) infinite;
+}
+.hero-twinkle {
+  animation: hero-twinkle 5s ease-in-out var(--twinkle-delay, 0s) infinite;
+}
+@keyframes hero-petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  8%,
+  85% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--petal-drift, 80px), 1250px) rotate(var(--petal-spin, 360deg));
+  }
+}
+@keyframes hero-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-petal,
+  .hero-twinkle {
+    animation: none;
+  }
+  .hero-petal {
+    opacity: 0;
+  }
+}
