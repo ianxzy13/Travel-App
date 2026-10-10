@@ -525,3 +525,175 @@ export async function sendSaveTheDates(
   revalidatePath("/app/save-the-date/recipients");
   return { ok: true, data: { sent, failed, noEmail } };
 }
+
+// ---------- SD4: send SMS ----------
+
+export type SmsSendSummary = {
+  sent: number;
+  failed: number;
+  noPhone: string[];
+};
+
+export async function sendSaveTheDateSms(
+  stdId: string,
+): Promise<ActionResult<SmsSendSummary>> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+
+  const { getTwilio, twilioFrom } = await import("@/lib/sms/twilio");
+  const tw = getTwilio();
+  if (!tw)
+    return { ok: false, error: "SMS is not configured (TWILIO_ACCOUNT_SID)." };
+
+  const { wedding, supabase } = ctx;
+
+  const { data: std } = await supabase
+    .from("save_the_dates")
+    .select("id, headline, message, published")
+    .eq("id", stdId)
+    .eq("wedding_id", wedding.id)
+    .single();
+
+  if (!std) return { ok: false, error: "Save the Date not found." };
+  if (!std.published)
+    return { ok: false, error: "Publish the Save the Date first." };
+
+  const sends = await fetchAll((f, t) =>
+    supabase
+      .from("save_the_date_sends")
+      .select("id, household_id, token, status")
+      .eq("save_the_date_id", stdId)
+      .eq("method", "sms")
+      .eq("status", "not_sent")
+      .order("id")
+      .range(f, t),
+  );
+
+  if (sends.length === 0)
+    return { ok: true, data: { sent: 0, failed: 0, noPhone: [] } };
+
+  const householdIds = sends.map((s) => s.household_id);
+  const households: { id: string; name: string }[] = [];
+  const guestPhones: { household_id: string; phone: string }[] = [];
+
+  for (let i = 0; i < householdIds.length; i += 100) {
+    const batch = householdIds.slice(i, i + 100);
+    const [h, g] = await Promise.all([
+      supabase
+        .from("households")
+        .select("id, name")
+        .eq("wedding_id", wedding.id)
+        .in("id", batch),
+      supabase
+        .from("guests")
+        .select("id, household_id, phone")
+        .eq("wedding_id", wedding.id)
+        .in("household_id", batch)
+        .is("plus_one_of", null)
+        .not("phone", "is", null),
+    ]);
+    if (h.error || g.error) return fail("sendSaveTheDateSms", h.error ?? g.error);
+    households.push(...h.data);
+    for (const guest of g.data) {
+      if (guest.phone?.trim()) {
+        guestPhones.push({
+          household_id: guest.household_id,
+          phone: guest.phone.trim(),
+        });
+      }
+    }
+  }
+
+  const phoneByHousehold = new Map<string, string>();
+  for (const gp of guestPhones) {
+    if (!phoneByHousehold.has(gp.household_id)) {
+      phoneByHousehold.set(gp.household_id, gp.phone);
+    }
+  }
+
+  const householdMap = new Map(households.map((h) => [h.id, h]));
+  const couple = `${wedding.partner_a_name} & ${wedding.partner_b_name}`;
+  const siteUrl = await getSiteUrl();
+  const statusCallback = `${siteUrl}/api/twilio/webhook`;
+  const from = twilioFrom();
+
+  let sent = 0;
+  let failed = 0;
+  const noPhone: string[] = [];
+
+  for (const send of sends) {
+    const h = householdMap.get(send.household_id);
+    if (!h) continue;
+    const phone = phoneByHousehold.get(send.household_id);
+    if (!phone) {
+      noPhone.push(h.name);
+      continue;
+    }
+
+    const link = `${siteUrl}/s/${send.token}`;
+    const body = `${couple} — Save the Date!\n${link}`;
+
+    try {
+      const msg = await tw.messages.create({
+        from,
+        to: phone,
+        body,
+        statusCallback,
+      });
+
+      await supabase
+        .from("save_the_date_sends")
+        .update({
+          status: "sent",
+          resend_id: msg.sid,
+          to_address: phone,
+          sent_at: new Date().toISOString(),
+        })
+        .eq("id", send.id);
+
+      sent++;
+    } catch (err: unknown) {
+      const errMsg =
+        err instanceof Error ? err.message.slice(0, 500) : "Unknown error";
+      console.error("[sendSaveTheDateSms]", errMsg);
+
+      await supabase
+        .from("save_the_date_sends")
+        .update({
+          status: "failed",
+          to_address: phone,
+          error: errMsg,
+        })
+        .eq("id", send.id);
+
+      failed++;
+    }
+  }
+
+  revalidatePath("/app/save-the-date/recipients");
+  return { ok: true, data: { sent, failed, noPhone } };
+}
+
+export async function getSmsEstimate(stdId: string): Promise<ActionResult<{ count: number; segments: number }>> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const { wedding, supabase } = ctx;
+
+  const sends = await fetchAll((f, t) =>
+    supabase
+      .from("save_the_date_sends")
+      .select("id")
+      .eq("save_the_date_id", stdId)
+      .eq("method", "sms")
+      .eq("status", "not_sent")
+      .order("id")
+      .range(f, t),
+  );
+
+  const couple = `${wedding.partner_a_name} & ${wedding.partner_b_name}`;
+  const sampleBody = `${couple} — Save the Date!\nhttps://example.com/s/abc123def456789a`;
+  const { estimateSegments } = await import("@/lib/sms/twilio");
+  const segments = estimateSegments(sampleBody);
+
+  return { ok: true, data: { count: sends.length, segments } };
+}

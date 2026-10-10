@@ -422,7 +422,12 @@
       "sendComplete": "Done! {sent} sent, {failed} failed.",
       "sendNoEmail": "{count, plural, one {# household} other {# households}} had no email address.",
       "emailNotConfigured": "Email is not set up. Add RESEND_API_KEY to your environment.",
-      "mustPublish": "Publish your Save the Date before sending."
+      "mustPublish": "Publish your Save the Date before sending.",
+      "sendAllSms": "Send texts",
+      "sendSmsConfirmTitle": "Send Save the Date by text?",
+      "sendSmsConfirmBody": "This will send {count, plural, one {# text message} other {# text messages}} via SMS. Standard messaging rates may apply. This cannot be undone.",
+      "sendNoPhone": "{count, plural, one {# household} other {# households}} had no phone number.",
+      "smsNotConfigured": "SMS is not set up. Add Twilio credentials to your environment."
     }
   }
 }

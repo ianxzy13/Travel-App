@@ -414,6 +414,11 @@
       "sendNoEmail": "{count, plural, one {# gospodinjstvo} two {# gospodinjstvi} few {# gospodinjstva} other {# gospodinjstev}} brez e-naslova.",
       "emailNotConfigured": "E-pošta ni nastavljena. Dodajte RESEND_API_KEY.",
       "mustPublish": "Najprej objavite najavo poroke.",
+      "sendAllSms": "Pošlji SMS",
+      "sendSmsConfirmTitle": "Pošlji najavo poroke po SMS-u?",
+      "sendSmsConfirmBody": "To bo poslalo {count, plural, one {# sporočilo} two {# sporočili} few {# sporočila} other {# sporočil}} po SMS-u. Veljajo standardne tarife. Tega ni mogoče razveljaviti.",
+      "sendNoPhone": "{count, plural, one {# gospodinjstvo} two {# gospodinjstvi} few {# gospodinjstva} other {# gospodinjstev}} brez telefonske številke.",
+      "smsNotConfigured": "SMS ni nastavljen. Dodajte Twilio podatke.",
       "status": {
         "not_sent": "Ni poslano",
         "queued": "V vrsti",
