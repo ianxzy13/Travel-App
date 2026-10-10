@@ -22,7 +22,6 @@ import {
   ensureRecipientSends,
   exportRecipientsCsv,
   loadRecipients,
-  sendSaveTheDateSms,
   sendSaveTheDates,
   updateSendMethod,
   type RecipientRow,
@@ -183,54 +182,31 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
   }
 
   // Send state
-  const [showConfirm, setShowConfirm] = useState<"email" | "sms" | null>(null);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [sending, setSending] = useState(false);
 
   const emailCount = recipients.filter(
     (r) => r.method === "email" && r.status === "not_sent" && !r.declined,
   ).length;
-  const smsCount = recipients.filter(
-    (r) => r.method === "sms" && r.status === "not_sent" && !r.declined,
-  ).length;
 
   function handleSendEmails() {
     if (!published) { toast.error(t("mustPublish")); return; }
     if (emailCount === 0) return;
-    setShowConfirm("email");
-  }
-
-  function handleSendSms() {
-    if (!published) { toast.error(t("mustPublish")); return; }
-    if (smsCount === 0) return;
-    setShowConfirm("sms");
+    setShowConfirm(true);
   }
 
   async function confirmSend() {
-    const mode = showConfirm;
-    setShowConfirm(null);
+    setShowConfirm(false);
     setSending(true);
-    if (mode === "email") {
-      const result = await sendSaveTheDates(stdId);
-      setSending(false);
-      if (result.ok) {
-        const { sent, failed, noEmail } = result.data;
-        if (sent > 0 || failed > 0) toast.success(t("sendComplete", { sent, failed }));
-        if (noEmail.length > 0) toast(t("sendNoEmail", { count: noEmail.length }));
-        refresh();
-      } else {
-        toast.error(result.error);
-      }
+    const result = await sendSaveTheDates(stdId);
+    setSending(false);
+    if (result.ok) {
+      const { sent, failed, noEmail } = result.data;
+      if (sent > 0 || failed > 0) toast.success(t("sendComplete", { sent, failed }));
+      if (noEmail.length > 0) toast(t("sendNoEmail", { count: noEmail.length }));
+      refresh();
     } else {
-      const result = await sendSaveTheDateSms(stdId);
-      setSending(false);
-      if (result.ok) {
-        const { sent, failed, noPhone } = result.data;
-        if (sent > 0 || failed > 0) toast.success(t("sendComplete", { sent, failed }));
-        if (noPhone.length > 0) toast(t("sendNoPhone", { count: noPhone.length }));
-        refresh();
-      } else {
-        toast.error(result.error);
-      }
+      toast.error(result.error);
     }
   }
 
@@ -267,20 +243,11 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
             </Button>
             <Button
               size="sm"
-              variant="outline"
-              onClick={handleSendSms}
-              disabled={pending || sending || smsCount === 0}
-            >
-              <Phone className="mr-1.5 size-4" />
-              {t("sendAllSms")} ({smsCount})
-            </Button>
-            <Button
-              size="sm"
               onClick={handleSendEmails}
               disabled={pending || sending || emailCount === 0}
             >
               <Mail className="mr-1.5 size-4" />
-              {sending ? t("sendingProgress", { sent: "…", total: emailCount + smsCount }) : `${t("sendAllEmails")} (${emailCount})`}
+              {sending ? t("sendingProgress", { sent: "…", total: emailCount }) : `${t("sendAllEmails")} (${emailCount})`}
             </Button>
           </div>
         }
@@ -428,24 +395,20 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
       </div>
 
       {/* Send confirmation dialog */}
-      <Dialog open={showConfirm !== null} onOpenChange={(open) => { if (!open) setShowConfirm(null); }}>
+      <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {showConfirm === "sms" ? t("sendSmsConfirmTitle") : t("sendConfirmTitle")}
-            </DialogTitle>
+            <DialogTitle>{t("sendConfirmTitle")}</DialogTitle>
             <DialogDescription>
-              {showConfirm === "sms"
-                ? t("sendSmsConfirmBody", { count: smsCount })
-                : t("sendConfirmBody", { count: emailCount })}
+              {t("sendConfirmBody", { count: emailCount })}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="gap-2 sm:gap-0">
-            <Button variant="outline" onClick={() => setShowConfirm(null)}>
+            <Button variant="outline" onClick={() => setShowConfirm(false)}>
               {t("sendCancel")}
             </Button>
             <Button onClick={confirmSend}>
-              {showConfirm === "sms" ? <Phone className="mr-1.5 size-4" /> : <Mail className="mr-1.5 size-4" />}
+              <Mail className="mr-1.5 size-4" />
               {t("sendConfirmButton")}
             </Button>
           </DialogFooter>
