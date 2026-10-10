@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { AppLanguagePicker } from "@/components/app-language-picker";
 import { LoginForm } from "@/components/auth/login-form";
 import { SetupNotice } from "@/components/auth/setup-notice";
+import { HeroArt } from "@/components/hero-art";
 import { Logo } from "@/components/logo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { safeNextPath } from "@/lib/site-url";
@@ -34,7 +35,9 @@ export default async function LoginPage({
 
   return (
     <main className="grid min-h-dvh lg:grid-cols-2">
-      <div aria-hidden className="soft-photo hidden lg:block" />
+      <div aria-hidden className="bg-sand relative hidden overflow-hidden lg:block">
+        <HeroArt className="absolute inset-0" />
+      </div>
       <div className="relative flex flex-col items-center justify-center gap-10 px-4 py-16">
         <AppLanguagePicker className="absolute end-4 top-4" />
         <Logo />

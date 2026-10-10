@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { AppLanguagePicker } from "@/components/app-language-picker";
+import { HeroArt } from "@/components/hero-art";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { fmtMoney } from "@/lib/i18n/format";
@@ -57,7 +58,8 @@ export default async function LandingPage() {
         {/* Hero: a photo-style image with the text card overlapping it, like a magazine */}
         <section className="mx-auto max-w-6xl px-4 pt-4 pb-24 sm:px-6 lg:pt-10">
           <div className="grid items-center lg:grid-cols-12">
-            <div className="soft-photo relative h-72 overflow-hidden rounded-lg sm:h-96 lg:col-span-8 lg:col-start-5 lg:row-start-1 lg:h-[36rem]">
+            <div className="bg-sand relative h-72 overflow-hidden rounded-lg sm:h-96 lg:col-span-8 lg:col-start-5 lg:row-start-1 lg:h-[36rem]">
+              <HeroArt className="absolute inset-0" />
               <div className="absolute inset-0 hidden items-center justify-end pe-10 lg:flex xl:pe-16">
                 <HeroPreview />
               </div>
