@@ -24,6 +24,7 @@ import {
   sendTravelReminder,
   setDestinationAirport,
 } from "@/app/app/travel/actions";
+import { AirportCombobox } from "@/components/travel/airport-combobox";
 import { ShuttlePlanner } from "@/components/travel/shuttle-planner";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
@@ -293,23 +294,22 @@ function SearchFlights({
         <div className="grid gap-3 sm:grid-cols-[1fr_1fr_1fr_1fr]">
           <div className="space-y-1.5">
             <Label htmlFor="sf-from">{t("from")}</Label>
-            <Input
+            <AirportCombobox
               id="sf-from"
               value={from}
-              maxLength={3}
+              onChange={setFrom}
               placeholder={t("fromPlaceholder")}
-              onChange={(e) => setFrom(e.target.value.toUpperCase())}
             />
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="sf-to">{t("to")}</Label>
             <div className="flex gap-1">
-              <Input
+              <AirportCombobox
                 id="sf-to"
                 value={to}
-                maxLength={3}
+                onChange={setTo}
                 placeholder={t("toPlaceholder")}
-                onChange={(e) => setTo(e.target.value.toUpperCase())}
+                className="flex-1"
               />
               {canEdit && iata(to) && iata(to) !== destinationAirport && (
                 <Button
@@ -681,17 +681,35 @@ function FlightForm({
               )}
             </FormField>
             <FormField id="f-from" label={t("fromLabel")} error={errors.fromAirport?.message}>
-              {(aria) => (
-                <Input
-                  {...aria}
-                  placeholder={t("fromPlaceholder")}
-                  {...form.register("fromAirport")}
+              {() => (
+                <Controller
+                  control={form.control}
+                  name="fromAirport"
+                  render={({ field }) => (
+                    <AirportCombobox
+                      id="f-from"
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder={t("fromPlaceholder")}
+                    />
+                  )}
                 />
               )}
             </FormField>
             <FormField id="f-to" label={t("toLabel")} error={errors.toAirport?.message}>
-              {(aria) => (
-                <Input {...aria} placeholder={t("toPlaceholder")} {...form.register("toAirport")} />
+              {() => (
+                <Controller
+                  control={form.control}
+                  name="toAirport"
+                  render={({ field }) => (
+                    <AirportCombobox
+                      id="f-to"
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder={t("toPlaceholder")}
+                    />
+                  )}
+                />
               )}
             </FormField>
             <FormField id="f-dep" label={t("departs")} error={errors.departAt?.message}>
