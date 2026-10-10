@@ -327,5 +327,16 @@
     "fallback": "बटन काम नहीं कर रहा? {link} खोलें",
     "love": "प्यार से,",
     "subject": "{couple} की शादी के लिए यात्रा विवरण"
+  },
+  "stdEmail": {
+    "preview": "Save the Date for {couple}’s wedding!",
+    "eyebrow": "Save the Date",
+    "heading": "Save the Date",
+    "body": "We’re getting married and would love for you to be there! Mark your calendar and stay tuned for the official invitation.",
+    "button": "View details",
+    "fallback": "Button not working? Open {link}",
+    "love": "With love,",
+    "personal": "This link is personal to your household.",
+    "subject": "Save the Date: {couple}’s wedding"
   }
 }

@@ -22,6 +22,7 @@ import {
   ensureRecipientSends,
   exportRecipientsCsv,
   loadRecipients,
+  sendSaveTheDates,
   updateSendMethod,
   type RecipientRow,
   type RecipientSummary,
@@ -30,6 +31,14 @@ import { PageHeader } from "@/components/app/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -172,6 +181,42 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
     window.open(whatsappDirectUrl(r.phones[0], text), "_blank");
   }
 
+  // Send state
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const emailCount = recipients.filter(
+    (r) => r.method === "email" && r.status === "not_sent" && !r.declined,
+  ).length;
+
+  function handleSendAll() {
+    if (!published) {
+      toast.error(t("mustPublish"));
+      return;
+    }
+    if (emailCount === 0) return;
+    setShowConfirm(true);
+  }
+
+  async function confirmSend() {
+    setShowConfirm(false);
+    setSending(true);
+    const result = await sendSaveTheDates(stdId);
+    setSending(false);
+    if (result.ok) {
+      const { sent, failed, noEmail } = result.data;
+      if (sent > 0 || failed > 0) {
+        toast.success(t("sendComplete", { sent, failed }));
+      }
+      if (noEmail.length > 0) {
+        toast(t("sendNoEmail", { count: noEmail.length }));
+      }
+      refresh();
+    } else {
+      toast.error(result.error);
+    }
+  }
+
   const noContact = recipients.filter((r) => !r.method && !r.declined);
   const problems = recipients.filter((r) => r.error);
 
@@ -202,6 +247,14 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
             <Button variant="outline" size="sm" onClick={handleExportCsv} disabled={pending}>
               <Download className="mr-1.5 size-4" />
               CSV
+            </Button>
+            <Button
+              size="sm"
+              onClick={handleSendAll}
+              disabled={pending || sending || emailCount === 0}
+            >
+              <Mail className="mr-1.5 size-4" />
+              {sending ? t("sendingProgress", { sent: "…", total: emailCount }) : t("sendAllEmails")}
             </Button>
           </div>
         }
@@ -347,6 +400,27 @@ export function RecipientsPage({ stdId, published, siteUrl, couple }: Props) {
           <p className="text-muted-foreground py-10 text-center text-sm">{t("noRecipients")}</p>
         )}
       </div>
+
+      {/* Send confirmation dialog */}
+      <Dialog open={showConfirm} onOpenChange={setShowConfirm}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("sendConfirmTitle")}</DialogTitle>
+            <DialogDescription>
+              {t("sendConfirmBody", { count: emailCount })}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setShowConfirm(false)}>
+              {t("sendCancel")}
+            </Button>
+            <Button onClick={confirmSend}>
+              <Mail className="mr-1.5 size-4" />
+              {t("sendConfirmButton")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

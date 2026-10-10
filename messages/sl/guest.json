@@ -327,5 +327,16 @@
     "fallback": "Gumb ne deluje? Odprite {link}",
     "love": "Z ljubeznijo,",
     "subject": "Podrobnosti potovanja za poroko {couple}"
+  },
+  "stdEmail": {
+    "preview": "Najava poroke {couple}!",
+    "eyebrow": "Najava poroke",
+    "heading": "Najava poroke",
+    "body": "Poročiva se in bi si želela, da bi bili ob najinem velikem dnevu! Označite si datum in spremljajte uradno vabilo.",
+    "button": "Ogled podrobnosti",
+    "fallback": "Gumb ne deluje? Odprite {link}",
+    "love": "Z ljubeznijo,",
+    "personal": "Ta povezava je namenjena samo vašemu gospodinjstvu.",
+    "subject": "Najava poroke: {couple}"
   }
 }
