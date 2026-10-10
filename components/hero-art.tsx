@@ -370,6 +370,18 @@ export function HeroArt({ className }: { className?: string }) {
           </g>
         ))}
 
+        <linearGradient id="vow-hero-gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#fff1cf" />
+          <stop offset="0.45" stopColor="#f3cf8e" />
+          <stop offset="1" stopColor="#d9a35f" />
+        </linearGradient>
+        <filter id="vow-hero-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         <filter id="vow-hero-blur" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="6" />
         </filter>
@@ -499,6 +511,34 @@ export function HeroArt({ className }: { className?: string }) {
       <Bloom x={990} y={990} size={95} tone="rose" seed={58} />
       <Bloom x={790} y={830} size={55} tone="rose" seed={59} />
       <Bloom x={600} y={1010} size={72} tone="ivory" seed={60} tilt={10} />
+
+      {/* "Vow" with the logo's ring-and-infinity mark, in gold across the sky */}
+      <g filter="url(#vow-hero-glow)">
+        <g transform="translate(372 150) scale(4)" fill="none" stroke="url(#vow-hero-gold)">
+          <path
+            d="M32 21C24 9 6 9 6 21C6 33 24 33 32 21C40 9 58 9 58 21C58 33 40 33 32 21Z"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M41 6.5L43.5 3H50.5L53 6.5L47 13Z M41 6.5H53 M45 6.5L47 13L49 6.5"
+            strokeWidth="0.8"
+            strokeLinejoin="round"
+            fill="#fff6e4"
+            fillOpacity="0.35"
+          />
+        </g>
+        <text
+          x="500"
+          y="390"
+          textAnchor="middle"
+          fill="url(#vow-hero-gold)"
+          fontSize="120"
+          style={{ fontFamily: "var(--font-accent)" }}
+        >
+          Vow
+        </text>
+      </g>
 
       {/* petals drifting down */}
       <g>
