@@ -60,7 +60,8 @@
       "waiting": "미답변",
       "matching": "{count}명 일치",
       "clear": "필터 지우기",
-      "any": "전체"
+      "any": "전체",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "표시된 하객 모두 선택",

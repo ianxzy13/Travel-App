@@ -87,7 +87,10 @@
       "deleteTitle": "このやることを削除しますか？",
       "deleted": "やることを削除しました",
       "save": "保存",
-      "add": "やることを追加"
+      "add": "やることを追加",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "予算",

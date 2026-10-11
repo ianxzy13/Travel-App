@@ -13,6 +13,8 @@ export type GuestFilters = {
   rsvp: "all" | "attending" | "declined" | "waiting";
   /** "all" or a language code (the household's, or the couple's when not set) */
   language: string;
+  /** "all" or a member id — show only households managed by that member */
+  managedBy: string;
 };
 
 export const DEFAULT_FILTERS: GuestFilters = {
@@ -25,12 +27,13 @@ export const DEFAULT_FILTERS: GuestFilters = {
   list: "all",
   rsvp: "all",
   language: "all",
+  managedBy: "all",
 };
 
 /** How many filters (besides search) are active, for the "Filters (2)" badge. */
 export function activeFilterCount(f: GuestFilters) {
   return (
-    ["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp", "language"] as const
+    ["side", "householdId", "eventId", "tagId", "ageGroup", "list", "rsvp", "language", "managedBy"] as const
   ).filter((k) => f[k] !== "all").length;
 }
 
@@ -64,6 +67,7 @@ export function filterGuests(
     if (f.language !== "all" && (g.householdLanguage || coupleLanguage) !== f.language) {
       return false;
     }
+    if (f.managedBy !== "all" && g.householdManagedBy !== f.managedBy) return false;
     if (words.length) {
       // every search word must appear somewhere in the guest's details
       const haystack = normalize([g.name, g.householdName, g.email ?? "", g.phone ?? ""].join(" "));

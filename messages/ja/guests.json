@@ -60,7 +60,8 @@
       "waiting": "未返信",
       "matching": "{count} 人が該当",
       "clear": "フィルターをクリア",
-      "any": "すべて"
+      "any": "すべて",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "表示中のゲストをすべて選択",

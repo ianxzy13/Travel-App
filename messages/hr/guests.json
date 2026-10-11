@@ -60,7 +60,8 @@
       "waiting": "Još bez odgovora",
       "matching": "{count} odgovara",
       "clear": "Očisti filtre",
-      "any": "Bilo koji"
+      "any": "Bilo koji",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Odaberi sve prikazane goste",

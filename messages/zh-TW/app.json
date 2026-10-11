@@ -51,7 +51,9 @@
       "roles": {
         "owner": "擁有者",
         "editor": "編輯者",
-        "viewer": "檢視者"
+        "viewer": "檢視者",
+        "parent": "parent",
+        "helper": "helper"
       }
     },
     "notifications": {
@@ -158,6 +160,9 @@
         "rooms": "rooms",
         "seated": "seated",
         "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
+      "activity": {
+        "title": "What's new"
       }
     },
     "settings": {

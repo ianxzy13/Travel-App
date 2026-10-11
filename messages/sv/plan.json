@@ -87,7 +87,10 @@
       "deleteTitle": "Ta bort uppgiften?",
       "deleted": "Uppgift borttagen",
       "save": "Spara",
-      "add": "Lägg till uppgift"
+      "add": "Lägg till uppgift",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

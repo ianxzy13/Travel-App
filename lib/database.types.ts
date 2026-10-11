@@ -4,7 +4,7 @@
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
-export type MemberRole = "owner" | "editor" | "viewer";
+export type MemberRole = "owner" | "editor" | "parent" | "helper" | "viewer";
 export type Accent = "rose" | "sage";
 
 type Timestamps = { created_at: string; updated_at: string };
@@ -59,6 +59,7 @@ export type WeddingMemberRow = Timestamps & {
   wedding_id: string;
   user_id: string;
   role: MemberRole;
+  time_zone: string | null;
 };
 
 export type WeddingInvitationRow = Timestamps & {
@@ -112,6 +113,7 @@ export type HouseholdRow = WeddingScoped & {
   rsvp_message: string | null;
   rsvp_responded_at: string | null;
   preferred_language: string | null;
+  managed_by: string | null;
 };
 
 export type GuestRow = WeddingScoped & {
@@ -513,6 +515,25 @@ export type TaskRow = WeddingScoped & {
   created_by: string | null;
 };
 
+export type TaskCommentRow = {
+  id: string;
+  task_id: string;
+  wedding_id: string;
+  author_id: string;
+  body: string;
+  created_at: string;
+};
+
+export type ActivityLogRow = {
+  id: string;
+  wedding_id: string;
+  actor_id: string | null;
+  kind: string;
+  subject: string | null;
+  detail: Json | null;
+  created_at: string;
+};
+
 // ---------- Phase 15: gifts ----------
 
 export type GuestChecklistItemRow = WeddingScoped & {
@@ -733,6 +754,8 @@ export type Database = {
       website_settings: Table<WebsiteSettingsRow, "wedding_id">;
       website_sections: Table<WebsiteSectionRow, "wedding_id" | "kind">;
       tasks: Table<TaskRow, "wedding_id" | "title">;
+      task_comments: Table<TaskCommentRow, "task_id" | "wedding_id" | "author_id" | "body">;
+      activity_log: Table<ActivityLogRow, "wedding_id" | "kind">;
       gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
       schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
       paperwork_items: Table<

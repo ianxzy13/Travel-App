@@ -60,7 +60,8 @@
       "waiting": "لم يرد بعد",
       "matching": "المطابق: {count}",
       "clear": "مسح المرشحات",
-      "any": "الكل"
+      "any": "الكل",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "تحديد كل الضيوف المعروضين",

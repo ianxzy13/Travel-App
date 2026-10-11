@@ -60,7 +60,8 @@
       "waiting": "ยังไม่ตอบ",
       "matching": "ตรงกัน {count} คน",
       "clear": "ล้างตัวกรอง",
-      "any": "ทั้งหมด"
+      "any": "ทั้งหมด",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "เลือกแขกทั้งหมดที่แสดง",

@@ -9,6 +9,7 @@ import { missingSuggestions } from "@/lib/tasks/timeline";
 import { taskSchema } from "@/lib/validation/tasks";
 import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 import { fail, err, invalid, noPermission } from "@/lib/errors";
+import { logActivity } from "@/lib/activity";
 
 const id = z.uuid();
 
@@ -57,6 +58,7 @@ export async function saveTask(taskId: string | null, input: unknown): Promise<A
       sort_order: days + 0.999,
     });
     if (error) return fail("saveTask", error);
+    logActivity(ctx.wedding.id, user.id, "task.add", v.title);
   }
   return done();
 }
@@ -96,6 +98,51 @@ export async function moveTask(taskId: string, sortOrder: number): Promise<Actio
     .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("moveTask", error);
   return done();
+}
+
+// ─── Task comments ───
+
+export async function addComment(
+  taskId: string,
+  body: string,
+): Promise<ActionResult<{ id: string }>> {
+  const user = await requireUser();
+  const { wedding, role } = await requireWedding();
+  if (!id.safeParse(taskId).success) return noPermission();
+  const trimmed = body.trim();
+  if (!trimmed || trimmed.length > 2000) return await err("generic");
+  const sb = await createClient();
+  const { data, error } = await sb
+    .from("task_comments")
+    .insert({ task_id: taskId, wedding_id: wedding.id, author_id: user.id, body: trimmed })
+    .select("id")
+    .single();
+  if (error) return fail("addComment", error);
+  revalidatePath("/app/tasks");
+  return { ok: true, data: { id: data.id } };
+}
+
+export async function deleteComment(commentId: string): Promise<ActionResult> {
+  await requireUser();
+  await requireWedding();
+  if (!id.safeParse(commentId).success) return noPermission();
+  const sb = await createClient();
+  const { error } = await sb.from("task_comments").delete().eq("id", commentId);
+  if (error) return fail("deleteComment", error);
+  revalidatePath("/app/tasks");
+  return { ok: true };
+}
+
+export async function loadComments(taskId: string) {
+  await requireWedding();
+  if (!id.safeParse(taskId).success) return [];
+  const sb = await createClient();
+  const { data } = await sb
+    .from("task_comments")
+    .select("id, body, author_id, created_at")
+    .eq("task_id", taskId)
+    .order("created_at", { ascending: true });
+  return data ?? [];
 }
 
 /** Adds the suggested timeline (only the tasks that aren't there yet). */

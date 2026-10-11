@@ -87,7 +87,10 @@
       "deleteTitle": "Deze taak verwijderen?",
       "deleted": "Taak verwijderd",
       "save": "Opslaan",
-      "add": "Taak toevoegen"
+      "add": "Taak toevoegen",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

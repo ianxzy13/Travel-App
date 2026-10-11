@@ -226,6 +226,14 @@
       "label": "Urednik",
       "description": "Lahko dodaja in spreminja vse"
     },
+    "parent": {
+      "label": "Starš",
+      "description": "Lahko ureja goste, naloge in potovanja, ne nastavitev"
+    },
+    "helper": {
+      "label": "Pomočnik",
+      "description": "Lahko ureja naloge, ki so mu dodeljene, ostalo le gleda"
+    },
     "viewer": {
       "label": "Opazovalec",
       "description": "Lahko gleda, ne more spreminjati"

@@ -391,6 +391,7 @@ export function TasksPage(props: Props) {
         members={members}
         categories={categories}
         canEdit={canEdit}
+        currentUserId={userId}
         onOpenChange={(o) => !o && setSheet(null)}
       />
     </>

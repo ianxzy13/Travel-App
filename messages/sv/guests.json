@@ -60,7 +60,8 @@
       "waiting": "Inget svar än",
       "matching": "{count} matchar",
       "clear": "Rensa filter",
-      "any": "Alla"
+      "any": "Alla",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Markera alla gäster som visas",

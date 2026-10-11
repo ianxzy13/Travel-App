@@ -60,7 +60,8 @@
       "waiting": "Ainda sem resposta",
       "matching": "{count} correspondem",
       "clear": "Limpar filtros",
-      "any": "Qualquer"
+      "any": "Qualquer",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Selecionar todos os convidados visíveis",

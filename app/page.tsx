@@ -65,7 +65,7 @@ const COMPARE_ROWS: { key: CompareKey; vow: "yes" | "soon" }[] = [
   { key: "paperwork", vow: "yes" },
   { key: "guestLanguages", vow: "yes" },
   { key: "dualBudget", vow: "yes" },
-  { key: "familyRoles", vow: "soon" },
+  { key: "familyRoles", vow: "yes" },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {

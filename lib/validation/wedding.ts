@@ -145,10 +145,10 @@ export function toWeddingColumns(v: WeddingFormValues) {
 
 export const inviteSchema = z.object({
   email: z.email(v("email")).max(320),
-  role: z.enum(["owner", "editor", "viewer"]),
+  role: z.enum(["owner", "editor", "parent", "helper", "viewer"]),
 });
 
 export type InviteFormValues = z.infer<typeof inviteSchema>;
 
 /** Collaborator roles (labels and descriptions are in messages "roles"). */
-export const ROLES = ["owner", "editor", "viewer"] as const;
+export const ROLES = ["owner", "editor", "parent", "helper", "viewer"] as const;

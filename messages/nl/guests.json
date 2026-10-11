@@ -60,7 +60,8 @@
       "waiting": "Nog geen reactie",
       "matching": "{count} gevonden",
       "clear": "Filters wissen",
-      "any": "Alle"
+      "any": "Alle",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Alle getoonde gasten selecteren",

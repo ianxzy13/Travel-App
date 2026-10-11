@@ -82,7 +82,10 @@
       "deleteTitle": "Delete this to-do?",
       "deleted": "To-do deleted",
       "save": "Save",
-      "add": "Add to-do"
+      "add": "Add to-do",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

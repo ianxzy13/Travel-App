@@ -8,6 +8,7 @@ export type HouseholdOption = {
   name: string;
   address: AddressValues;
   language: string;
+  managedBy: string | null;
 };
 export type EventOption = { id: string; name: string };
 export type TagOption = { id: string; name: string; color: TagColor };
@@ -31,4 +32,6 @@ export type GuestPageData = {
   coupleLanguage: string;
   canEdit: boolean;
   emailConfigured: boolean;
+  currentMemberId: string | null;
+  currentRole: string;
 };

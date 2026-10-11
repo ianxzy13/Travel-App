@@ -51,7 +51,9 @@
       "roles": {
         "owner": "소유자",
         "editor": "편집자",
-        "viewer": "보기 전용"
+        "viewer": "보기 전용",
+        "parent": "parent",
+        "helper": "helper"
       }
     },
     "notifications": {
@@ -158,6 +160,9 @@
         "rooms": "rooms",
         "seated": "seated",
         "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
+      "activity": {
+        "title": "What's new"
       }
     },
     "settings": {

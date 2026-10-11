@@ -60,7 +60,8 @@
       "waiting": "Še brez odgovora",
       "matching": "{count} ujemajočih",
       "clear": "Počisti filtre",
-      "any": "Katerikoli"
+      "any": "Katerikoli",
+      "myGuests": "Moji gostje"
     },
     "list": {
       "selectAll": "Izberi vse prikazane goste",

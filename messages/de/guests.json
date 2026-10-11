@@ -60,7 +60,8 @@
       "waiting": "Noch keine Antwort",
       "matching": "{count} passend",
       "clear": "Filter zurücksetzen",
-      "any": "Alle"
+      "any": "Alle",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Alle angezeigten Gäste auswählen",

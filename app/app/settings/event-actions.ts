@@ -5,13 +5,13 @@ import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { eventSchema } from "@/lib/validation/guest";
-import { canEdit, requireWedding } from "@/lib/wedding";
+import { canManage, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 import { contentTranslations } from "@/lib/i18n/content-locale";
 
 async function editor() {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return null;
+  if (!canManage(role)) return null;
   return { wedding, supabase: await createClient() };
 }
 

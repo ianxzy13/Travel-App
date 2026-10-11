@@ -60,7 +60,8 @@
       "waiting": "Belum membalas",
       "matching": "{count} cocok",
       "clear": "Hapus filter",
-      "any": "Semua"
+      "any": "Semua",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Pilih semua tamu yang ditampilkan",

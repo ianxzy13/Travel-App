@@ -87,7 +87,10 @@
       "deleteTitle": "حذف هذه المهمة؟",
       "deleted": "تم حذف المهمة",
       "save": "حفظ",
-      "add": "إضافة مهمة"
+      "add": "إضافة مهمة",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "الميزانية",

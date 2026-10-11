@@ -60,7 +60,8 @@
       "waiting": "अभी जवाब नहीं",
       "matching": "{count} मेल खाते",
       "clear": "फ़िल्टर साफ़ करें",
-      "any": "कोई भी"
+      "any": "कोई भी",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "दिख रहे सभी मेहमान चुनें",

@@ -87,7 +87,10 @@
       "deleteTitle": "Xóa việc này?",
       "deleted": "Đã xóa việc",
       "save": "Lưu",
-      "add": "Thêm việc"
+      "add": "Thêm việc",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Ngân sách",

@@ -247,6 +247,14 @@
     "viewer": {
       "label": "檢視者",
       "description": "只能檢視，不能修改"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

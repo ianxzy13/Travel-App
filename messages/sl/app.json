@@ -51,6 +51,8 @@
       "roles": {
         "owner": "lastnik",
         "editor": "urejevalec",
+        "parent": "starš",
+        "helper": "pomočnik",
         "viewer": "bralec"
       }
     },
@@ -158,6 +160,9 @@
         "cta": "Odpri najavo",
         "draft": "Osnutek — še ni objavljeno",
         "published": "Objavljeno in aktivno"
+      },
+      "activity": {
+        "title": "Novosti"
       }
     },
     "gifts": {

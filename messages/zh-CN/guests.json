@@ -60,7 +60,8 @@
       "waiting": "尚未回复",
       "matching": "{count} 位匹配",
       "clear": "清除筛选",
-      "any": "任意"
+      "any": "任意",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "选择所有显示的宾客",

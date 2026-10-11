@@ -87,7 +87,10 @@
       "deleteTitle": "Smazat tento úkol?",
       "deleted": "Úkol smazán",
       "save": "Uložit",
-      "add": "Přidat úkol"
+      "add": "Přidat úkol",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Rozpočet",

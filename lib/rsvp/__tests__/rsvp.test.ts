@@ -18,6 +18,8 @@ const data: RsvpData = {
     rsvp_ask_travel: false,
     deadline_passed: false,
     destination_airport: null,
+    time_zone: null,
+    find_seat_enabled: false,
   },
   household: {
     id: "h",
@@ -26,6 +28,7 @@ const data: RsvpData = {
     song_request: null,
     message: null,
     responded_at: null,
+    country_code: null,
   },
   guests: [
     {

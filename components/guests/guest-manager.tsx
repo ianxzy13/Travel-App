@@ -28,11 +28,16 @@ import type { GuestPageData } from "./types";
 
 /** The whole /app/guests screen. Filtering and sorting happen in the browser. */
 export function GuestManager(data: GuestPageData) {
-  const { guests, households, events, tags, names, canEdit, emailConfigured, coupleLanguage } =
-    data;
+  const {
+    guests, households, events, tags, names, canEdit, emailConfigured, coupleLanguage,
+    currentMemberId, currentRole,
+  } = data;
   const t = useTranslations("guests");
 
-  const [filters, setFilters] = useState<GuestFilters>(DEFAULT_FILTERS);
+  const defaultFilters: GuestFilters = currentRole === "parent" && currentMemberId
+    ? { ...DEFAULT_FILTERS, managedBy: currentMemberId }
+    : DEFAULT_FILTERS;
+  const [filters, setFilters] = useState<GuestFilters>(defaultFilters);
   const [sort, setSort] = useState<SortState>({ key: "name", dir: "asc" });
   const [grouped, setGrouped] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -162,6 +167,8 @@ export function GuestManager(data: GuestPageData) {
             names={names}
             languages={languages}
             resultCount={visible.length}
+            currentMemberId={currentMemberId}
+            currentRole={currentRole}
           />
 
           {visible.length === 0 ? (

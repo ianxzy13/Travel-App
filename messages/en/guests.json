@@ -56,7 +56,8 @@
       "waiting": "No reply yet",
       "matching": "{count} matching",
       "clear": "Clear filters",
-      "any": "Any"
+      "any": "Any",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Select all shown guests",

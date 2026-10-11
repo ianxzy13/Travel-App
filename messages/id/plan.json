@@ -87,7 +87,10 @@
       "deleteTitle": "Hapus tugas ini?",
       "deleted": "Tugas dihapus",
       "save": "Simpan",
-      "add": "Tambah tugas"
+      "add": "Tambah tugas",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Anggaran",

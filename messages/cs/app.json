@@ -51,7 +51,9 @@
       "roles": {
         "owner": "vlastník",
         "editor": "editor",
-        "viewer": "čtenář"
+        "viewer": "čtenář",
+        "parent": "parent",
+        "helper": "helper"
       }
     },
     "notifications": {
@@ -158,6 +160,9 @@
         "rooms": "rooms",
         "seated": "seated",
         "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
+      "activity": {
+        "title": "What's new"
       }
     },
     "settings": {

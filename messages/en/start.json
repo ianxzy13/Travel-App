@@ -172,6 +172,8 @@
   "roles": {
     "owner": { "label": "Owner", "description": "Full access, manages collaborators" },
     "editor": { "label": "Editor", "description": "Can add and change everything" },
+    "parent": { "label": "Parent", "description": "Can edit guests, tasks and travel, not settings" },
+    "helper": { "label": "Helper", "description": "Can edit tasks assigned to them, view the rest" },
     "viewer": { "label": "Viewer", "description": "Can look but not change" }
   },
   "invite": {

@@ -100,6 +100,12 @@ export default async function DashboardPage({
       .then(({ data }) => data),
     travelSummary(supabase, wedding.id),
   ]);
+  const { data: recentActivity } = await supabase
+    .from("activity_log")
+    .select("id, kind, subject, created_at, actor_id")
+    .eq("wedding_id", wedding.id)
+    .order("created_at", { ascending: false })
+    .limit(10);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
       .from("wedding_members")
@@ -553,8 +559,42 @@ export default async function DashboardPage({
           </SummaryCard>
         </div>
       </div>
+
+      {recentActivity && recentActivity.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-serif text-2xl">{t("activity.title")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="divide-y text-sm">
+              {recentActivity.map((a) => (
+                <li key={a.id} className="flex items-center justify-between py-2">
+                  <span>
+                    <span className="text-muted-foreground">{activityLabel(a.kind)}</span>
+                    {a.subject && <> &middot; {a.subject}</>}
+                  </span>
+                  <span className="text-muted-foreground text-xs">
+                    {shortDate(a.created_at)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
+}
+
+function activityLabel(kind: string) {
+  const labels: Record<string, string> = {
+    "task.add": "New to-do",
+    "task.done": "Completed",
+    "guest.add": "Guest added",
+    "rsvp.reply": "RSVP received",
+    "comment.add": "Comment",
+  };
+  return labels[kind] ?? kind;
 }
 
 function SummaryCard({

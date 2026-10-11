@@ -10,7 +10,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
 import type { WeddingFormValues } from "@/lib/validation/wedding";
-import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
+import { canManage, requireUser, requireWedding } from "@/lib/wedding";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("app.nav"))("settings") };
@@ -98,7 +98,7 @@ export default async function SettingsPage() {
           // Re-mount the form when switching weddings so it shows fresh values.
           key={wedding.id}
           defaultValues={values}
-          readOnly={!canEdit(role)}
+          readOnly={!canManage(role)}
         />
         <LanguagesCard
           key={`lang-${wedding.id}`}
@@ -108,11 +108,11 @@ export default async function SettingsPage() {
           translations={wedding.translations ?? {}}
           location={wedding.location}
           rsvpContact={wedding.rsvp_contact}
-          readOnly={!canEdit(role)}
+          readOnly={!canManage(role)}
         />
         <EventsCard
           languages={languages}
-          readOnly={!canEdit(role)}
+          readOnly={!canManage(role)}
           events={(events ?? []).map((e, i) => ({
             ...e,
             // default events nobody has renamed ("Ceremony"…) in the viewer's language

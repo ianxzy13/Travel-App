@@ -51,7 +51,9 @@
       "roles": {
         "owner": "मालिक",
         "editor": "संपादक",
-        "viewer": "दर्शक"
+        "viewer": "दर्शक",
+        "parent": "parent",
+        "helper": "helper"
       }
     },
     "notifications": {
@@ -158,6 +160,9 @@
         "rooms": "rooms",
         "seated": "seated",
         "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
+      "activity": {
+        "title": "What's new"
       }
     },
     "settings": {

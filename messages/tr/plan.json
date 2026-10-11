@@ -87,7 +87,10 @@
       "deleteTitle": "Bu görev silinsin mi?",
       "deleted": "Görev silindi",
       "save": "Kaydet",
-      "add": "Görev ekle"
+      "add": "Görev ekle",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Bütçe",

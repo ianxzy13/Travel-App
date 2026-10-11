@@ -87,7 +87,10 @@
       "deleteTitle": "이 할 일을 삭제할까요?",
       "deleted": "할 일을 삭제했습니다",
       "save": "저장",
-      "add": "할 일 추가"
+      "add": "할 일 추가",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "예산",

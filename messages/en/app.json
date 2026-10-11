@@ -51,6 +51,8 @@
       "roles": {
         "owner": "owner",
         "editor": "editor",
+        "parent": "parent",
+        "helper": "helper",
         "viewer": "viewer"
       }
     },
@@ -158,6 +160,9 @@
         "cta": "Open Save the Date",
         "draft": "Draft — not published yet",
         "published": "Published and live"
+      },
+      "activity": {
+        "title": "What's new"
       }
     },
     "gifts": {

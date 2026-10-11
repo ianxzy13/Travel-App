@@ -247,6 +247,14 @@
     "viewer": {
       "label": "दर्शक",
       "description": "देख सकता है पर बदल नहीं सकता"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

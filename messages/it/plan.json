@@ -87,7 +87,10 @@
       "deleteTitle": "Eliminare questa attività?",
       "deleted": "Attività eliminata",
       "save": "Salva",
-      "add": "Aggiungi attività"
+      "add": "Aggiungi attività",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

@@ -87,7 +87,10 @@
       "deleteTitle": "Видалити це завдання?",
       "deleted": "Завдання видалено",
       "save": "Зберегти",
-      "add": "Додати завдання"
+      "add": "Додати завдання",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Бюджет",

@@ -9,14 +9,14 @@ import type { MemberRole } from "@/lib/database.types";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import { inviteSchema, toWeddingColumns, weddingSchema } from "@/lib/validation/wedding";
-import { canEdit, requireUser, requireWedding, WEDDING_COOKIE } from "@/lib/wedding";
+import { canManage, requireUser, requireWedding, WEDDING_COOKIE } from "@/lib/wedding";
 import { fail, invalid, noPermission, err } from "@/lib/errors";
 
 // Every action re-checks permissions here for friendly messages, but the real
 // protection is the Row Level Security policies in the database.
 
 const idSchema = z.uuid();
-const roleSchema = z.enum(["owner", "editor", "viewer"]);
+const roleSchema = z.enum(["owner", "editor", "parent", "helper", "viewer"]);
 
 /** Translate the "last owner" database rule into plain English. */
 function ownerError(context: string, error: { message: string }) {
@@ -26,7 +26,7 @@ function ownerError(context: string, error: { message: string }) {
 
 export async function updateWedding(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return noPermission();
+  if (!canManage(role)) return noPermission();
 
   const parsed = weddingSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
@@ -129,6 +129,19 @@ export async function removeMember(memberId: string): Promise<ActionResult> {
   if (!data.length) return noPermission();
 
   revalidatePath("/app/settings");
+  return { ok: true };
+}
+
+export async function saveTimeZone(tz: string): Promise<ActionResult> {
+  if (!tz || tz.length > 60) return { ok: true };
+  const user = await requireUser();
+  const { wedding } = await requireWedding();
+  const supabase = await createClient();
+  await supabase
+    .from("wedding_members")
+    .update({ time_zone: tz })
+    .eq("wedding_id", wedding.id)
+    .eq("user_id", user.id);
   return { ok: true };
 }
 
