@@ -44,6 +44,14 @@ export default async function DashboardPage({
   const { wedding, role } = await requireWedding();
   const [t, locale] = await Promise.all([getTranslations("app.dashboard"), getLocale()]);
   const money = (n: number) => fmtMoney(n, wedding.currency, locale);
+  const hasDual =
+    !!wedding.secondary_currency &&
+    !!wedding.exchange_rate &&
+    Number(wedding.exchange_rate) > 0;
+  const dualMoney = (n: number) =>
+    hasDual
+      ? fmtMoney(n * Number(wedding.exchange_rate), wedding.secondary_currency!, locale)
+      : null;
   const shortDate = (d: string) => fmtDate(d, locale, "medium");
   const { welcome } = await searchParams;
   const supabase = await createClient();
@@ -234,6 +242,11 @@ export default async function DashboardPage({
                       : t("budget.committed")}
                   </span>
                 </p>
+                {dualMoney(budget.summary.totals.committed) && (
+                  <p className="text-muted-foreground text-sm">
+                    ≈ {dualMoney(budget.summary.totals.committed)}
+                  </p>
+                )}
                 {budget.summary.total != null && budget.summary.total > 0 && (
                   <div className="bg-muted h-2 rounded-full">
                     <div
