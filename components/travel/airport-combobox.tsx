@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 import { Plane, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,7 @@ export function AirportCombobox({
   className,
 }: Props) {
   const listId = useId();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
@@ -45,9 +47,9 @@ export function AirportCombobox({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const [label, setLabel] = useState("");
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  // Resolve label for saved code on mount
   useEffect(() => {
     if (!value) { setLabel(""); return; }
     let cancelled = false;
@@ -56,9 +58,20 @@ export function AirportCombobox({
         if (cancelled) return;
         setLabel(a ? `${a.city} (${a.code})` : value);
       }),
-    );
+    ).catch(() => {});
     return () => { cancelled = true; };
   }, [value]);
+
+  const positionDropdown = useCallback(() => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    setDropdownStyle({
+      position: "fixed",
+      top: rect.bottom + 4,
+      left: rect.left,
+      width: rect.width,
+    });
+  }, []);
 
   const search = useCallback((q: string) => {
     clearTimeout(debounceRef.current);
@@ -71,12 +84,13 @@ export function AirportCombobox({
       import("@/lib/places/airports").then(({ searchAirports }) =>
         searchAirports(q, { limit: 8 }).then((r) => {
           setResults(r);
-          setOpen(r.length > 0 || q.trim().length >= 2);
+          setOpen(true);
           setActive(-1);
+          positionDropdown();
         }),
-      );
+      ).catch(() => {});
     }, 100);
-  }, []);
+  }, [positionDropdown]);
 
   function pick(airport: Airport) {
     onChange(airport.code);
@@ -128,19 +142,17 @@ export function AirportCombobox({
     if (query.trim().length >= 2) search(query);
   }
 
-  // Scroll active item into view
   useEffect(() => {
     if (active < 0 || !listRef.current) return;
     const el = listRef.current.children[active] as HTMLElement | undefined;
     el?.scrollIntoView({ block: "nearest" });
   }, [active]);
 
-  // Close on click outside
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       const target = e.target as Node;
       if (
-        !inputRef.current?.contains(target) &&
+        !wrapperRef.current?.contains(target) &&
         !listRef.current?.contains(target)
       ) {
         setOpen(false);
@@ -150,10 +162,73 @@ export function AirportCombobox({
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    function handleScroll() {
+      positionDropdown();
+    }
+    window.addEventListener("scroll", handleScroll, true);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll, true);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [open, positionDropdown]);
+
   const showClear = !!(label || query);
 
+  const dropdown = open && (
+    <div
+      ref={listRef}
+      id={listId}
+      role="listbox"
+      style={dropdownStyle}
+      className="bg-popover z-[100] max-h-64 overflow-auto rounded-md border shadow-md"
+    >
+      {results.length === 0 ? (
+        <p className="text-muted-foreground px-3 py-3 text-center text-sm">
+          No airports found. Try the city name.
+        </p>
+      ) : (
+        results.map((a, i) => (
+          <div
+            key={a.code}
+            id={`${listId}-${i}`}
+            role="option"
+            aria-selected={i === active}
+            className={cn(
+              "flex cursor-pointer items-center gap-2 px-3 py-2.5 text-sm transition-colors",
+              i === active
+                ? "bg-accent text-accent-foreground"
+                : "hover:bg-muted",
+            )}
+            onMouseEnter={() => setActive(i)}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              pick(a);
+            }}
+          >
+            <span className="shrink-0 text-base leading-none">
+              {countryEmoji(a.countryCode)}
+            </span>
+            <span className="min-w-0 flex-1 truncate">
+              <span className="font-medium">{a.name}</span>
+              <span className="text-muted-foreground">
+                {" · "}
+                {a.city}, {a.country}
+              </span>
+            </span>
+            <span className="bg-muted shrink-0 rounded px-1.5 py-0.5 font-mono text-xs font-medium">
+              {a.code}
+            </span>
+          </div>
+        ))
+      )}
+    </div>
+  );
+
   return (
-    <div className={cn("relative", className)}>
+    <div ref={wrapperRef} className={cn("relative", className)}>
       <Plane className="text-muted-foreground pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2" />
       <Input
         ref={inputRef}
@@ -183,55 +258,9 @@ export function AirportCombobox({
           <X className="size-3.5" />
         </button>
       )}
-
-      {open && (
-        <div
-          ref={listRef}
-          id={listId}
-          role="listbox"
-          className="bg-popover absolute top-full z-50 mt-1 max-h-64 w-full overflow-auto rounded-md border shadow-md"
-        >
-          {results.length === 0 ? (
-            <p className="text-muted-foreground px-3 py-3 text-center text-sm">
-              No airports found. Try the city name.
-            </p>
-          ) : (
-            results.map((a, i) => (
-              <div
-                key={a.code}
-                id={`${listId}-${i}`}
-                role="option"
-                aria-selected={i === active}
-                className={cn(
-                  "flex cursor-pointer items-center gap-2 px-3 py-2.5 text-sm transition-colors",
-                  i === active
-                    ? "bg-accent text-accent-foreground"
-                    : "hover:bg-muted",
-                )}
-                onMouseEnter={() => setActive(i)}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  pick(a);
-                }}
-              >
-                <span className="shrink-0 text-base leading-none">
-                  {countryEmoji(a.countryCode)}
-                </span>
-                <span className="min-w-0 flex-1 truncate">
-                  <span className="font-medium">{a.name}</span>
-                  <span className="text-muted-foreground">
-                    {" · "}
-                    {a.city}, {a.country}
-                  </span>
-                </span>
-                <span className="bg-muted shrink-0 rounded px-1.5 py-0.5 font-mono text-xs font-medium">
-                  {a.code}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+      {typeof document !== "undefined" && dropdown
+        ? createPortal(dropdown, document.body)
+        : dropdown}
     </div>
   );
 }
