@@ -36,6 +36,8 @@ export type WeddingRow = Timestamps & {
   rsvp_ask_travel: boolean;
   rsvp_notify_email: boolean;
   budget_total: number | null;
+  secondary_currency: string | null;
+  exchange_rate: number | null;
   destination_airport: string | null;
   reminders_checked_on: string | null;
   /** languages the wedding is shown in; the first is the main one */

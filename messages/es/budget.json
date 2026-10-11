@@ -141,7 +141,8 @@
       "currency": "Moneda",
       "notes": "Notas",
       "file": "presupuesto"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Proveedores",

@@ -141,7 +141,8 @@
       "currency": "สกุลเงิน",
       "notes": "หมายเหตุ",
       "file": "budget"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "ผู้ให้บริการ",

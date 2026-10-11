@@ -13,6 +13,7 @@
     "categories": "Kategorije",
     "unallocated": "{amount} skupnega zneska še ni razporejenega v kategorijo.",
     "overAllocated": "Vaše kategorije skupaj presegajo skupni proračun za {amount}.",
+    "dualCurrencyNote": "Prikazani so približni zneski v {secondary} pri tečaju 1 {primary} = {rate} {secondary}.",
     "total": "Skupni proračun",
     "notSet": "Ni nastavljeno",
     "committed": "Dogovorjeno",

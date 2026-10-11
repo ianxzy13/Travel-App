@@ -141,7 +141,8 @@
       "currency": "幣別",
       "notes": "備註",
       "file": "budget"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "廠商",

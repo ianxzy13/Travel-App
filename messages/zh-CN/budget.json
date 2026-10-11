@@ -141,7 +141,8 @@
       "currency": "货币",
       "notes": "备注",
       "file": "budget"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "供应商",

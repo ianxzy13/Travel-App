@@ -217,71 +217,158 @@ export function DateLocationFields({ form, disabled }: Props) {
   );
 }
 
+function CurrencySelect({
+  id,
+  value,
+  onChange,
+  disabled,
+  placeholder,
+  locale,
+  allowEmpty,
+}: {
+  id: string;
+  value: string;
+  onChange: (v: string) => void;
+  disabled?: boolean;
+  placeholder: string;
+  locale: string;
+  allowEmpty?: boolean;
+}) {
+  const t = useTranslations("weddingForm");
+  const TOP_CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "INR", "BRL"] as const;
+  const topSet = new Set<string>(TOP_CURRENCIES);
+  const top = TOP_CURRENCIES.map((c) => ({ code: c, label: currencyLabel(c, locale) }));
+  const rest = CURRENCIES
+    .filter((c) => !topSet.has(c))
+    .map((c) => ({ code: c, label: currencyLabel(c, locale) }))
+    .sort((a, b) => a.label.localeCompare(b.label, locale));
+  return (
+    <Select value={value} onValueChange={onChange} disabled={disabled}>
+      <SelectTrigger id={id} className="w-full">
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        {allowEmpty && (
+          <>
+            <SelectItem value="__none">{t("noCurrency")}</SelectItem>
+            <SelectSeparator />
+          </>
+        )}
+        <SelectGroup>
+          <SelectLabel>{t("popularCurrencies")}</SelectLabel>
+          {top.map((c) => (
+            <SelectItem key={c.code} value={c.code}>
+              {c.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+        <SelectSeparator />
+        <SelectGroup>
+          <SelectLabel>{t("allCurrencies")}</SelectLabel>
+          {rest.map((c) => (
+            <SelectItem key={c.code} value={c.code}>
+              {c.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+}
+
 export function GuestsCurrencyFields({ form, disabled }: Props) {
   const t = useTranslations("weddingForm");
   const locale = useLocale();
   const { errors } = form.formState;
+  const secondaryCurrency = form.watch("secondaryCurrency");
+  const primaryCurrency = form.watch("currency");
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      <FormField
-        id="estimatedGuests"
-        label={t("guests")}
-        hint={t("guestsHint")}
-        error={errors.estimatedGuests?.message}
-      >
-        {(aria) => (
-          <Input
-            {...aria}
-            inputMode="numeric"
-            placeholder={t("guestsPlaceholder")}
-            disabled={disabled}
-            {...form.register("estimatedGuests")}
-          />
-        )}
-      </FormField>
-      <FormField id="currency" label={t("currency")} error={errors.currency?.message}>
-        {(aria) => {
-          const TOP_CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "INR", "BRL"] as const;
-          const topSet = new Set<string>(TOP_CURRENCIES);
-          const top = TOP_CURRENCIES.map((c) => ({ code: c, label: currencyLabel(c, locale) }));
-          const rest = CURRENCIES
-            .filter((c) => !topSet.has(c))
-            .map((c) => ({ code: c, label: currencyLabel(c, locale) }))
-            .sort((a, b) => a.label.localeCompare(b.label, locale));
-          return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField
+          id="estimatedGuests"
+          label={t("guests")}
+          hint={t("guestsHint")}
+          error={errors.estimatedGuests?.message}
+        >
+          {(aria) => (
+            <Input
+              {...aria}
+              inputMode="numeric"
+              placeholder={t("guestsPlaceholder")}
+              disabled={disabled}
+              {...form.register("estimatedGuests")}
+            />
+          )}
+        </FormField>
+        <FormField id="currency" label={t("currency")} error={errors.currency?.message}>
+          {() => (
             <Controller
               control={form.control}
               name="currency"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange} disabled={disabled}>
-                  <SelectTrigger {...aria} className="w-full">
-                    <SelectValue placeholder={t("chooseCurrency")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>{t("popularCurrencies")}</SelectLabel>
-                      {top.map((c) => (
-                        <SelectItem key={c.code} value={c.code}>
-                          {c.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                    <SelectSeparator />
-                    <SelectGroup>
-                      <SelectLabel>{t("allCurrencies")}</SelectLabel>
-                      {rest.map((c) => (
-                        <SelectItem key={c.code} value={c.code}>
-                          {c.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <CurrencySelect
+                  id="currency"
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={disabled}
+                  placeholder={t("chooseCurrency")}
+                  locale={locale}
+                />
               )}
             />
-          );
-        }}
-      </FormField>
+          )}
+        </FormField>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField
+          id="secondaryCurrency"
+          label={t("secondaryCurrency")}
+          hint={t("secondaryCurrencyHint")}
+        >
+          {() => (
+            <Controller
+              control={form.control}
+              name="secondaryCurrency"
+              render={({ field }) => (
+                <CurrencySelect
+                  id="secondaryCurrency"
+                  value={field.value || "__none"}
+                  onChange={(v) => {
+                    field.onChange(v === "__none" ? "" : v);
+                    if (v === "__none") form.setValue("exchangeRate", "");
+                  }}
+                  disabled={disabled}
+                  placeholder={t("noCurrency")}
+                  locale={locale}
+                  allowEmpty
+                />
+              )}
+            />
+          )}
+        </FormField>
+        {secondaryCurrency && (
+          <FormField
+            id="exchangeRate"
+            label={t("exchangeRate")}
+            hint={t("exchangeRateHint", {
+              primary: currencyLabel(primaryCurrency, locale),
+              secondary: currencyLabel(secondaryCurrency, locale),
+            })}
+            error={errors.exchangeRate?.message}
+          >
+            {(aria) => (
+              <Input
+                {...aria}
+                inputMode="decimal"
+                placeholder="e.g. 1.08"
+                disabled={disabled}
+                {...form.register("exchangeRate")}
+              />
+            )}
+          </FormField>
+        )}
+      </div>
     </div>
   );
 }

@@ -64,7 +64,7 @@ const COMPARE_ROWS: { key: CompareKey; vow: "yes" | "soon" }[] = [
   { key: "roomsPerGuest", vow: "yes" },
   { key: "paperwork", vow: "yes" },
   { key: "guestLanguages", vow: "yes" },
-  { key: "dualBudget", vow: "soon" },
+  { key: "dualBudget", vow: "yes" },
   { key: "familyRoles", vow: "soon" },
 ];
 

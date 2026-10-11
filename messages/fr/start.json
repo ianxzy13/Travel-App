@@ -228,7 +228,12 @@
     "allCurrencies": "All currencies",
     "guestCountries": "Countries your guests will travel from",
     "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…"
+    "guestCountriesSearch": "Search countries…",
+    "noCurrency": "No second currency",
+    "secondaryCurrency": "Second currency (optional)",
+    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
+    "exchangeRate": "Exchange rate",
+    "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
     "owner": {

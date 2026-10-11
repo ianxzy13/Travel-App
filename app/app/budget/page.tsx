@@ -19,6 +19,8 @@ export default async function Budget() {
       weddingId={wedding.id}
       total={wedding.budget_total == null ? null : Number(wedding.budget_total)}
       currency={wedding.currency}
+      secondaryCurrency={wedding.secondary_currency}
+      exchangeRate={wedding.exchange_rate == null ? null : Number(wedding.exchange_rate)}
       canEdit={canEdit(role)}
       today={new Date().toISOString().slice(0, 10)}
     />

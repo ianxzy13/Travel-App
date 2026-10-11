@@ -82,6 +82,8 @@ export default async function SettingsPage() {
     weddingDate: wedding.wedding_date ?? "",
     location: wedding.location ?? "",
     currency: wedding.currency,
+    secondaryCurrency: wedding.secondary_currency ?? "",
+    exchangeRate: wedding.exchange_rate?.toString() ?? "",
     estimatedGuests: wedding.estimated_guests?.toString() ?? "",
     guestCountries: wedding.guest_countries ?? [],
     styleTags: wedding.style_tags,
