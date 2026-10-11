@@ -1,15 +1,40 @@
 {
   "landing": {
-    "metaTitle": "Vow – načrtujta poroko skupaj",
-    "metaDescription": "Gostje, potrditve, sedežni red, proračun, prizorišča, potovanja, navdih in vajina poročna spletna stran – vse na enem mirnem mestu, v vašem jeziku.",
+    "metaTitle": "Vow – načrtovalnik za poroke čez meje",
+    "metaDescription": "Vaši gostje prihajajo od povsod. Vow vsakemu gostu pripravi lastno stran za potovanje, v njegovem jeziku, z leti, sobami, sedežnim redom in dokumenti.",
     "signIn": "Prijava",
     "getStarted": "Začnite",
-    "eyebrow": "Načrtovanje poroke, skupaj",
-    "title": "Vse za vašo poroko, na enem mirnem mestu.",
-    "intro": "Načrtujte goste, potrditve, sedežni red, proračun, prizorišča in potovanja s partnerjem in družino, na telefonu ali računalniku.",
+    "eyebrow": "Poroke čez meje",
+    "title": "Vaši gostje prihajajo od povsod. Vow jih pripelje tja.",
+    "intro": "En načrtovalnik za par, družino v tujini in vsakega gosta: potovanja, sobe, sedežni red, dokumenti in spletna stran, v jeziku vsakega posebej.",
     "start": "Začnite načrtovati brezplačno",
     "seeInside": "Poglejte, kaj je notri",
-    "featuresTitle": "Ena aplikacija namesto dvanajstih preglednic",
+    "differenceTitle": "Česar druge poročne aplikacije ne počnejo",
+    "differenceText": "Narejeno za poroke, kjer gostje prečkajo meje, ne le zveznih držav.",
+    "difference": {
+      "trip": { "title": "Osebna stran za pot", "text": "Vsak gost dobi svojo stran: leti, hotelska soba, čas prevoza, številka mize in seznam, kaj prinesti." },
+      "entry": { "title": "Kontrolni seznam za vstop v EU", "text": "Pravila za potni list, vizumske zahteve, ETIAS — pripravljeno za domovino vsakega gosta." },
+      "rooms": { "title": "Tabla hotelskih sob", "text": "Rezervirajte sobe v več hotelih, dodelite goste, spremljajte, kdo je potrjen." },
+      "shuttle": { "title": "Načrtovalnik prevozov", "text": "Združite prihode po času, načrtujte prevoze in obvestite goste, kdaj gre njihov prevoz." },
+      "paperwork": { "title": "Poročni dokumenti", "text": "Dokumenti, ki jih potrebujete za zakonsko poroko v 64 državah: apostile, prevodi, roki." },
+      "languages": { "title": "25 jezikov za vsakega gosta", "text": "Slovenska babica vidi vse v slovenščini. Ameriška prijatelja v angleščini. Samodejno." }
+    },
+    "compareTitle": "Vow v primerjavi s tipičnimi ameriškimi aplikacijami",
+    "compare": {
+      "tripPage": "Osebna stran za pot vsakega gosta",
+      "entryChecklist": "Seznam za vstop/vizum po državah",
+      "roomsPerGuest": "Hotelske sobe za vsakega gosta",
+      "paperwork": "Dokumenti za poroko v tujini",
+      "guestLanguages": "Jezik vsakega gosta",
+      "dualBudget": "Proračun v dveh valutah",
+      "familyRoles": "Vloge za družinske načrtovalce",
+      "vow": "Vow",
+      "others": "Tipične aplikacije",
+      "yes": "Da",
+      "no": "Ne",
+      "soon": "Kmalu"
+    },
+    "featuresTitle": "In vse ostalo, kar pričakujete",
     "featuresText": "Vsak del načrta je povezan z ostalimi. Potrditve se prenesejo v sedežni red, rezervirana prizorišča na vašo spletno stran.",
     "features": {
       "guests": {
@@ -53,20 +78,22 @@
         "text": "Vi načrtujete v svojem jeziku; vsak gost dobi spletno stran, potrditev in e-pošto v svojem."
       }
     },
-    "closingTitle": "Recite da manj stresu.",
-    "closingText": "Povabite partnerja, starše ali organizatorja in vse načrtujte skupaj, v realnem času.",
+    "closingTitle": "Vaša poroka presega meje. Vaš načrtovalnik tudi.",
+    "closingText": "Povabite partnerja, starše ali organizatorja in vse načrtujte skupaj, v realnem času — ne glede na to, kje živite.",
     "create": "Ustvarite svojo poroko",
     "footer": "Narejeno z ljubeznijo · © {year} Vow",
     "privacy": "Zasebnost",
     "terms": "Pogoji",
-    "preview": {
-      "couple": "Ian in Maria · Lizbona",
-      "daysToGo": "dni do poroke",
-      "attending": "pride",
-      "declined": "ne pride",
-      "waiting": "čaka",
-      "budget": "Proračun",
-      "budgetOf": "{spent} od {total}"
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Prihod čet. 5. mar., 14:20",
+      "hotel": "Hotel Park · Soba 204",
+      "shuttle": "Prevoz na Bled · 16:00",
+      "table": "Miza 3 · z družino Kovač",
+      "passport": "Potni list veljaven vsaj do junija 2027",
+      "yourTrip": "Vaša pot"
     }
   },
   "login": {
@@ -120,6 +147,10 @@
         "title": "Kako velika bo zabava?",
         "text": "To nam pomaga načrtovati proračun in sedežni red."
       },
+      "countries": {
+        "title": "Od kod prihajajo vaši gostje?",
+        "text": "Izberite države, od koder bodo potovali vaši gostje. To nam pomaga pripraviti strani za pot in kontrolne sezname za vstop."
+      },
       "style": {
         "title": "Kakšen je vajin slog?",
         "text": "Uporabili ga bomo za navdih in predloge za spletno stran."
@@ -152,6 +183,9 @@
     "chooseCurrency": "Izberite valuto",
     "popularCurrencies": "Priljubljene",
     "allCurrencies": "Vse valute",
+    "guestCountries": "Države, od koder prihajajo vaši gostje",
+    "guestCountriesHint": "Tapnite vse, ki veljajo. Pozneje lahko spremenite.",
+    "guestCountriesSearch": "Iščite države…",
     "style": "Slog (izberite, kar vama je blizu)",
     "accent": "Barva poudarka v aplikaciji",
     "accents": {

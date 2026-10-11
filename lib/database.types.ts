@@ -43,6 +43,7 @@ export type WeddingRow = Timestamps & {
   /** IANA time zone of the venue, e.g. "Europe/Ljubljana" */
   time_zone: string | null;
   translations: Translations;
+  guest_countries: string[];
   find_seat_enabled: boolean;
   photos_enabled: boolean;
   anonymised_at: string | null;

@@ -12,6 +12,7 @@ import {
   ListChecks,
   MailCheck,
   MapPin,
+  Plane,
   Send,
   Wallet,
   type LucideIcon,
@@ -48,7 +49,7 @@ export default async function DashboardPage({
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData, travelStats] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -89,6 +90,7 @@ export default async function DashboardPage({
       .eq("wedding_id", wedding.id)
       .maybeSingle()
       .then(({ data }) => data),
+    travelSummary(supabase, wedding.id),
   ]);
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
@@ -320,6 +322,41 @@ export default async function DashboardPage({
                     }}
                   />
                 </div>
+              </div>
+            )}
+          </SummaryCard>
+          <SummaryCard
+            icon={Plane}
+            title={t("travel.title")}
+            empty={t("travel.empty")}
+            href="/app/travel"
+            cta={t("travel.cta")}
+          >
+            {travelStats.withTravel > 0 && (
+              <div className="space-y-2">
+                <dl className="grid grid-cols-3 gap-2 text-center">
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.withFlight}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.flights")}</dt>
+                  </div>
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.withRoom}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.rooms")}</dt>
+                  </div>
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.seated}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.seated")}</dt>
+                  </div>
+                </dl>
+                <p className="text-muted-foreground text-xs">
+                  {t("travel.guestsWithTravel", { count: travelStats.withTravel })}
+                </p>
               </div>
             )}
           </SummaryCard>
@@ -667,6 +704,23 @@ async function giftSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     total: gifts.length,
     totalValue: gifts.reduce((s, g) => s + (g.amount == null ? 0 : Number(g.amount)), 0),
     thankYouDone: gifts.filter((g) => g.thank_you_sent).length,
+  };
+}
+
+async function travelSummary(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  weddingId: string,
+) {
+  const { data } = await supabase
+    .from("guest_travel")
+    .select("arrival_airport, hotel_id, household_id")
+    .eq("wedding_id", weddingId);
+  const rows = data ?? [];
+  return {
+    withTravel: rows.length,
+    withFlight: rows.filter((r) => !!r.arrival_airport).length,
+    withRoom: rows.filter((r) => !!r.hotel_id).length,
+    seated: 0,
   };
 }
 

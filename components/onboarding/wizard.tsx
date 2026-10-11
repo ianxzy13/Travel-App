@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   DateLocationFields,
+  GuestCountriesFields,
   GuestsCurrencyFields,
   NamesFields,
   StyleFields,
@@ -23,6 +24,7 @@ const STEPS = [
   { key: "names", fields: ["partnerAName", "partnerBName"], Fields: NamesFields },
   { key: "when", fields: ["weddingDate", "location"], Fields: DateLocationFields },
   { key: "size", fields: ["estimatedGuests", "currency"], Fields: GuestsCurrencyFields },
+  { key: "countries", fields: ["guestCountries"], Fields: GuestCountriesFields },
   { key: "style", fields: ["styleTags", "accent"], Fields: StyleFields },
 ] as const satisfies readonly {
   key: string;

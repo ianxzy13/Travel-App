@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – planeiem o vosso casamento juntos",
-    "metaDescription": "Convidados, confirmações, mesas, orçamento, espaços, viagens, inspiração e o site do vosso casamento – tudo num só lugar tranquilo, no vosso idioma.",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "Entrar",
     "getStarted": "Começar",
-    "eyebrow": "Planear o casamento, juntos",
-    "title": "Tudo para o vosso casamento, num só lugar tranquilo.",
-    "intro": "Planeiem convidados, confirmações, mesas, orçamento, espaços e viagens com o vosso par e a família, no telemóvel ou no computador.",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Comecem a planear grátis",
     "seeInside": "Vejam o que inclui",
-    "featuresTitle": "Uma app em vez de doze folhas de cálculo",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "Cada parte do vosso plano fala com as outras. As confirmações passam para as mesas e os espaços reservados para o vosso site.",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "Vocês planeiam no vosso idioma; cada convidado recebe o site, a confirmação e os emails no seu."
       }
     },
-    "closingTitle": "Digam sim a menos stress.",
-    "closingText": "Convidem o vosso par, os pais ou o wedding planner e planeiem tudo juntos em tempo real.",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "Criem o vosso casamento",
     "footer": "Feito com amor · © {year} Vow",
-    "preview": {
-      "couple": "Ian e Maria · Lisboa",
-      "daysToGo": "dias para o casamento",
-      "attending": "vêm",
-      "declined": "não vêm",
-      "waiting": "a aguardar",
-      "budget": "Orçamento",
-      "budgetOf": "{spent} de {total}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "Entrar",
@@ -123,6 +168,10 @@
       "style": {
         "title": "Qual é o vosso estilo?",
         "text": "Vamos usá-lo para inspiração e sugestões para o site."
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -176,7 +225,10 @@
     "saveChanges": "Guardar alterações",
     "saved": "Detalhes do casamento guardados",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…"
   },
   "roles": {
     "owner": {

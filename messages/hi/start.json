@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – अपनी शादी की योजना साथ मिलकर बनाएँ",
-    "metaDescription": "मेहमान, जवाब, बैठने की व्यवस्था, बजट, वेन्यू, यात्रा, प्रेरणा और आपकी शादी की वेबसाइट – सब एक शांत जगह पर, आपकी भाषा में।",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "साइन इन करें",
     "getStarted": "शुरू करें",
-    "eyebrow": "शादी की योजना, साथ मिलकर",
-    "title": "आपकी शादी के लिए सब कुछ, एक शांत जगह पर।",
-    "intro": "अपने साथी और परिवार के साथ मेहमानों, जवाबों, बैठने, बजट, वेन्यू और यात्रा की योजना बनाएँ, फ़ोन या लैपटॉप से।",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "मुफ़्त में योजना शुरू करें",
     "seeInside": "देखें अंदर क्या है",
-    "featuresTitle": "बारह स्प्रेडशीट की जगह एक ऐप",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "आपकी योजना का हर हिस्सा बाकी से जुड़ा है। जवाब बैठने की व्यवस्था में जाते हैं, बुक किए वेन्यू आपकी वेबसाइट पर।",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "आप अपनी भाषा में योजना बनाते हैं; हर मेहमान को वेबसाइट, जवाब पेज और ईमेल उसकी भाषा में मिलते हैं।"
       }
     },
-    "closingTitle": "कम तनाव को हाँ कहें।",
-    "closingText": "अपने साथी, माता-पिता या वेडिंग प्लानर को आमंत्रित करें और सब कुछ साथ मिलकर रियल टाइम में प्लान करें।",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "अपनी शादी बनाएँ",
     "footer": "प्यार से बनाया गया · © {year} Vow",
-    "preview": {
-      "couple": "इयान और मारिया · लिस्बन",
-      "daysToGo": "दिन बाकी",
-      "attending": "आ रहे हैं",
-      "declined": "नहीं आ रहे",
-      "waiting": "इंतज़ार",
-      "budget": "बजट",
-      "budgetOf": "{total} में से {spent}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "साइन इन करें",
@@ -123,6 +168,10 @@
       "style": {
         "title": "आपकी शैली क्या है?",
         "text": "हम इसे प्रेरणा और वेबसाइट सुझावों के लिए इस्तेमाल करेंगे।"
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -176,7 +225,10 @@
     "saveChanges": "बदलाव सहेजें",
     "saved": "शादी का विवरण सहेजा गया",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…"
   },
   "roles": {
     "owner": {

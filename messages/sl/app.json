@@ -115,6 +115,15 @@
         "cta": "Odpri razpored sedežev",
         "seated": "od {attending} gostov posedenih za {tables, plural, one {# mizo} two {# mizama} few {# mizami} other {# mizami}}"
       },
+      "travel": {
+        "title": "Gostje na poti",
+        "empty": "Podatkov o potovanjih še ni. Ko bodo gostje vpisali lete in hotele, bo tu povzetek.",
+        "cta": "Poglej potovanja",
+        "flights": "letov",
+        "rooms": "sob",
+        "seated": "posedenih",
+        "guestsWithTravel": "{count, plural, one {# gost je delil} two {# gosta sta delila} few {# gostje so delili} other {# gostov je delilo}} podatke o potovanju"
+      },
       "inspiration": {
         "title": "Navdih",
         "empty": "Pripetih slik še ni. Zbirajte ideje in iz njih izberite barvno paleto.",

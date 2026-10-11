@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Controller, type UseFormReturn } from "react-hook-form";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { FormField } from "@/components/form-field";
+import { getCountries } from "@/lib/i18n/countries";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -282,6 +283,96 @@ export function GuestsCurrencyFields({ form, disabled }: Props) {
         }}
       </FormField>
     </div>
+  );
+}
+
+export function GuestCountriesFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
+  const locale = useLocale();
+  const countries = getCountries(locale);
+  const [search, setSearch] = useState("");
+
+  const filtered = search.length < 1
+    ? countries
+    : countries.filter((c) =>
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.code.toLowerCase().includes(search.toLowerCase()),
+      );
+
+  return (
+    <Controller
+      control={form.control}
+      name="guestCountries"
+      render={({ field }) => {
+        const selected = field.value as string[];
+        const toggle = (code: string) => {
+          field.onChange(
+            selected.includes(code)
+              ? selected.filter((c) => c !== code)
+              : [...selected, code],
+          );
+        };
+
+        const selectedCountries = selected
+          .map((code) => countries.find((c) => c.code === code))
+          .filter(Boolean);
+
+        return (
+          <div className="space-y-4">
+            <div>
+              <p className="text-sm font-medium">{t("guestCountries")}</p>
+              <p className="text-muted-foreground mt-1 text-sm">{t("guestCountriesHint")}</p>
+            </div>
+
+            {selectedCountries.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedCountries.map((c) => (
+                  <button
+                    key={c!.code}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => toggle(c!.code)}
+                    className="bg-primary text-primary-foreground inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm"
+                  >
+                    {c!.flag} {c!.name}
+                    <X className="size-3.5" aria-hidden />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <Input
+              placeholder={t("guestCountriesSearch")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              disabled={disabled}
+            />
+
+            <div className="border-border max-h-48 overflow-y-auto rounded-md border">
+              {filtered.map((c) => {
+                const isSelected = selected.includes(c.code);
+                return (
+                  <button
+                    key={c.code}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => toggle(c.code)}
+                    className={cn(
+                      "flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors",
+                      isSelected ? "bg-primary-soft font-medium" : "hover:bg-accent",
+                    )}
+                  >
+                    <span>{c.flag}</span>
+                    <span className="flex-1 text-start">{c.name}</span>
+                    {isSelected && <Check className="text-primary size-4" aria-hidden />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }}
+    />
   );
 }
 

@@ -115,6 +115,15 @@
         "cta": "Open seating chart",
         "seated": "of {attending} attending guests seated at {tables, plural, one {# table} other {# tables}}"
       },
+      "travel": {
+        "title": "Guests on the move",
+        "empty": "No travel info yet. Once guests fill in their flights and hotels, you'll see a summary here.",
+        "cta": "View travel",
+        "flights": "flights",
+        "rooms": "rooms",
+        "seated": "seated",
+        "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
       "inspiration": {
         "title": "Inspiration",
         "empty": "No pins yet. Collect ideas and pull a colour palette from them.",

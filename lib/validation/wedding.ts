@@ -102,6 +102,7 @@ export const weddingSchema = z.object({
     .string()
     .trim()
     .regex(/^\d{0,4}$/, v("guestCount")),
+  guestCountries: z.array(z.string().length(2)).max(50),
   styleTags: z.array(z.string().max(30)).max(12),
   accent: z.enum(ACCENTS),
 });
@@ -115,6 +116,7 @@ export const emptyWedding: WeddingFormValues = {
   location: "",
   currency: "EUR",
   estimatedGuests: "",
+  guestCountries: [],
   styleTags: [],
   accent: "rose",
 };
@@ -129,6 +131,7 @@ export function toWeddingColumns(v: WeddingFormValues) {
     location: v.location || null,
     currency: v.currency,
     estimated_guests: guests,
+    guest_countries: v.guestCountries,
     style_tags: v.styleTags,
     accent: v.accent,
   };

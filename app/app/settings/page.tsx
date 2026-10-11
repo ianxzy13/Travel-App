@@ -83,6 +83,7 @@ export default async function SettingsPage() {
     location: wedding.location ?? "",
     currency: wedding.currency,
     estimatedGuests: wedding.estimated_guests?.toString() ?? "",
+    guestCountries: wedding.guest_countries ?? [],
     styleTags: wedding.style_tags,
     accent: wedding.accent,
   };
