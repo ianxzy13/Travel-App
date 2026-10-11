@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { CodeForm } from "@/components/rsvp/code-form";
 import { FindInvitation } from "@/components/rsvp/find-invitation";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { AirportName } from "@/components/travel/airport-name";
 import type { SiteSectionKind, SiteTemplate } from "@/lib/database.types";
 import { fmtDate, fmtMoney, fmtTime } from "@/lib/i18n/format";
 import { flightSearchLinks, mapsSearch } from "@/lib/places/travel";
@@ -939,6 +940,10 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
           <Plane className={cn("size-5", accentText)} aria-hidden />
           <p className="flex-1">
             {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}
+            {" "}
+            <span className="text-muted-foreground text-sm">
+              (<AirportName code={airport} />)
+            </span>
           </p>
           <a
             href={flightSearchLinks({ to: airport }).google}

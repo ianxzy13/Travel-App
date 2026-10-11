@@ -5,6 +5,7 @@ import { BedDouble, Loader2, Plane, PlaneLanding, PlaneTakeoff } from "lucide-re
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { submitGuestTravel, submitRoomPreferences } from "@/app/r/actions";
+import { AirportCombobox } from "@/components/travel/airport-combobox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -139,12 +140,11 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <Label htmlFor="arr-airport">{t("airport")}</Label>
-              <Input
+              <AirportCombobox
                 id="arr-airport"
                 placeholder={t("airportPlaceholder")}
-                maxLength={10}
                 value={form.arrival_airport ?? ""}
-                onChange={(e) => set("arrival_airport", e.target.value)}
+                onChange={(v) => set("arrival_airport", v)}
               />
             </div>
             <div>
@@ -189,12 +189,11 @@ export function RsvpTravelForm({ data, onSaved, onSkip }: Props) {
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <Label htmlFor="dep-airport">{t("airport")}</Label>
-              <Input
+              <AirportCombobox
                 id="dep-airport"
                 placeholder={t("airportPlaceholder")}
-                maxLength={10}
                 value={form.departure_airport ?? ""}
-                onChange={(e) => set("departure_airport", e.target.value)}
+                onChange={(v) => set("departure_airport", v)}
               />
             </div>
             <div>

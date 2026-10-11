@@ -25,6 +25,7 @@ import {
   setDestinationAirport,
 } from "@/app/app/travel/actions";
 import { AirportCombobox } from "@/components/travel/airport-combobox";
+import { AirportName } from "@/components/travel/airport-name";
 import { ShuttlePlanner } from "@/components/travel/shuttle-planner";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
@@ -877,7 +878,7 @@ function GuestTravelList({
                   <PlaneLanding className="mr-1 inline size-3.5" aria-hidden />
                   {fmtDate(gt.arrival_date, locale, "medium")}
                   {gt.arrival_time && ` ${gt.arrival_time.slice(0, 5)}`}
-                  {gt.arrival_airport && ` (${gt.arrival_airport})`}
+                  {gt.arrival_airport && <>{" ("}<AirportName code={gt.arrival_airport} />{")"}</>}
                   {gt.arrival_flight && ` · ${gt.arrival_flight}`}
                 </div>
               )}
@@ -886,7 +887,7 @@ function GuestTravelList({
                   <PlaneTakeoff className="mr-1 inline size-3.5" aria-hidden />
                   {fmtDate(gt.departure_date, locale, "medium")}
                   {gt.departure_time && ` ${gt.departure_time.slice(0, 5)}`}
-                  {gt.departure_airport && ` (${gt.departure_airport})`}
+                  {gt.departure_airport && <>{" ("}<AirportName code={gt.departure_airport} />{")"}</>}
                   {gt.departure_flight && ` · ${gt.departure_flight}`}
                 </div>
               )}
