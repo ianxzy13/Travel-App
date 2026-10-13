@@ -31,6 +31,54 @@ export function fmtTime(time: string | null, locale: string) {
   return dtf(locale, { timeStyle: "short" }).format(new Date(`1970-01-01T${time.slice(0, 5)}:00Z`));
 }
 
+/**
+ * Format a wall-clock time (at `venueTz`) in the viewer's timezone.
+ * Returns null when zones match, are missing, or on error.
+ */
+export function fmtTimeInZone(
+  time: string | null,
+  locale: string,
+  date: string | null,
+  venueTz: string | null,
+  memberTz: string | null,
+) {
+  if (!time || !venueTz || !memberTz || venueTz === memberTz) return null;
+  try {
+    const ref = date ?? "2027-01-15";
+    const hhmm = time.slice(0, 5);
+    const naiveUtcMs = Date.UTC(
+      +ref.slice(0, 4), +ref.slice(5, 7) - 1, +ref.slice(8, 10),
+      +hhmm.slice(0, 2), +hhmm.slice(3, 5),
+    );
+    const venueOffsetMs = tzOffsetMs(naiveUtcMs, venueTz);
+    const realUtcMs = naiveUtcMs - venueOffsetMs;
+    const formatted = dtf(locale, { timeStyle: "short", timeZone: memberTz }).format(new Date(realUtcMs));
+    const abbr = tzAbbr(memberTz, locale, new Date(realUtcMs));
+    return abbr ? `${formatted} ${abbr}` : formatted;
+  } catch {
+    return null;
+  }
+}
+
+function tzOffsetMs(utcMs: number, tz: string) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+  }).formatToParts(new Date(utcMs));
+  const v = (t: string) => +(parts.find((p) => p.type === t)?.value ?? "0");
+  const localMs = Date.UTC(v("year"), v("month") - 1, v("day"), v("hour") % 24, v("minute"), v("second"));
+  return localMs - utcMs;
+}
+
+function tzAbbr(tz: string, locale: string, d: Date) {
+  try {
+    const parts = new Intl.DateTimeFormat(locale, { timeZone: tz, timeZoneName: "short" }).formatToParts(d);
+    return parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+  } catch {
+    return "";
+  }
+}
+
 /** "Saturday, 12 June 2027 · 15:00–16:00" (skips what isn't set). */
 export function fmtEventWhen(
   e: { event_date: string | null; start_time: string | null; end_time: string | null },

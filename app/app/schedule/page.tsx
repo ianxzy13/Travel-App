@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { SchedulePage } from "@/components/schedule/schedule-page";
 import { starterTexts } from "@/lib/i18n/defaults";
 import { createClient } from "@/lib/supabase/server";
-import { canEdit, requireWedding } from "@/lib/wedding";
+import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("app.nav"))("schedule") };
@@ -11,8 +11,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Schedule() {
   const { wedding, role } = await requireWedding();
+  const user = await requireUser();
   const sb = await createClient();
-  const [{ data: items }, { data: events }, { data: vendors }] = await Promise.all([
+  const [{ data: items }, { data: events }, { data: vendors }, { data: memberRow }] = await Promise.all([
     sb.from("schedule_items").select("*").eq("wedding_id", wedding.id).order("start_time"),
     sb
       .from("events")
@@ -25,6 +26,12 @@ export default async function Schedule() {
       .eq("wedding_id", wedding.id)
       .neq("status", "rejected")
       .order("name"),
+    sb
+      .from("wedding_members")
+      .select("time_zone")
+      .eq("wedding_id", wedding.id)
+      .eq("user_id", user.id)
+      .single(),
   ]);
 
   // starter texts nobody has changed are shown in the viewer's language
@@ -40,6 +47,8 @@ export default async function Schedule() {
       vendors={vendors ?? []}
       weddingDate={wedding.wedding_date}
       canEdit={canEdit(role)}
+      venueTz={wedding.time_zone ?? null}
+      memberTz={memberRow?.time_zone ?? null}
     />
   );
 }

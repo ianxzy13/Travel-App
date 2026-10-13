@@ -1,3 +1,4 @@
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 export async function logActivity(
@@ -15,4 +16,20 @@ export async function logActivity(
     subject: subject ?? null,
     detail: detail ?? null,
   });
+}
+
+export function logActivityAdmin(
+  weddingId: string,
+  kind: string,
+  subject?: string,
+) {
+  const admin = createAdminClient();
+  if (!admin) return;
+  admin.from("activity_log").insert({
+    wedding_id: weddingId,
+    actor_id: null,
+    kind,
+    subject: subject ?? null,
+    detail: null,
+  }).then(() => {}, (e) => console.error("[logActivityAdmin]", e));
 }

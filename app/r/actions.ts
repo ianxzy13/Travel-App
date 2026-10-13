@@ -6,6 +6,7 @@ import type { ActionResult } from "@/lib/action-result";
 import { emailFrom, getResend } from "@/lib/email/resend";
 import { isLocale, type Locale } from "@/i18n/locales";
 import { rsvpErrorKey, type RsvpResult } from "@/lib/rsvp/types";
+import { logActivityAdmin } from "@/lib/activity";
 import { getSiteUrl } from "@/lib/site-url";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
@@ -39,6 +40,7 @@ export async function submitRsvp(
   }
 
   const result = data as RsvpResult;
+  logActivityAdmin(result.wedding_id, "rsvp.reply", result.household_name);
   // Optional email to the couple. Never let a mail problem fail the RSVP.
   await notifyCoupleByEmail(result).catch((e) => console.error("[notifyCoupleByEmail]", e));
   return { ok: true, data: result };
