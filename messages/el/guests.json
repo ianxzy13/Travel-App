@@ -204,7 +204,9 @@
       "sameAsOurs": "Ίδια με τη δική μας ({language})",
       "saved": "Το νοικοκυριό αποθηκεύτηκε",
       "cancel": "Ακύρωση",
-      "save": "Αποθήκευση"
+      "save": "Αποθήκευση",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Ετικέτες",

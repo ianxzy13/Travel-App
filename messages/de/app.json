@@ -162,7 +162,12 @@
         "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
       },
       "activity": {
-        "title": "What's new"
+        "title": "What's new",
+        "taskAdd": "New to-do",
+        "taskDone": "Completed",
+        "guestAdd": "Guest added",
+        "rsvpReply": "RSVP received",
+        "commentAdd": "Comment"
       }
     },
     "settings": {

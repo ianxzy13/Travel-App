@@ -16,7 +16,7 @@ export default async function GuestsPage() {
   const { wedding, role } = await requireWedding();
   const supabase = await createClient();
   const user = await requireUser();
-  const [guestData, { data: memberRow }] = await Promise.all([
+  const [guestData, { data: memberRow }, { data: allMembers }] = await Promise.all([
     loadGuestData(supabase, wedding.id),
     supabase
       .from("wedding_members")
@@ -24,6 +24,10 @@ export default async function GuestsPage() {
       .eq("wedding_id", wedding.id)
       .eq("user_id", user.id)
       .single(),
+    supabase
+      .from("wedding_members")
+      .select("id, role, profiles(full_name)")
+      .eq("wedding_id", wedding.id),
   ]);
   const { guests, households, invites, guestTags, events, tags, relationships, responses } =
     guestData;
@@ -67,6 +71,12 @@ export default async function GuestsPage() {
       emailConfigured={isEmailConfigured}
       currentMemberId={memberRow?.id ?? null}
       currentRole={role}
+      members={(allMembers ?? [])
+        .filter((m) => m.role === "parent" || m.role === "editor" || m.role === "owner")
+        .map((m) => ({
+          id: m.id,
+          name: (m.profiles as { full_name: string | null } | null)?.full_name ?? "?",
+        }))}
     />
   );
 }

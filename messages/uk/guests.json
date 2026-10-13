@@ -204,7 +204,9 @@
       "sameAsOurs": "Як наша ({language})",
       "saved": "Родину збережено",
       "cancel": "Скасувати",
-      "save": "Зберегти"
+      "save": "Зберегти",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Мітки",

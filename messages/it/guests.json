@@ -204,7 +204,9 @@
       "sameAsOurs": "Come la nostra ({language})",
       "saved": "Nucleo salvato",
       "cancel": "Annulla",
-      "save": "Salva"
+      "save": "Salva",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etichette",

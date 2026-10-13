@@ -204,7 +204,9 @@
       "sameAsOurs": "हमारी भाषा जैसी ({language})",
       "saved": "परिवार सहेजा गया",
       "cancel": "रद्द करें",
-      "save": "सहेजें"
+      "save": "सहेजें",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "टैग",

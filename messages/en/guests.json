@@ -198,6 +198,8 @@
       "language": "Language",
       "languageHint": "Their website, RSVP page and emails come in this language. Guests can also change it on their RSVP page; their choice is saved here.",
       "sameAsOurs": "Same as ours ({language})",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned",
       "saved": "Household saved",
       "cancel": "Cancel",
       "save": "Save"

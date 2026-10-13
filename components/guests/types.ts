@@ -34,4 +34,5 @@ export type GuestPageData = {
   emailConfigured: boolean;
   currentMemberId: string | null;
   currentRole: string;
+  members: { id: string; name: string }[];
 };

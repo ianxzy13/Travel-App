@@ -204,7 +204,9 @@
       "sameAsOurs": "우리와 같음({language})",
       "saved": "가족을 저장했습니다",
       "cancel": "취소",
-      "save": "저장"
+      "save": "저장",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "태그",

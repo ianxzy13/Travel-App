@@ -30,7 +30,7 @@ import type { GuestPageData } from "./types";
 export function GuestManager(data: GuestPageData) {
   const {
     guests, households, events, tags, names, canEdit, emailConfigured, coupleLanguage,
-    currentMemberId, currentRole,
+    currentMemberId, currentRole, members,
   } = data;
   const t = useTranslations("guests");
 
@@ -228,6 +228,8 @@ export function GuestManager(data: GuestPageData) {
         household={households.find((h) => h.id === householdId) ?? null}
         coupleLanguage={coupleLanguage}
         languages={languages}
+        members={members}
+        canManage={currentRole === "owner" || currentRole === "editor"}
         onClose={() => setHouseholdId(null)}
       />
     </>

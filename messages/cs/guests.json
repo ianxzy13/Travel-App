@@ -204,7 +204,9 @@
       "sameAsOurs": "Stejný jako náš ({language})",
       "saved": "Domácnost uložena",
       "cancel": "Zrušit",
-      "save": "Uložit"
+      "save": "Uložit",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Štítky",

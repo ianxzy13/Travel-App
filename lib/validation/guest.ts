@@ -67,6 +67,7 @@ export const householdSchema = z.object({
   name: text(120).min(1, v("householdName")),
   address: addressSchema,
   language: languageSchema.optional(),
+  managed_by: z.union([z.uuid(), z.literal("")]).optional(),
 });
 
 export type HouseholdFormValues = z.infer<typeof householdSchema>;

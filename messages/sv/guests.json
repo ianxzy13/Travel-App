@@ -204,7 +204,9 @@
       "sameAsOurs": "Samma som vårt ({language})",
       "saved": "Hushållet sparat",
       "cancel": "Avbryt",
-      "save": "Spara"
+      "save": "Spara",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Taggar",

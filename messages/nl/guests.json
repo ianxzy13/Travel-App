@@ -204,7 +204,9 @@
       "sameAsOurs": "Zelfde als de onze ({language})",
       "saved": "Huishouden opgeslagen",
       "cancel": "Annuleren",
-      "save": "Opslaan"
+      "save": "Opslaan",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Labels",

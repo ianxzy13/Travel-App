@@ -204,7 +204,9 @@
       "sameAsOurs": "เหมือนของเรา ({language})",
       "saved": "บันทึกครอบครัวแล้ว",
       "cancel": "ยกเลิก",
-      "save": "บันทึก"
+      "save": "บันทึก",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "แท็ก",

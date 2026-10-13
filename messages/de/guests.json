@@ -204,7 +204,9 @@
       "sameAsOurs": "Wie unsere ({language})",
       "saved": "Haushalt gespeichert",
       "cancel": "Abbrechen",
-      "save": "Speichern"
+      "save": "Speichern",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Tags",

@@ -204,7 +204,9 @@
       "sameAsOurs": "مثل لغتنا ({language})",
       "saved": "تم حفظ العائلة",
       "cancel": "إلغاء",
-      "save": "حفظ"
+      "save": "حفظ",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "الوسوم",

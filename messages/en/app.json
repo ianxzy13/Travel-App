@@ -162,7 +162,12 @@
         "published": "Published and live"
       },
       "activity": {
-        "title": "What's new"
+        "title": "What's new",
+        "taskAdd": "New to-do",
+        "taskDone": "Completed",
+        "guestAdd": "Guest added",
+        "rsvpReply": "RSVP received",
+        "commentAdd": "Comment"
       }
     },
     "gifts": {

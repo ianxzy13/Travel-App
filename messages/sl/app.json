@@ -162,7 +162,12 @@
         "published": "Objavljeno in aktivno"
       },
       "activity": {
-        "title": "Novosti"
+        "title": "Novosti",
+        "taskAdd": "Novo opravilo",
+        "taskDone": "Opravljeno",
+        "guestAdd": "Gost dodan",
+        "rsvpReply": "Potrditev prejeta",
+        "commentAdd": "Komentar"
       }
     },
     "gifts": {

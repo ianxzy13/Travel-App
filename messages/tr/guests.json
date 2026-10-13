@@ -204,7 +204,9 @@
       "sameAsOurs": "Bizimkiyle aynı ({language})",
       "saved": "Hane kaydedildi",
       "cancel": "İptal",
-      "save": "Kaydet"
+      "save": "Kaydet",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etiketler",

@@ -204,7 +204,9 @@
       "sameAsOurs": "Sama dengan kami ({language})",
       "saved": "Keluarga disimpan",
       "cancel": "Batal",
-      "save": "Simpan"
+      "save": "Simpan",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Label",

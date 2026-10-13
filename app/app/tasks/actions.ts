@@ -72,6 +72,11 @@ export async function setTaskDone(taskId: string, isDone: boolean): Promise<Acti
     .eq("id", taskId)
     .eq("wedding_id", ctx.wedding.id);
   if (error) return fail("setTaskDone", error);
+  if (isDone) {
+    const user = await requireUser();
+    const { data: task } = await ctx.sb.from("tasks").select("title").eq("id", taskId).single();
+    logActivity(ctx.wedding.id, user.id, "task.done", task?.title ?? "");
+  }
   return done();
 }
 
@@ -118,6 +123,7 @@ export async function addComment(
     .select("id")
     .single();
   if (error) return fail("addComment", error);
+  logActivity(wedding.id, user.id, "comment.add");
   revalidatePath("/app/tasks");
   return { ok: true, data: { id: data.id } };
 }

@@ -204,7 +204,9 @@
       "sameAsOurs": "El mismo que el nuestro ({language})",
       "saved": "Hogar guardado",
       "cancel": "Cancelar",
-      "save": "Guardar"
+      "save": "Guardar",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etiquetas",

@@ -204,7 +204,9 @@
       "sameAsOurs": "Isto kao naš ({language})",
       "saved": "Kućanstvo je spremljeno",
       "cancel": "Odustani",
-      "save": "Spremi"
+      "save": "Spremi",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Oznake",

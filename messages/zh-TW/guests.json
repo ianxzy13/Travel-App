@@ -204,7 +204,9 @@
       "sameAsOurs": "與我們相同（{language}）",
       "saved": "家庭已儲存",
       "cancel": "取消",
-      "save": "儲存"
+      "save": "儲存",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "標籤",

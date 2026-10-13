@@ -204,7 +204,9 @@
       "sameAsOurs": "Giống chúng tôi ({language})",
       "saved": "Đã lưu gia đình",
       "cancel": "Hủy",
-      "save": "Lưu"
+      "save": "Lưu",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Nhãn",

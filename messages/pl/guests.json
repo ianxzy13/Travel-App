@@ -204,7 +204,9 @@
       "sameAsOurs": "Taki jak nasz ({language})",
       "saved": "Zapisano gospodarstwo",
       "cancel": "Anuluj",
-      "save": "Zapisz"
+      "save": "Zapisz",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etykiety",
