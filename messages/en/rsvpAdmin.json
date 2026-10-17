@@ -7,6 +7,9 @@
     "linkCopied": "Link copied",
     "copyFailed": "Couldn’t copy automatically. Please copy it by hand.",
     "emailWaiting": "Email everyone who hasn’t replied",
+    "smsWaiting": "Text everyone who hasn’t replied",
+    "smsSelected": "Text selected",
+    "textRsvp": "Text RSVP link",
     "tabReplies": "Replies",
     "tabSetup": "Meals & settings",
     "nothingTitle": "Nothing to RSVP for yet",
@@ -120,6 +123,23 @@
       "nobody": "Nobody in this household is invited to an event yet. Invite them from the Guests page.",
       "saved": "RSVP saved for {name}",
       "save": "Save RSVP"
+    },
+    "sms": {
+      "title": "Text your guests",
+      "description": "Each household gets one SMS with its private RSVP link, sent to the first guest with a phone number.",
+      "notSetUp": "SMS isn’t set up yet. Add your Twilio credentials as <code>TWILIO_ACCOUNT_SID</code>, <code>TWILIO_AUTH_TOKEN</code>, and <code>TWILIO_FROM</code> in <code>.env.local</code> (see the README), then restart the app.",
+      "willGet": "<b>{count}</b> {count, plural, one {household will get a text.} other {households will get a text.}}",
+      "skipped": "{count} without a phone number will be skipped: {names}. Share their link on WhatsApp instead.",
+      "type": "Type of text",
+      "invitation": "Invitation",
+      "reminder": "Friendly reminder",
+      "note": "Personal note (optional)",
+      "notePlaceholder": "e.g. We can’t wait to celebrate with you!",
+      "preview": "Preview",
+      "cancel": "Cancel",
+      "send": "{count, plural, one {Send # text} other {Send # texts}}",
+      "sent": "{sent, plural, one {Sent to # household} other {Sent to # households}}",
+      "sentFailed": "{sent, plural, one {Sent to # household} other {Sent to # households}} ({failed} failed)"
     }
   }
 }

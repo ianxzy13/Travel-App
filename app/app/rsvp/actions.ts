@@ -332,6 +332,108 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
   return { ok: true, data: { sent, failed, noEmail } };
 }
 
+// ---------- SMS invitations ----------
+
+type SmsSummary = { sent: number; failed: number; noPhone: string[] };
+
+export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSummary>> {
+  const user = await requireUser();
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const parsed = sendEmailSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+
+  const { getTwilio, twilioFrom } = await import("@/lib/sms/twilio");
+  const tw = getTwilio();
+  if (!tw) return { ok: false, error: "SMS is not configured (TWILIO_ACCOUNT_SID)." };
+
+  const { householdIds, kind, note } = parsed.data;
+  const { wedding, supabase } = ctx;
+
+  const households: { id: string; name: string; rsvp_code: string }[] = [];
+  const guestPhones: { household_id: string; phone: string }[] = [];
+
+  for (let i = 0; i < householdIds.length; i += 100) {
+    const batch = householdIds.slice(i, i + 100);
+    const [h, g] = await Promise.all([
+      supabase
+        .from("households")
+        .select("id, name, rsvp_code")
+        .eq("wedding_id", wedding.id)
+        .in("id", batch),
+      supabase
+        .from("guests")
+        .select("id, household_id, phone")
+        .eq("wedding_id", wedding.id)
+        .in("household_id", batch)
+        .is("plus_one_of", null)
+        .not("phone", "is", null),
+    ]);
+    if (h.error || g.error) return fail("sendRsvpSms", h.error ?? g.error);
+    households.push(...h.data);
+    for (const guest of g.data) {
+      if (guest.phone?.trim()) {
+        guestPhones.push({ household_id: guest.household_id, phone: guest.phone.trim() });
+      }
+    }
+  }
+
+  const phoneByHousehold = new Map<string, string>();
+  for (const gp of guestPhones) {
+    if (!phoneByHousehold.has(gp.household_id)) {
+      phoneByHousehold.set(gp.household_id, gp.phone);
+    }
+  }
+
+  const siteUrl = await getSiteUrl();
+  const couple = coupleName(wedding);
+  const from = twilioFrom();
+  const noPhone = households.filter((h) => !phoneByHousehold.has(h.id)).map((h) => h.name);
+  const sendable = households.filter((h) => phoneByHousehold.has(h.id));
+  let sent = 0;
+  let failed = 0;
+
+  for (const h of sendable) {
+    const phone = phoneByHousehold.get(h.id)!;
+    const link = `${siteUrl}/r/${h.rsvp_code}`;
+    const invite = kind === "invitation";
+    let body = invite
+      ? `${couple}: You're invited! RSVP here: ${link}`
+      : `${couple}: Friendly reminder to RSVP: ${link}`;
+    if (note) body += `\n${note}`;
+
+    try {
+      const msg = await tw.messages.create({ from, to: phone, body });
+      await supabase.from("sms_sends").insert({
+        wedding_id: wedding.id,
+        household_id: h.id,
+        kind,
+        to_phone: phone,
+        twilio_sid: msg.sid,
+        status: "sent",
+        sent_by: user.id,
+      });
+      sent++;
+    } catch (e: unknown) {
+      const errMsg = e instanceof Error ? e.message.slice(0, 500) : "Unknown error";
+      console.error("[sendRsvpSms]", errMsg);
+      await supabase.from("sms_sends").insert({
+        wedding_id: wedding.id,
+        household_id: h.id,
+        kind,
+        to_phone: phone,
+        status: "failed",
+        error: errMsg,
+        sent_by: user.id,
+      });
+      failed++;
+    }
+  }
+
+  revalidatePath("/app/rsvp");
+  return { ok: true, data: { sent, failed, noPhone } };
+}
+
 // ---------- notifications ----------
 
 export async function markNotificationsRead(ids?: string[]): Promise<ActionResult> {

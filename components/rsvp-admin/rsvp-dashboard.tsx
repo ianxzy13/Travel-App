@@ -38,6 +38,7 @@ import type { RsvpSettingsValues } from "@/lib/validation/rsvp";
 import { RecordReplyDialog } from "./record-reply-dialog";
 import { RsvpSetup } from "./rsvp-setup";
 import { SendEmailDialog } from "./send-email-dialog";
+import { SendSmsDialog } from "./send-sms-dialog";
 
 type Filter = "all" | "waiting" | "replied" | "partial" | "not_emailed";
 
@@ -50,6 +51,7 @@ type Props = {
   slug: string;
   couple: string;
   emailConfigured: boolean;
+  smsConfigured: boolean;
   adminConfigured: boolean;
   canEdit: boolean;
   focusHouseholdId?: string;
@@ -68,13 +70,17 @@ function useCopy() {
 }
 
 export function RsvpDashboard(props: Props) {
-  const { data, siteUrl, slug, canEdit, emailConfigured } = props;
+  const { data, siteUrl, slug, canEdit, emailConfigured, smsConfigured } = props;
   const t = useTranslations("rsvpAdmin");
   const copy = useCopy();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [emailing, setEmailing] = useState<{
+    ids: string[];
+    kind: "invitation" | "reminder";
+  } | null>(null);
+  const [texting, setTexting] = useState<{
     ids: string[];
     kind: "invitation" | "reminder";
   } | null>(null);
@@ -117,6 +123,14 @@ export function RsvpDashboard(props: Props) {
         name: h.name,
         hasEmail: h.guests.some((g) => g.email && !g.isPlusOne),
       }));
+  const smsTargets = (ids: string[]) =>
+    data.households
+      .filter((h) => ids.includes(h.id))
+      .map((h) => ({
+        id: h.id,
+        name: h.name,
+        hasPhone: h.guests.some((g) => g.phone && !g.isPlusOne),
+      }));
 
   const publicUrl = `${siteUrl}/rsvp/${slug}`;
   const messages = data.households.filter((h) => h.message || h.songRequest);
@@ -147,6 +161,19 @@ export function RsvpDashboard(props: Props) {
                 }
               >
                 <Send aria-hidden /> {t("emailWaiting")}
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={counts.waiting + counts.partial === 0}
+                onClick={() =>
+                  setTexting({
+                    ids: invited.filter((h) => h.reply.status !== "replied").map((h) => h.id),
+                    kind: counts.not_emailed === counts.all ? "invitation" : "reminder",
+                  })
+                }
+              >
+                <MessageCircle aria-hidden /> {t("smsWaiting")}
               </Button>
             </>
           )
@@ -256,6 +283,13 @@ export function RsvpDashboard(props: Props) {
                           >
                             <Send aria-hidden /> {t("sendReminder")}
                           </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setTexting({ ids: selectedIds, kind: "invitation" })}
+                          >
+                            <MessageCircle aria-hidden /> {t("smsSelected")}
+                          </Button>
                         </div>
                       )}
                     </div>
@@ -285,6 +319,12 @@ export function RsvpDashboard(props: Props) {
                             setEmailing({
                               ids: [h.id],
                               kind: h.lastEmail ? "reminder" : "invitation",
+                            })
+                          }
+                          onText={() =>
+                            setTexting({
+                              ids: [h.id],
+                              kind: "invitation",
                             })
                           }
                         />
@@ -343,6 +383,16 @@ export function RsvpDashboard(props: Props) {
         households={emailing ? targets(emailing.ids) : []}
         emailConfigured={emailConfigured}
         defaultKind={emailing?.kind}
+        onSent={() => setSelected(new Set())}
+      />
+      <SendSmsDialog
+        open={!!texting}
+        onOpenChange={(o) => !o && setTexting(null)}
+        households={texting ? smsTargets(texting.ids) : []}
+        smsConfigured={smsConfigured}
+        couple={props.couple}
+        siteUrl={siteUrl}
+        defaultKind={texting?.kind}
         onSent={() => setSelected(new Set())}
       />
       <RecordReplyDialog household={recording} onClose={closeRecording} />
@@ -441,6 +491,7 @@ function HouseholdRow({
   onSelect,
   onRecord,
   onRemind,
+  onText,
 }: {
   household: DashboardHousehold;
   link: string;
@@ -450,6 +501,7 @@ function HouseholdRow({
   onSelect: (on: boolean) => void;
   onRecord: () => void;
   onRemind: () => void;
+  onText: () => void;
 }) {
   const t = useTranslations("rsvpAdmin");
   const locale = useLocale();
@@ -555,6 +607,9 @@ function HouseholdRow({
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={onRemind} disabled={!hasEmail}>
                   <Send aria-hidden /> {h.lastEmail ? t("sendReminder") : t("sendInvitation")}
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={onText} disabled={!guestPhone}>
+                  <MessageCircle aria-hidden /> {t("textRsvp")}
                 </DropdownMenuItem>
               </>
             )}

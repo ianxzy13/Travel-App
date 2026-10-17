@@ -120,6 +120,26 @@
       "nobody": "ยังไม่มีใครในครอบครัวนี้ได้รับเชิญไปกิจกรรมใด เชิญได้จากหน้าแขก",
       "saved": "บันทึกการตอบรับของ {name} แล้ว",
       "save": "บันทึกการตอบรับ"
+    },
+    "smsWaiting": "Text everyone who hasn't replied",
+    "smsSelected": "Text selected",
+    "textRsvp": "Text RSVP link",
+    "sms": {
+      "title": "Text your guests",
+      "description": "Each household gets one SMS with its private RSVP link, sent to the first guest with a phone number.",
+      "notSetUp": "SMS isn't set up yet. Add your Twilio credentials as <code>TWILIO_ACCOUNT_SID</code>, <code>TWILIO_AUTH_TOKEN</code>, and <code>TWILIO_FROM</code> in <code>.env.local</code> (see the README), then restart the app.",
+      "willGet": "<b>{count}</b> {count, plural, one {household will get a text.} other {households will get a text.}}",
+      "skipped": "{count} without a phone number will be skipped: {names}. Share their link on WhatsApp instead.",
+      "type": "Type of text",
+      "invitation": "Invitation",
+      "reminder": "Friendly reminder",
+      "note": "Personal note (optional)",
+      "notePlaceholder": "e.g. We can't wait to celebrate with you!",
+      "preview": "Preview",
+      "cancel": "Cancel",
+      "send": "{count, plural, one {Send # text} other {Send # texts}}",
+      "sent": "{sent, plural, one {Sent to # household} other {Sent to # households}}",
+      "sentFailed": "{sent, plural, one {Sent to # household} other {Sent to # households}} ({failed} failed)"
     }
   }
 }

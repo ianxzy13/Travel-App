@@ -7,6 +7,9 @@
     "linkCopied": "Povezava je kopirana",
     "copyFailed": "Samodejno kopiranje ni uspelo. Kopirajte ročno.",
     "emailWaiting": "Pošlji e-pošto vsem, ki še niso odgovorili",
+    "smsWaiting": "Pošlji SMS vsem, ki še niso odgovorili",
+    "smsSelected": "Pošlji SMS izbranim",
+    "textRsvp": "Pošlji SMS s povezavo",
     "tabReplies": "Odgovori",
     "tabSetup": "Meniji in nastavitve",
     "nothingTitle": "Še ni ničesar za potrditi",
@@ -120,6 +123,23 @@
       "nobody": "Nihče v tem gospodinjstvu še ni povabljen na dogodek. Povabite jih na strani Gostje.",
       "saved": "Potrditev za {name} je shranjena",
       "save": "Shrani potrditev"
+    },
+    "sms": {
+      "title": "Pošljite SMS gostom",
+      "description": "Vsako gospodinjstvo dobi en SMS s svojo zasebno povezavo za potrditev, poslan prvemu gostu s telefonsko številko.",
+      "notSetUp": "SMS še ni nastavljen. Dodajte podatke za Twilio kot <code>TWILIO_ACCOUNT_SID</code>, <code>TWILIO_AUTH_TOKEN</code> in <code>TWILIO_FROM</code> v <code>.env.local</code> (glejte README) in znova zaženite aplikacijo.",
+      "willGet": "<b>{count}</b> {count, plural, one {gospodinjstvo bo prejelo SMS.} two {gospodinjstvi bosta prejeli SMS.} few {gospodinjstva bodo prejela SMS.} other {gospodinjstev bo prejelo SMS.}}",
+      "skipped": "{count} brez telefonske številke bo izpuščenih: {names}. Njihovo povezavo raje delite na WhatsAppu.",
+      "type": "Vrsta sporočila",
+      "invitation": "Vabilo",
+      "reminder": "Prijazen opomnik",
+      "note": "Osebno sporočilo (neobvezno)",
+      "notePlaceholder": "npr. Komaj čakava, da praznujemo z vami!",
+      "preview": "Predogled",
+      "cancel": "Prekliči",
+      "send": "{count, plural, one {Pošlji # SMS} two {Pošlji # SMS-a} few {Pošlji # SMS-e} other {Pošlji # SMS-ov}}",
+      "sent": "{sent, plural, one {Poslano # gospodinjstvu} two {Poslano # gospodinjstvoma} few {Poslano # gospodinjstvom} other {Poslano # gospodinjstvom}}",
+      "sentFailed": "{sent, plural, one {Poslano # gospodinjstvu} two {Poslano # gospodinjstvoma} few {Poslano # gospodinjstvom} other {Poslano # gospodinjstvom}} ({failed} neuspešno)"
     }
   }
 }

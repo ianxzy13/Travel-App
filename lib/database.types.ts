@@ -185,6 +185,16 @@ export type EmailSendRow = WeddingScoped & {
   opened_at: string | null;
 };
 
+export type SmsSendRow = WeddingScoped & {
+  household_id: string;
+  kind: EmailKind;
+  to_phone: string;
+  twilio_sid: string | null;
+  status: "sent" | "delivered" | "failed";
+  error: string | null;
+  sent_by: string | null;
+};
+
 export type NotificationRow = WeddingScoped & {
   user_id: string;
   type: string;
@@ -721,6 +731,7 @@ export type Database = {
       meal_options: Table<MealOptionRow, "wedding_id" | "name">;
       rsvp_responses: Table<RsvpResponseRow, "wedding_id" | "guest_id" | "event_id" | "status">;
       email_sends: Table<EmailSendRow, "wedding_id" | "household_id" | "kind" | "to_emails">;
+      sms_sends: Table<SmsSendRow, "wedding_id" | "household_id" | "kind" | "to_phone">;
       notifications: Table<NotificationRow, "wedding_id" | "user_id" | "type" | "title">;
       seating_layouts: Table<SeatingLayoutRow, "wedding_id" | "event_id">;
       seating_objects: Table<
