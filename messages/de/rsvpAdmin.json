@@ -6,7 +6,6 @@
     "pageLinkCopied": "Link zur Zusageseite kopiert",
     "linkCopied": "Link kopiert",
     "copyFailed": "Automatisches Kopieren hat nicht geklappt. Bitte kopier ihn von Hand.",
-    "emailWaiting": "Allen ohne Antwort eine E-Mail senden",
     "tabReplies": "Antworten",
     "tabSetup": "Menüs & Einstellungen",
     "nothingTitle": "Noch nichts zum Zusagen",
@@ -121,9 +120,6 @@
       "saved": "Zusage für {name} gespeichert",
       "save": "Zusage speichern"
     },
-    "smsWaiting": "Text everyone who hasn't replied",
-    "smsSelected": "Text selected",
-    "textRsvp": "Text RSVP link",
     "sms": {
       "title": "Text your guests",
       "description": "Each household gets one SMS with its private RSVP link, sent to the first guest with a phone number.",
@@ -140,6 +136,34 @@
       "send": "{count, plural, one {Send # text} other {Send # texts}}",
       "sent": "{sent, plural, one {Sent to # household} other {Sent to # households}}",
       "sentFailed": "{sent, plural, one {Sent to # household} other {Sent to # households}} ({failed} failed)"
+    },
+    "sendInvitations": "Send invitations",
+    "invite": {
+      "title": "Send invitations",
+      "description": "Choose how to reach your guests — by email, text message, or both at once.",
+      "channel": "Send via",
+      "channelEmail": "Email only",
+      "channelSms": "Text message only",
+      "channelBoth": "Both email & text",
+      "notConfigured": "not set up",
+      "neitherSetUp": "Neither email nor SMS is set up yet. Add <code>RESEND_API_KEY</code> for email or <code>TWILIO_ACCOUNT_SID</code> for SMS in <code>.env.local</code> (see the README), then restart the app.",
+      "emailWillGet": "<b>{count}</b> {count, plural, one {household will get an email.} other {households will get an email.}}",
+      "smsWillGet": "<b>{count}</b> {count, plural, one {household will get a text.} other {households will get a text.}}",
+      "noContact": "{count} without any contact info will be skipped: {names}. Share their link on WhatsApp instead.",
+      "type": "Type",
+      "invitation": "Invitation",
+      "reminder": "Friendly reminder",
+      "note": "Personal note (optional)",
+      "notePlaceholder": "e.g. We can't wait to celebrate with you!",
+      "emailPreview": "Email preview",
+      "smsPreview": "Text preview",
+      "loading": "Loading preview",
+      "cancel": "Cancel",
+      "send": "{count, plural, one {Send to # household} other {Send to # households}}",
+      "emailSent": "{sent, plural, one {# email sent} other {# emails sent}}",
+      "emailResult": "{sent, plural, one {# email sent} other {# emails sent}} ({failed} failed)",
+      "smsSent": "{sent, plural, one {# text sent} other {# texts sent}}",
+      "smsResult": "{sent, plural, one {# text sent} other {# texts sent}} ({failed} failed)"
     }
   }
 }
