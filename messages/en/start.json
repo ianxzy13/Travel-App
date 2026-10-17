@@ -114,6 +114,7 @@
     "defaults": {
       "ceremony": "Ceremony",
       "reception": "Reception",
+      "ceremonyReception": "Ceremony & Reception",
       "tagline": "We’re getting married",
       "rsvpIntro": "We can’t wait to celebrate with you. Please let us know if you can make it.",
       "faqChildren": "Are children welcome?",

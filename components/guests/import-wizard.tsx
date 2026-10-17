@@ -193,7 +193,7 @@ function UploadStep({ onParsed }: { onParsed: (p: Parsed) => void }) {
           "Lisbon",
           "1000-001",
           "Portugal",
-          "Ceremony, Reception",
+          "Ceremony & Reception",
           "Family",
           "Vegetarian",
           c("yes"),

@@ -96,7 +96,7 @@ type Props = {
   mealOptions: { id: string; name: string }[];
   names: PartnerNames;
   canEdit: boolean;
-  /** capacity of the booked reception venue, if any */
+  /** capacity of the booked venue, if any */
   venue?: { name: string; capacity: number } | null;
   /** only for tests: replaces saving to the database */
   saveChanges?: Parameters<typeof useSeatingStore>[3];

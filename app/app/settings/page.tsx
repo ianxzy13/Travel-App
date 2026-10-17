@@ -115,7 +115,7 @@ export default async function SettingsPage() {
           readOnly={!canManage(role)}
           events={(events ?? []).map((e, i) => ({
             ...e,
-            // default events nobody has renamed ("Ceremony"…) in the viewer's language
+            // default events nobody has renamed in the viewer's language
             name: shown(e.name),
             invitedCount: invitedCounts[i],
           }))}

@@ -93,7 +93,7 @@
       "save2": "Save",
       "cancel": "Cancel",
       "mealEvents": "Which events ask for a meal?",
-      "mealEventsHint": "Usually just the reception dinner.",
+      "mealEventsHint": "Usually just the main event.",
       "addMealsFirst": "Add meal options first.",
       "noEvents": "No events yet. Add them in Settings.",
       "askAt": "Ask for a meal choice at {name}"

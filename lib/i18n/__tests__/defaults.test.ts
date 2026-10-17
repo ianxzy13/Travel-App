@@ -9,6 +9,7 @@ describe("starter texts in the reader's language", () => {
     const sl = await starterTexts("sl");
     expect(sl("Ceremony")).toBe("Poročni obred");
     expect(sl("Reception")).toBe("Pogostitev");
+    expect(sl("Ceremony & Reception")).toBe("Poročni obred in pogostitev");
     expect(sl("Draft your guest list")).toBe("Pripravite osnutek seznama gostov");
     expect(sl("Guests")).toBe("Gostje");
     // saved in Slovenian, read in German

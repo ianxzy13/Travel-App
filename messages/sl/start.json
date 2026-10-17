@@ -159,6 +159,7 @@
     "defaults": {
       "ceremony": "Poročni obred",
       "reception": "Pogostitev",
+      "ceremonyReception": "Poročni obred in pogostitev",
       "tagline": "Poročiva se",
       "rsvpIntro": "Komaj čakava, da praznujemo skupaj. Sporočite nama, ali lahko pridete.",
       "faqChildren": "Ali so otroci dobrodošli?",
