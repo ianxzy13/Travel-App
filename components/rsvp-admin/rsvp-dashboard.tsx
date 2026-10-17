@@ -5,14 +5,17 @@ import {
   Check,
   Copy,
   ExternalLink,
+  Mail,
   MailOpen,
   MailWarning,
   MessageCircle,
+  MessageSquare,
   MoreHorizontal,
   Music,
   PenLine,
   Search,
   Send,
+  Share2,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -55,6 +58,18 @@ type Props = {
   canEdit: boolean;
   focusHouseholdId?: string;
 };
+
+async function shareInvite(text: string, url: string, fallback: () => void) {
+  if (typeof navigator !== "undefined" && navigator.share) {
+    try {
+      await navigator.share({ text, url });
+      return;
+    } catch {
+      // user cancelled or API unavailable — fall through to copy
+    }
+  }
+  fallback();
+}
 
 function useCopy() {
   const t = useTranslations("rsvpAdmin");
@@ -477,10 +492,19 @@ function HouseholdRow({
   const copy = useCopy();
   const hasEmail = h.guests.some((g) => g.email && !g.isPlusOne);
   const guestPhone = h.guests.find((g) => g.phone)?.phone;
+  const shareText = t("shareText", { name: h.name, couple, link });
   const waText = encodeURIComponent(t("whatsappText", { name: h.name, couple, link }));
   const whatsapp = guestPhone
     ? `https://wa.me/${guestPhone.replace(/\D/g, "")}?text=${waText}`
     : `https://wa.me/?text=${waText}`;
+  const smsBody = encodeURIComponent(shareText);
+  const smsLink = guestPhone
+    ? `sms:${guestPhone}?body=${smsBody}`
+    : `sms:?body=${smsBody}`;
+  const emailSubject = encodeURIComponent(t("shareEmailSubject", { couple }));
+  const emailBody = encodeURIComponent(shareText);
+  const guestEmail = h.guests.find((g) => g.email && !g.isPlusOne)?.email;
+  const emailLink = `mailto:${guestEmail ?? ""}?subject=${emailSubject}&body=${emailBody}`;
 
   return (
     <li
@@ -543,10 +567,10 @@ function HouseholdRow({
         <Button
           variant="ghost"
           size="icon-sm"
-          onClick={() => copy(link)}
-          aria-label={t("copyFor", { name: h.name })}
+          onClick={() => shareInvite(shareText, link, () => copy(link))}
+          aria-label={t("shareFor", { name: h.name })}
         >
-          <Copy aria-hidden />
+          <Share2 aria-hidden />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -555,13 +579,27 @@ function HouseholdRow({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onSelect={() => copy(link)}>
-              <Copy aria-hidden /> {t("copyLink")}
+            <DropdownMenuItem onSelect={() => shareInvite(shareText, link, () => copy(link))}>
+              <Share2 aria-hidden /> {t("share")}
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <a href={whatsapp} target="_blank" rel="noreferrer">
                 <MessageCircle aria-hidden /> {t("whatsapp")}
               </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={smsLink} target="_blank" rel="noreferrer">
+                <MessageSquare aria-hidden /> {t("textMessage")}
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={emailLink} target="_blank" rel="noreferrer">
+                <Mail aria-hidden /> {t("emailLink")}
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => copy(link)}>
+              <Copy aria-hidden /> {t("copyLink")}
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href={link} target="_blank" rel="noreferrer">

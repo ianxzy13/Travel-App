@@ -164,6 +164,12 @@
       "emailResult": "{sent, plural, one {# email sent} other {# emails sent}} ({failed} failed)",
       "smsSent": "{sent, plural, one {# text sent} other {# texts sent}}",
       "smsResult": "{sent, plural, one {# text sent} other {# texts sent}} ({failed} failed)"
-    }
+    },
+    "share": "Share invite…",
+    "shareFor": "Share invite for {name}",
+    "shareText": "Hi {name}! Please RSVP for {couple}'s wedding here: {link}",
+    "shareEmailSubject": "You're invited to {couple}'s wedding!",
+    "textMessage": "Text message",
+    "emailLink": "Email"
   }
 }
