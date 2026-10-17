@@ -33,6 +33,8 @@ type Props = {
   /** languages the households speak */
   languages: string[];
   resultCount: number;
+  currentMemberId: string | null;
+  currentRole: string;
 };
 
 export function GuestToolbar(props: Props) {
@@ -65,6 +67,19 @@ export function GuestToolbar(props: Props) {
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
+        {/* My guests / All guests toggle for parents */}
+        {props.currentRole === "parent" && props.currentMemberId && (
+          <label className="flex items-center gap-2 text-sm">
+            <Switch
+              checked={filters.managedBy !== "all"}
+              onCheckedChange={(on) =>
+                set("managedBy", on ? props.currentMemberId! : "all")
+              }
+            />
+            {t("myGuests")}
+          </label>
+        )}
+
         {/* A-list / B-list toggle */}
         <div
           role="radiogroup"

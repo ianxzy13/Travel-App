@@ -17,7 +17,7 @@ import {
   translationsSchema,
   weddingLanguagesSchema,
 } from "@/lib/validation/languages";
-import { canEdit, getUser, requireWedding } from "@/lib/wedding";
+import { canManage, getUser, requireWedding } from "@/lib/wedding";
 import { err, fail, invalid, noPermission } from "@/lib/errors";
 
 /**
@@ -26,7 +26,7 @@ import { err, fail, invalid, noPermission } from "@/lib/errors";
  */
 export async function updateLanguages(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return noPermission();
+  if (!canManage(role)) return noPermission();
   const parsed = weddingLanguagesSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();
@@ -75,7 +75,7 @@ export async function saveEventTranslations(
   input: unknown,
 ): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role) || !id.safeParse(eventId).success) return noPermission();
+  if (!canManage(role) || !id.safeParse(eventId).success) return noPermission();
   const parsed = translationsSchema(EVENT_TEXT_FIELDS).safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();
@@ -92,7 +92,7 @@ export async function saveEventTranslations(
 /** Per-language names of one meal option. */
 export async function saveMealTranslations(mealId: string, input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role) || !id.safeParse(mealId).success) return noPermission();
+  if (!canManage(role) || !id.safeParse(mealId).success) return noPermission();
   const parsed = translationsSchema(MEAL_TEXT_FIELDS, 300).safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();
@@ -109,7 +109,7 @@ export async function saveMealTranslations(mealId: string, input: unknown): Prom
 /** Per-language location and RSVP contact line. */
 export async function saveWeddingTranslations(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return noPermission();
+  if (!canManage(role)) return noPermission();
   const parsed = translationsSchema(WEDDING_TEXT_FIELDS, 300).safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();

@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Controller, type UseFormReturn } from "react-hook-form";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { FormField } from "@/components/form-field";
+import { getCountries } from "@/lib/i18n/countries";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -216,72 +217,249 @@ export function DateLocationFields({ form, disabled }: Props) {
   );
 }
 
+function CurrencySelect({
+  id,
+  value,
+  onChange,
+  disabled,
+  placeholder,
+  locale,
+  allowEmpty,
+}: {
+  id: string;
+  value: string;
+  onChange: (v: string) => void;
+  disabled?: boolean;
+  placeholder: string;
+  locale: string;
+  allowEmpty?: boolean;
+}) {
+  const t = useTranslations("weddingForm");
+  const TOP_CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "INR", "BRL"] as const;
+  const topSet = new Set<string>(TOP_CURRENCIES);
+  const top = TOP_CURRENCIES.map((c) => ({ code: c, label: currencyLabel(c, locale) }));
+  const rest = CURRENCIES
+    .filter((c) => !topSet.has(c))
+    .map((c) => ({ code: c, label: currencyLabel(c, locale) }))
+    .sort((a, b) => a.label.localeCompare(b.label, locale));
+  return (
+    <Select value={value} onValueChange={onChange} disabled={disabled}>
+      <SelectTrigger id={id} className="w-full">
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        {allowEmpty && (
+          <>
+            <SelectItem value="__none">{t("noCurrency")}</SelectItem>
+            <SelectSeparator />
+          </>
+        )}
+        <SelectGroup>
+          <SelectLabel>{t("popularCurrencies")}</SelectLabel>
+          {top.map((c) => (
+            <SelectItem key={c.code} value={c.code}>
+              {c.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+        <SelectSeparator />
+        <SelectGroup>
+          <SelectLabel>{t("allCurrencies")}</SelectLabel>
+          {rest.map((c) => (
+            <SelectItem key={c.code} value={c.code}>
+              {c.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+}
+
 export function GuestsCurrencyFields({ form, disabled }: Props) {
   const t = useTranslations("weddingForm");
   const locale = useLocale();
   const { errors } = form.formState;
+  const secondaryCurrency = form.watch("secondaryCurrency");
+  const primaryCurrency = form.watch("currency");
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      <FormField
-        id="estimatedGuests"
-        label={t("guests")}
-        hint={t("guestsHint")}
-        error={errors.estimatedGuests?.message}
-      >
-        {(aria) => (
-          <Input
-            {...aria}
-            inputMode="numeric"
-            placeholder={t("guestsPlaceholder")}
-            disabled={disabled}
-            {...form.register("estimatedGuests")}
-          />
-        )}
-      </FormField>
-      <FormField id="currency" label={t("currency")} error={errors.currency?.message}>
-        {(aria) => {
-          const TOP_CURRENCIES = ["EUR", "USD", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "INR", "BRL"] as const;
-          const topSet = new Set<string>(TOP_CURRENCIES);
-          const top = TOP_CURRENCIES.map((c) => ({ code: c, label: currencyLabel(c, locale) }));
-          const rest = CURRENCIES
-            .filter((c) => !topSet.has(c))
-            .map((c) => ({ code: c, label: currencyLabel(c, locale) }))
-            .sort((a, b) => a.label.localeCompare(b.label, locale));
-          return (
+    <div className="space-y-4">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField
+          id="estimatedGuests"
+          label={t("guests")}
+          hint={t("guestsHint")}
+          error={errors.estimatedGuests?.message}
+        >
+          {(aria) => (
+            <Input
+              {...aria}
+              inputMode="numeric"
+              placeholder={t("guestsPlaceholder")}
+              disabled={disabled}
+              {...form.register("estimatedGuests")}
+            />
+          )}
+        </FormField>
+        <FormField id="currency" label={t("currency")} error={errors.currency?.message}>
+          {() => (
             <Controller
               control={form.control}
               name="currency"
               render={({ field }) => (
-                <Select value={field.value} onValueChange={field.onChange} disabled={disabled}>
-                  <SelectTrigger {...aria} className="w-full">
-                    <SelectValue placeholder={t("chooseCurrency")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>{t("popularCurrencies")}</SelectLabel>
-                      {top.map((c) => (
-                        <SelectItem key={c.code} value={c.code}>
-                          {c.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                    <SelectSeparator />
-                    <SelectGroup>
-                      <SelectLabel>{t("allCurrencies")}</SelectLabel>
-                      {rest.map((c) => (
-                        <SelectItem key={c.code} value={c.code}>
-                          {c.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <CurrencySelect
+                  id="currency"
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={disabled}
+                  placeholder={t("chooseCurrency")}
+                  locale={locale}
+                />
               )}
             />
-          );
-        }}
-      </FormField>
+          )}
+        </FormField>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField
+          id="secondaryCurrency"
+          label={t("secondaryCurrency")}
+          hint={t("secondaryCurrencyHint")}
+        >
+          {() => (
+            <Controller
+              control={form.control}
+              name="secondaryCurrency"
+              render={({ field }) => (
+                <CurrencySelect
+                  id="secondaryCurrency"
+                  value={field.value || "__none"}
+                  onChange={(v) => {
+                    field.onChange(v === "__none" ? "" : v);
+                    if (v === "__none") form.setValue("exchangeRate", "");
+                  }}
+                  disabled={disabled}
+                  placeholder={t("noCurrency")}
+                  locale={locale}
+                  allowEmpty
+                />
+              )}
+            />
+          )}
+        </FormField>
+        {secondaryCurrency && (
+          <FormField
+            id="exchangeRate"
+            label={t("exchangeRate")}
+            hint={t("exchangeRateHint", {
+              primary: currencyLabel(primaryCurrency, locale),
+              secondary: currencyLabel(secondaryCurrency, locale),
+            })}
+            error={errors.exchangeRate?.message}
+          >
+            {(aria) => (
+              <Input
+                {...aria}
+                inputMode="decimal"
+                placeholder="e.g. 1.08"
+                disabled={disabled}
+                {...form.register("exchangeRate")}
+              />
+            )}
+          </FormField>
+        )}
+      </div>
     </div>
+  );
+}
+
+export function GuestCountriesFields({ form, disabled }: Props) {
+  const t = useTranslations("weddingForm");
+  const locale = useLocale();
+  const countries = getCountries(locale);
+  const [search, setSearch] = useState("");
+
+  const filtered = search.length < 1
+    ? countries
+    : countries.filter((c) =>
+        c.name.toLowerCase().includes(search.toLowerCase()) ||
+        c.code.toLowerCase().includes(search.toLowerCase()),
+      );
+
+  return (
+    <Controller
+      control={form.control}
+      name="guestCountries"
+      render={({ field }) => {
+        const selected = field.value as string[];
+        const toggle = (code: string) => {
+          field.onChange(
+            selected.includes(code)
+              ? selected.filter((c) => c !== code)
+              : [...selected, code],
+          );
+        };
+
+        const selectedCountries = selected
+          .map((code) => countries.find((c) => c.code === code))
+          .filter(Boolean);
+
+        return (
+          <div className="space-y-4">
+            <div>
+              <p className="text-sm font-medium">{t("guestCountries")}</p>
+              <p className="text-muted-foreground mt-1 text-sm">{t("guestCountriesHint")}</p>
+            </div>
+
+            {selectedCountries.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {selectedCountries.map((c) => (
+                  <button
+                    key={c!.code}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => toggle(c!.code)}
+                    className="bg-primary text-primary-foreground inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm"
+                  >
+                    {c!.flag} {c!.name}
+                    <X className="size-3.5" aria-hidden />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <Input
+              placeholder={t("guestCountriesSearch")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              disabled={disabled}
+            />
+
+            <div className="border-border max-h-48 overflow-y-auto rounded-md border">
+              {filtered.map((c) => {
+                const isSelected = selected.includes(c.code);
+                return (
+                  <button
+                    key={c.code}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => toggle(c.code)}
+                    className={cn(
+                      "flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors",
+                      isSelected ? "bg-primary-soft font-medium" : "hover:bg-accent",
+                    )}
+                  >
+                    <span>{c.flag}</span>
+                    <span className="flex-1 text-start">{c.name}</span>
+                    {isSelected && <Check className="text-primary size-4" aria-hidden />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }}
+    />
   );
 }
 

@@ -60,7 +60,8 @@
       "waiting": "未返信",
       "matching": "{count} 人が該当",
       "clear": "フィルターをクリア",
-      "any": "すべて"
+      "any": "すべて",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "表示中のゲストをすべて選択",
@@ -203,7 +204,9 @@
       "sameAsOurs": "私たちと同じ（{language}）",
       "saved": "世帯を保存しました",
       "cancel": "キャンセル",
-      "save": "保存"
+      "save": "保存",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "タグ",

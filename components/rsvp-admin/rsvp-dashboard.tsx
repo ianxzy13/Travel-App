@@ -5,14 +5,17 @@ import {
   Check,
   Copy,
   ExternalLink,
+  Mail,
   MailOpen,
   MailWarning,
   MessageCircle,
+  MessageSquare,
   MoreHorizontal,
   Music,
   PenLine,
   Search,
   Send,
+  Share2,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -37,7 +40,7 @@ import { cn } from "@/lib/utils";
 import type { RsvpSettingsValues } from "@/lib/validation/rsvp";
 import { RecordReplyDialog } from "./record-reply-dialog";
 import { RsvpSetup } from "./rsvp-setup";
-import { SendEmailDialog } from "./send-email-dialog";
+import { SendInviteDialog } from "./send-invite-dialog";
 
 type Filter = "all" | "waiting" | "replied" | "partial" | "not_emailed";
 
@@ -50,10 +53,23 @@ type Props = {
   slug: string;
   couple: string;
   emailConfigured: boolean;
+  smsConfigured: boolean;
   adminConfigured: boolean;
   canEdit: boolean;
   focusHouseholdId?: string;
 };
+
+async function shareInvite(text: string, url: string, fallback: () => void) {
+  if (typeof navigator !== "undefined" && navigator.share) {
+    try {
+      await navigator.share({ text, url });
+      return;
+    } catch {
+      // user cancelled or API unavailable — fall through to copy
+    }
+  }
+  fallback();
+}
 
 function useCopy() {
   const t = useTranslations("rsvpAdmin");
@@ -68,15 +84,16 @@ function useCopy() {
 }
 
 export function RsvpDashboard(props: Props) {
-  const { data, siteUrl, slug, canEdit, emailConfigured } = props;
+  const { data, siteUrl, slug, canEdit, emailConfigured, smsConfigured } = props;
   const t = useTranslations("rsvpAdmin");
   const copy = useCopy();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [emailing, setEmailing] = useState<{
+  const [sending, setSending] = useState<{
     ids: string[];
     kind: "invitation" | "reminder";
+    channel: "email" | "sms" | "both";
   } | null>(null);
   const [recording, setRecording] = useState<{ name: string; code: string } | null>(null);
   const closeRecording = useCallback(() => setRecording(null), []);
@@ -109,13 +126,14 @@ export function RsvpDashboard(props: Props) {
   }, [invited, filter, search]);
 
   const selectedIds = visible.filter((h) => selected.has(h.id)).map((h) => h.id);
-  const targets = (ids: string[]) =>
+  const inviteTargets = (ids: string[]) =>
     data.households
       .filter((h) => ids.includes(h.id))
       .map((h) => ({
         id: h.id,
         name: h.name,
         hasEmail: h.guests.some((g) => g.email && !g.isPlusOne),
+        hasPhone: h.guests.some((g) => g.phone && !g.isPlusOne),
       }));
 
   const publicUrl = `${siteUrl}/rsvp/${slug}`;
@@ -140,13 +158,14 @@ export function RsvpDashboard(props: Props) {
                 size="sm"
                 disabled={counts.waiting + counts.partial === 0}
                 onClick={() =>
-                  setEmailing({
+                  setSending({
                     ids: invited.filter((h) => h.reply.status !== "replied").map((h) => h.id),
                     kind: counts.not_emailed === counts.all ? "invitation" : "reminder",
+                    channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                   })
                 }
               >
-                <Send aria-hidden /> {t("emailWaiting")}
+                <Send aria-hidden /> {t("sendInvitations")}
               </Button>
             </>
           )
@@ -244,7 +263,13 @@ export function RsvpDashboard(props: Props) {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => setEmailing({ ids: selectedIds, kind: "invitation" })}
+                            onClick={() =>
+                              setSending({
+                                ids: selectedIds,
+                                kind: "invitation",
+                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                              })
+                            }
                           >
                             <Send aria-hidden />{" "}
                             {t("sendInvitationCount", { count: selectedIds.length })}
@@ -252,7 +277,13 @@ export function RsvpDashboard(props: Props) {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => setEmailing({ ids: selectedIds, kind: "reminder" })}
+                            onClick={() =>
+                              setSending({
+                                ids: selectedIds,
+                                kind: "reminder",
+                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                              })
+                            }
                           >
                             <Send aria-hidden /> {t("sendReminder")}
                           </Button>
@@ -281,10 +312,11 @@ export function RsvpDashboard(props: Props) {
                             })
                           }
                           onRecord={() => setRecording({ name: h.name, code: h.code })}
-                          onRemind={() =>
-                            setEmailing({
+                          onSend={() =>
+                            setSending({
                               ids: [h.id],
                               kind: h.lastEmail ? "reminder" : "invitation",
+                              channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                             })
                           }
                         />
@@ -337,12 +369,16 @@ export function RsvpDashboard(props: Props) {
         </TabsContent>
       </Tabs>
 
-      <SendEmailDialog
-        open={!!emailing}
-        onOpenChange={(o) => !o && setEmailing(null)}
-        households={emailing ? targets(emailing.ids) : []}
+      <SendInviteDialog
+        open={!!sending}
+        onOpenChange={(o) => !o && setSending(null)}
+        households={sending ? inviteTargets(sending.ids) : []}
         emailConfigured={emailConfigured}
-        defaultKind={emailing?.kind}
+        smsConfigured={smsConfigured}
+        couple={props.couple}
+        siteUrl={siteUrl}
+        defaultKind={sending?.kind}
+        defaultChannel={sending?.channel}
         onSent={() => setSelected(new Set())}
       />
       <RecordReplyDialog household={recording} onClose={closeRecording} />
@@ -440,7 +476,7 @@ function HouseholdRow({
   selected,
   onSelect,
   onRecord,
-  onRemind,
+  onSend,
 }: {
   household: DashboardHousehold;
   link: string;
@@ -449,17 +485,26 @@ function HouseholdRow({
   selected: boolean;
   onSelect: (on: boolean) => void;
   onRecord: () => void;
-  onRemind: () => void;
+  onSend: () => void;
 }) {
   const t = useTranslations("rsvpAdmin");
   const locale = useLocale();
   const copy = useCopy();
   const hasEmail = h.guests.some((g) => g.email && !g.isPlusOne);
   const guestPhone = h.guests.find((g) => g.phone)?.phone;
+  const shareText = t("shareText", { name: h.name, couple, link });
   const waText = encodeURIComponent(t("whatsappText", { name: h.name, couple, link }));
   const whatsapp = guestPhone
     ? `https://wa.me/${guestPhone.replace(/\D/g, "")}?text=${waText}`
     : `https://wa.me/?text=${waText}`;
+  const smsBody = encodeURIComponent(shareText);
+  const smsLink = guestPhone
+    ? `sms:${guestPhone}?body=${smsBody}`
+    : `sms:?body=${smsBody}`;
+  const emailSubject = encodeURIComponent(t("shareEmailSubject", { couple }));
+  const emailBody = encodeURIComponent(shareText);
+  const guestEmail = h.guests.find((g) => g.email && !g.isPlusOne)?.email;
+  const emailLink = `mailto:${guestEmail ?? ""}?subject=${emailSubject}&body=${emailBody}`;
 
   return (
     <li
@@ -522,10 +567,10 @@ function HouseholdRow({
         <Button
           variant="ghost"
           size="icon-sm"
-          onClick={() => copy(link)}
-          aria-label={t("copyFor", { name: h.name })}
+          onClick={() => shareInvite(shareText, link, () => copy(link))}
+          aria-label={t("shareFor", { name: h.name })}
         >
-          <Copy aria-hidden />
+          <Share2 aria-hidden />
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -534,13 +579,27 @@ function HouseholdRow({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onSelect={() => copy(link)}>
-              <Copy aria-hidden /> {t("copyLink")}
+            <DropdownMenuItem onSelect={() => shareInvite(shareText, link, () => copy(link))}>
+              <Share2 aria-hidden /> {t("share")}
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <a href={whatsapp} target="_blank" rel="noreferrer">
                 <MessageCircle aria-hidden /> {t("whatsapp")}
               </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={smsLink} target="_blank" rel="noreferrer">
+                <MessageSquare aria-hidden /> {t("textMessage")}
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={emailLink} target="_blank" rel="noreferrer">
+                <Mail aria-hidden /> {t("emailLink")}
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => copy(link)}>
+              <Copy aria-hidden /> {t("copyLink")}
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a href={link} target="_blank" rel="noreferrer">
@@ -553,7 +612,7 @@ function HouseholdRow({
                 <DropdownMenuItem onSelect={onRecord}>
                   <PenLine aria-hidden /> {t("record")}
                 </DropdownMenuItem>
-                <DropdownMenuItem onSelect={onRemind} disabled={!hasEmail}>
+                <DropdownMenuItem onSelect={onSend} disabled={!hasEmail && !guestPhone}>
                   <Send aria-hidden /> {h.lastEmail ? t("sendReminder") : t("sendInvitation")}
                 </DropdownMenuItem>
               </>

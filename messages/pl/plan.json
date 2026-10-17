@@ -87,7 +87,10 @@
       "deleteTitle": "Usunąć to zadanie?",
       "deleted": "Usunięto zadanie",
       "save": "Zapisz",
-      "add": "Dodaj zadanie"
+      "add": "Dodaj zadanie",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budżet",

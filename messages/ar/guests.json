@@ -60,7 +60,8 @@
       "waiting": "لم يرد بعد",
       "matching": "المطابق: {count}",
       "clear": "مسح المرشحات",
-      "any": "الكل"
+      "any": "الكل",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "تحديد كل الضيوف المعروضين",
@@ -203,7 +204,9 @@
       "sameAsOurs": "مثل لغتنا ({language})",
       "saved": "تم حفظ العائلة",
       "cancel": "إلغاء",
-      "save": "حفظ"
+      "save": "حفظ",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "الوسوم",

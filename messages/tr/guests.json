@@ -60,7 +60,8 @@
       "waiting": "Henüz yanıt yok",
       "matching": "{count} eşleşme",
       "clear": "Filtreleri temizle",
-      "any": "Tümü"
+      "any": "Tümü",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Gösterilen tüm misafirleri seç",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Bizimkiyle aynı ({language})",
       "saved": "Hane kaydedildi",
       "cancel": "İptal",
-      "save": "Kaydet"
+      "save": "Kaydet",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etiketler",

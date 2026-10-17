@@ -60,7 +60,8 @@
       "waiting": "Ответа пока нет",
       "matching": "Найдено: {count}",
       "clear": "Сбросить фильтры",
-      "any": "Любой"
+      "any": "Любой",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Выбрать всех показанных гостей",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Как наш ({language})",
       "saved": "Семья сохранена",
       "cancel": "Отмена",
-      "save": "Сохранить"
+      "save": "Сохранить",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Метки",

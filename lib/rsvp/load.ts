@@ -55,7 +55,7 @@ export async function loadRsvpDashboard(
 ): Promise<RsvpDashboardData> {
   const wid = wedding.id;
   const labels = await nameLabels();
-  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  // default events nobody has renamed in the viewer's language
   const shown = await starterTexts(await getLocale());
   const [households, guests, invites, responses, events, mealOptions, emails] = await Promise.all([
     fetchAll((f, t) =>

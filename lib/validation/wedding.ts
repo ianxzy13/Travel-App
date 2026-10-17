@@ -97,11 +97,14 @@ export const weddingSchema = z.object({
   weddingDate: z.union([z.literal(""), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date"))]),
   location: z.string().trim().max(200, v("tooLong", 200)),
   currency: z.string().regex(/^[A-Z]{3}$/, v("currency")),
+  secondaryCurrency: z.union([z.literal(""), z.string().regex(/^[A-Z]{3}$/)]),
+  exchangeRate: z.union([z.literal(""), z.string().regex(/^\d+(\.\d{0,6})?$/)]),
   // Kept as text so the input can be empty; converted to a number when saving.
   estimatedGuests: z
     .string()
     .trim()
     .regex(/^\d{0,4}$/, v("guestCount")),
+  guestCountries: z.array(z.string().length(2)).max(50),
   styleTags: z.array(z.string().max(30)).max(12),
   accent: z.enum(ACCENTS),
 });
@@ -114,7 +117,10 @@ export const emptyWedding: WeddingFormValues = {
   weddingDate: "",
   location: "",
   currency: "EUR",
+  secondaryCurrency: "",
+  exchangeRate: "",
   estimatedGuests: "",
+  guestCountries: [],
   styleTags: [],
   accent: "rose",
 };
@@ -128,7 +134,10 @@ export function toWeddingColumns(v: WeddingFormValues) {
     wedding_date: v.weddingDate || null,
     location: v.location || null,
     currency: v.currency,
+    secondary_currency: v.secondaryCurrency || null,
+    exchange_rate: v.exchangeRate ? Number(v.exchangeRate) : null,
     estimated_guests: guests,
+    guest_countries: v.guestCountries,
     style_tags: v.styleTags,
     accent: v.accent,
   };
@@ -136,10 +145,10 @@ export function toWeddingColumns(v: WeddingFormValues) {
 
 export const inviteSchema = z.object({
   email: z.email(v("email")).max(320),
-  role: z.enum(["owner", "editor", "viewer"]),
+  role: z.enum(["owner", "editor", "parent", "helper", "viewer"]),
 });
 
 export type InviteFormValues = z.infer<typeof inviteSchema>;
 
 /** Collaborator roles (labels and descriptions are in messages "roles"). */
-export const ROLES = ["owner", "editor", "viewer"] as const;
+export const ROLES = ["owner", "editor", "parent", "helper", "viewer"] as const;

@@ -87,7 +87,10 @@
       "deleteTitle": "Supprimer cette tâche ?",
       "deleted": "Tâche supprimée",
       "save": "Enregistrer",
-      "add": "Ajouter la tâche"
+      "add": "Ajouter la tâche",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

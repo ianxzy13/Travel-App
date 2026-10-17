@@ -60,7 +60,8 @@
       "waiting": "Nessuna risposta",
       "matching": "{count} corrispondenti",
       "clear": "Cancella filtri",
-      "any": "Qualsiasi"
+      "any": "Qualsiasi",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Seleziona tutti gli invitati visibili",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Come la nostra ({language})",
       "saved": "Nucleo salvato",
       "cancel": "Annulla",
-      "save": "Salva"
+      "save": "Salva",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Etichette",

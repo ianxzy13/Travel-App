@@ -87,7 +87,10 @@
       "deleteTitle": "यह काम हटाएँ?",
       "deleted": "काम हटाया गया",
       "save": "सहेजें",
-      "add": "काम जोड़ें"
+      "add": "काम जोड़ें",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "बजट",

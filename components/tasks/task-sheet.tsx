@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Trash2 } from "lucide-react";
+import { Loader2, Send, Trash2, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { deleteTask, saveTask } from "@/app/app/tasks/actions";
+import { addComment, deleteComment, deleteTask, loadComments, saveTask } from "@/app/app/tasks/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
 import { FormField } from "@/components/form-field";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,7 @@ export function TaskSheet({
   members,
   categories,
   canEdit,
+  currentUserId,
   onOpenChange,
 }: {
   open: boolean;
@@ -47,6 +48,7 @@ export function TaskSheet({
   members: { id: string; name: string }[];
   categories: string[];
   canEdit: boolean;
+  currentUserId: string | null;
   onOpenChange: (open: boolean) => void;
 }) {
   const t = useTranslations("tasks.sheet");
@@ -55,6 +57,12 @@ export function TaskSheet({
     resolver: zodResolver(taskSchema),
     defaultValues: { title: "", notes: "", due_date: "", assignee_id: "", category: "" },
   });
+
+  type Comment = { id: string; body: string; author_id: string; created_at: string };
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentText, setCommentText] = useState("");
+  const [commentPending, setCommentPending] = useState(false);
+  const memberNames = new Map(members.map((m) => [m.id, m.name]));
 
   useEffect(() => {
     if (!open) return;
@@ -65,6 +73,11 @@ export function TaskSheet({
       assignee_id: task?.assignee_id ?? "",
       category: task?.category ?? "",
     });
+    setComments([]);
+    setCommentText("");
+    if (task) {
+      loadComments(task.id).then(setComments);
+    }
   }, [open, task, form]);
 
   const submit = form.handleSubmit((values) =>
@@ -168,7 +181,84 @@ export function TaskSheet({
             </SheetFooter>
           )}
         </form>
+        {task && (
+          <div className="border-t px-4 py-4">
+            <h3 className="mb-3 text-sm font-medium">{t("comments")}</h3>
+            {comments.length > 0 && (
+              <ul className="mb-3 space-y-2">
+                {comments.map((c) => (
+                  <li key={c.id} className="bg-muted rounded-md p-2 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium">
+                        {memberNames.get(c.author_id) ?? t("unknown")}
+                      </span>
+                      <span className="text-muted-foreground flex items-center gap-1 text-xs">
+                        {new Date(c.created_at).toLocaleDateString()}
+                        {c.author_id === currentUserId && (
+                          <button
+                            type="button"
+                            className="text-muted-foreground hover:text-destructive"
+                            onClick={async () => {
+                              const r = await deleteComment(c.id);
+                              if (r.ok) setComments((prev) => prev.filter((x) => x.id !== c.id));
+                            }}
+                          >
+                            <X className="size-3" />
+                          </button>
+                        )}
+                      </span>
+                    </div>
+                    <p className="mt-1 whitespace-pre-wrap">{c.body}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="flex gap-2">
+              <Input
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+                placeholder={t("addComment")}
+                maxLength={2000}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey && commentText.trim()) {
+                    e.preventDefault();
+                    handleAddComment();
+                  }
+                }}
+              />
+              <Button
+                type="button"
+                size="icon"
+                variant="ghost"
+                disabled={commentPending || !commentText.trim()}
+                onClick={handleAddComment}
+              >
+                {commentPending ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <Send className="size-4" />
+                )}
+              </Button>
+            </div>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
+
+  async function handleAddComment() {
+    if (!task || !commentText.trim()) return;
+    setCommentPending(true);
+    const r = await addComment(task.id, commentText);
+    setCommentPending(false);
+    if (!r.ok) {
+      toast.error(r.error);
+      return;
+    }
+    setComments((prev) => [
+      ...prev,
+      { id: r.data.id, body: commentText.trim(), author_id: currentUserId ?? "", created_at: new Date().toISOString() },
+    ]);
+    setCommentText("");
+  }
 }

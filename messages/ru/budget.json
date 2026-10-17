@@ -141,7 +141,8 @@
       "currency": "Валюта",
       "notes": "Заметки",
       "file": "byudzhet"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Подрядчики",

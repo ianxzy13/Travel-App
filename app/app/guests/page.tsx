@@ -6,7 +6,7 @@ import { loadGuestData } from "@/lib/guests/load";
 import { isEmailConfigured } from "@/lib/email/resend";
 import { buildGuestViews } from "@/lib/guests/model";
 import { createClient } from "@/lib/supabase/server";
-import { canEdit, requireWedding } from "@/lib/wedding";
+import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("guests"))("title") };
@@ -14,8 +14,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function GuestsPage() {
   const { wedding, role } = await requireWedding();
+  const supabase = await createClient();
+  const user = await requireUser();
+  const [guestData, { data: memberRow }, { data: allMembers }] = await Promise.all([
+    loadGuestData(supabase, wedding.id),
+    supabase
+      .from("wedding_members")
+      .select("id")
+      .eq("wedding_id", wedding.id)
+      .eq("user_id", user.id)
+      .single(),
+    supabase
+      .from("wedding_members")
+      .select("id, role, profiles(full_name)")
+      .eq("wedding_id", wedding.id),
+  ]);
   const { guests, households, invites, guestTags, events, tags, relationships, responses } =
-    await loadGuestData(await createClient(), wedding.id);
+    guestData;
 
   return (
     <GuestManager
@@ -39,6 +54,7 @@ export default async function GuestsPage() {
           country: h.country ?? "",
         },
         language: h.preferred_language ?? "",
+        managedBy: h.managed_by ?? null,
       }))}
       events={events}
       tags={tags}
@@ -53,6 +69,14 @@ export default async function GuestsPage() {
       coupleLanguage={wedding.languages?.[0] ?? "en"}
       canEdit={canEdit(role)}
       emailConfigured={isEmailConfigured}
+      currentMemberId={memberRow?.id ?? null}
+      currentRole={role}
+      members={(allMembers ?? [])
+        .filter((m) => m.role === "parent" || m.role === "editor" || m.role === "owner")
+        .map((m) => ({
+          id: m.id,
+          name: (m.profiles as { full_name: string | null } | null)?.full_name ?? "?",
+        }))}
     />
   );
 }

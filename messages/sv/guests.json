@@ -60,7 +60,8 @@
       "waiting": "Inget svar än",
       "matching": "{count} matchar",
       "clear": "Rensa filter",
-      "any": "Alla"
+      "any": "Alla",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Markera alla gäster som visas",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Samma som vårt ({language})",
       "saved": "Hushållet sparat",
       "cancel": "Avbryt",
-      "save": "Spara"
+      "save": "Spara",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Taggar",

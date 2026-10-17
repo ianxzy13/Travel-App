@@ -9,7 +9,7 @@ import { Providers } from "@/components/providers";
 import { isRtl } from "@/i18n/locales";
 import { GUEST_NAMESPACES } from "@/i18n/messages";
 import { isGuestPath } from "@/i18n/request";
-import { greatVibes } from "@/lib/website/fonts";
+import { greatVibes, rastellino } from "@/lib/website/fonts";
 import "./globals.css";
 
 // Fonts of the theme (see app/theme.css): body, headings and the script accent.
@@ -52,7 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       lang={locale}
       dir={isRtl(locale) ? "rtl" : "ltr"}
       suppressHydrationWarning
-      className={`${jost.variable} ${garamond.variable} ${greatVibes.variable}`}
+      className={`${jost.variable} ${garamond.variable} ${greatVibes.variable} ${rastellino.variable}`}
     >
       <body>
         <NextIntlClientProvider messages={clientMessages}>

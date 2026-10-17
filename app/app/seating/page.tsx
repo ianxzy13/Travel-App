@@ -28,7 +28,7 @@ export default async function SeatingPage({
     .select("id, name, meal_choice")
     .eq("wedding_id", wedding.id)
     .order("sort_order");
-  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  // default events nobody has renamed in the viewer's language
   const shown = await starterTexts(await getLocale());
   const events = rows?.map((e) => ({ ...e, name: shown(e.name) }));
 
@@ -45,7 +45,7 @@ export default async function SeatingPage({
     );
   }
 
-  // Default to the event asking for meals (usually the reception), else the last one.
+  // Default to the event asking for meals, else the last one.
   const { event: requested } = await searchParams;
   const event =
     events.find((e) => e.id === requested) ??
@@ -63,13 +63,12 @@ export default async function SeatingPage({
   }
   const [data, { data: venues }, layouts] = await Promise.all([
     loadSeatingData(supabase, layout),
-    // the booked reception venue's capacity is used as a warning
     supabase
       .from("venues")
       .select("name, capacity")
       .eq("wedding_id", wedding.id)
       .eq("status", "booked")
-      .in("kind", ["reception", "both"])
+      .in("kind", ["ceremony", "reception", "both"])
       .not("capacity", "is", null),
     loadEventLayouts(supabase, event.id),
   ]);

@@ -65,7 +65,7 @@ export async function loadGuestData(sb: Supabase, weddingId: string) {
           .range(from, to),
       ),
     ]);
-  // default events nobody has renamed ("Ceremony"…) in the viewer's language
+  // default events nobody has renamed in the viewer's language
   const shown = await starterTexts(await getLocale());
   return {
     guests,

@@ -70,16 +70,23 @@ type Props = BudgetData & {
   weddingId: string;
   total: number | null;
   currency: string;
+  secondaryCurrency: string | null;
+  exchangeRate: number | null;
   canEdit: boolean;
   today: string;
 };
 
 export function BudgetPage(props: Props) {
-  const { currency, canEdit } = props;
+  const { currency, canEdit, secondaryCurrency, exchangeRate } = props;
   const t = useTranslations("budget");
   const summary = summarizeBudget(props.total, props.categories, props.expenses, props.payments);
   const upcoming = upcomingPayments(props.payments, props.expenses, props.categories, props.today);
   const money = (v: number) => formatMoney(v, currency);
+  const hasDual = !!secondaryCurrency && !!exchangeRate && exchangeRate > 0;
+  const dual = (v: number) =>
+    hasDual
+      ? `${formatMoney(v, currency)} ≈ ${formatMoney(v * exchangeRate!, secondaryCurrency!)}`
+      : formatMoney(v, currency);
 
   const [sheet, setSheet] = useState<ExpenseSheetMode>(null);
   const [categoryDialog, setCategoryDialog] = useState<BudgetCategory | "new" | null>(null);
@@ -121,7 +128,13 @@ export function BudgetPage(props: Props) {
       <PageHeader title={t("title")} description={t("description")} actions={actions} />
 
       <div className="space-y-6">
-        <SummaryTiles summary={summary} currency={currency} canEdit={canEdit} />
+        <SummaryTiles
+          summary={summary}
+          currency={currency}
+          secondaryCurrency={secondaryCurrency}
+          exchangeRate={exchangeRate}
+          canEdit={canEdit}
+        />
 
         {props.categories.length === 0 ? (
           <Card>
@@ -227,14 +240,21 @@ export function BudgetPage(props: Props) {
 function SummaryTiles({
   summary,
   currency,
+  secondaryCurrency,
+  exchangeRate,
   canEdit,
 }: {
   summary: ReturnType<typeof summarizeBudget>;
   currency: string;
+  secondaryCurrency: string | null;
+  exchangeRate: number | null;
   canEdit: boolean;
 }) {
   const t = useTranslations("budget");
   const money = (v: number) => formatMoney(v, currency);
+  const hasDual = !!secondaryCurrency && !!exchangeRate && exchangeRate > 0;
+  const secondary = (v: number) =>
+    hasDual ? formatMoney(v * exchangeRate!, secondaryCurrency!) : null;
   const { totals, total, remaining } = summary;
   const base = Math.max(total ?? 0, totals.committed, 1);
   const pct = (v: number) => `${Math.min(100, (v / base) * 100)}%`;
@@ -242,23 +262,43 @@ function SummaryTiles({
   return (
     <Card>
       <CardContent className="space-y-5 p-5 sm:p-6">
+        {hasDual && (
+          <p className="text-muted-foreground text-xs">
+            {t("dualCurrencyNote", {
+              rate: exchangeRate!.toString(),
+              primary: currency,
+              secondary: secondaryCurrency!,
+            })}
+          </p>
+        )}
         <dl className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           <div>
             <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
               {t("total")}
             </dt>
             <dd className="flex items-center gap-1">
-              <span className="font-serif text-3xl font-medium tabular-nums sm:text-4xl">
-                {total == null ? t("notSet") : money(total)}
-              </span>
+              <div>
+                <span className="font-serif text-3xl font-medium tabular-nums sm:text-4xl">
+                  {total == null ? t("notSet") : money(total)}
+                </span>
+                {total != null && secondary(total) && (
+                  <span className="text-muted-foreground block text-sm">≈ {secondary(total)}</span>
+                )}
+              </div>
               {canEdit && <TotalEditor total={total} currency={currency} />}
             </dd>
           </div>
-          <Tile label={t("committed")} value={money(totals.committed)} hint={t("committedHint")} />
+          <Tile
+            label={t("committed")}
+            value={money(totals.committed)}
+            hint={t("committedHint")}
+            secondary={secondary(totals.committed)}
+          />
           <Tile
             label={t("paid")}
             value={money(totals.paid)}
             hint={t("toPay", { amount: money(totals.outstanding) })}
+            secondary={secondary(totals.paid)}
           />
           <div>
             <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
@@ -273,6 +313,9 @@ function SummaryTiles({
               >
                 {remaining == null ? "–" : money(remaining)}
               </span>
+              {remaining != null && secondary(remaining) && (
+                <span className="text-muted-foreground block text-sm">≈ {secondary(remaining)}</span>
+              )}
               {remaining != null && remaining < 0 && (
                 <span className="text-destructive flex items-center gap-1 text-xs">
                   <AlertTriangle className="size-3.5" aria-hidden /> {t("overBudget")}
@@ -320,12 +363,13 @@ function SummaryTiles({
   );
 }
 
-function Tile({ label, value, hint }: { label: string; value: string; hint?: string }) {
+function Tile({ label, value, hint, secondary }: { label: string; value: string; hint?: string; secondary?: string | null }) {
   return (
     <div>
       <dt className="text-muted-foreground text-xs font-medium tracking-wide uppercase">{label}</dt>
       <dd>
         <span className="font-serif text-3xl font-medium tabular-nums sm:text-4xl">{value}</span>
+        {secondary && <span className="text-muted-foreground block text-sm">≈ {secondary}</span>}
         {hint && <span className="text-muted-foreground block text-xs">{hint}</span>}
       </dd>
     </div>

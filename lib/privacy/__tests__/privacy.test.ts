@@ -37,8 +37,9 @@ describe("consent stripping in toPayload", () => {
       wedding_date: null, location: null, accent: "rose" as const,
       rsvp_deadline: null, rsvp_contact: null, rsvp_ask_song: false,
       rsvp_ask_travel: false, deadline_passed: false, destination_airport: null,
+      time_zone: null, find_seat_enabled: false,
     },
-    household: { id: "h", name: "H", code: "ABC123", song_request: null, message: null, responded_at: null },
+    household: { id: "h", name: "H", code: "ABC123", song_request: null, message: null, responded_at: null, country_code: null },
     guests: [
       { id: "g1", first_name: "Test", last_name: "User", plus_one_of: null, age_group: "adult" as const, dietary: null, dietary_consent: false, wants_hotel_room: null, needs_crib: false, room_pref_share: null, room_pref_avoid: null },
     ],

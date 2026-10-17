@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – οργανώστε τον γάμο σας μαζί",
-    "metaDescription": "Καλεσμένοι, απαντήσεις, διάταξη θέσεων, προϋπολογισμός, χώροι, ταξίδια, έμπνευση και ο ιστότοπος του γάμου σας – όλα σε ένα ήρεμο μέρος, στη γλώσσα σας.",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "Σύνδεση",
     "getStarted": "Ξεκινήστε",
-    "eyebrow": "Οργάνωση γάμου, μαζί",
-    "title": "Όλα για τον γάμο σας, σε ένα ήρεμο μέρος.",
-    "intro": "Οργανώστε καλεσμένους, απαντήσεις, θέσεις, προϋπολογισμό, χώρους και ταξίδια με τον σύντροφο και την οικογένεια, από το κινητό ή τον υπολογιστή.",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Ξεκινήστε δωρεάν",
     "seeInside": "Δείτε τι περιέχει",
-    "featuresTitle": "Μία εφαρμογή αντί για δώδεκα υπολογιστικά φύλλα",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "Κάθε κομμάτι του σχεδίου σας μιλά με τα άλλα. Οι απαντήσεις περνούν στη διάταξη θέσεων, οι κλεισμένοι χώροι στον ιστότοπό σας.",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "Εσείς οργανώνετε στη γλώσσα σας· κάθε καλεσμένος παίρνει ιστότοπο, απάντηση και email στη δική του."
       }
     },
-    "closingTitle": "Πείτε ναι σε λιγότερο άγχος.",
-    "closingText": "Προσκαλέστε τον σύντροφό σας, τους γονείς ή τον wedding planner και οργανώστε τα πάντα μαζί σε πραγματικό χρόνο.",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "Δημιουργήστε τον γάμο σας",
     "footer": "Φτιαγμένο με αγάπη · © {year} Vow",
-    "preview": {
-      "couple": "Ian και Maria · Λισαβόνα",
-      "daysToGo": "μέρες ακόμα",
-      "attending": "έρχονται",
-      "declined": "δεν έρχονται",
-      "waiting": "αναμονή",
-      "budget": "Προϋπολογισμός",
-      "budgetOf": "{spent} από {total}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "Σύνδεση",
@@ -123,6 +168,10 @@
       "style": {
         "title": "Ποιο είναι το στυλ σας;",
         "text": "Θα το χρησιμοποιήσουμε για έμπνευση και προτάσεις για τον ιστότοπο."
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -132,7 +181,8 @@
       "rsvpIntro": "Ανυπομονούμε να γιορτάσουμε μαζί σας. Πείτε μας αν μπορείτε να έρθετε.",
       "faqChildren": "Είναι ευπρόσδεκτα τα παιδιά;",
       "faqParking": "Υπάρχει πάρκινγκ στον χώρο;",
-      "faqWear": "Τι να φορέσω;"
+      "faqWear": "Τι να φορέσω;",
+      "ceremonyReception": "Τελετή & Δεξίωση"
     }
   },
   "weddingForm": {
@@ -176,7 +226,15 @@
     "saveChanges": "Αποθήκευση αλλαγών",
     "saved": "Τα στοιχεία του γάμου αποθηκεύτηκαν",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…",
+    "noCurrency": "No second currency",
+    "secondaryCurrency": "Second currency (optional)",
+    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
+    "exchangeRate": "Exchange rate",
+    "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
     "owner": {
@@ -190,6 +248,14 @@
     "viewer": {
       "label": "Θεατής",
       "description": "Μπορεί να βλέπει αλλά όχι να αλλάζει"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

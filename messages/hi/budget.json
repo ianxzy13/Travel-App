@@ -141,7 +141,8 @@
       "currency": "मुद्रा",
       "notes": "नोट",
       "file": "budget"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "वेंडर",

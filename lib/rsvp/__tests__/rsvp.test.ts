@@ -18,6 +18,8 @@ const data: RsvpData = {
     rsvp_ask_travel: false,
     deadline_passed: false,
     destination_airport: null,
+    time_zone: null,
+    find_seat_enabled: false,
   },
   household: {
     id: "h",
@@ -26,6 +28,7 @@ const data: RsvpData = {
     song_request: null,
     message: null,
     responded_at: null,
+    country_code: null,
   },
   guests: [
     {
@@ -57,20 +60,8 @@ const data: RsvpData = {
   ],
   events: [
     {
-      id: "cer",
-      name: "Ceremony",
-      event_date: null,
-      start_time: null,
-      end_time: null,
-      venue_name: null,
-      address: null,
-      dress_code: null,
-      description: null,
-      meal_choice: false,
-    },
-    {
-      id: "rec",
-      name: "Reception",
+      id: "evt",
+      name: "Ceremony & Reception",
       event_date: null,
       start_time: null,
       end_time: null,
@@ -82,11 +73,10 @@ const data: RsvpData = {
     },
   ],
   invites: [
-    { guest_id: "ann", event_id: "cer" },
-    { guest_id: "ann", event_id: "rec" },
-    { guest_id: "p1", event_id: "rec" },
+    { guest_id: "ann", event_id: "evt" },
+    { guest_id: "p1", event_id: "evt" },
   ],
-  responses: [{ guest_id: "ann", event_id: "cer", status: "attending", meal_option_id: null }],
+  responses: [{ guest_id: "ann", event_id: "evt", status: "attending", meal_option_id: null }],
   meal_options: [{ id: "fish", name: "Fish", description: null }],
   hotels: [],
   travel: null,
@@ -95,33 +85,30 @@ const data: RsvpData = {
 describe("RSVP form", () => {
   it("starts from previous answers", () => {
     const s = initialFormState(data);
-    expect(s.answers[answerKey("ann", "cer")]).toEqual({ status: "attending", mealOptionId: null });
-    expect(s.answers[answerKey("p1", "rec")]).toEqual({ status: null, mealOptionId: null });
+    expect(s.answers[answerKey("ann", "evt")]).toEqual({ status: "attending", mealOptionId: null });
+    expect(s.answers[answerKey("p1", "evt")]).toEqual({ status: null, mealOptionId: null });
   });
 
   it("requires an answer for every invitation and a meal when attending", () => {
     const s = initialFormState(data);
     expect(findMissing(data, s).map((m) => `${m.guestId}:${m.eventId}:${m.kind}`)).toEqual([
-      "ann:rec:status",
-      "p1:rec:status",
+      "ann:evt:meal",
+      "p1:evt:status",
     ]);
-    s.answers[answerKey("ann", "rec")] = { status: "attending", mealOptionId: null };
-    s.answers[answerKey("p1", "rec")] = { status: "declined", mealOptionId: null };
-    expect(findMissing(data, s)).toEqual([{ guestId: "ann", eventId: "rec", kind: "meal" }]);
-    s.answers[answerKey("ann", "rec")].mealOptionId = "fish";
+    s.answers[answerKey("ann", "evt")].mealOptionId = "fish";
+    s.answers[answerKey("p1", "evt")] = { status: "declined", mealOptionId: null };
     expect(findMissing(data, s)).toEqual([]);
   });
 
   it("builds the payload: meals only when attending, names only for plus-ones", () => {
     const s = initialFormState(data);
-    s.answers[answerKey("ann", "rec")] = { status: "attending", mealOptionId: "fish" };
-    s.answers[answerKey("p1", "rec")] = { status: "declined", mealOptionId: "fish" };
+    s.answers[answerKey("ann", "evt")].mealOptionId = "fish";
+    s.answers[answerKey("p1", "evt")] = { status: "declined", mealOptionId: "fish" };
     s.people.p1 = { firstName: "Tom", lastName: "Jones", dietary: "vegan", dietaryConsent: true };
     const p = toPayload(data, s);
     expect(p.responses).toEqual([
-      { guest_id: "ann", event_id: "cer", status: "attending", meal_option_id: null },
-      { guest_id: "ann", event_id: "rec", status: "attending", meal_option_id: "fish" },
-      { guest_id: "p1", event_id: "rec", status: "declined", meal_option_id: null },
+      { guest_id: "ann", event_id: "evt", status: "attending", meal_option_id: "fish" },
+      { guest_id: "p1", event_id: "evt", status: "declined", meal_option_id: null },
     ]);
     expect(p.guests).toEqual([
       { id: "ann", dietary: "", dietary_consent: false },

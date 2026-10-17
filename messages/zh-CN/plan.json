@@ -87,7 +87,10 @@
       "deleteTitle": "删除此待办？",
       "deleted": "待办已删除",
       "save": "保存",
-      "add": "添加待办"
+      "add": "添加待办",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "预算",

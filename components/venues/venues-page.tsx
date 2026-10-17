@@ -604,11 +604,7 @@ function VenueForm({
               ]),
             ),
           )}
-          {select(
-            "kind",
-            t("for"),
-            Object.fromEntries(VENUE_KINDS.map((k) => [k, p(`venueKind.${k}`)])),
-          )}
+          {/* kind picker hidden — single "Ceremony & Reception" event, default is "both" */}
           {select(
             "availability",
             t("available"),

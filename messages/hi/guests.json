@@ -60,7 +60,8 @@
       "waiting": "अभी जवाब नहीं",
       "matching": "{count} मेल खाते",
       "clear": "फ़िल्टर साफ़ करें",
-      "any": "कोई भी"
+      "any": "कोई भी",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "दिख रहे सभी मेहमान चुनें",
@@ -203,7 +204,9 @@
       "sameAsOurs": "हमारी भाषा जैसी ({language})",
       "saved": "परिवार सहेजा गया",
       "cancel": "रद्द करें",
-      "save": "सहेजें"
+      "save": "सहेजें",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "टैग",

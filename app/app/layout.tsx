@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app/app-shell";
 import { SIDEBAR_COOKIE } from "@/components/app/nav-items";
+import { TimezoneSync } from "@/components/app/timezone-sync";
 import { requireLanguageChoice } from "@/lib/i18n/choice";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -69,6 +70,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         avatarUrl: profile?.avatar_url ?? null,
       }}
     >
+      <TimezoneSync />
       {children}
     </AppShell>
   );

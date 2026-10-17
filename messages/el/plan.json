@@ -87,7 +87,10 @@
       "deleteTitle": "Διαγραφή αυτής της εργασίας;",
       "deleted": "Η εργασία διαγράφηκε",
       "save": "Αποθήκευση",
-      "add": "Προσθήκη εργασίας"
+      "add": "Προσθήκη εργασίας",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Προϋπολογισμός",

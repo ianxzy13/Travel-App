@@ -161,27 +161,16 @@ async function main() {
           },
           {
             wedding_id: wid,
-            name: "Ceremony",
+            name: "Ceremony & Reception",
             event_date: W,
             start_time: "15:00",
-            end_time: "16:00",
-            venue_name: "Quinta da Regaleira",
-            address: "R. Barbosa du Bocage 5, 2710-567 Sintra",
-            dress_code: "Summer formal",
-            description: "Please arrive by 14:40. Flat shoes recommended for the gardens.",
-            sort_order: 1,
-          },
-          {
-            wedding_id: wid,
-            name: "Reception",
-            event_date: W,
-            start_time: "17:00",
             end_time: "23:59",
             venue_name: "Palácio de Seteais",
             address: "R. Barbosa du Bocage 8, 2710-517 Sintra",
             dress_code: "Summer formal",
+            description: "Please arrive by 14:40. Ceremony in the gardens, reception in the palace.",
             meal_choice: true,
-            sort_order: 2,
+            sort_order: 1,
           },
           {
             wedding_id: wid,
@@ -191,7 +180,7 @@ async function main() {
             end_time: "13:00",
             venue_name: "Café Saudade",
             address: "Av. Dr. Miguel Bombarda 6, Sintra",
-            sort_order: 3,
+            sort_order: 2,
           },
         ],
         { defaultToNull: false },
@@ -758,8 +747,7 @@ async function main() {
   const invites: { wedding_id: string; guest_id: string; event_id: string }[] = [];
   for (const g of guests) {
     const h = HOUSES[g.house];
-    for (const e of ["Ceremony", "Reception"])
-      invites.push({ wedding_id: wid, guest_id: g.id, event_id: ev[e] });
+    invites.push({ wedding_id: wid, guest_id: g.id, event_id: ev["Ceremony & Reception"] });
     if (h.tag === "Family" || h.abroad || g.person.party)
       invites.push({ wedding_id: wid, guest_id: g.id, event_id: ev["Welcome drinks"] });
     if (h.tag === "Family")
@@ -789,7 +777,7 @@ async function main() {
     for (const g of members) {
       const coming = !wholeHouseDeclines && rand() < 0.93;
       for (const inv of invites.filter((i) => i.guest_id === g.id)) {
-        const isDinner = inv.event_id === ev["Reception"];
+        const isDinner = inv.event_id === ev["Ceremony & Reception"];
         const diet = (g.person.diet ?? "").toLowerCase();
         const mealId =
           !coming || !isDinner
@@ -963,23 +951,13 @@ async function main() {
   }[] = [
     {
       category: "Venue",
-      name: "Reception at Palácio de Seteais",
-      estimated: 9000,
-      actual: 8800,
+      name: "Ceremony & reception at Palácio de Seteais",
+      estimated: 10500,
+      actual: 10300,
       payments: [
-        [2600, fromToday(-120), true],
-        [3000, fromToday(4), false],
-        [3200, beforeW(21), false],
-      ],
-    },
-    {
-      category: "Venue",
-      name: "Ceremony at Quinta da Regaleira",
-      estimated: 1500,
-      actual: 1500,
-      payments: [
-        [750, fromToday(-90), true],
-        [750, beforeW(30), false],
+        [3000, fromToday(-120), true],
+        [3500, fromToday(4), false],
+        [3800, beforeW(21), false],
       ],
     },
     {
@@ -1537,7 +1515,7 @@ async function main() {
     await sb
       .from("seating_layouts")
       .insert(
-        { wedding_id: wid, event_id: ev["Reception"], room_width: 2400, room_height: 1600 },
+        { wedding_id: wid, event_id: ev["Ceremony & Reception"], room_width: 2400, room_height: 1600 },
         { defaultToNull: false },
       )
       .select("id")
@@ -2037,7 +2015,7 @@ async function main() {
               : i.owner === "Caterer"
                 ? vendor["Sabores de Sintra Catering"]
                 : null,
-        event_id: i.title === "Ceremony" ? ev["Ceremony"] : null,
+        event_id: i.title === "Ceremony" ? ev["Ceremony & Reception"] : null,
       })),
       { defaultToNull: false },
     ),

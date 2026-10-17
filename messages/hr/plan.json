@@ -87,7 +87,10 @@
       "deleteTitle": "Izbrisati ovaj zadatak?",
       "deleted": "Zadatak je izbrisan",
       "save": "Spremi",
-      "add": "Dodaj zadatak"
+      "add": "Dodaj zadatak",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Proračun",

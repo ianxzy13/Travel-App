@@ -13,6 +13,7 @@
     "categories": "Categories",
     "unallocated": "{amount} of your total isn’t allocated to a category yet.",
     "overAllocated": "Your categories add up to {amount} more than your total budget.",
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}.",
     "total": "Total budget",
     "notSet": "Not set",
     "committed": "Committed",

@@ -60,7 +60,8 @@
       "waiting": "Belum membalas",
       "matching": "{count} cocok",
       "clear": "Hapus filter",
-      "any": "Semua"
+      "any": "Semua",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Pilih semua tamu yang ditampilkan",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Sama dengan kami ({language})",
       "saved": "Keluarga disimpan",
       "cancel": "Batal",
-      "save": "Simpan"
+      "save": "Simpan",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Label",

@@ -18,8 +18,9 @@ import {
   type AddressValues,
 } from "@/lib/validation/guest";
 import { localeSchema } from "@/lib/validation/languages";
-import { canEdit, requireWedding } from "@/lib/wedding";
+import { canEdit, requireUser, requireWedding } from "@/lib/wedding";
 import { fail, err, invalid, noPermission } from "@/lib/errors";
+import { logActivity } from "@/lib/activity";
 
 // All writes are also protected by Row Level Security in the database;
 // the checks here are for clear error messages.
@@ -252,6 +253,10 @@ export async function saveGuest(
       await sb.rpc("delete_empty_households", { wid: weddingId });
     }
 
+    if (!guestId) {
+      const user = await requireUser();
+      logActivity(weddingId, user.id, "guest.add", fullName(v.firstName, v.lastName));
+    }
     done();
     return { ok: true, data: { id, householdId } };
   } catch (error) {
@@ -404,6 +409,9 @@ export async function updateHousehold(id: string, input: unknown): Promise<Actio
       ...addressColumns(parsed.data.address),
       ...(parsed.data.language !== undefined
         ? { preferred_language: parsed.data.language || null }
+        : {}),
+      ...(parsed.data.managed_by !== undefined
+        ? { managed_by: parsed.data.managed_by || null }
         : {}),
     })
     .eq("id", id)

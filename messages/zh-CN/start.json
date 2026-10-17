@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – 一起筹备你们的婚礼",
-    "metaDescription": "宾客、回复、座位图、预算、场地、行程、灵感和婚礼网站——都在一个安静的地方，用你们的语言。",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "登录",
     "getStarted": "开始使用",
-    "eyebrow": "一起筹备婚礼",
-    "title": "婚礼所需的一切，都在一个安静的地方。",
-    "intro": "和伴侣、家人一起规划宾客、回复、座位、预算、场地和行程，手机电脑都能用。",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "免费开始筹备",
     "seeInside": "看看有什么",
-    "featuresTitle": "一个应用，代替十二张表格",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "计划的每个部分都相互关联。回复会同步到座位图，已预订的场地会显示在你们的网站上。",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "你们用自己的语言筹备；每位宾客都能用自己的语言看到网站、回复页和邮件。"
       }
     },
-    "closingTitle": "向更少的压力说“我愿意”。",
-    "closingText": "邀请伴侣、父母或婚礼策划师，实时一起安排一切。",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "创建你们的婚礼",
     "footer": "用爱打造 · © {year} Vow",
-    "preview": {
-      "couple": "Ian 和 Maria · 里斯本",
-      "daysToGo": "天后",
-      "attending": "出席",
-      "declined": "不出席",
-      "waiting": "待回复",
-      "budget": "预算",
-      "budgetOf": "{spent} / {total}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "登录",
@@ -123,6 +168,10 @@
       "style": {
         "title": "你们喜欢什么风格？",
         "text": "我们会用它来推荐灵感和网站设计。"
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -132,7 +181,8 @@
       "rsvpIntro": "期待与你一起庆祝。请告诉我们你能否出席。",
       "faqChildren": "可以带小孩吗？",
       "faqParking": "场地有停车位吗？",
-      "faqWear": "应该穿什么？"
+      "faqWear": "应该穿什么？",
+      "ceremonyReception": "婚礼仪式暨婚宴"
     }
   },
   "weddingForm": {
@@ -176,7 +226,15 @@
     "saveChanges": "保存更改",
     "saved": "婚礼详情已保存",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…",
+    "noCurrency": "No second currency",
+    "secondaryCurrency": "Second currency (optional)",
+    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
+    "exchangeRate": "Exchange rate",
+    "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
     "owner": {
@@ -190,6 +248,14 @@
     "viewer": {
       "label": "查看者",
       "description": "只能查看，不能修改"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

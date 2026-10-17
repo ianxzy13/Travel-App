@@ -87,7 +87,10 @@
       "deleteTitle": "Удалить эту задачу?",
       "deleted": "Задача удалена",
       "save": "Сохранить",
-      "add": "Добавить задачу"
+      "add": "Добавить задачу",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Бюджет",

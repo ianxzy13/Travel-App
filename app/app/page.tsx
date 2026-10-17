@@ -12,6 +12,7 @@ import {
   ListChecks,
   MailCheck,
   MapPin,
+  Plane,
   Send,
   Wallet,
   type LucideIcon,
@@ -43,12 +44,20 @@ export default async function DashboardPage({
   const { wedding, role } = await requireWedding();
   const [t, locale] = await Promise.all([getTranslations("app.dashboard"), getLocale()]);
   const money = (n: number) => fmtMoney(n, wedding.currency, locale);
+  const hasDual =
+    !!wedding.secondary_currency &&
+    !!wedding.exchange_rate &&
+    Number(wedding.exchange_rate) > 0;
+  const dualMoney = (n: number) =>
+    hasDual
+      ? fmtMoney(n * Number(wedding.exchange_rate), wedding.secondary_currency!, locale)
+      : null;
   const shortDate = (d: string) => fmtDate(d, locale, "medium");
   const { welcome } = await searchParams;
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData] = await Promise.all([
+  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData, travelStats] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -89,7 +98,21 @@ export default async function DashboardPage({
       .eq("wedding_id", wedding.id)
       .maybeSingle()
       .then(({ data }) => data),
+    travelSummary(supabase, wedding.id),
   ]);
+  const { data: recentActivity } = await supabase
+    .from("activity_log")
+    .select("id, kind, subject, created_at, actor_id")
+    .eq("wedding_id", wedding.id)
+    .order("created_at", { ascending: false })
+    .limit(10);
+  const activityKinds: Record<string, string> = {
+    "task.add": t("activity.taskAdd"),
+    "task.done": t("activity.taskDone"),
+    "guest.add": t("activity.guestAdd"),
+    "rsvp.reply": t("activity.rsvpReply"),
+    "comment.add": t("activity.commentAdd"),
+  };
   const [{ count: memberCount }, { count: guestCount }] = await Promise.all([
     supabase
       .from("wedding_members")
@@ -232,6 +255,11 @@ export default async function DashboardPage({
                       : t("budget.committed")}
                   </span>
                 </p>
+                {dualMoney(budget.summary.totals.committed) && (
+                  <p className="text-muted-foreground text-sm">
+                    ≈ {dualMoney(budget.summary.totals.committed)}
+                  </p>
+                )}
                 {budget.summary.total != null && budget.summary.total > 0 && (
                   <div className="bg-muted h-2 rounded-full">
                     <div
@@ -320,6 +348,41 @@ export default async function DashboardPage({
                     }}
                   />
                 </div>
+              </div>
+            )}
+          </SummaryCard>
+          <SummaryCard
+            icon={Plane}
+            title={t("travel.title")}
+            empty={t("travel.empty")}
+            href="/app/travel"
+            cta={t("travel.cta")}
+          >
+            {travelStats.withTravel > 0 && (
+              <div className="space-y-2">
+                <dl className="grid grid-cols-3 gap-2 text-center">
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.withFlight}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.flights")}</dt>
+                  </div>
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.withRoom}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.rooms")}</dt>
+                  </div>
+                  <div className="bg-muted rounded-lg p-2">
+                    <dd className="font-serif text-3xl font-medium tabular-nums">
+                      {travelStats.seated}
+                    </dd>
+                    <dt className="text-muted-foreground text-xs">{t("travel.seated")}</dt>
+                  </div>
+                </dl>
+                <p className="text-muted-foreground text-xs">
+                  {t("travel.guestsWithTravel", { count: travelStats.withTravel })}
+                </p>
               </div>
             )}
           </SummaryCard>
@@ -503,6 +566,29 @@ export default async function DashboardPage({
           </SummaryCard>
         </div>
       </div>
+
+      {recentActivity && recentActivity.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-serif text-2xl">{t("activity.title")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="divide-y text-sm">
+              {recentActivity.map((a) => (
+                <li key={a.id} className="flex items-center justify-between py-2">
+                  <span>
+                    <span className="text-muted-foreground">{activityKinds[a.kind] ?? a.kind}</span>
+                    {a.subject && <> &middot; {a.subject}</>}
+                  </span>
+                  <span className="text-muted-foreground text-xs">
+                    {shortDate(a.created_at)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
@@ -667,6 +753,23 @@ async function giftSummary(supabase: Awaited<ReturnType<typeof createClient>>, w
     total: gifts.length,
     totalValue: gifts.reduce((s, g) => s + (g.amount == null ? 0 : Number(g.amount)), 0),
     thankYouDone: gifts.filter((g) => g.thank_you_sent).length,
+  };
+}
+
+async function travelSummary(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  weddingId: string,
+) {
+  const { data } = await supabase
+    .from("guest_travel")
+    .select("arrival_airport, hotel_id, household_id")
+    .eq("wedding_id", weddingId);
+  const rows = data ?? [];
+  return {
+    withTravel: rows.length,
+    withFlight: rows.filter((r) => !!r.arrival_airport).length,
+    withRoom: rows.filter((r) => !!r.hotel_id).length,
+    seated: 0,
   };
 }
 

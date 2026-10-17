@@ -60,7 +60,8 @@
       "waiting": "尚未回复",
       "matching": "{count} 位匹配",
       "clear": "清除筛选",
-      "any": "任意"
+      "any": "任意",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "选择所有显示的宾客",
@@ -203,7 +204,9 @@
       "sameAsOurs": "与我们相同（{language}）",
       "saved": "家庭已保存",
       "cancel": "取消",
-      "save": "保存"
+      "save": "保存",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "标签",

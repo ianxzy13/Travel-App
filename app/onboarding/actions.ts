@@ -50,13 +50,11 @@ async function startInOwnLanguage(sb: Awaited<ReturnType<typeof createClient>>, 
   if (locale === "en") return;
 
   const t = await getTranslations("onboarding.defaults");
-  const renames = [
-    ["Ceremony", t("ceremony")],
-    ["Reception", t("reception")],
-  ];
-  for (const [from, to] of renames) {
-    await sb.from("events").update({ name: to }).eq("wedding_id", weddingId).eq("name", from);
-  }
+  await sb
+    .from("events")
+    .update({ name: t("ceremonyReception") })
+    .eq("wedding_id", weddingId)
+    .eq("name", "Ceremony & Reception");
 
   const { data: sections } = await sb
     .from("website_sections")

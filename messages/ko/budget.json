@@ -141,7 +141,8 @@
       "currency": "통화",
       "notes": "메모",
       "file": "budget"
-    }
+    },
+    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "업체",

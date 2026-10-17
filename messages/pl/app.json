@@ -51,7 +51,9 @@
       "roles": {
         "owner": "właściciel",
         "editor": "edytor",
-        "viewer": "czytelnik"
+        "viewer": "czytelnik",
+        "parent": "parent",
+        "helper": "helper"
       }
     },
     "notifications": {
@@ -149,6 +151,23 @@
         "cta": "Open Save the Date",
         "draft": "Draft — not published yet",
         "published": "Published and live"
+      },
+      "travel": {
+        "title": "Guests on the move",
+        "empty": "No travel info yet. Once guests fill in their flights and hotels, you'll see a summary here.",
+        "cta": "View travel",
+        "flights": "flights",
+        "rooms": "rooms",
+        "seated": "seated",
+        "guestsWithTravel": "{count, plural, one {# guest} other {# guests}} have shared travel details"
+      },
+      "activity": {
+        "title": "What's new",
+        "taskAdd": "New to-do",
+        "taskDone": "Completed",
+        "guestAdd": "Guest added",
+        "rsvpReply": "RSVP received",
+        "commentAdd": "Comment"
       }
     },
     "settings": {

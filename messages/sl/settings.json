@@ -21,11 +21,11 @@
   },
   "events": {
     "title": "Dogodki",
-    "description": "Pozdravni aperitiv, obred, pogostitev, zajtrk … Vsak gost je lahko povabljen na nekatere ali vse.",
+    "description": "Pozdravni aperitiv, obred in pogostitev, zajtrk … Vsak gost je lahko povabljen na nekatere ali vse.",
     "add": "Dodaj dogodek",
     "empty": "Še ni dogodkov. Večina parov začne z obredom in pogostitvijo.",
     "addDefaults": "Dodaj obred in pogostitev",
-    "defaultsAdded": "Obred in pogostitev sta dodana",
+    "defaultsAdded": "Obred in pogostitev dodana",
     "addOther": "Dodaj drug dogodek",
     "invited": "{count, plural, one {# povabljen gost} two {# povabljena gosta} few {# povabljeni gostje} other {# povabljenih gostov}}",
     "moveUp": "Premakni {name} gor",

@@ -60,7 +60,8 @@
       "waiting": "Pas encore de réponse",
       "matching": "{count} correspondants",
       "clear": "Effacer les filtres",
-      "any": "Tous"
+      "any": "Tous",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Sélectionner tous les invités affichés",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Comme la nôtre ({language})",
       "saved": "Foyer enregistré",
       "cancel": "Annuler",
-      "save": "Enregistrer"
+      "save": "Enregistrer",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Étiquettes",

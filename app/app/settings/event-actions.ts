@@ -5,13 +5,13 @@ import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { eventSchema } from "@/lib/validation/guest";
-import { canEdit, requireWedding } from "@/lib/wedding";
+import { canManage, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 import { contentTranslations } from "@/lib/i18n/content-locale";
 
 async function editor() {
   const { wedding, role } = await requireWedding();
-  if (!canEdit(role)) return null;
+  if (!canManage(role)) return null;
   return { wedding, supabase: await createClient() };
 }
 
@@ -95,26 +95,19 @@ export async function reorderEvents(orderedIds: string[]): Promise<ActionResult>
   return done();
 }
 
-/** One click to add the usual Ceremony + Reception (for weddings created before events existed). */
+/** One click to add the default Ceremony & Reception event. */
 export async function addDefaultEvents(): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx) return noPermission();
   const date = ctx.wedding.wedding_date;
   const names = await contentTranslations(ctx.wedding, "onboarding");
-  const { error } = await ctx.supabase.from("events").insert([
-    {
-      wedding_id: ctx.wedding.id,
-      name: names("defaults.ceremony"),
-      event_date: date,
-      sort_order: 0,
-    },
-    {
-      wedding_id: ctx.wedding.id,
-      name: names("defaults.reception"),
-      event_date: date,
-      sort_order: 1,
-    },
-  ]);
+  const { error } = await ctx.supabase.from("events").insert({
+    wedding_id: ctx.wedding.id,
+    name: names("defaults.ceremonyReception"),
+    event_date: date,
+    sort_order: 0,
+    meal_choice: true,
+  });
   if (error) return fail("addDefaultEvents", error);
   return done();
 }

@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – 2 人で一緒に結婚式を準備",
-    "metaDescription": "ゲスト、出欠、席次表、予算、会場、旅行、アイデア、そして結婚式サイト。すべてを 1 か所で、あなたの言語で落ち着いて。",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "ログイン",
     "getStarted": "はじめる",
-    "eyebrow": "一緒に準備する結婚式",
-    "title": "結婚式のすべてを、落ち着いた 1 か所に。",
-    "intro": "ゲスト、出欠、席次、予算、会場、旅行を、パートナーや家族と一緒にスマホやパソコンから準備できます。",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "無料で準備をはじめる",
     "seeInside": "機能を見る",
-    "featuresTitle": "12 個のスプレッドシートの代わりに、1 つのアプリ",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "計画のすべてがつながっています。出欠は席次表に、予約した会場は結婚式サイトに反映されます。",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "あなたは自分の言語で準備し、ゲストはサイト、出欠ページ、メールをそれぞれの言語で受け取ります。"
       }
     },
-    "closingTitle": "ストレスの少ない結婚式準備を。",
-    "closingText": "パートナー、両親、プランナーを招待して、リアルタイムで一緒に準備しましょう。",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "結婚式を作成",
     "footer": "心を込めて · © {year} Vow",
-    "preview": {
-      "couple": "Ian & Maria · リスボン",
-      "daysToGo": "日",
-      "attending": "出席",
-      "declined": "欠席",
-      "waiting": "未回答",
-      "budget": "予算",
-      "budgetOf": "{spent} / {total}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "ログイン",
@@ -123,6 +168,10 @@
       "style": {
         "title": "どんな雰囲気が好きですか？",
         "text": "アイデアとサイトの提案に使います。"
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -132,7 +181,8 @@
       "rsvpIntro": "皆さまと一緒にお祝いできるのを楽しみにしています。ご出席いただけるかお知らせください。",
       "faqChildren": "子ども連れでも大丈夫ですか？",
       "faqParking": "会場に駐車場はありますか？",
-      "faqWear": "何を着ていけばいいですか？"
+      "faqWear": "何を着ていけばいいですか？",
+      "ceremonyReception": "挙式・披露宴"
     }
   },
   "weddingForm": {
@@ -176,7 +226,15 @@
     "saveChanges": "変更を保存",
     "saved": "結婚式の詳細を保存しました",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…",
+    "noCurrency": "No second currency",
+    "secondaryCurrency": "Second currency (optional)",
+    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
+    "exchangeRate": "Exchange rate",
+    "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
     "owner": {
@@ -190,6 +248,14 @@
     "viewer": {
       "label": "閲覧者",
       "description": "見ることはできますが、変更はできません"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

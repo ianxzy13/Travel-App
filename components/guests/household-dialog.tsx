@@ -19,21 +19,34 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { localeInfo } from "@/i18n/locales";
 import { householdSchema } from "@/lib/validation/guest";
 import type { HouseholdOption } from "./types";
+
+const NOBODY = "__none";
 
 /** Household settings: name, language (for their website, RSVP page and emails) and address. */
 export function HouseholdDialog({
   household,
   coupleLanguage,
   languages,
+  members,
+  canManage,
   onClose,
 }: {
   household: HouseholdOption | null;
   coupleLanguage: string;
   /** languages already used by households (listed first) */
   languages: string[];
+  members: { id: string; name: string }[];
+  canManage: boolean;
   onClose: () => void;
 }) {
   return (
@@ -45,6 +58,8 @@ export function HouseholdDialog({
             household={household}
             coupleLanguage={coupleLanguage}
             languages={languages}
+            members={members}
+            canManage={canManage}
             onClose={onClose}
           />
         )}
@@ -57,11 +72,15 @@ function HouseholdForm({
   household,
   coupleLanguage,
   languages,
+  members,
+  canManage,
   onClose,
 }: {
   household: HouseholdOption;
   coupleLanguage: string;
   languages: string[];
+  members: { id: string; name: string }[];
+  canManage: boolean;
   onClose: () => void;
 }) {
   const t = useTranslations("guests.household");
@@ -73,6 +92,7 @@ function HouseholdForm({
       name: household.name,
       address: household.address,
       language: household.language,
+      managed_by: household.managedBy ?? "",
     },
   });
   const { errors } = form.formState;
@@ -134,6 +154,32 @@ function HouseholdForm({
             />
           )}
         </FormField>
+        {canManage && members.length > 0 && (
+          <FormField id="h-managed" label={t("managedBy")} className="sm:col-span-2">
+            {(aria) => (
+              <Controller
+                control={form.control}
+                name="managed_by"
+                render={({ field }) => (
+                  <Select
+                    value={field.value || NOBODY}
+                    onValueChange={(v) => field.onChange(v === NOBODY ? "" : v)}
+                  >
+                    <SelectTrigger id={aria.id} className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={NOBODY}>{t("nobodyAssigned")}</SelectItem>
+                      {members.map((m) => (
+                        <SelectItem key={m.id} value={m.id}>{m.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            )}
+          </FormField>
+        )}
         <FormField
           id="h-1"
           label={s("line1")}

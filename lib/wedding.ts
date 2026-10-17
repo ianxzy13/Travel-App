@@ -21,7 +21,10 @@ export function coupleName(w: Pick<WeddingRow, "partner_a_name" | "partner_b_nam
   return `${w.partner_a_name} & ${w.partner_b_name}`;
 }
 
-export const canEdit = (role: MemberRole) => role === "owner" || role === "editor";
+export const canEdit = (role: MemberRole) =>
+  role === "owner" || role === "editor" || role === "parent";
+
+export const canManage = (role: MemberRole) => role === "owner" || role === "editor";
 
 // `cache` makes these run once per request even if several components call them.
 

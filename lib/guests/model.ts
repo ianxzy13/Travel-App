@@ -16,6 +16,8 @@ export type GuestView = {
   householdName: string;
   /** the household's language ("" = the couple's language) */
   householdLanguage: string;
+  /** the member id that manages this household (null = unassigned) */
+  householdManagedBy: string | null;
   firstName: string;
   lastName: string;
   /** "Ann Smith", or "Ann's guest" for an unnamed plus-one */
@@ -75,7 +77,7 @@ export function guestDisplayName(
 /** Joins the raw database rows into GuestView objects. */
 export function buildGuestViews(data: {
   guests: GuestRow[];
-  households: Pick<HouseholdRow, "id" | "name" | "preferred_language">[];
+  households: Pick<HouseholdRow, "id" | "name" | "preferred_language" | "managed_by">[];
   invites: Pick<GuestEventInviteRow, "guest_id" | "event_id">[];
   guestTags: Pick<GuestTagRow, "guest_id" | "tag_id">[];
   responses?: { guest_id: string; event_id: string; status: RsvpStatus }[];
@@ -85,6 +87,7 @@ export function buildGuestViews(data: {
   const householdLanguages = new Map(
     data.households.map((h) => [h.id, h.preferred_language ?? ""]),
   );
+  const householdManagers = new Map(data.households.map((h) => [h.id, h.managed_by ?? null]));
   const firstNames = new Map(data.guests.map((g) => [g.id, g.first_name]));
   const eventsByGuest = groupIds(data.invites, "guest_id", "event_id");
   const tagsByGuest = groupIds(data.guestTags, "guest_id", "tag_id");
@@ -98,6 +101,7 @@ export function buildGuestViews(data: {
     householdId: g.household_id,
     householdName: householdNames.get(g.household_id) ?? "",
     householdLanguage: householdLanguages.get(g.household_id) ?? "",
+    householdManagedBy: householdManagers.get(g.household_id) ?? null,
     firstName: g.first_name,
     lastName: g.last_name,
     name: guestDisplayName(g, g.plus_one_of ? firstNames.get(g.plus_one_of) : null, data.labels),

@@ -87,7 +87,10 @@
       "deleteTitle": "Diese Aufgabe löschen?",
       "deleted": "Aufgabe gelöscht",
       "save": "Speichern",
-      "add": "Aufgabe hinzufügen"
+      "add": "Aufgabe hinzufügen",
+      "comments": "Comments",
+      "addComment": "Add a comment…",
+      "unknown": "Someone"
     },
     "categories": {
       "Budget": "Budget",

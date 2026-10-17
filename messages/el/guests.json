@@ -60,7 +60,8 @@
       "waiting": "Χωρίς απάντηση ακόμα",
       "matching": "{count} ταιριάζουν",
       "clear": "Καθαρισμός φίλτρων",
-      "any": "Όλα"
+      "any": "Όλα",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Επιλογή όλων των εμφανιζόμενων",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Ίδια με τη δική μας ({language})",
       "saved": "Το νοικοκυριό αποθηκεύτηκε",
       "cancel": "Ακύρωση",
-      "save": "Αποθήκευση"
+      "save": "Αποθήκευση",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Ετικέτες",

@@ -232,6 +232,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     name: string;
     rsvp_code: string;
     preferred_language: string | null;
+    managed_by: string | null;
   }[] = [];
   const guests: { id: string; household_id: string; email: string | null }[] = [];
   for (let i = 0; i < householdIds.length; i += 100) {
@@ -239,7 +240,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name, rsvp_code, preferred_language")
+        .select("id, name, rsvp_code, preferred_language, managed_by")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -254,6 +255,20 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     if (h.error || g.error) return fail("sendRsvpEmails", h.error ?? g.error);
     households.push(...h.data);
     guests.push(...g.data);
+  }
+
+  // Resolve managed_by → member name + email for personalized sender
+  const memberIds = [...new Set(households.map((h) => h.managed_by).filter(Boolean))] as string[];
+  const memberProfiles = new Map<string, { name: string; email: string | null }>();
+  if (memberIds.length > 0) {
+    const { data: members } = await supabase
+      .from("wedding_members")
+      .select("id, profiles(full_name, email)")
+      .in("id", memberIds);
+    for (const m of members ?? []) {
+      const p = Array.isArray(m.profiles) ? m.profiles[0] : m.profiles;
+      if (p?.full_name) memberProfiles.set(m.id, { name: p.full_name, email: p.email ?? null });
+    }
   }
 
   const emailsByHousehold = new Map<string, string[]>();
@@ -293,10 +308,11 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
           props.unsubscribeUrl = `${siteUrl}/r/unsubscribe?code=${h.rsvp_code}&guest=${guestId}`;
         }
         const element = RsvpEmail(props);
+        const manager = h.managed_by ? memberProfiles.get(h.managed_by) : null;
         return {
-          from: emailFrom(couple),
+          from: emailFrom(manager?.name ?? couple),
           to: emailsByHousehold.get(h.id)!,
-          replyTo: user.email,
+          replyTo: manager?.email ?? user.email,
           subject,
           html: await render(element),
           text: await render(element, { plainText: true }),
@@ -330,6 +346,123 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     return { ok: false, error: (await getTranslations("rsvpAdmin.email"))("refused") };
   }
   return { ok: true, data: { sent, failed, noEmail } };
+}
+
+// ---------- SMS invitations ----------
+
+type SmsSummary = { sent: number; failed: number; noPhone: string[] };
+
+export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSummary>> {
+  const user = await requireUser();
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const parsed = sendEmailSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+
+  const { getTwilio, twilioFrom } = await import("@/lib/sms/twilio");
+  const tw = getTwilio();
+  if (!tw) return { ok: false, error: "SMS is not configured (TWILIO_ACCOUNT_SID)." };
+
+  const { householdIds, kind, note } = parsed.data;
+  const { wedding, supabase } = ctx;
+
+  const households: { id: string; name: string; rsvp_code: string; managed_by: string | null }[] = [];
+  const guestPhones: { household_id: string; phone: string }[] = [];
+
+  for (let i = 0; i < householdIds.length; i += 100) {
+    const batch = householdIds.slice(i, i + 100);
+    const [h, g] = await Promise.all([
+      supabase
+        .from("households")
+        .select("id, name, rsvp_code, managed_by")
+        .eq("wedding_id", wedding.id)
+        .in("id", batch),
+      supabase
+        .from("guests")
+        .select("id, household_id, phone")
+        .eq("wedding_id", wedding.id)
+        .in("household_id", batch)
+        .is("plus_one_of", null)
+        .not("phone", "is", null),
+    ]);
+    if (h.error || g.error) return fail("sendRsvpSms", h.error ?? g.error);
+    households.push(...h.data);
+    for (const guest of g.data) {
+      if (guest.phone?.trim()) {
+        guestPhones.push({ household_id: guest.household_id, phone: guest.phone.trim() });
+      }
+    }
+  }
+
+  // Resolve managed_by → member name for personalized SMS
+  const memberIds = [...new Set(households.map((h) => h.managed_by).filter(Boolean))] as string[];
+  const memberNames = new Map<string, string>();
+  if (memberIds.length > 0) {
+    const { data: members } = await supabase
+      .from("wedding_members")
+      .select("id, profiles(full_name)")
+      .in("id", memberIds);
+    for (const m of members ?? []) {
+      const p = Array.isArray(m.profiles) ? m.profiles[0] : m.profiles;
+      if (p?.full_name) memberNames.set(m.id, p.full_name);
+    }
+  }
+
+  const phoneByHousehold = new Map<string, string>();
+  for (const gp of guestPhones) {
+    if (!phoneByHousehold.has(gp.household_id)) {
+      phoneByHousehold.set(gp.household_id, gp.phone);
+    }
+  }
+
+  const siteUrl = await getSiteUrl();
+  const couple = coupleName(wedding);
+  const from = twilioFrom();
+  const noPhone = households.filter((h) => !phoneByHousehold.has(h.id)).map((h) => h.name);
+  const sendable = households.filter((h) => phoneByHousehold.has(h.id));
+  let sent = 0;
+  let failed = 0;
+
+  for (const h of sendable) {
+    const phone = phoneByHousehold.get(h.id)!;
+    const link = `${siteUrl}/r/${h.rsvp_code}`;
+    const invite = kind === "invitation";
+    const sender = (h.managed_by ? memberNames.get(h.managed_by) : null) ?? couple;
+    let body = invite
+      ? `${sender}: You're invited! RSVP here: ${link}`
+      : `${sender}: Friendly reminder to RSVP: ${link}`;
+    if (note) body += `\n${note}`;
+
+    try {
+      const msg = await tw.messages.create({ from, to: phone, body });
+      await supabase.from("sms_sends").insert({
+        wedding_id: wedding.id,
+        household_id: h.id,
+        kind,
+        to_phone: phone,
+        twilio_sid: msg.sid,
+        status: "sent",
+        sent_by: user.id,
+      });
+      sent++;
+    } catch (e: unknown) {
+      const errMsg = e instanceof Error ? e.message.slice(0, 500) : "Unknown error";
+      console.error("[sendRsvpSms]", errMsg);
+      await supabase.from("sms_sends").insert({
+        wedding_id: wedding.id,
+        household_id: h.id,
+        kind,
+        to_phone: phone,
+        status: "failed",
+        error: errMsg,
+        sent_by: user.id,
+      });
+      failed++;
+    }
+  }
+
+  revalidatePath("/app/rsvp");
+  return { ok: true, data: { sent, failed, noPhone } };
 }
 
 // ---------- notifications ----------

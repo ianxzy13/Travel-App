@@ -87,7 +87,10 @@
       "deleteTitle": "Izbrišem to opravilo?",
       "deleted": "Opravilo je izbrisano",
       "save": "Shrani",
-      "add": "Dodaj opravilo"
+      "add": "Dodaj opravilo",
+      "comments": "Komentarji",
+      "addComment": "Dodaj komentar…",
+      "unknown": "Nekdo"
     },
     "categories": {
       "Budget": "Proračun",

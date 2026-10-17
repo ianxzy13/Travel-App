@@ -60,7 +60,8 @@
       "waiting": "Nog geen reactie",
       "matching": "{count} gevonden",
       "clear": "Filters wissen",
-      "any": "Alle"
+      "any": "Alle",
+      "myGuests": "My guests"
     },
     "list": {
       "selectAll": "Alle getoonde gasten selecteren",
@@ -203,7 +204,9 @@
       "sameAsOurs": "Zelfde als de onze ({language})",
       "saved": "Huishouden opgeslagen",
       "cancel": "Annuleren",
-      "save": "Opslaan"
+      "save": "Opslaan",
+      "managedBy": "Managed by",
+      "nobodyAssigned": "Nobody assigned"
     },
     "tagsDialog": {
       "title": "Labels",

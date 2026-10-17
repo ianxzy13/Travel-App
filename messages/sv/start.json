@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – planera bröllopet tillsammans",
-    "metaDescription": "Gäster, OSA, bordsplacering, budget, lokaler, resor, inspiration och er bröllopssajt – allt på ett lugnt ställe, på ert språk.",
+    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
+    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
     "signIn": "Logga in",
     "getStarted": "Kom igång",
-    "eyebrow": "Bröllopsplanering, tillsammans",
-    "title": "Allt för ert bröllop, på ett lugnt ställe.",
-    "intro": "Planera gäster, OSA, bordsplacering, budget, lokaler och resor med din partner och familj, i mobilen eller datorn.",
+    "eyebrow": "Weddings across borders",
+    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Börja planera gratis",
     "seeInside": "Se vad som finns",
-    "featuresTitle": "En app i stället för tolv kalkylark",
+    "featuresTitle": "And everything else you'd expect",
     "featuresText": "Varje del av planen pratar med de andra. OSA går rakt in i bordsplaceringen, bokade lokaler på er sajt.",
     "features": {
       "guests": {
@@ -53,21 +53,66 @@
         "text": "Ni planerar på ert språk; varje gäst får sajten, OSA och mejl på sitt."
       }
     },
-    "closingTitle": "Säg ja till mindre stress.",
-    "closingText": "Bjud in din partner, föräldrar eller bröllopsplanerare och planera allt tillsammans i realtid.",
+    "closingTitle": "Your wedding crosses borders. Your planner should too.",
+    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
     "create": "Skapa ert bröllop",
     "footer": "Gjort med kärlek · © {year} Vow",
-    "preview": {
-      "couple": "Ian och Maria · Lissabon",
-      "daysToGo": "dagar kvar",
-      "attending": "kommer",
-      "declined": "tackat nej",
-      "waiting": "väntar",
-      "budget": "Budget",
-      "budgetOf": "{spent} av {total}"
-    },
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "differenceTitle": "What other wedding apps don't do",
+    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "difference": {
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
+    },
+    "compareTitle": "Vow vs. typical US wedding apps",
+    "compare": {
+      "tripPage": "Personal trip page per guest",
+      "entryChecklist": "Entry/visa checklist by country",
+      "roomsPerGuest": "Hotel rooms per guest",
+      "paperwork": "Paperwork for marrying abroad",
+      "guestLanguages": "Guest's own language",
+      "dualBudget": "Budget in two currencies",
+      "familyRoles": "Family planner roles",
+      "vow": "Vow",
+      "others": "Typical apps",
+      "yes": "Yes",
+      "no": "No",
+      "soon": "Coming soon"
+    },
+    "mock": {
+      "guestName": "Maja Novak",
+      "langLabel": "Slovenščina",
+      "flight": "Miami → Ljubljana",
+      "flightDetail": "Arrives Thu 5 Mar, 14:20",
+      "hotel": "Hotel Park · Room 204",
+      "shuttle": "Shuttle to Lake Bled · 16:00",
+      "table": "Table 3 · with the Kovač family",
+      "passport": "Passport valid until at least June 2027",
+      "yourTrip": "Your trip"
+    }
   },
   "login": {
     "title": "Logga in",
@@ -123,6 +168,10 @@
       "style": {
         "title": "Vilken stil har ni?",
         "text": "Vi använder den för inspiration och förslag till sajten."
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
       }
     },
     "defaults": {
@@ -132,7 +181,8 @@
       "rsvpIntro": "Vi längtar efter att fira med er. Säg till om ni kan komma.",
       "faqChildren": "Är barn välkomna?",
       "faqParking": "Finns det parkering vid lokalen?",
-      "faqWear": "Vad ska jag ha på mig?"
+      "faqWear": "Vad ska jag ha på mig?",
+      "ceremonyReception": "Vigsel & bröllopsfest"
     }
   },
   "weddingForm": {
@@ -176,7 +226,15 @@
     "saveChanges": "Spara ändringar",
     "saved": "Bröllopsdetaljer sparade",
     "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies"
+    "allCurrencies": "All currencies",
+    "guestCountries": "Countries your guests will travel from",
+    "guestCountriesHint": "Tap all that apply. You can always change this later.",
+    "guestCountriesSearch": "Search countries…",
+    "noCurrency": "No second currency",
+    "secondaryCurrency": "Second currency (optional)",
+    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
+    "exchangeRate": "Exchange rate",
+    "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
     "owner": {
@@ -190,6 +248,14 @@
     "viewer": {
       "label": "Läsare",
       "description": "Kan titta men inte ändra"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
     }
   },
   "invite": {

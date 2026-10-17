@@ -7,6 +7,7 @@ import {
   Nunito_Sans,
   Playfair_Display,
 } from "next/font/google";
+import localFont from "next/font/local";
 
 // Extra fonts for the wedding website (Garamond is loaded in the root layout;
 // Great Vibes is shared with it). The browser only downloads the ones a site uses.
@@ -46,6 +47,11 @@ const lora = Lora({
 const nunito = Nunito_Sans({
   subsets: ["latin", "latin-ext"],
   variable: "--font-nunito",
+  display: "swap",
+});
+export const rastellino = localFont({
+  src: "../../app/fonts/BuongiornoRastellino.otf",
+  variable: "--font-rastellino",
   display: "swap",
 });
 

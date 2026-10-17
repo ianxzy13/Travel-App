@@ -30,7 +30,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { ScheduleItemRow } from "@/lib/database.types";
-import { fmtDate, fmtTime } from "@/lib/i18n/format";
+import { fmtDate, fmtTime, fmtTimeInZone } from "@/lib/i18n/format";
 import { endTime, overlaps, sortByTime } from "@/lib/schedule/time";
 import { cn } from "@/lib/utils";
 import { ItemSheet } from "./item-sheet";
@@ -41,15 +41,19 @@ type Props = {
   vendors: { id: string; name: string; contact_name: string | null; phone: string | null }[];
   weddingDate: string | null;
   canEdit: boolean;
+  venueTz: string | null;
+  memberTz: string | null;
 };
 
 /** "" stands for the wedding day (items saved with no date follow the wedding date). */
 const WEDDING = "";
 
-export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: Props) {
+export function SchedulePage({ items, events, vendors, weddingDate, canEdit, venueTz, memberTz }: Props) {
   const t = useTranslations("schedule");
   const locale = useLocale();
   const time = (hhmm: string | null) => fmtTime(hhmm, locale);
+  const dualTime = (hhmm: string | null, date: string | null) =>
+    fmtTimeInZone(hhmm, locale, date, venueTz, memberTz);
   // Days to show: the wedding day, days that already have items, and other event days.
   const days = useMemo(() => {
     const set = new Set<string>([WEDDING]);
@@ -225,17 +229,22 @@ export function SchedulePage({ items, events, vendors, weddingDate, canEdit }: P
         </div>
       ) : (
         <>
-          <ol className="before:bg-border relative space-y-3 before:absolute before:start-[4.25rem] before:top-2 before:bottom-2 before:w-px sm:before:start-[5.25rem]">
+          <ol className="before:bg-border relative space-y-3 before:absolute before:start-[4.25rem] before:top-2 before:bottom-2 before:w-px sm:before:start-[6.25rem]">
             {dayItems.map((item) => {
               const end = endTime(item.start_time, item.duration_min);
               const vendor = item.vendor_id ? vendorById.get(item.vendor_id) : undefined;
               const overlapWith = clash.get(item.id);
               return (
                 <li key={item.id} className="relative flex gap-3 sm:gap-5">
-                  <div className="w-14 shrink-0 pt-3 text-end sm:w-16">
+                  <div className="w-14 shrink-0 pt-3 text-end sm:w-20">
                     <p className="font-medium tabular-nums">{time(item.start_time)}</p>
                     {end && (
                       <p className="text-muted-foreground text-xs tabular-nums">{time(end)}</p>
+                    )}
+                    {dualTime(item.start_time, dateOf(day) ?? null) && (
+                      <p className="text-primary-ink text-xs tabular-nums">
+                        {dualTime(item.start_time, dateOf(day) ?? null)}
+                      </p>
                     )}
                   </div>
                   <span

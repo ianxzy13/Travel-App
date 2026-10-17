@@ -21,6 +21,7 @@ function guest(overrides: Partial<GuestView>): GuestView {
     householdId: "h",
     householdName: "Household",
     householdLanguage: "",
+    householdManagedBy: null,
     firstName: "",
     lastName: "",
     name: "",
@@ -274,6 +275,9 @@ describe("buildGuestViews", () => {
       needs_crib: false,
       room_pref_share: null,
       room_pref_avoid: null,
+      dietary_consent: false,
+      dietary_consent_at: null,
+      email_unsubscribed: false,
       created_at: "",
       updated_at: "",
     };
@@ -282,7 +286,7 @@ describe("buildGuestViews", () => {
         { ...base, id: "1", first_name: "Ann", last_name: "Smith", plus_one_of: null },
         { ...base, id: "2", first_name: "", last_name: "", plus_one_of: "1" },
       ],
-      households: [{ id: "h", name: "Smiths", preferred_language: null }],
+      households: [{ id: "h", name: "Smiths", preferred_language: null, managed_by: null }],
       invites: [{ guest_id: "1", event_id: "e" }],
       guestTags: [],
     });

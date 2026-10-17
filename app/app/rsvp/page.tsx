@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { RsvpDashboard } from "@/components/rsvp-admin/rsvp-dashboard";
 import { isEmailConfigured } from "@/lib/email/resend";
+import { isSmsConfigured } from "@/lib/sms/twilio";
 import { loadRsvpDashboard } from "@/lib/rsvp/load";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
@@ -37,6 +38,7 @@ export default async function RsvpPage({
       slug={wedding.slug}
       couple={coupleName(wedding)}
       emailConfigured={isEmailConfigured}
+      smsConfigured={isSmsConfigured}
       adminConfigured={Boolean(process.env.SUPABASE_SECRET_KEY)}
       canEdit={canEdit(role)}
       focusHouseholdId={household}

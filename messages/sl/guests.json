@@ -60,7 +60,8 @@
       "waiting": "Še brez odgovora",
       "matching": "{count} ujemajočih",
       "clear": "Počisti filtre",
-      "any": "Katerikoli"
+      "any": "Katerikoli",
+      "myGuests": "Moji gostje"
     },
     "list": {
       "selectAll": "Izberi vse prikazane goste",
@@ -201,6 +202,8 @@
       "language": "Jezik",
       "languageHint": "Njihova spletna stran, stran za potrditev in e-pošta so v tem jeziku. Gostje ga lahko spremenijo tudi na strani za potrditev; njihova izbira se shrani tukaj.",
       "sameAsOurs": "Enako kot naš ({language})",
+      "managedBy": "Odgovorna oseba",
+      "nobodyAssigned": "Ni dodeljeno",
       "saved": "Gospodinjstvo je shranjeno",
       "cancel": "Prekliči",
       "save": "Shrani"
