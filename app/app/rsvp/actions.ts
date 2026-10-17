@@ -232,6 +232,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     name: string;
     rsvp_code: string;
     preferred_language: string | null;
+    managed_by: string | null;
   }[] = [];
   const guests: { id: string; household_id: string; email: string | null }[] = [];
   for (let i = 0; i < householdIds.length; i += 100) {
@@ -239,7 +240,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name, rsvp_code, preferred_language")
+        .select("id, name, rsvp_code, preferred_language, managed_by")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -254,6 +255,20 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
     if (h.error || g.error) return fail("sendRsvpEmails", h.error ?? g.error);
     households.push(...h.data);
     guests.push(...g.data);
+  }
+
+  // Resolve managed_by → member name + email for personalized sender
+  const memberIds = [...new Set(households.map((h) => h.managed_by).filter(Boolean))] as string[];
+  const memberProfiles = new Map<string, { name: string; email: string | null }>();
+  if (memberIds.length > 0) {
+    const { data: members } = await supabase
+      .from("wedding_members")
+      .select("id, profiles(full_name, email)")
+      .in("id", memberIds);
+    for (const m of members ?? []) {
+      const p = Array.isArray(m.profiles) ? m.profiles[0] : m.profiles;
+      if (p?.full_name) memberProfiles.set(m.id, { name: p.full_name, email: p.email ?? null });
+    }
   }
 
   const emailsByHousehold = new Map<string, string[]>();
@@ -293,10 +308,11 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
           props.unsubscribeUrl = `${siteUrl}/r/unsubscribe?code=${h.rsvp_code}&guest=${guestId}`;
         }
         const element = RsvpEmail(props);
+        const manager = h.managed_by ? memberProfiles.get(h.managed_by) : null;
         return {
-          from: emailFrom(couple),
+          from: emailFrom(manager?.name ?? couple),
           to: emailsByHousehold.get(h.id)!,
-          replyTo: user.email,
+          replyTo: manager?.email ?? user.email,
           subject,
           html: await render(element),
           text: await render(element, { plainText: true }),
@@ -350,7 +366,7 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
   const { householdIds, kind, note } = parsed.data;
   const { wedding, supabase } = ctx;
 
-  const households: { id: string; name: string; rsvp_code: string }[] = [];
+  const households: { id: string; name: string; rsvp_code: string; managed_by: string | null }[] = [];
   const guestPhones: { household_id: string; phone: string }[] = [];
 
   for (let i = 0; i < householdIds.length; i += 100) {
@@ -358,7 +374,7 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name, rsvp_code")
+        .select("id, name, rsvp_code, managed_by")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -375,6 +391,20 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
       if (guest.phone?.trim()) {
         guestPhones.push({ household_id: guest.household_id, phone: guest.phone.trim() });
       }
+    }
+  }
+
+  // Resolve managed_by → member name for personalized SMS
+  const memberIds = [...new Set(households.map((h) => h.managed_by).filter(Boolean))] as string[];
+  const memberNames = new Map<string, string>();
+  if (memberIds.length > 0) {
+    const { data: members } = await supabase
+      .from("wedding_members")
+      .select("id, profiles(full_name)")
+      .in("id", memberIds);
+    for (const m of members ?? []) {
+      const p = Array.isArray(m.profiles) ? m.profiles[0] : m.profiles;
+      if (p?.full_name) memberNames.set(m.id, p.full_name);
     }
   }
 
@@ -397,9 +427,10 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
     const phone = phoneByHousehold.get(h.id)!;
     const link = `${siteUrl}/r/${h.rsvp_code}`;
     const invite = kind === "invitation";
+    const sender = (h.managed_by ? memberNames.get(h.managed_by) : null) ?? couple;
     let body = invite
-      ? `${couple}: You're invited! RSVP here: ${link}`
-      : `${couple}: Friendly reminder to RSVP: ${link}`;
+      ? `${sender}: You're invited! RSVP here: ${link}`
+      : `${sender}: Friendly reminder to RSVP: ${link}`;
     if (note) body += `\n${note}`;
 
     try {
