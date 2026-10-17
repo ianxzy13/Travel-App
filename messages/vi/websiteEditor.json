@@ -97,7 +97,8 @@
         "script": "Chữ viết tay",
         "cleanSans": "Không chân gọn gàng",
         "bookSerif": "Có chân kiểu sách",
-        "friendlySans": "Không chân thân thiện"
+        "friendlySans": "Không chân thân thiện",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

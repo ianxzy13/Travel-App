@@ -24,6 +24,11 @@ export const HEADING_FONTS: Record<HeadingFont, FontInfo> = {
   },
   inter: { name: "Inter", style: "boldModern", css: "var(--font-inter), system-ui, sans-serif" },
   "great-vibes": { name: "Great Vibes", style: "script", css: "var(--font-great-vibes), cursive" },
+  rastellino: {
+    name: "Rastellino",
+    style: "handwritten",
+    css: "var(--font-rastellino), var(--font-great-vibes), cursive",
+  },
 };
 
 export const BODY_FONTS: Record<BodyFont, FontInfo> = {

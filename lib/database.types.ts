@@ -496,7 +496,7 @@ export type SiteTemplate = "classic" | "modern" | "garden" | "boho" | "beach";
 export type SiteSectionKind =
   "home" | "story" | "events" | "travel" | "party" | "rsvp" | "registry" | "faq" | "gallery";
 export type HeadingFont =
-  "cormorant" | "playfair" | "fraunces" | "josefin" | "inter" | "great-vibes";
+  "cormorant" | "playfair" | "fraunces" | "josefin" | "inter" | "great-vibes" | "rastellino";
 export type BodyFont = "inter" | "lora" | "nunito" | "josefin";
 
 export type WebsiteSettingsRow = Timestamps & {

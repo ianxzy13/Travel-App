@@ -97,7 +97,8 @@
         "script": "рукописний",
         "cleanSans": "чистий без засічок",
         "bookSerif": "книжковий із засічками",
-        "friendlySans": "дружній без засічок"
+        "friendlySans": "дружній без засічок",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

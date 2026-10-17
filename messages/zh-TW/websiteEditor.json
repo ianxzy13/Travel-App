@@ -97,7 +97,8 @@
         "script": "手寫體",
         "cleanSans": "簡潔無襯線",
         "bookSerif": "書籍襯線",
-        "friendlySans": "親切無襯線"
+        "friendlySans": "親切無襯線",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

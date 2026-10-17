@@ -97,7 +97,8 @@
         "script": "हस्तलिपि",
         "cleanSans": "साफ़ सैंस",
         "bookSerif": "किताबी सेरिफ़",
-        "friendlySans": "दोस्ताना सैंस"
+        "friendlySans": "दोस्ताना सैंस",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

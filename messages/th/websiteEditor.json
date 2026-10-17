@@ -97,7 +97,8 @@
         "script": "ลายมือ",
         "cleanSans": "ไม่มีเชิงสะอาดตา",
         "bookSerif": "มีเชิงแบบหนังสือ",
-        "friendlySans": "ไม่มีเชิงเป็นมิตร"
+        "friendlySans": "ไม่มีเชิงเป็นมิตร",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

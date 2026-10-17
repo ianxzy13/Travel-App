@@ -97,7 +97,8 @@
         "script": "handschrift",
         "cleanSans": "strakke schreefloze",
         "bookSerif": "boekschreef",
-        "friendlySans": "vriendelijke schreefloze"
+        "friendlySans": "vriendelijke schreefloze",
+        "handwritten": "handwritten"
       }
     },
     "sections": {
