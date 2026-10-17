@@ -36,7 +36,10 @@ export async function RsvpFrame({
         {couple && (
           <header className="bg-card mb-12 rounded-md border px-6 py-12 text-center sm:px-12">
             <p className="eyebrow text-primary-ink">{t("weddingOf")}</p>
-            <h1 className="font-script mt-4 text-6xl leading-tight font-normal sm:text-7xl">
+            <h1
+              className="mt-4 text-6xl leading-tight font-normal sm:text-7xl"
+              style={{ fontFamily: "var(--font-rastellino), var(--font-accent)", letterSpacing: 0 }}
+            >
               {couple}
             </h1>
             <div aria-hidden className="bg-primary mx-auto my-6 h-px w-16" />
