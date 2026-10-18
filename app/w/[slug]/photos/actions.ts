@@ -2,9 +2,14 @@
 
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
+import { checkUpload } from "@/lib/photos/upload";
 import { createClient } from "@/lib/supabase/server";
 
-const slugSchema = z.string().min(3).max(60).regex(/^[a-z0-9-]+$/);
+const slugSchema = z
+  .string()
+  .min(3)
+  .max(60)
+  .regex(/^[a-z0-9-]+$/);
 
 export type PhotoEntry = {
   id: string;
@@ -24,15 +29,17 @@ export async function listPhotos(slug: string): Promise<PhotoEntry[]> {
   const { data } = await sb.rpc("list_wedding_photos", { p_slug: parsed.data });
   if (!data || !Array.isArray(data)) return [];
 
-  return (data as {
-    id: string;
-    uploader_name: string;
-    file_path: string;
-    caption: string | null;
-    width: number | null;
-    height: number | null;
-    created_at: string;
-  }[]).map((p) => ({
+  return (
+    data as {
+      id: string;
+      uploader_name: string;
+      file_path: string;
+      caption: string | null;
+      width: number | null;
+      height: number | null;
+      created_at: string;
+    }[]
+  ).map((p) => ({
     id: p.id,
     uploaderName: p.uploader_name,
     filePath: p.file_path,
@@ -54,13 +61,14 @@ export async function uploadPhoto(
     return { ok: false, error: "Invalid input" };
   }
 
-  const file = formData.get("file") as File | null;
-  if (!file || file.size === 0) return { ok: false, error: "No file selected" };
-  if (file.size > 15 * 1024 * 1024) return { ok: false, error: "File too large (max 15 MB)" };
-
-  const allowed = ["image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"];
-  if (!allowed.includes(file.type)) {
-    return { ok: false, error: "Only JPEG, PNG, WebP, or HEIC images" };
+  const file = formData.get("file");
+  if (!(file instanceof File)) return { ok: false, error: "No file selected" };
+  const check = checkUpload(file);
+  if (!check.ok) {
+    return {
+      ok: false,
+      error: check.reason === "tooBig" ? "Photo too large" : "Only JPEG, PNG or WebP photos",
+    };
   }
 
   const sb = await createClient();
@@ -69,23 +77,32 @@ export async function uploadPhoto(
   const wedding = pageData as { id: string } | null;
   if (!wedding) return { ok: false, error: "Photo sharing is not enabled" };
 
-  const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+  const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
   const ts = Date.now();
   const rand = Math.random().toString(36).slice(2, 8);
   const path = `${wedding.id}/${ts}-${rand}.${ext}`;
 
   const { error: uploadError } = await sb.storage
     .from("photos")
-    .upload(path, file, { upsert: false });
+    .upload(path, file, { upsert: false, contentType: file.type });
   if (uploadError) return { ok: false, error: "Upload failed. Please try again." };
 
-  const caption = (formData.get("caption") as string)?.trim() || null;
+  const caption =
+    String(formData.get("caption") ?? "")
+      .trim()
+      .slice(0, 500) || null;
+  const size = (key: string) => {
+    const n = Number(formData.get(key));
+    return Number.isInteger(n) && n > 0 && n <= 10000 ? n : null;
+  };
 
   const { data: photoId, error: rpcError } = await sb.rpc("upload_wedding_photo", {
     p_slug: parsedSlug.data,
     p_uploader_name: parsedName.data,
     p_file_path: path,
     p_caption: caption,
+    p_width: size("width"),
+    p_height: size("height"),
   });
 
   if (rpcError) return { ok: false, error: "Failed to save photo record" };
