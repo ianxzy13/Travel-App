@@ -8,6 +8,7 @@ import { listPhotos, uploadPhoto, type PhotoEntry } from "@/app/w/[slug]/photos/
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { checkOriginal, shrinkPhoto } from "@/lib/photos/upload";
 import { SUPABASE_URL } from "@/lib/supabase/env";
 
 function photoUrl(filePath: string) {
@@ -35,10 +36,23 @@ export function GuestPhotoPage({
     const uploads = Array.from(files);
     startTransition(async () => {
       let success = 0;
-      for (const file of uploads) {
+      for (const original of uploads) {
+        const check = checkOriginal(original);
+        if (!check.ok) {
+          toast.error(t(check.reason === "tooBig" ? "errorTooBig" : "errorNotImage"));
+          continue;
+        }
+        // phone photos are too big to send as they are, so shrink them first
+        const shrunk = await shrinkPhoto(original);
+        if (!shrunk) {
+          toast.error(t("errorCantRead", { name: original.name }));
+          continue;
+        }
         const fd = new FormData();
-        fd.append("file", file);
+        fd.append("file", shrunk.file);
         fd.append("caption", caption);
+        fd.append("width", String(shrunk.width));
+        fd.append("height", String(shrunk.height));
         const r = await uploadPhoto(slug, name.trim(), fd);
         if (r.ok) success++;
         else toast.error(r.error);
@@ -78,7 +92,8 @@ export function GuestPhotoPage({
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            // plain image/* makes iPhones send a JPEG copy of their HEIC photos
+            accept="image/*"
             multiple
             className="hidden"
             onChange={handleUpload}
@@ -116,12 +131,8 @@ export function GuestPhotoPage({
                   className="w-full"
                 />
                 <div className="p-2">
-                  {photo.caption && (
-                    <p className="text-sm">{photo.caption}</p>
-                  )}
-                  <p className="text-muted-foreground text-xs">
-                    {photo.uploaderName}
-                  </p>
+                  {photo.caption && <p className="text-sm">{photo.caption}</p>}
+                  <p className="text-muted-foreground text-xs">{photo.uploaderName}</p>
                 </div>
               </div>
             ))}

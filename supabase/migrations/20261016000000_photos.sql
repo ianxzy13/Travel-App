@@ -1,5 +1,6 @@
 -- =============================================================
 -- Vow – Prompt E: Guest photo sharing by QR code
+-- Safe to run more than once.
 -- =============================================================
 
 -- Add toggle to weddings
@@ -7,7 +8,7 @@ alter table public.weddings
   add column if not exists photos_enabled boolean not null default false;
 
 -- Photo records
-create table public.wedding_photos (
+create table if not exists public.wedding_photos (
   id uuid primary key default gen_random_uuid(),
   wedding_id uuid not null references public.weddings (id) on delete cascade,
   uploader_name text not null check (char_length(uploader_name) between 1 and 100),
@@ -18,20 +19,23 @@ create table public.wedding_photos (
   created_at timestamptz not null default now()
 );
 
-create index wedding_photos_wedding_idx on public.wedding_photos (wedding_id);
+create index if not exists wedding_photos_wedding_idx on public.wedding_photos (wedding_id);
 
 -- RLS: couple members can read/delete, guests upload via RPC
 alter table public.wedding_photos enable row level security;
 
+drop policy if exists "wedding_photos_select" on public.wedding_photos;
 create policy "wedding_photos_select" on public.wedding_photos
   for select to authenticated
   using (public.is_wedding_member(wedding_id));
 
+drop policy if exists "wedding_photos_delete" on public.wedding_photos;
 create policy "wedding_photos_delete" on public.wedding_photos
   for delete to authenticated
   using (public.can_edit_wedding(wedding_id));
 
 -- Anon can also read (for the public gallery page)
+drop policy if exists "wedding_photos_anon_select" on public.wedding_photos;
 create policy "wedding_photos_anon_select" on public.wedding_photos
   for select to anon
   using (
@@ -44,21 +48,24 @@ create policy "wedding_photos_anon_select" on public.wedding_photos
 -- Public storage bucket for wedding photos (guests need to view them)
 insert into storage.buckets (id, name, public)
 values ('photos', 'photos', true)
-on conflict (id) do nothing;
+on conflict (id) do update set public = true;
 
 -- Storage policies: authenticated couple members can manage
+drop policy if exists "photos_storage_select" on storage.objects;
 create policy "photos_storage_select" on storage.objects
   for select to authenticated
   using (bucket_id = 'photos' and (storage.foldername(name))[1] in (
     select id::text from public.weddings where public.is_wedding_member(id)
   ));
 
+drop policy if exists "photos_storage_insert" on storage.objects;
 create policy "photos_storage_insert" on storage.objects
   for insert to authenticated
   with check (bucket_id = 'photos' and (storage.foldername(name))[1] in (
     select id::text from public.weddings where public.can_edit_wedding(id)
   ));
 
+drop policy if exists "photos_storage_delete" on storage.objects;
 create policy "photos_storage_delete" on storage.objects
   for delete to authenticated
   using (bucket_id = 'photos' and (storage.foldername(name))[1] in (
@@ -66,6 +73,7 @@ create policy "photos_storage_delete" on storage.objects
   ));
 
 -- Anon can read photos from enabled weddings
+drop policy if exists "photos_storage_anon_select" on storage.objects;
 create policy "photos_storage_anon_select" on storage.objects
   for select to anon
   using (bucket_id = 'photos' and (storage.foldername(name))[1] in (
@@ -73,6 +81,7 @@ create policy "photos_storage_anon_select" on storage.objects
   ));
 
 -- Anon can upload to enabled weddings
+drop policy if exists "photos_storage_anon_insert" on storage.objects;
 create policy "photos_storage_anon_insert" on storage.objects
   for insert to anon
   with check (bucket_id = 'photos' and (storage.foldername(name))[1] in (

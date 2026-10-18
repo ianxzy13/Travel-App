@@ -103,7 +103,10 @@
       "upload": "Izberite fotografije",
       "uploaded": "{count, plural, one {# fotografija nalozena!} two {# fotografiji nalozeni!} few {# fotografije nalozene!} other {# fotografij nalozenih!}}",
       "gallery": "{count, plural, one {# fotografija} two {# fotografiji} few {# fotografije} other {# fotografij}}",
-      "photoBy": "Fotografija: {name}"
+      "photoBy": "Fotografija: {name}",
+      "errorNotImage": "Ta datoteka ni fotografija. Videoposnetkov tukaj ni mogoče deliti.",
+      "errorTooBig": "Fotografija je prevelika za nalaganje.",
+      "errorCantRead": "Datoteke {name} ni bilo mogoče odpreti. Poskusite jo deliti s telefona."
     }
   },
   "rsvp": {
