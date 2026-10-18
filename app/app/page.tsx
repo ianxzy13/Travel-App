@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Armchair,
@@ -156,18 +157,22 @@ export default async function DashboardPage({
         </div>
       )}
 
-      {/* Countdown hero: a soft photo-style backdrop with an overlapping card */}
-      <section className="relative lg:min-h-[22rem]">
-        <div
-          aria-hidden
-          className="soft-photo h-44 rounded-lg sm:h-56 lg:absolute lg:inset-y-0 lg:start-0 lg:h-auto lg:w-3/5"
+      {/* Countdown hero: the Vow picture behind a soft see-through card */}
+      <section className="relative flex min-h-[22rem] items-end justify-center overflow-hidden rounded-lg pt-28 sm:items-center sm:px-8 sm:py-14">
+        <Image
+          src="/dashboard/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          className="object-cover"
         />
-        <div className="bg-card relative mx-3 -mt-16 rounded-md border p-6 sm:mx-8 sm:p-10 lg:ms-auto lg:me-0 lg:mt-10 lg:w-[58%]">
+        <div className="bg-card/80 relative w-full max-w-xl rounded-t-md border-t p-6 sm:rounded-md sm:border text-center shadow-sm backdrop-blur-md sm:p-10">
           <div>
             <h1 className="font-script text-5xl leading-tight font-normal sm:text-6xl">
               {coupleName(wedding)}
             </h1>
-            <p className="caps text-muted-foreground mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+            <p className="caps text-muted-foreground mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
               <span>
                 {wedding.wedding_date ? fmtDate(wedding.wedding_date, locale, "full") : t("noDate")}
               </span>
@@ -178,7 +183,7 @@ export default async function DashboardPage({
                 </span>
               )}
             </p>
-            <div className="mt-8">
+            <div className="mt-8 flex justify-center">
               {wedding.wedding_date ? (
                 <Countdown date={wedding.wedding_date} />
               ) : (

@@ -62,8 +62,8 @@ export default async function LandingPage() {
             <Image
               src="/landing/hero.jpg"
               alt=""
-              width={1669}
-              height={942}
+              width={1920}
+              height={1080}
               priority
               sizes="100vw"
               className="aspect-[4/3] w-full object-cover sm:aspect-auto sm:min-h-[28rem]"
