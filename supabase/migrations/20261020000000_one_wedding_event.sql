@@ -296,3 +296,13 @@ begin
   return new_id;
 end;
 $$;
+
+-- =============================================================
+-- Add "rastellino" to the heading_font check constraint.
+-- =============================================================
+
+alter table public.website_settings
+  drop constraint if exists website_settings_heading_font_check;
+alter table public.website_settings
+  add constraint website_settings_heading_font_check
+  check (heading_font in ('cormorant', 'playfair', 'fraunces', 'josefin', 'inter', 'great-vibes', 'rastellino'));

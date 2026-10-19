@@ -97,7 +97,8 @@
         "script": "рукописный",
         "cleanSans": "чистый без засечек",
         "bookSerif": "книжный с засечками",
-        "friendlySans": "дружелюбный без засечек"
+        "friendlySans": "дружелюбный без засечек",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

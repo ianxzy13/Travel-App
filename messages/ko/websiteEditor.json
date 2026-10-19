@@ -97,7 +97,8 @@
         "script": "필기체",
         "cleanSans": "깔끔한 산세리프",
         "bookSerif": "북 세리프",
-        "friendlySans": "친근한 산세리프"
+        "friendlySans": "친근한 산세리프",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

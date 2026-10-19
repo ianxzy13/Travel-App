@@ -97,7 +97,8 @@
         "script": "corsivo",
         "cleanSans": "sans pulito",
         "bookSerif": "serif da libro",
-        "friendlySans": "sans amichevole"
+        "friendlySans": "sans amichevole",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

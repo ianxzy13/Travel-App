@@ -17,6 +17,7 @@ const GOOGLE: Record<HeadingFont, string> = {
   josefin: "Josefin Sans:wght@300",
   inter: "Inter:wght@800",
   "great-vibes": "Great Vibes",
+  rastellino: "Great Vibes",
 };
 
 /** Downloads just the letters we need; returns null if it fails (a default font is used). */

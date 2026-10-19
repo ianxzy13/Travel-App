@@ -97,7 +97,8 @@
         "script": "manuscrite",
         "cleanSans": "sans-serif épurée",
         "bookSerif": "serif de livre",
-        "friendlySans": "sans-serif chaleureuse"
+        "friendlySans": "sans-serif chaleureuse",
+        "handwritten": "handwritten"
       }
     },
     "sections": {

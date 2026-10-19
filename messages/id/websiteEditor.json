@@ -97,7 +97,8 @@
         "script": "Tulisan tangan",
         "cleanSans": "Sans bersih",
         "bookSerif": "Serif buku",
-        "friendlySans": "Sans ramah"
+        "friendlySans": "Sans ramah",
+        "handwritten": "handwritten"
       }
     },
     "sections": {
