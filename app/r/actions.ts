@@ -35,8 +35,10 @@ export async function submitRsvp(
     p_payload: parsed.data,
   });
   if (error || !data) {
-    console.error("[submitRsvp]", error);
-    return { ok: false, error: t(rsvpErrorKey(error?.message)) };
+    console.error("[submitRsvp]", error?.message, error?.code, error?.details);
+    const key = rsvpErrorKey(error?.message);
+    const msg = t(key);
+    return { ok: false, error: key === "generic" && error?.message ? `${msg} (${error.message})` : msg };
   }
 
   const result = data as RsvpResult;
