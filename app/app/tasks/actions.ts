@@ -16,7 +16,14 @@ const id = z.uuid();
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
-  return { wedding, sb: await createClient() };
+  return { wedding, sb: await createClient(), onlyOwn: false };
+}
+
+/** Helpers may only tick off to-dos assigned to them. */
+async function helper() {
+  const { wedding, role } = await requireWedding();
+  if (role !== "helper") return null;
+  return { wedding, sb: await createClient(), onlyOwn: true };
 }
 
 function done(): ActionResult {
@@ -64,16 +71,21 @@ export async function saveTask(taskId: string | null, input: unknown): Promise<A
 }
 
 export async function setTaskDone(taskId: string, isDone: boolean): Promise<ActionResult> {
-  const ctx = await editor();
-  if (!ctx || !id.safeParse(taskId).success) return noPermission();
-  const { error } = await ctx.sb
+  if (!id.safeParse(taskId).success) return noPermission();
+  const user = await requireUser();
+  // Editors can tick any to-do; helpers only the ones assigned to them.
+  const ctx = (await editor()) ?? (await helper());
+  if (!ctx) return noPermission();
+  let query = ctx.sb
     .from("tasks")
     .update({ done: isDone })
     .eq("id", taskId)
     .eq("wedding_id", ctx.wedding.id);
+  if (ctx.onlyOwn) query = query.eq("assignee_id", user.id);
+  const { data: changed, error } = await query.select("id");
   if (error) return fail("setTaskDone", error);
+  if (!changed?.length) return noPermission();
   if (isDone) {
-    const user = await requireUser();
     const { data: task } = await ctx.sb.from("tasks").select("title").eq("id", taskId).single();
     logActivity(ctx.wedding.id, user.id, "task.done", task?.title ?? "");
   }
