@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Ta datoteka nije fotografija. Videozapisi se ovdje ne mogu dijeliti.",
+      "errorTooBig": "Fotografija je prevelika za prijenos.",
+      "errorCantRead": "Nismo mogli otvoriti {name}. Pokušajte je podijeliti s mobitela."
     }
   },
   "rsvp": {

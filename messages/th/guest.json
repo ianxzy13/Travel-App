@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "ไฟล์นี้ไม่ใช่รูปภาพ ไม่สามารถแชร์วิดีโอที่นี่ได้",
+      "errorTooBig": "รูปภาพมีขนาดใหญ่เกินกว่าจะอัปโหลดได้",
+      "errorCantRead": "ไม่สามารถเปิด {name} ได้ ลองแชร์จากโทรศัพท์ของคุณแทน"
     }
   },
   "rsvp": {

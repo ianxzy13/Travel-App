@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Цей файл не є фото. Відео тут поширювати не можна.",
+      "errorTooBig": "Фото завелике для завантаження.",
+      "errorCantRead": "Не вдалося відкрити {name}. Спробуйте поділитися ним з телефона."
     }
   },
   "rsvp": {

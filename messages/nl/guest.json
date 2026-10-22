@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Dat bestand is geen foto. Video’s kun je hier niet delen.",
+      "errorTooBig": "Die foto is te groot om te uploaden.",
+      "errorCantRead": "We konden {name} niet openen. Probeer hem vanaf je telefoon te delen."
     }
   },
   "rsvp": {

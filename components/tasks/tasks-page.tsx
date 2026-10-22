@@ -458,7 +458,8 @@ function TaskItem({
       )}
       <Checkbox
         checked={task.done}
-        disabled={!canEdit}
+        // helpers can tick off the to-dos assigned to them
+        disabled={!canEdit && !isMine}
         onCheckedChange={(v) => onToggle(v === true)}
         aria-label={
           task.done ? t("markUndone", { title: task.title }) : t("markDone", { title: task.title })

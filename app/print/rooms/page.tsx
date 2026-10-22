@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, BedDouble, Printer } from "lucide-react";
+import { ArrowLeft, BedDouble } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { PrintControls } from "@/components/seating/print-controls";
 import { Button } from "@/components/ui/button";
 import { fetchAll } from "@/lib/supabase/fetch-all";
 import { createClient } from "@/lib/supabase/server";
@@ -54,15 +55,9 @@ export default async function PrintRoomsPage() {
             {t("export.back")}
           </Link>
         </Button>
-        <Button size="sm" onClick={() => {}} className="ml-auto" id="print-btn">
-          <Printer className="mr-1 size-4" />
-          {t("export.print")}
-        </Button>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.getElementById("print-btn")?.addEventListener("click",()=>window.print())`,
-          }}
-        />
+        <div className="ml-auto">
+          <PrintControls />
+        </div>
       </div>
 
       <div className="mx-auto max-w-4xl space-y-8 p-8">
