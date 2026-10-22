@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Bu dosya bir fotoğraf değil. Videolar burada paylaşılamaz.",
+      "errorTooBig": "Bu fotoğraf yüklenemeyecek kadar büyük.",
+      "errorCantRead": "{name} açılamadı. Telefonunuzdan paylaşmayı deneyin."
     }
   },
   "rsvp": {

@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "هذا الملف ليس صورة. لا يمكن مشاركة مقاطع الفيديو هنا.",
+      "errorTooBig": "الصورة كبيرة جدًا بحيث لا يمكن رفعها.",
+      "errorCantRead": "تعذّر فتح {name}. جرّب مشاركتها من هاتفك."
     }
   },
   "rsvp": {

@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "File itu bukan foto. Video tidak bisa dibagikan di sini.",
+      "errorTooBig": "Foto terlalu besar untuk diunggah.",
+      "errorCantRead": "Kami tidak bisa membuka {name}. Coba bagikan dari ponsel Anda."
     }
   },
   "rsvp": {

@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "사진 파일이 아닙니다. 여기서는 동영상을 공유할 수 없습니다.",
+      "errorTooBig": "사진이 너무 커서 업로드할 수 없습니다.",
+      "errorCantRead": "{name}을(를) 열 수 없습니다. 휴대폰에서 공유해 보세요."
     }
   },
   "rsvp": {

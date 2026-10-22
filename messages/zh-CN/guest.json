@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "该文件不是照片。此处无法分享视频。",
+      "errorTooBig": "照片太大，无法上传。",
+      "errorCantRead": "无法打开 {name}。请尝试直接从手机分享。"
     }
   },
   "rsvp": {

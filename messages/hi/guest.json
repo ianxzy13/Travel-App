@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "यह फ़ाइल फ़ोटो नहीं है। यहाँ वीडियो साझा नहीं किए जा सकते।",
+      "errorTooBig": "यह फ़ोटो अपलोड करने के लिए बहुत बड़ी है।",
+      "errorCantRead": "हम {name} नहीं खोल सके। इसे अपने फ़ोन से साझा करके देखें।"
     }
   },
   "rsvp": {
