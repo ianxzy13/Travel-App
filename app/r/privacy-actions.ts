@@ -4,12 +4,14 @@ import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
 
 const codeSchema = z.string().trim().min(6).max(10);
 
+// Guests aren't signed in and can't read these tables themselves, so the
+// server-only admin client is used. The household's private code is the key.
 async function loadHousehold(code: string) {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
+  if (!supabase) return null;
   const clean = code.toUpperCase().replace(/[^A-Z0-9]/g, "");
   const { data } = await supabase
     .from("households")
@@ -26,7 +28,8 @@ export async function downloadMyData(code: string): Promise<ActionResult<object>
   const h = await loadHousehold(code);
   if (!h) return { ok: false, error: t("rsvp_not_found") };
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
+  if (!supabase) return { ok: false, error: t("rsvp_not_found") };
   const [guests, responses, travel] = await Promise.all([
     supabase
       .from("guests")

@@ -819,7 +819,7 @@ export function SeatingEditor(props: Props) {
                   </div>
                 )}
                 {legend.length > 0 && (
-                  <ul className="bg-card/95 absolute start-3 bottom-3 flex max-w-[60%] flex-wrap gap-x-3 gap-y-1 rounded-lg border px-3 py-1.5 text-xs shadow-sm">
+                  <ul className="bg-card/95 absolute start-3 bottom-14 flex max-w-[60%] sm:bottom-3 flex-wrap gap-x-3 gap-y-1 rounded-lg border px-3 py-1.5 text-xs shadow-sm">
                     {legend.map((l) => (
                       <li key={l.label} className="flex items-center gap-1.5">
                         <span

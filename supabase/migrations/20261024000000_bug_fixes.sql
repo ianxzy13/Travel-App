@@ -1,12 +1,15 @@
 -- =============================================================
--- Vow – fix guest RSVPs
+-- Vow – bug fixes found in the full-site test (October 2026)
+-- Safe to run more than once: paste the whole file into the
+-- Supabase SQL editor and press Run.
+-- =============================================================
+
+-- ---------- fix guest RSVPs
 -- Two bugs stopped guests from answering:
 --   1. get_rsvp() sorts hotels by "sort_order", a column hotels never had,
 --      so every RSVP link showed "Invitation not found".
 --   2. submit_rsvp() lost a type cast in the privacy update, so sending an
 --      answer failed with "column status is of type rsvp_status".
--- Safe to run more than once.
--- =============================================================
 
 -- 1. Give hotels the column get_rsvp() orders by (couple's order of entry).
 alter table public.hotels add column if not exists sort_order integer not null default 0;
@@ -123,3 +126,78 @@ begin
   );
 end;
 $$;
+
+-- ---------- helpers can tick off their own to-dos
+-- The "Helper" role promises "can edit tasks assigned to them", but the
+-- database only let owners, editors and parents change to-dos.
+
+drop policy if exists "tasks_update_assignee" on public.tasks;
+create policy "tasks_update_assignee" on public.tasks for update to authenticated
+  using (assignee_id = auth.uid() and public.is_wedding_member(wedding_id))
+  with check (assignee_id = auth.uid() and public.is_wedding_member(wedding_id));
+
+-- ---------- fix guest photo uploads
+-- Guests aren't signed in, and the database hides the weddings table from
+-- them, so the storage rules "is photo sharing on for this wedding?" always
+-- answered no and every guest upload failed ("Upload failed").
+-- A small helper function looks it up with the right permissions instead.
+
+create or replace function public.photo_sharing_open(p_folder text)
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1 from public.weddings
+    where id::text = p_folder and photos_enabled = true
+  );
+$$;
+
+grant execute on function public.photo_sharing_open(text) to anon, authenticated;
+
+-- Guests (signed in to Vow or not) can view and add photos while sharing is on.
+drop policy if exists "photos_storage_anon_select" on storage.objects;
+create policy "photos_storage_anon_select" on storage.objects
+  for select to anon, authenticated
+  using (bucket_id = 'photos' and public.photo_sharing_open((storage.foldername(name))[1]));
+
+drop policy if exists "photos_storage_anon_insert" on storage.objects;
+create policy "photos_storage_anon_insert" on storage.objects
+  for insert to anon, authenticated
+  with check (bucket_id = 'photos' and public.photo_sharing_open((storage.foldername(name))[1]));
+
+drop policy if exists "wedding_photos_anon_select" on public.wedding_photos;
+create policy "wedding_photos_anon_select" on public.wedding_photos
+  for select to anon, authenticated
+  using (public.photo_sharing_open(wedding_id::text));
+
+-- ---------- fix "Find your seat" for guests
+-- The page read the weddings table directly, which guests can't see, so
+-- it always showed "page not found". get_wedding_public() now also says
+-- whether the couple switched the page on.
+
+create or replace function public.get_wedding_public(p_slug text)
+returns jsonb
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select jsonb_build_object(
+    'slug', w.slug,
+    'partner_a_name', w.partner_a_name,
+    'partner_b_name', w.partner_b_name,
+    'wedding_date', w.wedding_date,
+    'location', w.location,
+    'accent', w.accent,
+    'rsvp_deadline', w.rsvp_deadline,
+    'rsvp_contact', w.rsvp_contact,
+    'languages', w.languages,
+    'translations', w.translations,
+    'find_seat_enabled', w.find_seat_enabled
+  )
+  from public.weddings w where w.slug = lower(trim(p_slug));
+$$;
+
