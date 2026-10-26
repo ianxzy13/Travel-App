@@ -16,7 +16,16 @@ import { TripPage } from "./trip-page";
 type View = "summary" | "form" | "thanks" | "travel" | "trip";
 
 /** The guest's journey on /r/[code]: see answers → edit → thank you → trip. */
-export function RsvpExperience({ data, siteUrl }: { data: RsvpData; siteUrl: string }) {
+export function RsvpExperience({
+  data,
+  siteUrl,
+  destination,
+}: {
+  data: RsvpData;
+  siteUrl: string;
+  /** Wedding country (ISO code) for the travel checklist, null if unknown. */
+  destination: string | null;
+}) {
   const t = useTranslations("rsvp");
   const locale = useLocale();
   const [answered, setAnswered] = useState(!!data.household.responded_at);
@@ -61,11 +70,15 @@ export function RsvpExperience({ data, siteUrl }: { data: RsvpData; siteUrl: str
         <>
           <div role="status" className="bg-card rounded-2xl border p-8 text-center shadow-sm">
             <Heart className="text-primary-ink mx-auto size-10" aria-hidden />
-            <h2 className="font-script mt-4 text-5xl font-normal">{t("thanks")}</h2>
+            <h2 className="font-script mt-4 text-5xl font-normal">
+              {anyAttending ? t("thanks") : t("missYouTitle")}
+            </h2>
             <p className="text-muted-foreground mt-2">
-              {deadline
-                ? t("thanksTextUntil", { couple, date: deadline })
-                : t("thanksText", { couple })}
+              {!anyAttending
+                ? t("missYouText", { couple })
+                : deadline
+                  ? t("thanksTextUntil", { couple, date: deadline })
+                  : t("thanksText", { couple })}
             </p>
           </div>
           {showTravelPrompt && (
@@ -110,9 +123,9 @@ export function RsvpExperience({ data, siteUrl }: { data: RsvpData; siteUrl: str
           }}
           submitLabel={answered ? t("save") : t("send")}
         />
-      ) : view === "trip" ? (
+      ) : view === "trip" && anyAttending ? (
         <>
-          <TripPage data={data} siteUrl={siteUrl} />
+          <TripPage data={data} siteUrl={siteUrl} destination={destination} />
           <Button
             size="lg"
             variant="outline"
@@ -131,7 +144,14 @@ export function RsvpExperience({ data, siteUrl }: { data: RsvpData; siteUrl: str
           {(data.room_assignments ?? []).length > 0 && (
             <RoomAssignmentCard data={data} />
           )}
-          {answered && (
+          {answered && !anyAttending && (
+            <div role="status" className="bg-card rounded-2xl border p-6 text-center shadow-sm">
+              <Heart className="text-primary-ink mx-auto size-8" aria-hidden />
+              <h2 className="mt-3 text-2xl">{t("missYouTitle")}</h2>
+              <p className="text-muted-foreground mt-1 text-sm">{t("missYouText", { couple })}</p>
+            </div>
+          )}
+          {answered && anyAttending && (
             <Button
               size="lg"
               className="w-full"

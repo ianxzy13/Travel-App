@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { generateIcs, googleCalendarUrl } from "../calendar";
-import { filterChecklist, isEuEea, SLOVENIA_CHECKLIST } from "../checklist-data";
+import { buildChecklist, isEuEea } from "../checklist-data";
+import { guessCountryFromLocation } from "../country-info";
 
 describe("generateIcs", () => {
   it("produces valid .ics for a timed event", () => {
@@ -106,41 +107,87 @@ describe("isEuEea", () => {
   });
 });
 
-describe("filterChecklist", () => {
-  it("returns only EU items for EU guest", () => {
-    const items = filterChecklist(SLOVENIA_CHECKLIST, "DE");
-    const keys = items.map((i) => i.key);
-    expect(keys).toContain("passport-eu");
-    expect(keys).not.toContain("passport");
-    expect(keys).not.toContain("ees");
-    expect(keys).not.toContain("etias");
-    expect(keys).toContain("currency");
+const keys = (input: Parameters<typeof buildChecklist>[0]) =>
+  buildChecklist(input).map((i) => i.key);
+
+describe("buildChecklist", () => {
+  const base = { locale: "en", timeZone: null, weddingDate: "2027-03-07" };
+
+  it("Slovenia, EU guest: ID card, no border paperwork, no currency/plug notes", () => {
+    const k = keys({ ...base, destination: "SI", guestCountry: "DE" });
+    expect(k).toContain("passportEu");
+    expect(k).not.toContain("ees");
+    expect(k).not.toContain("etias");
+    expect(k).not.toContain("currency"); // both use the euro
+    expect(k).not.toContain("plug");
+    expect(k).toContain("insuranceEhic");
   });
 
-  it("returns non-EU items for non-EU guest", () => {
-    const items = filterChecklist(SLOVENIA_CHECKLIST, "US");
-    const keys = items.map((i) => i.key);
-    expect(keys).toContain("passport");
-    expect(keys).not.toContain("passport-eu");
-    expect(keys).toContain("ees");
-    expect(keys).toContain("etias");
-    expect(keys).toContain("currency");
+  it("Slovenia, US guest: passport, EES, ETIAS, euro, plug + voltage", () => {
+    const k = keys({ ...base, destination: "SI", guestCountry: "US" });
+    expect(k).toEqual(
+      expect.arrayContaining([
+        "passportSchengen",
+        "ees",
+        "etias",
+        "currency",
+        "plugVoltage",
+        "insurance",
+      ]),
+    );
+    expect(k).not.toContain("passportEu");
   });
 
-  it("returns all universal items regardless of country", () => {
-    const euItems = filterChecklist(SLOVENIA_CHECKLIST, "DE");
-    const nonEuItems = filterChecklist(SLOVENIA_CHECKLIST, "US");
-    const universalKeys = ["currency", "plug", "timezone", "emergency", "insurance"];
-    for (const key of universalKeys) {
-      expect(euItems.map((i) => i.key)).toContain(key);
-      expect(nonEuItems.map((i) => i.key)).toContain(key);
-    }
+  it("Dominican Republic: e-Ticket, no EU rules, pesos and US plugs", () => {
+    const items = buildChecklist({ ...base, destination: "DO", guestCountry: "SI" });
+    const k = items.map((i) => i.key);
+    expect(k).toContain("doEticket");
+    expect(k).not.toContain("ees");
+    expect(k).not.toContain("etias");
+    expect(k).toContain("plugVoltage");
+    const currency = items.find((i) => i.key === "currency");
+    expect(currency?.values?.currency).toMatch(/Dominican Peso/i);
+    const entry = items.find((i) => i.key === "entryCheck");
+    expect(entry?.values?.country).toBe("Dominican Republic");
   });
 
-  it("treats null country as non-EU", () => {
-    const items = filterChecklist(SLOVENIA_CHECKLIST, null);
-    const keys = items.map((i) => i.key);
-    expect(keys).toContain("passport");
-    expect(keys).not.toContain("passport-eu");
+  it("United States: ESTA for visa-waiver guests, visa for others, nothing for Canadians", () => {
+    expect(keys({ ...base, destination: "US", guestCountry: "SI" })).toContain("esta");
+    expect(keys({ ...base, destination: "US", guestCountry: "IN" })).toContain("usVisa");
+    const ca = keys({ ...base, destination: "US", guestCountry: "CA" });
+    expect(ca).not.toContain("esta");
+    expect(ca).not.toContain("usVisa");
+    expect(ca).not.toContain("plug"); // same plugs and voltage
+  });
+
+  it("home guests get no travel paperwork", () => {
+    expect(keys({ ...base, destination: "DO", guestCountry: "DO" })).toEqual([]);
+  });
+
+  it("unknown destination: only generic items", () => {
+    const k = keys({ ...base, destination: null, guestCountry: "US" });
+    expect(k).toEqual(["passportGeneric", "insurance"]);
+  });
+
+  it("shows the wedding-day time zone", () => {
+    const items = buildChecklist({
+      ...base,
+      timeZone: "America/Santo_Domingo",
+      destination: "DO",
+      guestCountry: "SI",
+    });
+    const tz = items.find((i) => i.key === "timezone");
+    expect(tz?.values?.offset).toBe("GMT-4");
+  });
+});
+
+describe("guessCountryFromLocation", () => {
+  it("finds the country in free text", () => {
+    expect(guessCountryFromLocation("Punta Cana, Dominican Republic")).toBe("DO");
+    expect(guessCountryFromLocation("Lake Bled, Slovenia")).toBe("SI");
+    expect(guessCountryFromLocation("Miami, FL, USA")).toBe("US");
+    expect(guessCountryFromLocation("Punta Cana")).toBe("DO");
+    expect(guessCountryFromLocation("Somewhere nice")).toBeNull();
+    expect(guessCountryFromLocation(null)).toBeNull();
   });
 });
