@@ -22,7 +22,14 @@ export function fmtDate(
   locale: string,
   style: "full" | "long" | "medium" | "short" = "long",
 ) {
-  return date ? dtf(locale, { dateStyle: style }).format(asUtc(date)) : "";
+  if (!date) return "";
+  // "short" spells out the year: newer browsers write "24. 5. 27" in some
+  // languages (e.g. Slovenian), which is easy to misread.
+  const opts: Intl.DateTimeFormatOptions =
+    style === "short"
+      ? { year: "numeric", month: "numeric", day: "numeric" }
+      : { dateStyle: style };
+  return dtf(locale, opts).format(asUtc(date));
 }
 
 /** "15:00" or "3:00 PM", as usual in that language. */

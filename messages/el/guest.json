@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Αυτό το αρχείο δεν είναι φωτογραφία. Τα βίντεο δεν μπορούν να κοινοποιηθούν εδώ.",
+      "errorTooBig": "Η φωτογραφία είναι πολύ μεγάλη για μεταφόρτωση.",
+      "errorCantRead": "Δεν ήταν δυνατό να ανοίξει το {name}. Δοκιμάστε να το μοιραστείτε από το κινητό σας."
     }
   },
   "rsvp": {

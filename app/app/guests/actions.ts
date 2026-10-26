@@ -44,7 +44,20 @@ async function inBatches(ids: string[], run: (batch: string[]) => PromiseLike<{ 
 async function editor() {
   const { wedding, role } = await requireWedding();
   if (!canEdit(role)) return null;
-  return { weddingId: wedding.id, supabase: await createClient() };
+  return { weddingId: wedding.id, role, supabase: await createClient() };
+}
+
+/** A parent's new households are "managed by" them, so they show under "My guests". */
+async function managerFor(ctx: NonNullable<Awaited<ReturnType<typeof editor>>>) {
+  if (ctx.role !== "parent") return {};
+  const user = await requireUser();
+  const { data } = await ctx.supabase
+    .from("wedding_members")
+    .select("id")
+    .eq("wedding_id", ctx.weddingId)
+    .eq("user_id", user.id)
+    .maybeSingle();
+  return data ? { managed_by: data.id } : {};
 }
 
 function done(): ActionResult {
@@ -183,6 +196,7 @@ export async function saveGuest(
           name: v.householdName || fullName(v.firstName, v.lastName),
           preferred_language: v.householdLanguage || null,
           ...addressColumns(v.address),
+          ...(await managerFor(ctx)),
         })
         .select("id")
         .single();
@@ -565,7 +579,9 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
     postal_code: string | null;
     country: string | null;
     preferred_language: string | null;
+    managed_by?: string;
   }[] = [];
+  const manager = await managerFor(ctx);
 
   const guestRows: GuestRow[] = [];
   const inviteRows: { wedding_id: string; guest_id: string; event_id: string }[] = [];
@@ -588,6 +604,7 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
         postal_code: r.postalCode || null,
         country: r.country || null,
         preferred_language: r.language || null,
+        ...manager,
       });
     }
     return householdId;

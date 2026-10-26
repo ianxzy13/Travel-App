@@ -34,8 +34,12 @@ export function GuestManager(data: GuestPageData) {
   } = data;
   const t = useTranslations("guests");
 
-  const defaultFilters: GuestFilters = currentRole === "parent" && currentMemberId
-    ? { ...DEFAULT_FILTERS, managedBy: currentMemberId }
+  // Parents start on "My guests", but only once they manage someone:
+  // an empty list on day one looks like the guests are gone.
+  const managesSome =
+    !!currentMemberId && households.some((h) => h.managedBy === currentMemberId);
+  const defaultFilters: GuestFilters = currentRole === "parent" && managesSome
+    ? { ...DEFAULT_FILTERS, managedBy: currentMemberId! }
     : DEFAULT_FILTERS;
   const [filters, setFilters] = useState<GuestFilters>(defaultFilters);
   const [sort, setSort] = useState<SortState>({ key: "name", dir: "asc" });

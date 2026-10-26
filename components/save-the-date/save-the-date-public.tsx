@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { fmtDate } from "@/lib/i18n/format";
 import Link from "next/link";
 import { CalendarPlus } from "lucide-react";
 import type { Accent } from "@/lib/database.types";
@@ -26,19 +28,6 @@ type StdPublic = {
 
 function mediaUrl(path: string) {
   return `${SUPABASE_URL}/storage/v1/object/public/std-media/${path}`;
-}
-
-function formatDate(date: string) {
-  try {
-    return new Date(date + "T00:00:00").toLocaleDateString("en-GB", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  } catch {
-    return date;
-  }
 }
 
 function daysUntil(date: string) {
@@ -70,6 +59,9 @@ export function SaveTheDatePublic({ std }: { std: StdPublic }) {
   const fonts = FONT_CLASSES[std.template];
   const couple = `${std.partner_a_name} & ${std.partner_b_name}`;
   const days = std.wedding_date ? daysUntil(std.wedding_date) : null;
+  // guests read this in their browser's language (see i18n/request.ts)
+  const site = useTranslations("site");
+  const locale = useLocale();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -139,7 +131,7 @@ export function SaveTheDatePublic({ std }: { std: StdPublic }) {
               className={`text-lg tracking-wide ${fonts.body}`}
               style={{ color: t.fg }}
             >
-              {formatDate(std.wedding_date)}
+              {fmtDate(std.wedding_date, locale, "full")}
             </p>
           )}
 
@@ -155,9 +147,7 @@ export function SaveTheDatePublic({ std }: { std: StdPublic }) {
               style={{ color: t.accent }}
             >
               {days}{" "}
-              <span className="text-lg">
-                {days === 1 ? "day to go" : "days to go"}
-              </span>
+              <span className="text-lg">{site("countdown.daysWord", { count: days })}</span>
             </p>
           )}
 
@@ -180,8 +170,8 @@ export function SaveTheDatePublic({ std }: { std: StdPublic }) {
               className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition hover:opacity-80"
               style={{ background: t.accent, color: t.bg }}
             >
-              <CalendarPlus className="size-4" />
-              Add to calendar
+              <CalendarPlus className="size-4" aria-hidden />
+              {site("event.addToCalendar")}
             </a>
           )}
         </div>
@@ -189,9 +179,13 @@ export function SaveTheDatePublic({ std }: { std: StdPublic }) {
 
       {/* Footer */}
       <footer className="pb-8 text-center text-xs" style={{ color: t.muted }}>
-        <Link href="/" className="hover:underline" style={{ color: t.muted }}>
-          Made with Vow
-        </Link>
+        {site.rich("madeWith", {
+          link: (c) => (
+            <Link href="/" className="hover:underline" style={{ color: t.muted }}>
+              {c}
+            </Link>
+          ),
+        })}
       </footer>
     </div>
   );

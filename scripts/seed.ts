@@ -1995,28 +1995,33 @@ async function main() {
   check(
     "schedule",
     await sb.from("schedule_items").insert(
-      DAY_TEMPLATE.map((i) => ({
-        wedding_id: wid,
-        start_time: fromMinutes(ceremonyAt + i.offset),
-        duration_min: i.duration,
-        title: i.title,
-        owner: i.owner ?? null,
-        location:
-          i.location === "ceremony"
-            ? "Quinta da Regaleira"
-            : i.location === "reception"
-              ? "Palácio de Seteais"
-              : null,
-        vendor_id:
-          i.owner === "Photographer"
-            ? vendor["Luz Photography"]
-            : i.owner === "DJ / band"
-              ? vendor["DJ Rui Beats"]
-              : i.owner === "Caterer"
-                ? vendor["Sabores de Sintra Catering"]
+      DAY_TEMPLATE.map((x) => {
+        // the template holds message keys; show the English texts like the app does
+        const title = EN.schedule.template[x.title as keyof typeof EN.schedule.template];
+        const owner = x.owner ? EN.schedule.owners[x.owner as keyof typeof EN.schedule.owners] : null;
+        return {
+          wedding_id: wid,
+          start_time: fromMinutes(ceremonyAt + x.offset),
+          duration_min: x.duration,
+          title,
+          owner,
+          location:
+            x.location === "ceremony"
+              ? "Quinta da Regaleira"
+              : x.location === "reception"
+                ? "Palácio de Seteais"
                 : null,
-        event_id: i.title === "Ceremony" ? ev["Ceremony & Reception"] : null,
-      })),
+          vendor_id:
+            x.owner === "photographer"
+              ? vendor["Luz Photography"]
+              : x.owner === "dj"
+                ? vendor["DJ Rui Beats"]
+                : x.owner === "caterer"
+                  ? vendor["Sabores de Sintra Catering"]
+                  : null,
+          event_id: x.title === "ceremony" ? ev["Ceremony & Reception"] : null,
+        };
+      }),
       { defaultToNull: false },
     ),
   );

@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Tento soubor není fotka. Videa sem nelze sdílet.",
+      "errorTooBig": "Fotka je příliš velká na nahrání.",
+      "errorCantRead": "Soubor {name} se nepodařilo otevřít. Zkuste ho sdílet z telefonu."
     }
   },
   "rsvp": {

@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Tệp này không phải là ảnh. Không thể chia sẻ video ở đây.",
+      "errorTooBig": "Ảnh quá lớn để tải lên.",
+      "errorCantRead": "Không thể mở {name}. Hãy thử chia sẻ từ điện thoại của bạn."
     }
   },
   "rsvp": {

@@ -36,9 +36,8 @@ export async function submitRsvp(
   });
   if (error || !data) {
     console.error("[submitRsvp]", error?.message, error?.code, error?.details);
-    const key = rsvpErrorKey(error?.message);
-    const msg = t(key);
-    return { ok: false, error: key === "generic" && error?.message ? `${msg} (${error.message})` : msg };
+    // Guests see a friendly message; the database error is in the Vercel logs.
+    return { ok: false, error: t(rsvpErrorKey(error?.message)) };
   }
 
   const result = data as RsvpResult;

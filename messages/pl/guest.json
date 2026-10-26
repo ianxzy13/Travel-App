@@ -103,7 +103,10 @@
       "upload": "Choose photos",
       "uploaded": "{count, plural, one {# photo uploaded!} other {# photos uploaded!}}",
       "gallery": "{count, plural, one {# photo shared} other {# photos shared}}",
-      "photoBy": "Photo by {name}"
+      "photoBy": "Photo by {name}",
+      "errorNotImage": "Ten plik nie jest zdjęciem. Nie można tu udostępniać filmów.",
+      "errorTooBig": "To zdjęcie jest za duże, aby je przesłać.",
+      "errorCantRead": "Nie udało się otworzyć {name}. Spróbuj udostępnić je z telefonu."
     }
   },
   "rsvp": {
