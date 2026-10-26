@@ -399,6 +399,8 @@ export type HotelRoomRow = WeddingScoped & {
   hotel_id: string;
   room_type_id: string | null;
   room_number: string;
+  name: string | null;
+  capacity: number | null;
   floor: string | null;
   is_locked: boolean;
   notes: string | null;

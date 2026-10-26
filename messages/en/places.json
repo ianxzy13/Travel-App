@@ -28,7 +28,11 @@
       "rate_received": "Offer received",
       "rate_signed": "Rate signed"
     },
-    "flightCategory": { "guest": "Guests", "couple": "Us", "honeymoon": "Honeymoon" },
+    "flightCategory": {
+      "guest": "Guests",
+      "couple": "Us",
+      "honeymoon": "Honeymoon"
+    },
     "flightDirection": {
       "arrival": "Arriving for the wedding",
       "departure": "Leaving after the wedding",
@@ -253,13 +257,14 @@
         "kids": "Kids",
         "accessible": "Accessible",
         "attending": "Attending",
-        "notReplied": "Not replied",
-        "everyone": "Everyone"
+        "notReplied": "Not replied yet",
+        "everyone": "Everyone (incl. declined)",
+        "planning": "Attending + not replied"
       },
       "dropToUnassign": "Drop here to unassign",
       "allHotels": "All hotels",
       "roomCount": "{count, plural, one {# room} other {# rooms}}",
-      "emptyRoom": "Drag or tap a guest, then tap a room",
+      "emptyRoom": "Tap a guest, then tap this room",
       "assigned": "Guest assigned to room",
       "removed": "Guest removed from room",
       "roomFull": "This room is full",
@@ -271,11 +276,77 @@
       "costSummary": "Cost summary",
       "costPerNight": "{amount} / night (occupied rooms only)",
       "occupancy": "{occupied} of {total} rooms used · {guests, plural, one {# guest} other {# guests}}",
-      "tapRoom": "Tap a room to place {name}",
+      "tapRoom": "Now tap a room for {name}",
       "prefShare": "Wants to share with: {name}",
       "prefAvoid": "Prefers not to share with: {name}",
-      "strangerHint": "Guests from different groups sharing — check if they're OK with it",
-      "overBeds": "More people than beds!"
+      "strangerHint": "Mixes groups — check they’re happy to share",
+      "rsvpFilter": "Show guests",
+      "cancelPick": "Cancel",
+      "placeHere": "Put the selected guest in {room}",
+      "mixedHints": "Mixed-group hints",
+      "badge": {
+        "notReplied": "not replied",
+        "declined": "declined"
+      },
+      "ofCapacity": "{count} / {capacity}",
+      "free": "{count, plural, one {# spot free} other {# spots free}}",
+      "full": "Full",
+      "over": "{count} too many",
+      "bedsFor": "beds for {count}",
+      "warning": {
+        "over_capacity": "More people than the room fits",
+        "over_beds": "More people than beds",
+        "declined_in_room": "Someone here declined",
+        "child_alone": "Child without an adult",
+        "keep_apart": "Two people who should be apart",
+        "night_mismatch": "Different check-in/out dates",
+        "stranger_pair": "Mixes groups",
+        "empty_room": "Empty",
+        "no_room": "No room"
+      },
+      "guestMenu": "Options for {name}",
+      "moveTo": "Move to…",
+      "removeFromRoom": "Remove from room",
+      "cancel": "Cancel",
+      "swap": {
+        "title": "{room} is full",
+        "text": "Swap {name} with someone in this room? They move to {from}.",
+        "textNoRoom": "Swap {name} with someone in this room? They go back to the guest list.",
+        "with": "Swap with {name}",
+        "done": "Swapped"
+      },
+      "edit": {
+        "title": "Edit {room}",
+        "nickname": "Nickname",
+        "nicknameHint": "e.g. Girls’ room",
+        "capacity": "People in this room",
+        "capacityHint": "Leave empty to use the room type ({count}).",
+        "save": "Save",
+        "saved": "Room updated"
+      },
+      "add": {
+        "button": "Add rooms",
+        "title": "Add rooms",
+        "text": "Create several identical shared rooms at once. You can change any single room later.",
+        "count": "How many rooms",
+        "perRoom": "People per room",
+        "start": "First room name or number",
+        "startHint": "e.g. 101 (then 102, 103…) or Room A (then Room B…)",
+        "beds": "Beds per room (optional)",
+        "bedsHint": "Leave at 0 to skip the bed check.",
+        "price": "Price per room per night (optional)",
+        "typeName": "{count}-person room",
+        "create": "{count, plural, one {Create # room} other {Create # rooms}}",
+        "created": "{count, plural, one {# room added} other {# rooms added}}"
+      },
+      "empty": {
+        "title": "No rooms yet",
+        "text": "Plan who shares which room, even before everyone has replied.",
+        "step1": "Add the hotel on the Hotels page.",
+        "step2": "Click “Add rooms”: how many rooms and how many people per room.",
+        "step3": "Tap a guest, then tap a room (or drag on a computer).",
+        "addHotel": "Add a hotel"
+      }
     },
     "export": {
       "hotel": "Hotel",

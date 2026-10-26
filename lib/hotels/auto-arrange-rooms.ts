@@ -1,4 +1,5 @@
 import type { HotelRoomRow, HotelRoomTypeRow, HotelRoomAssignmentRow } from "../database.types";
+import { roomCapacity } from "./room-sharing";
 
 type RoomGuest = {
   id: string;
@@ -103,7 +104,7 @@ export function autoArrangeRooms({
   const freeSpots = (roomId: string) => {
     const r = rooms.find((rm) => rm.id === roomId);
     const rt = r?.room_type_id ? roomTypes.get(r.room_type_id) : null;
-    const max = rt?.max_guests ?? 99;
+    const max = r ? roomCapacity(r, rt) : 0;
     return max - (roomOccupancy.get(roomId)?.size ?? 0);
   };
 

@@ -83,6 +83,22 @@ export const roomSchema = z.object({
 });
 export type RoomValues = z.infer<typeof roomSchema>;
 
+export const quickRoomsSchema = z.object({
+  hotelId: z.uuid(),
+  typeName: text(80).min(1, v("name")),
+  count: z.number().int().min(1).max(100),
+  perRoom: z.number().int().min(1).max(20),
+  start: text(30),
+  beds: z.array(bedConfigSchema).max(10),
+  pricePerNight: money,
+});
+export type QuickRoomsValues = z.infer<typeof quickRoomsSchema>;
+
+export const roomDetailsSchema = z.object({
+  name: text(60),
+  capacity: z.number().int().min(1).max(20).nullable(),
+});
+
 export const roomAssignmentSchema = z
   .object({
     roomId: z.uuid(),

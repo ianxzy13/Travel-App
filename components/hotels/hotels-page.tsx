@@ -61,6 +61,7 @@ import type {
   HotelRow,
 } from "@/lib/database.types";
 import { formatMoney } from "@/lib/budget/money";
+import { roomTitle } from "@/lib/hotels/room-sharing";
 import { fmtDate } from "@/lib/i18n/format";
 import { HOTEL_STATUS_CLASS } from "@/lib/places/labels";
 import { roomBlockState } from "@/lib/places/travel";
@@ -170,7 +171,7 @@ export function HotelsPage({
         actions={
           <>
             <div className="flex gap-2">
-              {rooms.length > 0 && (
+              {hotels.length > 0 && (
                 <Button asChild variant="outline" size="sm">
                   <Link href="/app/hotels/rooms">
                     <LayoutGrid aria-hidden /> {t("board.title")}
@@ -915,12 +916,12 @@ function HotelRooms({
                   )}
                   onClick={() => setEditingRoom(room.id)}
                 >
-                  <span className="font-mono font-medium">{room.room_number}</span>
+                  <span className="font-mono font-medium">{roomTitle(room)}</span>
                   <span className="text-muted-foreground truncate">
                     {rt?.name ?? t("rooms.untyped")}
                   </span>
                   <span className="text-muted-foreground">
-                    {assigned}/{rt?.max_guests ?? "?"} {t("rooms.guests")}
+                    {assigned}/{room.capacity ?? rt?.max_guests ?? "?"} {t("rooms.guests")}
                   </span>
                   {room.is_locked && <span title={t("rooms.locked")}>🔒</span>}
                 </button>

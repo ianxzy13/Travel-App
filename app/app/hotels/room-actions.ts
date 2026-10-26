@@ -4,7 +4,14 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
-import { roomAssignmentSchema, roomSchema, roomTypeSchema } from "@/lib/validation/places";
+import { roomLabels } from "@/lib/hotels/room-sharing";
+import {
+  quickRoomsSchema,
+  roomAssignmentSchema,
+  roomDetailsSchema,
+  roomSchema,
+  roomTypeSchema,
+} from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 
@@ -16,6 +23,7 @@ async function editor() {
 
 function done(): ActionResult {
   revalidatePath("/app/hotels");
+  revalidatePath("/app/hotels/rooms");
   revalidatePath("/app");
   return { ok: true };
 }
@@ -149,17 +157,22 @@ export async function deleteRoom(id: string): Promise<ActionResult> {
   return done();
 }
 
-export async function generateRooms(hotelId: string): Promise<ActionResult> {
+export async function generateRooms(
+  hotelId: string,
+  opts: { typeId?: string; start?: string } = {},
+): Promise<ActionResult> {
   const ctx = await editor();
   if (!ctx || !z.uuid().safeParse(hotelId).success) return noPermission();
+  if (opts.typeId && !z.uuid().safeParse(opts.typeId).success) return noPermission();
   const wid = ctx.wedding.id;
 
-  const { data: types } = await ctx.sb
+  let typeQuery = ctx.sb
     .from("hotel_room_types")
     .select("id, name, count")
     .eq("hotel_id", hotelId)
-    .eq("wedding_id", wid)
-    .order("sort_order");
+    .eq("wedding_id", wid);
+  if (opts.typeId) typeQuery = typeQuery.eq("id", opts.typeId);
+  const { data: types } = await typeQuery.order("sort_order");
   if (!types?.length) return fail("generateRooms", "no room types");
 
   const { data: existing } = await ctx.sb
@@ -177,7 +190,7 @@ export async function generateRooms(hotelId: string): Promise<ActionResult> {
     sort_order: number;
   }[] = [];
   let sort = (existing?.length ?? 0);
-  let counter = 100;
+  const start = opts.start?.trim().slice(0, 30) || "100";
 
   for (const t of types) {
     const { count: existingOfType } = await ctx.sb
@@ -186,18 +199,16 @@ export async function generateRooms(hotelId: string): Promise<ActionResult> {
       .eq("hotel_id", hotelId)
       .eq("room_type_id", t.id)
       .eq("wedding_id", wid);
-    const needed = t.count - (existingOfType ?? 0);
-    for (let i = 0; i < needed; i++) {
-      while (usedNumbers.has(String(counter))) counter++;
+    const needed = Math.max(0, t.count - (existingOfType ?? 0));
+    for (const label of roomLabels(start, needed, usedNumbers)) {
       rows.push({
         wedding_id: wid,
         hotel_id: hotelId,
         room_type_id: t.id,
-        room_number: String(counter),
+        room_number: label,
         sort_order: sort++,
       });
-      usedNumbers.add(String(counter));
-      counter++;
+      usedNumbers.add(label);
     }
   }
 
@@ -205,6 +216,93 @@ export async function generateRooms(hotelId: string): Promise<ActionResult> {
     const { error } = await ctx.sb.from("hotel_rooms").insert(rows);
     if (error) return fail("generateRooms", error);
   }
+  return done();
+}
+
+/** "Add rooms" dialog: one room type for N identical shared rooms, then create them. */
+export async function addRoomsQuick(input: unknown): Promise<ActionResult<{ created: number }>> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const parsed = quickRoomsSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const v = parsed.data;
+
+  const { data: hotel } = await ctx.sb
+    .from("hotels")
+    .select("id")
+    .eq("id", v.hotelId)
+    .eq("wedding_id", ctx.wedding.id)
+    .maybeSingle();
+  if (!hotel) return noPermission();
+
+  const type = await saveRoomType(v.hotelId, {
+    name: v.typeName,
+    beds: v.beds,
+    maxGuests: v.perRoom,
+    hasCrib: false,
+    accessible: false,
+    pricePerNight: v.pricePerNight,
+    count: v.count,
+    notes: "",
+  });
+  if (!type.ok) return type;
+
+  const made = await generateRooms(v.hotelId, { typeId: type.data.id, start: v.start });
+  if (!made.ok) return made;
+  return { ok: true, data: { created: v.count } };
+}
+
+/** Nickname and per-room capacity, edited right on the board. */
+export async function updateRoomDetails(roomId: string, input: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx || !z.uuid().safeParse(roomId).success) return noPermission();
+  const parsed = roomDetailsSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const { error } = await ctx.sb
+    .from("hotel_rooms")
+    .update({ name: parsed.data.name || null, capacity: parsed.data.capacity })
+    .eq("id", roomId)
+    .eq("wedding_id", ctx.wedding.id);
+  if (error) return fail("updateRoomDetails", error);
+  return done();
+}
+
+/** Put `movingId` in `targetId`'s room; `targetId` takes the mover's old room (or no room). */
+export async function swapRoomGuests(movingId: string, targetId: string): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const ids = z.tuple([z.uuid(), z.uuid()]).safeParse([movingId, targetId]);
+  if (!ids.success || movingId === targetId) return noPermission();
+  const wid = ctx.wedding.id;
+
+  const { data: rows, error: readError } = await ctx.sb
+    .from("hotel_room_assignments")
+    .select("guest_id, room_id")
+    .eq("wedding_id", wid)
+    .in("guest_id", [movingId, targetId]);
+  if (readError) return fail("swapGuests", readError);
+  const target = rows?.find((r) => r.guest_id === targetId);
+  const moving = rows?.find((r) => r.guest_id === movingId);
+  if (!target) return fail("swapGuests", "target has no room");
+
+  const first = moving
+    ? await ctx.sb
+        .from("hotel_room_assignments")
+        .update({ room_id: moving.room_id })
+        .eq("guest_id", targetId)
+        .eq("wedding_id", wid)
+    : await ctx.sb
+        .from("hotel_room_assignments")
+        .delete()
+        .eq("guest_id", targetId)
+        .eq("wedding_id", wid);
+  if (first.error) return fail("swapGuests", first.error);
+
+  const { error } = await ctx.sb.from("hotel_room_assignments").upsert(
+    { wedding_id: wid, room_id: target.room_id, guest_id: movingId },
+    { onConflict: "guest_id" },
+  );
+  if (error) return fail("swapGuests", error);
   return done();
 }
 
