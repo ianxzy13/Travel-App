@@ -8,6 +8,8 @@ import { starterTexts } from "@/lib/i18n/defaults";
 import { localizeRsvp } from "@/lib/rsvp/localize";
 import { CODE_PATTERN, normalizeCode, type RsvpData, type RsvpExtras } from "@/lib/rsvp/types";
 import { getSiteUrl } from "@/lib/site-url";
+import { airportByCode } from "@/lib/places/airports";
+import { guessCountryFromLocation } from "@/lib/trip/country-info";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
 
@@ -76,8 +78,21 @@ export default async function RsvpPage({ params }: { params: Promise<{ code: str
       {data.invites.length === 0 ? (
         <p className="bg-card rounded-2xl border p-8 text-center">{t("nothingYet")}</p>
       ) : (
-        <RsvpExperience data={data} siteUrl={await getSiteUrl()} />
+        <RsvpExperience
+          data={data}
+          siteUrl={await getSiteUrl()}
+          destination={await weddingCountry(w.destination_airport, w.location)}
+        />
       )}
     </RsvpFrame>
   );
+}
+
+/** The wedding's country: from the destination airport, else from the location text. */
+async function weddingCountry(airport: string | null, location: string | null) {
+  if (airport) {
+    const a = await airportByCode(airport).catch(() => undefined);
+    if (a?.countryCode) return a.countryCode;
+  }
+  return guessCountryFromLocation(location);
 }

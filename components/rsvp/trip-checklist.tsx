@@ -2,23 +2,28 @@
 
 import { useState, useTransition } from "react";
 import { CheckSquare, ExternalLink, Square } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toggleChecklistItem } from "@/app/r/trip-actions";
 import type { RsvpData } from "@/lib/rsvp/types";
-import { filterChecklist, SLOVENIA_CHECKLIST, type ChecklistItem } from "@/lib/trip/checklist-data";
+import { buildChecklist, type ChecklistItem } from "@/lib/trip/checklist-data";
 
-export function TripChecklist({ data }: { data: RsvpData }) {
+export function TripChecklist({ data, destination }: { data: RsvpData; destination: string | null }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const t: (key: string, values?: Record<string, unknown>) => string = useTranslations("rsvp.trip") as any;
-  const country = data.household.country_code;
-
-  const items = filterChecklist(SLOVENIA_CHECKLIST, country);
+  const locale = useLocale();
+  const items = buildChecklist({
+    destination,
+    guestCountry: data.household.country_code,
+    timeZone: data.wedding.time_zone,
+    weddingDate: data.wedding.wedding_date,
+    locale,
+  });
   const doneMap: Record<string, boolean> = {};
   for (const c of data.checklist ?? []) doneMap[c.item_key] = c.done;
 
   const [checked, setChecked] = useState<Record<string, boolean>>(doneMap);
   const [pending, startTransition] = useTransition();
-  const doneCount = Object.values(checked).filter(Boolean).length;
+  const doneCount = items.filter((i) => checked[i.key]).length;
 
   if (items.length === 0) return null;
 
@@ -64,9 +69,9 @@ export function TripChecklist({ data }: { data: RsvpData }) {
                 )}
                 <div className="min-w-0 flex-1">
                   <p className={done ? "line-through opacity-60" : "font-medium"}>
-                    {t(item.titleKey)}
+                    {t(item.titleKey, item.values)}
                   </p>
-                  <p className="text-muted-foreground mt-0.5 text-sm">{t(item.descriptionKey)}</p>
+                  <p className="text-muted-foreground mt-0.5 text-sm">{t(item.descriptionKey, item.values)}</p>
                   {item.link && (
                     <a
                       href={item.link}

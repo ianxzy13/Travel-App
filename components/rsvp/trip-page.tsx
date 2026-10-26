@@ -24,6 +24,7 @@ import { YourTime } from "@/components/website/your-time";
 type Props = {
   data: RsvpData;
   siteUrl: string;
+  destination: string | null;
 };
 
 function calendarDownloadUrl(event: RsvpData["events"][number], tz: string | null): string {
@@ -37,7 +38,7 @@ function calendarDownloadUrl(event: RsvpData["events"][number], tz: string | nul
   return `/api/calendar?${params.toString()}`;
 }
 
-export function TripPage({ data, siteUrl }: Props) {
+export function TripPage({ data, siteUrl, destination }: Props) {
   const t = useTranslations("rsvp.trip");
   const locale = useLocale();
   const w = data.wedding;
@@ -227,7 +228,7 @@ export function TripPage({ data, siteUrl }: Props) {
       )}
 
       {/* Entry checklist */}
-      <TripChecklist data={data} />
+      <TripChecklist data={data} destination={destination} />
 
       {/* WhatsApp share */}
       <section className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
