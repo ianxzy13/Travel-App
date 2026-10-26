@@ -38,15 +38,22 @@ export function RsvpExperience({
   const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
 
   const anyAttending = Object.values(state.answers).some((a) => a.status === "attending");
+  // the couple's own texts (empty = the standard ones)
+  const welcome = data.wedding.rsvp_welcome?.trim() || null;
+  const thanksText = data.wedding.rsvp_thanks?.trim() || null;
+  const sorryText = data.wedding.rsvp_sorry?.trim() || t("missYouText", { couple });
   const showTravelPrompt = data.wedding.rsvp_ask_travel && anyAttending;
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <p className="font-serif text-3xl">{t("dear", { name: data.household.name })}</p>
+        {welcome && (view === "form" || view === "summary") && (
+          <p className="mx-auto mt-3 max-w-prose whitespace-pre-line">{welcome}</p>
+        )}
         {view === "form" && (
           <p className="text-muted-foreground mt-2">
-            {answered ? t("update") : t("invite")}
+            {answered ? t("update") : welcome ? "" : t("invite")}
             {deadline && ` ${t("replyBy", { date: deadline })}`}
           </p>
         )}
@@ -73,12 +80,13 @@ export function RsvpExperience({
             <h2 className="font-script mt-4 text-5xl font-normal">
               {anyAttending ? t("thanks") : t("missYouTitle")}
             </h2>
-            <p className="text-muted-foreground mt-2">
+            <p className="text-muted-foreground mt-2 whitespace-pre-line">
               {!anyAttending
-                ? t("missYouText", { couple })
-                : deadline
-                  ? t("thanksTextUntil", { couple, date: deadline })
-                  : t("thanksText", { couple })}
+                ? sorryText
+                : (thanksText ??
+                  (deadline
+                    ? t("thanksTextUntil", { couple, date: deadline })
+                    : t("thanksText", { couple })))}
             </p>
           </div>
           {showTravelPrompt && (
@@ -148,7 +156,7 @@ export function RsvpExperience({
             <div role="status" className="bg-card rounded-2xl border p-6 text-center shadow-sm">
               <Heart className="text-primary-ink mx-auto size-8" aria-hidden />
               <h2 className="mt-3 text-2xl">{t("missYouTitle")}</h2>
-              <p className="text-muted-foreground mt-1 text-sm">{t("missYouText", { couple })}</p>
+              <p className="text-muted-foreground mt-1 text-sm whitespace-pre-line">{sorryText}</p>
             </div>
           )}
           {answered && anyAttending && (

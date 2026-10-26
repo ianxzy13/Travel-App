@@ -48,6 +48,11 @@ export type WeddingRow = Timestamps & {
   guest_countries: string[];
   find_seat_enabled: boolean;
   photos_enabled: boolean;
+  /** the couple's RSVP page: cover photo (storage path) and their own texts */
+  rsvp_cover_path: string | null;
+  rsvp_welcome: string | null;
+  rsvp_thanks: string | null;
+  rsvp_sorry: string | null;
   anonymised_at: string | null;
 };
 

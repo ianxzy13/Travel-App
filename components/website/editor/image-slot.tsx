@@ -14,7 +14,7 @@ const MAX_BYTES = 10 * 1024 * 1024;
 export const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 /**
- * Uploads a website picture to <wedding>/website/… and returns its path plus a
+ * Uploads a picture to <wedding>/<folder>/… and returns its path plus a
  * local preview link. Pictures only become visible to guests once the site
  * is published.
  */
@@ -22,6 +22,7 @@ export async function uploadSiteImage(
   weddingId: string,
   file: File,
   errors: { wrongType: string; tooBig: string; failed: string },
+  folder: "website" | "rsvp" = "website",
 ) {
   if (!IMAGE_TYPES.includes(file.type)) {
     toast.error(errors.wrongType);
@@ -32,7 +33,7 @@ export async function uploadSiteImage(
     return null;
   }
   const safeName = file.name.replace(/[^\w.\-]+/g, "_").slice(-60);
-  const path = `${weddingId}/website/${crypto.randomUUID()}-${safeName}`;
+  const path = `${weddingId}/${folder}/${crypto.randomUUID()}-${safeName}`;
   const { error } = await createClient()
     .storage.from(BUCKET)
     .upload(path, file, { contentType: file.type, upsert: false });
@@ -59,6 +60,7 @@ export function ImageSlot({
   onChange,
   aspect = "aspect-[3/2]",
   disabled,
+  folder = "website",
 }: {
   weddingId: string;
   path: string | null;
@@ -67,6 +69,8 @@ export function ImageSlot({
   onChange: (next: { path: string; url: string } | null) => void;
   aspect?: string;
   disabled?: boolean;
+  /** storage folder: website pictures, or the RSVP page cover photo */
+  folder?: "website" | "rsvp";
 }) {
   const t = useTranslations("websiteEditor.image");
   const errors = useImageErrors();
@@ -75,7 +79,7 @@ export function ImageSlot({
 
   async function pick(file: File) {
     setBusy(true);
-    const r = await uploadSiteImage(weddingId, file, errors);
+    const r = await uploadSiteImage(weddingId, file, errors, folder);
     setBusy(false);
     if (r) onChange(r);
   }

@@ -170,6 +170,25 @@
     "shareText": "Hi {name}! Please RSVP for {couple}'s wedding here: {link}",
     "shareEmailSubject": "You're invited to {couple}'s wedding!",
     "textMessage": "Text message",
-    "emailLink": "Email"
+    "emailLink": "Email",
+    "page": {
+      "saved": "RSVP page saved",
+      "title": "Your RSVP page",
+      "description": "Make the page your guests see your own. Leave a box empty to use the standard text.",
+      "cover": "Cover photo",
+      "coverAdd": "Add a cover photo",
+      "coverHint": "Shown at the top of every guest’s RSVP page. JPG, PNG or WebP, up to 10 MB.",
+      "welcome": "Welcome message",
+      "welcomeHint": "Shown under “Dear …,” before guests answer.",
+      "welcomePlaceholder": "We can’t wait to celebrate with you! Please let us know if you can come.",
+      "thanks": "Thank-you message",
+      "thanksHint": "Shown after a guest says they’re coming.",
+      "thanksPlaceholder": "Thank you! We’re so happy you’ll be there.",
+      "sorry": "Message when someone can’t come",
+      "sorryHint": "Shown after a guest says no for everyone in their household.",
+      "sorryPlaceholder": "We’ll miss you! Thank you for letting us know.",
+      "translate": "RSVP page messages",
+      "save": "Save"
+    }
   }
 }

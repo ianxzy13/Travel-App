@@ -15,6 +15,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import {
   mealOptionSchema,
+  rsvpPageSchema,
   rsvpPayloadSchema,
   rsvpSettingsSchema,
   sendEmailSchema,
@@ -53,6 +54,31 @@ export async function updateRsvpSettings(input: unknown): Promise<ActionResult> 
     })
     .eq("id", ctx.wedding.id);
   if (error) return fail("updateRsvpSettings", error);
+  return done();
+}
+
+/** The couple's RSVP page: cover photo and their own welcome / thank-you / sorry texts. */
+export async function updateRsvpPage(input: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const parsed = rsvpPageSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const v = parsed.data;
+  const cover = v.coverPath || null;
+  // only a photo uploaded into this wedding's RSVP folder
+  if (cover && !cover.startsWith(`${ctx.wedding.id}/rsvp/`)) return noPermission();
+  const { error } = await ctx.supabase
+    .from("weddings")
+    .update({
+      rsvp_cover_path: cover,
+      rsvp_welcome: v.welcome || null,
+      rsvp_thanks: v.thanks || null,
+      rsvp_sorry: v.sorry || null,
+    })
+    .eq("id", ctx.wedding.id);
+  if (error) return fail("updateRsvpPage", error);
+  const old = ctx.wedding.rsvp_cover_path;
+  if (old && old !== cover) await ctx.supabase.storage.from("wedding-files").remove([old]);
   return done();
 }
 

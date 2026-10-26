@@ -4,6 +4,7 @@ import { RsvpDashboard } from "@/components/rsvp-admin/rsvp-dashboard";
 import { isEmailConfigured } from "@/lib/email/resend";
 import { isSmsConfigured } from "@/lib/sms/twilio";
 import { loadRsvpDashboard } from "@/lib/rsvp/load";
+import { signPaths } from "@/lib/inspiration/load";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import { canEdit, coupleName, requireWedding } from "@/lib/wedding";
@@ -19,7 +20,10 @@ export default async function RsvpPage({
 }) {
   const { wedding, role } = await requireWedding();
   const { household } = await searchParams;
-  const data = await loadRsvpDashboard(await createClient(), wedding);
+  const sb = await createClient();
+  const data = await loadRsvpDashboard(sb, wedding);
+  const cover = wedding.rsvp_cover_path ?? null;
+  const coverUrl = cover ? ((await signPaths(sb, [cover])).get(cover) ?? null) : null;
 
   return (
     <RsvpDashboard
@@ -33,6 +37,17 @@ export default async function RsvpPage({
         askTravel: wedding.rsvp_ask_travel,
         notifyEmail: wedding.rsvp_notify_email,
         findSeatEnabled: wedding.find_seat_enabled,
+      }}
+      rsvpPage={{
+        weddingId: wedding.id,
+        values: {
+          coverPath: cover ?? "",
+          welcome: wedding.rsvp_welcome ?? "",
+          thanks: wedding.rsvp_thanks ?? "",
+          sorry: wedding.rsvp_sorry ?? "",
+        },
+        coverUrl,
+        translations: wedding.translations ?? {},
       }}
       siteUrl={await getSiteUrl()}
       slug={wedding.slug}

@@ -105,7 +105,13 @@ export function localized<T extends Obj>(
 
 export const EVENT_TEXT_FIELDS = ["name", "venue_name", "dress_code", "description"] as const;
 export const MEAL_TEXT_FIELDS = ["name", "description"] as const;
-export const WEDDING_TEXT_FIELDS = ["location", "rsvp_contact"] as const;
+export const WEDDING_TEXT_FIELDS = [
+  "location",
+  "rsvp_contact",
+  "rsvp_welcome",
+  "rsvp_thanks",
+  "rsvp_sorry",
+] as const;
 
 /** Keeps only the texts a section can translate (strings, limited length); anything else is dropped. */
 export function sanitizeTranslation(kind: SiteSectionKind, raw: unknown, max = 3000): Obj {

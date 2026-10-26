@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { rsvpSettingsSchema, type RsvpSettingsValues } from "@/lib/validation/rsvp";
+import { RsvpPageCard, type RsvpPageSetup } from "./rsvp-page-card";
 
 type Meal = { id: string; name: string; description: string | null; translations?: Translations };
 
@@ -34,7 +35,10 @@ export function RsvpSetup({
   emailConfigured,
   readOnly,
   languages = [],
+  page,
 }: {
+  /** the couple's RSVP page photo and texts */
+  page?: RsvpPageSetup;
   /** the wedding's languages, main first */
   languages?: string[];
   settings: RsvpSettingsValues;
@@ -47,11 +51,14 @@ export function RsvpSetup({
 }) {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <SettingsCard
-        settings={settings}
-        readOnly={readOnly}
-        canNotify={adminConfigured && emailConfigured}
-      />
+      <div className="space-y-6">
+        <SettingsCard
+          settings={settings}
+          readOnly={readOnly}
+          canNotify={adminConfigured && emailConfigured}
+        />
+        {page && <RsvpPageCard page={page} languages={languages} readOnly={readOnly} />}
+      </div>
       <div className="space-y-6">
         <MealsCard mealOptions={mealOptions} readOnly={readOnly} languages={languages} />
         <MealEventsCard events={events} readOnly={readOnly} hasMeals={mealOptions.length > 0} />

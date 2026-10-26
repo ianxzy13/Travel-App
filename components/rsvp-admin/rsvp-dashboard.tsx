@@ -39,6 +39,7 @@ import type { DashboardHousehold, RsvpDashboardData } from "@/lib/rsvp/load";
 import { cn } from "@/lib/utils";
 import type { RsvpSettingsValues } from "@/lib/validation/rsvp";
 import { RecordReplyDialog } from "./record-reply-dialog";
+import type { RsvpPageSetup } from "./rsvp-page-card";
 import { RsvpSetup } from "./rsvp-setup";
 import { SendInviteDialog } from "./send-invite-dialog";
 
@@ -49,6 +50,8 @@ type Props = {
   /** the wedding's languages, main first */
   languages: string[];
   settings: RsvpSettingsValues;
+  /** the couple's RSVP page photo and texts */
+  rsvpPage?: RsvpPageSetup;
   siteUrl: string;
   slug: string;
   couple: string;
@@ -365,6 +368,7 @@ export function RsvpDashboard(props: Props) {
             emailConfigured={emailConfigured}
             readOnly={!canEdit}
             languages={props.languages}
+            page={props.rsvpPage}
           />
         </TabsContent>
       </Tabs>
