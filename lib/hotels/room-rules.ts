@@ -132,13 +132,13 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
             .filter((r) => r.type === "keep_together")
             .map((r) => `${r.guestA}:${r.guestB}`),
         );
-        const allConnected = roomGuests.every((g, i) =>
+        const allConnected = roomGuests.every((g) =>
           roomGuests.some(
-            (other, j) =>
-              i === j ||
-              g.householdId === other.householdId ||
-              keepTogetherPairs.has(`${g.id}:${other.id}`) ||
-              keepTogetherPairs.has(`${other.id}:${g.id}`),
+            (other) =>
+              other.id !== g.id &&
+              (g.householdId === other.householdId ||
+                keepTogetherPairs.has(`${g.id}:${other.id}`) ||
+                keepTogetherPairs.has(`${other.id}:${g.id}`)),
           ),
         );
         if (!allConnected) {

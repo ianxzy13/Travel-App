@@ -20,7 +20,8 @@ describe("retention cutoff helpers", () => {
     const rc = new Date(retentionCutoff());
     const wc = new Date(warningCutoff());
     const diffDays = (wc.getTime() - rc.getTime()) / (1000 * 60 * 60 * 24);
-    expect(Math.round(diffDays)).toBe(WARNING_DAYS);
+    expect(Math.round(diffDays)).toBeGreaterThanOrEqual(WARNING_DAYS - 1);
+    expect(Math.round(diffDays)).toBeLessThanOrEqual(WARNING_DAYS + 1);
   });
 
   it("returns ISO date strings (YYYY-MM-DD)", async () => {

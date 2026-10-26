@@ -4,6 +4,7 @@ import {
   Camera,
   ClipboardList,
   Clock,
+  DoorOpen,
   Gift,
   Globe,
   Images,
@@ -34,6 +35,7 @@ export type NavKey =
   | "guests"
   | "rsvp"
   | "seating"
+  | "roomSharing"
   | "venues"
   | "hotels"
   | "travel"
@@ -66,6 +68,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
       { href: "/app/guests", key: "guests", icon: Users },
       { href: "/app/rsvp", key: "rsvp", icon: MailCheck },
       { href: "/app/seating", key: "seating", icon: Armchair },
+      { href: "/app/hotels/rooms", key: "roomSharing", icon: DoorOpen },
     ],
   },
   {

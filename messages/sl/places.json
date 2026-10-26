@@ -247,7 +247,7 @@
       "guests": "gostov"
     },
     "board": {
-      "title": "Razporeditev sob",
+      "title": "Sobivanje",
       "guests": "Gostje",
       "unassigned": "{count, plural, one {# nedodeljen} two {# nedodeljena} few {# nedodeljeni} other {# nedodeljenih}}",
       "search": "Išči goste…",
@@ -255,12 +255,15 @@
         "all": "Vsi",
         "unassigned": "Nedodeljeni",
         "kids": "Otroci",
-        "accessible": "Dostopnost"
+        "accessible": "Dostopnost",
+        "attending": "Prisotni",
+        "notReplied": "Niso odgovorili",
+        "everyone": "Vsi gostje"
       },
       "dropToUnassign": "Povlecite sem za odstranitev",
       "allHotels": "Vsi hoteli",
       "roomCount": "{count, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}}",
-      "emptyRoom": "Povlecite gosta sem",
+      "emptyRoom": "Povlecite ali tapnite gosta, nato tapnite sobo",
       "assigned": "Gost dodeljen v sobo",
       "removed": "Gost odstranjen iz sobe",
       "roomFull": "Ta soba je polna",
@@ -271,7 +274,12 @@
       "noRoomsAvailable": "Ni prostih sob za zapolnitev",
       "costSummary": "Pregled stroškov",
       "costPerNight": "{amount} / noč (samo zasedene sobe)",
-      "occupancy": "{occupied} od {total} sob v uporabi · {guests, plural, one {# gost} two {# gosta} few {# gostje} other {# gostov}}"
+      "occupancy": "{occupied} od {total} sob v uporabi · {guests, plural, one {# gost} two {# gosta} few {# gostje} other {# gostov}}",
+      "tapRoom": "Tapnite sobo za namestitev gosta {name}",
+      "prefShare": "Želi sobivati z: {name}",
+      "prefAvoid": "Raje ne bi sobival z: {name}",
+      "strangerHint": "Gostje iz različnih skupin si delijo sobo — preverite, ali jim to ustreza",
+      "overBeds": "Več ljudi kot postelj!"
     },
     "export": {
       "hotel": "Hotel",

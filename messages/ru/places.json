@@ -234,7 +234,7 @@
       "guests": "guests"
     },
     "board": {
-      "title": "Room Assignments",
+      "title": "Room Sharing",
       "guests": "Guests",
       "unassigned": "{count, plural, one {# unassigned} other {# unassigned}}",
       "search": "Search guests…",
@@ -242,12 +242,15 @@
         "all": "All",
         "unassigned": "Unassigned",
         "kids": "Kids",
-        "accessible": "Accessible"
+        "accessible": "Accessible",
+        "attending": "Attending",
+        "notReplied": "Not replied",
+        "everyone": "Everyone"
       },
       "dropToUnassign": "Drop here to unassign",
       "allHotels": "All hotels",
       "roomCount": "{count, plural, one {# room} other {# rooms}}",
-      "emptyRoom": "Drag a guest here",
+      "emptyRoom": "Drag or tap a guest, then tap a room",
       "assigned": "Guest assigned to room",
       "removed": "Guest removed from room",
       "roomFull": "This room is full",
@@ -258,7 +261,12 @@
       "noRoomsAvailable": "No available rooms to fill",
       "costSummary": "Cost summary",
       "costPerNight": "{amount} / night (occupied rooms only)",
-      "occupancy": "{occupied} of {total} rooms used · {guests, plural, one {# guest} other {# guests}}"
+      "occupancy": "{occupied} of {total} rooms used · {guests, plural, one {# guest} other {# guests}}",
+      "tapRoom": "Tap a room to place {name}",
+      "prefShare": "Wants to share with: {name}",
+      "prefAvoid": "Prefers not to share with: {name}",
+      "strangerHint": "Guests from different groups sharing — check if they are OK with it",
+      "overBeds": "More people than beds!"
     },
     "export": {
       "hotel": "Hotel",

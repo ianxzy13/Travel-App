@@ -56,21 +56,42 @@ export default async function HotelRooms() {
     ),
   ]);
 
-  const guestRows = await fetchAll((f, t) =>
-    sb
-      .from("guests")
-      .select("id, age_group, household_id, accessibility")
-      .eq("wedding_id", wedding.id)
-      .range(f, t),
-  );
+  const [guestRows, allRsvps] = await Promise.all([
+    fetchAll((f, t) =>
+      sb
+        .from("guests")
+        .select("id, age_group, household_id, accessibility, wants_hotel_room, room_pref_share, room_pref_avoid")
+        .eq("wedding_id", wedding.id)
+        .range(f, t),
+    ),
+    fetchAll((f, t) =>
+      sb
+        .from("rsvp_responses")
+        .select("guest_id, status")
+        .eq("wedding_id", wedding.id)
+        .range(f, t),
+    ),
+  ]);
   const guestExtra = new Map(guestRows.map((g) => [g.id, g]));
+
+  const rsvpMap = new Map<string, string>();
+  for (const r of allRsvps) {
+    const prev = rsvpMap.get(r.guest_id);
+    if (!prev || r.status === "attending") rsvpMap.set(r.guest_id, r.status);
+  }
 
   const boardGuests = pickerGuests.map((pg) => {
     const extra = guestExtra.get(pg.id);
+    const status = rsvpMap.get(pg.id);
     return {
       ...pg,
       ageGroup: extra?.age_group ?? "adult",
       householdId: extra?.household_id ?? pg.householdId,
+      rsvpStatus: (status === "attending" ? "attending" : status ? "declined" : "not_replied") as
+        "attending" | "declined" | "not_replied",
+      wantsHotelRoom: extra?.wants_hotel_room as string | null ?? null,
+      roomPrefShare: extra?.room_pref_share as string | null ?? null,
+      roomPrefAvoid: extra?.room_pref_avoid as string | null ?? null,
     };
   });
 
