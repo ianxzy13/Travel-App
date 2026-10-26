@@ -110,7 +110,7 @@ export async function saveMealTranslations(mealId: string, input: unknown): Prom
 export async function saveWeddingTranslations(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
   if (!canManage(role)) return noPermission();
-  const parsed = translationsSchema(WEDDING_TEXT_FIELDS, 1000).safeParse(input);
+  const parsed = translationsSchema(WEDDING_TEXT_FIELDS, 4000).safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();
   const { error } = await sb

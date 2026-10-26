@@ -44,7 +44,7 @@ export type RsvpSettingsValues = z.infer<typeof rsvpSettingsSchema>;
 /** The couple's own RSVP page: cover photo and messages (empty = the standard text). */
 export const rsvpPageSchema = z.object({
   coverPath: z.string().max(300),
-  welcome: z.string().trim().max(1000, v("tooLong", 1000)),
+  welcome: z.string().trim().max(4000, v("tooLong", 4000)),
   thanks: z.string().trim().max(1000, v("tooLong", 1000)),
   sorry: z.string().trim().max(1000, v("tooLong", 1000)),
 });
