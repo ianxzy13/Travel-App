@@ -64,8 +64,8 @@ export function RsvpPageCard({
       {(aria) => (
         <Textarea
           {...aria}
-          rows={3}
-          maxLength={1000}
+          rows={name === "welcome" ? 6 : 3}
+          maxLength={name === "welcome" ? 4000 : 1000}
           placeholder={t(`${name}Placeholder`)}
           disabled={readOnly}
           {...form.register(name)}
@@ -108,7 +108,7 @@ export function RsvpPageCard({
                 <TranslationsDialog
                   title={t("translate")}
                   fields={[
-                    { key: "rsvp_welcome", label: t("welcome"), multiline: true, max: 1000 },
+                    { key: "rsvp_welcome", label: t("welcome"), multiline: true, max: 4000 },
                     { key: "rsvp_thanks", label: t("thanks"), multiline: true, max: 1000 },
                     { key: "rsvp_sorry", label: t("sorry"), multiline: true, max: 1000 },
                   ]}
