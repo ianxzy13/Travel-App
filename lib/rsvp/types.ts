@@ -18,6 +18,11 @@ export type RsvpData = {
     destination_airport: string | null;
     time_zone: string | null;
     find_seat_enabled: boolean;
+    /** the couple's own RSVP page photo and texts (missing on older databases) */
+    rsvp_cover_path?: string | null;
+    rsvp_welcome?: string | null;
+    rsvp_thanks?: string | null;
+    rsvp_sorry?: string | null;
   };
   household: {
     id: string;

@@ -106,11 +106,11 @@ export async function saveMealTranslations(mealId: string, input: unknown): Prom
   return { ok: true };
 }
 
-/** Per-language location and RSVP contact line. */
+/** Per-language location, RSVP contact line and RSVP page messages. */
 export async function saveWeddingTranslations(input: unknown): Promise<ActionResult> {
   const { wedding, role } = await requireWedding();
   if (!canManage(role)) return noPermission();
-  const parsed = translationsSchema(WEDDING_TEXT_FIELDS, 300).safeParse(input);
+  const parsed = translationsSchema(WEDDING_TEXT_FIELDS, 1000).safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const sb = await createClient();
   const { error } = await sb

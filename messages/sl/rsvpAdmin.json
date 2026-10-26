@@ -170,6 +170,25 @@
       "emailResult": "{sent, plural, one {# e-pošta poslana} two {# e-pošti poslani} few {# e-pošte poslane} other {# e-pošt poslanih}} ({failed} neuspešno)",
       "smsSent": "{sent, plural, one {# SMS poslan} two {# SMS-a poslana} few {# SMS-i poslani} other {# SMS-ov poslanih}}",
       "smsResult": "{sent, plural, one {# SMS poslan} two {# SMS-a poslana} few {# SMS-i poslani} other {# SMS-ov poslanih}} ({failed} neuspešno)"
+    },
+    "page": {
+      "saved": "Stran za potrditev shranjena",
+      "title": "Vaša stran za potrditev udeležbe",
+      "description": "Prilagodite stran, ki jo vidijo vaši gostje. Če polje pustite prazno, se pokaže običajno besedilo.",
+      "cover": "Naslovna fotografija",
+      "coverAdd": "Dodaj naslovno fotografijo",
+      "coverHint": "Prikaže se na vrhu strani za potrditev pri vsakem gostu. JPG, PNG ali WebP, do 10 MB.",
+      "welcome": "Pozdravno sporočilo",
+      "welcomeHint": "Prikaže se pod »Dragi …,«, preden gostje odgovorijo.",
+      "welcomePlaceholder": "Komaj čakava, da praznujemo skupaj! Prosiva, sporočite nama, ali pridete.",
+      "thanks": "Zahvala",
+      "thanksHint": "Prikaže se, ko gost potrdi, da pride.",
+      "thanksPlaceholder": "Hvala! Zelo sva vesela, da boste z nama.",
+      "sorry": "Sporočilo, ko kdo ne more priti",
+      "sorryHint": "Prikaže se, ko gost odgovori ne za vse v svojem gospodinjstvu.",
+      "sorryPlaceholder": "Pogrešala vas bova! Hvala, da ste nama sporočili.",
+      "translate": "Sporočila na strani za potrditev",
+      "save": "Shrani"
     }
   }
 }

@@ -11,8 +11,11 @@ export async function RsvpFrame({
   location,
   languages,
   code,
+  cover,
   children,
 }: {
+  /** the couple's cover photo (temporary link) */
+  cover?: string | null;
   accent?: Accent;
   couple?: string;
   date?: string | null;
@@ -34,7 +37,15 @@ export async function RsvpFrame({
       )}
       <main className="relative mx-auto max-w-2xl px-4 pt-20 pb-20 sm:pt-28">
         {couple && (
-          <header className="bg-card mb-12 rounded-md border px-6 py-12 text-center sm:px-12">
+          <header className="bg-card mb-12 overflow-hidden rounded-md border px-6 py-12 text-center sm:px-12">
+            {cover && (
+              // eslint-disable-next-line @next/next/no-img-element -- temporary signed link
+              <img
+                src={cover}
+                alt=""
+                className="-mx-6 -mt-12 mb-10 aspect-[2/1] w-[calc(100%+3rem)] max-w-none object-cover sm:-mx-12 sm:w-[calc(100%+6rem)]"
+              />
+            )}
             <p className="eyebrow text-primary-ink">{t("weddingOf")}</p>
             <h1 className="font-script mt-4 text-6xl leading-tight font-normal sm:text-7xl">
               {couple}

@@ -68,6 +68,7 @@ export default async function RsvpPage({ params }: { params: Promise<{ code: str
   const w = data.wedding;
   return (
     <RsvpFrame
+      cover={await coverUrl(w.rsvp_cover_path)}
       accent={w.accent}
       couple={`${w.partner_a_name} & ${w.partner_b_name}`}
       date={w.wedding_date}
@@ -86,6 +87,15 @@ export default async function RsvpPage({ params }: { params: Promise<{ code: str
       )}
     </RsvpFrame>
   );
+}
+
+/** A temporary link to the couple's RSVP cover photo (guests may view only that one). */
+async function coverUrl(path: string | null | undefined) {
+  if (!path) return null;
+  const { data } = await (await createClient()).storage
+    .from("wedding-files")
+    .createSignedUrl(path, 3600);
+  return data?.signedUrl ?? null;
 }
 
 /** The wedding's country: from the destination airport, else from the location text. */
