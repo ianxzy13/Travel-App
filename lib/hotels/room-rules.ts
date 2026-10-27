@@ -1,4 +1,5 @@
 import type { HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow } from "../database.types";
+import { aloneNights, sameNights, type Stay } from "./nights";
 import { bedSpots, roomCapacity, roomTitle } from "./room-sharing";
 
 export type RoomWarning = {
@@ -6,6 +7,8 @@ export type RoomWarning = {
   kind: WarningKind;
   message: string;
   guestIds?: string[];
+  /** night_mismatch: nights when only one roommate is there */
+  aloneNights?: number;
 };
 
 export type WarningKind =
@@ -41,6 +44,11 @@ export type RuleInput = {
   relationships: Relationship[];
   attendingGuestIds: Set<string>;
   declinedGuestIds?: Set<string>;
+  /**
+   * Each guest's real stay at the room's hotel (own dates or the booking).
+   * When given, it replaces the check-in/check-out saved on assignments.
+   */
+  stayOf?: (guestId: string, hotelId: string) => Stay | null;
 };
 
 export function checkRoomRules(input: RuleInput): RoomWarning[] {
@@ -97,9 +105,7 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
 
     // Child without guardian
     const roomGuests = ra.map((a) => guests.get(a.guest_id)).filter(Boolean) as RoomGuest[];
-    const children = roomGuests.filter(
-      (g) => g.ageGroup === "child" || g.ageGroup === "infant",
-    );
+    const children = roomGuests.filter((g) => g.ageGroup === "child" || g.ageGroup === "infant");
     const adults = roomGuests.filter((g) => g.ageGroup === "adult");
     if (children.length > 0 && adults.length === 0) {
       warnings.push({
@@ -128,7 +134,22 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
     }
 
     // Night mismatch
-    const dates = ra.filter((a) => a.check_in || a.check_out);
+    if (input.stayOf && ra.length > 1) {
+      const stays = ra.map((a) => input.stayOf!(a.guest_id, room.hotel_id));
+      if (stays.some((s) => !sameNights(s, stays[0]))) {
+        const alone = aloneNights(stays);
+        warnings.push({
+          roomId: room.id,
+          kind: "night_mismatch",
+          message: alone
+            ? `Roommates in ${label} have different dates; one person is alone for ${alone} night(s).`
+            : `Roommates in ${label} have different dates.`,
+          guestIds: ra.map((a) => a.guest_id),
+          aloneNights: alone,
+        });
+      }
+    }
+    const dates = input.stayOf ? [] : ra.filter((a) => a.check_in || a.check_out);
     if (dates.length > 1) {
       const checkIns = new Set(dates.map((a) => a.check_in).filter(Boolean));
       const checkOuts = new Set(dates.map((a) => a.check_out).filter(Boolean));

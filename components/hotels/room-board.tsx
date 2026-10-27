@@ -1,6 +1,14 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState, useTransition } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import {
   DndContext,
   DragOverlay,
@@ -18,6 +26,7 @@ import {
   ArrowLeftRight,
   Baby,
   BedDouble,
+  CalendarClock,
   Download,
   Loader2,
   Lock,
@@ -33,7 +42,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   addRoomsQuick,
@@ -95,7 +104,11 @@ import {
   type RsvpFilter,
   type RsvpStatus,
 } from "@/lib/hotels/room-sharing";
+import { effectiveStay, sameNights, type Stay } from "@/lib/hotels/nights";
+import { bookedStay } from "@/lib/hotels/stays";
+import { fmtDateRange } from "@/lib/i18n/format";
 import { cn } from "@/lib/utils";
+import { StayDateDialog } from "./stay-date-dialog";
 
 type RoomTypeItem = Omit<HotelRoomTypeRow, "price_per_night"> & {
   price_per_night: number | null;
@@ -108,6 +121,9 @@ export type BoardGuest = PickerGuest & {
   roomPrefShare: string | null;
   roomPrefAvoid: string | null;
   group: FriendGroup;
+  /** own arrival / departure; null = the hotel's booked dates */
+  stayFrom: string | null;
+  stayTo: string | null;
 };
 
 type Relationship = {
@@ -116,7 +132,19 @@ type Relationship = {
   type: "keep_together" | "keep_apart";
 };
 
-type Hotel = { id: string; name: string; price_per_night: number | null };
+type Hotel = {
+  id: string;
+  name: string;
+  price_per_night: number | null;
+  booked_from: string | null;
+  booked_to: string | null;
+};
+
+/** Guests' dates on chips: the label when they differ from the booking, and the editor. */
+const StayContext = createContext<{
+  label: (guestId: string, hotelId: string | null) => string | null;
+  edit: ((guestId: string, hotelId: string | null) => void) | null;
+}>({ label: () => null, edit: null });
 
 type Props = {
   hotels: Hotel[];
@@ -187,13 +215,15 @@ export function RoomBoard({
   const [search, setSearch] = useState("");
   const [hotelFilter, setHotelFilter] = useState<string>("all");
   const [rsvpFilter, setRsvpFilter] = useState<RsvpFilter>("planning");
-  const [showFilter, setShowFilter] = useState<"all" | "unassigned" | "kids" | "accessible">(
-    "all",
-  );
+  const [showFilter, setShowFilter] = useState<"all" | "unassigned" | "kids" | "accessible">("all");
   const [selected, setSelected] = useState<string | null>(null);
   const [mixedHints, setMixedHints] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
   const [swap, setSwap] = useState<{ guestId: string; roomId: string } | null>(null);
+  const [editStay, setEditStay] = useState<{ guestId: string; hotelId: string | null } | null>(
+    null,
+  );
+  const locale = useLocale();
   const lastDrag = useRef(0);
 
   // Mouse only: on phones you tap a guest, then tap a room.
@@ -202,6 +232,17 @@ export function RoomBoard({
   const typeMap = useMemo(() => new Map(roomTypes.map((rt) => [rt.id, rt])), [roomTypes]);
   const guestMap = useMemo(() => new Map(guests.map((g) => [g.id, g])), [guests]);
   const hotelName = useMemo(() => new Map(hotels.map((h) => [h.id, h.name])), [hotels]);
+  const bookedOf = useMemo(() => new Map(hotels.map((h) => [h.id, bookedStay(h)])), [hotels]);
+  // Guests without a room are measured against the first hotel with dates.
+  const mainHotel = hotels.find((h) => bookedOf.get(h.id))?.id ?? hotels[0]?.id ?? null;
+  const stayOf = useCallback(
+    (guestId: string, hotelId: string | null): Stay | null => {
+      const g = guestMap.get(guestId);
+      const booked = bookedOf.get(hotelId ?? mainHotel ?? "") ?? null;
+      return g ? effectiveStay({ from: g.stayFrom, to: g.stayTo }, booked) : booked;
+    },
+    [guestMap, bookedOf, mainHotel],
+  );
 
   const assignmentsByRoom = useMemo(() => {
     const map = new Map<string, HotelRoomAssignmentRow[]>();
@@ -239,10 +280,31 @@ export function RoomBoard({
       assignments: roomAssignments,
       guests: ruleGuests,
       relationships,
-      attendingGuestIds: new Set(guests.filter((g) => g.rsvpStatus === "attending").map((g) => g.id)),
+      attendingGuestIds: new Set(
+        guests.filter((g) => g.rsvpStatus === "attending").map((g) => g.id),
+      ),
       declinedGuestIds: new Set(guests.filter((g) => g.rsvpStatus === "declined").map((g) => g.id)),
+      stayOf,
     });
-  }, [rooms, roomTypes, roomAssignments, guests, relationships]);
+  }, [rooms, roomTypes, roomAssignments, guests, relationships, stayOf]);
+  const roomHotel = useMemo(() => new Map(rooms.map((r) => [r.id, r.hotel_id])), [rooms]);
+  const stayCtx = useMemo(
+    () => ({
+      label: (guestId: string, hotelId: string | null) => {
+        const g = guestMap.get(guestId);
+        if (!g || (!g.stayFrom && !g.stayTo)) return null;
+        const hid =
+          hotelId ?? (roomOf.get(guestId) ? roomHotel.get(roomOf.get(guestId)!) : null) ?? null;
+        const stay = stayOf(guestId, hid);
+        const booked = bookedOf.get(hid ?? mainHotel ?? "") ?? null;
+        return stay && !sameNights(stay, booked) ? fmtDateRange(stay.from, stay.to, locale) : null;
+      },
+      edit: canEdit
+        ? (guestId: string, hotelId: string | null) => setEditStay({ guestId, hotelId })
+        : null,
+    }),
+    [guestMap, roomOf, roomHotel, stayOf, bookedOf, mainHotel, locale, canEdit],
+  );
 
   const warningsByRoom = useMemo(() => {
     const map = new Map<string, RoomWarning[]>();
@@ -311,8 +373,7 @@ export function RoomBoard({
         return;
       }
       run(
-        () =>
-          assignGuestToRoom({ roomId, guestId, checkIn: "", checkOut: "", needsCrib: false }),
+        () => assignGuestToRoom({ roomId, guestId, checkIn: "", checkOut: "", needsCrib: false }),
         t("board.assigned"),
       );
     },
@@ -402,7 +463,11 @@ export function RoomBoard({
   if (rooms.length === 0) {
     return (
       <>
-        <EmptyState hasHotels={hotels.length > 0} canEdit={canEdit} onAdd={() => setAddOpen(true)} />
+        <EmptyState
+          hasHotels={hotels.length > 0}
+          canEdit={canEdit}
+          onAdd={() => setAddOpen(true)}
+        />
         {addDialog}
       </>
     );
@@ -413,252 +478,281 @@ export function RoomBoard({
   const swapGuest = swap ? guestMap.get(swap.guestId) : null;
   const swapFrom = swap ? rooms.find((r) => r.id === roomOf.get(swap.guestId)) : null;
 
+  const editGuest = editStay ? guestMap.get(editStay.guestId) : null;
+
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={pointerWithin}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-    >
-      <div className="flex min-h-0 flex-1 flex-col gap-4 md:flex-row">
-        {/* Guests: a top section on phones, a sidebar on desktop */}
-        <div className="bg-card flex max-h-[45vh] w-full shrink-0 flex-col gap-3 overflow-hidden rounded-xl border p-3 md:max-h-none md:w-72">
-          <div className="flex items-baseline justify-between">
-            <h2 className="font-serif text-2xl">{t("board.guests")}</h2>
-            <span className="text-muted-foreground text-xs" aria-live="polite">
-              {t("board.unassigned", { count: unplacedCount })}
-            </span>
-          </div>
+    <StayContext.Provider value={stayCtx}>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={pointerWithin}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+      >
+        <div className="flex min-h-0 flex-1 flex-col gap-4 md:flex-row">
+          {/* Guests: a top section on phones, a sidebar on desktop */}
+          <div className="bg-card flex max-h-[45vh] w-full shrink-0 flex-col gap-3 overflow-hidden rounded-xl border p-3 md:max-h-none md:w-72">
+            <div className="flex items-baseline justify-between">
+              <h2 className="font-serif text-2xl">{t("board.guests")}</h2>
+              <span className="text-muted-foreground text-xs" aria-live="polite">
+                {t("board.unassigned", { count: unplacedCount })}
+              </span>
+            </div>
 
-          <div className="relative">
-            <Search className="text-muted-foreground absolute start-2 top-2 size-4" aria-hidden />
-            <Input
-              className="h-8 ps-8"
-              placeholder={t("board.search")}
-              aria-label={t("board.search")}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          <Select value={rsvpFilter} onValueChange={(v) => setRsvpFilter(v as RsvpFilter)}>
-            <SelectTrigger className="h-8 w-full text-xs" aria-label={t("board.rsvpFilter")}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="planning">{t("board.filter.planning")}</SelectItem>
-              <SelectItem value="attending">{t("board.filter.attending")}</SelectItem>
-              <SelectItem value="not_replied">{t("board.filter.notReplied")}</SelectItem>
-              <SelectItem value="everyone">{t("board.filter.everyone")}</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <div className="flex flex-wrap gap-1">
-            {(["all", "unassigned", "kids", "accessible"] as const).map((f) => (
-              <Button
-                key={f}
-                variant={showFilter === f ? "secondary" : "ghost"}
-                size="sm"
-                className="h-6 px-2 text-xs"
-                aria-pressed={showFilter === f}
-                onClick={() => setShowFilter(f)}
-              >
-                {t(`board.filter.${f}`)}
-              </Button>
-            ))}
-          </div>
-
-          {canEdit && <UnassignedZone />}
-
-          <ul className="min-h-0 flex-1 space-y-1 overflow-y-auto">
-            {visibleGuests.map((g) => (
-              <SidebarGuest
-                key={g.id}
-                guest={g}
-                roomTitle={(() => {
-                  const r = rooms.find((x) => x.id === roomOf.get(g.id));
-                  return r ? roomTitle(r) : null;
-                })()}
-                selected={selected === g.id}
-                canEdit={canEdit}
-                onTap={tapGuest}
+            <div className="relative">
+              <Search className="text-muted-foreground absolute start-2 top-2 size-4" aria-hidden />
+              <Input
+                className="h-8 ps-8"
+                placeholder={t("board.search")}
+                aria-label={t("board.search")}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-            ))}
-            {visibleGuests.length === 0 && (
-              <p className="text-muted-foreground py-4 text-center text-xs">{t("board.noGuests")}</p>
-            )}
-          </ul>
-        </div>
+            </div>
 
-        {/* Rooms */}
-        <div className="flex min-h-0 flex-1 flex-col gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            {hotels.length > 1 && (
-              <Select value={hotelFilter} onValueChange={setHotelFilter}>
-                <SelectTrigger className="h-8 w-48" aria-label={t("board.allHotels")}>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">{t("board.allHotels")}</SelectItem>
-                  {hotels.map((h) => (
-                    <SelectItem key={h.id} value={h.id}>
-                      {h.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-            <span className="text-muted-foreground text-sm">
-              {t("board.roomCount", { count: visibleRooms.length })}
-            </span>
-            {canEdit && (
-              <Button size="sm" variant="outline" className="h-8" onClick={() => setAddOpen(true)}>
-                <Plus aria-hidden /> {t("board.add.button")}
-              </Button>
-            )}
-            {canEdit && unplacedCount > 0 && (
-              <Button size="sm" variant="outline" className="h-8" disabled={pending} onClick={autoArrange}>
-                {pending ? (
-                  <Loader2 className="animate-spin" aria-hidden />
-                ) : (
-                  <Sparkles aria-hidden />
-                )}
-                {t("board.autoArrange")}
-              </Button>
-            )}
-            <div className="ms-auto flex flex-wrap items-center gap-2">
-              <Label className="text-muted-foreground gap-2 text-xs font-normal">
-                <Switch checked={mixedHints} onCheckedChange={setMixedHints} />
-                {t("board.mixedHints")}
-              </Label>
-              {problemCount > 0 && (
-                <span className="text-warning flex items-center gap-1 text-sm">
-                  <AlertTriangle className="size-4" aria-hidden />
-                  {t("board.warnings", { count: problemCount })}
-                </span>
+            <Select value={rsvpFilter} onValueChange={(v) => setRsvpFilter(v as RsvpFilter)}>
+              <SelectTrigger className="h-8 w-full text-xs" aria-label={t("board.rsvpFilter")}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="planning">{t("board.filter.planning")}</SelectItem>
+                <SelectItem value="attending">{t("board.filter.attending")}</SelectItem>
+                <SelectItem value="not_replied">{t("board.filter.notReplied")}</SelectItem>
+                <SelectItem value="everyone">{t("board.filter.everyone")}</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <div className="flex flex-wrap gap-1">
+              {(["all", "unassigned", "kids", "accessible"] as const).map((f) => (
+                <Button
+                  key={f}
+                  variant={showFilter === f ? "secondary" : "ghost"}
+                  size="sm"
+                  className="h-6 px-2 text-xs"
+                  aria-pressed={showFilter === f}
+                  onClick={() => setShowFilter(f)}
+                >
+                  {t(`board.filter.${f}`)}
+                </Button>
+              ))}
+            </div>
+
+            {canEdit && <UnassignedZone />}
+
+            <ul className="min-h-0 flex-1 space-y-1 overflow-y-auto">
+              {visibleGuests.map((g) => (
+                <SidebarGuest
+                  key={g.id}
+                  guest={g}
+                  roomTitle={(() => {
+                    const r = rooms.find((x) => x.id === roomOf.get(g.id));
+                    return r ? roomTitle(r) : null;
+                  })()}
+                  selected={selected === g.id}
+                  canEdit={canEdit}
+                  onTap={tapGuest}
+                />
+              ))}
+              {visibleGuests.length === 0 && (
+                <p className="text-muted-foreground py-4 text-center text-xs">
+                  {t("board.noGuests")}
+                </p>
               )}
-              <Button size="sm" variant="outline" className="h-8" asChild>
-                <a href="/app/hotels/rooms/export" download>
-                  <Download aria-hidden /> {t("export.csv")}
-                </a>
-              </Button>
-              <Button size="sm" variant="outline" className="h-8" asChild>
-                <Link href="/print/rooms" target="_blank">
-                  <Printer aria-hidden /> {t("export.pdf")}
-                </Link>
-              </Button>
-            </div>
+            </ul>
           </div>
 
-          {selected && (
-            <div
-              role="status"
-              className="bg-primary-soft sticky top-0 z-10 flex items-center gap-2 rounded-lg px-3 py-2 text-sm"
-            >
-              <span className="flex-1">
-                {t("board.tapRoom", { name: guestMap.get(selected)?.name ?? "" })}
+          {/* Rooms */}
+          <div className="flex min-h-0 flex-1 flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              {hotels.length > 1 && (
+                <Select value={hotelFilter} onValueChange={setHotelFilter}>
+                  <SelectTrigger className="h-8 w-48" aria-label={t("board.allHotels")}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t("board.allHotels")}</SelectItem>
+                    {hotels.map((h) => (
+                      <SelectItem key={h.id} value={h.id}>
+                        {h.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+              <span className="text-muted-foreground text-sm">
+                {t("board.roomCount", { count: visibleRooms.length })}
               </span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-7 px-2"
-                aria-label={t("board.cancelPick")}
-                onClick={() => setSelected(null)}
+              {canEdit && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-8"
+                  onClick={() => setAddOpen(true)}
+                >
+                  <Plus aria-hidden /> {t("board.add.button")}
+                </Button>
+              )}
+              {canEdit && unplacedCount > 0 && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-8"
+                  disabled={pending}
+                  onClick={autoArrange}
+                >
+                  {pending ? (
+                    <Loader2 className="animate-spin" aria-hidden />
+                  ) : (
+                    <Sparkles aria-hidden />
+                  )}
+                  {t("board.autoArrange")}
+                </Button>
+              )}
+              <div className="ms-auto flex flex-wrap items-center gap-2">
+                <Label className="text-muted-foreground gap-2 text-xs font-normal">
+                  <Switch checked={mixedHints} onCheckedChange={setMixedHints} />
+                  {t("board.mixedHints")}
+                </Label>
+                {problemCount > 0 && (
+                  <span className="text-warning flex items-center gap-1 text-sm">
+                    <AlertTriangle className="size-4" aria-hidden />
+                    {t("board.warnings", { count: problemCount })}
+                  </span>
+                )}
+                <Button size="sm" variant="outline" className="h-8" asChild>
+                  <a href="/app/hotels/rooms/export" download>
+                    <Download aria-hidden /> {t("export.csv")}
+                  </a>
+                </Button>
+                <Button size="sm" variant="outline" className="h-8" asChild>
+                  <Link href="/print/rooms" target="_blank">
+                    <Printer aria-hidden /> {t("export.pdf")}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            {selected && (
+              <div
+                role="status"
+                className="bg-primary-soft sticky top-0 z-10 flex items-center gap-2 rounded-lg px-3 py-2 text-sm"
               >
-                <X className="size-4" aria-hidden />
-              </Button>
-            </div>
-          )}
+                <span className="flex-1">
+                  {t("board.tapRoom", { name: guestMap.get(selected)?.name ?? "" })}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-7 px-2"
+                  aria-label={t("board.cancelPick")}
+                  onClick={() => setSelected(null)}
+                >
+                  <X className="size-4" aria-hidden />
+                </Button>
+              </div>
+            )}
 
-          <div className="grid min-h-0 flex-1 grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] content-start gap-3 md:overflow-y-auto">
-            {visibleRooms.map((room) => (
-              <RoomCard
-                key={room.id}
-                room={room}
-                roomType={room.room_type_id ? typeMap.get(room.room_type_id) : undefined}
-                capacity={capacityOf(room)}
-                assignments={assignmentsByRoom.get(room.id) ?? []}
-                guestMap={guestMap}
-                warnings={warningsByRoom.get(room.id) ?? []}
-                hotelName={hotels.length > 1 ? hotelName.get(room.hotel_id) : undefined}
-                canEdit={canEdit}
-                picking={!!selected}
-                onTap={tapRoom}
-                roomOptions={roomOptions}
-                onMove={place}
-                onRemove={unplace}
-              />
-            ))}
+            <div className="grid min-h-0 flex-1 grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] content-start gap-3 md:overflow-y-auto">
+              {visibleRooms.map((room) => (
+                <RoomCard
+                  key={room.id}
+                  room={room}
+                  roomType={room.room_type_id ? typeMap.get(room.room_type_id) : undefined}
+                  capacity={capacityOf(room)}
+                  assignments={assignmentsByRoom.get(room.id) ?? []}
+                  guestMap={guestMap}
+                  warnings={warningsByRoom.get(room.id) ?? []}
+                  hotelName={hotels.length > 1 ? hotelName.get(room.hotel_id) : undefined}
+                  canEdit={canEdit}
+                  picking={!!selected}
+                  onTap={tapRoom}
+                  roomOptions={roomOptions}
+                  onMove={place}
+                  onRemove={unplace}
+                />
+              ))}
+            </div>
+
+            {costs.occupiedRooms > 0 && (
+              <div className="bg-muted/50 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border px-4 py-2 text-sm">
+                <span className="font-medium">{t("board.costSummary")}</span>
+                <span>
+                  {t("board.costPerNight", { amount: formatMoney(costs.totalPerNight, currency) })}
+                </span>
+                <span className="text-muted-foreground">
+                  {t("board.occupancy", {
+                    occupied: costs.occupiedRooms,
+                    total: costs.totalRooms,
+                    guests: costs.totalGuests,
+                  })}
+                </span>
+              </div>
+            )}
           </div>
-
-          {costs.occupiedRooms > 0 && (
-            <div className="bg-muted/50 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border px-4 py-2 text-sm">
-              <span className="font-medium">{t("board.costSummary")}</span>
-              <span>{t("board.costPerNight", { amount: formatMoney(costs.totalPerNight, currency) })}</span>
-              <span className="text-muted-foreground">
-                {t("board.occupancy", {
-                  occupied: costs.occupiedRooms,
-                  total: costs.totalRooms,
-                  guests: costs.totalGuests,
-                })}
-              </span>
-            </div>
-          )}
         </div>
-      </div>
 
-      <DragOverlay>
-        {draggingGuest && (
-          <div className="bg-card flex items-center gap-2 rounded-lg border-2 border-dashed px-3 py-1.5 text-sm shadow-lg">
-            <GroupDot group={draggingGuest.group} />
-            {draggingGuest.name}
-          </div>
-        )}
-      </DragOverlay>
+        <DragOverlay>
+          {draggingGuest && (
+            <div className="bg-card flex items-center gap-2 rounded-lg border-2 border-dashed px-3 py-1.5 text-sm shadow-lg">
+              <GroupDot group={draggingGuest.group} />
+              {draggingGuest.name}
+            </div>
+          )}
+        </DragOverlay>
 
-      {addDialog}
+        {addDialog}
 
-      <Dialog open={!!swap} onOpenChange={(o) => !o && setSwap(null)}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>{t("board.swap.title", { room: swapRoom ? roomTitle(swapRoom) : "" })}</DialogTitle>
-            <DialogDescription>
-              {swapFrom
-                ? t("board.swap.text", { name: swapGuest?.name ?? "", from: roomTitle(swapFrom) })
-                : t("board.swap.textNoRoom", { name: swapGuest?.name ?? "" })}
-            </DialogDescription>
-          </DialogHeader>
-          <ul className="space-y-1">
-            {(swap ? (assignmentsByRoom.get(swap.roomId) ?? []) : []).map((a) => {
-              const g = guestMap.get(a.guest_id);
-              return (
-                <li key={a.guest_id}>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    disabled={pending}
-                    onClick={() => {
-                      const s = swap!;
-                      setSwap(null);
-                      run(() => swapRoomGuests(s.guestId, a.guest_id), t("board.swap.done"));
-                    }}
-                  >
-                    <ArrowLeftRight aria-hidden />
-                    {g && <GroupDot group={g.group} />}
-                    {t("board.swap.with", { name: g?.name ?? "?" })}
-                  </Button>
-                </li>
-              );
-            })}
-          </ul>
-          <DialogFooter>
-            <Button variant="ghost" onClick={() => setSwap(null)}>
-              {t("board.cancel")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </DndContext>
+        <Dialog open={!!swap} onOpenChange={(o) => !o && setSwap(null)}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>
+                {t("board.swap.title", { room: swapRoom ? roomTitle(swapRoom) : "" })}
+              </DialogTitle>
+              <DialogDescription>
+                {swapFrom
+                  ? t("board.swap.text", { name: swapGuest?.name ?? "", from: roomTitle(swapFrom) })
+                  : t("board.swap.textNoRoom", { name: swapGuest?.name ?? "" })}
+              </DialogDescription>
+            </DialogHeader>
+            <ul className="space-y-1">
+              {(swap ? (assignmentsByRoom.get(swap.roomId) ?? []) : []).map((a) => {
+                const g = guestMap.get(a.guest_id);
+                return (
+                  <li key={a.guest_id}>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start"
+                      disabled={pending}
+                      onClick={() => {
+                        const s = swap!;
+                        setSwap(null);
+                        run(() => swapRoomGuests(s.guestId, a.guest_id), t("board.swap.done"));
+                      }}
+                    >
+                      <ArrowLeftRight aria-hidden />
+                      {g && <GroupDot group={g.group} />}
+                      {t("board.swap.with", { name: g?.name ?? "?" })}
+                    </Button>
+                  </li>
+                );
+              })}
+            </ul>
+            <DialogFooter>
+              <Button variant="ghost" onClick={() => setSwap(null)}>
+                {t("board.cancel")}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </DndContext>
+      {editStay && editGuest && (
+        <StayDateDialog
+          mode="edit"
+          guests={[editGuest]}
+          booked={bookedOf.get(editStay.hotelId ?? mainHotel ?? "") ?? null}
+          onClose={() => setEditStay(null)}
+        />
+      )}
+    </StayContext.Provider>
   );
 }
 
@@ -782,6 +876,9 @@ function SidebarGuest({
     disabled: !canEdit,
   });
   const kid = guest.ageGroup === "child" || guest.ageGroup === "infant";
+  const t = useTranslations("hotels");
+  const stay = useContext(StayContext);
+  const dates = stay.label(guest.id, null);
 
   return (
     <li
@@ -795,7 +892,11 @@ function SidebarGuest({
         "flex items-center gap-2 rounded-lg border px-2 py-1.5 text-sm transition-colors select-none",
         canEdit && "cursor-pointer md:cursor-grab md:active:cursor-grabbing",
         isDragging && "opacity-40",
-        selected ? "border-primary bg-primary-soft ring-primary ring-1" : placedIn ? "bg-muted/40" : "bg-card",
+        selected
+          ? "border-primary bg-primary-soft ring-primary ring-1"
+          : placedIn
+            ? "bg-muted/40"
+            : "bg-card",
       )}
     >
       <GroupDot group={guest.group} />
@@ -805,13 +906,30 @@ function SidebarGuest({
         <User className="text-muted-foreground size-3.5 shrink-0" aria-hidden />
       )}
       <span className="min-w-0 flex-1">
-        <span className={cn("block truncate", placedIn && "text-muted-foreground")}>{guest.name}</span>
+        <span className={cn("block truncate", placedIn && "text-muted-foreground")}>
+          {guest.name}
+        </span>
         <span className="text-muted-foreground block truncate text-[11px]">
           {placedIn ? `${guest.householdName} · ${placedIn}` : guest.householdName}
+          {dates && <span className="text-primary-ink"> · {dates}</span>}
         </span>
       </span>
       <RsvpBadge status={guest.rsvpStatus} />
       <WishIcon guest={guest} />
+      {stay.edit && (
+        <button
+          type="button"
+          className="text-muted-foreground hover:text-foreground focus-visible:ring-ring -m-1 shrink-0 rounded p-1 focus-visible:ring-2 focus-visible:outline-none"
+          aria-label={t("stays.editFor", { name: guest.name })}
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            stay.edit?.(guest.id, null);
+          }}
+        >
+          <CalendarClock className="size-3.5" aria-hidden />
+        </button>
+      )}
     </li>
   );
 }
@@ -823,7 +941,11 @@ function FillBar({ occupants, capacity }: { occupants: number; capacity: number 
       <div
         className={cn(
           "h-full rounded-full transition-all",
-          occupants > capacity ? "bg-destructive" : occupants === capacity ? "bg-warning" : "bg-primary",
+          occupants > capacity
+            ? "bg-destructive"
+            : occupants === capacity
+              ? "bg-warning"
+              : "bg-primary",
         )}
         style={{ width: `${pct}%` }}
       />
@@ -891,12 +1013,20 @@ function RoomCard({
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{roomTitle(room)}</p>
           <p className="text-muted-foreground truncate text-xs">
-            {[room.name ? room.room_number : null, hotelName, roomType?.name].filter(Boolean).join(" · ")}
+            {[room.name ? room.room_number : null, hotelName, roomType?.name]
+              .filter(Boolean)
+              .join(" · ")}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          {room.is_locked && <Lock className="text-warning size-3.5" aria-label={t("rooms.locked")} />}
-          {roomType?.accessible && <span className="text-xs" aria-label={t("rooms.accessible")}>♿</span>}
+          {room.is_locked && (
+            <Lock className="text-warning size-3.5" aria-label={t("rooms.locked")} />
+          )}
+          {roomType?.accessible && (
+            <span className="text-xs" aria-label={t("rooms.accessible")}>
+              ♿
+            </span>
+          )}
           {canEdit && <RoomEditPopover room={room} typeCapacity={roomType?.max_guests ?? null} />}
         </div>
       </div>
@@ -907,7 +1037,9 @@ function RoomCard({
             {unlimited ? occupants : t("board.ofCapacity", { count: occupants, capacity })}
           </span>
           {!unlimited && (
-            <span className={cn("text-muted-foreground", free < 0 && "text-destructive font-medium")}>
+            <span
+              className={cn("text-muted-foreground", free < 0 && "text-destructive font-medium")}
+            >
               {free > 0
                 ? t("board.free", { count: free })
                 : free === 0
@@ -930,7 +1062,9 @@ function RoomCard({
           {problems.map((w, i) => (
             <li key={`${w.kind}-${i}`} className="text-warning flex items-center gap-1">
               <AlertTriangle className="size-3 shrink-0" aria-hidden />
-              {t(`board.warning.${w.kind}`)}
+              {w.aloneNights
+                ? t("board.aloneNights", { count: w.aloneNights })
+                : t(`board.warning.${w.kind}`)}
             </li>
           ))}
           {mixed && (
@@ -949,6 +1083,7 @@ function RoomCard({
               key={a.guest_id}
               assignment={a}
               guest={guestMap.get(a.guest_id)}
+              hotelId={room.hotel_id}
               currentRoom={room.id}
               canEdit={canEdit}
               roomOptions={roomOptions}
@@ -958,7 +1093,9 @@ function RoomCard({
           ))}
         </ul>
       ) : (
-        <p className="text-muted-foreground py-2 text-center text-xs italic">{t("board.emptyRoom")}</p>
+        <p className="text-muted-foreground py-2 text-center text-xs italic">
+          {t("board.emptyRoom")}
+        </p>
       )}
     </div>
   );
@@ -967,6 +1104,7 @@ function RoomCard({
 function RoomGuestChip({
   assignment: a,
   guest,
+  hotelId,
   currentRoom,
   canEdit,
   roomOptions,
@@ -975,6 +1113,7 @@ function RoomGuestChip({
 }: {
   assignment: HotelRoomAssignmentRow;
   guest: BoardGuest | undefined;
+  hotelId: string;
   currentRoom: string;
   canEdit: boolean;
   roomOptions: RoomOption[];
@@ -986,6 +1125,8 @@ function RoomGuestChip({
     id: a.guest_id,
     disabled: !canEdit,
   });
+  const stay = useContext(StayContext);
+  const dates = stay.label(a.guest_id, hotelId);
 
   return (
     <li
@@ -1005,6 +1146,22 @@ function RoomGuestChip({
         <span className="truncate">{guest?.name ?? "?"}</span>
         {a.needs_crib && <Baby className="size-3 shrink-0" aria-label={t("rooms.crib")} />}
       </span>
+      {dates &&
+        (stay.edit ? (
+          <button
+            type="button"
+            className="text-primary-ink shrink-0 rounded text-[11px] underline-offset-2 hover:underline"
+            aria-label={t("stays.editFor", { name: guest?.name ?? "" })}
+            onClick={(e) => {
+              e.stopPropagation();
+              stay.edit?.(a.guest_id, hotelId);
+            }}
+          >
+            {dates}
+          </button>
+        ) : (
+          <span className="text-primary-ink shrink-0 text-[11px]">{dates}</span>
+        ))}
       {guest && <RsvpBadge status={guest.rsvpStatus} />}
       {guest && <WishIcon guest={guest} />}
       {canEdit && (
@@ -1021,6 +1178,14 @@ function RoomGuestChip({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="max-h-80 overflow-y-auto">
+            {stay.edit && (
+              <>
+                <DropdownMenuItem onSelect={() => stay.edit?.(a.guest_id, hotelId)}>
+                  <CalendarClock aria-hidden /> {t("stays.mode.edit")}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </>
+            )}
             <DropdownMenuLabel>{t("board.moveTo")}</DropdownMenuLabel>
             {roomOptions
               .filter((r) => r.id !== currentRoom)
@@ -1031,7 +1196,11 @@ function RoomGuestChip({
                     {r.hotel && <span className="text-muted-foreground"> · {r.hotel}</span>}
                   </span>
                   <span className="text-muted-foreground text-xs">
-                    {r.free >= 90 ? "" : r.free > 0 ? t("board.free", { count: r.free }) : t("board.full")}
+                    {r.free >= 90
+                      ? ""
+                      : r.free > 0
+                        ? t("board.free", { count: r.free })
+                        : t("board.full")}
                   </span>
                 </DropdownMenuItem>
               ))}
@@ -1293,7 +1462,13 @@ function AddRoomsDialog({
           </fieldset>
           <div className="space-y-1">
             <Label htmlFor="ar-price">{t("board.add.price")}</Label>
-            <MoneyInput id="ar-price" currency={currency} allowEmpty value={price} onChange={setPrice} />
+            <MoneyInput
+              id="ar-price"
+              currency={currency}
+              allowEmpty
+              value={price}
+              onChange={setPrice}
+            />
           </div>
           <DialogFooter>
             <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>

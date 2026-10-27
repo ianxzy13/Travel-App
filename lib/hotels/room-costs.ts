@@ -1,4 +1,9 @@
-import type { HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow, HotelRow } from "../database.types";
+import type {
+  HotelRoomAssignmentRow,
+  HotelRoomRow,
+  HotelRoomTypeRow,
+  HotelRow,
+} from "../database.types";
 
 type HotelItem = Pick<HotelRow, "id" | "name" | "price_per_night">;
 type RoomTypeItem = Pick<HotelRoomTypeRow, "id" | "price_per_night" | "max_guests">;
@@ -54,7 +59,8 @@ export function computeRoomCosts({
       hGuests += guestCount;
 
       const rt = room.room_type_id ? roomTypes.get(room.room_type_id) : null;
-      const price = rt?.price_per_night ?? (hotel as { price_per_night?: number | null }).price_per_night ?? 0;
+      const price =
+        rt?.price_per_night ?? (hotel as { price_per_night?: number | null }).price_per_night ?? 0;
       if (guestCount > 0) hCost += Number(price);
     }
 

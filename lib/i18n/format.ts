@@ -32,6 +32,13 @@ export function fmtDate(
   return dtf(locale, opts).format(asUtc(date));
 }
 
+/** "5–9 Mar" (or "28 Feb – 2 Mar"), short and as usual in that language. */
+export function fmtDateRange(from: string | null, to: string | null, locale: string) {
+  if (!from || !to) return fmtDate(from ?? to, locale, "medium");
+  const f = dtf(locale, { day: "numeric", month: "short" });
+  return f.formatRange(asUtc(from), asUtc(to));
+}
+
 /** "15:00" or "3:00 PM", as usual in that language. */
 export function fmtTime(time: string | null, locale: string) {
   if (!time) return "";

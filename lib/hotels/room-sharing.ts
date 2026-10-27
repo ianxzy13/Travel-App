@@ -82,7 +82,8 @@ export function friendGroup(
     .map((id) => ({ id, tag: tags.get(id) }))
     .filter((x): x is { id: string; tag: { name: string; color: TagColor } } => !!x.tag)
     .sort((a, b) => a.tag.name.localeCompare(b.tag.name));
-  if (own.length) return { key: `tag:${own[0].id}`, label: own[0].tag.name, color: own[0].tag.color };
+  if (own.length)
+    return { key: `tag:${own[0].id}`, label: own[0].tag.name, color: own[0].tag.color };
   return { key: `hh:${guest.householdId}`, label: guest.householdName, color: null };
 }
 

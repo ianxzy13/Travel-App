@@ -4,7 +4,14 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
-import { hotelGuestsSchema, hotelSchema } from "@/lib/validation/places";
+import { syncStayDates } from "@/lib/hotels/stay-sync";
+import {
+  bookedDatesSchema,
+  hotelGuestsSchema,
+  hotelSchema,
+  peoplePerRoomSchema,
+  stayDatesSchema,
+} from "@/lib/validation/places";
 import { canEdit, requireWedding } from "@/lib/wedding";
 import { fail, invalid, noPermission } from "@/lib/errors";
 
@@ -16,6 +23,8 @@ async function editor() {
 
 function done(): ActionResult {
   revalidatePath("/app/hotels");
+  revalidatePath("/app/hotels/stays");
+  revalidatePath("/app/hotels/rooms");
   revalidatePath("/app");
   return { ok: true };
 }
@@ -116,6 +125,65 @@ export async function setHotelGuests(hotelId: string, input: unknown): Promise<A
       { onConflict: "guest_id" },
     );
     if (error) return fail("setHotelGuests", error);
+    // Fill empty dates from the guest's stay; hand-typed dates stay as they are.
+    const sync = await syncStayDates(ctx.sb, wid, keep, true);
+    if (sync) return fail("setHotelGuests", sync.error);
   }
+  return done();
+}
+
+/** The dates the hotel is booked for. Guests without their own dates follow them. */
+export async function saveBookedDates(hotelId: string, input: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx || !z.uuid().safeParse(hotelId).success) return noPermission();
+  const parsed = bookedDatesSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const { error } = await ctx.sb
+    .from("hotels")
+    .update({ booked_from: parsed.data.from, booked_to: parsed.data.to })
+    .eq("id", hotelId)
+    .eq("wedding_id", ctx.wedding.id);
+  if (error) return fail("saveBookedDates", error);
+  const sync = await syncStayDates(ctx.sb, ctx.wedding.id, null);
+  if (sync) return fail("saveBookedDates", sync.error);
+  return done();
+}
+
+/** How many people the couple puts in one room at this hotel (for "rooms needed"). */
+export async function savePeoplePerRoom(hotelId: string, input: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx || !z.uuid().safeParse(hotelId).success) return noPermission();
+  const parsed = peoplePerRoomSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const { error } = await ctx.sb
+    .from("hotels")
+    .update({ people_per_room: parsed.data })
+    .eq("id", hotelId)
+    .eq("wedding_id", ctx.wedding.id);
+  if (error) return fail("savePeoplePerRoom", error);
+  revalidatePath("/app/hotels/stays");
+  return { ok: true };
+}
+
+/** Set when some guests arrive and/or leave; null puts that side back to the booked date. */
+export async function setStayDates(input: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const parsed = stayDatesSchema.safeParse(input);
+  if (!parsed.success) return await invalid(parsed.error);
+  const { guestIds, from, to } = parsed.data;
+  const wid = ctx.wedding.id;
+  const patch: { stay_from?: string | null; stay_to?: string | null } = {};
+  if (from !== undefined) patch.stay_from = from;
+  if (to !== undefined) patch.stay_to = to;
+  if (!Object.keys(patch).length) return { ok: true };
+  const { error } = await ctx.sb
+    .from("guests")
+    .update(patch)
+    .eq("wedding_id", wid)
+    .in("id", guestIds);
+  if (error) return fail("setStayDates", error);
+  const sync = await syncStayDates(ctx.sb, wid, guestIds);
+  if (sync) return fail("setStayDates", sync.error);
   return done();
 }

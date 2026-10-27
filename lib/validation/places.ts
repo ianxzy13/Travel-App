@@ -111,6 +111,23 @@ export const roomAssignmentSchema = z
     message: v("checkOut"),
   });
 
+const dayOrNull = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, v("date")).nullable();
+
+export const bookedDatesSchema = z
+  .object({ from: dayOrNull, to: dayOrNull })
+  .refine((d) => !d.from || !d.to || d.to > d.from, { message: v("checkOut"), path: ["to"] });
+
+export const peoplePerRoomSchema = z.number().int(v("wholeNumber")).min(1).max(1000).nullable();
+
+export const stayDatesSchema = z
+  .object({
+    guestIds: z.array(z.uuid()).min(1).max(500),
+    // undefined = leave that side as it is, null = back to the booked date
+    from: dayOrNull.optional(),
+    to: dayOrNull.optional(),
+  })
+  .refine((d) => !d.from || !d.to || d.to > d.from, { message: v("checkOut"), path: ["to"] });
+
 export const hotelGuestsSchema = z
   .array(
     z.object({

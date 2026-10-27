@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   AlarmClock,
   BedDouble,
+  CalendarClock,
   Copy,
   ExternalLink,
   Globe,
@@ -170,11 +171,18 @@ export function HotelsPage({
         description={t("description")}
         actions={
           <>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {hotels.length > 0 && (
                 <Button asChild variant="outline" size="sm">
                   <Link href="/app/hotels/rooms">
                     <LayoutGrid aria-hidden /> {t("board.title")}
+                  </Link>
+                </Button>
+              )}
+              {hotels.length > 0 && (
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/app/hotels/stays">
+                    <CalendarClock aria-hidden /> {t("stays.title")}
                   </Link>
                 </Button>
               )}
@@ -327,7 +335,11 @@ export function HotelsPage({
                       )}
                       {h.booking_url && (
                         <Button asChild variant="ghost" size="sm">
-                          <a href={h.booking_url} target="_blank" rel="sponsored noopener noreferrer">
+                          <a
+                            href={h.booking_url}
+                            target="_blank"
+                            rel="sponsored noopener noreferrer"
+                          >
                             <ExternalLink aria-hidden /> {t("bookingLink")}
                           </a>
                         </Button>
@@ -602,15 +614,9 @@ function HotelForm({
                 label={t("groupRateEmail")}
                 error={errors.groupRateEmail?.message}
               >
-                {(aria) => (
-                  <Input {...aria} type="email" {...form.register("groupRateEmail")} />
-                )}
+                {(aria) => <Input {...aria} type="email" {...form.register("groupRateEmail")} />}
               </FormField>
-              <FormField
-                id="h-hold"
-                label={t("holdDate")}
-                error={errors.holdDate?.message}
-              >
+              <FormField id="h-hold" label={t("holdDate")} error={errors.holdDate?.message}>
                 {(aria) => <Input {...aria} type="date" {...form.register("holdDate")} />}
               </FormField>
               <FormField
@@ -629,13 +635,7 @@ function HotelForm({
               {(aria) => <Textarea {...aria} rows={2} {...form.register("groupRateNotes")} />}
             </FormField>
             {form.watch("groupRateEmail") && (
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="mt-2"
-                asChild
-              >
+              <Button type="button" variant="outline" size="sm" className="mt-2" asChild>
                 <a
                   href={buildGroupRateMailto({
                     email: form.watch("groupRateEmail"),
@@ -695,9 +695,7 @@ function HotelForm({
           <Tabs defaultValue="details">
             <TabsList className="mb-4">
               <TabsTrigger value="details">{p("details")}</TabsTrigger>
-              <TabsTrigger value="rooms">
-                {t("roomsTab", { count: rooms.length })}
-              </TabsTrigger>
+              <TabsTrigger value="rooms">{t("roomsTab", { count: rooms.length })}</TabsTrigger>
               <TabsTrigger value="guests">
                 {t("guestsTab", { count: stays.filter((s) => s.hotel_id === hotel.id).length })}
               </TabsTrigger>
@@ -796,12 +794,12 @@ function HotelRooms({
   const [forTypeId, setForTypeId] = useState<string | null>(null);
   const bedLabels = useBedLabels();
 
-  const editType = editingType && editingType !== "new"
-    ? roomTypes.find((rt) => rt.id === editingType) ?? null
-    : null;
-  const editRoom = editingRoom && editingRoom !== "new"
-    ? rooms.find((r) => r.id === editingRoom) ?? null
-    : null;
+  const editType =
+    editingType && editingType !== "new"
+      ? (roomTypes.find((rt) => rt.id === editingType) ?? null)
+      : null;
+  const editRoom =
+    editingRoom && editingRoom !== "new" ? (rooms.find((r) => r.id === editingRoom) ?? null) : null;
 
   return (
     <div className="space-y-6">
@@ -810,11 +808,7 @@ function HotelRooms({
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium">{t("rooms.types")}</h3>
           {canEdit && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setEditingType("new")}
-            >
+            <Button size="sm" variant="outline" onClick={() => setEditingType("new")}>
               <Plus aria-hidden /> {t("rooms.addType")}
             </Button>
           )}
@@ -852,7 +846,9 @@ function HotelRooms({
                     </p>
                   </button>
                   {rt.accessible && (
-                    <span className="text-xs" title={t("rooms.accessible")}>♿</span>
+                    <span className="text-xs" title={t("rooms.accessible")}>
+                      ♿
+                    </span>
                   )}
                 </li>
               );
@@ -881,9 +877,7 @@ function HotelRooms({
       {/* Individual rooms section */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium">
-            {t("rooms.list", { count: rooms.length })}
-          </h3>
+          <h3 className="text-sm font-medium">{t("rooms.list", { count: rooms.length })}</h3>
           {canEdit && (
             <Button
               size="sm"
@@ -978,7 +972,10 @@ function RoomTypeForm({
     resolver: zodResolver(roomTypeSchema),
     defaultValues: {
       name: roomType?.name ?? "",
-      beds: (roomType?.beds ?? [{ kind: "double", count: 1 }]) as { kind: "double" | "single" | "sofa_bed" | "bunk"; count: number }[],
+      beds: (roomType?.beds ?? [{ kind: "double", count: 1 }]) as {
+        kind: "double" | "single" | "sofa_bed" | "bunk";
+        count: number;
+      }[],
       maxGuests: roomType?.max_guests ?? 2,
       hasCrib: roomType?.has_crib ?? false,
       accessible: roomType?.accessible ?? false,
@@ -1078,7 +1075,11 @@ function RoomTypeForm({
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <FormField id="rt-max" label={t("rooms.maxGuests", { count: 0 }).replace("0 ", "")} error={errors.maxGuests?.message}>
+              <FormField
+                id="rt-max"
+                label={t("rooms.maxGuests", { count: 0 }).replace("0 ", "")}
+                error={errors.maxGuests?.message}
+              >
                 {(aria) => (
                   <Input
                     {...aria}
@@ -1102,7 +1103,11 @@ function RoomTypeForm({
               </FormField>
             </div>
 
-            <FormField id="rt-price" label={t("pricePerNight")} error={errors.pricePerNight?.message}>
+            <FormField
+              id="rt-price"
+              label={t("pricePerNight")}
+              error={errors.pricePerNight?.message}
+            >
               {(aria) => (
                 <Controller
                   control={form.control}

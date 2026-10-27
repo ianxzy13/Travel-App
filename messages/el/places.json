@@ -333,7 +333,8 @@
         "step2": "Click “Add rooms”: how many rooms and how many people per room.",
         "step3": "Tap a guest, then tap a room (or drag on a computer).",
         "addHotel": "Add a hotel"
-      }
+      },
+      "aloneNights": "{count, plural, one {Someone is alone here for # night} other {Someone is alone here for # nights}}"
     },
     "export": {
       "hotel": "Hotel",
@@ -365,7 +366,114 @@
     "groupRateBodyDate": "Wedding date: {date}",
     "groupRateBodyRooms": "Estimated rooms needed: {count}",
     "groupRateBodyClosing": "We look forward to hearing from you.",
-    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you."
+    "affiliateDisclosure": "Some links may earn us a small commission at no extra cost to you.",
+    "stays": {
+      "title": "Who's staying when",
+      "description": "Set the hotel's booked dates, then mark who arrives earlier or leaves later. The summary is ready to send to the hotel.",
+      "back": "Hotels",
+      "saved": "Dates saved",
+      "saving": "Saving…",
+      "noHotel": {
+        "title": "Add a hotel first",
+        "text": "Once you've added the hotel, you can set its booked dates here.",
+        "button": "Go to Hotels"
+      },
+      "booking": {
+        "title": "Booked dates",
+        "hotel": "Hotel",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "save": "Save dates",
+        "nights": "{count, plural, one {# night} other {# nights}}",
+        "invalid": "Check-out must be after check-in.",
+        "perHotel": "Each hotel has its own booked dates. Guests count for the hotel they're placed in, or this one if they have none yet."
+      },
+      "guests": {
+        "title": "Guests",
+        "showNotReplied": "Also show guests who haven't replied",
+        "showNoRoom": "Include guests who don't need a room",
+        "setBookingFirst": "Set the booked dates above first. Until then you can still type each guest's dates with “Edit dates”.",
+        "empty": "No guests to show yet. Guests appear here once they say they're coming (or turn on “haven't replied”)."
+      },
+      "bookedDates": "Booked dates ({range})",
+      "noDates": "No dates yet",
+      "diff": {
+        "early": "{count, plural, one {# extra night} other {# extra nights}} before",
+        "late": "{count, plural, one {# extra night} other {# extra nights}} after",
+        "shorter": "{count, plural, one {# night less} other {# nights less}}"
+      },
+      "mode": {
+        "edit": "Edit dates",
+        "earlier": "Comes earlier",
+        "later": "Leaves later",
+        "arriveLater": "Arrives later",
+        "leaveEarlier": "Leaves earlier"
+      },
+      "more": "More for {name}",
+      "select": "Select {name}",
+      "selectHousehold": "Select everyone in {name}",
+      "editFor": "Edit dates for {name}",
+      "sameForHousehold": "Same for whole household",
+      "householdDone": "Household updated",
+      "reset": "Reset to booked dates",
+      "guestSaid": "Guest said: arrives {arrival}, leaves {departure}",
+      "useThis": "Use this",
+      "badge": {
+        "notReplied": "not replied",
+        "noRoom": "no room needed"
+      },
+      "bulk": {
+        "selected": "{count, plural, one {# guest selected} other {# guests selected}}",
+        "clear": "Clear selection"
+      },
+      "dialog": {
+        "booked": "booked {range}",
+        "arrives": "Arrives (check-in)",
+        "leaves": "Leaves (check-out)",
+        "extra": "{count, plural, one {# extra night} other {# extra nights}}",
+        "nights": "{count, plural, one {# night} other {# nights}}",
+        "bothDates": "Pick both dates.",
+        "broken": "Leaving has to be after arriving.",
+        "outside": {
+          "earlier": "Pick a day before the booked check-in.",
+          "later": "Pick a day after the booked check-out.",
+          "arriveLater": "Pick a day inside the booked dates.",
+          "leaveEarlier": "Pick a day inside the booked dates."
+        },
+        "andMore": "{names} and {count} more",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "summary": {
+        "title": "For the hotel",
+        "copy": "Copy",
+        "copied": "Copied — paste it into your email",
+        "copyFailed": "Couldn't copy. Select the text and copy it by hand.",
+        "print": "Print",
+        "perRoom": "People per room",
+        "perRoomInvalid": "Type a whole number, 1 or more.",
+        "needBooking": "Set the booked dates to see the summary.",
+        "main": "Main booking",
+        "mainLine": "{range} ({nights, plural, one {# night} other {# nights}}): {guests, plural, one {# guest} other {# guests}}, {rooms, plural, one {# room} other {# rooms}} ({perRoom} per room)",
+        "early": "Arriving earlier",
+        "late": "Leaving later",
+        "shorter": "Shorter stays",
+        "nobody": "Nobody",
+        "arriveLine": "{names}: arrive {date} ({nights, plural, one {# extra night} other {# extra nights}})",
+        "leaveLine": "{names}: stay until {date} ({nights, plural, one {# extra night} other {# extra nights}})",
+        "shorterLine": "{names}: {range} ({nights, plural, one {# night less} other {# nights less}})",
+        "perNight": "Each night",
+        "nightLine": "{date}: {guests, plural, one {# guest} other {# guests}}, {rooms, plural, one {# room} other {# rooms}}",
+        "extraTotal": "Extra room-nights outside the main booking: {count}"
+      },
+      "table": {
+        "night": "Night of",
+        "guests": "Guests",
+        "rooms": "Rooms",
+        "weddingNight": "wedding night",
+        "extra": "extra"
+      }
+    }
   },
   "travel": {
     "title": "Ταξίδια",

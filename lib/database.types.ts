@@ -141,6 +141,9 @@ export type GuestRow = WeddingScoped & {
   needs_crib: boolean;
   room_pref_share: string | null;
   room_pref_avoid: string | null;
+  /** own arrival / departure at the hotel; null = the hotel's booked dates */
+  stay_from: string | null;
+  stay_to: string | null;
   dietary_consent: boolean;
   dietary_consent_at: string | null;
   email_unsubscribed: boolean;
@@ -352,6 +355,11 @@ export type HotelRow = WeddingScoped & {
   group_rate_notes: string | null;
   hold_date: string | null;
   release_date: string | null;
+  /** the dates the hotel is booked for (check-in / check-out) */
+  booked_from: string | null;
+  booked_to: string | null;
+  /** how many people the couple puts in one room (for "rooms needed") */
+  people_per_room: number | null;
 };
 
 export type OutboundClickRow = WeddingScoped & {

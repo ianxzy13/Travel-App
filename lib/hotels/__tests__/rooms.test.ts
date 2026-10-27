@@ -254,3 +254,30 @@ describe("RS1 room rules", () => {
     expect(w?.message).toContain("Girls' room");
   });
 });
+
+describe("roommates' dates", () => {
+  const booked = { from: "2027-03-05", to: "2027-03-09" };
+  const input = (own: Record<string, { from: string; to: string }>): RuleInput => ({
+    rooms: [makeRoom()],
+    roomTypes: new Map([["rt-1", makeRoomType()]]),
+    assignments: [makeAssignment("g1"), makeAssignment("g2")],
+    guests: new Map([
+      ["g1", makeGuest("g1", "h1")],
+      ["g2", makeGuest("g2", "h1")],
+    ]),
+    relationships: [],
+    attendingGuestIds: new Set(["g1", "g2"]),
+    stayOf: (id) => own[id] ?? booked,
+  });
+
+  it("is quiet when everyone stays the booked dates", () => {
+    expect(checkRoomRules(input({})).some((w) => w.kind === "night_mismatch")).toBe(false);
+  });
+
+  it("warns and counts nights someone is alone", () => {
+    const w = checkRoomRules(input({ g1: { from: "2027-03-03", to: "2027-03-09" } })).find(
+      (x) => x.kind === "night_mismatch",
+    );
+    expect(w?.aloneNights).toBe(2);
+  });
+});

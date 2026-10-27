@@ -5,6 +5,7 @@ import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
 import { createClient } from "@/lib/supabase/server";
 import { roomLabels } from "@/lib/hotels/room-sharing";
+import { syncStayDates } from "@/lib/hotels/stay-sync";
 import {
   quickRoomsSchema,
   roomAssignmentSchema,
@@ -303,6 +304,8 @@ export async function swapRoomGuests(movingId: string, targetId: string): Promis
     { onConflict: "guest_id" },
   );
   if (error) return fail("swapGuests", error);
+  const sync = await syncStayDates(ctx.sb, wid, [movingId, targetId]);
+  if (sync) return fail("swapGuests", sync.error);
   return done();
 }
 
@@ -327,6 +330,9 @@ export async function assignGuestToRoom(input: unknown): Promise<ActionResult> {
     { onConflict: "guest_id" },
   );
   if (error) return fail("assignGuest", error);
+  // Dates follow the guest's stay unless typed in here.
+  const sync = await syncStayDates(ctx.sb, ctx.wedding.id, [v.guestId], true);
+  if (sync) return fail("assignGuest", sync.error);
   return done();
 }
 
@@ -374,6 +380,13 @@ export async function bulkAssignGuests(
       { onConflict: "guest_id" },
     );
     if (error) return fail("bulkAssign", error);
+    const sync = await syncStayDates(
+      ctx.sb,
+      ctx.wedding.id,
+      parsed.data.map((a) => a.guestId),
+      true,
+    );
+    if (sync) return fail("bulkAssign", sync.error);
   }
   return done();
 }
@@ -403,6 +416,12 @@ export async function autoArrangeRoomAssignments(
       { onConflict: "guest_id" },
     );
     if (error) return fail("autoArrange", error);
+    const sync = await syncStayDates(
+      ctx.sb,
+      ctx.wedding.id,
+      parsed.data.map((a) => a.guestId),
+    );
+    if (sync) return fail("autoArrange", sync.error);
   }
   done();
   return { ok: true, data: { placed: parsed.data.length, unplaced: 0 } };
