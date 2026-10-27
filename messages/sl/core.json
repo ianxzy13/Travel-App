@@ -72,7 +72,8 @@
     "code": "Vnesite kodo iz e-pošte (samo številke).",
     "slugChars": "Uporabite samo črke, številke in posamezne vezaje (npr. ian-in-maria).",
     "slugLength": "Uporabite od 3 do 60 znakov.",
-    "airport": "Uporabite 3-črkovno kodo letališča, npr. LJU."
+    "airport": "Uporabite 3-črkovno kodo letališča, npr. LJU.",
+    "songTitle": "Vpišite naslov pesmi."
   },
   "ui": {
     "cancel": "Prekliči",

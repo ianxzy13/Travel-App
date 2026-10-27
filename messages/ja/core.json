@@ -72,7 +72,8 @@
     "code": "メールに記載されたコード（数字のみ）を入力してください。",
     "slugChars": "英字、数字、単一のハイフンのみ使えます（例：ian-and-maria）。",
     "slugLength": "3〜60 文字で入力してください。",
-    "airport": "3 文字の空港コードを使ってください（例：LIS）。"
+    "airport": "3 文字の空港コードを使ってください（例：LIS）。",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "キャンセル",

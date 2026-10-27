@@ -684,6 +684,45 @@ export type WebsiteSectionRow = WeddingScoped & {
   translations: Translations;
 };
 
+// ---------- Music ----------
+
+export type MusicPriority = "must" | "nice" | "no";
+export type MusicSuggestionStatus = "new" | "accepted" | "dismissed";
+
+export type MusicMomentRow = WeddingScoped & {
+  name: string;
+  /** ceremony_in, first_dance, party, do_not_play, custom, ... */
+  kind: string;
+  schedule_item_id: string | null;
+  sort_order: number;
+  hidden: boolean;
+};
+
+export type MusicSongRow = WeddingScoped & {
+  moment_id: string;
+  title: string;
+  artist: string;
+  url: string | null;
+  note: string | null;
+  priority: MusicPriority;
+  /** short tag like "SL" or "EN" */
+  language: string | null;
+  sort_order: number;
+  suggestion_id: string | null;
+  created_by: string | null;
+};
+
+export type MusicSuggestionRow = {
+  id: string;
+  wedding_id: string;
+  household_id: string | null;
+  guest_name: string | null;
+  title: string;
+  artist: string;
+  status: MusicSuggestionStatus;
+  created_at: string;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -784,6 +823,9 @@ export type Database = {
       activity_log: Table<ActivityLogRow, "wedding_id" | "kind">;
       gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
       schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
+      music_moments: Table<MusicMomentRow, "wedding_id" | "name">;
+      music_songs: Table<MusicSongRow, "wedding_id" | "moment_id" | "title">;
+      music_suggestions: Table<MusicSuggestionRow, "wedding_id" | "title">;
       paperwork_items: Table<
         PaperworkItemRow,
         "wedding_id" | "person" | "title"

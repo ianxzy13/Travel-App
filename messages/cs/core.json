@@ -72,7 +72,8 @@
     "code": "Zadejte kód z e-mailu (jen číslice).",
     "slugChars": "Používejte jen písmena, číslice a jednotlivé pomlčky (např. ian-a-maria).",
     "slugLength": "Použijte 3 až 60 znaků.",
-    "airport": "Použijte třípísmenný kód letiště, např. PRG."
+    "airport": "Použijte třípísmenný kód letiště, např. PRG.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Zrušit",

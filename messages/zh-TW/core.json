@@ -72,7 +72,8 @@
     "code": "請輸入郵件中的驗證碼（僅數字）。",
     "slugChars": "只能使用字母、數字和單一連字號（例如 ian-and-maria）。",
     "slugLength": "請使用 3 到 60 個字元。",
-    "airport": "請使用三字母機場代碼，例如 TPE。"
+    "airport": "請使用三字母機場代碼，例如 TPE。",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "取消",

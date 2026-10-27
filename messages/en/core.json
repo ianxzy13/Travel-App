@@ -72,7 +72,8 @@
     "code": "Please enter the code from the email (numbers only).",
     "slugChars": "Use only letters, numbers and single dashes (e.g. ian-and-maria).",
     "slugLength": "Use 3 to 60 characters.",
-    "airport": "Use the 3-letter airport code, e.g. LIS."
+    "airport": "Use the 3-letter airport code, e.g. LIS.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Cancel",

@@ -19,6 +19,7 @@ const GROUPS = [
   "schedule.template",
   "schedule.owners",
   "budget.suggested",
+  "music.moments",
 ] as const;
 
 type Tree = Record<string, unknown>;

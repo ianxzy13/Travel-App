@@ -72,7 +72,8 @@
     "code": "Wpisz kod z e-maila (tylko cyfry).",
     "slugChars": "Używaj tylko liter, cyfr i pojedynczych myślników (np. ian-i-maria).",
     "slugLength": "Użyj od 3 do 60 znaków.",
-    "airport": "Użyj 3-literowego kodu lotniska, np. WAW."
+    "airport": "Użyj 3-literowego kodu lotniska, np. WAW.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Anuluj",

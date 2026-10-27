@@ -178,6 +178,7 @@ export const SUGGESTIONS: Suggestion[] = [
     key: "song-list",
     category: "Music",
     before: { months: 2 },
+    link: "/app/music",
   },
   {
     key: "fittings",
