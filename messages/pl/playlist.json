@@ -66,7 +66,10 @@
       "new": "New category",
       "newPlaceholder": "e.g. Cocktail hour",
       "add": "Add",
-      "added": "Category added"
+      "added": "Category added",
+      "newOption": "New category…",
+      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
+      "starterAdded": "Starter categories added"
     }
   }
 }

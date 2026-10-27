@@ -66,7 +66,10 @@
       "new": "Nova kategorija",
       "newPlaceholder": "npr. Pogostitev",
       "add": "Dodaj",
-      "added": "Kategorija dodana"
+      "added": "Kategorija dodana",
+      "newOption": "Nova kategorija …",
+      "starter": "Dodaj osnovne kategorije (obred, prvi ples, večerja, zabava)",
+      "starterAdded": "Osnovne kategorije dodane"
     }
   }
 }
