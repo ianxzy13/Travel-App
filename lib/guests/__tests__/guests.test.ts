@@ -275,6 +275,8 @@ describe("buildGuestViews", () => {
       needs_crib: false,
       room_pref_share: null,
       room_pref_avoid: null,
+      stay_from: null,
+      stay_to: null,
       dietary_consent: false,
       dietary_consent_at: null,
       email_unsubscribed: false,

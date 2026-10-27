@@ -9,6 +9,8 @@ function makeRoom(overrides: Partial<HotelRoomRow> = {}): HotelRoomRow {
     hotel_id: "h",
     room_type_id: "rt-1",
     room_number: "101",
+    name: null,
+    capacity: null,
     floor: null,
     is_locked: false,
     notes: null,
@@ -175,5 +177,107 @@ describe("checkRoomRules", () => {
     };
     const warnings = checkRoomRules(input);
     expect(warnings.some((w) => w.kind === "keep_apart")).toBe(true);
+  });
+});
+
+describe("RS1 room rules", () => {
+  const base = (over: Partial<RuleInput> = {}): RuleInput => ({
+    rooms: [makeRoom()],
+    roomTypes: new Map([["rt-1", makeRoomType()]]),
+    assignments: [],
+    guests: new Map(),
+    relationships: [],
+    attendingGuestIds: new Set(),
+    ...over,
+  });
+  const people = (n: number) =>
+    Array.from({ length: n }, (_, i) => `g${i}`).map((id) => makeGuest(id, "h1"));
+
+  it("room capacity overrides the room type", () => {
+    const ps = people(5);
+    const input = base({
+      rooms: [makeRoom({ capacity: 6 })],
+      roomTypes: new Map([["rt-1", makeRoomType({ max_guests: 4, beds: [] })]]),
+      assignments: ps.map((p) => makeAssignment(p.id)),
+      guests: new Map(ps.map((p) => [p.id, p])),
+    });
+    expect(checkRoomRules(input).map((w) => w.kind)).not.toContain("over_capacity");
+  });
+
+  it("warns when people outnumber beds (sofa bed sleeps 2)", () => {
+    const ps = people(5);
+    const beds = [
+      { kind: "double" as const, count: 1 },
+      { kind: "sofa_bed" as const, count: 1 },
+    ];
+    const input = base({
+      rooms: [makeRoom({ capacity: 6 })],
+      roomTypes: new Map([["rt-1", makeRoomType({ beds })]]),
+      assignments: ps.map((p) => makeAssignment(p.id)),
+      guests: new Map(ps.map((p) => [p.id, p])),
+    });
+    expect(checkRoomRules(input).map((w) => w.kind)).toContain("over_beds");
+
+    const four = { ...input, assignments: input.assignments.slice(0, 4) };
+    expect(checkRoomRules(four).map((w) => w.kind)).not.toContain("over_beds");
+  });
+
+  it("skips the bed check when no beds are filled in", () => {
+    const ps = people(4);
+    const input = base({
+      roomTypes: new Map([["rt-1", makeRoomType({ beds: [] })]]),
+      assignments: ps.map((p) => makeAssignment(p.id)),
+      guests: new Map(ps.map((p) => [p.id, p])),
+    });
+    expect(checkRoomRules(input).map((w) => w.kind)).not.toContain("over_beds");
+  });
+
+  it("flags declined guests who still have a room", () => {
+    const ps = people(2);
+    const input = base({
+      assignments: ps.map((p) => makeAssignment(p.id)),
+      guests: new Map(ps.map((p) => [p.id, p])),
+      declinedGuestIds: new Set(["g1"]),
+    });
+    const w = checkRoomRules(input).find((x) => x.kind === "declined_in_room");
+    expect(w?.guestIds).toEqual(["g1"]);
+  });
+
+  it("uses the room nickname in messages", () => {
+    const ps = people(3);
+    const input = base({
+      rooms: [makeRoom({ name: "Girls' room", capacity: 2 })],
+      assignments: ps.map((p) => makeAssignment(p.id)),
+      guests: new Map(ps.map((p) => [p.id, p])),
+    });
+    const w = checkRoomRules(input).find((x) => x.kind === "over_capacity");
+    expect(w?.message).toContain("Girls' room");
+  });
+});
+
+describe("roommates' dates", () => {
+  const booked = { from: "2027-03-05", to: "2027-03-09" };
+  const input = (own: Record<string, { from: string; to: string }>): RuleInput => ({
+    rooms: [makeRoom()],
+    roomTypes: new Map([["rt-1", makeRoomType()]]),
+    assignments: [makeAssignment("g1"), makeAssignment("g2")],
+    guests: new Map([
+      ["g1", makeGuest("g1", "h1")],
+      ["g2", makeGuest("g2", "h1")],
+    ]),
+    relationships: [],
+    attendingGuestIds: new Set(["g1", "g2"]),
+    stayOf: (id) => own[id] ?? booked,
+  });
+
+  it("is quiet when everyone stays the booked dates", () => {
+    expect(checkRoomRules(input({})).some((w) => w.kind === "night_mismatch")).toBe(false);
+  });
+
+  it("warns and counts nights someone is alone", () => {
+    const w = checkRoomRules(input({ g1: { from: "2027-03-03", to: "2027-03-09" } })).find(
+      (x) => x.kind === "night_mismatch",
+    );
+    expect(w?.aloneNights).toBe(2);
   });
 });

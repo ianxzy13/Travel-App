@@ -1,4 +1,5 @@
 import type { HotelRoomRow, HotelRoomTypeRow, HotelRoomAssignmentRow } from "../database.types";
+import { roomCapacity } from "./room-sharing";
 
 type RoomGuest = {
   id: string;
@@ -103,7 +104,7 @@ export function autoArrangeRooms({
   const freeSpots = (roomId: string) => {
     const r = rooms.find((rm) => rm.id === roomId);
     const rt = r?.room_type_id ? roomTypes.get(r.room_type_id) : null;
-    const max = rt?.max_guests ?? 99;
+    const max = r ? roomCapacity(r, rt) : 0;
     return max - (roomOccupancy.get(roomId)?.size ?? 0);
   };
 
@@ -156,7 +157,10 @@ export function autoArrangeRooms({
     if (hasChildren) {
       for (const existing of occ) {
         const eg = guestMap.get(existing);
-        if (eg?.ageGroup === "adult" && unit.some((gid) => guestMap.get(gid)?.householdId === eg.householdId)) {
+        if (
+          eg?.ageGroup === "adult" &&
+          unit.some((gid) => guestMap.get(gid)?.householdId === eg.householdId)
+        ) {
           score += 15;
         }
       }
@@ -167,9 +171,7 @@ export function autoArrangeRooms({
 
   // Place each unit
   for (const unit of units) {
-    const availableRooms = rooms
-      .filter((r) => !lockedRoomIds.has(r.id))
-      .map((r) => r.id);
+    const availableRooms = rooms.filter((r) => !lockedRoomIds.has(r.id)).map((r) => r.id);
 
     let bestRoom: string | null = null;
     let bestScore = -Infinity;

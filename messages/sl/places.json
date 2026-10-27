@@ -257,13 +257,14 @@
         "kids": "Otroci",
         "accessible": "Dostopnost",
         "attending": "Prisotni",
-        "notReplied": "Niso odgovorili",
-        "everyone": "Vsi gostje"
+        "notReplied": "Še niso odgovorili",
+        "everyone": "Vsi (tudi zavrnjeni)",
+        "planning": "Prisotni + brez odgovora"
       },
       "dropToUnassign": "Povlecite sem za odstranitev",
       "allHotels": "Vsi hoteli",
       "roomCount": "{count, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}}",
-      "emptyRoom": "Povlecite ali tapnite gosta, nato tapnite sobo",
+      "emptyRoom": "Tapnite gosta, nato to sobo",
       "assigned": "Gost dodeljen v sobo",
       "removed": "Gost odstranjen iz sobe",
       "roomFull": "Ta soba je polna",
@@ -275,11 +276,78 @@
       "costSummary": "Pregled stroškov",
       "costPerNight": "{amount} / noč (samo zasedene sobe)",
       "occupancy": "{occupied} od {total} sob v uporabi · {guests, plural, one {# gost} two {# gosta} few {# gostje} other {# gostov}}",
-      "tapRoom": "Tapnite sobo za namestitev gosta {name}",
+      "tapRoom": "Zdaj tapnite sobo za: {name}",
       "prefShare": "Želi sobivati z: {name}",
       "prefAvoid": "Raje ne bi sobival z: {name}",
-      "strangerHint": "Gostje iz različnih skupin si delijo sobo — preverite, ali jim to ustreza",
-      "overBeds": "Več ljudi kot postelj!"
+      "strangerHint": "Mešane skupine — preverite, ali jim to ustreza",
+      "rsvpFilter": "Prikaži goste",
+      "cancelPick": "Prekliči",
+      "placeHere": "Izbranega gosta daj v sobo {room}",
+      "mixedHints": "Namigi o mešanih skupinah",
+      "badge": {
+        "notReplied": "brez odgovora",
+        "declined": "zavrnil"
+      },
+      "ofCapacity": "{count} / {capacity}",
+      "free": "{count, plural, one {# prosto mesto} two {# prosti mesti} few {# prosta mesta} other {# prostih mest}}",
+      "full": "Polna",
+      "over": "{count} preveč",
+      "bedsFor": "postelje za {count}",
+      "warning": {
+        "over_capacity": "Več ljudi, kot jih soba sprejme",
+        "over_beds": "Več ljudi kot postelj",
+        "declined_in_room": "Nekdo tukaj je zavrnil",
+        "child_alone": "Otrok brez odrasle osebe",
+        "keep_apart": "Dva, ki naj bi bila narazen",
+        "night_mismatch": "Različni datumi prihoda/odhoda",
+        "stranger_pair": "Mešane skupine",
+        "empty_room": "Prazna",
+        "no_room": "Brez sobe"
+      },
+      "guestMenu": "Možnosti za: {name}",
+      "moveTo": "Premakni v …",
+      "removeFromRoom": "Odstrani iz sobe",
+      "cancel": "Prekliči",
+      "swap": {
+        "title": "{room} je polna",
+        "text": "Zamenjam {name} z nekom iz te sobe? Ta oseba gre v {from}.",
+        "textNoRoom": "Zamenjam {name} z nekom iz te sobe? Ta oseba gre nazaj na seznam gostov.",
+        "with": "Zamenjaj z: {name}",
+        "done": "Zamenjano"
+      },
+      "edit": {
+        "title": "Uredi {room}",
+        "nickname": "Vzdevek",
+        "nicknameHint": "npr. Dekliška soba",
+        "capacity": "Število oseb v tej sobi",
+        "capacityHint": "Pustite prazno za privzeto vrednost tipa sobe ({count}).",
+        "save": "Shrani",
+        "saved": "Soba posodobljena"
+      },
+      "add": {
+        "button": "Dodaj sobe",
+        "title": "Dodaj sobe",
+        "text": "Ustvarite več enakih skupnih sob naenkrat. Vsako sobo lahko pozneje spremenite.",
+        "count": "Koliko sob",
+        "perRoom": "Oseb na sobo",
+        "start": "Ime ali številka prve sobe",
+        "startHint": "npr. 101 (nato 102, 103 …) ali Soba A (nato Soba B …)",
+        "beds": "Postelje na sobo (neobvezno)",
+        "bedsHint": "Pustite 0, če ne želite preverjanja postelj.",
+        "price": "Cena na sobo na noč (neobvezno)",
+        "typeName": "Soba za {count}",
+        "create": "{count, plural, one {Ustvari # sobo} two {Ustvari # sobi} few {Ustvari # sobe} other {Ustvari # sob}}",
+        "created": "{count, plural, one {Dodana # soba} two {Dodani # sobi} few {Dodane # sobe} other {Dodanih # sob}}"
+      },
+      "empty": {
+        "title": "Še ni sob",
+        "text": "Načrtujte, kdo si deli katero sobo, še preden vsi odgovorijo.",
+        "step1": "Dodajte hotel na strani Hoteli.",
+        "step2": "Kliknite »Dodaj sobe«: koliko sob in koliko oseb na sobo.",
+        "step3": "Tapnite gosta, nato sobo (na računalniku lahko tudi povlečete).",
+        "addHotel": "Dodaj hotel"
+      },
+      "aloneNights": "{count, plural, one {Nekdo je tu sam # noč} two {Nekdo je tu sam # noči} few {Nekdo je tu sam # noči} other {Nekdo je tu sam # noči}}"
     },
     "export": {
       "hotel": "Hotel",
@@ -298,6 +366,113 @@
       "roomingList": "Seznam sob",
       "csv": "Izvozi CSV",
       "pdf": "Natisni / PDF"
+    },
+    "stays": {
+      "title": "Kdo ostane kdaj",
+      "description": "Vnesite datume rezervacije hotela in označite, kdo pride prej ali odide pozneje. Povzetek je pripravljen za hotel.",
+      "back": "Hoteli",
+      "saved": "Datumi shranjeni",
+      "saving": "Shranjujem …",
+      "noHotel": {
+        "title": "Najprej dodajte hotel",
+        "text": "Ko dodate hotel, lahko tukaj vnesete datume rezervacije.",
+        "button": "Na Hotele"
+      },
+      "booking": {
+        "title": "Datumi rezervacije",
+        "hotel": "Hotel",
+        "checkIn": "Prihod",
+        "checkOut": "Odhod",
+        "save": "Shrani datume",
+        "nights": "{count, plural, one {# noč} two {# noči} few {# noči} other {# noči}}",
+        "invalid": "Odhod mora biti po prihodu.",
+        "perHotel": "Vsak hotel ima svoje datume. Gostje štejejo za hotel, v katerem so razporejeni, ali za tega, če še niso nikjer."
+      },
+      "guests": {
+        "title": "Gostje",
+        "showNotReplied": "Prikaži tudi goste, ki še niso odgovorili",
+        "showNoRoom": "Vključi goste, ki ne potrebujejo sobe",
+        "setBookingFirst": "Najprej zgoraj vnesite datume rezervacije. Do takrat lahko datume vsakega gosta vnesete z »Uredi datume«.",
+        "empty": "Ni gostov za prikaz. Gostje se pojavijo, ko potrdijo prihod (ali vklopite »še niso odgovorili«)."
+      },
+      "bookedDates": "Datumi rezervacije ({range})",
+      "noDates": "Še brez datumov",
+      "diff": {
+        "early": "{count, plural, one {# noč} two {# noči} few {# noči} other {# noči}} prej",
+        "late": "{count, plural, one {# noč} two {# noči} few {# noči} other {# noči}} dlje",
+        "shorter": "{count, plural, one {# noč manj} two {# noči manj} few {# noči manj} other {# noči manj}}"
+      },
+      "mode": {
+        "edit": "Uredi datume",
+        "earlier": "Pride prej",
+        "later": "Odide pozneje",
+        "arriveLater": "Pride pozneje",
+        "leaveEarlier": "Odide prej"
+      },
+      "more": "Več za: {name}",
+      "select": "Izberi: {name}",
+      "selectHousehold": "Izberi vse v: {name}",
+      "editFor": "Uredi datume za: {name}",
+      "sameForHousehold": "Enako za celo gospodinjstvo",
+      "householdDone": "Gospodinjstvo posodobljeno",
+      "reset": "Nazaj na datume rezervacije",
+      "guestSaid": "Gost je napisal: prihod {arrival}, odhod {departure}",
+      "useThis": "Uporabi to",
+      "badge": {
+        "notReplied": "brez odgovora",
+        "noRoom": "ne potrebuje sobe"
+      },
+      "bulk": {
+        "selected": "{count, plural, one {Izbran # gost} two {Izbrana # gosta} few {Izbrani # gostje} other {Izbranih # gostov}}",
+        "clear": "Počisti izbor"
+      },
+      "dialog": {
+        "booked": "rezervirano {range}",
+        "arrives": "Prihod",
+        "leaves": "Odhod",
+        "extra": "{count, plural, one {# dodatna noč} two {# dodatni noči} few {# dodatne noči} other {# dodatnih noči}}",
+        "nights": "{count, plural, one {# noč} two {# noči} few {# noči} other {# noči}}",
+        "bothDates": "Izberite oba datuma.",
+        "broken": "Odhod mora biti po prihodu.",
+        "outside": {
+          "earlier": "Izberite dan pred rezerviranim prihodom.",
+          "later": "Izberite dan po rezerviranem odhodu.",
+          "arriveLater": "Izberite dan znotraj rezerviranih datumov.",
+          "leaveEarlier": "Izberite dan znotraj rezerviranih datumov."
+        },
+        "andMore": "{names} in še {count}",
+        "cancel": "Prekliči",
+        "save": "Shrani"
+      },
+      "summary": {
+        "title": "Za hotel",
+        "copy": "Kopiraj",
+        "copied": "Kopirano — prilepite v e-pošto",
+        "copyFailed": "Kopiranje ni uspelo. Označite besedilo in ga kopirajte ročno.",
+        "print": "Natisni",
+        "perRoom": "Oseb na sobo",
+        "perRoomInvalid": "Vnesite celo število, 1 ali več.",
+        "needBooking": "Za povzetek vnesite datume rezervacije.",
+        "main": "Glavna rezervacija",
+        "mainLine": "{range} ({nights, plural, one {# noč} two {# noči} few {# noči} other {# noči}}): {guests, plural, one {# gost} two {# gosta} few {# gostje} other {# gostov}}, {rooms, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}} ({perRoom} na sobo)",
+        "early": "Pridejo prej",
+        "late": "Ostanejo dlje",
+        "shorter": "Krajša bivanja",
+        "nobody": "Nihče",
+        "arriveLine": "{names}: prihod {date} ({nights, plural, one {# dodatna noč} two {# dodatni noči} few {# dodatne noči} other {# dodatnih noči}})",
+        "leaveLine": "{names}: ostanejo do {date} ({nights, plural, one {# dodatna noč} two {# dodatni noči} few {# dodatne noči} other {# dodatnih noči}})",
+        "shorterLine": "{names}: {range} ({nights, plural, one {# noč manj} two {# noči manj} few {# noči manj} other {# noči manj}})",
+        "perNight": "Po nočeh",
+        "nightLine": "{date}: {guests, plural, one {# gost} two {# gosta} few {# gostje} other {# gostov}}, {rooms, plural, one {# soba} two {# sobi} few {# sobe} other {# sob}}",
+        "extraTotal": "Dodatne sobe-noči zunaj glavne rezervacije: {count}"
+      },
+      "table": {
+        "night": "Noč",
+        "guests": "Gostje",
+        "rooms": "Sobe",
+        "weddingNight": "poročna noč",
+        "extra": "dodatno"
+      }
     }
   },
   "travel": {

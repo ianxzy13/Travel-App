@@ -1,10 +1,14 @@
-import type { BedConfig, HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow } from "../database.types";
+import type { HotelRoomAssignmentRow, HotelRoomRow, HotelRoomTypeRow } from "../database.types";
+import { aloneNights, sameNights, type Stay } from "./nights";
+import { bedSpots, roomCapacity, roomTitle } from "./room-sharing";
 
 export type RoomWarning = {
   roomId: string;
   kind: WarningKind;
   message: string;
   guestIds?: string[];
+  /** night_mismatch: nights when only one roommate is there */
+  aloneNights?: number;
 };
 
 export type WarningKind =
@@ -14,7 +18,9 @@ export type WarningKind =
   | "night_mismatch"
   | "empty_room"
   | "no_room"
-  | "stranger_pair";
+  | "stranger_pair"
+  | "over_beds"
+  | "declined_in_room";
 
 type RoomGuest = {
   id: string;
@@ -37,11 +43,18 @@ export type RuleInput = {
   guests: Map<string, RoomGuest>;
   relationships: Relationship[];
   attendingGuestIds: Set<string>;
+  declinedGuestIds?: Set<string>;
+  /**
+   * Each guest's real stay at the room's hotel (own dates or the booking).
+   * When given, it replaces the check-in/check-out saved on assignments.
+   */
+  stayOf?: (guestId: string, hotelId: string) => Stay | null;
 };
 
 export function checkRoomRules(input: RuleInput): RoomWarning[] {
   const warnings: RoomWarning[] = [];
   const { rooms, roomTypes, assignments, guests, relationships, attendingGuestIds } = input;
+  const declined = input.declinedGuestIds ?? new Set<string>();
 
   const assignmentsByRoom = new Map<string, HotelRoomAssignmentRow[]>();
   for (const a of assignments) {
@@ -55,29 +68,50 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
   for (const room of rooms) {
     const ra = assignmentsByRoom.get(room.id) ?? [];
     const rt = room.room_type_id ? roomTypes.get(room.room_type_id) : null;
-    const maxGuests = rt?.max_guests ?? 99;
+    const maxGuests = roomCapacity(room, rt);
+    const label = roomTitle(room);
 
     // Over capacity
     if (ra.length > maxGuests) {
       warnings.push({
         roomId: room.id,
         kind: "over_capacity",
-        message: `Room ${room.room_number} has ${ra.length} guests but only fits ${maxGuests}.`,
+        message: `Room ${label} has ${ra.length} guests but only fits ${maxGuests}.`,
         guestIds: ra.map((a) => a.guest_id),
+      });
+    }
+
+    // More people than the beds sleep (skipped when no beds are filled in)
+    const spots = bedSpots(rt?.beds);
+    if (spots != null && ra.length > spots) {
+      warnings.push({
+        roomId: room.id,
+        kind: "over_beds",
+        message: `Room ${label} has ${ra.length} people but beds for ${spots}.`,
+        guestIds: ra.map((a) => a.guest_id),
+      });
+    }
+
+    // Guests who said no but still have a bed
+    const declinedHere = ra.filter((a) => declined.has(a.guest_id));
+    if (declinedHere.length) {
+      warnings.push({
+        roomId: room.id,
+        kind: "declined_in_room",
+        message: `Room ${label} has guests who declined.`,
+        guestIds: declinedHere.map((a) => a.guest_id),
       });
     }
 
     // Child without guardian
     const roomGuests = ra.map((a) => guests.get(a.guest_id)).filter(Boolean) as RoomGuest[];
-    const children = roomGuests.filter(
-      (g) => g.ageGroup === "child" || g.ageGroup === "infant",
-    );
+    const children = roomGuests.filter((g) => g.ageGroup === "child" || g.ageGroup === "infant");
     const adults = roomGuests.filter((g) => g.ageGroup === "adult");
     if (children.length > 0 && adults.length === 0) {
       warnings.push({
         roomId: room.id,
         kind: "child_alone",
-        message: `Room ${room.room_number} has children but no adults.`,
+        message: `Room ${label} has children but no adults.`,
         guestIds: children.map((c) => c.id),
       });
     }
@@ -93,14 +127,29 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
         warnings.push({
           roomId: room.id,
           kind: "keep_apart",
-          message: `${nameA} and ${nameB} should be kept apart but share room ${room.room_number}.`,
+          message: `${nameA} and ${nameB} should be kept apart but share room ${label}.`,
           guestIds: [rel.guestA, rel.guestB],
         });
       }
     }
 
     // Night mismatch
-    const dates = ra.filter((a) => a.check_in || a.check_out);
+    if (input.stayOf && ra.length > 1) {
+      const stays = ra.map((a) => input.stayOf!(a.guest_id, room.hotel_id));
+      if (stays.some((s) => !sameNights(s, stays[0]))) {
+        const alone = aloneNights(stays);
+        warnings.push({
+          roomId: room.id,
+          kind: "night_mismatch",
+          message: alone
+            ? `Roommates in ${label} have different dates; one person is alone for ${alone} night(s).`
+            : `Roommates in ${label} have different dates.`,
+          guestIds: ra.map((a) => a.guest_id),
+          aloneNights: alone,
+        });
+      }
+    }
+    const dates = input.stayOf ? [] : ra.filter((a) => a.check_in || a.check_out);
     if (dates.length > 1) {
       const checkIns = new Set(dates.map((a) => a.check_in).filter(Boolean));
       const checkOuts = new Set(dates.map((a) => a.check_out).filter(Boolean));
@@ -108,7 +157,7 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
         warnings.push({
           roomId: room.id,
           kind: "night_mismatch",
-          message: `Roommates in ${room.room_number} have different check-in/check-out dates.`,
+          message: `Roommates in ${label} have different check-in/check-out dates.`,
           guestIds: dates.map((a) => a.guest_id),
         });
       }
@@ -119,7 +168,7 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
       warnings.push({
         roomId: room.id,
         kind: "empty_room",
-        message: `Room ${room.room_number} is empty.`,
+        message: `Room ${label} is empty.`,
       });
     }
 
@@ -145,7 +194,7 @@ export function checkRoomRules(input: RuleInput): RoomWarning[] {
           warnings.push({
             roomId: room.id,
             kind: "stranger_pair",
-            message: `Room ${room.room_number} has guests from different households who aren't connected.`,
+            message: `Room ${label} has guests from different households who aren't connected.`,
             guestIds: roomGuests.map((g) => g.id),
           });
         }
