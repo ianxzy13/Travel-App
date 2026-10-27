@@ -83,7 +83,7 @@ export async function deleteMyData(code: string): Promise<ActionResult> {
   }
 
   await admin.from("guest_travel").delete().eq("household_id", h.id);
-  // Songs they suggested (songs the couple already added stay, without their name).
+  // Songs they suggested on the RSVP page while the old Music page existed.
   await admin.from("music_suggestions").delete().eq("household_id", h.id);
 
   await admin

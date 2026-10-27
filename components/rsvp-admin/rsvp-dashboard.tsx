@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import {
   Check,
   Copy,
@@ -165,8 +164,7 @@ export function RsvpDashboard(props: Props) {
                   setSending({
                     ids: invited.filter((h) => h.reply.status !== "replied").map((h) => h.id),
                     kind: counts.not_emailed === counts.all ? "invitation" : "reminder",
-                    channel:
-                      emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                    channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                   })
                 }
               >
@@ -272,12 +270,7 @@ export function RsvpDashboard(props: Props) {
                               setSending({
                                 ids: selectedIds,
                                 kind: "invitation",
-                                channel:
-                                  emailConfigured && smsConfigured
-                                    ? "both"
-                                    : emailConfigured
-                                      ? "email"
-                                      : "sms",
+                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                               })
                             }
                           >
@@ -291,12 +284,7 @@ export function RsvpDashboard(props: Props) {
                               setSending({
                                 ids: selectedIds,
                                 kind: "reminder",
-                                channel:
-                                  emailConfigured && smsConfigured
-                                    ? "both"
-                                    : emailConfigured
-                                      ? "email"
-                                      : "sms",
+                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                               })
                             }
                           >
@@ -331,12 +319,7 @@ export function RsvpDashboard(props: Props) {
                             setSending({
                               ids: [h.id],
                               kind: h.lastEmail ? "reminder" : "invitation",
-                              channel:
-                                emailConfigured && smsConfigured
-                                  ? "both"
-                                  : emailConfigured
-                                    ? "email"
-                                    : "sms",
+                              channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                             })
                           }
                         />
@@ -362,15 +345,8 @@ export function RsvpDashboard(props: Props) {
                             </p>
                           )}
                           {h.songRequest && (
-                            <p className="text-muted-foreground mt-1 flex items-start gap-1.5 text-sm">
-                              <Music className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-                              <span className="whitespace-pre-line">{h.songRequest}</span>{" "}
-                              <Link
-                                href="/app/music"
-                                className="text-xs underline underline-offset-2"
-                              >
-                                {t("songsInMusic")}
-                              </Link>
+                            <p className="text-muted-foreground mt-1 flex items-center gap-1.5 text-sm">
+                              <Music className="size-3.5" aria-hidden /> {h.songRequest}
                             </p>
                           )}
                         </li>
@@ -526,7 +502,9 @@ function HouseholdRow({
     ? `https://wa.me/${guestPhone.replace(/\D/g, "")}?text=${waText}`
     : `https://wa.me/?text=${waText}`;
   const smsBody = encodeURIComponent(shareText);
-  const smsLink = guestPhone ? `sms:${guestPhone}?body=${smsBody}` : `sms:?body=${smsBody}`;
+  const smsLink = guestPhone
+    ? `sms:${guestPhone}?body=${smsBody}`
+    : `sms:?body=${smsBody}`;
   const emailSubject = encodeURIComponent(t("shareEmailSubject", { couple }));
   const emailBody = encodeURIComponent(shareText);
   const guestEmail = h.guests.find((g) => g.email && !g.isPlusOne)?.email;

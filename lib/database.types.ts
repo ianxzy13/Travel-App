@@ -302,7 +302,14 @@ export type VenueKind = "ceremony" | "reception" | "both";
 export type VenueStatus =
   "researching" | "contacted" | "visited" | "shortlisted" | "booked" | "rejected";
 export type VenueAvailability = "unknown" | "available" | "tentative" | "unavailable";
-export type HotelStatus = "considering" | "contacted" | "block_confirmed" | "rejected" | "rate_requested" | "rate_received" | "rate_signed";
+export type HotelStatus =
+  | "considering"
+  | "contacted"
+  | "block_confirmed"
+  | "rejected"
+  | "rate_requested"
+  | "rate_received"
+  | "rate_signed";
 export type FlightCategory = "guest" | "couple" | "honeymoon";
 export type FlightDirection = "arrival" | "departure" | "other";
 export type FlightStatus = "considering" | "booked";
@@ -586,12 +593,7 @@ export type GiftRow = WeddingScoped & {
 // ---------- Prompt D: paperwork ----------
 
 export type PaperworkStatus =
-  | "not_started"
-  | "requested"
-  | "received"
-  | "apostilled"
-  | "translated"
-  | "submitted";
+  "not_started" | "requested" | "received" | "apostilled" | "translated" | "submitted";
 export type PaperworkPerson = "partner_a" | "partner_b" | "shared";
 
 export type PaperworkItemRow = WeddingScoped & {
@@ -632,7 +634,8 @@ export type SaveTheDateRow = {
 };
 
 export type StdSendMethod = "email" | "sms" | "whatsapp" | "manual";
-export type StdSendStatus = "not_sent" | "queued" | "sent" | "delivered" | "opened" | "failed" | "opted_out";
+export type StdSendStatus =
+  "not_sent" | "queued" | "sent" | "delivered" | "opened" | "failed" | "opted_out";
 
 export type StdSendRow = {
   id: string;
@@ -684,34 +687,7 @@ export type WebsiteSectionRow = WeddingScoped & {
   translations: Translations;
 };
 
-// ---------- Music ----------
-
-export type MusicPriority = "must" | "nice" | "no";
-export type MusicSuggestionStatus = "new" | "accepted" | "dismissed";
-
-export type MusicMomentRow = WeddingScoped & {
-  name: string;
-  /** ceremony_in, first_dance, party, do_not_play, custom, ... */
-  kind: string;
-  schedule_item_id: string | null;
-  sort_order: number;
-  hidden: boolean;
-};
-
-export type MusicSongRow = WeddingScoped & {
-  moment_id: string;
-  title: string;
-  artist: string;
-  url: string | null;
-  note: string | null;
-  priority: MusicPriority;
-  /** short tag like "SL" or "EN" */
-  language: string | null;
-  sort_order: number;
-  suggestion_id: string | null;
-  created_by: string | null;
-};
-
+/** Left from the old Music page; only "delete my data" still clears it. */
 export type MusicSuggestionRow = {
   id: string;
   wedding_id: string;
@@ -719,8 +695,27 @@ export type MusicSuggestionRow = {
   guest_name: string | null;
   title: string;
   artist: string;
-  status: MusicSuggestionStatus;
+  status: string;
   created_at: string;
+};
+
+// ---------- Playlist ----------
+
+export type PlaylistPriority = "must" | "nice" | "no";
+
+export type PlaylistCategoryRow = {
+  id: string;
+  wedding_id: string;
+  name: string;
+  sort_order: number;
+  created_at: string;
+};
+
+export type PlaylistSongRow = WeddingScoped & {
+  category_id: string;
+  title: string;
+  artist: string;
+  priority: PlaylistPriority;
 };
 
 // Helper: columns with DB defaults become optional on insert.
@@ -810,7 +805,10 @@ export type Database = {
       flights: Table<FlightRow, "wedding_id">;
       flight_travellers: Table<FlightTravellerRow, "flight_id" | "guest_id" | "wedding_id">;
       guest_travel: Table<GuestTravelRow, "wedding_id" | "household_id">;
-      guest_checklist_items: Table<GuestChecklistItemRow, "wedding_id" | "household_id" | "item_key">;
+      guest_checklist_items: Table<
+        GuestChecklistItemRow,
+        "wedding_id" | "household_id" | "item_key"
+      >;
       boards: Table<BoardRow, "wedding_id" | "name">;
       pins: Table<PinRow, "wedding_id" | "board_id">;
       pin_comments: Table<PinCommentRow, "wedding_id" | "pin_id" | "user_id" | "body">;
@@ -823,37 +821,19 @@ export type Database = {
       activity_log: Table<ActivityLogRow, "wedding_id" | "kind">;
       gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
       schedule_items: Table<ScheduleItemRow, "wedding_id" | "start_time" | "title">;
-      music_moments: Table<MusicMomentRow, "wedding_id" | "name">;
-      music_songs: Table<MusicSongRow, "wedding_id" | "moment_id" | "title">;
       music_suggestions: Table<MusicSuggestionRow, "wedding_id" | "title">;
-      paperwork_items: Table<
-        PaperworkItemRow,
-        "wedding_id" | "person" | "title"
-      >;
-      wedding_photos: Table<
-        WeddingPhotoRow,
-        "wedding_id" | "uploader_name" | "file_path"
-      >;
-      save_the_dates: Table<
-        SaveTheDateRow,
-        "wedding_id"
-      >;
-      save_the_date_sends: Table<
-        StdSendRow,
-        "wedding_id" | "save_the_date_id" | "household_id"
-      >;
+      playlist_categories: Table<PlaylistCategoryRow, "wedding_id" | "name">;
+      playlist_songs: Table<PlaylistSongRow, "wedding_id" | "category_id" | "title">;
+      paperwork_items: Table<PaperworkItemRow, "wedding_id" | "person" | "title">;
+      wedding_photos: Table<WeddingPhotoRow, "wedding_id" | "uploader_name" | "file_path">;
+      save_the_dates: Table<SaveTheDateRow, "wedding_id">;
+      save_the_date_sends: Table<StdSendRow, "wedding_id" | "save_the_date_id" | "household_id">;
       guest_relationships: Table<
         GuestRelationshipRow,
         "wedding_id" | "guest_a" | "guest_b" | "type"
       >;
-      outbound_clicks: Table<
-        OutboundClickRow,
-        "wedding_id" | "provider" | "url"
-      >;
-      fare_cache: Table<
-        FareCacheRow,
-        "origin" | "destination" | "depart_month" | "price_eur"
-      >;
+      outbound_clicks: Table<OutboundClickRow, "wedding_id" | "provider" | "url">;
+      fare_cache: Table<FareCacheRow, "origin" | "destination" | "depart_month" | "price_eur">;
     };
     Views: { [_ in never]: never };
     Functions: {

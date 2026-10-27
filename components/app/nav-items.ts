@@ -43,7 +43,7 @@ export type NavKey =
   | "inspiration"
   | "website"
   | "schedule"
-  | "music"
+  | "playlist"
   | "photos"
   | "saveTheDate"
   | "settings"
@@ -89,7 +89,7 @@ export const NAV_GROUPS: { key: NavGroupKey; items: NavItem[] }[] = [
       { href: "/app/save-the-date", key: "saveTheDate", icon: Send },
       { href: "/app/website", key: "website", icon: Globe },
       { href: "/app/schedule", key: "schedule", icon: Clock },
-      { href: "/app/music", key: "music", icon: ListMusic },
+      { href: "/app/playlist", key: "playlist", icon: ListMusic },
     ],
   },
 ];

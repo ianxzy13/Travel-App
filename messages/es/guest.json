@@ -177,13 +177,7 @@
       "guest": "Invitado",
       "dietaryConsent": "I agree that my dietary and allergy information is shared with the couple and their caterer.",
       "consentNotice": "Your answers are shared with {couple} to plan the wedding.",
-      "privacyLink": "Privacy policy",
-      "songTitle": "Song {n} title",
-      "songArtist": "Song {n} artist",
-      "songTitlePlaceholder": "Song title",
-      "songArtistPlaceholder": "Artist",
-      "addSong": "Add another song",
-      "removeSong": "Remove song {n}"
+      "privacyLink": "Privacy policy"
     },
     "errors": {
       "rsvp_not_found": "No encontramos esa invitación. Revisa el enlace o el código.",

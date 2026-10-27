@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { Check, Loader2, MapPin, Plus, Shirt, X } from "lucide-react";
+import { Check, Loader2, MapPin, Shirt, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -18,12 +18,10 @@ import {
   needsMeal,
   rsvpGuestName,
   toPayload,
-  withSongs,
   type GuestNameLabels,
   type RsvpFormState,
 } from "@/lib/rsvp/form";
 import type { RsvpData, RsvpResult } from "@/lib/rsvp/types";
-import { MAX_GUEST_SONGS } from "@/lib/music/songs";
 import { cn } from "@/lib/utils";
 
 /** "Ann's guest" / "Guest" in the current language. */
@@ -295,10 +293,7 @@ export function RsvpForm({
                     checked={state.people[g.id].dietaryConsent}
                     onCheckedChange={(v) => setPerson(g.id, { dietaryConsent: !!v })}
                   />
-                  <label
-                    htmlFor={`dc-${g.id}`}
-                    className="text-muted-foreground text-xs leading-snug"
-                  >
+                  <label htmlFor={`dc-${g.id}`} className="text-muted-foreground text-xs leading-snug">
                     {tf("dietaryConsent")}
                   </label>
                 </div>
@@ -310,69 +305,16 @@ export function RsvpForm({
 
       <section className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
         {data.wedding.rsvp_ask_song && (
-          <fieldset className="space-y-2">
-            <legend className="mb-1.5 text-sm font-medium">{tf("song")}</legend>
-            {(state.songs.length ? state.songs : [{ title: "", artist: "" }]).map((s, i, list) => {
-              const set = (patch: Partial<typeof s>) =>
-                onStateChange(
-                  withSongs(
-                    state,
-                    list.map((x, j) => (j === i ? { ...x, ...patch } : x)),
-                  ),
-                );
-              return (
-                <div key={i} className="flex items-start gap-2">
-                  <div className="grid min-w-0 flex-1 gap-2 sm:grid-cols-2">
-                    <Input
-                      value={s.title}
-                      maxLength={90}
-                      aria-label={tf("songTitle", { n: i + 1 })}
-                      placeholder={tf("songTitlePlaceholder")}
-                      onChange={(e) => set({ title: e.target.value })}
-                    />
-                    <Input
-                      value={s.artist}
-                      maxLength={60}
-                      aria-label={tf("songArtist", { n: i + 1 })}
-                      placeholder={tf("songArtistPlaceholder")}
-                      onChange={(e) => set({ artist: e.target.value })}
-                    />
-                  </div>
-                  {list.length > 1 && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="size-9 shrink-0"
-                      aria-label={tf("removeSong", { n: i + 1 })}
-                      onClick={() =>
-                        onStateChange(
-                          withSongs(
-                            state,
-                            list.filter((_, j) => j !== i),
-                          ),
-                        )
-                      }
-                    >
-                      <X aria-hidden />
-                    </Button>
-                  )}
-                </div>
-              );
-            })}
-            {state.songs.length < MAX_GUEST_SONGS && state.songs.some((s) => s.title.trim()) && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() =>
-                  onStateChange(withSongs(state, [...state.songs, { title: "", artist: "" }]))
-                }
-              >
-                <Plus aria-hidden /> {tf("addSong")}
-              </Button>
-            )}
-          </fieldset>
+          <div className="space-y-1.5">
+            <Label htmlFor="song">{tf("song")}</Label>
+            <Input
+              id="song"
+              value={state.songRequest}
+              maxLength={200}
+              placeholder={tf("songPlaceholder")}
+              onChange={(e) => onStateChange({ ...state, songRequest: e.target.value })}
+            />
+          </div>
         )}
         <div className="space-y-1.5">
           <Label htmlFor="message">{tf("message", { couple })}</Label>
@@ -388,11 +330,7 @@ export function RsvpForm({
 
       <p className="text-muted-foreground text-center text-xs leading-relaxed">
         {tf("consentNotice", { couple })}{" "}
-        <Link
-          href="/privacy"
-          target="_blank"
-          className="hover:text-foreground underline underline-offset-2"
-        >
+        <Link href="/privacy" target="_blank" className="underline underline-offset-2 hover:text-foreground">
           {tf("privacyLink")}
         </Link>
       </p>

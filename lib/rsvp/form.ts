@@ -1,5 +1,4 @@
 import type { RsvpStatus } from "@/lib/database.types";
-import { guestSongsToText, textToGuestSongs, type GuestSong } from "@/lib/music/songs";
 import type { RsvpData } from "./types";
 
 /** One person's answer for one event. */
@@ -9,20 +8,10 @@ export type RsvpFormState = {
   /** key: `${guestId}:${eventId}` */
   answers: Record<string, Answer>;
   /** per person: plus-one names, dietary notes, and dietary consent */
-  people: Record<
-    string,
-    { firstName: string; lastName: string; dietary: string; dietaryConsent: boolean }
-  >;
-  /** up to three songs; songRequest is the same as one text (shown on the thank-you screen) */
-  songs: GuestSong[];
+  people: Record<string, { firstName: string; lastName: string; dietary: string; dietaryConsent: boolean }>;
   songRequest: string;
   message: string;
 };
-
-/** Updates the songs and the text version together. */
-export function withSongs(state: RsvpFormState, songs: GuestSong[]): RsvpFormState {
-  return { ...state, songs, songRequest: guestSongsToText(songs) };
-}
 
 export const answerKey = (guestId: string, eventId: string) => `${guestId}:${eventId}`;
 
@@ -51,7 +40,6 @@ export function initialFormState(data: RsvpData): RsvpFormState {
   return {
     answers,
     people,
-    songs: textToGuestSongs(data.household.song_request),
     songRequest: data.household.song_request ?? "",
     message: data.household.message ?? "",
   };
@@ -93,20 +81,10 @@ export function toPayload(data: RsvpData, state: RsvpFormState) {
       const p = state.people[g.id];
       const dietary = p.dietaryConsent ? p.dietary : "";
       return plusOnes.has(g.id)
-        ? {
-            id: g.id,
-            dietary,
-            dietary_consent: p.dietaryConsent,
-            first_name: p.firstName,
-            last_name: p.lastName,
-          }
+        ? { id: g.id, dietary, dietary_consent: p.dietaryConsent, first_name: p.firstName, last_name: p.lastName }
         : { id: g.id, dietary, dietary_consent: p.dietaryConsent };
     }),
-    song_request: guestSongsToText(state.songs),
-    songs: state.songs
-      .filter((s) => s.title.trim())
-      .slice(0, 3)
-      .map((s) => ({ title: s.title.trim(), artist: s.artist.trim() })),
+    song_request: state.songRequest,
     message: state.message,
   };
 }
