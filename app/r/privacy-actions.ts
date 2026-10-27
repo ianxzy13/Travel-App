@@ -83,6 +83,8 @@ export async function deleteMyData(code: string): Promise<ActionResult> {
   }
 
   await admin.from("guest_travel").delete().eq("household_id", h.id);
+  // Songs they suggested (songs the couple already added stay, without their name).
+  await admin.from("music_suggestions").delete().eq("household_id", h.id);
 
   await admin
     .from("guests")

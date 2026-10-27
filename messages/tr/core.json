@@ -72,7 +72,8 @@
     "code": "Lütfen e-postadaki kodu girin (yalnızca rakam).",
     "slugChars": "Yalnızca harf, rakam ve tekli tire kullanın (ör. ian-ve-maria).",
     "slugLength": "3 ile 60 karakter arasında kullanın.",
-    "airport": "3 harfli havalimanı kodunu kullanın, ör. IST."
+    "airport": "3 harfli havalimanı kodunu kullanın, ör. IST.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "İptal",

@@ -72,7 +72,8 @@
     "code": "Vul de code uit de e-mail in (alleen cijfers).",
     "slugChars": "Gebruik alleen letters, cijfers en losse streepjes (bijv. ian-en-maria).",
     "slugLength": "Gebruik 3 tot 60 tekens.",
-    "airport": "Gebruik de luchthavencode van 3 letters, bijv. AMS."
+    "airport": "Gebruik de luchthavencode van 3 letters, bijv. AMS.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Annuleren",

@@ -72,7 +72,8 @@
     "code": "Silakan masukkan kode dari email (hanya angka).",
     "slugChars": "Gunakan hanya huruf, angka, dan tanda hubung tunggal (misalnya ian-and-maria).",
     "slugLength": "Gunakan 3 sampai 60 karakter.",
-    "airport": "Gunakan kode bandara 3 huruf, misalnya LIS."
+    "airport": "Gunakan kode bandara 3 huruf, misalnya LIS.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Batal",

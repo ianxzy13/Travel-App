@@ -72,7 +72,8 @@
     "code": "Ange koden från mejlet (bara siffror).",
     "slugChars": "Använd bara bokstäver, siffror och enstaka bindestreck (t.ex. ian-och-maria).",
     "slugLength": "Använd 3 till 60 tecken.",
-    "airport": "Använd flygplatsens kod på 3 bokstäver, t.ex. ARN."
+    "airport": "Använd flygplatsens kod på 3 bokstäver, t.ex. ARN.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Avbryt",

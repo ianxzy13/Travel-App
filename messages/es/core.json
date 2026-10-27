@@ -72,7 +72,8 @@
     "code": "Introduce el código del correo (solo números).",
     "slugChars": "Usa solo letras, números y guiones sueltos (p. ej. ian-y-maria).",
     "slugLength": "Usa entre 3 y 60 caracteres.",
-    "airport": "Usa el código de aeropuerto de 3 letras, p. ej. MAD."
+    "airport": "Usa el código de aeropuerto de 3 letras, p. ej. MAD.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Cancelar",

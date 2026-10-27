@@ -72,7 +72,8 @@
     "code": "Saisissez le code de l’e-mail (chiffres uniquement).",
     "slugChars": "Uniquement des lettres, des chiffres et des tirets simples (par ex. ian-et-maria).",
     "slugLength": "Utilisez 3 à 60 caractères.",
-    "airport": "Utilisez le code aéroport à 3 lettres, par ex. CDG."
+    "airport": "Utilisez le code aéroport à 3 lettres, par ex. CDG.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Annuler",

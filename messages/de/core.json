@@ -72,7 +72,8 @@
     "code": "Bitte gib den Code aus der E-Mail ein (nur Ziffern).",
     "slugChars": "Nur Buchstaben, Ziffern und einzelne Bindestriche (z. B. ian-und-maria).",
     "slugLength": "Verwende 3 bis 60 Zeichen.",
-    "airport": "Verwende den 3-Buchstaben-Flughafencode, z. B. MUC."
+    "airport": "Verwende den 3-Buchstaben-Flughafencode, z. B. MUC.",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "Abbrechen",

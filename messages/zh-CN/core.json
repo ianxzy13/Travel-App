@@ -72,7 +72,8 @@
     "code": "请输入邮件中的验证码（仅数字）。",
     "slugChars": "只能使用字母、数字和单个连字符（例如 ian-and-maria）。",
     "slugLength": "请使用 3 到 60 个字符。",
-    "airport": "请使用三字母机场代码，例如 PEK。"
+    "airport": "请使用三字母机场代码，例如 PEK。",
+    "songTitle": "Please enter the song title."
   },
   "ui": {
     "cancel": "取消",

@@ -177,7 +177,13 @@
       "guest": "하객",
       "dietaryConsent": "I agree that my dietary and allergy information is shared with the couple and their caterer.",
       "consentNotice": "Your answers are shared with {couple} to plan the wedding.",
-      "privacyLink": "Privacy policy"
+      "privacyLink": "Privacy policy",
+      "songTitle": "Song {n} title",
+      "songArtist": "Song {n} artist",
+      "songTitlePlaceholder": "Song title",
+      "songArtistPlaceholder": "Artist",
+      "addSong": "Add another song",
+      "removeSong": "Remove song {n}"
     },
     "errors": {
       "rsvp_not_found": "초대장을 찾을 수 없습니다. 링크나 코드를 확인하세요.",
