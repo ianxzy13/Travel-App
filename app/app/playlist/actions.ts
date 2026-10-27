@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/action-result";
+import { getTranslations } from "next-intl/server";
+import { DEFAULT_CATEGORIES } from "@/lib/playlist/songs";
 import { createClient } from "@/lib/supabase/server";
 import { playlistCategorySchema, playlistSongSchema } from "@/lib/validation/playlist";
 import { canEdit, requireWedding } from "@/lib/wedding";
@@ -63,7 +65,7 @@ export async function deleteSong(songId: string): Promise<ActionResult> {
 export async function saveCategory(
   categoryId: string | null,
   input: unknown,
-): Promise<ActionResult> {
+): Promise<ActionResult<{ id: string }>> {
   const ctx = await editor();
   if (!ctx || (categoryId && !id.safeParse(categoryId).success)) return noPermission();
   const parsed = playlistCategorySchema.safeParse(input);
@@ -75,7 +77,8 @@ export async function saveCategory(
       .eq("id", categoryId)
       .eq("wedding_id", ctx.wedding.id);
     if (error) return fail("saveCategory", error);
-    return done();
+    revalidatePath("/app/playlist");
+    return { ok: true, data: { id: categoryId } };
   }
   const { data: last } = await ctx.sb
     .from("playlist_categories")
@@ -83,12 +86,41 @@ export async function saveCategory(
     .eq("wedding_id", ctx.wedding.id)
     .order("sort_order", { ascending: false })
     .limit(1);
-  const { error } = await ctx.sb.from("playlist_categories").insert({
-    wedding_id: ctx.wedding.id,
-    name: parsed.data.name,
-    sort_order: (last?.[0]?.sort_order ?? -1) + 1,
-  });
+  const { data: row, error } = await ctx.sb
+    .from("playlist_categories")
+    .insert({
+      wedding_id: ctx.wedding.id,
+      name: parsed.data.name,
+      sort_order: (last?.[0]?.sort_order ?? -1) + 1,
+    })
+    .select("id")
+    .single();
   if (error) return fail("saveCategory", error);
+  revalidatePath("/app/playlist");
+  // the new id lets the song form pick the category straight away
+  return { ok: true, data: { id: row.id } };
+}
+
+/** Adds Ceremony, First dance, Dinner and Party (any that are missing). */
+export async function addStarterCategories(): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const t = await getTranslations("playlist.defaults");
+  const { data: existing, error: readError } = await ctx.sb
+    .from("playlist_categories")
+    .select("name, sort_order")
+    .eq("wedding_id", ctx.wedding.id);
+  if (readError) return fail("saveCategory", readError);
+  const taken = new Set((existing ?? []).map((c) => c.name.trim().toLowerCase()));
+  let next = Math.max(-1, ...(existing ?? []).map((c) => c.sort_order)) + 1;
+  const rows = DEFAULT_CATEGORIES.map((key) => t(key))
+    .filter((name) => !taken.has(name.toLowerCase()))
+    .map((name) => ({ wedding_id: ctx.wedding.id, name, sort_order: next++ }));
+  if (rows.length) {
+    const { error } = await ctx.sb.from("playlist_categories").insert(rows);
+    // 23505: someone else added them at the same moment
+    if (error && error.code !== "23505") return fail("saveCategory", error);
+  }
   return done();
 }
 

@@ -1,10 +1,16 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { ListMusic, Loader2, Pencil, Plus, Settings2, Trash2 } from "lucide-react";
+import { ListMusic, Loader2, Pencil, Plus, Settings2, Sparkles, Trash2, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { deleteCategory, deleteSong, saveCategory, saveSong } from "@/app/app/playlist/actions";
+import {
+  addStarterCategories,
+  deleteCategory,
+  deleteSong,
+  saveCategory,
+  saveSong,
+} from "@/app/app/playlist/actions";
 import { PageHeader } from "@/components/app/page-header";
 import {
   AlertDialog,
@@ -110,7 +116,6 @@ export function PlaylistPage({
         <section className="bg-card mb-6 rounded-xl border p-4">
           <h2 className="mb-3 text-lg">{t("add.title")}</h2>
           <SongForm
-            key={categories[0]?.id ?? "none"}
             categories={categories}
             songs={songs}
             titleRef={titleRef}
@@ -313,6 +318,11 @@ function SongForm({
   );
   const [warned, setWarned] = useState(false);
   const [pending, startTransition] = useTransition();
+  // The chosen category can disappear (deleted) or arrive later (just created):
+  // fall back to the first one so the form always has a valid choice.
+  const categoryId = categories.some((c) => c.id === draft.categoryId)
+    ? draft.categoryId
+    : (categories[0]?.id ?? "");
   const dup = findDuplicate(songs, draft, song?.id);
   const dupCategory = dup ? categories.find((c) => c.id === dup.category_id)?.name : null;
   const set = (patch: Partial<Draft>) => {
@@ -326,10 +336,10 @@ function SongForm({
       return;
     }
     startTransition(async () => {
-      const r = await saveSong(song?.id ?? null, draft);
+      const r = await saveSong(song?.id ?? null, { ...draft, categoryId });
       if (!r.ok) return void toast.error(r.error);
       toast.success(song ? t("edit.done") : t("add.done", { title: draft.title.trim() }));
-      if (!song) setDraft((d) => ({ ...empty, categoryId: d.categoryId, priority: d.priority }));
+      if (!song) setDraft((d) => ({ ...empty, categoryId, priority: d.priority }));
       setWarned(false);
       onSaved?.();
     });
@@ -373,18 +383,12 @@ function SongForm({
         </div>
         <div className="space-y-1.5">
           <Label htmlFor={`${id}-category`}>{t("field.category")}</Label>
-          <Select value={draft.categoryId} onValueChange={(v) => set({ categoryId: v })}>
-            <SelectTrigger id={`${id}-category`} className="w-full">
-              <SelectValue placeholder={t("field.chooseCategory")} />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((c) => (
-                <SelectItem key={c.id} value={c.id}>
-                  {c.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <CategoryPicker
+            id={`${id}-category`}
+            value={categoryId}
+            categories={categories}
+            onChange={(v) => set({ categoryId: v })}
+          />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor={`${id}-priority`}>{t("field.priority")}</Label>
@@ -407,7 +411,7 @@ function SongForm({
         {!stacked && (
           <Button
             type="submit"
-            disabled={pending || !draft.title.trim() || !draft.categoryId}
+            disabled={pending || !draft.title.trim() || !categoryId}
             className="sm:col-span-2 lg:col-span-1"
           >
             {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Plus aria-hidden />}
@@ -434,13 +438,121 @@ function SongForm({
           <Button type="button" variant="ghost" onClick={onCancel}>
             {t("cancel")}
           </Button>
-          <Button type="submit" disabled={pending || !draft.title.trim() || !draft.categoryId}>
+          <Button type="submit" disabled={pending || !draft.title.trim() || !categoryId}>
             {pending && <Loader2 className="animate-spin" aria-hidden />}
             {dup && warned ? t("duplicate.anyway") : submitLabel}
           </Button>
         </DialogFooter>
       )}
     </form>
+  );
+}
+
+const NEW_CATEGORY = "__new";
+const STARTER_CATEGORIES = "__starter";
+
+/**
+ * The category dropdown. It always has something to pick: "New category…" opens a
+ * name box right here, and with no categories at all it also offers the starter ones.
+ */
+function CategoryPicker({
+  id,
+  value,
+  categories,
+  onChange,
+}: {
+  id: string;
+  value: string;
+  categories: PlaylistCategory[];
+  onChange: (id: string) => void;
+}) {
+  const t = useTranslations("playlist");
+  const [adding, setAdding] = useState(false);
+  const [name, setName] = useState("");
+  const [pending, startTransition] = useTransition();
+
+  const add = () => {
+    if (!name.trim()) return;
+    startTransition(async () => {
+      const r = await saveCategory(null, { name });
+      if (!r.ok) return void toast.error(r.error);
+      toast.success(t("categories.added"));
+      onChange(r.data.id);
+      setName("");
+      setAdding(false);
+    });
+  };
+
+  const addStarters = () =>
+    startTransition(async () => {
+      const r = await addStarterCategories();
+      if (!r.ok) return void toast.error(r.error);
+      toast.success(t("categories.starterAdded"));
+    });
+
+  if (adding)
+    return (
+      <div className="flex gap-1.5">
+        <Input
+          id={id}
+          autoFocus
+          value={name}
+          maxLength={60}
+          placeholder={t("categories.newPlaceholder")}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+            // Enter adds the category, not the song
+            if (e.key === "Enter") {
+              e.preventDefault();
+              add();
+            } else if (e.key === "Escape") setAdding(false);
+          }}
+        />
+        <Button type="button" disabled={pending || !name.trim()} onClick={add}>
+          {pending ? <Loader2 className="animate-spin" aria-hidden /> : t("categories.add")}
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="shrink-0"
+          aria-label={t("cancel")}
+          onClick={() => setAdding(false)}
+        >
+          <X aria-hidden />
+        </Button>
+      </div>
+    );
+
+  return (
+    <Select
+      value={value}
+      disabled={pending}
+      onValueChange={(v) => {
+        if (v === NEW_CATEGORY) setAdding(true);
+        else if (v === STARTER_CATEGORIES) addStarters();
+        else onChange(v);
+      }}
+    >
+      <SelectTrigger id={id} className="w-full">
+        <SelectValue placeholder={t("field.chooseCategory")} />
+      </SelectTrigger>
+      <SelectContent>
+        {categories.map((c) => (
+          <SelectItem key={c.id} value={c.id}>
+            {c.name}
+          </SelectItem>
+        ))}
+        {categories.length === 0 && (
+          <SelectItem value={STARTER_CATEGORIES}>
+            <Sparkles aria-hidden /> {t("categories.starter")}
+          </SelectItem>
+        )}
+        <SelectItem value={NEW_CATEGORY}>
+          <Plus aria-hidden /> {t("categories.newOption")}
+        </SelectItem>
+      </SelectContent>
+    </Select>
   );
 }
 
