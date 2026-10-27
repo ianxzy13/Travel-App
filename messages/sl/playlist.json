@@ -1,0 +1,72 @@
+{
+  "playlist": {
+    "title": "Seznam pesmi",
+    "description": "Pesmi za vašo poroko: kaj mora igrati, kaj bi bilo lepo in česa DJ ne sme predvajati.",
+    "save": "Shrani",
+    "cancel": "Prekliči",
+    "noSongs": "Še ni pesmi",
+    "defaults": {
+      "ceremony": "Obred",
+      "firstDance": "Prvi ples",
+      "dinner": "Večerja",
+      "party": "Zabava"
+    },
+    "priority": {
+      "must": "Obvezno",
+      "nice": "Bi bilo lepo",
+      "no": "Ne predvajaj"
+    },
+    "field": {
+      "title": "Naslov pesmi",
+      "artist": "Izvajalec",
+      "category": "Kategorija",
+      "chooseCategory": "Izberite kategorijo",
+      "priority": "Prednost"
+    },
+    "add": {
+      "title": "Dodaj pesem",
+      "button": "Dodaj",
+      "done": "»{title}« dodana"
+    },
+    "edit": {
+      "title": "Uredi pesem",
+      "label": "Uredi: {title}",
+      "done": "Pesem shranjena"
+    },
+    "delete": {
+      "label": "Izbriši: {title}",
+      "title": "Izbrišem »{title}«?",
+      "button": "Izbriši",
+      "done": "Pesem izbrisana"
+    },
+    "duplicate": {
+      "text": "Ta pesem je že na seznamu (v kategoriji {category}).",
+      "again": "Jo vseeno dodam še enkrat?",
+      "anyway": "Vseeno dodaj"
+    },
+    "filter": {
+      "label": "Prikaži pesmi",
+      "all": "Vse",
+      "none": "Še ni pesmi s to prednostjo."
+    },
+    "empty": {
+      "text": "Vse pesmi za poroko na enem seznamu, razvrščene po trenutkih, da DJ ve, kaj naj predvaja in česa ne.",
+      "button": "Dodaj prvo pesem"
+    },
+    "categories": {
+      "manage": "Uredi kategorije",
+      "title": "Kategorije",
+      "text": "Kategorijo preimenujete tako, da prepišete ime. Če kategorijo izbrišete, se izbrišejo tudi njene pesmi.",
+      "rename": "Ime kategorije {name}",
+      "renamed": "Kategorija preimenovana",
+      "delete": "Izbriši: {name}",
+      "deleteTitle": "Izbrišem »{name}«?",
+      "deleteText": "{count, plural, one {Izbrisala se bo tudi # pesem.} two {Izbrisali se bosta tudi # pesmi.} few {Izbrisale se bodo tudi # pesmi.} other {Izbrisalo se bo tudi # pesmi.}}",
+      "deleted": "Kategorija izbrisana",
+      "new": "Nova kategorija",
+      "newPlaceholder": "npr. Pogostitev",
+      "add": "Dodaj",
+      "added": "Kategorija dodana"
+    }
+  }
+}

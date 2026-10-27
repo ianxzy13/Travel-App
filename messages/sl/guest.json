@@ -179,13 +179,7 @@
       "guest": "Gost",
       "dietaryConsent": "Strinjam se, da se moje prehranske zahteve in podatki o alergijah delijo s parom in gostinsko službo.",
       "consentNotice": "Vaši odgovori se delijo s parom {couple} za načrtovanje poroke.",
-      "privacyLink": "Politika zasebnosti",
-      "songTitle": "Naslov pesmi {n}",
-      "songArtist": "Izvajalec pesmi {n}",
-      "songTitlePlaceholder": "Naslov pesmi",
-      "songArtistPlaceholder": "Izvajalec",
-      "addSong": "Dodaj še eno pesem",
-      "removeSong": "Odstrani pesem {n}"
+      "privacyLink": "Politika zasebnosti"
     },
     "privacy": {
       "title": "Vaši podatki",

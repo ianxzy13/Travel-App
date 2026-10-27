@@ -25,10 +25,6 @@ export const rsvpPayloadSchema = z.object({
     )
     .max(100),
   song_request: z.string().max(200, v("tooLong", 200)),
-  songs: z
-    .array(z.object({ title: z.string().max(200), artist: z.string().max(200) }))
-    .max(3)
-    .optional(),
   message: z.string().max(2000, v("tooLong", 2000)),
 });
 

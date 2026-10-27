@@ -1,0 +1,72 @@
+{
+  "playlist": {
+    "title": "Playlist",
+    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "noSongs": "No songs yet",
+    "defaults": {
+      "ceremony": "Ceremony",
+      "firstDance": "First dance",
+      "dinner": "Dinner",
+      "party": "Party"
+    },
+    "priority": {
+      "must": "Must play",
+      "nice": "Would be nice",
+      "no": "Do not play"
+    },
+    "field": {
+      "title": "Song name",
+      "artist": "Artist",
+      "category": "Category",
+      "chooseCategory": "Choose a category",
+      "priority": "Priority"
+    },
+    "add": {
+      "title": "Add a song",
+      "button": "Add",
+      "done": "“{title}” added"
+    },
+    "edit": {
+      "title": "Edit song",
+      "label": "Edit {title}",
+      "done": "Song saved"
+    },
+    "delete": {
+      "label": "Delete {title}",
+      "title": "Delete “{title}”?",
+      "button": "Delete",
+      "done": "Song deleted"
+    },
+    "duplicate": {
+      "text": "This song is already on the list (in {category}).",
+      "again": "Add it again anyway?",
+      "anyway": "Add anyway"
+    },
+    "filter": {
+      "label": "Show songs",
+      "all": "All",
+      "none": "No songs with this priority yet."
+    },
+    "empty": {
+      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
+      "button": "Add your first song"
+    },
+    "categories": {
+      "manage": "Manage categories",
+      "title": "Categories",
+      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
+      "rename": "Name of {name}",
+      "renamed": "Category renamed",
+      "delete": "Delete {name}",
+      "deleteTitle": "Delete “{name}”?",
+      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
+      "deleted": "Category deleted",
+      "new": "New category",
+      "newPlaceholder": "e.g. Cocktail hour",
+      "add": "Add",
+      "added": "Category added"
+    }
+  }
+}
