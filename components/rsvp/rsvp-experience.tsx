@@ -7,6 +7,7 @@ import { submitRsvp } from "@/app/r/actions";
 import { Button } from "@/components/ui/button";
 import { fmtDate } from "@/lib/i18n/format";
 import { answerKey, initialFormState, rsvpGuestName, type RsvpFormState } from "@/lib/rsvp/form";
+import type { RsvpOriginals } from "@/lib/rsvp/auto-localize";
 import type { RsvpData } from "@/lib/rsvp/types";
 import { DataRights } from "./data-rights";
 import { RsvpForm, useGuestNameLabels } from "./rsvp-form";
@@ -18,10 +19,13 @@ type View = "summary" | "form" | "thanks" | "travel" | "trip";
 /** The guest's journey on /r/[code]: see answers → edit → thank you → trip. */
 export function RsvpExperience({
   data,
+  originals = {},
   siteUrl,
   destination,
 }: {
   data: RsvpData;
+  /** the couple's original texts, where the page shows a machine translation */
+  originals?: RsvpOriginals;
   siteUrl: string;
   /** Wedding country (ISO code) for the travel checklist, null if unknown. */
   destination: string | null;
@@ -37,11 +41,25 @@ export function RsvpExperience({
     : null;
   const couple = `${data.wedding.partner_a_name} & ${data.wedding.partner_b_name}`;
 
+  // machine-translated texts can be switched back to what the couple wrote
+  const [showOriginal, setShowOriginal] = useState(false);
+  const w = showOriginal ? { ...data.wedding, ...originals } : data.wedding;
+  const autoNote = (field: keyof RsvpOriginals) =>
+    originals[field] ? (
+      <button
+        type="button"
+        className="text-muted-foreground hover:text-foreground mt-1 text-xs underline-offset-2 hover:underline"
+        onClick={() => setShowOriginal((v) => !v)}
+      >
+        {showOriginal ? t("autoTranslate.showTranslation") : t("autoTranslate.note")}
+      </button>
+    ) : null;
+
   const anyAttending = Object.values(state.answers).some((a) => a.status === "attending");
   // the couple's own texts (empty = the standard ones)
-  const welcome = data.wedding.rsvp_welcome?.trim() || null;
-  const thanksText = data.wedding.rsvp_thanks?.trim() || null;
-  const sorryText = data.wedding.rsvp_sorry?.trim() || t("missYouText", { couple });
+  const welcome = w.rsvp_welcome?.trim() || null;
+  const thanksText = w.rsvp_thanks?.trim() || null;
+  const sorryText = w.rsvp_sorry?.trim() || t("missYouText", { couple });
   const showTravelPrompt = data.wedding.rsvp_ask_travel && anyAttending;
 
   return (
@@ -49,7 +67,10 @@ export function RsvpExperience({
       <div className="text-center">
         <p className="font-serif text-3xl">{t("dear", { name: data.household.name })}</p>
         {welcome && (view === "form" || view === "summary") && (
-          <p className="mx-auto mt-3 max-w-prose whitespace-pre-line">{welcome}</p>
+          <>
+            <p className="mx-auto mt-3 max-w-prose whitespace-pre-line">{welcome}</p>
+            {autoNote("rsvp_welcome")}
+          </>
         )}
         {view === "form" && (
           <p className="text-muted-foreground mt-2">
@@ -65,10 +86,11 @@ export function RsvpExperience({
           <div className="text-sm">
             <p className="font-medium">{t("closed")}</p>
             <p className="text-muted-foreground mt-1">
-              {data.wedding.rsvp_contact
-                ? t("closedContact", { contact: data.wedding.rsvp_contact })
+              {w.rsvp_contact
+                ? t("closedContact", { contact: w.rsvp_contact })
                 : t("closedNoContact")}
             </p>
+            {autoNote("rsvp_contact")}
           </div>
         </div>
       )}
@@ -88,6 +110,7 @@ export function RsvpExperience({
                     ? t("thanksTextUntil", { couple, date: deadline })
                     : t("thanksText", { couple })))}
             </p>
+            {autoNote(anyAttending ? "rsvp_thanks" : "rsvp_sorry")}
           </div>
           {showTravelPrompt && (
             <Button
@@ -149,14 +172,13 @@ export function RsvpExperience({
       ) : view !== "travel" ? (
         <>
           <AnswerSummary data={data} state={state} />
-          {(data.room_assignments ?? []).length > 0 && (
-            <RoomAssignmentCard data={data} />
-          )}
+          {(data.room_assignments ?? []).length > 0 && <RoomAssignmentCard data={data} />}
           {answered && !anyAttending && (
             <div role="status" className="bg-card rounded-2xl border p-6 text-center shadow-sm">
               <Heart className="text-primary-ink mx-auto size-8" aria-hidden />
               <h2 className="mt-3 text-2xl">{t("missYouTitle")}</h2>
               <p className="text-muted-foreground mt-1 text-sm whitespace-pre-line">{sorryText}</p>
+              {autoNote("rsvp_sorry")}
             </div>
           )}
           {answered && anyAttending && (
@@ -221,7 +243,7 @@ function AnswerSummary({ data, state }: { data: RsvpData; state: RsvpFormState }
               .filter((i) => i.event_id === event.id)
               .map((i) => {
                 const a = state.answers[answerKey(i.guest_id, event.id)];
-                const meal = a?.mealOptionId ? meals[a.mealOptionId] ?? null : null;
+                const meal = a?.mealOptionId ? (meals[a.mealOptionId] ?? null) : null;
                 return (
                   <li key={i.guest_id} className="flex items-center gap-2 text-sm">
                     {a?.status === "attending" ? (

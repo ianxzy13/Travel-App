@@ -320,7 +320,11 @@
       }
     },
     "missYouTitle": "We’ll miss you",
-    "missYouText": "Thank you for letting {couple} know. They’re sorry you can’t be there. If your plans change, you can update your answer here any time."
+    "missYouText": "Thank you for letting {couple} know. They’re sorry you can’t be there. If your plans change, you can update your answer here any time.",
+    "autoTranslate": {
+      "note": "자동 번역됨 · 원문 보기",
+      "showTranslation": "번역 보기"
+    }
   },
   "board": {
     "empty": "이 보드는 아직 비어 있습니다.",
