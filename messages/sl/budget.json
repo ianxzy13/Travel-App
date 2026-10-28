@@ -163,7 +163,7 @@
     "inBudget": "V proračunu: <b>{amount}</b>",
     "paidSuffix": " · plačano {amount}",
     "statuses": {
-      "researching": "Raziskujemo",
+      "researching": "V raziskovanju",
       "contacted": "Kontaktirani",
       "quoted": "Ponudba prejeta",
       "booked": "Rezervirano",

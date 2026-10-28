@@ -2,7 +2,7 @@
 
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import { guestTranslations, householdSizes } from "@/lib/i18n/guest-translations";
 import {
   SaveTheDateEmail,
   type StdEmailProps,
@@ -451,13 +451,14 @@ export async function sendSaveTheDates(
     return true;
   });
 
+  const sizes = await householdSizes(supabase, wedding.id, sendable.map((s) => s.household_id));
   for (let i = 0; i < sendable.length; i += 100) {
     const chunk = sendable.slice(i, i + 100);
     const messages = await Promise.all(
       chunk.map(async (send) => {
         const h = householdMap.get(send.household_id)!;
         const locale = stdLocale(wedding, h.preferred_language);
-        const t = await getTranslations({ locale, namespace: "stdEmail" });
+        const t = await guestTranslations(locale, "stdEmail", sizes.get(send.household_id));
         const link = `${siteUrl}/s/${send.token}`;
         const dateText = wedding.wedding_date
           ? fmtDate(wedding.wedding_date, locale, "long")

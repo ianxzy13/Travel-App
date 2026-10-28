@@ -1,7 +1,7 @@
 {
   "places": {
     "venueStatus": {
-      "researching": "Raziskujemo",
+      "researching": "V raziskovanju",
       "contacted": "Kontaktirano",
       "visited": "Ogledano",
       "shortlisted": "V ožjem izboru",
@@ -20,7 +20,7 @@
       "unavailable": "Ni na voljo"
     },
     "hotelStatus": {
-      "considering": "Razmišljamo",
+      "considering": "V razmisleku",
       "contacted": "Kontaktirano",
       "block_confirmed": "Sobe potrjene",
       "rejected": "Ni izbrano",
@@ -519,7 +519,7 @@
     "direction": "Smer",
     "status": "Stanje",
     "booked": "Rezervirano",
-    "considering": "Razmišljamo",
+    "considering": "V razmisleku",
     "airline": "Letalska družba",
     "number": "Številka leta",
     "numberPlaceholder": "npr. TP1351",
