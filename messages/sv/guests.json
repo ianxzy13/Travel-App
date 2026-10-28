@@ -61,7 +61,7 @@
       "matching": "{count} matchar",
       "clear": "Rensa filter",
       "any": "Alla",
-      "myGuests": "My guests"
+      "myGuests": "Mina gäster"
     },
     "list": {
       "selectAll": "Markera alla gäster som visas",
@@ -205,8 +205,8 @@
       "saved": "Hushållet sparat",
       "cancel": "Avbryt",
       "save": "Spara",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Hanteras av",
+      "nobodyAssigned": "Ingen tilldelad"
     },
     "tagsDialog": {
       "title": "Taggar",

@@ -88,9 +88,9 @@
       "deleted": "Uppgift borttagen",
       "save": "Spara",
       "add": "Lägg till uppgift",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Kommentarer",
+      "addComment": "Lägg till en kommentar…",
+      "unknown": "Någon"
     },
     "categories": {
       "Budget": "Budget",

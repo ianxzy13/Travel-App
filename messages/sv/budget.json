@@ -142,7 +142,7 @@
       "notes": "Anteckningar",
       "file": "budget"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Ungefärliga värden i {secondary} vid 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Leverantörer",
