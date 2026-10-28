@@ -88,9 +88,9 @@
       "deleted": "Tâche supprimée",
       "save": "Enregistrer",
       "add": "Ajouter la tâche",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Commentaires",
+      "addComment": "Ajouter un commentaire…",
+      "unknown": "Quelqu’un"
     },
     "categories": {
       "Budget": "Budget",

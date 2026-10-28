@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – l’organisateur de mariage pour les couples qui se marient par-delà les frontières",
+    "metaDescription": "Vos invités viennent de partout. Vow donne à chaque invité sa propre page de voyage, dans sa langue, avec vols, chambres, places et formalités d’entrée, tout au même endroit.",
     "signIn": "Se connecter",
     "getStarted": "Commencer",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "Mariages sans frontières",
+    "title": "Vos invités viennent de partout. Vow les y amène.",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Commencer gratuitement",
     "seeInside": "Découvrir le contenu",
@@ -53,65 +53,65 @@
         "text": "Vous organisez dans votre langue ; chaque invité reçoit le site, la réponse et les e-mails dans la sienne."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Votre mariage traverse les frontières. Votre organisateur aussi.",
+    "closingText": "Invitez votre partenaire, vos parents ou votre wedding planner, et organisez tout ensemble en temps réel, où que vous viviez.",
     "create": "Créer votre mariage",
     "footer": "Fait avec amour · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "Conçu pour les mariages où les invités traversent des frontières, pas seulement des régions.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Page de voyage personnelle",
+        "text": "Chaque invité a sa propre page : vols, chambre d’hôtel, horaire de la navette, numéro de table et une checklist de ce qu’il faut emporter."
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "Checklist d’entrée dans l’UE",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "Tableau des chambres d’hôtel",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Planificateur de navettes",
+        "text": "Regroupez les arrivées par horaire, organisez les prises en charge et prévenez les invités du départ de leur navette."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Formalités du mariage",
+        "text": "Les documents pour se marier légalement dans 64 pays : apostilles, traductions, délais, tout est suivi."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 langues par invité",
+        "text": "Votre grand-mère slovène voit tout en slovène. Vos amis de fac le voient en anglais. Automatiquement."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow vs les applis de mariage américaines classiques",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "Page de voyage personnelle par invité",
+      "entryChecklist": "Checklist entrée/visa par pays",
+      "roomsPerGuest": "Chambres d’hôtel par invité",
+      "paperwork": "Formalités pour se marier à l’étranger",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "Budget en deux devises",
+      "familyRoles": "Rôles pour la famille",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Applis classiques",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Bientôt disponible"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Arrivée jeu. 5 mars, 14:20",
+      "hotel": "Hôtel Park · Chambre 204",
+      "shuttle": "Navette pour le lac de Bled · 16:00",
+      "table": "Table 3 · avec la famille Kovač",
+      "passport": "Passeport valable au moins jusqu’en juin 2027",
+      "yourTrip": "Votre voyage"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Nous avons envoyé un e-mail à <b>{email}</b>. Cliquez sur le lien (dans ce navigateur) ou saisissez ci-dessous le code de l’e-mail.",
     "code": "Code de l’e-mail",
     "signInWithCode": "Se connecter avec le code",
-    "again": "Use a different email address",
+    "again": "Utiliser une autre adresse e-mail",
     "setupTitle": "Presque prêt : Supabase n’est pas encore connecté.",
     "setupText": "Créez un fichier <code>.env.local</code> avec l’URL Supabase et la clé publique (voir <code>.env.example</code> et le README), puis relancez <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Renvoyer le code",
+    "resendWait": "Renvoyer le code ({seconds} s)",
+    "resent": "Un nouveau code vous a été envoyé par e-mail."
   },
   "welcome": {
     "title": "Choisissez votre langue",
@@ -170,8 +170,8 @@
         "text": "Nous l’utiliserons pour l’inspiration et les suggestions du site."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "D’où viennent vos invités ?",
+        "text": "Sélectionnez les pays d’où vos invités voyageront. Cela nous aide à préparer les pages de voyage et les checklists d’entrée."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Prénoms, date, lieu et style. Les modifications s’appliquent partout dans l’appli.",
     "saveChanges": "Enregistrer",
     "saved": "Détails du mariage enregistrés",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Populaires",
+    "allCurrencies": "Toutes les devises",
+    "guestCountries": "Pays d’où vos invités voyageront",
+    "guestCountriesHint": "Touchez tous ceux qui s’appliquent. Vous pourrez modifier ce choix plus tard.",
+    "guestCountriesSearch": "Rechercher un pays…",
+    "noCurrency": "Pas de deuxième devise",
+    "secondaryCurrency": "Deuxième devise (facultatif)",
+    "secondaryCurrencyHint": "Si vos prestataires facturent dans une autre devise, ajoutez-la ici.",
+    "exchangeRate": "Taux de change",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -251,11 +251,11 @@
     },
     "parent": {
       "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "description": "Peut modifier les invités, les tâches et les voyages, pas les paramètres"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Aide",
+      "description": "Peut modifier les tâches qui lui sont attribuées et voir le reste"
     }
   },
   "invite": {
