@@ -61,7 +61,7 @@
       "matching": "{count} odgovara",
       "clear": "Očisti filtre",
       "any": "Bilo koji",
-      "myGuests": "My guests"
+      "myGuests": "Moji gosti"
     },
     "list": {
       "selectAll": "Odaberi sve prikazane goste",
@@ -205,8 +205,8 @@
       "saved": "Kućanstvo je spremljeno",
       "cancel": "Odustani",
       "save": "Spremi",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Upravlja",
+      "nobodyAssigned": "Nitko nije dodijeljen"
     },
     "tagsDialog": {
       "title": "Oznake",

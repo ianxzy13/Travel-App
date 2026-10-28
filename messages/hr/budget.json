@@ -142,7 +142,7 @@
       "notes": "Napomene",
       "file": "proracun"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Približne vrijednosti u {secondary} uz 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Dobavljači",

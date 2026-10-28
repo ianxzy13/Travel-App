@@ -73,7 +73,7 @@
     "slugChars": "Koristite samo slova, brojke i pojedinačne crtice (npr. ian-i-maria).",
     "slugLength": "Koristite od 3 do 60 znakova.",
     "airport": "Koristite troslovni kôd zračne luke, npr. ZAG.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Upišite naziv pjesme."
   },
   "ui": {
     "cancel": "Odustani",

@@ -88,9 +88,9 @@
       "deleted": "Zadatak je izbrisan",
       "save": "Spremi",
       "add": "Dodaj zadatak",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Komentari",
+      "addComment": "Dodaj komentar…",
+      "unknown": "Netko"
     },
     "categories": {
       "Budget": "Proračun",
