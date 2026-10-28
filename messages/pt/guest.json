@@ -320,7 +320,11 @@
       }
     },
     "missYouTitle": "We’ll miss you",
-    "missYouText": "Thank you for letting {couple} know. They’re sorry you can’t be there. If your plans change, you can update your answer here any time."
+    "missYouText": "Thank you for letting {couple} know. They’re sorry you can’t be there. If your plans change, you can update your answer here any time.",
+    "autoTranslate": {
+      "note": "Traduzido automaticamente · Ver original",
+      "showTranslation": "Ver tradução"
+    }
   },
   "board": {
     "empty": "Este quadro está vazio por agora.",

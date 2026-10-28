@@ -320,7 +320,11 @@
       "checkOut": "Odjava: {date}"
     },
     "missYouTitle": "Pogrešali vas bomo",
-    "missYouText": "Hvala, da ste obvestili par {couple}. Žal jima je, da ne morete priti. Če se vaši načrti spremenijo, lahko odgovor kadar koli spremenite prek te povezave."
+    "missYouText": "Hvala, da ste obvestili par {couple}. Žal jima je, da ne morete priti. Če se vaši načrti spremenijo, lahko odgovor kadar koli spremenite prek te povezave.",
+    "autoTranslate": {
+      "note": "Samodejno prevedeno · Pokaži izvirnik",
+      "showTranslation": "Pokaži prevod"
+    }
   },
   "board": {
     "empty": "Ta tabla je zaenkrat prazna.",
