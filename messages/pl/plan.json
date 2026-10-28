@@ -88,9 +88,9 @@
       "deleted": "Usunięto zadanie",
       "save": "Zapisz",
       "add": "Dodaj zadanie",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Komentarze",
+      "addComment": "Dodaj komentarz…",
+      "unknown": "Ktoś"
     },
     "categories": {
       "Budget": "Budżet",

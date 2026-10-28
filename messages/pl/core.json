@@ -73,7 +73,7 @@
     "slugChars": "Używaj tylko liter, cyfr i pojedynczych myślników (np. ian-i-maria).",
     "slugLength": "Użyj od 3 do 60 znaków.",
     "airport": "Użyj 3-literowego kodu lotniska, np. WAW.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Wpisz tytuł piosenki."
   },
   "ui": {
     "cancel": "Anuluj",
