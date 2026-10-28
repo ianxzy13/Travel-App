@@ -88,9 +88,9 @@
       "deleted": "Taak verwijderd",
       "save": "Opslaan",
       "add": "Taak toevoegen",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Opmerkingen",
+      "addComment": "Opmerking toevoegen…",
+      "unknown": "Iemand"
     },
     "categories": {
       "Budget": "Budget",
