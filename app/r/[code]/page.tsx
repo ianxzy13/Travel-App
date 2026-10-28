@@ -5,6 +5,7 @@ import { CodeForm } from "@/components/rsvp/code-form";
 import { RsvpExperience } from "@/components/rsvp/rsvp-experience";
 import { RsvpFrame } from "@/components/rsvp/rsvp-frame";
 import { starterTexts } from "@/lib/i18n/defaults";
+import { fetchRsvp } from "@/lib/rsvp/fetch";
 import { autoTranslateRsvp } from "@/lib/rsvp/auto-localize";
 import { localizeRsvp } from "@/lib/rsvp/localize";
 import { CODE_PATTERN, normalizeCode, type RsvpData, type RsvpExtras } from "@/lib/rsvp/types";
@@ -20,12 +21,11 @@ const loadRsvp = cache(async (rawCode: string) => {
   const code = normalizeCode(decodeURIComponent(rawCode));
   if (!CODE_PATTERN.test(code) || !isSupabaseConfigured) return null;
   const supabase = await createClient();
-  const [{ data, error }, { data: extras }, locale] = await Promise.all([
-    supabase.rpc("get_rsvp", { p_code: code }),
+  const [data, { data: extras }, locale] = await Promise.all([
+    fetchRsvp(code),
     supabase.rpc("get_rsvp_extras", { p_code: code }),
     getLocale(),
   ]);
-  if (error) console.error("[get_rsvp]", error);
   if (!data) return null;
   const x = extras as RsvpExtras | null;
   const shown = await starterTexts(locale);

@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – svatební plánovač pro páry, které se berou přes hranice",
+    "metaDescription": "Vaši hosté přiletí odevšad. Vow dá každému hostovi vlastní stránku cesty v jeho jazyce, s lety, pokoji, místem u stolu a dokumenty pro vstup – vše na jednom místě.",
     "signIn": "Přihlásit se",
     "getStarted": "Začít",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "Svatby přes hranice",
+    "title": "Vaši hosté přiletí odevšad. Vow je dopraví k vám.",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Začněte plánovat zdarma",
     "seeInside": "Podívejte se dovnitř",
@@ -53,65 +53,65 @@
         "text": "Vy plánujete ve svém jazyce; každý host dostane stránky, odpověď a e-maily ve svém."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Vaše svatba překračuje hranice. Váš plánovač by měl taky.",
+    "closingText": "Pozvěte partnera, rodiče nebo svatební koordinátorku a plánujte vše společně v reálném čase, ať bydlíte kdekoli.",
     "create": "Vytvořte svou svatbu",
     "footer": "Vytvořeno s láskou · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "Soukromí",
+    "terms": "Podmínky",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "Vytvořeno pro svatby, na které hosté cestují přes hranice států, ne jen krajů.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Osobní stránka cesty",
+        "text": "Každý host má vlastní stránku: lety, hotelový pokoj, čas transferu, číslo stolu a seznam věcí s sebou."
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "Seznam pro vstup do EU",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "Přehled hotelových pokojů",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Plánovač transferů",
+        "text": "Seskupte přílety podle času, naplánujte vyzvednutí a dejte hostům vědět, kdy jim jede odvoz."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Svatební dokumenty",
+        "text": "Dokumenty potřebné k legální svatbě v 64 zemích: apostily, překlady, termíny – vše pod kontrolou."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 jazyků pro každého hosta",
+        "text": "Vaše slovinská babička vidí vše slovinsky. Kamarádi z vysoké anglicky. Automaticky."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow vs. typické americké svatební aplikace",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "Osobní stránka cesty pro každého hosta",
+      "entryChecklist": "Seznam pro vstup/víza podle země",
+      "roomsPerGuest": "Hotelové pokoje pro každého hosta",
+      "paperwork": "Dokumenty ke svatbě v zahraničí",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "Rozpočet ve dvou měnách",
+      "familyRoles": "Role pro rodinu",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Typické aplikace",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Brzy"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "Miami → Lublaň",
+      "flightDetail": "Přílet čt 5. bře, 14:20",
+      "hotel": "Hotel Park · Pokoj 204",
+      "shuttle": "Transfer k Bledskému jezeru · 16:00",
+      "table": "Stůl 3 · s rodinou Kovačových",
+      "passport": "Pas platný alespoň do června 2027",
+      "yourTrip": "Vaše cesta"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Poslali jsme e-mail na <b>{email}</b>. Klikněte na odkaz v něm (v tomto prohlížeči) nebo níže zadejte kód z e-mailu.",
     "code": "Kód z e-mailu",
     "signInWithCode": "Přihlásit se kódem",
-    "again": "Use a different email address",
+    "again": "Použít jinou e-mailovou adresu",
     "setupTitle": "Skoro hotovo: Supabase ještě není připojen.",
     "setupText": "Vytvořte soubor <code>.env.local</code> s URL a veřejným klíčem Supabase (viz <code>.env.example</code> a README) a pak znovu spusťte <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Poslat kód znovu",
+    "resendWait": "Poslat kód znovu ({seconds} s)",
+    "resent": "Na váš e-mail jsme poslali nový kód."
   },
   "welcome": {
     "title": "Vyberte svůj jazyk",
@@ -170,8 +170,8 @@
         "text": "Použijeme ho pro inspiraci a návrhy stránek."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Odkud přijedou vaši hosté?",
+        "text": "Vyberte země, ze kterých hosté přicestují. Připravíme podle toho stránky cesty a seznamy pro vstup."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Jména, datum, místo a styl. Změny platí v celé aplikaci.",
     "saveChanges": "Uložit změny",
     "saved": "Podrobnosti svatby uloženy",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Oblíbené",
+    "allCurrencies": "Všechny měny",
+    "guestCountries": "Země, ze kterých hosté přicestují",
+    "guestCountriesHint": "Klepněte na všechny, které platí. Později to můžete změnit.",
+    "guestCountriesSearch": "Hledat země…",
+    "noCurrency": "Bez druhé měny",
+    "secondaryCurrency": "Druhá měna (volitelné)",
+    "secondaryCurrencyHint": "Pokud vaši dodavatelé účtují v jiné měně, přidejte ji tady.",
+    "exchangeRate": "Směnný kurz",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Může prohlížet, ale nic neměnit"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Rodič",
+      "description": "Může upravovat hosty, úkoly a cesty, ale ne nastavení"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Pomocník",
+      "description": "Může upravovat přiřazené úkoly a prohlížet zbytek"
     }
   },
   "invite": {

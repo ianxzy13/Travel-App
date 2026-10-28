@@ -61,7 +61,7 @@
       "matching": "Odpovídá: {count}",
       "clear": "Vymazat filtry",
       "any": "Jakékoli",
-      "myGuests": "My guests"
+      "myGuests": "Moji hosté"
     },
     "list": {
       "selectAll": "Vybrat všechny zobrazené hosty",
@@ -205,8 +205,8 @@
       "saved": "Domácnost uložena",
       "cancel": "Zrušit",
       "save": "Uložit",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Spravuje",
+      "nobodyAssigned": "Nikdo nepřiřazen"
     },
     "tagsDialog": {
       "title": "Štítky",

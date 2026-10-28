@@ -1,75 +1,75 @@
 {
   "playlist": {
     "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "description": "Písně na vaši svatbu: co musí zaznít, co by bylo fajn a co DJ nikdy nesmí pustit.",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "noSongs": "Zatím žádné písně",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Obřad",
+      "firstDance": "První tanec",
+      "dinner": "Večeře",
+      "party": "Párty"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Musí zaznít",
+      "nice": "Bylo by fajn",
+      "no": "Nepouštět"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Název písně",
+      "artist": "Interpret",
+      "category": "Kategorie",
+      "chooseCategory": "Vyberte kategorii",
+      "priority": "Priorita"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Přidat píseň",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "„{title}“ přidána"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Upravit píseň",
+      "label": "Upravit: {title}",
+      "done": "Píseň uložena"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Smazat: {title}",
+      "title": "Smazat „{title}“?",
+      "button": "Smazat",
+      "done": "Píseň smazána"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Tato píseň už na seznamu je (v: {category}).",
+      "again": "Přesto ji přidat znovu?",
+      "anyway": "Přesto přidat"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Zobrazit písně",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Zatím žádné písně s touto prioritou."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Mějte všechny svatební písně v jednom seznamu, seřazené podle chvíle, aby DJ věděl, co pustit a co vynechat.",
+      "button": "Přidejte první píseň"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Spravovat kategorie",
+      "title": "Kategorie",
+      "text": "Kategorii přejmenujete přepsáním jejího názvu. Smazáním kategorie se smažou i její písně.",
+      "rename": "Název: {name}",
+      "renamed": "Kategorie přejmenována",
+      "delete": "Smazat: {name}",
+      "deleteTitle": "Smazat „{name}“?",
+      "deleteText": "{count, plural, one {Smaže se i její # píseň.} few {Smažou se i její # písně.} many {Smaže se i jejích # písně.} other {Smaže se i jejích # písní.}}",
+      "deleted": "Kategorie smazána",
+      "new": "Nová kategorie",
+      "newPlaceholder": "např. Koktejl",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Kategorie přidána",
+      "newOption": "Nová kategorie…",
+      "starter": "Přidat výchozí kategorie (Obřad, První tanec, Večeře, Párty)",
+      "starterAdded": "Výchozí kategorie přidány"
     }
   }
 }

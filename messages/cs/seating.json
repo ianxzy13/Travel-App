@@ -213,7 +213,7 @@
     },
     "scenarios": {
       "title": "Scenare zasedaciho poradku",
-      "plan": "Plan",
+      "plan": "Plán",
       "active": "aktivni",
       "duplicate": "Duplikovat",
       "duplicated": "Scenar zduplikovan",
@@ -223,7 +223,7 @@
       "deleteConfirm": "Smazat tento scenar? Stoly a prirazeni budou odstraneny.",
       "maxReached": "Muzete mit az 3 scenare na udalost.",
       "switched": "Scenar prepnut",
-      "defaultName": "Plan A"
+      "defaultName": "Plán A"
     },
     "findSeatQr": "QR plakat: najdete sve misto",
     "findSeatHeading": "Najdete sve misto",

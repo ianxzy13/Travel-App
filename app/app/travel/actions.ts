@@ -2,7 +2,7 @@
 
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
-import { getTranslations } from "next-intl/server";
+import { guestTranslations, householdSizes } from "@/lib/i18n/guest-translations";
 import { z } from "zod";
 import { TravelReminderEmail } from "@/emails/travel-reminder-email";
 import type { ActionResult } from "@/lib/action-result";
@@ -182,6 +182,7 @@ export async function sendTravelReminder(
 
   const noEmail = households.filter((h) => !emailsByHousehold.has(h.id)).map((h) => h.name);
   const sendable = households.filter((h) => emailsByHousehold.has(h.id));
+  const sizes = await householdSizes(sb, wedding.id, sendable.map((h) => h.id));
   const siteUrl = await getSiteUrl();
   const couple = coupleName(wedding);
   let sent = 0;
@@ -192,7 +193,7 @@ export async function sendTravelReminder(
     const messages = await Promise.all(
       chunk.map(async (h) => {
         const locale = emailLocale(wedding, h.preferred_language);
-        const t = await getTranslations({ locale, namespace: "travelEmail" });
+        const t = await guestTranslations(locale, "travelEmail", sizes.get(h.id));
         const link = `${siteUrl}/r/${h.rsvp_code}?lang=${locale}&travel=1`;
         const place = localized(wedding, locale, ["location"]).location;
         const guestId = firstGuestByHousehold.get(h.id);

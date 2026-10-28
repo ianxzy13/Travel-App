@@ -3,6 +3,7 @@
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { guestTranslations, householdSizes } from "@/lib/i18n/guest-translations";
 import { z } from "zod";
 import { RsvpEmail, type RsvpEmailProps } from "@/emails/rsvp-email";
 import type { ActionResult } from "@/lib/action-result";
@@ -174,11 +175,11 @@ async function emailFor(
   wedding: Wedding,
   kind: Kind,
   note: string,
-  household: { name: string; code: string; language?: string | null },
+  household: { name: string; code: string; language?: string | null; people?: number },
   siteUrl: string,
 ): Promise<{ props: RsvpEmailProps; subject: string }> {
   const locale = emailLocale(wedding, household.language);
-  const t = await getTranslations({ locale, namespace: "email" });
+  const t = await guestTranslations(locale, "email", household.people);
   const couple = coupleName(wedding);
   const invite = kind === "invitation";
   // the link opens the RSVP page in the same language
@@ -312,6 +313,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
 
   const noEmail = households.filter((h) => !emailsByHousehold.has(h.id)).map((h) => h.name);
   const sendable = households.filter((h) => emailsByHousehold.has(h.id));
+  const sizes = await householdSizes(supabase, wedding.id, sendable.map((h) => h.id));
   const siteUrl = await getSiteUrl();
   const couple = coupleName(wedding);
   let sent = 0;
@@ -326,7 +328,12 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
           wedding,
           kind,
           note,
-          { name: h.name, code: h.rsvp_code, language: h.preferred_language },
+          {
+            name: h.name,
+            code: h.rsvp_code,
+            language: h.preferred_language,
+            people: sizes.get(h.id),
+          },
           siteUrl,
         );
         const guestId = firstGuestByHousehold.get(h.id);

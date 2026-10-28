@@ -61,7 +61,7 @@
       "matching": "Pasuje: {count}",
       "clear": "Wyczyść filtry",
       "any": "Dowolne",
-      "myGuests": "My guests"
+      "myGuests": "Moi goście"
     },
     "list": {
       "selectAll": "Zaznacz wszystkich widocznych gości",
@@ -205,8 +205,8 @@
       "saved": "Zapisano gospodarstwo",
       "cancel": "Anuluj",
       "save": "Zapisz",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Zarządza",
+      "nobodyAssigned": "Nikt nieprzypisany"
     },
     "tagsDialog": {
       "title": "Etykiety",
