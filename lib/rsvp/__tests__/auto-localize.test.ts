@@ -57,7 +57,7 @@ describe("machine translation of the couple's RSVP texts", () => {
       { languages: ["en"] } as never,
       "sl",
     );
-    expect(one.data.wedding.rsvp_welcome).toBe("Komaj čakamo!");
+    expect(one.data.wedding.rsvp_welcome).toBe("Komaj čakava!"); // Slovenian dual for the couple
 
     const none = await autoTranslateRsvp(
       { wedding: { rsvp_welcome: "We can't wait!" } } as never,

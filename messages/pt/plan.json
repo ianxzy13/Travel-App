@@ -88,9 +88,9 @@
       "deleted": "Tarefa eliminada",
       "save": "Guardar",
       "add": "Adicionar tarefa",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Comentários",
+      "addComment": "Adicionar um comentário…",
+      "unknown": "Alguém"
     },
     "categories": {
       "Budget": "Orçamento",

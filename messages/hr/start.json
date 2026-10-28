@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – planer vjenčanja za parove koji se vjenčavaju preko granica",
+    "metaDescription": "Vaši gosti dolaze odasvud. Vow svakom gostu daje vlastitu stranicu putovanja, na njegovu jeziku, s letovima, sobama, mjestom za stolom i dokumentima za ulazak – sve na jednom mjestu.",
     "signIn": "Prijava",
     "getStarted": "Započnite",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "Vjenčanja preko granica",
+    "title": "Vaši gosti dolaze odasvud. Vow ih dovodi do vas.",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Počnite planirati besplatno",
     "seeInside": "Pogledajte što je unutra",
@@ -53,65 +53,65 @@
         "text": "Vi planirate na svom jeziku; svaki gost dobiva web-stranicu, potvrdu i e-poštu na svom."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Vaše vjenčanje prelazi granice. I vaš planer bi trebao.",
+    "closingText": "Pozovite partnera, roditelje ili planera vjenčanja i planirajte sve zajedno u stvarnom vremenu, gdje god živjeli.",
     "create": "Stvorite svoje vjenčanje",
     "footer": "Napravljeno s ljubavlju · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "Privatnost",
+    "terms": "Uvjeti",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "Napravljeno za vjenčanja na koja gosti putuju preko državnih granica.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Osobna stranica putovanja",
+        "text": "Svaki gost dobiva vlastitu stranicu: letovi, hotelska soba, vrijeme prijevoza, broj stola i popis stvari za ponijeti."
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "Popis za ulazak u EU",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "Ploča hotelskih soba",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Planer prijevoza",
+        "text": "Grupirajte dolaske po vremenu, planirajte prijevoze i javite gostima kad im kreće prijevoz."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Dokumenti za vjenčanje",
+        "text": "Dokumenti potrebni za zakonito vjenčanje u 64 zemlje: apostille, prijevodi, rokovi – sve na jednom mjestu."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 jezika po gostu",
+        "text": "Vaša baka iz Slovenije sve vidi na slovenskom. Vaši prijatelji s faksa vide sve na engleskom. Automatski."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow u usporedbi s tipičnim američkim aplikacijama za vjenčanja",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "Osobna stranica putovanja za svakog gosta",
+      "entryChecklist": "Popis za ulazak/vize po zemlji",
+      "roomsPerGuest": "Hotelske sobe po gostu",
+      "paperwork": "Dokumenti za vjenčanje u inozemstvu",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "Proračun u dvije valute",
+      "familyRoles": "Uloge za obitelj",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Tipične aplikacije",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Uskoro"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Dolazak čet 5. ožu, 14:20",
+      "hotel": "Hotel Park · Soba 204",
+      "shuttle": "Prijevoz do Bledskog jezera · 16:00",
+      "table": "Stol 3 · s obitelji Kovač",
+      "passport": "Putovnica valjana najmanje do lipnja 2027.",
+      "yourTrip": "Vaše putovanje"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Poslali smo e-poruku na <b>{email}</b>. Kliknite poveznicu u njoj (u ovom pregledniku) ili upišite kôd iz e-poruke ispod.",
     "code": "Kôd iz e-poruke",
     "signInWithCode": "Prijava kôdom",
-    "again": "Use a different email address",
+    "again": "Upotrijebi drugu adresu e-pošte",
     "setupTitle": "Skoro gotovo: Supabase još nije povezan.",
     "setupText": "Stvorite datoteku <code>.env.local</code> sa svojim Supabase URL-om i javnim ključem (vidi <code>.env.example</code> i README), zatim ponovno pokrenite <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Ponovno pošalji kod",
+    "resendWait": "Ponovno pošalji kod ({seconds} s)",
+    "resent": "Novi kod poslan je na vašu e-poštu."
   },
   "welcome": {
     "title": "Odaberite svoj jezik",
@@ -170,8 +170,8 @@
         "text": "Koristit ćemo ga za inspiraciju i prijedloge za web-stranicu."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Odakle dolaze vaši gosti?",
+        "text": "Odaberite zemlje iz kojih će vaši gosti putovati. Tako možemo pripremiti stranice putovanja i popise za ulazak."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Imena, datum, mjesto i stil. Promjene vrijede posvuda u aplikaciji.",
     "saveChanges": "Spremi promjene",
     "saved": "Detalji vjenčanja su spremljeni",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Popularno",
+    "allCurrencies": "Sve valute",
+    "guestCountries": "Zemlje iz kojih će gosti putovati",
+    "guestCountriesHint": "Dodirnite sve što vrijedi. To možete promijeniti kasnije.",
+    "guestCountriesSearch": "Pretraži zemlje…",
+    "noCurrency": "Bez druge valute",
+    "secondaryCurrency": "Druga valuta (neobavezno)",
+    "secondaryCurrencyHint": "Ako vaši dobavljači naplaćuju u drugoj valuti, dodajte je ovdje.",
+    "exchangeRate": "Tečaj",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Može gledati, ali ne i mijenjati"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Roditelj",
+      "description": "Može uređivati goste, zadatke i putovanja, ali ne i postavke"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Pomagač",
+      "description": "Može uređivati dodijeljene zadatke i vidjeti ostalo"
     }
   },
   "invite": {

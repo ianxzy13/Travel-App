@@ -43,6 +43,7 @@ export const requestLocale = cache(async (): Promise<Locale> => {
     preferred: info?.preferred,
     acceptLanguage: accept,
     weddingLanguages: info?.languages,
+    householdFirst: page.kind === "rsvp",
   });
 });
 

@@ -61,7 +61,7 @@
       "matching": "{count} passend",
       "clear": "Filter zurücksetzen",
       "any": "Alle",
-      "myGuests": "My guests"
+      "myGuests": "Meine Gäste"
     },
     "list": {
       "selectAll": "Alle angezeigten Gäste auswählen",
@@ -205,8 +205,8 @@
       "saved": "Haushalt gespeichert",
       "cancel": "Abbrechen",
       "save": "Speichern",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Verwaltet von",
+      "nobodyAssigned": "Niemand zugewiesen"
     },
     "tagsDialog": {
       "title": "Tags",

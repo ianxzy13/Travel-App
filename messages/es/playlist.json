@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Lista de canciones",
+    "description": "Las canciones de tu boda: lo que tiene que sonar, lo que estaría bien y lo que el DJ no debe poner nunca.",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "noSongs": "Aún no hay canciones",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Ceremonia",
+      "firstDance": "Primer baile",
+      "dinner": "Cena",
+      "party": "Fiesta"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Tiene que sonar",
+      "nice": "Estaría bien",
+      "no": "No poner"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Nombre de la canción",
+      "artist": "Artista",
+      "category": "Categoría",
+      "chooseCategory": "Elige una categoría",
+      "priority": "Prioridad"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Añadir una canción",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "«{title}» añadida"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Editar canción",
+      "label": "Editar {title}",
+      "done": "Canción guardada"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Eliminar {title}",
+      "title": "¿Eliminar «{title}»?",
+      "button": "Eliminar",
+      "done": "Canción eliminada"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Esta canción ya está en la lista (en {category}).",
+      "again": "¿Añadirla otra vez de todos modos?",
+      "anyway": "Añadir de todos modos"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Mostrar canciones",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Aún no hay canciones con esta prioridad."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Ten todas las canciones de tu boda en una lista, ordenadas por momento, para que el DJ sepa qué poner y qué no.",
+      "button": "Añade tu primera canción"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Gestionar categorías",
+      "title": "Categorías",
+      "text": "Para cambiar el nombre de una categoría, escribe encima. Al eliminar una categoría también se eliminan sus canciones.",
+      "rename": "Nombre de {name}",
+      "renamed": "Categoría renombrada",
+      "delete": "Eliminar {name}",
+      "deleteTitle": "¿Eliminar «{name}»?",
+      "deleteText": "{count, plural, one {También se eliminará su # canción.} other {También se eliminarán sus # canciones.}}",
+      "deleted": "Categoría eliminada",
+      "new": "Nueva categoría",
+      "newPlaceholder": "p. ej. Cóctel",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Categoría añadida",
+      "newOption": "Nueva categoría…",
+      "starter": "Añadir categorías iniciales (Ceremonia, Primer baile, Cena, Fiesta)",
+      "starterAdded": "Categorías iniciales añadidas"
     }
   }
 }

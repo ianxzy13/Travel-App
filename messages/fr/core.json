@@ -73,7 +73,7 @@
     "slugChars": "Uniquement des lettres, des chiffres et des tirets simples (par ex. ian-et-maria).",
     "slugLength": "Utilisez 3 à 60 caractères.",
     "airport": "Utilisez le code aéroport à 3 lettres, par ex. CDG.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Saisissez le titre de la chanson."
   },
   "ui": {
     "cancel": "Annuler",

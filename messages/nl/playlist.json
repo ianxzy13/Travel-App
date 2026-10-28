@@ -1,75 +1,75 @@
 {
   "playlist": {
     "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "description": "De nummers voor jullie bruiloft: wat moet, wat leuk zou zijn en wat de DJ nooit mag draaien.",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "noSongs": "Nog geen nummers",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Ceremonie",
+      "firstDance": "Openingsdans",
+      "dinner": "Diner",
+      "party": "Feest"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Moet gedraaid worden",
+      "nice": "Zou leuk zijn",
+      "no": "Niet draaien"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Titel van het nummer",
+      "artist": "Artiest",
+      "category": "Categorie",
+      "chooseCategory": "Kies een categorie",
+      "priority": "Prioriteit"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Nummer toevoegen",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "\"{title}\" toegevoegd"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Nummer bewerken",
+      "label": "{title} bewerken",
+      "done": "Nummer opgeslagen"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "{title} verwijderen",
+      "title": "\"{title}\" verwijderen?",
+      "button": "Verwijderen",
+      "done": "Nummer verwijderd"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Dit nummer staat al op de lijst (bij {category}).",
+      "again": "Toch nog een keer toevoegen?",
+      "anyway": "Toch toevoegen"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Nummers tonen",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Nog geen nummers met deze prioriteit."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Houd alle trouwnummers in één lijst, gesorteerd per moment, zodat de DJ weet wat hij moet draaien en wat niet.",
+      "button": "Voeg je eerste nummer toe"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Categorieën beheren",
+      "title": "Categorieën",
+      "text": "Hernoem een categorie door over de naam te typen. Als je een categorie verwijdert, verdwijnen ook de nummers erin.",
+      "rename": "Naam van {name}",
+      "renamed": "Categorie hernoemd",
+      "delete": "{name} verwijderen",
+      "deleteTitle": "\"{name}\" verwijderen?",
+      "deleteText": "{count, plural, one {Het # nummer erin wordt ook verwijderd.} other {De # nummers erin worden ook verwijderd.}}",
+      "deleted": "Categorie verwijderd",
+      "new": "Nieuwe categorie",
+      "newPlaceholder": "bijv. Borrel",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Categorie toegevoegd",
+      "newOption": "Nieuwe categorie…",
+      "starter": "Startcategorieën toevoegen (Ceremonie, Openingsdans, Diner, Feest)",
+      "starterAdded": "Startcategorieën toegevoegd"
     }
   }
 }

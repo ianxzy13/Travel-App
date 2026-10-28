@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import type { SiteSectionKind } from "@/lib/database.types";
-import { browserTranslate, canBrowserTranslate } from "@/lib/i18n/browser-translate";
+import { draftTranslate } from "@/lib/i18n/draft-translate";
 import { TRANSLATABLE } from "@/lib/i18n/content";
 
 type Obj = Record<string, unknown>;
@@ -43,7 +43,6 @@ export function TranslateSectionForm({
   const t = useTranslations("app.websiteLang");
   const spec = TRANSLATABLE[kind];
   const [drafting, setDrafting] = useState(false);
-  const machine = typeof window !== "undefined" && canBrowserTranslate();
 
   const setField = (f: string, v: string) => onChange({ ...translation, [f]: v });
   const setItem = (list: string, id: string, f: string, v: string) => {
@@ -58,7 +57,7 @@ export function TranslateSectionForm({
       for (const f of spec.fields) {
         const src = str(content[f]).trim();
         if (src && !str(next[f]).trim())
-          next = { ...next, [f]: await browserTranslate(src, mainLanguage, language) };
+          next = { ...next, [f]: await draftTranslate(src, mainLanguage, language) };
       }
       for (const [list, fields] of Object.entries(spec.lists ?? {})) {
         const items = { ...((next[list] ?? {}) as Record<string, Obj>) };
@@ -69,7 +68,7 @@ export function TranslateSectionForm({
             if (src && !str(items[id]?.[f]).trim())
               items[id] = {
                 ...items[id],
-                [f]: await browserTranslate(src, mainLanguage, language),
+                [f]: await draftTranslate(src, mainLanguage, language),
               };
           }
         }
@@ -130,7 +129,7 @@ export function TranslateSectionForm({
 
   return (
     <div className="space-y-4">
-      {machine && !disabled && (
+      {!disabled && (
         <Button type="button" variant="outline" size="sm" onClick={draftAll} disabled={drafting}>
           {drafting ? <Loader2 className="animate-spin" aria-hidden /> : <Wand2 aria-hidden />}{" "}
           {t("draft")}

@@ -61,7 +61,7 @@
       "matching": "{count} correspondem",
       "clear": "Limpar filtros",
       "any": "Qualquer",
-      "myGuests": "My guests"
+      "myGuests": "Os meus convidados"
     },
     "list": {
       "selectAll": "Selecionar todos os convidados visíveis",
@@ -205,8 +205,8 @@
       "saved": "Agregado guardado",
       "cancel": "Cancelar",
       "save": "Guardar",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Gerido por",
+      "nobodyAssigned": "Ninguém atribuído"
     },
     "tagsDialog": {
       "title": "Etiquetas",

@@ -28,6 +28,23 @@ describe("choosing a language", () => {
     ).toBe("it");
     expect(resolveGuestLocale({ acceptLanguage: "de-DE", weddingLanguages: wedding })).toBe("de");
     expect(resolveGuestLocale({ acceptLanguage: "xx", weddingLanguages: wedding })).toBe("sl");
+    // a household's own RSVP link: its language beats a cookie left from another link
+    expect(
+      resolveGuestLocale({
+        cookie: "en",
+        preferred: "sl",
+        householdFirst: true,
+        weddingLanguages: wedding,
+      }),
+    ).toBe("sl");
+    expect(
+      resolveGuestLocale({
+        asked: "es",
+        preferred: "sl",
+        householdFirst: true,
+        weddingLanguages: wedding,
+      }),
+    ).toBe("es");
     expect(resolveGuestLocale({})).toBe("en");
   });
 

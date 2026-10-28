@@ -61,7 +61,7 @@
       "matching": "{count} gevonden",
       "clear": "Filters wissen",
       "any": "Alle",
-      "myGuests": "My guests"
+      "myGuests": "Mijn gasten"
     },
     "list": {
       "selectAll": "Alle getoonde gasten selecteren",
@@ -205,8 +205,8 @@
       "saved": "Huishouden opgeslagen",
       "cancel": "Annuleren",
       "save": "Opslaan",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Beheerd door",
+      "nobodyAssigned": "Niemand toegewezen"
     },
     "tagsDialog": {
       "title": "Labels",
@@ -226,7 +226,7 @@
         "sage": "Salie",
         "sky": "Lucht",
         "amber": "Amber",
-        "violet": "Violet"
+        "violet": "Paars"
       }
     },
     "picker": {

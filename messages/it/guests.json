@@ -61,7 +61,7 @@
       "matching": "{count} corrispondenti",
       "clear": "Cancella filtri",
       "any": "Qualsiasi",
-      "myGuests": "My guests"
+      "myGuests": "I miei ospiti"
     },
     "list": {
       "selectAll": "Seleziona tutti gli invitati visibili",
@@ -205,8 +205,8 @@
       "saved": "Nucleo salvato",
       "cancel": "Annulla",
       "save": "Salva",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Gestito da",
+      "nobodyAssigned": "Nessuno assegnato"
     },
     "tagsDialog": {
       "title": "Etichette",

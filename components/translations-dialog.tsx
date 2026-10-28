@@ -21,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import type { ActionResult } from "@/lib/action-result";
 import type { Translations } from "@/lib/database.types";
 import { localeInfo } from "@/i18n/locales";
-import { browserTranslate, canBrowserTranslate } from "@/lib/i18n/browser-translate";
+import { draftTranslate } from "@/lib/i18n/draft-translate";
 
 export type TranslatableField = { key: string; label: string; multiline?: boolean; max?: number };
 
@@ -59,13 +59,9 @@ export function TranslationsDialog({
   const [draft, setDraft] = useState<Translations>(value);
   const [pending, startTransition] = useTransition();
   const [drafting, setDrafting] = useState<string | null>(null);
-  const [machine, setMachine] = useState(false);
   useEffect(() => {
     if (open) setDraft(value);
   }, [open, value]);
-  useEffect(() => {
-    setMachine(canBrowserTranslate());
-  }, []);
 
   if (!languages.length) return null;
   const filled = languages.filter((l) =>
@@ -80,7 +76,7 @@ export function TranslationsDialog({
       for (const f of fields) {
         const src = source[f.key]?.trim();
         if (!src || String(draft[lang]?.[f.key] ?? "").trim()) continue;
-        set(lang, f.key, await browserTranslate(src, mainLanguage, lang));
+        set(lang, f.key, await draftTranslate(src, mainLanguage, lang));
       }
     } catch {
       toast.error(t("draftFailed"));
@@ -122,22 +118,20 @@ export function TranslationsDialog({
             <fieldset key={lang} className="space-y-3 rounded-lg border p-3" lang={lang}>
               <legend className="flex w-full items-center justify-between gap-2 px-1 text-sm font-medium">
                 <LanguageName code={lang} />
-                {machine && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => draftWithBrowser(lang)}
-                    disabled={!!drafting}
-                  >
-                    {drafting === lang ? (
-                      <Loader2 className="animate-spin" aria-hidden />
-                    ) : (
-                      <Wand2 aria-hidden />
-                    )}{" "}
-                    {t("draft")}
-                  </Button>
-                )}
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => draftWithBrowser(lang)}
+                  disabled={!!drafting}
+                >
+                  {drafting === lang ? (
+                    <Loader2 className="animate-spin" aria-hidden />
+                  ) : (
+                    <Wand2 aria-hidden />
+                  )}{" "}
+                  {t("draft")}
+                </Button>
               </legend>
               {fields.map((f) => {
                 const src = source[f.key] ?? "";
@@ -162,7 +156,6 @@ export function TranslationsDialog({
               })}
             </fieldset>
           ))}
-          {!machine && <p className="text-muted-foreground text-xs">{t("noMachine")}</p>}
         </div>
         <DialogFooter>
           <Button

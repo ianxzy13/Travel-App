@@ -72,7 +72,7 @@
           "description": "Nude- und Rosétöne, Namen in Serifenschrift mit Schreibschrift-Akzent."
         },
         "modern": {
-          "label": "Modern Minimal",
+          "label": "Modern minimalistisch",
           "description": "Große fette Schrift, Schwarz-Weiß, viel Raum."
         },
         "garden": {
@@ -98,7 +98,7 @@
         "cleanSans": "klare serifenlose",
         "bookSerif": "Buch-Serifenschrift",
         "friendlySans": "freundliche serifenlose",
-        "handwritten": "handwritten"
+        "handwritten": "handschriftlich"
       }
     },
     "sections": {

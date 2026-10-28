@@ -73,7 +73,7 @@
     "slugChars": "Usate solo lettere, numeri e trattini singoli (ad es. ian-e-maria).",
     "slugLength": "Usate da 3 a 60 caratteri.",
     "airport": "Usate il codice aeroporto di 3 lettere, ad es. FCO.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Inserisci il titolo della canzone."
   },
   "ui": {
     "cancel": "Annulla",

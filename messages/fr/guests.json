@@ -61,7 +61,7 @@
       "matching": "{count} correspondants",
       "clear": "Effacer les filtres",
       "any": "Tous",
-      "myGuests": "My guests"
+      "myGuests": "Mes invités"
     },
     "list": {
       "selectAll": "Sélectionner tous les invités affichés",
@@ -205,8 +205,8 @@
       "saved": "Foyer enregistré",
       "cancel": "Annuler",
       "save": "Enregistrer",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Géré par",
+      "nobodyAssigned": "Personne d’assigné"
     },
     "tagsDialog": {
       "title": "Étiquettes",

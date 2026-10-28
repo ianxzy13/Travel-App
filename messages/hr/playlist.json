@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Popis pjesama",
+    "description": "Pjesme za vaše vjenčanje: što mora svirati, što bi bilo lijepo i što DJ nikad ne smije pustiti.",
+    "save": "Spremi",
+    "cancel": "Odustani",
+    "noSongs": "Još nema pjesama",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Obred",
+      "firstDance": "Prvi ples",
+      "dinner": "Večera",
+      "party": "Zabava"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Mora svirati",
+      "nice": "Bilo bi lijepo",
+      "no": "Ne puštati"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Naziv pjesme",
+      "artist": "Izvođač",
+      "category": "Kategorija",
+      "chooseCategory": "Odaberite kategoriju",
+      "priority": "Prioritet"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Dodaj pjesmu",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "„{title}” dodana"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Uredi pjesmu",
+      "label": "Uredi {title}",
+      "done": "Pjesma spremljena"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Izbriši {title}",
+      "title": "Izbrisati „{title}”?",
+      "button": "Izbriši",
+      "done": "Pjesma izbrisana"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Ova je pjesma već na popisu (u {category}).",
+      "again": "Ipak je dodati ponovno?",
+      "anyway": "Ipak dodaj"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Prikaži pjesme",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Još nema pjesama s ovim prioritetom."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Držite sve pjesme za vjenčanje na jednom popisu, razvrstane po trenutku, da DJ zna što pustiti, a što preskočiti.",
+      "button": "Dodajte prvu pjesmu"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Upravljaj kategorijama",
+      "title": "Kategorije",
+      "text": "Kategoriju preimenujete tako da preko naziva upišete novi. Brisanjem kategorije brišu se i njezine pjesme.",
+      "rename": "Naziv za {name}",
+      "renamed": "Kategorija preimenovana",
+      "delete": "Izbriši {name}",
+      "deleteTitle": "Izbrisati „{name}”?",
+      "deleteText": "{count, plural, one {Izbrisat će se i njezina # pjesma.} few {Izbrisat će se i njezine # pjesme.} other {Izbrisat će se i njezinih # pjesama.}}",
+      "deleted": "Kategorija izbrisana",
+      "new": "Nova kategorija",
+      "newPlaceholder": "npr. Koktel",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Kategorija dodana",
+      "newOption": "Nova kategorija…",
+      "starter": "Dodaj početne kategorije (Obred, Prvi ples, Večera, Zabava)",
+      "starterAdded": "Početne kategorije dodane"
     }
   }
 }

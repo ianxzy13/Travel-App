@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – de trouwplanner voor stellen die over grenzen heen trouwen",
+    "metaDescription": "Je gasten komen van overal. Vow geeft elke gast een eigen reispagina, in de eigen taal, met vluchten, kamers, tafelplaats en inreispapieren – alles op één plek.",
     "signIn": "Inloggen",
     "getStarted": "Aan de slag",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "Bruiloften over grenzen heen",
+    "title": "Je gasten komen van overal. Vow brengt ze er.",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Gratis beginnen met plannen",
     "seeInside": "Bekijk wat erin zit",
@@ -53,65 +53,65 @@
         "text": "Jullie plannen in je eigen taal; elke gast krijgt website, reactie en e-mails in de zijne."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Jullie bruiloft gaat over grenzen. Jullie planner ook.",
+    "closingText": "Nodig je partner, ouders of weddingplanner uit en plan alles samen in realtime, waar jullie ook wonen.",
     "create": "Maak jullie bruiloft aan",
     "footer": "Met liefde gemaakt · © {year} Vow",
     "privacy": "Privacy",
-    "terms": "Terms",
+    "terms": "Voorwaarden",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "Gemaakt voor bruiloften waar gasten landsgrenzen oversteken, niet alleen provinciegrenzen.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Persoonlijke reispagina",
+        "text": "Elke gast krijgt een eigen pagina: vluchten, hotelkamer, shuttletijd, tafelnummer en een checklist van wat mee moet."
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "EU-inreischecklist",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "Overzicht hotelkamers",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Shuttleplanner",
+        "text": "Groepeer aankomsten op tijd, plan ophaalritten en laat gasten weten wanneer hun rit vertrekt."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Trouwpapieren",
+        "text": "De documenten om in 64 landen wettelijk te trouwen: apostilles, vertalingen, deadlines, alles bijgehouden."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 talen per gast",
+        "text": "Je Sloveense oma ziet alles in het Sloveens. Je studievrienden zien het in het Engels. Automatisch."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow vs. typische Amerikaanse trouwapps",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "Persoonlijke reispagina per gast",
+      "entryChecklist": "Inreis-/visumchecklist per land",
+      "roomsPerGuest": "Hotelkamers per gast",
+      "paperwork": "Papieren om in het buitenland te trouwen",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "Budget in twee valuta",
+      "familyRoles": "Rollen voor familie",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Typische apps",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Binnenkort"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Aankomst do 5 mrt, 14:20",
+      "hotel": "Hotel Park · Kamer 204",
+      "shuttle": "Shuttle naar het meer van Bled · 16:00",
+      "table": "Tafel 3 · met de familie Kovač",
+      "passport": "Paspoort geldig tot minstens juni 2027",
+      "yourTrip": "Jouw reis"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "We hebben een e-mail gestuurd naar <b>{email}</b>. Klik op de link (in deze browser) of typ hieronder de code uit de e-mail.",
     "code": "Code uit de e-mail",
     "signInWithCode": "Inloggen met code",
-    "again": "Use a different email address",
+    "again": "Ander e-mailadres gebruiken",
     "setupTitle": "Bijna klaar: Supabase is nog niet gekoppeld.",
     "setupText": "Maak een bestand <code>.env.local</code> met je Supabase-URL en publieke sleutel (zie <code>.env.example</code> en de README) en start <code>npm run dev</code> opnieuw.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Code opnieuw sturen",
+    "resendWait": "Code opnieuw sturen ({seconds} s)",
+    "resent": "Er is een nieuwe code naar je e-mail gestuurd."
   },
   "welcome": {
     "title": "Kies je taal",
@@ -170,8 +170,8 @@
         "text": "We gebruiken dit voor inspiratie en websitesuggesties."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Waar komen je gasten vandaan?",
+        "text": "Kies de landen waar je gasten vandaan reizen. Zo kunnen we reispagina's en inreischecklists voorbereiden."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Namen, datum, plaats en stijl. Wijzigingen gelden overal in de app.",
     "saveChanges": "Wijzigingen opslaan",
     "saved": "Details van de bruiloft opgeslagen",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Populair",
+    "allCurrencies": "Alle valuta",
+    "guestCountries": "Landen waar je gasten vandaan reizen",
+    "guestCountriesHint": "Tik alles aan wat van toepassing is. Je kunt dit later altijd aanpassen.",
+    "guestCountriesSearch": "Landen zoeken…",
+    "noCurrency": "Geen tweede valuta",
+    "secondaryCurrency": "Tweede valuta (optioneel)",
+    "secondaryCurrencyHint": "Rekenen je leveranciers in een andere valuta? Voeg die hier toe.",
+    "exchangeRate": "Wisselkoers",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Kan kijken maar niet wijzigen"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Ouder",
+      "description": "Kan gasten, taken en reizen bewerken, maar geen instellingen"
     },
     "helper": {
       "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "description": "Kan toegewezen taken bewerken en de rest bekijken"
     }
   },
   "invite": {

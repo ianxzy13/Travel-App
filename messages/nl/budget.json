@@ -142,7 +142,7 @@
       "notes": "Notities",
       "file": "budget"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Geschatte bedragen in {secondary} bij 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Leveranciers",
@@ -160,7 +160,7 @@
     "noMatch": "Geen leveranciers gevonden.",
     "noCategory": "Geen categorie",
     "quote": "Offerte: <b>{amount}</b>",
-    "inBudget": "In budget: <b>{amount}</b>",
+    "inBudget": "Binnen budget: <b>{amount}</b>",
     "paidSuffix": " · {amount} betaald",
     "statuses": {
       "researching": "Aan het zoeken",

@@ -142,7 +142,7 @@
       "notes": "Notes",
       "file": "budget"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Valeurs approximatives en {secondary} à 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Prestataires",
