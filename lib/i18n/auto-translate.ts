@@ -1,5 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
+import { toSlovenianDual } from "./slovenian-dual";
 
 // Machine translation of the couple's own texts for guests (e.g. the RSVP
 // welcome message), used where the couple hasn't saved a translation.
@@ -147,15 +148,19 @@ const cached = unstable_cache(translateNow, ["auto-translate-v1"], {
 /**
  * `text` in language `to`, or null if no translator answered. `from` is the
  * language the text is most likely in (most translators detect it themselves).
+ * `byCouple`: the couple wrote it about themselves ("we"), so Slovenian gets
+ * the dual ("poročila se bova") instead of the plural translators give.
  */
 export async function autoTranslate(
   text: string,
   from: string,
   to: string,
+  { byCouple = false }: { byCouple?: boolean } = {},
 ): Promise<string | null> {
   if (!text.trim()) return null;
   try {
-    return await cached(text, from, to);
+    const out = await cached(text, from, to);
+    return byCouple && to === "sl" ? toSlovenianDual(out) : out;
   } catch (e) {
     console.error("[auto-translate]", e);
     return null;

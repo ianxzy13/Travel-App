@@ -11,6 +11,7 @@ import {
   WEDDING_TEXT_FIELDS,
   pruneTranslation,
 } from "@/lib/i18n/content";
+import { autoTranslate } from "@/lib/i18n/auto-translate";
 import { createClient } from "@/lib/supabase/server";
 import {
   localeSchema,
@@ -120,4 +121,36 @@ export async function saveWeddingTranslations(input: unknown): Promise<ActionRes
   if (error) return fail("saveWeddingTranslations", error);
   revalidatePath("/app", "layout");
   return { ok: true };
+}
+
+/**
+ * "Draft" in the translations dialogs: machine translations of the couple's
+ * texts (by field key), for them to check and correct before saving.
+ */
+export async function draftTranslations(
+  texts: Record<string, string>,
+  from: string,
+  to: string,
+): Promise<ActionResult<Record<string, string>>> {
+  const { role } = await requireWedding();
+  if (!canManage(role)) return noPermission();
+  const parsed = z
+    .object({
+      texts: z
+        .record(z.string().max(64), z.string().max(4000))
+        .refine((t) => Object.keys(t).length <= 20),
+      from: localeSchema,
+      to: localeSchema,
+    })
+    .safeParse({ texts, from, to });
+  if (!parsed.success) return await invalid(parsed.error);
+  const out: Record<string, string> = {};
+  await Promise.all(
+    Object.entries(parsed.data.texts).map(async ([key, text]) => {
+      const t = await autoTranslate(text, parsed.data.from, parsed.data.to, { byCouple: true });
+      if (t) out[key] = t;
+    }),
+  );
+  if (!Object.keys(out).length) return await err("generic");
+  return { ok: true, data: out };
 }

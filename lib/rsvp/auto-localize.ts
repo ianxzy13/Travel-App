@@ -31,7 +31,7 @@ export async function autoTranslateRsvp(
       const own = saved?.[field];
       if (!original || (typeof own === "string" && own.trim())) return;
       const translated = (
-        await autoTranslate(original, extras?.languages?.[0] ?? "en", locale)
+        await autoTranslate(original, extras?.languages?.[0] ?? "en", locale, { byCouple: true })
       )?.trim();
       if (!translated || translated === original) return;
       wedding[field] = translated;
