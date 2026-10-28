@@ -88,9 +88,9 @@
       "deleted": "Tarea eliminada",
       "save": "Guardar",
       "add": "Añadir tarea",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Comentarios",
+      "addComment": "Añade un comentario…",
+      "unknown": "Alguien"
     },
     "categories": {
       "Budget": "Presupuesto",
