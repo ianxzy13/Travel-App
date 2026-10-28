@@ -47,6 +47,9 @@ export function negotiate(
  * 3. the household's language (set by the couple, or chosen on the RSVP page)
  * 4. the browser's language
  * 5. the couple's language
+ * On a household's own RSVP page (`householdFirst`), 3 comes before 2: the
+ * couple set that language for exactly these guests, while the cookie may be
+ * left over from another link opened on the same phone.
  */
 export function resolveGuestLocale(opts: {
   asked?: string | null;
@@ -54,9 +57,11 @@ export function resolveGuestLocale(opts: {
   preferred?: string | null;
   acceptLanguage?: string | null;
   weddingLanguages?: readonly string[] | null;
+  householdFirst?: boolean;
 }): Locale {
   const offered = (opts.weddingLanguages ?? []).filter(isLocale);
   if (isLocale(opts.asked)) return opts.asked;
+  if (opts.householdFirst && isLocale(opts.preferred)) return opts.preferred;
   if (isLocale(opts.cookie)) return opts.cookie;
   if (isLocale(opts.preferred)) return opts.preferred;
   return negotiate(opts.acceptLanguage, LOCALE_CODES) ?? offered[0] ?? DEFAULT_LOCALE;
