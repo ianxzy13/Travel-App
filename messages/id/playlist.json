@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Daftar lagu",
+    "description": "Lagu untuk pernikahan Anda: yang wajib diputar, yang bagus jika diputar, dan yang tidak boleh diputar DJ.",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "noSongs": "Belum ada lagu",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Upacara",
+      "firstDance": "Dansa pertama",
+      "dinner": "Makan malam",
+      "party": "Pesta"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Wajib diputar",
+      "nice": "Bagus jika diputar",
+      "no": "Jangan diputar"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Judul lagu",
+      "artist": "Artis",
+      "category": "Kategori",
+      "chooseCategory": "Pilih kategori",
+      "priority": "Prioritas"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Tambah lagu",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "“{title}” ditambahkan"
     },
     "edit": {
-      "title": "Edit song",
+      "title": "Edit lagu",
       "label": "Edit {title}",
-      "done": "Song saved"
+      "done": "Lagu disimpan"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Hapus {title}",
+      "title": "Hapus “{title}”?",
+      "button": "Hapus",
+      "done": "Lagu dihapus"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Lagu ini sudah ada di daftar (di {category}).",
+      "again": "Tetap tambahkan lagi?",
+      "anyway": "Tetap tambahkan"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Tampilkan lagu",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Belum ada lagu dengan prioritas ini."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Simpan semua lagu pernikahan Anda dalam satu daftar, diurutkan per momen, agar DJ tahu apa yang diputar dan dilewati.",
+      "button": "Tambahkan lagu pertama Anda"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Kelola kategori",
+      "title": "Kategori",
+      "text": "Ganti nama kategori dengan mengetik di atas namanya. Menghapus kategori juga menghapus lagunya.",
+      "rename": "Nama {name}",
+      "renamed": "Nama kategori diganti",
+      "delete": "Hapus {name}",
+      "deleteTitle": "Hapus “{name}”?",
+      "deleteText": "{count, plural, other {# lagunya juga akan dihapus.}}",
+      "deleted": "Kategori dihapus",
+      "new": "Kategori baru",
+      "newPlaceholder": "mis. Waktu koktail",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Kategori ditambahkan",
+      "newOption": "Kategori baru…",
+      "starter": "Tambah kategori awal (Upacara, Dansa pertama, Makan malam, Pesta)",
+      "starterAdded": "Kategori awal ditambahkan"
     }
   }
 }

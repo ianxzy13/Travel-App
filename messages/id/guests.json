@@ -54,14 +54,14 @@
       "household": "Keluarga",
       "age": "Kelompok usia",
       "language": "Bahasa",
-      "rsvp": "RSVP",
+      "rsvp": "Konfirmasi kehadiran",
       "attending": "Hadir",
       "declined": "Tidak hadir",
       "waiting": "Belum membalas",
       "matching": "{count} cocok",
       "clear": "Hapus filter",
       "any": "Semua",
-      "myGuests": "My guests"
+      "myGuests": "Tamu saya"
     },
     "list": {
       "selectAll": "Pilih semua tamu yang ditampilkan",
@@ -205,8 +205,8 @@
       "saved": "Keluarga disimpan",
       "cancel": "Batal",
       "save": "Simpan",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Dikelola oleh",
+      "nobodyAssigned": "Belum ada yang ditugaskan"
     },
     "tagsDialog": {
       "title": "Label",
@@ -223,9 +223,9 @@
       "colours": {
         "stone": "Batu",
         "rose": "Mawar",
-        "sage": "Sage",
+        "sage": "Hijau sage",
         "sky": "Langit",
-        "amber": "Amber",
+        "amber": "Kuning amber",
         "violet": "Ungu"
       }
     },

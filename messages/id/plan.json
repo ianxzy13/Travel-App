@@ -88,16 +88,16 @@
       "deleted": "Tugas dihapus",
       "save": "Simpan",
       "add": "Tambah tugas",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Komentar",
+      "addComment": "Tambah komentar…",
+      "unknown": "Seseorang"
     },
     "categories": {
       "Budget": "Anggaran",
       "Guests": "Tamu",
       "Style": "Gaya",
       "Vendors": "Vendor",
-      "Venue": "Venue",
+      "Venue": "Tempat acara",
       "Ceremony": "Upacara",
       "People": "Orang",
       "Travel": "Perjalanan",
