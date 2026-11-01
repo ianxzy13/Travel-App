@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – 国境を越えて結婚するカップルのためのウェディングプランナー",
+    "metaDescription": "ゲストは世界中からやって来ます。Vowはゲスト一人ひとりに、その人の言語で、フライト、部屋、席、入国書類をまとめた旅程ページを用意します。",
     "signIn": "ログイン",
     "getStarted": "はじめる",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "国境を越える結婚式",
+    "title": "ゲストは世界中から。Vowが会場まで導きます。",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "無料で準備をはじめる",
     "seeInside": "機能を見る",
@@ -53,65 +53,65 @@
         "text": "あなたは自分の言語で準備し、ゲストはサイト、出欠ページ、メールをそれぞれの言語で受け取ります。"
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "結婚式は国境を越える。プランナーもそうあるべき。",
+    "closingText": "パートナー、両親、プランナーを招待して、どこに住んでいてもリアルタイムで一緒に準備しましょう。",
     "create": "結婚式を作成",
     "footer": "心を込めて · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "プライバシー",
+    "terms": "利用規約",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "州境ではなく、国境を越えてゲストが集まる結婚式のために。",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "個人の旅程ページ",
+        "text": "ゲストごとの専用ページ：フライト、ホテルの部屋、送迎の時刻、テーブル番号、持ち物チェックリスト。"
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "EU入国チェックリスト",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "ホテルの部屋ボード",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "送迎プランナー",
+        "text": "到着を時間帯でまとめ、送迎を計画し、出発時刻をゲストに知らせます。"
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "結婚手続きの書類",
+        "text": "64か国で法的に結婚するための書類：アポスティーユ、翻訳、期限をすべて管理。"
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "ゲストごとに25言語",
+        "text": "スロベニアのおばあちゃんはすべてスロベニア語で。大学の友人は英語で。自動で。"
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vowと一般的な米国のウェディングアプリ",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "ゲストごとの旅程ページ",
+      "entryChecklist": "国別の入国・ビザチェックリスト",
+      "roomsPerGuest": "ゲストごとのホテルの部屋",
+      "paperwork": "海外挙式の書類手続き",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "2つの通貨で予算管理",
+      "familyRoles": "家族のプランニング権限",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "一般的なアプリ",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "近日公開"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "マイアミ → リュブリャナ",
+      "flightDetail": "到着 3月5日（木）14:20",
+      "hotel": "Hotel Park · 204号室",
+      "shuttle": "ブレッド湖への送迎 · 16:00",
+      "table": "テーブル3 · Kovač 家と",
+      "passport": "パスポートは2027年6月まで有効であること",
+      "yourTrip": "あなたの旅程"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "<b>{email}</b> にメールを送信しました。メール内のリンクを（このブラウザで）クリックするか、下にメールのコードを入力してください。",
     "code": "メールのコード",
     "signInWithCode": "コードでログイン",
-    "again": "Use a different email address",
+    "again": "別のメールアドレスを使う",
     "setupTitle": "あと少し：Supabase がまだ接続されていません。",
     "setupText": "Supabase の URL と公開キーを記載した <code>.env.local</code> ファイルを作成し（<code>.env.example</code> と README を参照）、<code>npm run dev</code> を再起動してください。",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "コードを再送",
+    "resendWait": "コードを再送（{seconds} 秒）",
+    "resent": "新しいコードをメールで送りました。"
   },
   "welcome": {
     "title": "言語を選んでください",
@@ -170,8 +170,8 @@
         "text": "アイデアとサイトの提案に使います。"
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "ゲストはどこから来ますか？",
+        "text": "ゲストが出発する国を選んでください。旅程ページと入国チェックリストの準備に役立ちます。"
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "名前、日付、場所、スタイル。変更はアプリ全体に反映されます。",
     "saveChanges": "変更を保存",
     "saved": "結婚式の詳細を保存しました",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "人気",
+    "allCurrencies": "すべての通貨",
+    "guestCountries": "ゲストが出発する国",
+    "guestCountriesHint": "当てはまるものをすべてタップしてください。あとからいつでも変更できます。",
+    "guestCountriesSearch": "国を検索…",
+    "noCurrency": "2つ目の通貨なし",
+    "secondaryCurrency": "2つ目の通貨（任意）",
+    "secondaryCurrencyHint": "業者が別の通貨で請求する場合はここで追加してください。",
+    "exchangeRate": "為替レート",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "見ることはできますが、変更はできません"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "親",
+      "description": "ゲスト、タスク、旅行を編集できます（設定は不可）"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "お手伝い",
+      "description": "担当のタスクを編集し、その他を閲覧できます"
     }
   },
   "invite": {

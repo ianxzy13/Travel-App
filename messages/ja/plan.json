@@ -88,9 +88,9 @@
       "deleted": "やることを削除しました",
       "save": "保存",
       "add": "やることを追加",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "コメント",
+      "addComment": "コメントを追加…",
+      "unknown": "誰か"
     },
     "categories": {
       "Budget": "予算",

@@ -61,7 +61,7 @@
       "matching": "{count} 人が該当",
       "clear": "フィルターをクリア",
       "any": "すべて",
-      "myGuests": "My guests"
+      "myGuests": "自分のゲスト"
     },
     "list": {
       "selectAll": "表示中のゲストをすべて選択",
@@ -205,8 +205,8 @@
       "saved": "世帯を保存しました",
       "cancel": "キャンセル",
       "save": "保存",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "担当",
+      "nobodyAssigned": "担当者なし"
     },
     "tagsDialog": {
       "title": "タグ",
@@ -339,7 +339,7 @@
       "language": "言語",
       "yes": "はい",
       "no": "いいえ",
-      "file": "guests"
+      "file": "ゲスト"
     }
   }
 }
