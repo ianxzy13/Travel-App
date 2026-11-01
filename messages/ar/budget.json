@@ -140,9 +140,9 @@
       "nextAmount": "مبلغ الدفعة التالية",
       "currency": "العملة",
       "notes": "ملاحظات",
-      "file": "budget"
+      "file": "الميزانية"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "تُعرض قيم {secondary} تقريبية بسعر 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "الموردون",

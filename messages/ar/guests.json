@@ -61,7 +61,7 @@
       "matching": "المطابق: {count}",
       "clear": "مسح المرشحات",
       "any": "الكل",
-      "myGuests": "My guests"
+      "myGuests": "ضيوفي"
     },
     "list": {
       "selectAll": "تحديد كل الضيوف المعروضين",
@@ -205,8 +205,8 @@
       "saved": "تم حفظ العائلة",
       "cancel": "إلغاء",
       "save": "حفظ",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "يديره",
+      "nobodyAssigned": "لم يُسند لأحد"
     },
     "tagsDialog": {
       "title": "الوسوم",
@@ -339,7 +339,7 @@
       "language": "اللغة",
       "yes": "نعم",
       "no": "لا",
-      "file": "guests"
+      "file": "ضيوف"
     }
   }
 }
