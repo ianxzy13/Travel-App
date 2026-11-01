@@ -61,7 +61,7 @@
       "matching": "Найдено: {count}",
       "clear": "Сбросить фильтры",
       "any": "Любой",
-      "myGuests": "My guests"
+      "myGuests": "Мои гости"
     },
     "list": {
       "selectAll": "Выбрать всех показанных гостей",
@@ -205,8 +205,8 @@
       "saved": "Семья сохранена",
       "cancel": "Отмена",
       "save": "Сохранить",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Ответственный",
+      "nobodyAssigned": "Никто не назначен"
     },
     "tagsDialog": {
       "title": "Метки",

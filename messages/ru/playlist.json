@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Плейлист",
+    "description": "Песни для вашей свадьбы: что обязательно включить, что было бы хорошо и что диджей не должен ставить никогда.",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "noSongs": "Песен пока нет",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Церемония",
+      "firstDance": "Первый танец",
+      "dinner": "Ужин",
+      "party": "Вечеринка"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Обязательно",
+      "nice": "Было бы хорошо",
+      "no": "Не включать"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Название песни",
+      "artist": "Исполнитель",
+      "category": "Категория",
+      "chooseCategory": "Выберите категорию",
+      "priority": "Приоритет"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Добавить песню",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "«{title}» добавлена"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Изменить песню",
+      "label": "Изменить {title}",
+      "done": "Песня сохранена"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Удалить {title}",
+      "title": "Удалить «{title}»?",
+      "button": "Удалить",
+      "done": "Песня удалена"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Эта песня уже есть в списке (в категории {category}).",
+      "again": "Всё равно добавить ещё раз?",
+      "anyway": "Всё равно добавить"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Показать песни",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Песен с таким приоритетом пока нет."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Все песни для свадьбы в одном списке по моментам — диджей будет знать, что ставить, а что пропустить.",
+      "button": "Добавьте первую песню"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Управление категориями",
+      "title": "Категории",
+      "text": "Чтобы переименовать категорию, просто измените название. При удалении категории удаляются и её песни.",
+      "rename": "Название: {name}",
+      "renamed": "Категория переименована",
+      "delete": "Удалить {name}",
+      "deleteTitle": "Удалить «{name}»?",
+      "deleteText": "{count, plural, one {Будет удалена и # песня.} few {Будут удалены и # песни.} many {Будут удалены и # песен.} other {Будут удалены и # песни.}}",
+      "deleted": "Категория удалена",
+      "new": "Новая категория",
+      "newPlaceholder": "например, Коктейль",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Категория добавлена",
+      "newOption": "Новая категория…",
+      "starter": "Добавить базовые категории (Церемония, Первый танец, Ужин, Вечеринка)",
+      "starterAdded": "Базовые категории добавлены"
     }
   }
 }

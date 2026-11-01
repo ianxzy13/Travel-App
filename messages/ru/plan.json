@@ -88,9 +88,9 @@
       "deleted": "Задача удалена",
       "save": "Сохранить",
       "add": "Добавить задачу",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Комментарии",
+      "addComment": "Добавить комментарий…",
+      "unknown": "Кто-то"
     },
     "categories": {
       "Budget": "Бюджет",
