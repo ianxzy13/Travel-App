@@ -61,7 +61,7 @@
       "matching": "{count} eşleşme",
       "clear": "Filtreleri temizle",
       "any": "Tümü",
-      "myGuests": "My guests"
+      "myGuests": "Misafirlerim"
     },
     "list": {
       "selectAll": "Gösterilen tüm misafirleri seç",
@@ -205,8 +205,8 @@
       "saved": "Hane kaydedildi",
       "cancel": "İptal",
       "save": "Kaydet",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Sorumlu",
+      "nobodyAssigned": "Kimse atanmadı"
     },
     "tagsDialog": {
       "title": "Etiketler",

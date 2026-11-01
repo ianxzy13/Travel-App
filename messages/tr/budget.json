@@ -142,7 +142,7 @@
       "notes": "Notlar",
       "file": "butce"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Yaklaşık {secondary} değerleri 1 {primary} = {rate} {secondary} kuruyla gösteriliyor."
   },
   "vendors": {
     "title": "Tedarikçiler",
