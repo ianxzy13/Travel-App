@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – 為跨國結婚的新人打造的婚禮策劃工具",
+    "metaDescription": "你的賓客來自世界各地。Vow 為每位賓客提供專屬行程頁面，使用他們的語言，包含航班、房間、座位和入境文件 — 一站式彙總。",
     "signIn": "登入",
     "getStarted": "開始使用",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "跨國婚禮",
+    "title": "你的賓客來自世界各地。Vow 幫他們順利抵達。",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "免費開始籌備",
     "seeInside": "看看有什麼",
@@ -53,65 +53,65 @@
         "text": "你們用自己的語言籌備；每位賓客都能用自己的語言看到網站、回覆頁和郵件。"
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "你的婚禮跨越國界，你的策劃工具也應如此。",
+    "closingText": "邀請伴侶、父母或婚禮策劃師，無論大家住在哪裡，都能實時一起籌備。",
     "create": "建立你們的婚禮",
     "footer": "用愛打造 · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "隱私",
+    "terms": "條款",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "專為賓客要跨越國界、而不只是跨州的婚禮而設計。",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "個人行程頁面",
+        "text": "每位賓客都有自己的頁面：航班、飯店房間、接駁時間、桌號，以及隨身物品清單。"
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "歐盟入境清單",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "飯店房間看板",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "接駁規劃",
+        "text": "按時間彙總抵達，安排接機，並告訴賓客車何時出發。"
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "結婚證件",
+        "text": "在 64 個國家合法結婚所需的文件：海牙認證、翻譯、截止日期，全部跟進。"
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "每位賓客 25 種語言",
+        "text": "你的斯洛維尼亞奶奶看到的全是斯洛維尼亞語，大學同學看到的是英語。全自動。"
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow 與常見美國婚禮應用對比",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "每位賓客的個人行程頁面",
+      "entryChecklist": "按國家的入境/簽證清單",
+      "roomsPerGuest": "每位賓客的飯店房間",
+      "paperwork": "海外結婚證件手續",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "雙幣種預算",
+      "familyRoles": "家人的策劃角色",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "常見應用",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "即將推出"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "邁阿密 → 盧布林雅那",
+      "flightDetail": "3 月 5 日（週四）14:20 抵達",
+      "hotel": "Hotel Park · 204 房",
+      "shuttle": "前往布萊德湖的接駁車 · 16:00",
+      "table": "第 3 桌 · 與 Kovač 一家同桌",
+      "passport": "護照有效期至少到 2027 年 6 月",
+      "yourTrip": "你的行程"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "我們已寄一封郵件到 <b>{email}</b>。點擊其中的連結（在此瀏覽器中），或在下方輸入郵件中的驗證碼。",
     "code": "郵件中的驗證碼",
     "signInWithCode": "使用驗證碼登入",
-    "again": "Use a different email address",
+    "again": "使用其他電子郵件地址",
     "setupTitle": "快好了：Supabase 尚未連線。",
     "setupText": "建立 <code>.env.local</code> 檔案，填入 Supabase 網址和公開金鑰（見 <code>.env.example</code> 和 README），然後重新執行 <code>npm run dev</code>。",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "重新傳送驗證碼",
+    "resendWait": "重新傳送驗證碼（{seconds} 秒）",
+    "resent": "新的驗證碼已傳送到你的電子郵件。"
   },
   "welcome": {
     "title": "選擇你的語言",
@@ -170,8 +170,8 @@
         "text": "我們會用它來推薦靈感和網站設計。"
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "你的賓客從哪裡來？",
+        "text": "選擇賓客出發的國家。這能幫助我們準備行程頁面和入境清單。"
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "名字、日期、地點和風格。變更會套用到整個應用程式。",
     "saveChanges": "儲存變更",
     "saved": "婚禮詳情已儲存",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "熱門",
+    "allCurrencies": "所有貨幣",
+    "guestCountries": "賓客出發的國家",
+    "guestCountriesHint": "點選所有適用項。之後隨時可以更改。",
+    "guestCountriesSearch": "搜尋國家…",
+    "noCurrency": "無第二貨幣",
+    "secondaryCurrency": "第二貨幣（可選）",
+    "secondaryCurrencyHint": "如果供應商使用其他貨幣收費，請在這裡新增。",
+    "exchangeRate": "匯率",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "只能檢視，不能修改"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "父母",
+      "description": "可編輯賓客、待辦和行程，不能修改設定"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "幫手",
+      "description": "可編輯分配給自己的待辦，檢視其他內容"
     }
   },
   "invite": {
