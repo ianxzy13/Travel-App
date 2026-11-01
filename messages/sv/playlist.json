@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Spellista",
+    "description": "Låtarna till ert bröllop: det som måste spelas, det som vore kul och det som DJ:n aldrig får spela.",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "noSongs": "Inga låtar än",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Vigsel",
+      "firstDance": "Första dansen",
+      "dinner": "Middag",
+      "party": "Fest"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Måste spelas",
+      "nice": "Vore kul",
+      "no": "Spela inte"
     },
     "field": {
-      "title": "Song name",
+      "title": "Låtnamn",
       "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "category": "Kategori",
+      "chooseCategory": "Välj en kategori",
+      "priority": "Prioritet"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Lägg till en låt",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "\"{title}\" tillagd"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Redigera låt",
+      "label": "Redigera {title}",
+      "done": "Låt sparad"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Ta bort {title}",
+      "title": "Ta bort \"{title}\"?",
+      "button": "Ta bort",
+      "done": "Låt borttagen"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Den här låten finns redan på listan (i {category}).",
+      "again": "Lägga till den igen ändå?",
+      "anyway": "Lägg till ändå"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Visa låtar",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Inga låtar med den här prioriteten än."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Samla alla bröllopslåtar i en lista, sorterad efter moment, så att DJ:n vet vad som ska spelas och vad som ska skippas.",
+      "button": "Lägg till din första låt"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Hantera kategorier",
+      "title": "Kategorier",
+      "text": "Byt namn på en kategori genom att skriva över namnet. Tar du bort en kategori tas även dess låtar bort.",
+      "rename": "Namn på {name}",
+      "renamed": "Kategori omdöpt",
+      "delete": "Ta bort {name}",
+      "deleteTitle": "Ta bort \"{name}\"?",
+      "deleteText": "{count, plural, one {Dess # låt tas också bort.} other {Dess # låtar tas också bort.}}",
+      "deleted": "Kategori borttagen",
+      "new": "Ny kategori",
+      "newPlaceholder": "t.ex. Mingel",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Kategori tillagd",
+      "newOption": "Ny kategori…",
+      "starter": "Lägg till startkategorier (Vigsel, Första dansen, Middag, Fest)",
+      "starterAdded": "Startkategorier tillagda"
     }
   }
 }

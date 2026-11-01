@@ -86,7 +86,7 @@
     },
     "notFound": {
       "title": "Te strani nismo našli",
-      "text": "Povezava je morda stara ali napačno vpisana. Vrnimo vas na pravo pot.",
+      "text": "Povezava je morda stara ali napačno vpisana. Vrnite se na začetno stran.",
       "home": "Na začetek"
     }
   }

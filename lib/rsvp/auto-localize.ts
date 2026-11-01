@@ -1,4 +1,5 @@
 import "server-only";
+import { youForm } from "@/i18n/you";
 import { autoTranslate } from "@/lib/i18n/auto-translate";
 import type { RsvpData, RsvpExtras } from "./types";
 
@@ -25,13 +26,14 @@ export async function autoTranslateRsvp(
   const saved = extras?.translations?.[locale] as Record<string, unknown> | undefined;
   const originals: RsvpOriginals = {};
   const wedding = { ...data.wedding };
+  const you = youForm(data.guests?.length); // one guest, two or more
   await Promise.all(
     AUTO_RSVP_FIELDS.map(async (field) => {
       const original = data.wedding[field]?.trim();
       const own = saved?.[field];
       if (!original || (typeof own === "string" && own.trim())) return;
       const translated = (
-        await autoTranslate(original, extras?.languages?.[0] ?? "en", locale, { byCouple: true })
+        await autoTranslate(original, extras?.languages?.[0] ?? "en", locale, { byCouple: true, you })
       )?.trim();
       if (!translated || translated === original) return;
       wedding[field] = translated;

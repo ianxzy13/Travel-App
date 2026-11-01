@@ -142,7 +142,7 @@
       "notes": "Uwagi",
       "file": "budzet"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Przybliżone wartości w {secondary} przy kursie 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Usługodawcy",

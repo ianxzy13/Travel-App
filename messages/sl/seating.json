@@ -207,7 +207,7 @@
     "resetWeights": "Ponastavi",
     "noHostTag": "Dodajte oznako host gostom, ki sprejemajo druge.",
     "rsvpChanged": {
-      "attending": "Gost je pravkar potrdil udelezbo!",
+      "attending": "Gost je pravkar potrdil udeležbo!",
       "declined": "Gost je zavrnil povabilo.",
       "removed": "Odgovor gosta je bil odstranjen."
     },
@@ -218,15 +218,15 @@
       "duplicate": "Podvoji",
       "duplicated": "Scenarij podvojen",
       "rename": "Preimenuj",
-      "delete": "Izbrisi",
+      "delete": "Izbriši",
       "deleted": "Scenarij izbrisan",
       "deleteConfirm": "Izbrisati ta scenarij? Mize in dodelitve bodo odstranjene.",
-      "maxReached": "Imate lahko najvec 3 scenarije na dogodek.",
+      "maxReached": "Na dogodek imate lahko največ 3 scenarije.",
       "switched": "Scenarij spremenjen",
       "defaultName": "Plan A"
     },
-    "findSeatQr": "QR plakat: poiscite svoj sedez",
-    "findSeatHeading": "Poiscite svoj sedez",
-    "findSeatScan": "Skenirajte to kodo s telefonom in poiscite svojo mizo."
+    "findSeatQr": "QR plakat: poiščite svoj sedež",
+    "findSeatHeading": "Poiščite svoj sedež",
+    "findSeatScan": "Skenirajte to kodo s telefonom in poiščite svojo mizo."
   }
 }

@@ -1,11 +1,11 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – bröllopsplaneraren för par som gifter sig över gränserna",
+    "metaDescription": "Dina gäster kommer från hela världen. Vow ger varje gäst en egen resesida, på sitt språk, med flyg, rum, bordsplacering och inresepapper – allt på ett ställe.",
     "signIn": "Logga in",
     "getStarted": "Kom igång",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
+    "eyebrow": "Bröllop över gränserna",
+    "title": "Dina gäster kommer från hela världen. Vow tar dem dit.",
     "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
     "start": "Börja planera gratis",
     "seeInside": "Se vad som finns",
@@ -53,65 +53,65 @@
         "text": "Ni planerar på ert språk; varje gäst får sajten, OSA och mejl på sitt."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Ert bröllop går över gränser. Det borde er planerare också göra.",
+    "closingText": "Bjud in din partner, dina föräldrar eller er bröllopsplanerare och planera allt tillsammans i realtid, var ni än bor.",
     "create": "Skapa ert bröllop",
     "footer": "Gjort med kärlek · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
+    "privacy": "Integritet",
+    "terms": "Villkor",
     "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "differenceText": "Byggd för bröllop där gästerna reser över landsgränser.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Personlig resesida",
+        "text": "Varje gäst får en egen sida: flyg, hotellrum, transfertid, bordsnummer och en checklista över vad som ska med."
       },
       "entry": {
-        "title": "EU entry checklist",
+        "title": "Checklista för inresa i EU",
         "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
       },
       "rooms": {
-        "title": "Hotel room board",
+        "title": "Tavla för hotellrum",
         "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Transferplanerare",
+        "text": "Gruppera ankomster efter tid, planera upphämtningar och meddela gästerna när deras skjuts går."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Vigselpapper",
+        "text": "Dokumenten som krävs för att gifta sig lagligt i 64 länder: apostille, översättningar, deadlines – allt under kontroll."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 språk per gäst",
+        "text": "Din slovenska mormor ser allt på slovenska. Dina studiekompisar ser det på engelska. Automatiskt."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow jämfört med vanliga amerikanska bröllopsappar",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
+      "tripPage": "Personlig resesida för varje gäst",
+      "entryChecklist": "Checklista för inresa/visum per land",
+      "roomsPerGuest": "Hotellrum per gäst",
+      "paperwork": "Papper för att gifta sig utomlands",
       "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "dualBudget": "Budget i två valutor",
+      "familyRoles": "Roller för familjen",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Vanliga appar",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Kommer snart"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Ankommer tors 5 mars, 14:20",
+      "hotel": "Hotel Park · Rum 204",
+      "shuttle": "Transfer till Bledsjön · 16:00",
+      "table": "Bord 3 · med familjen Kovač",
+      "passport": "Passet gäller minst till juni 2027",
+      "yourTrip": "Din resa"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Vi har skickat ett mejl till <b>{email}</b>. Klicka på länken (i den här webbläsaren) eller skriv koden från mejlet nedan.",
     "code": "Kod från mejlet",
     "signInWithCode": "Logga in med kod",
-    "again": "Use a different email address",
+    "again": "Använd en annan e-postadress",
     "setupTitle": "Nästan klart: Supabase är inte anslutet än.",
     "setupText": "Skapa en fil <code>.env.local</code> med din Supabase-URL och publika nyckel (se <code>.env.example</code> och README) och starta sedan om <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Skicka koden igen",
+    "resendWait": "Skicka koden igen ({seconds} s)",
+    "resent": "En ny kod har skickats till din e-post."
   },
   "welcome": {
     "title": "Välj ditt språk",
@@ -170,8 +170,8 @@
         "text": "Vi använder den för inspiration och förslag till sajten."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Var kommer dina gäster ifrån?",
+        "text": "Välj länderna dina gäster reser från. Då kan vi förbereda resesidor och checklistor för inresa."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Namn, datum, plats och stil. Ändringar gäller överallt i appen.",
     "saveChanges": "Spara ändringar",
     "saved": "Bröllopsdetaljer sparade",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Populära",
+    "allCurrencies": "Alla valutor",
+    "guestCountries": "Länder dina gäster reser från",
+    "guestCountriesHint": "Tryck på alla som stämmer. Du kan ändra det senare.",
+    "guestCountriesSearch": "Sök länder…",
+    "noCurrency": "Ingen andra valuta",
+    "secondaryCurrency": "Andra valuta (valfritt)",
+    "secondaryCurrencyHint": "Om dina leverantörer tar betalt i en annan valuta, lägg till den här.",
+    "exchangeRate": "Växelkurs",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Kan titta men inte ändra"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Förälder",
+      "description": "Kan redigera gäster, uppgifter och resor, men inte inställningar"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Hjälpare",
+      "description": "Kan redigera tilldelade uppgifter och se resten"
     }
   },
   "invite": {

@@ -92,8 +92,11 @@ describe("every language file", () => {
         const source = String(get(en, k));
         const translated = String(get(messages, k));
         expect(translated.trim(), `${code} ${k} is empty`).not.toBe("");
-        // plural forms may differ, so only compare the variable names
-        expect(new Set(placeholders(translated)), `${code} ${k} placeholders`).toEqual(
+        // plural forms may differ, so only compare the variable names; "you" (one
+        // guest, two or more) is chosen when texts load, so English needs none
+        const used = new Set(placeholders(translated));
+        used.delete("you");
+        expect(used, `${code} ${k} placeholders`).toEqual(
           new Set(placeholders(source)),
         );
         expect(tags(translated), `${code} ${k} tags`).toEqual(tags(source));

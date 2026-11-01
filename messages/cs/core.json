@@ -73,7 +73,7 @@
     "slugChars": "Používejte jen písmena, číslice a jednotlivé pomlčky (např. ian-a-maria).",
     "slugLength": "Použijte 3 až 60 znaků.",
     "airport": "Použijte třípísmenný kód letiště, např. PRG.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Zadejte název písně."
   },
   "ui": {
     "cancel": "Zrušit",

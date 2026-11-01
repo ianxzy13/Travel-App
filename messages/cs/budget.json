@@ -142,7 +142,7 @@
       "notes": "Poznámky",
       "file": "rozpocet"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Přibližné hodnoty v {secondary} při kurzu 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Dodavatelé",

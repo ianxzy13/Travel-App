@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { APP_LOCALE_COOKIE, GUEST_LOCALE_COOKIE, type Locale } from "./locales";
 import { loadMessages } from "./messages";
 import { resolveAppLocale, resolveGuestLocale } from "./resolve";
+import { youForm, type YouForm } from "./you";
+import { fetchRsvp } from "@/lib/rsvp/fetch";
 
 /** Guests' pages (website, RSVP, shared boards). */
 export const isGuestPath = (path: string) => /^\/(w|rsvp|r|b)(\/|$)/.test(path);
@@ -47,11 +49,17 @@ export const requestLocale = cache(async (): Promise<Locale> => {
   });
 });
 
+/** How this page speaks to the guest: by the size of the household on an RSVP link (/r/CODE…). */
+const requestYou = cache(async (): Promise<YouForm> => {
+  const code = ((await headers()).get("x-vow-path") ?? "").match(/^\/r\/([^/]+)/)?.[1];
+  return code ? youForm((await fetchRsvp(code))?.guests.length) : "other";
+});
+
 export default getRequestConfig(async () => {
-  const locale = await requestLocale();
+  const [locale, you] = await Promise.all([requestLocale(), requestYou()]);
   return {
     locale,
-    messages: await loadMessages(locale),
+    messages: await loadMessages(locale, you),
     // dates are plain calendar dates / local times, so format them without shifting
     timeZone: "UTC",
   };
