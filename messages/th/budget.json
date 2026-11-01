@@ -140,9 +140,9 @@
       "nextAmount": "จำนวนครั้งถัดไป",
       "currency": "สกุลเงิน",
       "notes": "หมายเหตุ",
-      "file": "budget"
+      "file": "งบประมาณ"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "แสดงค่า {secondary} โดยประมาณที่อัตรา 1 {primary} = {rate} {secondary}"
   },
   "vendors": {
     "title": "ผู้ให้บริการ",

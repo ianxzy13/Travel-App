@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "เพลย์ลิสต์",
+    "description": "เพลงสำหรับงานแต่งงานของคุณ: เพลงที่ต้องเปิด เพลงที่เปิดก็ดี และเพลงที่ดีเจห้ามเปิด",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "noSongs": "ยังไม่มีเพลง",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "พิธี",
+      "firstDance": "เต้นรำครั้งแรก",
+      "dinner": "มื้อค่ำ",
+      "party": "ปาร์ตี้"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "ต้องเปิด",
+      "nice": "เปิดก็ดี",
+      "no": "ห้ามเปิด"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "ชื่อเพลง",
+      "artist": "ศิลปิน",
+      "category": "หมวดหมู่",
+      "chooseCategory": "เลือกหมวดหมู่",
+      "priority": "ลำดับความสำคัญ"
     },
     "add": {
-      "title": "Add a song",
+      "title": "เพิ่มเพลง",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "เพิ่ม “{title}” แล้ว"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "แก้ไขเพลง",
+      "label": "แก้ไข {title}",
+      "done": "บันทึกเพลงแล้ว"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "ลบ {title}",
+      "title": "ลบ “{title}” ไหม",
+      "button": "ลบ",
+      "done": "ลบเพลงแล้ว"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "เพลงนี้อยู่ในรายการแล้ว (ใน {category})",
+      "again": "ยังต้องการเพิ่มซ้ำไหม",
+      "anyway": "เพิ่มต่อไป"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "แสดงเพลง",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "ยังไม่มีเพลงในลำดับความสำคัญนี้"
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "เก็บเพลงงานแต่งงานทั้งหมดไว้ในรายการเดียว เรียงตามช่วงเวลา เพื่อให้ดีเจรู้ว่าจะเปิดหรือข้ามเพลงไหน",
+      "button": "เพิ่มเพลงแรกของคุณ"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "จัดการหมวดหมู่",
+      "title": "หมวดหมู่",
+      "text": "เปลี่ยนชื่อหมวดหมู่ได้โดยพิมพ์ทับชื่อ การลบหมวดหมู่จะลบเพลงในหมวดนั้นด้วย",
+      "rename": "ชื่อของ {name}",
+      "renamed": "เปลี่ยนชื่อหมวดหมู่แล้ว",
+      "delete": "ลบ {name}",
+      "deleteTitle": "ลบ “{name}” ไหม",
+      "deleteText": "{count, plural, other {เพลงในหมวดนี้ # เพลงจะถูกลบด้วย}}",
+      "deleted": "ลบหมวดหมู่แล้ว",
+      "new": "หมวดหมู่ใหม่",
+      "newPlaceholder": "เช่น ช่วงค็อกเทล",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "เพิ่มหมวดหมู่แล้ว",
+      "newOption": "หมวดหมู่ใหม่…",
+      "starter": "เพิ่มหมวดหมู่เริ่มต้น (พิธี, เต้นรำครั้งแรก, มื้อค่ำ, ปาร์ตี้)",
+      "starterAdded": "เพิ่มหมวดหมู่เริ่มต้นแล้ว"
     }
   }
 }
