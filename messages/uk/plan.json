@@ -88,9 +88,9 @@
       "deleted": "Завдання видалено",
       "save": "Зберегти",
       "add": "Додати завдання",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Коментарі",
+      "addComment": "Додати коментар…",
+      "unknown": "Хтось"
     },
     "categories": {
       "Budget": "Бюджет",
