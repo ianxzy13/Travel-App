@@ -88,9 +88,9 @@
       "deleted": "Đã xóa việc",
       "save": "Lưu",
       "add": "Thêm việc",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Bình luận",
+      "addComment": "Thêm bình luận…",
+      "unknown": "Ai đó"
     },
     "categories": {
       "Budget": "Ngân sách",
