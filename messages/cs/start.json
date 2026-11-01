@@ -6,10 +6,10 @@
     "getStarted": "Začít",
     "eyebrow": "Svatby přes hranice",
     "title": "Vaši hosté přiletí odevšad. Vow je dopraví k vám.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Jeden plánovač pro pár, rodinu v zahraničí i každého hosta: cesty, pokoje, zasedací pořádek, dokumenty a web, každému v jeho jazyce.",
     "start": "Začněte plánovat zdarma",
     "seeInside": "Podívejte se dovnitř",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "A všechno ostatní, co čekáte",
     "featuresText": "Každá část plánu mluví s ostatními. Odpovědi se propisují do zasedacího pořádku, rezervovaná místa na vaše stránky.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Vytvořeno s láskou · © {year} Vow",
     "privacy": "Soukromí",
     "terms": "Podmínky",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Co jiné svatební aplikace neumí",
     "differenceText": "Vytvořeno pro svatby, na které hosté cestují přes hranice států, ne jen krajů.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Seznam pro vstup do EU",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Pasová pravidla, víza, ETIAS — připravené pro zemi každého hosta, aby nikdo neuvízl na hranicích."
       },
       "rooms": {
         "title": "Přehled hotelových pokojů",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Blokujte pokoje ve více hotelech, rozdělujte hosty a sledujte, kdo potvrdil a kdo ještě potřebuje postel."
       },
       "shuttle": {
         "title": "Plánovač transferů",
@@ -93,7 +93,7 @@
       "entryChecklist": "Seznam pro vstup/víza podle země",
       "roomsPerGuest": "Hotelové pokoje pro každého hosta",
       "paperwork": "Dokumenty ke svatbě v zahraničí",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Vlastní jazyk hosta",
       "dualBudget": "Rozpočet ve dvou měnách",
       "familyRoles": "Role pro rodinu",
       "vow": "Vow",

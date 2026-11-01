@@ -6,10 +6,10 @@
     "getStarted": "Kom igång",
     "eyebrow": "Bröllop över gränserna",
     "title": "Dina gäster kommer från hela världen. Vow tar dem dit.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "En planerare för paret, familjen utomlands och varje gäst: resor, rum, bordsplacering, papper och webbplatsen, på allas eget språk.",
     "start": "Börja planera gratis",
     "seeInside": "Se vad som finns",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Och allt annat du väntar dig",
     "featuresText": "Varje del av planen pratar med de andra. OSA går rakt in i bordsplaceringen, bokade lokaler på er sajt.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Gjort med kärlek · © {year} Vow",
     "privacy": "Integritet",
     "terms": "Villkor",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Det andra bröllopsappar inte gör",
     "differenceText": "Byggd för bröllop där gästerna reser över landsgränser.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Checklista för inresa i EU",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Passregler, visumkrav, ETIAS — tas fram för varje gästs hemland så att ingen fastnar vid gränsen."
       },
       "rooms": {
         "title": "Tavla för hotellrum",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Blockera rum på flera hotell, placera gäster och se vem som har bekräftat och vem som fortfarande behöver en säng."
       },
       "shuttle": {
         "title": "Transferplanerare",
@@ -93,7 +93,7 @@
       "entryChecklist": "Checklista för inresa/visum per land",
       "roomsPerGuest": "Hotellrum per gäst",
       "paperwork": "Papper för att gifta sig utomlands",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Gästens eget språk",
       "dualBudget": "Budget i två valutor",
       "familyRoles": "Roller för familjen",
       "vow": "Vow",

@@ -6,10 +6,10 @@
     "getStarted": "ابدأ",
     "eyebrow": "أعراس عبر الحدود",
     "title": "ضيوفك قادمون من كل مكان. Vow يوصلهم إليك.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "مخطِّط واحد للعروسين والعائلة في الخارج وكل ضيف: السفر والغرف والمقاعد والأوراق والموقع، بلغة كل شخص.",
     "start": "ابدأ التخطيط مجانًا",
     "seeInside": "اكتشف المحتوى",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "وكل ما تتوقعه أيضًا",
     "featuresText": "كل جزء من خطتك مرتبط بالآخر. الردود تنتقل إلى ترتيب الجلوس، والقاعات المحجوزة إلى موقعك.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "صُنع بحب · © {year} Vow",
     "privacy": "الخصوصية",
     "terms": "الشروط",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "ما لا تفعله تطبيقات الزفاف الأخرى",
     "differenceText": "مصمَّم للأعراس التي يعبر فيها الضيوف حدود الدول، لا حدود الولايات فقط.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "قائمة الدخول إلى الاتحاد الأوروبي",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "قواعد جواز السفر ومتطلبات التأشيرة وETIAS — تُعدّ لبلد كل ضيف حتى لا يعلق أحد على الحدود."
       },
       "rooms": {
         "title": "لوحة غرف الفندق",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "احجز غرفًا في عدة فنادق، ووزّع الضيوف، وتابع من أكّد ومن لا يزال يحتاج إلى سرير."
       },
       "shuttle": {
         "title": "مخطِّط التنقلات",
@@ -93,7 +93,7 @@
       "entryChecklist": "قائمة الدخول/التأشيرة حسب البلد",
       "roomsPerGuest": "غرف الفندق لكل ضيف",
       "paperwork": "أوراق الزواج في الخارج",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "لغة الضيف نفسه",
       "dualBudget": "ميزانية بعملتين",
       "familyRoles": "أدوار للعائلة في التخطيط",
       "vow": "Vow",

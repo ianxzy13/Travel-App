@@ -6,10 +6,10 @@
     "getStarted": "시작하기",
     "eyebrow": "국경을 넘는 결혼식",
     "title": "하객은 세계 곳곳에서 옵니다. Vow가 길을 안내합니다.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "커플, 해외에 사는 가족, 모든 하객을 위한 하나의 플래너: 여행, 객실, 좌석, 서류, 웹사이트를 각자의 언어로.",
     "start": "무료로 준비 시작하기",
     "seeInside": "기능 살펴보기",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "그 밖에 기대하는 모든 기능",
     "featuresText": "계획의 모든 부분이 서로 연결됩니다. 참석 여부는 좌석 배치도로, 예약한 식장은 웹사이트로 이어집니다.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "사랑을 담아 · © {year} Vow",
     "privacy": "개인정보",
     "terms": "이용약관",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "다른 웨딩 앱이 못 하는 것",
     "differenceText": "주 경계가 아니라 국경을 넘어 하객이 오는 결혼식을 위해 만들었습니다.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "EU 입국 체크리스트",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "여권 규정, 비자 요건, ETIAS — 하객마다 출발 국가에 맞춰 준비해 국경에서 막히는 사람이 없습니다."
       },
       "rooms": {
         "title": "호텔 객실 보드",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "여러 호텔에 객실을 블록으로 잡고, 하객을 배정하고, 누가 확정했고 누가 아직 침대가 필요한지 확인하세요."
       },
       "shuttle": {
         "title": "셔틀 플래너",
@@ -93,7 +93,7 @@
       "entryChecklist": "국가별 입국/비자 체크리스트",
       "roomsPerGuest": "하객별 호텔 객실",
       "paperwork": "해외 결혼 서류",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "하객 본인의 언어",
       "dualBudget": "두 가지 통화로 예산 관리",
       "familyRoles": "가족 플래닝 역할",
       "vow": "Vow",

@@ -6,10 +6,10 @@
     "getStarted": "Mulai",
     "eyebrow": "Pernikahan lintas negara",
     "title": "Tamu Anda datang dari mana-mana. Vow mengantar mereka sampai.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Satu perencana untuk pasangan, keluarga di luar negeri, dan setiap tamu: perjalanan, kamar, tempat duduk, dokumen, dan situs web, dalam bahasa masing-masing.",
     "start": "Mulai merencanakan gratis",
     "seeInside": "Lihat isinya",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Dan semua hal lain yang Anda harapkan",
     "featuresText": "Setiap bagian rencana Anda saling terhubung. RSVP mengalir ke denah tempat duduk, venue yang dipesan mengalir ke situs Anda.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Dibuat dengan cinta · © {year} Vow",
     "privacy": "Privasi",
     "terms": "Ketentuan",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Yang tidak dilakukan aplikasi pernikahan lain",
     "differenceText": "Dibuat untuk pernikahan yang tamunya melintasi batas negara, bukan sekadar batas negara bagian.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Daftar periksa masuk UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Aturan paspor, persyaratan visa, ETIAS — dibuat untuk negara asal setiap tamu agar tidak ada yang tertahan di perbatasan."
       },
       "rooms": {
         "title": "Papan kamar hotel",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Blokir kamar di beberapa hotel, tempatkan tamu, dan pantau siapa yang sudah konfirmasi dan siapa yang masih perlu tempat tidur."
       },
       "shuttle": {
         "title": "Perencana antar-jemput",
@@ -93,7 +93,7 @@
       "entryChecklist": "Daftar periksa masuk/visa per negara",
       "roomsPerGuest": "Kamar hotel per tamu",
       "paperwork": "Dokumen untuk menikah di luar negeri",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Bahasa tamu sendiri",
       "dualBudget": "Anggaran dalam dua mata uang",
       "familyRoles": "Peran perencanaan keluarga",
       "vow": "Vow",

@@ -6,10 +6,10 @@
     "getStarted": "เริ่มต้น",
     "eyebrow": "งานแต่งงานข้ามพรมแดน",
     "title": "แขกของคุณบินมาจากทุกที่ Vow พาพวกเขาไปถึง",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "ผู้ช่วยวางแผนเดียวสำหรับคู่บ่าวสาว ครอบครัวในต่างประเทศ และแขกทุกคน: การเดินทาง ห้องพัก ที่นั่ง เอกสาร และเว็บไซต์ ในภาษาของแต่ละคน",
     "start": "เริ่มวางแผนฟรี",
     "seeInside": "ดูว่ามีอะไรบ้าง",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "และทุกอย่างที่คุณคาดหวัง",
     "featuresText": "ทุกส่วนของแผนเชื่อมถึงกัน การตอบรับไหลเข้าผังที่นั่ง สถานที่ที่จองแล้วไปแสดงบนเว็บไซต์ของคุณ",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "สร้างด้วยความรัก · © {year} Vow",
     "privacy": "ความเป็นส่วนตัว",
     "terms": "ข้อกำหนด",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "สิ่งที่แอปงานแต่งงานอื่นทำไม่ได้",
     "differenceText": "สร้างมาเพื่องานแต่งงานที่แขกต้องข้ามพรมแดนประเทศ ไม่ใช่แค่ข้ามรัฐ",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "รายการเข้าประเทศ EU",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "กฎหนังสือเดินทาง ข้อกำหนดวีซ่า ETIAS — จัดทำตามประเทศของแขกแต่ละคน เพื่อไม่ให้ใครติดอยู่ที่ด่าน"
       },
       "rooms": {
         "title": "กระดานห้องพักโรงแรม",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "กันห้องในหลายโรงแรม จัดแขกเข้าห้อง และติดตามว่าใครยืนยันแล้วและใครยังต้องการเตียง"
       },
       "shuttle": {
         "title": "วางแผนรถรับส่ง",
@@ -93,7 +93,7 @@
       "entryChecklist": "รายการเข้าประเทศ/วีซ่าตามประเทศ",
       "roomsPerGuest": "ห้องพักโรงแรมสำหรับแขกแต่ละคน",
       "paperwork": "เอกสารสำหรับแต่งงานในต่างประเทศ",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "ภาษาของแขกเอง",
       "dualBudget": "งบประมาณสองสกุลเงิน",
       "familyRoles": "บทบาทวางแผนสำหรับครอบครัว",
       "vow": "Vow",

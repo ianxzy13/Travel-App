@@ -6,10 +6,10 @@
     "getStarted": "शुरू करें",
     "eyebrow": "सरहदों के पार शादियाँ",
     "title": "आपके मेहमान हर जगह से आते हैं। Vow उन्हें वहाँ पहुँचाता है।",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "जोड़े, विदेश में रहने वाले परिवार और हर मेहमान के लिए एक प्लानर: यात्रा, कमरे, बैठने की जगह, काग़ज़ात और वेबसाइट, सबकी अपनी भाषा में।",
     "start": "मुफ़्त में योजना शुरू करें",
     "seeInside": "देखें अंदर क्या है",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "और बाकी सब कुछ जिसकी आप उम्मीद करते हैं",
     "featuresText": "आपकी योजना का हर हिस्सा बाकी से जुड़ा है। जवाब बैठने की व्यवस्था में जाते हैं, बुक किए वेन्यू आपकी वेबसाइट पर।",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "प्यार से बनाया गया · © {year} Vow",
     "privacy": "गोपनीयता",
     "terms": "शर्तें",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "जो दूसरे वेडिंग ऐप नहीं करते",
     "differenceText": "उन शादियों के लिए बना जहाँ मेहमान सिर्फ़ राज्य नहीं, देशों की सीमाएँ पार करते हैं।",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "EU प्रवेश चेकलिस्ट",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "पासपोर्ट नियम, वीज़ा ज़रूरतें, ETIAS — हर मेहमान के देश के लिए तैयार, ताकि कोई सीमा पर न अटके।"
       },
       "rooms": {
         "title": "होटल कमरा बोर्ड",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "कई होटलों में कमरे ब्लॉक करें, मेहमानों को कमरे दें और देखें किसने पुष्टि की और किसे अभी बिस्तर चाहिए।"
       },
       "shuttle": {
         "title": "शटल प्लानर",
@@ -93,7 +93,7 @@
       "entryChecklist": "देश के अनुसार प्रवेश/वीज़ा चेकलिस्ट",
       "roomsPerGuest": "हर मेहमान के लिए होटल का कमरा",
       "paperwork": "विदेश में शादी के काग़ज़ात",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "मेहमान की अपनी भाषा",
       "dualBudget": "दो मुद्राओं में बजट",
       "familyRoles": "परिवार के लिए प्लानिंग भूमिकाएँ",
       "vow": "Vow",

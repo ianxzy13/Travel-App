@@ -6,10 +6,10 @@
     "getStarted": "開始使用",
     "eyebrow": "跨國婚禮",
     "title": "你的賓客來自世界各地。Vow 幫他們順利抵達。",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "一個工具，服務新人、海外的家人和每一位賓客：行程、房間、座位、證件和網站，每個人都用自己的語言。",
     "start": "免費開始籌備",
     "seeInside": "看看有什麼",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "以及你期待的其他一切",
     "featuresText": "計畫的每個部分都互相連結。回覆會同步到座位表，已預訂的場地會顯示在你們的網站上。",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "用愛打造 · © {year} Vow",
     "privacy": "隱私",
     "terms": "條款",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "其他婚禮應用程式做不到的",
     "differenceText": "專為賓客要跨越國界、而不只是跨州的婚禮而設計。",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "歐盟入境清單",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "護照規定、簽證要求、ETIAS — 依每位賓客所在國家產生，沒有人會被卡在邊境。"
       },
       "rooms": {
         "title": "飯店房間看板",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "在多家飯店預留房間，分配賓客，並追蹤誰已確認、誰還需要床位。"
       },
       "shuttle": {
         "title": "接駁規劃",
@@ -93,7 +93,7 @@
       "entryChecklist": "按國家的入境/簽證清單",
       "roomsPerGuest": "每位賓客的飯店房間",
       "paperwork": "海外結婚證件手續",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "賓客自己的語言",
       "dualBudget": "雙幣種預算",
       "familyRoles": "家人的策劃角色",
       "vow": "Vow",

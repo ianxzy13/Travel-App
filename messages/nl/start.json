@@ -6,10 +6,10 @@
     "getStarted": "Aan de slag",
     "eyebrow": "Bruiloften over grenzen heen",
     "title": "Je gasten komen van overal. Vow brengt ze er.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Eén planner voor het koppel, de familie in het buitenland en elke gast: reis, kamers, tafelschikking, papieren en de website, in ieders eigen taal.",
     "start": "Gratis beginnen met plannen",
     "seeInside": "Bekijk wat erin zit",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "En verder alles wat je verwacht",
     "featuresText": "Elk onderdeel van je planning praat met de rest. Reacties komen in de tafelindeling, geboekte locaties op je website.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Met liefde gemaakt · © {year} Vow",
     "privacy": "Privacy",
     "terms": "Voorwaarden",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Wat andere trouwapps niet doen",
     "differenceText": "Gemaakt voor bruiloften waar gasten landsgrenzen oversteken, niet alleen provinciegrenzen.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "EU-inreischecklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Paspoortregels, visumplicht, ETIAS — gemaakt voor het land van elke gast, zodat niemand vastloopt aan de grens."
       },
       "rooms": {
         "title": "Overzicht hotelkamers",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Blokkeer kamers in meerdere hotels, deel gasten in en zie wie bevestigd heeft en wie nog een bed nodig heeft."
       },
       "shuttle": {
         "title": "Shuttleplanner",
@@ -93,7 +93,7 @@
       "entryChecklist": "Inreis-/visumchecklist per land",
       "roomsPerGuest": "Hotelkamers per gast",
       "paperwork": "Papieren om in het buitenland te trouwen",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Eigen taal van de gast",
       "dualBudget": "Budget in twee valuta",
       "familyRoles": "Rollen voor familie",
       "vow": "Vow",

@@ -6,10 +6,10 @@
     "getStarted": "Empezar",
     "eyebrow": "Bodas entre países",
     "title": "Tus invitados vienen de todas partes. Vow los lleva hasta allí.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Un solo planificador para la pareja, la familia en el extranjero y cada invitado: viajes, habitaciones, mesas, trámites y la web, en el idioma de cada uno.",
     "start": "Empieza a organizar gratis",
     "seeInside": "Mira lo que incluye",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Y todo lo demás que esperarías",
     "featuresText": "Cada parte de tu plan se comunica con las demás. Las confirmaciones pasan a las mesas y los lugares reservados a tu web.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Hecho con amor · © {year} Vow",
     "privacy": "Privacidad",
     "terms": "Condiciones",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Lo que otras apps de bodas no hacen",
     "differenceText": "Pensado para bodas en las que los invitados cruzan fronteras, no solo provincias.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Lista de entrada en la UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Requisitos de pasaporte, visados, ETIAS — generados para el país de cada invitado para que nadie se quede atascado en la frontera."
       },
       "rooms": {
         "title": "Panel de habitaciones de hotel",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Reserva bloques de habitaciones en varios hoteles, asigna invitados y controla quién ha confirmado y quién aún necesita cama."
       },
       "shuttle": {
         "title": "Planificador de lanzaderas",
@@ -93,7 +93,7 @@
       "entryChecklist": "Lista de entrada/visados por país",
       "roomsPerGuest": "Habitaciones de hotel por invitado",
       "paperwork": "Papeleo para casarse en el extranjero",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Idioma propio de cada invitado",
       "dualBudget": "Presupuesto en dos monedas",
       "familyRoles": "Funciones para la familia",
       "vow": "Vow",

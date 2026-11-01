@@ -6,10 +6,10 @@
     "getStarted": "Loslegen",
     "eyebrow": "Hochzeiten über Grenzen hinweg",
     "title": "Eure Gäste reisen von überall an. Vow bringt sie hin.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Ein Planer für das Paar, die Familie im Ausland und alle Gäste: Reise, Zimmer, Sitzplätze, Unterlagen und die Website, für jeden in der eigenen Sprache.",
     "start": "Kostenlos mit der Planung beginnen",
     "seeInside": "Sieh dir an, was drin ist",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Und alles andere, was man erwartet",
     "featuresText": "Jeder Teil eurer Planung spricht mit den anderen. Zusagen fließen in den Sitzplan, gebuchte Locations auf eure Website.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Mit Liebe gemacht · © {year} Vow",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Was andere Hochzeits-Apps nicht können",
     "differenceText": "Gemacht für Hochzeiten, bei denen Gäste Landesgrenzen überqueren, nicht nur Bundesländer.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "EU-Einreise-Checkliste",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Passregeln, Visumpflicht, ETIAS — für das Herkunftsland jedes Gastes erstellt, damit niemand an der Grenze hängen bleibt."
       },
       "rooms": {
         "title": "Hotelzimmer-Board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Zimmer in mehreren Hotels blocken, Gäste zuteilen und sehen, wer bestätigt hat und wer noch ein Bett braucht."
       },
       "shuttle": {
         "title": "Shuttle-Planer",
@@ -93,7 +93,7 @@
       "entryChecklist": "Einreise-/Visa-Checkliste nach Land",
       "roomsPerGuest": "Hotelzimmer pro Gast",
       "paperwork": "Dokumente für die Hochzeit im Ausland",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Eigene Sprache des Gastes",
       "dualBudget": "Budget in zwei Währungen",
       "familyRoles": "Rollen für die Familie",
       "vow": "Vow",

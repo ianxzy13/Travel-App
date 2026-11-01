@@ -6,10 +6,10 @@
     "getStarted": "Commencer",
     "eyebrow": "Mariages sans frontières",
     "title": "Vos invités viennent de partout. Vow les y amène.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Un seul organisateur pour le couple, la famille à l’étranger et chaque invité : voyages, chambres, plan de table, démarches et site web, dans la langue de chacun.",
     "start": "Commencer gratuitement",
     "seeInside": "Découvrir le contenu",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Et tout ce que vous attendez par ailleurs",
     "featuresText": "Chaque partie de votre organisation communique avec les autres. Les réponses alimentent le plan de table, les lieux réservés votre site.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Fait avec amour · © {year} Vow",
     "privacy": "Confidentialité",
     "terms": "Conditions",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Ce que les autres apps de mariage ne font pas",
     "differenceText": "Conçu pour les mariages où les invités traversent des frontières, pas seulement des régions.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Checklist d’entrée dans l’UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Règles de passeport, visas, ETIAS — générés pour le pays de chaque invité, pour que personne ne reste bloqué à la frontière."
       },
       "rooms": {
         "title": "Tableau des chambres d’hôtel",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Bloquez des chambres dans plusieurs hôtels, placez les invités et suivez qui a confirmé et qui cherche encore un lit."
       },
       "shuttle": {
         "title": "Planificateur de navettes",
@@ -93,7 +93,7 @@
       "entryChecklist": "Checklist entrée/visa par pays",
       "roomsPerGuest": "Chambres d’hôtel par invité",
       "paperwork": "Formalités pour se marier à l’étranger",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Langue de chaque invité",
       "dualBudget": "Budget en deux devises",
       "familyRoles": "Rôles pour la famille",
       "vow": "Vow",

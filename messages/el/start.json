@@ -6,10 +6,10 @@
     "getStarted": "Ξεκινήστε",
     "eyebrow": "Γάμοι πέρα από τα σύνορα",
     "title": "Οι καλεσμένοι σας έρχονται από παντού. Το Vow τους φέρνει εκεί.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Ένας οργανωτής για το ζευγάρι, την οικογένεια στο εξωτερικό και κάθε καλεσμένο: ταξίδια, δωμάτια, θέσεις, έγγραφα και η ιστοσελίδα, στη γλώσσα του καθενός.",
     "start": "Ξεκινήστε δωρεάν",
     "seeInside": "Δείτε τι περιέχει",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Και όλα τα υπόλοιπα που περιμένετε",
     "featuresText": "Κάθε κομμάτι του σχεδίου σας μιλά με τα άλλα. Οι απαντήσεις περνούν στη διάταξη θέσεων, οι κλεισμένοι χώροι στον ιστότοπό σας.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Φτιαγμένο με αγάπη · © {year} Vow",
     "privacy": "Απόρρητο",
     "terms": "Όροι",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Τι δεν κάνουν οι άλλες εφαρμογές γάμου",
     "differenceText": "Φτιαγμένο για γάμους όπου οι καλεσμένοι περνούν σύνορα χωρών, όχι μόνο πολιτειών.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Λίστα εισόδου στην ΕΕ",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Κανόνες διαβατηρίου, βίζες, ETIAS — για τη χώρα κάθε καλεσμένου, ώστε κανείς να μην κολλήσει στα σύνορα."
       },
       "rooms": {
         "title": "Πίνακας δωματίων ξενοδοχείου",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Κλείστε δωμάτια σε πολλά ξενοδοχεία, τοποθετήστε καλεσμένους και δείτε ποιος επιβεβαίωσε και ποιος χρειάζεται ακόμη κρεβάτι."
       },
       "shuttle": {
         "title": "Οργάνωση μεταφορών",
@@ -93,7 +93,7 @@
       "entryChecklist": "Λίστα εισόδου/βίζας ανά χώρα",
       "roomsPerGuest": "Δωμάτια ξενοδοχείου ανά καλεσμένο",
       "paperwork": "Έγγραφα για γάμο στο εξωτερικό",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Η γλώσσα του κάθε καλεσμένου",
       "dualBudget": "Προϋπολογισμός σε δύο νομίσματα",
       "familyRoles": "Ρόλοι για την οικογένεια",
       "vow": "Vow",

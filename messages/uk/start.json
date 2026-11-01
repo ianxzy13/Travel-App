@@ -6,10 +6,10 @@
     "getStarted": "Почати",
     "eyebrow": "Весілля без кордонів",
     "title": "Ваші гості прилітають звідусіль. Vow допомагає їм дістатися.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Один планувальник для пари, родини за кордоном і кожного гостя: подорожі, номери, розсадка, документи й сайт — кожному його мовою.",
     "start": "Почати безкоштовно",
     "seeInside": "Подивитися, що всередині",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "І все інше, чого ви очікуєте",
     "featuresText": "Усі частини плану пов’язані. Відповіді потрапляють у розсадку, заброньовані локації — на ваш сайт.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Зроблено з любов’ю · © {year} Vow",
     "privacy": "Конфіденційність",
     "terms": "Умови",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Чого не вміють інші весільні застосунки",
     "differenceText": "Для весіль, на які гості їдуть через кордони.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Список для в’їзду в ЄС",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Паспортні правила, візи, ETIAS — для країни кожного гостя, щоб ніхто не застряг на кордоні."
       },
       "rooms": {
         "title": "Дошка номерів готелю",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Бронюйте блоки номерів у кількох готелях, розселяйте гостей і стежте, хто підтвердив, а кому ще потрібне ліжко."
       },
       "shuttle": {
         "title": "Планувальник трансферів",
@@ -93,7 +93,7 @@
       "entryChecklist": "Список для в’їзду/візи за країнами",
       "roomsPerGuest": "Номери в готелі для кожного гостя",
       "paperwork": "Документи для шлюбу за кордоном",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Рідна мова гостя",
       "dualBudget": "Бюджет у двох валютах",
       "familyRoles": "Ролі для родини",
       "vow": "Vow",

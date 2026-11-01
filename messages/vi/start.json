@@ -6,10 +6,10 @@
     "getStarted": "Bắt đầu",
     "eyebrow": "Đám cưới xuyên biên giới",
     "title": "Khách của bạn bay đến từ khắp nơi. Vow đưa họ đến nơi.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Một công cụ cho cặp đôi, gia đình ở nước ngoài và mọi vị khách: đi lại, phòng, chỗ ngồi, giấy tờ và trang web, bằng ngôn ngữ của từng người.",
     "start": "Bắt đầu miễn phí",
     "seeInside": "Xem bên trong có gì",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Và mọi thứ khác bạn mong đợi",
     "featuresText": "Mọi phần trong kế hoạch đều kết nối với nhau. Xác nhận tham dự đổ vào sơ đồ chỗ ngồi, địa điểm đã đặt hiện trên trang web của bạn.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Làm bằng cả tấm lòng · © {year} Vow",
     "privacy": "Quyền riêng tư",
     "terms": "Điều khoản",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Những điều các ứng dụng cưới khác không làm",
     "differenceText": "Dành cho những đám cưới mà khách vượt qua biên giới quốc gia, không chỉ ranh giới tiểu bang.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Danh sách nhập cảnh EU",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Quy định hộ chiếu, yêu cầu thị thực, ETIAS — tạo riêng cho quốc gia của từng khách để không ai bị kẹt ở biên giới."
       },
       "rooms": {
         "title": "Bảng phòng khách sạn",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Giữ phòng ở nhiều khách sạn, xếp khách và theo dõi ai đã xác nhận, ai vẫn cần giường."
       },
       "shuttle": {
         "title": "Lên lịch xe đưa đón",
@@ -93,7 +93,7 @@
       "entryChecklist": "Danh sách nhập cảnh/thị thực theo quốc gia",
       "roomsPerGuest": "Phòng khách sạn cho mỗi khách",
       "paperwork": "Giấy tờ kết hôn ở nước ngoài",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Ngôn ngữ riêng của khách",
       "dualBudget": "Ngân sách hai loại tiền",
       "familyRoles": "Vai trò cho gia đình",
       "vow": "Vow",

@@ -6,10 +6,10 @@
     "getStarted": "はじめる",
     "eyebrow": "国境を越える結婚式",
     "title": "ゲストは世界中から。Vowが会場まで導きます。",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "カップル、海外の家族、そしてすべてのゲストのためのひとつのプランナー：旅行、部屋、席次、書類、ウェブサイトを、それぞれの言語で。",
     "start": "無料で準備をはじめる",
     "seeInside": "機能を見る",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "そのほか必要な機能もすべて",
     "featuresText": "計画のすべてがつながっています。出欠は席次表に、予約した会場は結婚式サイトに反映されます。",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "心を込めて · © {year} Vow",
     "privacy": "プライバシー",
     "terms": "利用規約",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "ほかのウェディングアプリにできないこと",
     "differenceText": "州境ではなく、国境を越えてゲストが集まる結婚式のために。",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "EU入国チェックリスト",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "パスポートの規則、ビザの要件、ETIAS — ゲストそれぞれの国に合わせて作成。国境で足止めされる人はいません。"
       },
       "rooms": {
         "title": "ホテルの部屋ボード",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "複数のホテルで部屋を押さえ、ゲストを割り当て、誰が確定済みで誰にまだベッドが必要かを把握。"
       },
       "shuttle": {
         "title": "送迎プランナー",
@@ -93,7 +93,7 @@
       "entryChecklist": "国別の入国・ビザチェックリスト",
       "roomsPerGuest": "ゲストごとのホテルの部屋",
       "paperwork": "海外挙式の書類手続き",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "ゲスト自身の言語",
       "dualBudget": "2つの通貨で予算管理",
       "familyRoles": "家族のプランニング権限",
       "vow": "Vow",
