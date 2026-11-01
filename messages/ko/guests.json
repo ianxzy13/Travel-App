@@ -61,7 +61,7 @@
       "matching": "{count}명 일치",
       "clear": "필터 지우기",
       "any": "전체",
-      "myGuests": "My guests"
+      "myGuests": "내 하객"
     },
     "list": {
       "selectAll": "표시된 하객 모두 선택",
@@ -205,8 +205,8 @@
       "saved": "가족을 저장했습니다",
       "cancel": "취소",
       "save": "저장",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "담당",
+      "nobodyAssigned": "담당자 없음"
     },
     "tagsDialog": {
       "title": "태그",
@@ -339,7 +339,7 @@
       "language": "언어",
       "yes": "예",
       "no": "아니요",
-      "file": "guests"
+      "file": "하객"
     }
   }
 }

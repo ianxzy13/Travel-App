@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "플레이리스트",
+    "description": "결혼식 노래: 꼭 틀어야 할 곡, 나오면 좋은 곡, DJ가 절대 틀면 안 되는 곡.",
+    "save": "저장",
+    "cancel": "취소",
+    "noSongs": "아직 노래가 없습니다",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "예식",
+      "firstDance": "첫 춤",
+      "dinner": "저녁 식사",
+      "party": "파티"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "꼭 틀기",
+      "nice": "나오면 좋음",
+      "no": "틀지 않기"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "노래 제목",
+      "artist": "아티스트",
+      "category": "카테고리",
+      "chooseCategory": "카테고리 선택",
+      "priority": "우선순위"
     },
     "add": {
-      "title": "Add a song",
+      "title": "노래 추가",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "“{title}” 추가됨"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "노래 수정",
+      "label": "{title} 수정",
+      "done": "노래가 저장되었습니다"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "{title} 삭제",
+      "title": "“{title}”을(를) 삭제할까요?",
+      "button": "삭제",
+      "done": "노래가 삭제되었습니다"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "이 노래는 이미 목록에 있습니다 ({category}).",
+      "again": "그래도 다시 추가할까요?",
+      "anyway": "그래도 추가"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "노래 보기",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "이 우선순위의 노래가 아직 없습니다."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "결혼식 노래를 순서별로 한 목록에 모아 DJ가 틀 곡과 건너뛸 곡을 알 수 있게 하세요.",
+      "button": "첫 노래 추가하기"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "카테고리 관리",
+      "title": "카테고리",
+      "text": "이름 위에 입력해 카테고리 이름을 바꾸세요. 카테고리를 삭제하면 그 노래도 삭제됩니다.",
+      "rename": "{name} 이름",
+      "renamed": "카테고리 이름을 바꿨습니다",
+      "delete": "{name} 삭제",
+      "deleteTitle": "“{name}”을(를) 삭제할까요?",
+      "deleteText": "{count, plural, other {포함된 노래 #곡도 삭제됩니다.}}",
+      "deleted": "카테고리가 삭제되었습니다",
+      "new": "새 카테고리",
+      "newPlaceholder": "예: 칵테일 타임",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "카테고리가 추가되었습니다",
+      "newOption": "새 카테고리…",
+      "starter": "기본 카테고리 추가 (예식, 첫 춤, 저녁 식사, 파티)",
+      "starterAdded": "기본 카테고리를 추가했습니다"
     }
   }
 }
