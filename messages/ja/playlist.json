@@ -5,6 +5,7 @@
     "save": "保存",
     "cancel": "キャンセル",
     "noSongs": "まだ曲はありません",
+    "export": "Excelに書き出す",
     "defaults": {
       "ceremony": "挙式",
       "firstDance": "ファーストダンス",

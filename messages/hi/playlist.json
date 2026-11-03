@@ -5,6 +5,7 @@
     "save": "सहेजें",
     "cancel": "रद्द करें",
     "noSongs": "अभी कोई गाना नहीं",
+    "export": "Excel में निर्यात करें",
     "defaults": {
       "ceremony": "समारोह",
       "firstDance": "पहला डांस",

@@ -5,6 +5,7 @@
     "save": "Spremi",
     "cancel": "Odustani",
     "noSongs": "Još nema pjesama",
+    "export": "Izvezi u Excel",
     "defaults": {
       "ceremony": "Obred",
       "firstDance": "Prvi ples",

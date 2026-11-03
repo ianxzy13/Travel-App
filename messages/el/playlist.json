@@ -5,6 +5,7 @@
     "save": "Αποθήκευση",
     "cancel": "Ακύρωση",
     "noSongs": "Δεν υπάρχουν ακόμη τραγούδια",
+    "export": "Εξαγωγή σε Excel",
     "defaults": {
       "ceremony": "Τελετή",
       "firstDance": "Πρώτος χορός",

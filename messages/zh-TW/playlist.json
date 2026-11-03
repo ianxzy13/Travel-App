@@ -5,6 +5,7 @@
     "save": "儲存",
     "cancel": "取消",
     "noSongs": "還沒有歌曲",
+    "export": "匯出至 Excel",
     "defaults": {
       "ceremony": "儀式",
       "firstDance": "第一支舞",

@@ -5,6 +5,7 @@
     "save": "Uložit",
     "cancel": "Zrušit",
     "noSongs": "Zatím žádné písně",
+    "export": "Exportovat do Excelu",
     "defaults": {
       "ceremony": "Obřad",
       "firstDance": "První tanec",
