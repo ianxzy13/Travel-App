@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Λίστα τραγουδιών",
+    "description": "Τα τραγούδια του γάμου σας: τι πρέπει να παίξει, τι θα ήταν ωραίο και τι δεν πρέπει να παίξει ποτέ ο DJ.",
+    "save": "Αποθήκευση",
+    "cancel": "Ακύρωση",
+    "noSongs": "Δεν υπάρχουν ακόμη τραγούδια",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Τελετή",
+      "firstDance": "Πρώτος χορός",
+      "dinner": "Δείπνο",
+      "party": "Πάρτι"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Οπωσδήποτε",
+      "nice": "Θα ήταν ωραίο",
+      "no": "Να μην παίξει"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Τίτλος τραγουδιού",
+      "artist": "Καλλιτέχνης",
+      "category": "Κατηγορία",
+      "chooseCategory": "Επιλέξτε κατηγορία",
+      "priority": "Προτεραιότητα"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Προσθήκη τραγουδιού",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "Προστέθηκε το «{title}»"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Επεξεργασία τραγουδιού",
+      "label": "Επεξεργασία {title}",
+      "done": "Το τραγούδι αποθηκεύτηκε"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Διαγραφή {title}",
+      "title": "Διαγραφή του «{title}»;",
+      "button": "Διαγραφή",
+      "done": "Το τραγούδι διαγράφηκε"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Αυτό το τραγούδι είναι ήδη στη λίστα (στην κατηγορία {category}).",
+      "again": "Να προστεθεί ξανά;",
+      "anyway": "Προσθήκη ούτως ή άλλως"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Εμφάνιση τραγουδιών",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Δεν υπάρχουν ακόμη τραγούδια με αυτή την προτεραιότητα."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Κρατήστε όλα τα τραγούδια του γάμου σας σε μία λίστα, ταξινομημένα ανά στιγμή, ώστε ο DJ να ξέρει τι να παίξει και τι να παραλείψει.",
+      "button": "Προσθέστε το πρώτο σας τραγούδι"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Διαχείριση κατηγοριών",
+      "title": "Κατηγορίες",
+      "text": "Μετονομάστε μια κατηγορία γράφοντας πάνω στο όνομά της. Η διαγραφή μιας κατηγορίας διαγράφει και τα τραγούδια της.",
+      "rename": "Όνομα της κατηγορίας {name}",
+      "renamed": "Η κατηγορία μετονομάστηκε",
+      "delete": "Διαγραφή {name}",
+      "deleteTitle": "Διαγραφή της κατηγορίας «{name}»;",
+      "deleteText": "{count, plural, one {Θα διαγραφεί και το # τραγούδι της.} other {Θα διαγραφούν και τα # τραγούδια της.}}",
+      "deleted": "Η κατηγορία διαγράφηκε",
+      "new": "Νέα κατηγορία",
+      "newPlaceholder": "π.χ. Ώρα κοκτέιλ",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Η κατηγορία προστέθηκε",
+      "newOption": "Νέα κατηγορία…",
+      "starter": "Προσθήκη βασικών κατηγοριών (Τελετή, Πρώτος χορός, Δείπνο, Πάρτι)",
+      "starterAdded": "Οι βασικές κατηγορίες προστέθηκαν"
     }
   }
 }

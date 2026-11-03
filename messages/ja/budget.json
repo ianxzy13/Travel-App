@@ -140,9 +140,9 @@
       "nextAmount": "次の支払額",
       "currency": "通貨",
       "notes": "メモ",
-      "file": "budget"
+      "file": "予算"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "1 {primary} = {rate} {secondary} のレートで、おおよその {secondary} 金額を表示しています。"
   },
   "vendors": {
     "title": "業者",

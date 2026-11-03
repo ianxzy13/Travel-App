@@ -88,9 +88,9 @@
       "deleted": "تم حذف المهمة",
       "save": "حفظ",
       "add": "إضافة مهمة",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "التعليقات",
+      "addComment": "أضف تعليقًا…",
+      "unknown": "شخص ما"
     },
     "categories": {
       "Budget": "الميزانية",

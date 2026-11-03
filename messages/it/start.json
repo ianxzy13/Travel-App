@@ -6,10 +6,10 @@
     "getStarted": "Inizia",
     "eyebrow": "Matrimoni oltre i confini",
     "title": "I tuoi ospiti arrivano da ovunque. Vow li porta lì.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Un unico planner per la coppia, la famiglia all’estero e ogni ospite: viaggi, camere, tavoli, documenti e il sito, nella lingua di ognuno.",
     "start": "Iniziate gratis",
     "seeInside": "Scoprite cosa c’è dentro",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "E tutto il resto che ti aspetti",
     "featuresText": "Ogni parte del vostro piano dialoga con le altre. Le conferme finiscono nei tavoli, le location prenotate sul vostro sito.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Fatto con amore · © {year} Vow",
     "privacy": "Privacy",
     "terms": "Termini",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Cosa non fanno le altre app per matrimoni",
     "differenceText": "Pensato per matrimoni in cui gli ospiti attraversano confini nazionali, non solo regionali.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Checklist d'ingresso nell'UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Regole sul passaporto, visti, ETIAS — generati per il paese di ogni ospite, così nessuno resta bloccato alla frontiera."
       },
       "rooms": {
         "title": "Bacheca camere d'albergo",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Blocca camere in più hotel, assegna gli ospiti e controlla chi ha confermato e chi cerca ancora un letto."
       },
       "shuttle": {
         "title": "Pianificatore navette",
@@ -93,7 +93,7 @@
       "entryChecklist": "Checklist ingresso/visti per paese",
       "roomsPerGuest": "Camere d'albergo per ospite",
       "paperwork": "Documenti per sposarsi all'estero",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Lingua di ogni ospite",
       "dualBudget": "Budget in due valute",
       "familyRoles": "Ruoli per la famiglia",
       "vow": "Vow",

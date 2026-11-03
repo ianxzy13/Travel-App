@@ -98,7 +98,7 @@
         "cleanSans": "Sans bersih",
         "bookSerif": "Serif buku",
         "friendlySans": "Sans ramah",
-        "handwritten": "handwritten"
+        "handwritten": "tulisan tangan"
       }
     },
     "sections": {
@@ -107,7 +107,7 @@
         "story": "Kisah kami",
         "events": "Jadwal",
         "travel": "Perjalanan & menginap",
-        "rsvp": "RSVP",
+        "rsvp": "Konfirmasi kehadiran",
         "party": "Pengiring pengantin",
         "registry": "Hadiah",
         "faq": "Tanya jawab",

@@ -142,7 +142,7 @@
       "notes": "Нотатки",
       "file": "biudzhet"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Приблизні суми в {secondary} за курсом 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Підрядники",

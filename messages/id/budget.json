@@ -62,7 +62,7 @@
     "planned": "Direncanakan",
     "other": "Lainnya ({count})",
     "suggested": {
-      "venue": "Venue",
+      "venue": "Tempat acara",
       "catering": "Katering",
       "photography": "Fotografi",
       "videography": "Videografi",
@@ -142,7 +142,7 @@
       "notes": "Catatan",
       "file": "anggaran"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Menampilkan perkiraan nilai {secondary} dengan kurs 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Vendor",

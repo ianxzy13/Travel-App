@@ -6,10 +6,10 @@
     "getStarted": "Começar",
     "eyebrow": "Casamentos além-fronteiras",
     "title": "Os seus convidados vêm de todo o lado. O Vow leva-os até lá.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Um só planeador para o casal, a família no estrangeiro e cada convidado: viagens, quartos, mesas, documentos e o site, no idioma de cada um.",
     "start": "Comecem a planear grátis",
     "seeInside": "Vejam o que inclui",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "E tudo o resto que espera",
     "featuresText": "Cada parte do vosso plano fala com as outras. As confirmações passam para as mesas e os espaços reservados para o vosso site.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Feito com amor · © {year} Vow",
     "privacy": "Privacidade",
     "terms": "Termos",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "O que outras apps de casamento não fazem",
     "differenceText": "Feito para casamentos em que os convidados atravessam fronteiras, não só distritos.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Lista de entrada na UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Regras de passaporte, vistos, ETIAS — gerados para o país de cada convidado, para ninguém ficar preso na fronteira."
       },
       "rooms": {
         "title": "Quadro de quartos de hotel",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Reserve blocos de quartos em vários hotéis, distribua os convidados e acompanhe quem confirmou e quem ainda precisa de cama."
       },
       "shuttle": {
         "title": "Planeador de shuttles",
@@ -93,7 +93,7 @@
       "entryChecklist": "Lista de entrada/vistos por país",
       "roomsPerGuest": "Quartos de hotel por convidado",
       "paperwork": "Documentação para casar no estrangeiro",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Idioma de cada convidado",
       "dualBudget": "Orçamento em duas moedas",
       "familyRoles": "Funções para a família",
       "vow": "Vow",

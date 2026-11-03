@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – 국경을 넘어 결혼하는 커플을 위한 웨딩 플래너",
+    "metaDescription": "하객은 세계 곳곳에서 옵니다. Vow는 하객마다 자신의 언어로 항공편, 객실, 좌석, 입국 서류를 담은 여행 페이지를 한곳에 만들어 줍니다.",
     "signIn": "로그인",
     "getStarted": "시작하기",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "국경을 넘는 결혼식",
+    "title": "하객은 세계 곳곳에서 옵니다. Vow가 길을 안내합니다.",
+    "intro": "커플, 해외에 사는 가족, 모든 하객을 위한 하나의 플래너: 여행, 객실, 좌석, 서류, 웹사이트를 각자의 언어로.",
     "start": "무료로 준비 시작하기",
     "seeInside": "기능 살펴보기",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "그 밖에 기대하는 모든 기능",
     "featuresText": "계획의 모든 부분이 서로 연결됩니다. 참석 여부는 좌석 배치도로, 예약한 식장은 웹사이트로 이어집니다.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "나는 내 언어로 준비하고, 하객은 각자의 언어로 웹사이트, 참석 여부 페이지, 이메일을 받습니다."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "결혼식이 국경을 넘는다면, 플래너도 그래야죠.",
+    "closingText": "파트너, 부모님, 플래너를 초대해 어디에 살든 실시간으로 함께 준비하세요.",
     "create": "결혼식 만들기",
     "footer": "사랑을 담아 · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "개인정보",
+    "terms": "이용약관",
+    "differenceTitle": "다른 웨딩 앱이 못 하는 것",
+    "differenceText": "주 경계가 아니라 국경을 넘어 하객이 오는 결혼식을 위해 만들었습니다.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "개인 여행 페이지",
+        "text": "하객마다 전용 페이지: 항공편, 호텔 객실, 셔틀 시간, 테이블 번호, 챙길 물건 체크리스트."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "EU 입국 체크리스트",
+        "text": "여권 규정, 비자 요건, ETIAS — 하객마다 출발 국가에 맞춰 준비해 국경에서 막히는 사람이 없습니다."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "호텔 객실 보드",
+        "text": "여러 호텔에 객실을 블록으로 잡고, 하객을 배정하고, 누가 확정했고 누가 아직 침대가 필요한지 확인하세요."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "셔틀 플래너",
+        "text": "도착 시간별로 묶고, 픽업을 계획하고, 하객에게 차량 출발 시간을 알려 주세요."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "결혼 서류",
+        "text": "64개국에서 법적으로 결혼하는 데 필요한 서류: 아포스티유, 번역, 기한을 모두 관리합니다."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "하객별 25개 언어",
+        "text": "슬로베니아의 할머니는 모든 것을 슬로베니아어로, 대학 친구들은 영어로 봅니다. 자동으로."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow vs. 일반적인 미국 웨딩 앱",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "하객별 개인 여행 페이지",
+      "entryChecklist": "국가별 입국/비자 체크리스트",
+      "roomsPerGuest": "하객별 호텔 객실",
+      "paperwork": "해외 결혼 서류",
+      "guestLanguages": "하객 본인의 언어",
+      "dualBudget": "두 가지 통화로 예산 관리",
+      "familyRoles": "가족 플래닝 역할",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "일반 앱",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "곧 출시"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "마이애미 → 류블랴나",
+      "flightDetail": "3월 5일 (목) 14:20 도착",
+      "hotel": "Hotel Park · 204호",
+      "shuttle": "블레드 호수행 셔틀 · 16:00",
+      "table": "테이블 3 · Kovač 가족과 함께",
+      "passport": "여권은 최소 2027년 6월까지 유효해야 함",
+      "yourTrip": "내 여행"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "<b>{email}</b>(으)로 이메일을 보냈습니다. 이메일의 링크를 (이 브라우저에서) 클릭하거나 아래에 이메일의 코드를 입력하세요.",
     "code": "이메일의 코드",
     "signInWithCode": "코드로 로그인",
-    "again": "Use a different email address",
+    "again": "다른 이메일 주소 사용",
     "setupTitle": "거의 다 됐습니다: Supabase가 아직 연결되지 않았습니다.",
     "setupText": "Supabase URL과 공개 키가 담긴 <code>.env.local</code> 파일을 만들고(<code>.env.example</code>과 README 참고) <code>npm run dev</code>를 다시 시작하세요.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "코드 다시 보내기",
+    "resendWait": "코드 다시 보내기 ({seconds}초)",
+    "resent": "새 코드를 이메일로 보냈습니다."
   },
   "welcome": {
     "title": "언어를 선택하세요",
@@ -170,8 +170,8 @@
         "text": "영감과 웹사이트 추천에 활용합니다."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "하객은 어디에서 오나요?",
+        "text": "하객이 출발할 나라를 선택하세요. 여행 페이지와 입국 체크리스트를 준비하는 데 도움이 됩니다."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "이름, 날짜, 장소, 스타일. 변경 사항은 앱 전체에 적용됩니다.",
     "saveChanges": "변경 사항 저장",
     "saved": "결혼식 정보를 저장했습니다",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "인기",
+    "allCurrencies": "모든 통화",
+    "guestCountries": "하객이 출발할 나라",
+    "guestCountriesHint": "해당하는 것을 모두 탭하세요. 나중에 언제든 바꿀 수 있습니다.",
+    "guestCountriesSearch": "국가 검색…",
+    "noCurrency": "두 번째 통화 없음",
+    "secondaryCurrency": "두 번째 통화 (선택)",
+    "secondaryCurrencyHint": "업체가 다른 통화로 청구한다면 여기에 추가하세요.",
+    "exchangeRate": "환율",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "볼 수는 있지만 변경할 수 없음"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "부모님",
+      "description": "하객, 할 일, 여행을 수정할 수 있음 (설정 제외)"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "도우미",
+      "description": "맡은 할 일을 수정하고 나머지는 볼 수 있음"
     }
   },
   "invite": {

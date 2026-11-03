@@ -140,9 +140,9 @@
       "nextAmount": "अगले भुगतान की राशि",
       "currency": "मुद्रा",
       "notes": "नोट",
-      "file": "budget"
+      "file": "बजट"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "1 {primary} = {rate} {secondary} की दर से अनुमानित {secondary} मूल्य दिख रहे हैं।"
   },
   "vendors": {
     "title": "वेंडर",

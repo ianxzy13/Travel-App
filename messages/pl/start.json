@@ -6,10 +6,10 @@
     "getStarted": "Zacznij",
     "eyebrow": "Śluby ponad granicami",
     "title": "Twoi goście przylatują z całego świata. Vow ich do was dowiezie.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Jeden planer dla pary, rodziny za granicą i każdego gościa: podróże, pokoje, miejsca przy stołach, dokumenty i strona, w języku każdego z nich.",
     "start": "Zacznij planować za darmo",
     "seeInside": "Zobacz, co jest w środku",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "I wszystko inne, czego się spodziewasz",
     "featuresText": "Każda część planu rozmawia z pozostałymi. Potwierdzenia trafiają do rozsadzenia, a zarezerwowane sale na Waszą stronę.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Zrobione z miłością · © {year} Vow",
     "privacy": "Prywatność",
     "terms": "Regulamin",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Czego nie robią inne aplikacje ślubne",
     "differenceText": "Stworzone na śluby, na które goście jadą przez granice, nie tylko przez województwa.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Lista wjazdowa do UE",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Zasady paszportowe, wizy, ETIAS — przygotowane dla kraju każdego gościa, żeby nikt nie utknął na granicy."
       },
       "rooms": {
         "title": "Tablica pokoi hotelowych",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Rezerwuj pule pokoi w kilku hotelach, przydzielaj gości i sprawdzaj, kto potwierdził, a kto wciąż potrzebuje łóżka."
       },
       "shuttle": {
         "title": "Planer transferów",
@@ -93,7 +93,7 @@
       "entryChecklist": "Lista wjazdowa/wizowa według kraju",
       "roomsPerGuest": "Pokoje hotelowe na gościa",
       "paperwork": "Dokumenty do ślubu za granicą",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Własny język gościa",
       "dualBudget": "Budżet w dwóch walutach",
       "familyRoles": "Role dla rodziny",
       "vow": "Vow",

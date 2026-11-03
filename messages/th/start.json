@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – ผู้ช่วยวางแผนงานแต่งงานสำหรับคู่รักที่แต่งงานข้ามพรมแดน",
+    "metaDescription": "แขกของคุณบินมาจากทุกที่ Vow ให้แขกแต่ละคนมีหน้าทริปของตัวเองในภาษาของเขา พร้อมเที่ยวบิน ห้องพัก ที่นั่ง และเอกสารเข้าประเทศ — รวมไว้ที่เดียว",
     "signIn": "เข้าสู่ระบบ",
     "getStarted": "เริ่มต้น",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "งานแต่งงานข้ามพรมแดน",
+    "title": "แขกของคุณบินมาจากทุกที่ Vow พาพวกเขาไปถึง",
+    "intro": "ผู้ช่วยวางแผนเดียวสำหรับคู่บ่าวสาว ครอบครัวในต่างประเทศ และแขกทุกคน: การเดินทาง ห้องพัก ที่นั่ง เอกสาร และเว็บไซต์ ในภาษาของแต่ละคน",
     "start": "เริ่มวางแผนฟรี",
     "seeInside": "ดูว่ามีอะไรบ้าง",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "และทุกอย่างที่คุณคาดหวัง",
     "featuresText": "ทุกส่วนของแผนเชื่อมถึงกัน การตอบรับไหลเข้าผังที่นั่ง สถานที่ที่จองแล้วไปแสดงบนเว็บไซต์ของคุณ",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "คุณวางแผนในภาษาของคุณ แขกแต่ละคนได้รับเว็บไซต์ หน้าตอบรับ และอีเมลในภาษาของตัวเอง"
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "งานแต่งงานของคุณข้ามพรมแดน ผู้ช่วยวางแผนของคุณก็ควรเป็นเช่นนั้น",
+    "closingText": "ชวนคู่ของคุณ พ่อแม่ หรือเวดดิ้งแพลนเนอร์ มาวางแผนทุกอย่างด้วยกันแบบเรียลไทม์ — ไม่ว่าแต่ละคนจะอยู่ที่ไหน",
     "create": "สร้างงานแต่งงานของคุณ",
     "footer": "สร้างด้วยความรัก · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "ข้อกำหนด",
+    "differenceTitle": "สิ่งที่แอปงานแต่งงานอื่นทำไม่ได้",
+    "differenceText": "สร้างมาเพื่องานแต่งงานที่แขกต้องข้ามพรมแดนประเทศ ไม่ใช่แค่ข้ามรัฐ",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "หน้าทริปส่วนตัว",
+        "text": "แขกทุกคนมีหน้าของตัวเอง: เที่ยวบิน ห้องพัก เวลารถรับส่ง หมายเลขโต๊ะ และรายการของที่ต้องเตรียม"
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "รายการเข้าประเทศ EU",
+        "text": "กฎหนังสือเดินทาง ข้อกำหนดวีซ่า ETIAS — จัดทำตามประเทศของแขกแต่ละคน เพื่อไม่ให้ใครติดอยู่ที่ด่าน"
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "กระดานห้องพักโรงแรม",
+        "text": "กันห้องในหลายโรงแรม จัดแขกเข้าห้อง และติดตามว่าใครยืนยันแล้วและใครยังต้องการเตียง"
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "วางแผนรถรับส่ง",
+        "text": "จัดกลุ่มการมาถึงตามเวลา วางแผนรับส่ง และแจ้งแขกว่ารถออกเมื่อไร"
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "เอกสารการสมรส",
+        "text": "เอกสารที่ต้องใช้เพื่อแต่งงานอย่างถูกกฎหมายใน 64 ประเทศ: Apostille คำแปล กำหนดส่ง ติดตามได้ครบ"
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 ภาษาสำหรับแขกแต่ละคน",
+        "text": "คุณยายชาวสโลวีเนียเห็นทุกอย่างเป็นภาษาสโลวีเนีย เพื่อนสมัยมหาวิทยาลัยเห็นเป็นภาษาอังกฤษ อัตโนมัติ"
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow เทียบกับแอปงานแต่งงานทั่วไปในสหรัฐฯ",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "หน้าทริปส่วนตัวสำหรับแขกแต่ละคน",
+      "entryChecklist": "รายการเข้าประเทศ/วีซ่าตามประเทศ",
+      "roomsPerGuest": "ห้องพักโรงแรมสำหรับแขกแต่ละคน",
+      "paperwork": "เอกสารสำหรับแต่งงานในต่างประเทศ",
+      "guestLanguages": "ภาษาของแขกเอง",
+      "dualBudget": "งบประมาณสองสกุลเงิน",
+      "familyRoles": "บทบาทวางแผนสำหรับครอบครัว",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "แอปทั่วไป",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "เร็วๆ นี้"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "ไมอามี → ลูบลิยานา",
+      "flightDetail": "ถึง พฤ. 5 มี.ค. 14:20",
+      "hotel": "Hotel Park · ห้อง 204",
+      "shuttle": "รถรับส่งไปทะเลสาบเบลด · 16:00",
+      "table": "โต๊ะ 3 · กับครอบครัว Kovač",
+      "passport": "หนังสือเดินทางต้องใช้ได้อย่างน้อยถึงมิถุนายน 2027",
+      "yourTrip": "ทริปของคุณ"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "เราส่งอีเมลไปที่ <b>{email}</b> แล้ว คลิกลิงก์ในอีเมล (ในเบราว์เซอร์นี้) หรือพิมพ์รหัสจากอีเมลด้านล่าง",
     "code": "รหัสจากอีเมล",
     "signInWithCode": "เข้าสู่ระบบด้วยรหัส",
-    "again": "Use a different email address",
+    "again": "ใช้อีเมลอื่น",
     "setupTitle": "เกือบเสร็จแล้ว: ยังไม่ได้เชื่อมต่อ Supabase",
     "setupText": "สร้างไฟล์ <code>.env.local</code> ที่มี URL ของ Supabase และคีย์สาธารณะ (ดู <code>.env.example</code> และ README) แล้วรีสตาร์ต <code>npm run dev</code>",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "ส่งรหัสอีกครั้ง",
+    "resendWait": "ส่งรหัสอีกครั้ง ({seconds} วิ)",
+    "resent": "ส่งรหัสใหม่ไปที่อีเมลของคุณแล้ว"
   },
   "welcome": {
     "title": "เลือกภาษาของคุณ",
@@ -170,8 +170,8 @@
         "text": "เราจะใช้สิ่งนี้เพื่อแนะนำแรงบันดาลใจและเว็บไซต์"
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "แขกของคุณมาจากไหน",
+        "text": "เลือกประเทศที่แขกจะเดินทางมา ช่วยให้เราเตรียมหน้าทริปและรายการเข้าประเทศได้"
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "ชื่อ วันที่ สถานที่ และสไตล์ การเปลี่ยนแปลงจะมีผลทั่วทั้งแอป",
     "saveChanges": "บันทึกการเปลี่ยนแปลง",
     "saved": "บันทึกรายละเอียดงานแต่งงานแล้ว",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "ยอดนิยม",
+    "allCurrencies": "ทุกสกุลเงิน",
+    "guestCountries": "ประเทศที่แขกจะเดินทางมา",
+    "guestCountriesHint": "แตะทุกข้อที่ตรง เปลี่ยนภายหลังได้เสมอ",
+    "guestCountriesSearch": "ค้นหาประเทศ…",
+    "noCurrency": "ไม่มีสกุลเงินที่สอง",
+    "secondaryCurrency": "สกุลเงินที่สอง (ไม่บังคับ)",
+    "secondaryCurrencyHint": "ถ้าผู้ให้บริการคิดเงินเป็นสกุลอื่น เพิ่มไว้ที่นี่",
+    "exchangeRate": "อัตราแลกเปลี่ยน",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "ดูได้แต่เปลี่ยนแปลงไม่ได้"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "พ่อแม่",
+      "description": "แก้ไขแขก งาน และการเดินทางได้ แต่ไม่ใช่การตั้งค่า"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "ผู้ช่วย",
+      "description": "แก้ไขงานที่ได้รับมอบหมายได้ ดูส่วนอื่นได้"
     }
   },
   "invite": {

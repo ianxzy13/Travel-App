@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow — планувальник весіль для пар, які одружуються за кордоном",
+    "metaDescription": "Ваші гості прилітають звідусіль. Vow дає кожному гостю особисту сторінку поїздки його мовою: рейси, номери, розсадка й документи для в’їзду — усе в одному місці.",
     "signIn": "Увійти",
     "getStarted": "Почати",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "Весілля без кордонів",
+    "title": "Ваші гості прилітають звідусіль. Vow допомагає їм дістатися.",
+    "intro": "Один планувальник для пари, родини за кордоном і кожного гостя: подорожі, номери, розсадка, документи й сайт — кожному його мовою.",
     "start": "Почати безкоштовно",
     "seeInside": "Подивитися, що всередині",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "І все інше, чого ви очікуєте",
     "featuresText": "Усі частини плану пов’язані. Відповіді потрапляють у розсадку, заброньовані локації — на ваш сайт.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "Ви плануєте своєю мовою; кожен гість отримує сайт, форму відповіді й листи своєю."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Ваше весілля виходить за кордони. Ваш планувальник теж має.",
+    "closingText": "Запросіть партнера, батьків або організатора й плануйте все разом у реальному часі — де б хто не жив.",
     "create": "Створити весілля",
     "footer": "Зроблено з любов’ю · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "Конфіденційність",
+    "terms": "Умови",
+    "differenceTitle": "Чого не вміють інші весільні застосунки",
+    "differenceText": "Для весіль, на які гості їдуть через кордони.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Особиста сторінка поїздки",
+        "text": "Кожен гість має свою сторінку: рейси, номер у готелі, час трансферу, номер столу і список, що взяти із собою."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "Список для в’їзду в ЄС",
+        "text": "Паспортні правила, візи, ETIAS — для країни кожного гостя, щоб ніхто не застряг на кордоні."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "Дошка номерів готелю",
+        "text": "Бронюйте блоки номерів у кількох готелях, розселяйте гостей і стежте, хто підтвердив, а кому ще потрібне ліжко."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Планувальник трансферів",
+        "text": "Групуйте прибуття за часом, плануйте зустрічі й повідомляйте гостям, коли вирушає їхній трансфер."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Документи для шлюбу",
+        "text": "Документи для законного шлюбу в 64 країнах: апостилі, переклади, терміни — усе під контролем."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 мов для гостей",
+        "text": "Бабуся зі Словенії бачить усе словенською. Друзі з коледжу — англійською. Автоматично."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow і звичайні американські весільні застосунки",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "Особиста сторінка поїздки для кожного гостя",
+      "entryChecklist": "Список для в’їзду/візи за країнами",
+      "roomsPerGuest": "Номери в готелі для кожного гостя",
+      "paperwork": "Документи для шлюбу за кордоном",
+      "guestLanguages": "Рідна мова гостя",
+      "dualBudget": "Бюджет у двох валютах",
+      "familyRoles": "Ролі для родини",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Звичайні застосунки",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Незабаром"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "Маямі → Любляна",
+      "flightDetail": "Прибуття: чт, 5 березня, 14:20",
+      "hotel": "Hotel Park · Номер 204",
+      "shuttle": "Трансфер до озера Блед · 16:00",
+      "table": "Стіл 3 · з родиною Ковач",
+      "passport": "Паспорт дійсний щонайменше до червня 2027",
+      "yourTrip": "Ваша поїздка"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Ми надіслали лист на <b>{email}</b>. Натисніть посилання в ньому (у цьому браузері) або введіть код із листа нижче.",
     "code": "Код із листа",
     "signInWithCode": "Увійти за кодом",
-    "again": "Use a different email address",
+    "again": "Використати інший e-mail",
     "setupTitle": "Майже готово: Supabase ще не під’єднано.",
     "setupText": "Створіть файл <code>.env.local</code> з URL і публічним ключем Supabase (див. <code>.env.example</code> і README), потім перезапустіть <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Надіслати код ще раз",
+    "resendWait": "Надіслати код ще раз ({seconds} с)",
+    "resent": "Новий код надіслано на ваш e-mail."
   },
   "welcome": {
     "title": "Виберіть мову",
@@ -170,8 +170,8 @@
         "text": "Ми використаємо це для ідей і підказок для сайту."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Звідки приїдуть ваші гості?",
+        "text": "Оберіть країни, з яких приїдуть гості. Це допоможе підготувати сторінки поїздок і списки для в’їзду."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Імена, дата, місце й стиль. Зміни застосовуються в усьому застосунку.",
     "saveChanges": "Зберегти зміни",
     "saved": "Деталі весілля збережено",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Популярні",
+    "allCurrencies": "Усі валюти",
+    "guestCountries": "Країни, з яких приїдуть гості",
+    "guestCountriesHint": "Позначте всі відповідні. Це можна змінити пізніше.",
+    "guestCountriesSearch": "Пошук країн…",
+    "noCurrency": "Без другої валюти",
+    "secondaryCurrency": "Друга валюта (необов’язково)",
+    "secondaryCurrencyHint": "Якщо підрядники беруть оплату в іншій валюті, додайте її тут.",
+    "exchangeRate": "Курс",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Може переглядати, але не змінювати"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Батьки",
+      "description": "Можуть змінювати гостей, завдання й поїздки, але не налаштування"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Помічник",
+      "description": "Може змінювати призначені йому завдання, решту лише бачить"
     }
   },
   "invite": {

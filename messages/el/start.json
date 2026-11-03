@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – ο οργανωτής γάμου για ζευγάρια που παντρεύονται πέρα από τα σύνορα",
+    "metaDescription": "Οι καλεσμένοι σας έρχονται από παντού. Το Vow δίνει σε κάθε καλεσμένο τη δική του σελίδα ταξιδιού, στη γλώσσα του, με πτήσεις, δωμάτια, θέσεις και έγγραφα εισόδου — όλα σε ένα μέρος.",
     "signIn": "Σύνδεση",
     "getStarted": "Ξεκινήστε",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "Γάμοι πέρα από τα σύνορα",
+    "title": "Οι καλεσμένοι σας έρχονται από παντού. Το Vow τους φέρνει εκεί.",
+    "intro": "Ένας οργανωτής για το ζευγάρι, την οικογένεια στο εξωτερικό και κάθε καλεσμένο: ταξίδια, δωμάτια, θέσεις, έγγραφα και η ιστοσελίδα, στη γλώσσα του καθενός.",
     "start": "Ξεκινήστε δωρεάν",
     "seeInside": "Δείτε τι περιέχει",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Και όλα τα υπόλοιπα που περιμένετε",
     "featuresText": "Κάθε κομμάτι του σχεδίου σας μιλά με τα άλλα. Οι απαντήσεις περνούν στη διάταξη θέσεων, οι κλεισμένοι χώροι στον ιστότοπό σας.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "Εσείς οργανώνετε στη γλώσσα σας· κάθε καλεσμένος παίρνει ιστότοπο, απάντηση και email στη δική του."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Ο γάμος σας περνά σύνορα. Το ίδιο πρέπει και ο οργανωτής σας.",
+    "closingText": "Προσκαλέστε τον σύντροφό σας, τους γονείς ή τον wedding planner και οργανώστε τα όλα μαζί σε πραγματικό χρόνο — όπου κι αν ζει ο καθένας.",
     "create": "Δημιουργήστε τον γάμο σας",
     "footer": "Φτιαγμένο με αγάπη · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "Απόρρητο",
+    "terms": "Όροι",
+    "differenceTitle": "Τι δεν κάνουν οι άλλες εφαρμογές γάμου",
+    "differenceText": "Φτιαγμένο για γάμους όπου οι καλεσμένοι περνούν σύνορα χωρών, όχι μόνο πολιτειών.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Προσωπική σελίδα ταξιδιού",
+        "text": "Κάθε καλεσμένος έχει τη δική του σελίδα: πτήσεις, δωμάτιο ξενοδοχείου, ώρα μεταφοράς, αριθμό τραπεζιού και λίστα με ό,τι πρέπει να πάρει μαζί του."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "Λίστα εισόδου στην ΕΕ",
+        "text": "Κανόνες διαβατηρίου, βίζες, ETIAS — για τη χώρα κάθε καλεσμένου, ώστε κανείς να μην κολλήσει στα σύνορα."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "Πίνακας δωματίων ξενοδοχείου",
+        "text": "Κλείστε δωμάτια σε πολλά ξενοδοχεία, τοποθετήστε καλεσμένους και δείτε ποιος επιβεβαίωσε και ποιος χρειάζεται ακόμη κρεβάτι."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Οργάνωση μεταφορών",
+        "text": "Ομαδοποιήστε τις αφίξεις ανά ώρα, οργανώστε τις παραλαβές και ενημερώστε τους καλεσμένους πότε φεύγει η μεταφορά τους."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Έγγραφα γάμου",
+        "text": "Τα έγγραφα που χρειάζεστε για να παντρευτείτε νόμιμα σε 64 χώρες: επισημειώσεις (apostille), μεταφράσεις, προθεσμίες, όλα υπό έλεγχο."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 γλώσσες ανά καλεσμένο",
+        "text": "Η Σλοβένα γιαγιά σας βλέπει τα πάντα στα σλοβενικά. Οι φίλοι σας από το πανεπιστήμιο τα βλέπουν στα αγγλικά. Αυτόματα."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow ή τυπικές αμερικανικές εφαρμογές γάμου",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "Προσωπική σελίδα ταξιδιού ανά καλεσμένο",
+      "entryChecklist": "Λίστα εισόδου/βίζας ανά χώρα",
+      "roomsPerGuest": "Δωμάτια ξενοδοχείου ανά καλεσμένο",
+      "paperwork": "Έγγραφα για γάμο στο εξωτερικό",
+      "guestLanguages": "Η γλώσσα του κάθε καλεσμένου",
+      "dualBudget": "Προϋπολογισμός σε δύο νομίσματα",
+      "familyRoles": "Ρόλοι για την οικογένεια",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Τυπικές εφαρμογές",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Σύντομα"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "Μαϊάμι → Λιουμπλιάνα",
+      "flightDetail": "Άφιξη Πέμ 5 Μαρ, 14:20",
+      "hotel": "Hotel Park · Δωμάτιο 204",
+      "shuttle": "Μεταφορά στη λίμνη Μπλεντ · 16:00",
+      "table": "Τραπέζι 3 · με την οικογένεια Kovač",
+      "passport": "Διαβατήριο σε ισχύ τουλάχιστον έως τον Ιούνιο του 2027",
+      "yourTrip": "Το ταξίδι σας"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Στείλαμε email στο <b>{email}</b>. Πατήστε τον σύνδεσμο (σε αυτό το πρόγραμμα περιήγησης) ή γράψτε παρακάτω τον κωδικό από το email.",
     "code": "Κωδικός από το email",
     "signInWithCode": "Σύνδεση με κωδικό",
-    "again": "Use a different email address",
+    "again": "Χρήση άλλης διεύθυνσης email",
     "setupTitle": "Σχεδόν έτοιμο: το Supabase δεν έχει συνδεθεί ακόμα.",
     "setupText": "Δημιουργήστε αρχείο <code>.env.local</code> με το URL και το δημόσιο κλειδί του Supabase (δείτε <code>.env.example</code> και README) και επανεκκινήστε το <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Επαναποστολή κωδικού",
+    "resendWait": "Επαναποστολή κωδικού ({seconds} δευτ.)",
+    "resent": "Ένας νέος κωδικός στάλθηκε στο email σας."
   },
   "welcome": {
     "title": "Επιλέξτε τη γλώσσα σας",
@@ -170,8 +170,8 @@
         "text": "Θα το χρησιμοποιήσουμε για έμπνευση και προτάσεις για τον ιστότοπο."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Από πού έρχονται οι καλεσμένοι σας;",
+        "text": "Επιλέξτε τις χώρες από τις οποίες θα ταξιδέψουν οι καλεσμένοι σας. Έτσι ετοιμάζουμε σελίδες ταξιδιού και λίστες εισόδου."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Ονόματα, ημερομηνία, τοποθεσία και στυλ. Οι αλλαγές ισχύουν σε όλη την εφαρμογή.",
     "saveChanges": "Αποθήκευση αλλαγών",
     "saved": "Τα στοιχεία του γάμου αποθηκεύτηκαν",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Δημοφιλή",
+    "allCurrencies": "Όλα τα νομίσματα",
+    "guestCountries": "Χώρες από τις οποίες θα ταξιδέψουν οι καλεσμένοι σας",
+    "guestCountriesHint": "Πατήστε όσες ισχύουν. Μπορείτε να το αλλάξετε αργότερα.",
+    "guestCountriesSearch": "Αναζήτηση χωρών…",
+    "noCurrency": "Χωρίς δεύτερο νόμισμα",
+    "secondaryCurrency": "Δεύτερο νόμισμα (προαιρετικό)",
+    "secondaryCurrencyHint": "Αν οι προμηθευτές σας χρεώνουν σε άλλο νόμισμα, προσθέστε το εδώ.",
+    "exchangeRate": "Ισοτιμία",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Μπορεί να βλέπει αλλά όχι να αλλάζει"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Γονέας",
+      "description": "Μπορεί να επεξεργάζεται καλεσμένους, εργασίες και ταξίδια, όχι τις ρυθμίσεις"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Βοηθός",
+      "description": "Μπορεί να επεξεργάζεται τις εργασίες που του έχουν ανατεθεί και να βλέπει τα υπόλοιπα"
     }
   },
   "invite": {

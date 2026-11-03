@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – مخطِّط الزفاف للأزواج الذين يتزوجون عبر الحدود",
+    "metaDescription": "ضيوفك قادمون من كل مكان. يمنح Vow كل ضيف صفحة رحلته الخاصة بلغته، مع الرحلات والغرف والمقاعد وأوراق الدخول — كلها في مكان واحد.",
     "signIn": "تسجيل الدخول",
     "getStarted": "ابدأ",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "أعراس عبر الحدود",
+    "title": "ضيوفك قادمون من كل مكان. Vow يوصلهم إليك.",
+    "intro": "مخطِّط واحد للعروسين والعائلة في الخارج وكل ضيف: السفر والغرف والمقاعد والأوراق والموقع، بلغة كل شخص.",
     "start": "ابدأ التخطيط مجانًا",
     "seeInside": "اكتشف المحتوى",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "وكل ما تتوقعه أيضًا",
     "featuresText": "كل جزء من خطتك مرتبط بالآخر. الردود تنتقل إلى ترتيب الجلوس، والقاعات المحجوزة إلى موقعك.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "تخطط بلغتك؛ وكل ضيف يتلقى الموقع والرد والرسائل بلغته."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "زفافكما يعبر الحدود. ومخطِّطكما يجب أن يفعل ذلك أيضًا.",
+    "closingText": "ادعُ شريكك أو والديك أو منظّم الزفاف، وخطّطوا لكل شيء معًا لحظة بلحظة — أينما كان كل واحد منكم.",
     "create": "أنشئ زفافك",
     "footer": "صُنع بحب · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "الخصوصية",
+    "terms": "الشروط",
+    "differenceTitle": "ما لا تفعله تطبيقات الزفاف الأخرى",
+    "differenceText": "مصمَّم للأعراس التي يعبر فيها الضيوف حدود الدول، لا حدود الولايات فقط.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "صفحة رحلة شخصية",
+        "text": "لكل ضيف صفحته الخاصة: الرحلات، وغرفة الفندق، وموعد الحافلة، ورقم الطاولة، وقائمة بما يحضره معه."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "قائمة الدخول إلى الاتحاد الأوروبي",
+        "text": "قواعد جواز السفر ومتطلبات التأشيرة وETIAS — تُعدّ لبلد كل ضيف حتى لا يعلق أحد على الحدود."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "لوحة غرف الفندق",
+        "text": "احجز غرفًا في عدة فنادق، ووزّع الضيوف، وتابع من أكّد ومن لا يزال يحتاج إلى سرير."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "مخطِّط التنقلات",
+        "text": "جمّع الوصول حسب الوقت، وخطّط للاستقبال، وأخبر الضيوف متى تنطلق حافلتهم."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "أوراق الزواج",
+        "text": "المستندات اللازمة للزواج قانونيًا في 64 بلدًا: الأبوستيل والترجمات والمواعيد النهائية، كلها متابعة."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 لغة لكل ضيف",
+        "text": "جدتك السلوفينية ترى كل شيء بالسلوفينية. وأصدقاء الجامعة يرونه بالإنجليزية. تلقائيًا."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow مقابل تطبيقات الزفاف الأمريكية المعتادة",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "صفحة رحلة شخصية لكل ضيف",
+      "entryChecklist": "قائمة الدخول/التأشيرة حسب البلد",
+      "roomsPerGuest": "غرف الفندق لكل ضيف",
+      "paperwork": "أوراق الزواج في الخارج",
+      "guestLanguages": "لغة الضيف نفسه",
+      "dualBudget": "ميزانية بعملتين",
+      "familyRoles": "أدوار للعائلة في التخطيط",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "التطبيقات المعتادة",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "قريبًا"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "ميامي → ليوبليانا",
+      "flightDetail": "الوصول الخميس 5 مارس، 14:20",
+      "hotel": "Hotel Park · الغرفة 204",
+      "shuttle": "حافلة إلى بحيرة بليد · 16:00",
+      "table": "الطاولة 3 · مع عائلة Kovač",
+      "passport": "جواز السفر صالح حتى يونيو 2027 على الأقل",
+      "yourTrip": "رحلتك"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "أرسلنا رسالة إلى <b>{email}</b>. انقر الرابط فيها (في هذا المتصفح) أو اكتب الرمز من الرسالة أدناه.",
     "code": "الرمز من البريد",
     "signInWithCode": "الدخول بالرمز",
-    "again": "Use a different email address",
+    "again": "استخدام عنوان بريد إلكتروني آخر",
     "setupTitle": "اقتربنا: Supabase غير متصل بعد.",
     "setupText": "أنشئ ملف <code>.env.local</code> يحتوي على رابط Supabase والمفتاح العام (راجع <code>.env.example</code> وملف README)، ثم أعد تشغيل <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "إعادة إرسال الرمز",
+    "resendWait": "إعادة إرسال الرمز ({seconds} ث)",
+    "resent": "أُرسل رمز جديد إلى بريدك الإلكتروني."
   },
   "welcome": {
     "title": "اختر لغتك",
@@ -170,8 +170,8 @@
         "text": "سنستخدمه للإلهام واقتراحات الموقع."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "من أين يأتي ضيوفك؟",
+        "text": "اختر البلدان التي سيسافر منها ضيوفك. يساعدنا ذلك في إعداد صفحات الرحلات وقوائم الدخول."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "الأسماء والتاريخ والمكان والأسلوب. تنطبق التغييرات في كل أنحاء التطبيق.",
     "saveChanges": "حفظ التغييرات",
     "saved": "تم حفظ تفاصيل الزفاف",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "الأكثر شيوعًا",
+    "allCurrencies": "كل العملات",
+    "guestCountries": "البلدان التي سيسافر منها ضيوفك",
+    "guestCountriesHint": "اضغط على كل ما ينطبق. يمكنك تغيير ذلك لاحقًا دائمًا.",
+    "guestCountriesSearch": "البحث عن بلد…",
+    "noCurrency": "بلا عملة ثانية",
+    "secondaryCurrency": "العملة الثانية (اختياري)",
+    "secondaryCurrencyHint": "إذا كان مزودو الخدمات يتقاضون بعملة أخرى، فأضفها هنا.",
+    "exchangeRate": "سعر الصرف",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "يمكنه المشاهدة دون التغيير"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "أحد الوالدين",
+      "description": "يمكنه تعديل الضيوف والمهام والسفر، لا الإعدادات"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "مساعد",
+      "description": "يمكنه تعديل المهام المسندة إليه، وعرض الباقي"
     }
   },
   "invite": {

@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – sınırların ötesinde evlenen çiftler için düğün planlayıcısı",
+    "metaDescription": "Misafirleriniz her yerden geliyor. Vow her misafire kendi dilinde, uçuşlar, odalar, oturma düzeni ve giriş belgeleriyle kendi seyahat sayfasını verir — hepsi tek bir yerde.",
     "signIn": "Giriş yap",
     "getStarted": "Başlayın",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "Sınırların ötesinde düğünler",
+    "title": "Misafirleriniz her yerden geliyor. Vow onları oraya ulaştırır.",
+    "intro": "Çift, yurt dışındaki aile ve her misafir için tek planlayıcı: seyahat, odalar, oturma düzeni, evraklar ve web sitesi, herkesin kendi dilinde.",
     "start": "Ücretsiz planlamaya başlayın",
     "seeInside": "İçinde neler var görün",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Ve beklediğiniz diğer her şey",
     "featuresText": "Planınızın her parçası diğerleriyle konuşur. Yanıtlar oturma düzenine, rezerve edilen mekânlar sitenize akar.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "Siz kendi dilinizde planlarsınız; her misafir siteyi, yanıt sayfasını ve e-postaları kendi dilinde alır."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Düğününüz sınırları aşıyor. Planlayıcınız da aşmalı.",
+    "closingText": "Partnerinizi, ailenizi ya da düğün planlayıcınızı davet edin ve herkes nerede yaşarsa yaşasın her şeyi gerçek zamanlı olarak birlikte planlayın.",
     "create": "Düğününüzü oluşturun",
     "footer": "Sevgiyle yapıldı · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "Gizlilik",
+    "terms": "Koşullar",
+    "differenceTitle": "Diğer düğün uygulamalarının yapmadıkları",
+    "differenceText": "Misafirlerin yalnızca şehir değil, ülke sınırı geçtiği düğünler için tasarlandı.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Kişisel seyahat sayfası",
+        "text": "Her misafirin kendi sayfası var: uçuşlar, otel odası, servis saati, masa numarası ve yanına alacaklarının kontrol listesi."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "AB giriş kontrol listesi",
+        "text": "Pasaport kuralları, vize şartları, ETIAS — her misafirin ülkesine göre hazırlanır, kimse sınırda takılmaz."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "Otel oda panosu",
+        "text": "Birden çok otelde oda bloke edin, misafirleri yerleştirin ve kimin onayladığını, kimin hâlâ yatağa ihtiyacı olduğunu takip edin."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Servis planlayıcı",
+        "text": "Varışları saate göre gruplayın, karşılamaları planlayın ve misafirlere servislerinin ne zaman kalkacağını bildirin."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Evlilik evrakları",
+        "text": "64 ülkede yasal olarak evlenmek için gereken belgeler: apostiller, çeviriler, son tarihler, hepsi takipte."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "Misafir başına 25 dil",
+        "text": "Sloven büyükanneniz her şeyi Slovence görür. Üniversite arkadaşlarınız İngilizce görür. Otomatik olarak."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow ve tipik ABD düğün uygulamaları",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "Misafir başına kişisel seyahat sayfası",
+      "entryChecklist": "Ülkeye göre giriş/vize kontrol listesi",
+      "roomsPerGuest": "Misafir başına otel odası",
+      "paperwork": "Yurt dışında evlilik evrakları",
+      "guestLanguages": "Misafirin kendi dili",
+      "dualBudget": "İki para biriminde bütçe",
+      "familyRoles": "Aile planlayıcı rolleri",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Tipik uygulamalar",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Yakında"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Varış Per 5 Mar, 14:20",
+      "hotel": "Hotel Park · Oda 204",
+      "shuttle": "Bled Gölü'ne servis · 16:00",
+      "table": "Masa 3 · Kovač ailesiyle",
+      "passport": "Pasaport en az Haziran 2027'ye kadar geçerli olmalı",
+      "yourTrip": "Seyahatiniz"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "<b>{email}</b> adresine bir e-posta gönderdik. İçindeki bağlantıya (bu tarayıcıda) tıklayın veya e-postadaki kodu aşağıya yazın.",
     "code": "E-postadaki kod",
     "signInWithCode": "Kodla giriş yap",
-    "again": "Use a different email address",
+    "again": "Başka bir e-posta adresi kullan",
     "setupTitle": "Neredeyse hazır: Supabase henüz bağlı değil.",
     "setupText": "Supabase URL’niz ve herkese açık anahtarınızla bir <code>.env.local</code> dosyası oluşturun (<code>.env.example</code> ve README’ye bakın), ardından <code>npm run dev</code> komutunu yeniden başlatın.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Kodu yeniden gönder",
+    "resendWait": "Kodu yeniden gönder ({seconds} sn)",
+    "resent": "E-postanıza yeni bir kod gönderildi."
   },
   "welcome": {
     "title": "Dilinizi seçin",
@@ -170,8 +170,8 @@
         "text": "Bunu ilham ve site önerileri için kullanacağız."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Misafirleriniz nereden geliyor?",
+        "text": "Misafirlerinizin seyahat edeceği ülkeleri seçin. Bu, seyahat sayfalarını ve giriş kontrol listelerini hazırlamamıza yardımcı olur."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "İsimler, tarih, yer ve tarz. Değişiklikler uygulamanın her yerinde geçerli olur.",
     "saveChanges": "Değişiklikleri kaydet",
     "saved": "Düğün ayrıntıları kaydedildi",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Popüler",
+    "allCurrencies": "Tüm para birimleri",
+    "guestCountries": "Misafirlerinizin seyahat edeceği ülkeler",
+    "guestCountriesHint": "Uygun olanların hepsine dokunun. Bunu daha sonra her zaman değiştirebilirsiniz.",
+    "guestCountriesSearch": "Ülke ara…",
+    "noCurrency": "İkinci para birimi yok",
+    "secondaryCurrency": "İkinci para birimi (isteğe bağlı)",
+    "secondaryCurrencyHint": "Tedarikçileriniz farklı bir para biriminde fiyat veriyorsa buraya ekleyin.",
+    "exchangeRate": "Döviz kuru",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Görebilir ama değiştiremez"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Ebeveyn",
+      "description": "Misafirleri, görevleri ve seyahati düzenleyebilir, ayarları değil"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Yardımcı",
+      "description": "Kendisine atanan görevleri düzenleyebilir, geri kalanını görebilir"
     }
   },
   "invite": {

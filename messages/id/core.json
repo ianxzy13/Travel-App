@@ -73,7 +73,7 @@
     "slugChars": "Gunakan hanya huruf, angka, dan tanda hubung tunggal (misalnya ian-and-maria).",
     "slugLength": "Gunakan 3 sampai 60 karakter.",
     "airport": "Gunakan kode bandara 3 huruf, misalnya LIS.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Silakan masukkan judul lagu."
   },
   "ui": {
     "cancel": "Batal",

@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Çalma listesi",
+    "description": "Düğününüzün şarkıları: mutlaka çalması gerekenler, çalsa güzel olanlar ve DJ'in asla çalmaması gerekenler.",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "noSongs": "Henüz şarkı yok",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Tören",
+      "firstDance": "İlk dans",
+      "dinner": "Akşam yemeği",
+      "party": "Parti"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Mutlaka çalsın",
+      "nice": "Çalsa güzel olur",
+      "no": "Çalmasın"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Şarkı adı",
+      "artist": "Sanatçı",
+      "category": "Kategori",
+      "chooseCategory": "Bir kategori seçin",
+      "priority": "Öncelik"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Şarkı ekle",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "“{title}” eklendi"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Şarkıyı düzenle",
+      "label": "{title} düzenle",
+      "done": "Şarkı kaydedildi"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "{title} sil",
+      "title": "“{title}” silinsin mi?",
+      "button": "Sil",
+      "done": "Şarkı silindi"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Bu şarkı zaten listede ({category} kategorisinde).",
+      "again": "Yine de tekrar eklensin mi?",
+      "anyway": "Yine de ekle"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Şarkıları göster",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Bu öncelikte henüz şarkı yok."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Tüm düğün şarkılarınızı anlara göre sıralanmış tek bir listede tutun; DJ neyi çalacağını ve neyi atlayacağını bilsin.",
+      "button": "İlk şarkınızı ekleyin"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Kategorileri yönet",
+      "title": "Kategoriler",
+      "text": "Bir kategoriyi adının üzerine yazarak yeniden adlandırın. Bir kategoriyi silmek şarkılarını da siler.",
+      "rename": "{name} kategorisinin adı",
+      "renamed": "Kategori yeniden adlandırıldı",
+      "delete": "{name} sil",
+      "deleteTitle": "“{name}” silinsin mi?",
+      "deleteText": "{count, plural, one {İçindeki # şarkı da silinecek.} other {İçindeki # şarkı da silinecek.}}",
+      "deleted": "Kategori silindi",
+      "new": "Yeni kategori",
+      "newPlaceholder": "ör. Kokteyl saati",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Kategori eklendi",
+      "newOption": "Yeni kategori…",
+      "starter": "Başlangıç kategorilerini ekle (Tören, İlk dans, Akşam yemeği, Parti)",
+      "starterAdded": "Başlangıç kategorileri eklendi"
     }
   }
 }

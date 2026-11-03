@@ -61,7 +61,7 @@
       "matching": "Знайдено: {count}",
       "clear": "Скинути фільтри",
       "any": "Будь-який",
-      "myGuests": "My guests"
+      "myGuests": "Мої гості"
     },
     "list": {
       "selectAll": "Вибрати всіх показаних гостей",
@@ -205,8 +205,8 @@
       "saved": "Родину збережено",
       "cancel": "Скасувати",
       "save": "Зберегти",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Відповідальний",
+      "nobodyAssigned": "Нікого не призначено"
     },
     "tagsDialog": {
       "title": "Мітки",

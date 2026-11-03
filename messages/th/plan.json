@@ -88,9 +88,9 @@
       "deleted": "ลบสิ่งที่ต้องทำแล้ว",
       "save": "บันทึก",
       "add": "เพิ่มสิ่งที่ต้องทำ",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "ความคิดเห็น",
+      "addComment": "เพิ่มความคิดเห็น…",
+      "unknown": "ใครบางคน"
     },
     "categories": {
       "Budget": "งบประมาณ",

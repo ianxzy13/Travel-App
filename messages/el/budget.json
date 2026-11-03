@@ -142,7 +142,7 @@
       "notes": "Σημειώσεις",
       "file": "proypologismos"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "Κατά προσέγγιση τιμές σε {secondary} με ισοτιμία 1 {primary} = {rate} {secondary}."
   },
   "vendors": {
     "title": "Προμηθευτές",

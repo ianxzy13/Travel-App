@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "歌單",
+    "description": "婚禮歌曲：一定要放的、放了更好的，以及 DJ 絕對不能放的。",
+    "save": "儲存",
+    "cancel": "取消",
+    "noSongs": "還沒有歌曲",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "儀式",
+      "firstDance": "第一支舞",
+      "dinner": "晚宴",
+      "party": "派對"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "必放",
+      "nice": "放了更好",
+      "no": "不要放"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "歌名",
+      "artist": "歌手",
+      "category": "類別",
+      "chooseCategory": "選擇類別",
+      "priority": "優先順序"
     },
     "add": {
-      "title": "Add a song",
+      "title": "新增歌曲",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "已新增「{title}」"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "編輯歌曲",
+      "label": "編輯 {title}",
+      "done": "歌曲已儲存"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "刪除 {title}",
+      "title": "刪除「{title}」？",
+      "button": "刪除",
+      "done": "歌曲已刪除"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "這首歌已在列表中（在 {category} 中）。",
+      "again": "仍然再次新增？",
+      "anyway": "仍然新增"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "顯示歌曲",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "此優先順序下還沒有歌曲。"
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "把所有婚禮歌曲按環節放在一個列表裡，讓 DJ 知道該放什麼、跳過什麼。",
+      "button": "新增第一首歌"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "管理類別",
+      "title": "類別",
+      "text": "直接改寫類別名稱即可重新命名。刪除類別會同時刪除其中的歌曲。",
+      "rename": "{name} 的名稱",
+      "renamed": "類別已重新命名",
+      "delete": "刪除 {name}",
+      "deleteTitle": "刪除「{name}」？",
+      "deleteText": "{count, plural, other {其中的 # 首歌也會被刪除。}}",
+      "deleted": "類別已刪除",
+      "new": "新類別",
+      "newPlaceholder": "例如：雞尾酒時間",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "類別已新增",
+      "newOption": "新類別…",
+      "starter": "新增初始類別（儀式、第一支舞、晚宴、派對）",
+      "starterAdded": "已新增初始類別"
     }
   }
 }

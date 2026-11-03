@@ -88,9 +88,9 @@
       "deleted": "Η εργασία διαγράφηκε",
       "save": "Αποθήκευση",
       "add": "Προσθήκη εργασίας",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Σχόλια",
+      "addComment": "Προσθήκη σχολίου…",
+      "unknown": "Κάποιος"
     },
     "categories": {
       "Budget": "Προϋπολογισμός",

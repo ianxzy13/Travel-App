@@ -6,10 +6,10 @@
     "getStarted": "Započnite",
     "eyebrow": "Vjenčanja preko granica",
     "title": "Vaši gosti dolaze odasvud. Vow ih dovodi do vas.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "intro": "Jedan planer za par, obitelj u inozemstvu i svakog gosta: putovanja, sobe, raspored sjedenja, dokumenti i web-stranica, svakome na njegovom jeziku.",
     "start": "Počnite planirati besplatno",
     "seeInside": "Pogledajte što je unutra",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "I sve ostalo što očekuješ",
     "featuresText": "Svaki dio plana povezan je s ostalima. Potvrde idu u raspored sjedenja, rezervirana mjesta na vašu web-stranicu.",
     "features": {
       "guests": {
@@ -59,7 +59,7 @@
     "footer": "Napravljeno s ljubavlju · © {year} Vow",
     "privacy": "Privatnost",
     "terms": "Uvjeti",
-    "differenceTitle": "What other wedding apps don't do",
+    "differenceTitle": "Što druge aplikacije za vjenčanja ne rade",
     "differenceText": "Napravljeno za vjenčanja na koja gosti putuju preko državnih granica.",
     "difference": {
       "trip": {
@@ -68,11 +68,11 @@
       },
       "entry": {
         "title": "Popis za ulazak u EU",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "text": "Pravila za putovnice, vize, ETIAS — pripremljeno za zemlju svakog gosta da nitko ne zapne na granici."
       },
       "rooms": {
         "title": "Ploča hotelskih soba",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "text": "Rezerviraj sobe u više hotela, rasporedi goste i prati tko je potvrdio, a kome još treba krevet."
       },
       "shuttle": {
         "title": "Planer prijevoza",
@@ -93,7 +93,7 @@
       "entryChecklist": "Popis za ulazak/vize po zemlji",
       "roomsPerGuest": "Hotelske sobe po gostu",
       "paperwork": "Dokumenti za vjenčanje u inozemstvu",
-      "guestLanguages": "Guest's own language",
+      "guestLanguages": "Gostov vlastiti jezik",
       "dualBudget": "Proračun u dvije valute",
       "familyRoles": "Uloge za obitelj",
       "vow": "Vow",

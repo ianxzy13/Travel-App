@@ -88,9 +88,9 @@
       "deleted": "Görev silindi",
       "save": "Kaydet",
       "add": "Görev ekle",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "Yorumlar",
+      "addComment": "Yorum ekle…",
+      "unknown": "Biri"
     },
     "categories": {
       "Budget": "Bütçe",

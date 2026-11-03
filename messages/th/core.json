@@ -73,7 +73,7 @@
     "slugChars": "ใช้ได้เฉพาะตัวอักษรอังกฤษ ตัวเลข และขีดกลางเดี่ยว (เช่น ian-and-maria)",
     "slugLength": "ใช้ 3 ถึง 60 ตัวอักษร",
     "airport": "ใช้รหัสสนามบิน 3 ตัวอักษร เช่น LIS",
-    "songTitle": "Please enter the song title."
+    "songTitle": "กรุณาใส่ชื่อเพลง"
   },
   "ui": {
     "cancel": "ยกเลิก",

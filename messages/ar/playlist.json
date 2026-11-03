@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "قائمة الأغاني",
+    "description": "أغاني زفافك: ما يجب أن يُعزف، وما سيكون لطيفًا، وما يجب ألا يعزفه منسق الأغاني أبدًا.",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "noSongs": "لا توجد أغانٍ بعد",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "المراسم",
+      "firstDance": "الرقصة الأولى",
+      "dinner": "العشاء",
+      "party": "الحفلة"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "يجب أن تُعزف",
+      "nice": "سيكون لطيفًا",
+      "no": "لا تُعزف"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "اسم الأغنية",
+      "artist": "الفنان",
+      "category": "الفئة",
+      "chooseCategory": "اختر فئة",
+      "priority": "الأولوية"
     },
     "add": {
-      "title": "Add a song",
+      "title": "إضافة أغنية",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "أُضيفت «{title}»"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "تعديل الأغنية",
+      "label": "تعديل {title}",
+      "done": "حُفظت الأغنية"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "حذف {title}",
+      "title": "حذف «{title}»؟",
+      "button": "حذف",
+      "done": "حُذفت الأغنية"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "هذه الأغنية موجودة في القائمة بالفعل (في {category}).",
+      "again": "إضافتها مرة أخرى على أي حال؟",
+      "anyway": "إضافة على أي حال"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "إظهار الأغاني",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "لا توجد أغانٍ بهذه الأولوية بعد."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "احتفظ بكل أغاني زفافك في قائمة واحدة مرتبة حسب اللحظة، ليعرف منسق الأغاني ما يعزفه وما يتخطاه.",
+      "button": "أضف أغنيتك الأولى"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "إدارة الفئات",
+      "title": "الفئات",
+      "text": "أعد تسمية الفئة بالكتابة فوق اسمها. حذف الفئة يحذف أغانيها أيضًا.",
+      "rename": "اسم {name}",
+      "renamed": "أُعيدت تسمية الفئة",
+      "delete": "حذف {name}",
+      "deleteTitle": "حذف «{name}»؟",
+      "deleteText": "{count, plural, zero {ستُحذف أغانيها الـ# أيضًا.} one {ستُحذف أغنيتها الوحيدة أيضًا.} two {ستُحذف أغنيتاها أيضًا.} few {ستُحذف أغانيها الـ# أيضًا.} many {ستُحذف أغانيها الـ# أيضًا.} other {ستُحذف أغانيها الـ# أيضًا.}}",
+      "deleted": "حُذفت الفئة",
+      "new": "فئة جديدة",
+      "newPlaceholder": "مثال: ساعة الكوكتيل",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "أُضيفت الفئة",
+      "newOption": "فئة جديدة…",
+      "starter": "إضافة فئات البداية (المراسم، الرقصة الأولى، العشاء، الحفلة)",
+      "starterAdded": "أُضيفت فئات البداية"
     }
   }
 }

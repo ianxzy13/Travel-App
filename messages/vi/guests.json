@@ -61,7 +61,7 @@
       "matching": "{count} phù hợp",
       "clear": "Xóa bộ lọc",
       "any": "Bất kỳ",
-      "myGuests": "My guests"
+      "myGuests": "Khách của tôi"
     },
     "list": {
       "selectAll": "Chọn tất cả khách đang hiện",
@@ -205,8 +205,8 @@
       "saved": "Đã lưu gia đình",
       "cancel": "Hủy",
       "save": "Lưu",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Phụ trách",
+      "nobodyAssigned": "Chưa giao cho ai"
     },
     "tagsDialog": {
       "title": "Nhãn",

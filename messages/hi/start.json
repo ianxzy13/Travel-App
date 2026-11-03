@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – सरहदों के पार शादी करने वाले जोड़ों के लिए वेडिंग प्लानर",
+    "metaDescription": "आपके मेहमान हर जगह से आते हैं। Vow हर मेहमान को उसकी अपनी भाषा में अपना यात्रा पेज देता है, उड़ानों, कमरों, बैठने की जगह और प्रवेश के काग़ज़ों के साथ — सब एक जगह।",
     "signIn": "साइन इन करें",
     "getStarted": "शुरू करें",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "सरहदों के पार शादियाँ",
+    "title": "आपके मेहमान हर जगह से आते हैं। Vow उन्हें वहाँ पहुँचाता है।",
+    "intro": "जोड़े, विदेश में रहने वाले परिवार और हर मेहमान के लिए एक प्लानर: यात्रा, कमरे, बैठने की जगह, काग़ज़ात और वेबसाइट, सबकी अपनी भाषा में।",
     "start": "मुफ़्त में योजना शुरू करें",
     "seeInside": "देखें अंदर क्या है",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "और बाकी सब कुछ जिसकी आप उम्मीद करते हैं",
     "featuresText": "आपकी योजना का हर हिस्सा बाकी से जुड़ा है। जवाब बैठने की व्यवस्था में जाते हैं, बुक किए वेन्यू आपकी वेबसाइट पर।",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "आप अपनी भाषा में योजना बनाते हैं; हर मेहमान को वेबसाइट, जवाब पेज और ईमेल उसकी भाषा में मिलते हैं।"
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "आपकी शादी सरहदें पार करती है। आपका प्लानर भी करे।",
+    "closingText": "अपने पार्टनर, माता-पिता या प्लानर को बुलाएँ और रियल टाइम में साथ मिलकर सब प्लान करें — चाहे कोई कहीं भी रहता हो।",
     "create": "अपनी शादी बनाएँ",
     "footer": "प्यार से बनाया गया · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "गोपनीयता",
+    "terms": "शर्तें",
+    "differenceTitle": "जो दूसरे वेडिंग ऐप नहीं करते",
+    "differenceText": "उन शादियों के लिए बना जहाँ मेहमान सिर्फ़ राज्य नहीं, देशों की सीमाएँ पार करते हैं।",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "निजी यात्रा पेज",
+        "text": "हर मेहमान का अपना पेज: उड़ानें, होटल का कमरा, शटल का समय, टेबल नंबर और साथ लाने वाली चीज़ों की चेकलिस्ट।"
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "EU प्रवेश चेकलिस्ट",
+        "text": "पासपोर्ट नियम, वीज़ा ज़रूरतें, ETIAS — हर मेहमान के देश के लिए तैयार, ताकि कोई सीमा पर न अटके।"
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "होटल कमरा बोर्ड",
+        "text": "कई होटलों में कमरे ब्लॉक करें, मेहमानों को कमरे दें और देखें किसने पुष्टि की और किसे अभी बिस्तर चाहिए।"
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "शटल प्लानर",
+        "text": "आगमन को समय के हिसाब से समूहित करें, पिकअप तय करें और मेहमानों को बताएँ कि उनकी गाड़ी कब निकलेगी।"
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "शादी के काग़ज़ात",
+        "text": "64 देशों में कानूनी रूप से शादी के लिए ज़रूरी दस्तावेज़: अपोस्टिल, अनुवाद, समय सीमाएँ, सब ट्रैक।"
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "हर मेहमान के लिए 25 भाषाएँ",
+        "text": "आपकी स्लोवेनियाई दादी सब कुछ स्लोवेनियाई में देखती हैं। आपके कॉलेज के दोस्त अंग्रेज़ी में। अपने आप।"
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow बनाम आम अमेरिकी वेडिंग ऐप",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "हर मेहमान के लिए निजी यात्रा पेज",
+      "entryChecklist": "देश के अनुसार प्रवेश/वीज़ा चेकलिस्ट",
+      "roomsPerGuest": "हर मेहमान के लिए होटल का कमरा",
+      "paperwork": "विदेश में शादी के काग़ज़ात",
+      "guestLanguages": "मेहमान की अपनी भाषा",
+      "dualBudget": "दो मुद्राओं में बजट",
+      "familyRoles": "परिवार के लिए प्लानिंग भूमिकाएँ",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "आम ऐप",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "जल्द आ रहा है"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flight": "मियामी → ल्युब्ल्याना",
+      "flightDetail": "आगमन गुरु 5 मार्च, 14:20",
+      "hotel": "Hotel Park · कमरा 204",
+      "shuttle": "लेक ब्लेड के लिए शटल · 16:00",
+      "table": "टेबल 3 · Kovač परिवार के साथ",
+      "passport": "पासपोर्ट कम से कम जून 2027 तक वैध",
+      "yourTrip": "आपकी यात्रा"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "हमने <b>{email}</b> पर एक ईमेल भेजा है। उसमें दिए लिंक पर क्लिक करें (इसी ब्राउज़र में), या नीचे ईमेल का कोड लिखें।",
     "code": "ईमेल का कोड",
     "signInWithCode": "कोड से साइन इन करें",
-    "again": "Use a different email address",
+    "again": "दूसरा ईमेल पता इस्तेमाल करें",
     "setupTitle": "लगभग तैयार: Supabase अभी जुड़ा नहीं है।",
     "setupText": "अपने Supabase URL और पब्लिक की के साथ एक <code>.env.local</code> फ़ाइल बनाएँ (<code>.env.example</code> और README देखें), फिर <code>npm run dev</code> दोबारा शुरू करें।",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "कोड दोबारा भेजें",
+    "resendWait": "कोड दोबारा भेजें ({seconds} से.)",
+    "resent": "आपके ईमेल पर नया कोड भेजा गया है।"
   },
   "welcome": {
     "title": "अपनी भाषा चुनें",
@@ -170,8 +170,8 @@
         "text": "हम इसे प्रेरणा और वेबसाइट सुझावों के लिए इस्तेमाल करेंगे।"
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "आपके मेहमान कहाँ से आ रहे हैं?",
+        "text": "वे देश चुनें जहाँ से आपके मेहमान यात्रा करेंगे। इससे हम यात्रा पेज और प्रवेश चेकलिस्ट तैयार कर पाते हैं।"
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "नाम, तारीख, स्थान और शैली। बदलाव पूरे ऐप में लागू होते हैं।",
     "saveChanges": "बदलाव सहेजें",
     "saved": "शादी का विवरण सहेजा गया",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "लोकप्रिय",
+    "allCurrencies": "सभी मुद्राएँ",
+    "guestCountries": "वे देश जहाँ से आपके मेहमान यात्रा करेंगे",
+    "guestCountriesHint": "जो लागू हों सब पर टैप करें। आप इसे बाद में कभी भी बदल सकते हैं।",
+    "guestCountriesSearch": "देश खोजें…",
+    "noCurrency": "कोई दूसरी मुद्रा नहीं",
+    "secondaryCurrency": "दूसरी मुद्रा (वैकल्पिक)",
+    "secondaryCurrencyHint": "अगर आपके वेंडर किसी दूसरी मुद्रा में शुल्क लेते हैं, तो उसे यहाँ जोड़ें।",
+    "exchangeRate": "विनिमय दर",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "देख सकता है पर बदल नहीं सकता"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "माता-पिता",
+      "description": "मेहमान, काम और यात्रा संपादित कर सकते हैं, सेटिंग्स नहीं"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "सहायक",
+      "description": "अपने सौंपे गए काम संपादित कर सकते हैं, बाकी देख सकते हैं"
     }
   },
   "invite": {

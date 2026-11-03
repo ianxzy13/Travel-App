@@ -61,7 +61,7 @@
       "matching": "{count} ταιριάζουν",
       "clear": "Καθαρισμός φίλτρων",
       "any": "Όλα",
-      "myGuests": "My guests"
+      "myGuests": "Οι καλεσμένοι μου"
     },
     "list": {
       "selectAll": "Επιλογή όλων των εμφανιζόμενων",
@@ -205,8 +205,8 @@
       "saved": "Το νοικοκυριό αποθηκεύτηκε",
       "cancel": "Ακύρωση",
       "save": "Αποθήκευση",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "Υπεύθυνος",
+      "nobodyAssigned": "Κανείς δεν έχει ανατεθεί"
     },
     "tagsDialog": {
       "title": "Ετικέτες",

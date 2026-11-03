@@ -61,7 +61,7 @@
       "matching": "ตรงกัน {count} คน",
       "clear": "ล้างตัวกรอง",
       "any": "ทั้งหมด",
-      "myGuests": "My guests"
+      "myGuests": "แขกของฉัน"
     },
     "list": {
       "selectAll": "เลือกแขกทั้งหมดที่แสดง",
@@ -205,8 +205,8 @@
       "saved": "บันทึกครอบครัวแล้ว",
       "cancel": "ยกเลิก",
       "save": "บันทึก",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "ดูแลโดย",
+      "nobodyAssigned": "ยังไม่มีผู้รับผิดชอบ"
     },
     "tagsDialog": {
       "title": "แท็ก",
@@ -339,7 +339,7 @@
       "language": "ภาษา",
       "yes": "ใช่",
       "no": "ไม่",
-      "file": "guests"
+      "file": "แขก"
     }
   }
 }

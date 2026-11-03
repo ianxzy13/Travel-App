@@ -61,7 +61,7 @@
       "matching": "{count} 位匹配",
       "clear": "清除筛选",
       "any": "任意",
-      "myGuests": "My guests"
+      "myGuests": "我的宾客"
     },
     "list": {
       "selectAll": "选择所有显示的宾客",
@@ -205,8 +205,8 @@
       "saved": "家庭已保存",
       "cancel": "取消",
       "save": "保存",
-      "managedBy": "Managed by",
-      "nobodyAssigned": "Nobody assigned"
+      "managedBy": "负责人",
+      "nobodyAssigned": "未分配"
     },
     "tagsDialog": {
       "title": "标签",
@@ -339,7 +339,7 @@
       "language": "语言",
       "yes": "是",
       "no": "否",
-      "file": "guests"
+      "file": "宾客"
     }
   }
 }

@@ -140,9 +140,9 @@
       "nextAmount": "다음 지불 금액",
       "currency": "통화",
       "notes": "메모",
-      "file": "budget"
+      "file": "예산"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "1 {primary} = {rate} {secondary} 환율로 대략적인 {secondary} 금액을 표시합니다."
   },
   "vendors": {
     "title": "업체",

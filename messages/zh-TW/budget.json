@@ -140,9 +140,9 @@
       "nextAmount": "下次付款金額",
       "currency": "幣別",
       "notes": "備註",
-      "file": "budget"
+      "file": "預算"
     },
-    "dualCurrencyNote": "Showing approximate {secondary} values at 1 {primary} = {rate} {secondary}."
+    "dualCurrencyNote": "按 1 {primary} = {rate} {secondary} 顯示大致的 {secondary} 金額。"
   },
   "vendors": {
     "title": "廠商",

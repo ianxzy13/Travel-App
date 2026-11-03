@@ -88,9 +88,9 @@
       "deleted": "할 일을 삭제했습니다",
       "save": "저장",
       "add": "할 일 추가",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "댓글",
+      "addComment": "댓글 추가…",
+      "unknown": "누군가"
     },
     "categories": {
       "Budget": "예산",

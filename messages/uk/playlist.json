@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Плейлист",
+    "description": "Пісні для вашого весілля: що обов’язково ввімкнути, що було б добре і що діджей не має ставити ніколи.",
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "noSongs": "Пісень ще немає",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Церемонія",
+      "firstDance": "Перший танець",
+      "dinner": "Вечеря",
+      "party": "Вечірка"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Обов’язково",
+      "nice": "Було б добре",
+      "no": "Не вмикати"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Назва пісні",
+      "artist": "Виконавець",
+      "category": "Категорія",
+      "chooseCategory": "Оберіть категорію",
+      "priority": "Пріоритет"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Додати пісню",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "«{title}» додано"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Змінити пісню",
+      "label": "Змінити {title}",
+      "done": "Пісню збережено"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Видалити {title}",
+      "title": "Видалити «{title}»?",
+      "button": "Видалити",
+      "done": "Пісню видалено"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Ця пісня вже є в списку (у категорії {category}).",
+      "again": "Усе одно додати ще раз?",
+      "anyway": "Усе одно додати"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Показати пісні",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Пісень із таким пріоритетом ще немає."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Усі пісні для весілля в одному списку за моментами — діджей знатиме, що ставити, а що пропустити.",
+      "button": "Додайте першу пісню"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Керування категоріями",
+      "title": "Категорії",
+      "text": "Щоб перейменувати категорію, просто змініть назву. Під час видалення категорії видаляються і її пісні.",
+      "rename": "Назва: {name}",
+      "renamed": "Категорію перейменовано",
+      "delete": "Видалити {name}",
+      "deleteTitle": "Видалити «{name}»?",
+      "deleteText": "{count, plural, one {Буде видалено й # пісню.} few {Буде видалено й # пісні.} many {Буде видалено й # пісень.} other {Буде видалено й # пісні.}}",
+      "deleted": "Категорію видалено",
+      "new": "Нова категорія",
+      "newPlaceholder": "наприклад, Коктейль",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Категорію додано",
+      "newOption": "Нова категорія…",
+      "starter": "Додати базові категорії (Церемонія, Перший танець, Вечеря, Вечірка)",
+      "starterAdded": "Базові категорії додано"
     }
   }
 }

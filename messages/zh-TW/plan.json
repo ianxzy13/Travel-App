@@ -88,9 +88,9 @@
       "deleted": "待辦已刪除",
       "save": "儲存",
       "add": "新增待辦",
-      "comments": "Comments",
-      "addComment": "Add a comment…",
-      "unknown": "Someone"
+      "comments": "評論",
+      "addComment": "新增評論…",
+      "unknown": "某人"
     },
     "categories": {
       "Budget": "預算",

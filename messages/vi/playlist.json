@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "Danh sách nhạc",
+    "description": "Nhạc cho đám cưới của bạn: bài nhất định phải phát, bài phát thì hay, và bài DJ tuyệt đối không được phát.",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "noSongs": "Chưa có bài hát",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "Lễ cưới",
+      "firstDance": "Điệu nhảy đầu tiên",
+      "dinner": "Tiệc tối",
+      "party": "Tiệc vui"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "Phải phát",
+      "nice": "Phát thì hay",
+      "no": "Không phát"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "Tên bài hát",
+      "artist": "Nghệ sĩ",
+      "category": "Danh mục",
+      "chooseCategory": "Chọn danh mục",
+      "priority": "Mức ưu tiên"
     },
     "add": {
-      "title": "Add a song",
+      "title": "Thêm bài hát",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "Đã thêm “{title}”"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "Sửa bài hát",
+      "label": "Sửa {title}",
+      "done": "Đã lưu bài hát"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "Xóa {title}",
+      "title": "Xóa “{title}”?",
+      "button": "Xóa",
+      "done": "Đã xóa bài hát"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "Bài này đã có trong danh sách (ở {category}).",
+      "again": "Vẫn thêm lại?",
+      "anyway": "Vẫn thêm"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "Hiện bài hát",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "Chưa có bài nào ở mức ưu tiên này."
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "Giữ mọi bài hát đám cưới trong một danh sách, theo từng khoảnh khắc, để DJ biết phát gì và bỏ qua gì.",
+      "button": "Thêm bài hát đầu tiên"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "Quản lý danh mục",
+      "title": "Danh mục",
+      "text": "Đổi tên danh mục bằng cách gõ đè lên tên. Xóa danh mục cũng xóa các bài hát trong đó.",
+      "rename": "Tên của {name}",
+      "renamed": "Đã đổi tên danh mục",
+      "delete": "Xóa {name}",
+      "deleteTitle": "Xóa “{name}”?",
+      "deleteText": "{count, plural, other {# bài hát trong đó cũng sẽ bị xóa.}}",
+      "deleted": "Đã xóa danh mục",
+      "new": "Danh mục mới",
+      "newPlaceholder": "VD: Giờ cocktail",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "Đã thêm danh mục",
+      "newOption": "Danh mục mới…",
+      "starter": "Thêm danh mục mẫu (Lễ cưới, Điệu nhảy đầu tiên, Tiệc tối, Tiệc vui)",
+      "starterAdded": "Đã thêm danh mục mẫu"
     }
   }
 }

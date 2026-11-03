@@ -1,15 +1,15 @@
 {
   "landing": {
-    "metaTitle": "Vow – the wedding planner for couples marrying across borders",
-    "metaDescription": "Your guests fly in from everywhere. Vow gives every guest their own trip page, in their language, with flights, rooms, seating and entry paperwork — all in one place.",
+    "metaTitle": "Vow – công cụ lên kế hoạch cưới cho các cặp đôi kết hôn xuyên biên giới",
+    "metaDescription": "Khách của bạn bay đến từ khắp nơi. Vow cho mỗi khách một trang chuyến đi riêng, bằng ngôn ngữ của họ, với chuyến bay, phòng, chỗ ngồi và giấy tờ nhập cảnh — tất cả ở một nơi.",
     "signIn": "Đăng nhập",
     "getStarted": "Bắt đầu",
-    "eyebrow": "Weddings across borders",
-    "title": "Your guests fly in from everywhere. Vow gets them there.",
-    "intro": "One planner for the couple, the family abroad and every guest: travel, rooms, seating, paperwork and the website, in everyone's own language.",
+    "eyebrow": "Đám cưới xuyên biên giới",
+    "title": "Khách của bạn bay đến từ khắp nơi. Vow đưa họ đến nơi.",
+    "intro": "Một công cụ cho cặp đôi, gia đình ở nước ngoài và mọi vị khách: đi lại, phòng, chỗ ngồi, giấy tờ và trang web, bằng ngôn ngữ của từng người.",
     "start": "Bắt đầu miễn phí",
     "seeInside": "Xem bên trong có gì",
-    "featuresTitle": "And everything else you'd expect",
+    "featuresTitle": "Và mọi thứ khác bạn mong đợi",
     "featuresText": "Mọi phần trong kế hoạch đều kết nối với nhau. Xác nhận tham dự đổ vào sơ đồ chỗ ngồi, địa điểm đã đặt hiện trên trang web của bạn.",
     "features": {
       "guests": {
@@ -53,65 +53,65 @@
         "text": "Bạn lên kế hoạch bằng ngôn ngữ của mình; mỗi khách nhận trang web, xác nhận tham dự và email bằng ngôn ngữ của họ."
       }
     },
-    "closingTitle": "Your wedding crosses borders. Your planner should too.",
-    "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
+    "closingTitle": "Đám cưới của bạn vượt biên giới. Công cụ lên kế hoạch cũng nên như vậy.",
+    "closingText": "Mời người ấy, bố mẹ hoặc wedding planner, và cùng lên kế hoạch theo thời gian thực — dù mỗi người sống ở đâu.",
     "create": "Tạo đám cưới của bạn",
     "footer": "Làm bằng cả tấm lòng · © {year} Vow",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "differenceTitle": "What other wedding apps don't do",
-    "differenceText": "Built for weddings where guests cross borders, not just state lines.",
+    "privacy": "Quyền riêng tư",
+    "terms": "Điều khoản",
+    "differenceTitle": "Những điều các ứng dụng cưới khác không làm",
+    "differenceText": "Dành cho những đám cưới mà khách vượt qua biên giới quốc gia, không chỉ ranh giới tiểu bang.",
     "difference": {
       "trip": {
-        "title": "Personal trip page",
-        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+        "title": "Trang chuyến đi riêng",
+        "text": "Mỗi khách có trang riêng: chuyến bay, phòng khách sạn, giờ xe đưa đón, số bàn và danh sách đồ cần mang."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest's home country so nobody gets stuck at the border."
+        "title": "Danh sách nhập cảnh EU",
+        "text": "Quy định hộ chiếu, yêu cầu thị thực, ETIAS — tạo riêng cho quốc gia của từng khách để không ai bị kẹt ở biên giới."
       },
       "rooms": {
-        "title": "Hotel room board",
-        "text": "Block rooms across hotels, assign guests, track who's confirmed and who still needs a bed."
+        "title": "Bảng phòng khách sạn",
+        "text": "Giữ phòng ở nhiều khách sạn, xếp khách và theo dõi ai đã xác nhận, ai vẫn cần giường."
       },
       "shuttle": {
-        "title": "Shuttle planner",
-        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+        "title": "Lên lịch xe đưa đón",
+        "text": "Gom các lượt đến theo giờ, lên kế hoạch đón và báo khách khi nào xe chạy."
       },
       "paperwork": {
-        "title": "Marriage paperwork",
-        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+        "title": "Giấy tờ kết hôn",
+        "text": "Giấy tờ cần để kết hôn hợp pháp ở 64 quốc gia: apostille, bản dịch, hạn chót, theo dõi đầy đủ."
       },
       "languages": {
-        "title": "25 languages per guest",
-        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+        "title": "25 ngôn ngữ cho mỗi khách",
+        "text": "Bà ngoại người Slovenia của bạn xem mọi thứ bằng tiếng Slovenia. Bạn đại học xem bằng tiếng Anh. Tự động."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow so với các ứng dụng cưới phổ biến ở Mỹ",
     "compare": {
-      "tripPage": "Personal trip page per guest",
-      "entryChecklist": "Entry/visa checklist by country",
-      "roomsPerGuest": "Hotel rooms per guest",
-      "paperwork": "Paperwork for marrying abroad",
-      "guestLanguages": "Guest's own language",
-      "dualBudget": "Budget in two currencies",
-      "familyRoles": "Family planner roles",
+      "tripPage": "Trang chuyến đi riêng cho mỗi khách",
+      "entryChecklist": "Danh sách nhập cảnh/thị thực theo quốc gia",
+      "roomsPerGuest": "Phòng khách sạn cho mỗi khách",
+      "paperwork": "Giấy tờ kết hôn ở nước ngoài",
+      "guestLanguages": "Ngôn ngữ riêng của khách",
+      "dualBudget": "Ngân sách hai loại tiền",
+      "familyRoles": "Vai trò cho gia đình",
       "vow": "Vow",
-      "others": "Typical apps",
+      "others": "Ứng dụng phổ biến",
       "yes": "Yes",
       "no": "No",
-      "soon": "Coming soon"
+      "soon": "Sắp ra mắt"
     },
     "mock": {
       "guestName": "Maja Novak",
       "langLabel": "Slovenščina",
       "flight": "Miami → Ljubljana",
-      "flightDetail": "Arrives Thu 5 Mar, 14:20",
-      "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
-      "passport": "Passport valid until at least June 2027",
-      "yourTrip": "Your trip"
+      "flightDetail": "Đến T5 5/3, 14:20",
+      "hotel": "Hotel Park · Phòng 204",
+      "shuttle": "Xe đến hồ Bled · 16:00",
+      "table": "Bàn 3 · cùng gia đình Kovač",
+      "passport": "Hộ chiếu còn hạn ít nhất đến tháng 6/2027",
+      "yourTrip": "Chuyến đi của bạn"
     }
   },
   "login": {
@@ -129,12 +129,12 @@
     "sentTo": "Chúng tôi đã gửi email đến <b>{email}</b>. Nhấp vào liên kết trong đó (trên trình duyệt này), hoặc nhập mã từ email bên dưới.",
     "code": "Mã trong email",
     "signInWithCode": "Đăng nhập bằng mã",
-    "again": "Use a different email address",
+    "again": "Dùng địa chỉ email khác",
     "setupTitle": "Sắp xong rồi: Supabase chưa được kết nối.",
     "setupText": "Tạo tệp <code>.env.local</code> với URL Supabase và khóa công khai (xem <code>.env.example</code> và README), rồi khởi động lại <code>npm run dev</code>.",
-    "resend": "Resend code",
-    "resendWait": "Resend code ({seconds}s)",
-    "resent": "A new code has been sent to your email."
+    "resend": "Gửi lại mã",
+    "resendWait": "Gửi lại mã ({seconds} giây)",
+    "resent": "Mã mới đã được gửi đến email của bạn."
   },
   "welcome": {
     "title": "Chọn ngôn ngữ của bạn",
@@ -170,8 +170,8 @@
         "text": "Chúng tôi dùng để gợi ý cảm hứng và trang web."
       },
       "countries": {
-        "title": "Where are your guests coming from?",
-        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+        "title": "Khách của bạn đến từ đâu?",
+        "text": "Chọn các quốc gia khách sẽ khởi hành. Điều này giúp chúng tôi chuẩn bị trang chuyến đi và danh sách nhập cảnh."
       }
     },
     "defaults": {
@@ -225,15 +225,15 @@
     "detailsText": "Tên, ngày, địa điểm và phong cách. Thay đổi áp dụng cho toàn bộ ứng dụng.",
     "saveChanges": "Lưu thay đổi",
     "saved": "Đã lưu thông tin đám cưới",
-    "popularCurrencies": "Popular",
-    "allCurrencies": "All currencies",
-    "guestCountries": "Countries your guests will travel from",
-    "guestCountriesHint": "Tap all that apply. You can always change this later.",
-    "guestCountriesSearch": "Search countries…",
-    "noCurrency": "No second currency",
-    "secondaryCurrency": "Second currency (optional)",
-    "secondaryCurrencyHint": "If your vendors charge in a different currency, add it here.",
-    "exchangeRate": "Exchange rate",
+    "popularCurrencies": "Phổ biến",
+    "allCurrencies": "Tất cả loại tiền",
+    "guestCountries": "Các quốc gia khách sẽ khởi hành",
+    "guestCountriesHint": "Chạm vào tất cả mục phù hợp. Bạn luôn có thể đổi sau.",
+    "guestCountriesSearch": "Tìm quốc gia…",
+    "noCurrency": "Không có loại tiền thứ hai",
+    "secondaryCurrency": "Loại tiền thứ hai (tùy chọn)",
+    "secondaryCurrencyHint": "Nếu nhà cung cấp tính tiền bằng loại tiền khác, hãy thêm ở đây.",
+    "exchangeRate": "Tỷ giá",
     "exchangeRateHint": "1 {primary} = ? {secondary}"
   },
   "roles": {
@@ -250,12 +250,12 @@
       "description": "Có thể xem nhưng không thay đổi"
     },
     "parent": {
-      "label": "Parent",
-      "description": "Can edit guests, tasks and travel, not settings"
+      "label": "Bố mẹ",
+      "description": "Có thể sửa khách, việc cần làm và đi lại, không sửa cài đặt"
     },
     "helper": {
-      "label": "Helper",
-      "description": "Can edit tasks assigned to them, view the rest"
+      "label": "Người giúp",
+      "description": "Có thể sửa việc được giao, xem phần còn lại"
     }
   },
   "invite": {

@@ -1,75 +1,75 @@
 {
   "playlist": {
-    "title": "Playlist",
-    "description": "The songs for your wedding: what must play, what would be nice, and what the DJ should never play.",
-    "save": "Save",
-    "cancel": "Cancel",
-    "noSongs": "No songs yet",
+    "title": "प्लेलिस्ट",
+    "description": "आपकी शादी के गाने: क्या ज़रूर बजना चाहिए, क्या बजे तो अच्छा, और DJ को क्या कभी नहीं बजाना चाहिए।",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "noSongs": "अभी कोई गाना नहीं",
     "defaults": {
-      "ceremony": "Ceremony",
-      "firstDance": "First dance",
-      "dinner": "Dinner",
-      "party": "Party"
+      "ceremony": "समारोह",
+      "firstDance": "पहला डांस",
+      "dinner": "डिनर",
+      "party": "पार्टी"
     },
     "priority": {
-      "must": "Must play",
-      "nice": "Would be nice",
-      "no": "Do not play"
+      "must": "ज़रूर बजे",
+      "nice": "बजे तो अच्छा",
+      "no": "न बजाएँ"
     },
     "field": {
-      "title": "Song name",
-      "artist": "Artist",
-      "category": "Category",
-      "chooseCategory": "Choose a category",
-      "priority": "Priority"
+      "title": "गाने का नाम",
+      "artist": "कलाकार",
+      "category": "श्रेणी",
+      "chooseCategory": "श्रेणी चुनें",
+      "priority": "प्राथमिकता"
     },
     "add": {
-      "title": "Add a song",
+      "title": "गाना जोड़ें",
       "button": "Add",
-      "done": "“{title}” added"
+      "done": "“{title}” जोड़ा गया"
     },
     "edit": {
-      "title": "Edit song",
-      "label": "Edit {title}",
-      "done": "Song saved"
+      "title": "गाना संपादित करें",
+      "label": "{title} संपादित करें",
+      "done": "गाना सहेजा गया"
     },
     "delete": {
-      "label": "Delete {title}",
-      "title": "Delete “{title}”?",
-      "button": "Delete",
-      "done": "Song deleted"
+      "label": "{title} हटाएँ",
+      "title": "“{title}” हटाएँ?",
+      "button": "हटाएँ",
+      "done": "गाना हटाया गया"
     },
     "duplicate": {
-      "text": "This song is already on the list (in {category}).",
-      "again": "Add it again anyway?",
-      "anyway": "Add anyway"
+      "text": "यह गाना पहले से सूची में है ({category} में)।",
+      "again": "फिर भी दोबारा जोड़ें?",
+      "anyway": "फिर भी जोड़ें"
     },
     "filter": {
-      "label": "Show songs",
+      "label": "गाने दिखाएँ",
       "all": "All",
-      "none": "No songs with this priority yet."
+      "none": "इस प्राथमिकता के अभी कोई गाने नहीं।"
     },
     "empty": {
-      "text": "Keep all your wedding songs in one list, sorted by moment, so the DJ knows what to play and what to skip.",
-      "button": "Add your first song"
+      "text": "शादी के सारे गाने एक सूची में रखें, पल के हिसाब से, ताकि DJ जाने कि क्या बजाना है और क्या छोड़ना है।",
+      "button": "अपना पहला गाना जोड़ें"
     },
     "categories": {
-      "manage": "Manage categories",
-      "title": "Categories",
-      "text": "Rename a category by typing over its name. Deleting a category also deletes its songs.",
-      "rename": "Name of {name}",
-      "renamed": "Category renamed",
-      "delete": "Delete {name}",
-      "deleteTitle": "Delete “{name}”?",
-      "deleteText": "{count, plural, one {Its # song will be deleted too.} other {Its # songs will be deleted too.}}",
-      "deleted": "Category deleted",
-      "new": "New category",
-      "newPlaceholder": "e.g. Cocktail hour",
+      "manage": "श्रेणियाँ प्रबंधित करें",
+      "title": "श्रेणियाँ",
+      "text": "किसी श्रेणी के नाम पर लिखकर उसका नाम बदलें। श्रेणी हटाने से उसके गाने भी हट जाते हैं।",
+      "rename": "{name} का नाम",
+      "renamed": "श्रेणी का नाम बदला गया",
+      "delete": "{name} हटाएँ",
+      "deleteTitle": "“{name}” हटाएँ?",
+      "deleteText": "{count, plural, one {इसका # गाना भी हट जाएगा।} other {इसके # गाने भी हट जाएँगे।}}",
+      "deleted": "श्रेणी हटाई गई",
+      "new": "नई श्रेणी",
+      "newPlaceholder": "जैसे: कॉकटेल का समय",
       "add": "Add",
-      "added": "Category added",
-      "newOption": "New category…",
-      "starter": "Add starter categories (Ceremony, First dance, Dinner, Party)",
-      "starterAdded": "Starter categories added"
+      "added": "श्रेणी जोड़ी गई",
+      "newOption": "नई श्रेणी…",
+      "starter": "शुरुआती श्रेणियाँ जोड़ें (समारोह, पहला डांस, डिनर, पार्टी)",
+      "starterAdded": "शुरुआती श्रेणियाँ जोड़ी गईं"
     }
   }
 }

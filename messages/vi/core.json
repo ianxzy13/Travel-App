@@ -73,7 +73,7 @@
     "slugChars": "Chỉ dùng chữ cái, số và dấu gạch ngang đơn (ví dụ ian-and-maria).",
     "slugLength": "Dùng từ 3 đến 60 ký tự.",
     "airport": "Dùng mã sân bay 3 chữ cái, ví dụ LIS.",
-    "songTitle": "Please enter the song title."
+    "songTitle": "Vui lòng nhập tên bài hát."
   },
   "ui": {
     "cancel": "Hủy",
