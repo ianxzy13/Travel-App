@@ -5,6 +5,7 @@
     "save": "저장",
     "cancel": "취소",
     "noSongs": "아직 노래가 없습니다",
+    "export": "Excel로 내보내기",
     "defaults": {
       "ceremony": "예식",
       "firstDance": "첫 춤",

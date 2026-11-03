@@ -5,6 +5,7 @@
     "save": "Зберегти",
     "cancel": "Скасувати",
     "noSongs": "Пісень ще немає",
+    "export": "Експорт в Excel",
     "defaults": {
       "ceremony": "Церемонія",
       "firstDance": "Перший танець",

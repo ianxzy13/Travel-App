@@ -5,6 +5,7 @@
     "save": "Spara",
     "cancel": "Avbryt",
     "noSongs": "Inga låtar än",
+    "export": "Exportera till Excel",
     "defaults": {
       "ceremony": "Vigsel",
       "firstDance": "Första dansen",

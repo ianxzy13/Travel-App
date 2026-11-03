@@ -5,6 +5,7 @@
     "save": "Lưu",
     "cancel": "Hủy",
     "noSongs": "Chưa có bài hát",
+    "export": "Xuất sang Excel",
     "defaults": {
       "ceremony": "Lễ cưới",
       "firstDance": "Điệu nhảy đầu tiên",

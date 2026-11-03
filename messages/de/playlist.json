@@ -5,6 +5,7 @@
     "save": "Speichern",
     "cancel": "Abbrechen",
     "noSongs": "Noch keine Songs",
+    "export": "Nach Excel exportieren",
     "defaults": {
       "ceremony": "Trauung",
       "firstDance": "Eröffnungstanz",

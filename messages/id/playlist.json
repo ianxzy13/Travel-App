@@ -5,6 +5,7 @@
     "save": "Simpan",
     "cancel": "Batal",
     "noSongs": "Belum ada lagu",
+    "export": "Ekspor ke Excel",
     "defaults": {
       "ceremony": "Upacara",
       "firstDance": "Dansa pertama",

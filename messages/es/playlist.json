@@ -5,6 +5,7 @@
     "save": "Guardar",
     "cancel": "Cancelar",
     "noSongs": "Aún no hay canciones",
+    "export": "Exportar a Excel",
     "defaults": {
       "ceremony": "Ceremonia",
       "firstDance": "Primer baile",

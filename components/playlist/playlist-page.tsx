@@ -1,7 +1,17 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { ListMusic, Loader2, Pencil, Plus, Settings2, Sparkles, Trash2, X } from "lucide-react";
+import {
+  Download,
+  ListMusic,
+  Loader2,
+  Pencil,
+  Plus,
+  Settings2,
+  Sparkles,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
@@ -104,11 +114,20 @@ export function PlaylistPage({
         title={t("title")}
         description={t("description")}
         actions={
-          canEdit && (
-            <Button variant="outline" size="sm" onClick={() => setManage(true)}>
-              <Settings2 aria-hidden /> {t("categories.manage")}
-            </Button>
-          )
+          <>
+            {songs.length > 0 && (
+              <Button asChild variant="outline" size="sm">
+                <a href="/app/playlist/export" download>
+                  <Download aria-hidden /> {t("export")}
+                </a>
+              </Button>
+            )}
+            {canEdit && (
+              <Button variant="outline" size="sm" onClick={() => setManage(true)}>
+                <Settings2 aria-hidden /> {t("categories.manage")}
+              </Button>
+            )}
+          </>
         }
       />
 

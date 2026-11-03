@@ -5,6 +5,7 @@
     "save": "Opslaan",
     "cancel": "Annuleren",
     "noSongs": "Nog geen nummers",
+    "export": "Exporteren naar Excel",
     "defaults": {
       "ceremony": "Ceremonie",
       "firstDance": "Openingsdans",

@@ -5,6 +5,7 @@
     "save": "บันทึก",
     "cancel": "ยกเลิก",
     "noSongs": "ยังไม่มีเพลง",
+    "export": "ส่งออกเป็น Excel",
     "defaults": {
       "ceremony": "พิธี",
       "firstDance": "เต้นรำครั้งแรก",

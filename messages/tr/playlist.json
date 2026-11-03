@@ -5,6 +5,7 @@
     "save": "Kaydet",
     "cancel": "İptal",
     "noSongs": "Henüz şarkı yok",
+    "export": "Excel'e aktar",
     "defaults": {
       "ceremony": "Tören",
       "firstDance": "İlk dans",

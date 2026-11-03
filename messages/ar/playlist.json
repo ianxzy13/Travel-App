@@ -5,6 +5,7 @@
     "save": "حفظ",
     "cancel": "إلغاء",
     "noSongs": "لا توجد أغانٍ بعد",
+    "export": "تصدير إلى Excel",
     "defaults": {
       "ceremony": "المراسم",
       "firstDance": "الرقصة الأولى",
