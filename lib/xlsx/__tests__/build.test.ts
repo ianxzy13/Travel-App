@@ -39,6 +39,18 @@ describe("buildXlsx", () => {
     expect(files["xl/workbook.xml"]).toContain('name="Playlist"');
   });
 
+  it("writes numbers as number cells so Excel can add them up", () => {
+    const sheet = unzip(
+      buildXlsx("Budget", [
+        ["Item", "Paid"],
+        ["Venue", 1234.5],
+        ["Cake", ""],
+      ]),
+    )["xl/worksheets/sheet1.xml"]!;
+    expect(sheet).toContain('<c r="B2"><v>1234.5</v></c>');
+    expect(sheet).toContain('<c r="B3" t="inlineStr">');
+  });
+
   it("keeps sheet names valid", () => {
     expect(sheetName("A/B: [x]?")).toBe("A B   x");
     expect(sheetName("x".repeat(40))).toHaveLength(31);

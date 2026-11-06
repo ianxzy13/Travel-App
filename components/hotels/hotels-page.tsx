@@ -284,7 +284,9 @@ export function HotelsPage({
                       {[
                         h.distance,
                         h.price_per_night != null &&
-                          t("perNight", { price: formatMoney(h.price_per_night, currency) }),
+                          t("perNight", {
+                            price: formatMoney(h.price_per_night, currency, { locale }),
+                          }),
                       ]
                         .filter(Boolean)
                         .join(" · ") || " "}
@@ -371,6 +373,7 @@ export function HotelsPage({
                       .sort((a, b) =>
                         (guestName.get(a.guest_id) ?? "").localeCompare(
                           guestName.get(b.guest_id) ?? "",
+                          locale,
                         ),
                       )
                       .map((s) => (
@@ -788,6 +791,7 @@ function HotelRooms({
   canEdit: boolean;
 }) {
   const t = useTranslations("hotels");
+  const locale = useLocale();
   const [pending, startTransition] = useTransition();
   const [editingType, setEditingType] = useState<string | "new" | null>(null);
   const [editingRoom, setEditingRoom] = useState<string | "new" | null>(null);
@@ -839,7 +843,7 @@ function HotelRooms({
                       {" · "}
                       {t("rooms.maxGuests", { count: rt.max_guests })}
                       {rt.price_per_night != null &&
-                        ` · ${formatMoney(rt.price_per_night, currency)}/${t("rooms.night")}`}
+                        ` · ${formatMoney(rt.price_per_night, currency, { locale })}/${t("rooms.night")}`}
                     </p>
                     <p className="text-muted-foreground text-xs">
                       {t("rooms.ofType", { created: roomCount, total: rt.count })}

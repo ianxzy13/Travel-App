@@ -143,9 +143,9 @@
     "thanks": "Tack!",
     "thanksText": "{you, select, one {Ditt svar har skickats till {couple}. Du kan ändra det när som helst med samma länk.} other {Ert svar har skickats till {couple}. Ni kan ändra det när som helst med samma länk.}}",
     "thanksTextUntil": "{you, select, one {Ditt svar har skickats till {couple}. Du kan ändra det fram till {date} med samma länk.} other {Ert svar har skickats till {couple}. Ni kan ändra det fram till {date} med samma länk.}}",
-    "send": "Skicka vårt svar",
+    "send": "{you, select, one {Skicka mitt svar} other {Skicka vårt svar}}",
     "save": "Spara ändringar",
-    "change": "Ändra våra svar",
+    "change": "{you, select, one {Ändra mina svar} other {Ändra våra svar}}",
     "yourAnswers": "{you, select, one {Dina svar} other {Era svar}}",
     "attending": "Kommer",
     "notAttending": "Kommer inte",
@@ -347,7 +347,9 @@
     "love": "Varma hälsningar,",
     "personal": "{you, select, one {Den här länken är bara till dig. Dela den inte.} other {Den här länken är personlig för ert hushåll. Dela den inte.}}",
     "subjectInvite": "Ni är bjudna: bröllopet för {couple}",
-    "subjectReminder": "Påminnelse: svara på inbjudan till bröllopet för {couple}"
+    "subjectReminder": "Påminnelse: svara på inbjudan till bröllopet för {couple}",
+    "smsInvite": "{sender}: Inbjudan till bröllop! OSA här: {link}",
+    "smsReminder": "{sender}: En påminnelse om att OSA: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Dela dina reseplaner för bröllopet för {couple}} other {Dela era reseplaner för bröllopet för {couple}}}",

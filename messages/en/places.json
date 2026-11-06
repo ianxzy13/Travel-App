@@ -364,7 +364,7 @@
       "back": "Back",
       "print": "Print",
       "roomingList": "Rooming List",
-      "csv": "Export CSV",
+      "csv": "Export to Excel",
       "pdf": "Print / PDF"
     },
     "stays": {

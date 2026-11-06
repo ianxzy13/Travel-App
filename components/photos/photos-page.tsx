@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   Camera,
@@ -33,8 +33,9 @@ type Props = {
   canEdit: boolean;
 };
 
-export function PhotosPage({ photos, enabled, slug, shareUrl, canEdit: editable }: Props) {
+export function PhotosPage({ photos, enabled, shareUrl, canEdit: editable }: Props) {
   const t = useTranslations("app.photos");
+  const locale = useLocale();
   const [isEnabled, setIsEnabled] = useState(enabled);
   const [pending, startTransition] = useTransition();
 
@@ -153,7 +154,7 @@ export function PhotosPage({ photos, enabled, slug, shareUrl, canEdit: editable 
                     {photo.uploader_name}
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    {new Date(photo.created_at).toLocaleDateString()}
+                    {new Date(photo.created_at).toLocaleDateString(locale)}
                   </p>
                 </div>
                 {editable && (

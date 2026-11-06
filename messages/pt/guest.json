@@ -143,9 +143,9 @@
     "thanks": "Obrigado!",
     "thanksText": "{you, select, one {A tua resposta foi enviada a {couple}. Podes alterá-la quando quiseres com este mesmo link.} other {A vossa resposta foi enviada a {couple}. Podem alterá-la quando quiserem com este mesmo link.}}",
     "thanksTextUntil": "{you, select, one {A tua resposta foi enviada a {couple}. Podes alterá-la até {date} com este mesmo link.} other {A vossa resposta foi enviada a {couple}. Podem alterá-la até {date} com este mesmo link.}}",
-    "send": "Enviar a nossa resposta",
+    "send": "{you, select, one {Enviar a minha resposta} other {Enviar a nossa resposta}}",
     "save": "Guardar alterações",
-    "change": "Alterar as nossas respostas",
+    "change": "{you, select, one {Alterar as minhas respostas} other {Alterar as nossas respostas}}",
     "yourAnswers": "{you, select, one {As tuas respostas} other {As vossas respostas}}",
     "attending": "Vai",
     "notAttending": "Não vai",
@@ -347,7 +347,9 @@
     "love": "Com carinho,",
     "personal": "{you, select, one {Este link é só para ti. Por favor, não o partilhes.} other {Este link é pessoal para a vossa casa. Por favor, não o partilhem.}}",
     "subjectInvite": "Está convidado: casamento de {couple}",
-    "subjectReminder": "{you, select, one {Lembrete: confirma a tua presença no casamento de {couple}} other {Lembrete: confirmem a vossa presença no casamento de {couple}}}"
+    "subjectReminder": "{you, select, one {Lembrete: confirma a tua presença no casamento de {couple}} other {Lembrete: confirmem a vossa presença no casamento de {couple}}}",
+    "smsInvite": "{sender}: Convite de casamento! {you, select, one {Confirma a tua presença} other {Confirmem a vossa presença}} aqui: {link}",
+    "smsReminder": "{sender}: Lembrete: {you, select, one {confirma a tua presença} other {confirmem a vossa presença}} aqui: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Partilha os teus planos de viagem para o casamento de {couple}} other {Partilhem os vossos planos de viagem para o casamento de {couple}}}",

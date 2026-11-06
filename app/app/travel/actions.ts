@@ -230,7 +230,7 @@ export async function sendTravelReminder(
       }),
     );
 
-    const { data, error } = await resend.batch.send(messages);
+    const { error } = await resend.batch.send(messages);
     if (error) {
       console.error("[sendTravelReminder] Resend error", error);
       failed += chunk.length;

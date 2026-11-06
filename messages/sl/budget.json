@@ -2,7 +2,7 @@
   "budget": {
     "title": "Proračun",
     "description": "Načrtujte, spremljajte in plačujte vse na enem mestu.",
-    "exportCsv": "Izvozi CSV",
+    "exportCsv": "Izvozi v Excel",
     "category": "Kategorija",
     "expense": "Strošek",
     "startTitle": "Načrtujmo vaš proračun",

@@ -347,7 +347,9 @@
     "love": "心を込めて",
     "personal": "このリンクはご家族専用です。共有しないでください。",
     "subjectInvite": "ご招待：{couple}の結婚式",
-    "subjectReminder": "リマインダー：{couple}の結婚式の出欠をご回答ください"
+    "subjectReminder": "リマインダー：{couple}の結婚式の出欠をご回答ください",
+    "smsInvite": "{sender}：結婚式のご招待です。こちらからご回答ください：{link}",
+    "smsReminder": "{sender}：出欠のご回答をお願いします：{link}"
   },
   "travelEmail": {
     "preview": "{couple}の結婚式の旅行プランを共有してください",

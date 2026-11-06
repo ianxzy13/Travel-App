@@ -143,9 +143,9 @@
     "thanks": "Teşekkürler!",
     "thanksText": "{you, select, one {Cevabın {couple} çiftine gönderildi. Aynı bağlantıyla istediğin zaman değiştirebilirsin.} other {Cevabınız {couple} çiftine gönderildi. Aynı bağlantıyla istediğiniz zaman değiştirebilirsiniz.}}",
     "thanksTextUntil": "{you, select, one {Cevabın {couple} çiftine gönderildi. Aynı bağlantıyla {date} tarihine kadar değiştirebilirsin.} other {Cevabınız {couple} çiftine gönderildi. Aynı bağlantıyla {date} tarihine kadar değiştirebilirsiniz.}}",
-    "send": "Yanıtımızı gönder",
+    "send": "{you, select, one {Yanıtımı gönder} other {Yanıtımızı gönder}}",
     "save": "Değişiklikleri kaydet",
-    "change": "Yanıtlarımızı değiştir",
+    "change": "{you, select, one {Yanıtlarımı değiştir} other {Yanıtlarımızı değiştir}}",
     "yourAnswers": "{you, select, one {Cevapların} other {Cevaplarınız}}",
     "attending": "Katılıyor",
     "notAttending": "Katılmıyor",
@@ -347,7 +347,9 @@
     "love": "Sevgiyle,",
     "personal": "{you, select, one {Bu bağlantı sadece sana özel. Lütfen paylaşma.} other {Bu bağlantı hanenize özel. Lütfen paylaşmayın.}}",
     "subjectInvite": "Davetlisiniz: {couple} düğünü",
-    "subjectReminder": "{you, select, one {Hatırlatma: {couple} düğünü için katılımını bildir} other {Hatırlatma: {couple} düğünü için katılımınızı bildirin}}"
+    "subjectReminder": "{you, select, one {Hatırlatma: {couple} düğünü için katılımını bildir} other {Hatırlatma: {couple} düğünü için katılımınızı bildirin}}",
+    "smsInvite": "{sender}: Düğün davetiyesi! {you, select, one {Katılımını buradan bildir} other {Katılımınızı buradan bildirin}}: {link}",
+    "smsReminder": "{sender}: Hatırlatma: {you, select, one {katılımını bildir} other {katılımınızı bildirin}}: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {{couple} düğünü için seyahat planlarını paylaş} other {{couple} düğünü için seyahat planlarınızı paylaşın}}",

@@ -33,8 +33,6 @@ export function SendInviteDialog({
   households,
   emailConfigured,
   smsConfigured,
-  couple,
-  siteUrl,
   defaultKind = "invitation",
   defaultChannel = "email",
   onSent,
@@ -54,7 +52,9 @@ export function SendInviteDialog({
   const [channel, setChannel] = useState<Channel>(defaultChannel);
   const [kind, setKind] = useState(defaultKind);
   const [note, setNote] = useState("");
-  const [preview, setPreview] = useState<{ html: string; subject: string } | null>(null);
+  const [preview, setPreview] = useState<{ html: string; subject: string; sms: string } | null>(
+    null,
+  );
   const [pending, startTransition] = useTransition();
 
   const sendEmail = channel === "email" || channel === "both";
@@ -64,9 +64,6 @@ export function SendInviteDialog({
   const withPhone = households.filter((h) => h.hasPhone);
   const noContact = households.filter((h) => !h.hasEmail && !h.hasPhone);
 
-  const emailCount = sendEmail ? withEmail.length : 0;
-  const smsCount = sendSms ? withPhone.length : 0;
-
   useEffect(() => {
     if (open) {
       setKind(defaultKind);
@@ -75,7 +72,7 @@ export function SendInviteDialog({
   }, [open, defaultKind, defaultChannel]);
 
   useEffect(() => {
-    if (!open || !sendEmail) {
+    if (!open) {
       setPreview(null);
       return;
     }
@@ -84,12 +81,10 @@ export function SendInviteDialog({
       if (result.ok) setPreview(result.data);
     }, 400);
     return () => clearTimeout(timer);
-  }, [open, kind, note, sendEmail]);
+  }, [open, kind, note]);
 
-  const smsPreviewText =
-    kind === "invitation"
-      ? `${couple}: You're invited! RSVP here: ${siteUrl}/r/XXXXXX`
-      : `${couple}: Friendly reminder to RSVP: ${siteUrl}/r/XXXXXX`;
+  // Shown in the wedding's main language; each household gets it in its own.
+  const smsPreviewText = preview?.sms ?? "";
 
   function send() {
     startTransition(async () => {
@@ -255,7 +250,6 @@ export function SendInviteDialog({
                   </p>
                   <div className="bg-muted rounded-lg p-4 text-sm whitespace-pre-line">
                     {smsPreviewText}
-                    {note && `\n${note}`}
                   </div>
                 </div>
               )}
@@ -289,7 +283,6 @@ export function SendInviteDialog({
                     </p>
                     <div className="bg-muted rounded-lg p-3 text-sm whitespace-pre-line">
                       {smsPreviewText}
-                      {note && `\n${note}`}
                     </div>
                   </div>
                 )}

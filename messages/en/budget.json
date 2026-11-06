@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budget",
     "description": "Plan, track and pay for everything in one place.",
-    "exportCsv": "Export CSV",
+    "exportCsv": "Export to Excel",
     "category": "Category",
     "expense": "Expense",
     "startTitle": "Let’s plan your budget",

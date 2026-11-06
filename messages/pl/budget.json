@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budżet",
     "description": "Planuj, śledź i opłacaj wszystko w jednym miejscu.",
-    "exportCsv": "Eksportuj CSV",
+    "exportCsv": "Eksportuj do Excela",
     "category": "Kategoria",
     "expense": "Wydatek",
     "startTitle": "Zaplanujmy Wasz budżet",

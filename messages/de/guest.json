@@ -347,7 +347,9 @@
     "love": "Alles Liebe,",
     "personal": "{you, select, one {Dieser Link ist nur für dich. Bitte teile ihn nicht.} other {Dieser Link ist nur für euren Haushalt. Bitte teilt ihn nicht.}}",
     "subjectInvite": "Einladung: Hochzeit von {couple}",
-    "subjectReminder": "{you, select, one {Erinnerung: Bitte antworte auf die Einladung von {couple}} other {Erinnerung: Bitte antwortet auf die Einladung von {couple}}}"
+    "subjectReminder": "{you, select, one {Erinnerung: Bitte antworte auf die Einladung von {couple}} other {Erinnerung: Bitte antwortet auf die Einladung von {couple}}}",
+    "smsInvite": "{sender}: Herzliche Einladung zur Hochzeit! {you, select, one {Antworte} other {Antwortet}} hier: {link}",
+    "smsReminder": "{sender}: Kleine Erinnerung – bitte {you, select, one {antworte} other {antwortet}} hier: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Teile deine Reisepläne für die Hochzeit von {couple}} other {Teilt eure Reisepläne für die Hochzeit von {couple}}}",

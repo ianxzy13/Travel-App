@@ -2,7 +2,7 @@
   "budget": {
     "title": "Bütçe",
     "description": "Her şeyi tek yerden planlayın, takip edin ve ödeyin.",
-    "exportCsv": "CSV dışa aktar",
+    "exportCsv": "Excel'e aktar",
     "category": "Kategori",
     "expense": "Harcama",
     "startTitle": "Bütçenizi planlayalım",

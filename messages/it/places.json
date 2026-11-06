@@ -351,7 +351,7 @@
       "back": "Indietro",
       "print": "Stampa",
       "roomingList": "Elenco camere",
-      "csv": "Esporta CSV",
+      "csv": "Esporta in Excel",
       "pdf": "Stampa / PDF"
     },
     "groupRate": "Richiesta tariffa di gruppo",

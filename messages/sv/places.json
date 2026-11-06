@@ -351,7 +351,7 @@
       "back": "Tillbaka",
       "print": "Skriv ut",
       "roomingList": "Rumslista",
-      "csv": "Exportera CSV",
+      "csv": "Exportera till Excel",
       "pdf": "Skriv ut / PDF"
     },
     "groupRate": "Förfrågan om grupppris",

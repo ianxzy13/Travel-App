@@ -331,7 +331,7 @@ function VenueCard({
             <div>
               <dt className="sr-only">{t("price")}</dt>
               <dd className="text-foreground text-end font-medium tabular-nums">
-                {v.price == null ? "–" : formatMoney(v.price, currency)}
+                {v.price == null ? "–" : formatMoney(v.price, currency, { locale })}
               </dd>
             </div>
           </dl>
@@ -375,6 +375,7 @@ function CompareDialog({
 }) {
   const t = useTranslations("venues");
   const p = useTranslations("places");
+  const locale = useLocale();
   const questions = [...new Set(venues.flatMap((v) => v.checklist.map((c) => c.question)))];
   const rows: { label: string; cell: (v: VenueItem) => React.ReactNode }[] = [
     { label: t("rows.type"), cell: (v) => p(`venueKind.${v.kind}`) },
@@ -415,7 +416,7 @@ function CompareDialog({
     },
     {
       label: t("rows.price"),
-      cell: (v) => (v.price == null ? "–" : formatMoney(v.price, currency)),
+      cell: (v) => (v.price == null ? "–" : formatMoney(v.price, currency, { locale })),
     },
     { label: t("rows.rating"), cell: (v) => <StarRating value={v.rating} size="size-4" /> },
     { label: t("rows.included"), cell: (v) => v.included },

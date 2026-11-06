@@ -2,7 +2,7 @@
   "budget": {
     "title": "Rozpočet",
     "description": "Plánujte, sledujte a plaťte vše na jednom místě.",
-    "exportCsv": "Exportovat CSV",
+    "exportCsv": "Exportovat do Excelu",
     "category": "Kategorie",
     "expense": "Výdaj",
     "startTitle": "Pojďme naplánovat váš rozpočet",

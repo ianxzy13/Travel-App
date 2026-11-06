@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budget",
     "description": "Planifiez, suivez et payez tout au même endroit.",
-    "exportCsv": "Exporter en CSV",
+    "exportCsv": "Exporter vers Excel",
     "category": "Catégorie",
     "expense": "Dépense",
     "startTitle": "Planifions votre budget",

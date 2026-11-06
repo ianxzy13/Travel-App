@@ -2,7 +2,7 @@
   "budget": {
     "title": "Anggaran",
     "description": "Rencanakan, pantau, dan bayar semua pengeluaran di satu tempat.",
-    "exportCsv": "Ekspor CSV",
+    "exportCsv": "Ekspor ke Excel",
     "category": "Kategori",
     "expense": "Pengeluaran",
     "startTitle": "Mari susun anggaran Anda",

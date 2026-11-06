@@ -347,7 +347,9 @@
     "love": "Z ljubeznijo,",
     "personal": "{you, select, one {Ta povezava je namenjena samo tebi. Prosiva, ne deli je.} two {Ta povezava je namenjena samo vama. Prosiva, ne delita je.} other {Ta povezava je namenjena samo vašemu gospodinjstvu. Prosiva, ne delite je.}}",
     "subjectInvite": "Vabilo na poroko: {couple}",
-    "subjectReminder": "Opomnik: {you, select, one {potrdi} two {potrdita} other {potrdite}} udeležbo na poroki {couple}"
+    "subjectReminder": "Opomnik: {you, select, one {potrdi} two {potrdita} other {potrdite}} udeležbo na poroki {couple}",
+    "smsInvite": "{sender}: Prisrčno vabilo na poroko! {you, select, one {Potrdi} two {Potrdita} other {Potrdite}} udeležbo tukaj: {link}",
+    "smsReminder": "{sender}: Prijazen opomnik – {you, select, one {potrdi} two {potrdita} other {potrdite}} udeležbo tukaj: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Deli} two {Delita} other {Delite}} svoje potovalne načrte za poroko {couple}",

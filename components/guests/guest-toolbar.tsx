@@ -1,7 +1,7 @@
 "use client";
 
 import { ListFilter, Search, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -133,6 +133,7 @@ function FilterPopover({
 }) {
   const t = useTranslations("guests.toolbar");
   const g = useTranslations("guests");
+  const locale = useLocale();
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -181,7 +182,7 @@ function FilterPopover({
           value={filters.householdId}
           onChange={(v) => set("householdId", v)}
           options={[...households]
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => a.name.localeCompare(b.name, locale))
             .map((h) => ({ value: h.id, label: h.name }))}
         />
         {languages.length > 1 && (

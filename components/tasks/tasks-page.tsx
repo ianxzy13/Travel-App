@@ -289,7 +289,11 @@ export function TasksPage(props: Props) {
           </section>
 
           <div className="mb-5 flex flex-wrap items-center gap-2">
-            <div className="flex rounded-lg border p-0.5" role="group" aria-label={t("show")}>
+            <div
+              className="flex max-w-full flex-wrap rounded-lg border p-0.5"
+              role="group"
+              aria-label={t("show")}
+            >
               {(["open", "overdue", "done", "all"] as const).map((key) => (
                 <Button
                   key={key}

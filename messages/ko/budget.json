@@ -2,7 +2,7 @@
   "budget": {
     "title": "예산",
     "description": "모든 비용을 한곳에서 계획하고, 관리하고, 지불하세요.",
-    "exportCsv": "CSV 내보내기",
+    "exportCsv": "Excel로 내보내기",
     "category": "카테고리",
     "expense": "비용",
     "startTitle": "예산을 세워 봅시다",

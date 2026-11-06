@@ -2,7 +2,7 @@
   "budget": {
     "title": "الميزانية",
     "description": "خطّط وتابع وادفع كل شيء في مكان واحد.",
-    "exportCsv": "تصدير CSV",
+    "exportCsv": "تصدير إلى Excel",
     "category": "الفئة",
     "expense": "المصروف",
     "startTitle": "لنخطط لميزانيتك",

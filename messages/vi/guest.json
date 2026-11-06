@@ -347,7 +347,9 @@
     "love": "Thân thương",
     "personal": "Liên kết này dành riêng cho gia đình bạn. Vui lòng không chia sẻ.",
     "subjectInvite": "Thư mời: đám cưới của {couple}",
-    "subjectReminder": "Lời nhắc: xác nhận tham dự đám cưới của {couple}"
+    "subjectReminder": "Lời nhắc: xác nhận tham dự đám cưới của {couple}",
+    "smsInvite": "{sender}: Thư mời dự đám cưới! Phản hồi tại đây: {link}",
+    "smsReminder": "{sender}: Nhắc nhẹ: vui lòng xác nhận tham dự tại đây: {link}"
   },
   "travelEmail": {
     "preview": "Hãy chia sẻ kế hoạch di chuyển cho đám cưới của {couple}",
