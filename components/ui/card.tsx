@@ -1,15 +1,25 @@
+"use client";
+
 import * as React from "react";
+import { motion } from "framer-motion";
+import { EASE } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
+/** Cards fade up the first time they scroll into view (Framer Motion). */
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
+    <motion.div
       data-slot="card"
+      data-reveal
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-lg border py-6",
         className,
       )}
-      {...props}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6, ease: EASE }}
+      {...(props as React.ComponentProps<typeof motion.div>)}
     />
   );
 }

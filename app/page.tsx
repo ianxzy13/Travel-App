@@ -16,7 +16,7 @@ import {
 import { getTranslations } from "next-intl/server";
 import { InsideDialog } from "@/components/landing/inside-dialog";
 import { LandingNavbar } from "@/components/landing/navbar";
-import { HoverIcon, Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { HoverIcon, Reveal, SettleIn, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 
 const FEATURES = [
@@ -48,22 +48,28 @@ export default async function LandingPage() {
             so the page heading is for screen readers only. */}
         <section className="pb-20">
           <h1 className="sr-only">{t("title")}</h1>
-          <div className="relative">
-            <Image
-              src="/landing/hero.jpg"
-              alt=""
-              width={1920}
-              height={1080}
-              priority
-              sizes="100vw"
-              className="aspect-[4/3] w-full object-cover sm:aspect-auto sm:min-h-[28rem]"
-            />
-            <div className="absolute inset-x-0 top-[70%] hidden justify-center gap-3 sm:flex">
+          <div className="relative overflow-hidden">
+            <SettleIn>
+              <Image
+                src="/landing/hero.jpg"
+                alt=""
+                width={1920}
+                height={1080}
+                priority
+                sizes="100vw"
+                className="aspect-[4/3] w-full object-cover sm:aspect-auto sm:min-h-[28rem]"
+              />
+            </SettleIn>
+            <Reveal
+              immediate
+              delay={0.5}
+              className="absolute inset-x-0 top-[70%] hidden justify-center gap-4 sm:flex"
+            >
               <Button asChild size="lg">
                 <Link href="/login">{t("start")}</Link>
               </Button>
               <InsideDialog triggerClassName="bg-card/70 backdrop-blur-sm" />
-            </div>
+            </Reveal>
           </div>
           <Reveal
             immediate
@@ -103,7 +109,7 @@ export default async function LandingPage() {
                 <StaggerItem
                   as="li"
                   key={key}
-                  whileHover="hover"
+                  hoverGroup
                   className="bg-card hover:bg-primary-soft/40 p-8 transition-colors duration-300"
                 >
                   <HoverIcon className="mb-5">

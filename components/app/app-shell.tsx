@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { SPRING } from "@/components/motion/reveal";
 import { usePathname } from "next/navigation";
 import { Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -39,6 +41,10 @@ type Props = {
  * - desktop: collapsible left sidebar
  * - mobile: top bar + bottom tab bar with a "More" sheet
  */
+
+// Next.js links that Framer Motion can animate (hover, tap, sliding highlight).
+const MotionLink = motion.create(Link);
+
 export function AppShell({
   current,
   weddings,
@@ -214,21 +220,38 @@ function SidebarLink({
   const Icon = item.icon;
   const label = useTranslations("app.nav")(item.key);
   const link = (
-    <Link
+    <MotionLink
       href={item.href}
       aria-current={active ? "page" : undefined}
       aria-label={collapsed ? label : undefined}
+      whileHover="hover"
+      whileTap={{ scale: 0.97 }}
       className={cn(
         "focus-visible:ring-ring relative flex items-center gap-3 rounded-md px-3 py-2 text-[0.72rem] tracking-[0.14em] uppercase transition-colors focus-visible:ring-[3px] focus-visible:outline-none",
         collapsed && "justify-center px-0",
         active
-          ? "bg-primary-soft/70 text-foreground before:bg-primary font-medium before:absolute before:inset-y-2 before:start-0 before:w-px"
+          ? "text-foreground font-medium"
           : "text-muted-foreground hover:bg-primary-soft/40 hover:text-foreground",
       )}
     >
-      <Icon className={cn("size-[1.15rem] shrink-0", active && "text-primary-ink")} aria-hidden />
-      {!collapsed && label}
-    </Link>
+      {/* the highlight slides from the old page's link to the new one */}
+      {active && (
+        <motion.span
+          layoutId="sidebar-active"
+          className="bg-primary-soft/70 before:bg-primary absolute inset-0 rounded-md before:absolute before:inset-y-2 before:start-0 before:w-px"
+          transition={SPRING}
+          aria-hidden
+        />
+      )}
+      <motion.span
+        className="relative inline-flex"
+        variants={{ hover: { x: 3, scale: 1.12 } }}
+        transition={SPRING}
+      >
+        <Icon className={cn("size-[1.15rem] shrink-0", active && "text-primary-ink")} aria-hidden />
+      </motion.span>
+      {!collapsed && <span className="relative">{label}</span>}
+    </MotionLink>
   );
 
   if (!collapsed) return link;
@@ -244,17 +267,34 @@ function TabLink({ item, active }: { item: NavItem; active: boolean }) {
   const Icon = item.icon;
   const label = useTranslations("app.nav")(item.key);
   return (
-    <Link
+    <MotionLink
       href={item.href}
       aria-current={active ? "page" : undefined}
+      whileTap={{ scale: 0.9 }}
+      transition={SPRING}
       className={cn(
-        "focus-visible:bg-accent flex h-16 flex-col items-center justify-center gap-1 text-[0.6rem] tracking-[0.12em] uppercase focus-visible:outline-none",
+        "focus-visible:bg-accent relative flex h-16 flex-col items-center justify-center gap-1 text-[0.6rem] tracking-[0.12em] uppercase focus-visible:outline-none",
         active ? "text-primary-ink font-medium" : "text-muted-foreground",
       )}
     >
-      <Icon className="size-5" aria-hidden />
+      {/* a short line above the current tab slides across when you switch */}
+      {active && (
+        <motion.span
+          layoutId="tab-active"
+          className="bg-primary absolute inset-x-6 top-0 h-0.5 rounded-full"
+          transition={SPRING}
+          aria-hidden
+        />
+      )}
+      <motion.span
+        className="inline-flex"
+        animate={active ? { y: -2, scale: 1.1 } : { y: 0, scale: 1 }}
+        transition={SPRING}
+      >
+        <Icon className="size-5" aria-hidden />
+      </motion.span>
       {label}
-    </Link>
+    </MotionLink>
   );
 }
 

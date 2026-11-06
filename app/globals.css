@@ -174,3 +174,13 @@ h3 {
     center;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
+
+/* Things that fade in on scroll (Framer Motion) print fully visible,
+   even if nobody scrolled down to them first. */
+@media print {
+  [data-reveal],
+  [data-reveal] * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

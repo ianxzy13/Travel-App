@@ -19,13 +19,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "text-[0.72rem] tracking-[0.16em] uppercase bg-primary text-primary-foreground hover:bg-primary-hover",
+          "text-[0.72rem] tracking-[0.16em] uppercase bg-primary text-primary-foreground hover:bg-primary-hover hover:shadow-md",
         destructive:
           "text-[0.72rem] tracking-[0.16em] uppercase bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
         outline:
-          "text-[0.72rem] tracking-[0.16em] uppercase border border-foreground/25 bg-transparent hover:border-primary hover:bg-primary-soft/60 dark:border-foreground/30",
+          "text-[0.72rem] tracking-[0.16em] uppercase border border-foreground/25 bg-transparent hover:border-primary hover:bg-primary-soft/60 dark:border-foreground/30 hover:shadow-md",
         secondary:
-          "text-[0.72rem] tracking-[0.16em] uppercase bg-sand text-secondary-foreground hover:bg-blush",
+          "text-[0.72rem] tracking-[0.16em] uppercase bg-sand text-secondary-foreground hover:bg-blush hover:shadow-md",
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary-ink normal-case tracking-normal text-sm underline-offset-4 hover:underline",
       },
@@ -65,7 +65,7 @@ function Button({
 }: ButtonProps) {
   const moves = !disabled && !STILL.has(variant ?? "default");
   const motionProps = moves
-    ? { whileHover: { y: -1 }, whileTap: { scale: 0.97, y: 0 }, transition: SPRING }
+    ? { whileHover: { y: -2 }, whileTap: { scale: 0.96, y: 0 }, transition: SPRING }
     : { whileTap: disabled ? undefined : { scale: 0.97 }, transition: SPRING };
   const shared = {
     "data-slot": "button",
