@@ -1,6 +1,16 @@
 import Image from "next/image";
-import { Calendar, CalendarDays, Clock, ExternalLink, Gift, MapPin, Plane, Shirt } from "lucide-react";
+import {
+  Calendar,
+  CalendarDays,
+  Clock,
+  ExternalLink,
+  Gift,
+  MapPin,
+  Plane,
+  Shirt,
+} from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { CodeForm } from "@/components/rsvp/code-form";
 import { FindInvitation } from "@/components/rsvp/find-invitation";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -220,7 +230,7 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
           );
         })}
       </main>
-      <footer className={cn("border-t px-5 py-12 text-center", line)}>
+      <Reveal as="footer" className={cn("border-t px-5 py-12 text-center", line)}>
         <Ornament t={t} className="mb-4" />
         <p className={cn(heading, "text-2xl")}>{couple}</p>
         <p className={cn(muted, "mt-1 text-sm")}>
@@ -242,11 +252,15 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
           })}
         </p>
         <p className={cn(muted, "mt-2 text-xs")}>
-          <a href="/privacy" className="underline underline-offset-2">{tr("privacy")}</a>
+          <a href="/privacy" className="underline underline-offset-2">
+            {tr("privacy")}
+          </a>
           {" · "}
-          <a href="/terms" className="underline underline-offset-2">{tr("terms")}</a>
+          <a href="/terms" className="underline underline-offset-2">
+            {tr("terms")}
+          </a>
         </p>
-      </footer>
+      </Reveal>
     </div>
   );
 }
@@ -571,8 +585,13 @@ function Block({
             t === "modern" ? "grid max-w-6xl gap-8 @3xl:grid-cols-[1fr_2fr]" : "max-w-5xl",
           )}
         >
-          <Heading ctx={ctx} kind={kind} index={index} />
-          <div className={cn(t !== "modern" && "mt-10")}>{children}</div>
+          {/* each section fades in as guests scroll down to it */}
+          <Reveal>
+            <Heading ctx={ctx} kind={kind} index={index} />
+          </Reveal>
+          <Reveal delay={0.1} className={cn(t !== "modern" && "mt-10")}>
+            {children}
+          </Reveal>
         </div>
       </div>
       {beachTint && <Wave fill="var(--site-card)" />}
@@ -716,7 +735,9 @@ function Story({ ctx, c }: { ctx: Ctx; c: SectionContent["story"] }) {
     <>
       <Intro ctx={ctx} text={c.intro} />
       {c.milestones.length > 0 && (
-        <ol
+        <Stagger
+          as="ol"
+          stagger={0.12}
           className={cn(
             "relative space-y-10",
             !modern &&
@@ -724,7 +745,8 @@ function Story({ ctx, c }: { ctx: Ctx; c: SectionContent["story"] }) {
           )}
         >
           {c.milestones.map((m, i) => (
-            <li
+            <StaggerItem
+              as="li"
               key={m.id}
               className={cn(
                 "relative grid gap-5",
@@ -789,9 +811,9 @@ function Story({ ctx, c }: { ctx: Ctx; c: SectionContent["story"] }) {
                   </div>
                 )}
               </div>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </Stagger>
       )}
     </>
   );
@@ -801,13 +823,17 @@ function Events({ ctx, intro }: { ctx: Ctx; intro: string }) {
   return (
     <>
       <Intro ctx={ctx} text={intro} />
-      <ul className={cn("grid gap-5", ctx.data.events.length > 1 && "@2xl:grid-cols-2")}>
+      <Stagger
+        as="ul"
+        stagger={0.08}
+        className={cn("grid gap-5", ctx.data.events.length > 1 && "@2xl:grid-cols-2")}
+      >
         {ctx.data.events.map((e) => {
           const start = fmtTime(e.start_time, ctx.locale);
           const end = fmtTime(e.end_time, ctx.locale);
           const where = [e.venue_name, e.address].filter(Boolean).join(", ");
           return (
-            <li key={e.id} className={card(ctx.t)}>
+            <StaggerItem as="li" hover key={e.id} className={card(ctx.t)}>
               <h3
                 className={cn(
                   heading,
@@ -901,10 +927,10 @@ function Events({ ctx, intro }: { ctx: Ctx; intro: string }) {
                   </a>
                 </div>
               )}
-            </li>
+            </StaggerItem>
           );
         })}
-      </ul>
+      </Stagger>
     </>
   );
 }
@@ -939,8 +965,7 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
         <div className={cn(card(ctx.t), "mb-5 flex flex-wrap items-center gap-3")}>
           <Plane className={cn("size-5", accentText)} aria-hidden />
           <p className="flex-1">
-            {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}
-            {" "}
+            {ctx.tr.rich("travel.airport", { code: airport, b: (c) => <strong>{c}</strong> })}{" "}
             <span className="text-muted-foreground text-sm">
               (<AirportName code={airport} />)
             </span>
@@ -957,12 +982,16 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
         </div>
       )}
       {data.hotels.length > 0 && (
-        <ul className={cn("grid gap-5", data.hotels.length > 1 && "@2xl:grid-cols-2")}>
+        <Stagger
+          as="ul"
+          stagger={0.08}
+          className={cn("grid gap-5", data.hotels.length > 1 && "@2xl:grid-cols-2")}
+        >
           {data.hotels.map((h) => {
             const book = safeUrl(h.booking_url) ?? safeUrl(h.website);
             const site = safeUrl(h.website);
             return (
-              <li key={h.id} className={cn(card(ctx.t), "flex flex-col")}>
+              <StaggerItem as="li" hover key={h.id} className={cn(card(ctx.t), "flex flex-col")}>
                 <h3
                   className={cn(
                     heading,
@@ -1043,10 +1072,10 @@ function Travel({ ctx, c }: { ctx: Ctx; c: SectionContent["travel"] }) {
                     </a>
                   )}
                 </div>
-              </li>
+              </StaggerItem>
             );
           })}
-        </ul>
+        </Stagger>
       )}
       {c.notes.trim() && (
         <p
@@ -1136,9 +1165,13 @@ function Rsvp({ ctx, intro }: { ctx: Ctx; intro: string }) {
 function Party({ ctx, c }: { ctx: Ctx; c: SectionContent["party"] }) {
   const people = c.people.filter((p) => p.name.trim());
   return (
-    <ul className="grid grid-cols-2 gap-x-5 gap-y-10 @xl:grid-cols-3 @4xl:grid-cols-4">
+    <Stagger
+      as="ul"
+      stagger={0.06}
+      className="grid grid-cols-2 gap-x-5 gap-y-10 @xl:grid-cols-3 @4xl:grid-cols-4"
+    >
       {people.map((p) => (
-        <li key={p.id} className={cn(ctx.t !== "modern" && "text-center")}>
+        <StaggerItem as="li" hover key={p.id} className={cn(ctx.t !== "modern" && "text-center")}>
           <div
             className={cn(
               "relative mx-auto aspect-square w-full max-w-44 overflow-hidden bg-[var(--site-card)]",
@@ -1176,9 +1209,9 @@ function Party({ ctx, c }: { ctx: Ctx; c: SectionContent["party"] }) {
             </p>
           )}
           {p.bio && <p className={cn(muted, "mt-2 text-sm")}>{p.bio}</p>}
-        </li>
+        </StaggerItem>
       ))}
-    </ul>
+    </Stagger>
   );
 }
 
@@ -1187,7 +1220,9 @@ function Registry({ ctx, c }: { ctx: Ctx; c: SectionContent["registry"] }) {
   return (
     <>
       <Intro ctx={ctx} text={c.intro} />
-      <ul
+      <Stagger
+        as="ul"
+        stagger={0.08}
         className={cn(
           "grid gap-5",
           links.length > 1 && "@2xl:grid-cols-2",
@@ -1195,7 +1230,9 @@ function Registry({ ctx, c }: { ctx: Ctx; c: SectionContent["registry"] }) {
         )}
       >
         {links.map((l) => (
-          <li
+          <StaggerItem
+            as="li"
+            hover
             key={l.id}
             className={cn(
               card(ctx.t),
@@ -1224,9 +1261,9 @@ function Registry({ ctx, c }: { ctx: Ctx; c: SectionContent["registry"] }) {
                 {l.label} {ctx.tr("newTab")}
               </span>
             </a>
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </Stagger>
     </>
   );
 }
@@ -1271,9 +1308,11 @@ function Gallery({ ctx, c }: { ctx: Ctx; c: SectionContent["gallery"] }) {
         ? "rounded-t-full rounded-b-lg"
         : "rounded-2xl";
   return (
-    <ul className="grid grid-cols-2 gap-3 @3xl:grid-cols-3">
+    <Stagger as="ul" stagger={0.06} className="grid grid-cols-2 gap-3 @3xl:grid-cols-3">
       {c.photos.map((p, i) => (
-        <li
+        <StaggerItem
+          as="li"
+          hover
           key={p.id}
           className={cn(ctx.t === "modern" && i % 5 === 0 && "col-span-2 @3xl:col-span-2")}
         >
@@ -1302,8 +1341,8 @@ function Gallery({ ctx, c }: { ctx: Ctx; c: SectionContent["gallery"] }) {
               </figcaption>
             )}
           </figure>
-        </li>
+        </StaggerItem>
       ))}
-    </ul>
+    </Stagger>
   );
 }

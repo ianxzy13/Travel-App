@@ -15,7 +15,9 @@ import {
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { AppLanguagePicker } from "@/components/app-language-picker";
+import { InsideDialog } from "@/components/landing/inside-dialog";
 import { Logo } from "@/components/logo";
+import { HoverIcon, Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 
 const FEATURES = [
@@ -72,59 +74,72 @@ export default async function LandingPage() {
               <Button asChild size="lg">
                 <Link href="/login">{t("start")}</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="bg-card/70 backdrop-blur-sm">
-                <a href="#features">{t("seeInside")}</a>
-              </Button>
+              <InsideDialog triggerClassName="bg-card/70 backdrop-blur-sm" />
             </div>
           </div>
-          <div className="mx-auto mt-10 max-w-2xl px-4 text-center sm:px-6">
+          <Reveal
+            immediate
+            delay={0.15}
+            className="mx-auto mt-10 max-w-2xl px-4 text-center sm:px-6"
+          >
             <p className="text-muted-foreground text-lg leading-relaxed">{t("intro")}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3 sm:hidden">
               <Button asChild size="lg">
                 <Link href="/login">{t("start")}</Link>
               </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#features">{t("seeInside")}</a>
-              </Button>
+              <InsideDialog />
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Features */}
         <section id="features" className="bg-blush/35 py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <p className="font-script text-primary-ink text-center text-5xl" aria-hidden>
-              Vow
-            </p>
-            <h2 className="mt-2 text-center text-4xl font-light sm:text-5xl">
-              {t("featuresTitle")}
-            </h2>
-            <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-center leading-relaxed">
-              {t("featuresText")}
-            </p>
-            <ul className="bg-border mt-16 grid gap-px overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-3">
+            <Reveal>
+              <p className="font-script text-primary-ink text-center text-5xl" aria-hidden>
+                Vow
+              </p>
+              <h2 className="mt-2 text-center text-4xl font-light sm:text-5xl">
+                {t("featuresTitle")}
+              </h2>
+              <p className="text-muted-foreground mx-auto mt-4 max-w-xl text-center leading-relaxed">
+                {t("featuresText")}
+              </p>
+            </Reveal>
+            <Stagger
+              as="ul"
+              stagger={0.06}
+              className="bg-border mt-16 grid gap-px overflow-hidden rounded-lg border sm:grid-cols-2 lg:grid-cols-3"
+            >
               {FEATURES.map(({ icon: Icon, key }) => (
-                <li key={key} className="bg-card p-8">
-                  <Icon className="text-primary-ink mb-5 size-6" aria-hidden />
+                <StaggerItem
+                  as="li"
+                  key={key}
+                  whileHover="hover"
+                  className="bg-card hover:bg-primary-soft/40 p-8 transition-colors duration-300"
+                >
+                  <HoverIcon className="mb-5">
+                    <Icon className="text-primary-ink size-6" aria-hidden />
+                  </HoverIcon>
                   <h3 className="text-2xl">{t(`features.${key}.title`)}</h3>
                   <p className="text-muted-foreground mt-2 leading-relaxed">
                     {t(`features.${key}.text`)}
                   </p>
-                </li>
+                </StaggerItem>
               ))}
-            </ul>
+            </Stagger>
           </div>
         </section>
 
         {/* Closing call to action */}
         <section className="bg-sand/50 px-4 py-28 text-center sm:px-6">
-          <div className="mx-auto max-w-3xl">
+          <Reveal className="mx-auto max-w-3xl">
             <h2 className="text-4xl font-light sm:text-5xl">{t("closingTitle")}</h2>
             <p className="text-muted-foreground mt-5 leading-relaxed">{t("closingText")}</p>
             <Button asChild size="lg" className="mt-10">
               <Link href="/login">{t("create")}</Link>
             </Button>
-          </div>
+          </Reveal>
         </section>
       </main>
 
