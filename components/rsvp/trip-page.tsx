@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/motion/reveal";
 import { fmtDate, fmtTime } from "@/lib/i18n/format";
 import type { RsvpData } from "@/lib/rsvp/types";
 import { googleCalendarUrl } from "@/lib/trip/calendar";
@@ -34,7 +35,8 @@ function calendarDownloadUrl(event: RsvpData["events"][number], tz: string | nul
   if (event.start_time) params.set("start", event.start_time);
   if (event.end_time) params.set("end", event.end_time);
   if (tz) params.set("tz", tz);
-  if (event.venue_name) params.set("location", event.venue_name + (event.address ? `, ${event.address}` : ""));
+  if (event.venue_name)
+    params.set("location", event.venue_name + (event.address ? `, ${event.address}` : ""));
   return `/api/calendar?${params.toString()}`;
 }
 
@@ -55,7 +57,7 @@ export function TripPage({ data, siteUrl, destination }: Props) {
 
       {/* Events */}
       {data.events.length > 0 && (
-        <section className="bg-card space-y-4 rounded-2xl border p-5 shadow-sm sm:p-7">
+        <Reveal as="section" className="bg-card space-y-4 rounded-2xl border p-5 shadow-sm sm:p-7">
           <h3 className="flex items-center gap-2 text-xl font-medium">
             <Calendar className="size-5" aria-hidden />
             {t("events")}
@@ -120,19 +122,19 @@ export function TripPage({ data, siteUrl, destination }: Props) {
               </li>
             ))}
           </ul>
-        </section>
+        </Reveal>
       )}
 
       {/* Travel */}
       {data.travel && (data.travel.arrival_date || data.travel.departure_date) && (
-        <section className="bg-card space-y-3 rounded-2xl border p-5 shadow-sm sm:p-7">
+        <Reveal as="section" className="bg-card space-y-3 rounded-2xl border p-5 shadow-sm sm:p-7">
           <h3 className="flex items-center gap-2 text-xl font-medium">
             <Plane className="size-5" aria-hidden />
             {t("flights")}
           </h3>
           {data.travel.arrival_date && (
             <div className="rounded-xl border p-4">
-              <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 {t("arrival")}
               </p>
               <p className="mt-1 font-medium">
@@ -151,7 +153,7 @@ export function TripPage({ data, siteUrl, destination }: Props) {
           )}
           {data.travel.departure_date && (
             <div className="rounded-xl border p-4">
-              <p className="text-muted-foreground text-xs font-medium uppercase tracking-wide">
+              <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
                 {t("departure")}
               </p>
               <p className="mt-1 font-medium">
@@ -174,12 +176,12 @@ export function TripPage({ data, siteUrl, destination }: Props) {
               {t("transferRequested")}
             </p>
           )}
-        </section>
+        </Reveal>
       )}
 
       {/* Hotel & room */}
       {(data.room_assignments ?? []).length > 0 && (
-        <section className="bg-card space-y-3 rounded-2xl border p-5 shadow-sm sm:p-7">
+        <Reveal as="section" className="bg-card space-y-3 rounded-2xl border p-5 shadow-sm sm:p-7">
           <h3 className="flex items-center gap-2 text-xl font-medium">
             <BedDouble className="size-5" aria-hidden />
             {t("hotel")}
@@ -206,12 +208,12 @@ export function TripPage({ data, siteUrl, destination }: Props) {
               );
             })}
           </ul>
-        </section>
+        </Reveal>
       )}
 
       {/* Seating */}
       {w.find_seat_enabled && data.seat && (
-        <section className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
+        <Reveal as="section" className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
           <h3 className="flex items-center gap-2 text-xl font-medium">
             <Utensils className="size-5" aria-hidden />
             {t("yourSeat")}
@@ -224,14 +226,14 @@ export function TripPage({ data, siteUrl, destination }: Props) {
             </p>
             <p className="text-muted-foreground mt-1 text-sm">{data.seat.guest_name}</p>
           </div>
-        </section>
+        </Reveal>
       )}
 
       {/* Entry checklist */}
       <TripChecklist data={data} destination={destination} />
 
       {/* WhatsApp share */}
-      <section className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
+      <Reveal as="section" className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7">
         <h3 className="flex items-center gap-2 text-xl font-medium">
           <MessageCircle className="size-5" aria-hidden />
           {t("share")}
@@ -240,9 +242,7 @@ export function TripPage({ data, siteUrl, destination }: Props) {
         <div className="mt-3">
           <Button asChild variant="outline">
             <a
-              href={whatsappShareUrl(
-                t("whatsappText", { couple, link: rsvpLink }),
-              )}
+              href={whatsappShareUrl(t("whatsappText", { couple, link: rsvpLink }))}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -251,7 +251,7 @@ export function TripPage({ data, siteUrl, destination }: Props) {
             </a>
           </Button>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Countdown } from "@/components/dashboard/countdown";
 import { Button } from "@/components/ui/button";
+import { GrowBar, Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PaletteStrip } from "@/components/inspiration/palette-strip";
 import { PinImage } from "@/components/inspiration/pin-image";
@@ -46,9 +47,7 @@ export default async function DashboardPage({
   const [t, locale] = await Promise.all([getTranslations("app.dashboard"), getLocale()]);
   const money = (n: number) => fmtMoney(n, wedding.currency, locale);
   const hasDual =
-    !!wedding.secondary_currency &&
-    !!wedding.exchange_rate &&
-    Number(wedding.exchange_rate) > 0;
+    !!wedding.secondary_currency && !!wedding.exchange_rate && Number(wedding.exchange_rate) > 0;
   const dualMoney = (n: number) =>
     hasDual
       ? fmtMoney(n * Number(wedding.exchange_rate), wedding.secondary_currency!, locale)
@@ -58,7 +57,19 @@ export default async function DashboardPage({
   const supabase = await createClient();
 
   const today = new Date().toISOString().slice(0, 10);
-  const [rsvp, seating, venues, budget, inspiration, website, tasks, giftStats, paperworkStats, stdData, travelStats] = await Promise.all([
+  const [
+    rsvp,
+    seating,
+    venues,
+    budget,
+    inspiration,
+    website,
+    tasks,
+    giftStats,
+    paperworkStats,
+    stdData,
+    travelStats,
+  ] = await Promise.all([
     rsvpSummary(supabase, wedding.id),
     seatingSummary(supabase, wedding.id),
     supabase
@@ -167,7 +178,11 @@ export default async function DashboardPage({
           sizes="(min-width: 1024px) 1024px, 100vw"
           className="object-cover"
         />
-        <div className="bg-card/80 relative w-full max-w-xl rounded-t-md border-t p-6 sm:rounded-md sm:border text-center shadow-sm backdrop-blur-md sm:p-10">
+        <Reveal
+          immediate
+          y={24}
+          className="bg-card/80 relative w-full max-w-xl rounded-t-md border-t p-6 text-center shadow-sm backdrop-blur-md sm:rounded-md sm:border sm:p-10"
+        >
           <div>
             <h1 className="font-script text-5xl leading-tight font-normal sm:text-6xl">
               {coupleName(wedding)}
@@ -197,50 +212,57 @@ export default async function DashboardPage({
               )}
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Next steps */}
-        <Card className="lg:col-span-1">
-          <CardHeader>
-            <CardTitle className="font-serif text-2xl">{t("nextSteps")}</CardTitle>
-            <p className="text-muted-foreground text-sm">
-              {t("stepsDone", { done: doneCount, total: steps.length })}
-            </p>
-            <div className="bg-muted h-1.5 rounded-full">
-              <div
-                className="bg-primary h-1.5 rounded-full transition-all"
-                style={{ width: `${(doneCount / steps.length) * 100}%` }}
-              />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-1">
-              {steps.map((s) => (
-                <li key={s.label}>
-                  <Link
-                    href={s.href}
-                    className="hover:bg-accent flex items-center gap-3 rounded-lg px-2 py-2 text-sm"
-                  >
-                    {s.done ? (
-                      <CheckCircle2 className="text-success size-5 shrink-0" aria-hidden />
-                    ) : (
-                      <Circle className="text-muted-foreground size-5 shrink-0" aria-hidden />
-                    )}
-                    <span className={cn(s.done && "text-muted-foreground line-through")}>
-                      {s.label}
-                    </span>
-                    <span className="sr-only">{s.done ? t("done") : t("toDo")}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+        <Reveal immediate delay={0.1} className="lg:col-span-1">
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl">{t("nextSteps")}</CardTitle>
+              <p className="text-muted-foreground text-sm">
+                {t("stepsDone", { done: doneCount, total: steps.length })}
+              </p>
+              <div className="bg-muted h-1.5 rounded-full">
+                <GrowBar
+                  className="bg-primary h-1.5 rounded-full"
+                  percent={(doneCount / steps.length) * 100}
+                />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-1">
+                {steps.map((s) => (
+                  <li key={s.label}>
+                    <Link
+                      href={s.href}
+                      className="hover:bg-accent flex items-center gap-3 rounded-lg px-2 py-2 text-sm"
+                    >
+                      {s.done ? (
+                        <CheckCircle2 className="text-success size-5 shrink-0" aria-hidden />
+                      ) : (
+                        <Circle className="text-muted-foreground size-5 shrink-0" aria-hidden />
+                      )}
+                      <span className={cn(s.done && "text-muted-foreground line-through")}>
+                        {s.label}
+                      </span>
+                      <span className="sr-only">{s.done ? t("done") : t("toDo")}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </Reveal>
 
-        {/* Module summaries */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2">
+        {/* Module summaries: they appear one after another */}
+        <Stagger
+          immediate
+          delay={0.15}
+          stagger={0.06}
+          className="grid gap-4 sm:grid-cols-2 lg:col-span-2"
+        >
           <SummaryCard
             icon={Wallet}
             title={t("budget.title")}
@@ -346,11 +368,9 @@ export default async function DashboardPage({
                   </span>
                 </p>
                 <div className="bg-muted h-2 rounded-full">
-                  <div
+                  <GrowBar
                     className="bg-primary h-2 rounded-full"
-                    style={{
-                      width: `${rsvp.attending ? Math.min(100, (seating.seated / rsvp.attending) * 100) : 0}%`,
-                    }}
+                    percent={rsvp.attending ? (seating.seated / rsvp.attending) * 100 : 0}
                   />
                 </div>
               </div>
@@ -439,9 +459,9 @@ export default async function DashboardPage({
                   )}
                 </p>
                 <div className="bg-muted h-2 rounded-full">
-                  <div
+                  <GrowBar
                     className="bg-primary h-2 rounded-full"
-                    style={{ width: `${(tasks.done / tasks.total) * 100}%` }}
+                    percent={(tasks.done / tasks.total) * 100}
                   />
                 </div>
                 {tasks.next.length > 0 && (
@@ -569,7 +589,7 @@ export default async function DashboardPage({
               </div>
             )}
           </SummaryCard>
-        </div>
+        </Stagger>
       </div>
 
       {recentActivity && recentActivity.length > 0 && (
@@ -585,9 +605,7 @@ export default async function DashboardPage({
                     <span className="text-muted-foreground">{activityKinds[a.kind] ?? a.kind}</span>
                     {a.subject && <> &middot; {a.subject}</>}
                   </span>
-                  <span className="text-muted-foreground text-xs">
-                    {shortDate(a.created_at)}
-                  </span>
+                  <span className="text-muted-foreground text-xs">{shortDate(a.created_at)}</span>
                 </li>
               ))}
             </ul>
@@ -615,20 +633,22 @@ function SummaryCard({
   children?: React.ReactNode;
 }) {
   return (
-    <Card>
-      <CardHeader className="flex items-center gap-3">
-        <span className="bg-primary-soft text-primary-ink inline-flex size-9 items-center justify-center rounded-full">
-          <Icon className="size-4" aria-hidden />
-        </span>
-        <CardTitle className="font-serif text-2xl">{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {children || <p className="text-muted-foreground text-sm">{empty}</p>}
-        <Button asChild variant="outline" size="sm">
-          <Link href={href}>{cta}</Link>
-        </Button>
-      </CardContent>
-    </Card>
+    <StaggerItem hover className="h-full">
+      <Card className="h-full">
+        <CardHeader className="flex items-center gap-3">
+          <span className="bg-primary-soft text-primary-ink inline-flex size-9 items-center justify-center rounded-full">
+            <Icon className="size-4" aria-hidden />
+          </span>
+          <CardTitle className="font-serif text-2xl">{title}</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {children || <p className="text-muted-foreground text-sm">{empty}</p>}
+          <Button asChild variant="outline" size="sm">
+            <Link href={href}>{cta}</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </StaggerItem>
   );
 }
 
@@ -789,9 +809,7 @@ async function paperworkSummary(
     .order("due_date", { nullsFirst: false })
     .order("sort_order");
   const items = data ?? [];
-  const nextItem = items.find(
-    (i) => i.status !== "submitted" && i.due_date,
-  );
+  const nextItem = items.find((i) => i.status !== "submitted" && i.due_date);
   return {
     total: items.length,
     done: items.filter((i) => i.status === "submitted").length,

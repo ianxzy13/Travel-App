@@ -6,6 +6,8 @@ import { Check, Loader2, MapPin, Shirt, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Reveal, SPRING } from "@/components/motion/reveal";
+import { motion } from "framer-motion";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -126,7 +128,8 @@ export function RsvpForm({
         const mealAsked = needsMeal(data, event.id);
         const where = [event.venue_name, event.address].filter(Boolean).join(", ");
         return (
-          <section
+          <Reveal
+            as="section"
             key={event.id}
             className="bg-card rounded-2xl border p-5 shadow-sm sm:p-7"
             aria-labelledby={`ev-${event.id}`}
@@ -244,12 +247,12 @@ export function RsvpForm({
                 );
               })}
             </ul>
-          </section>
+          </Reveal>
         );
       })}
 
       {(plusOnes.length > 0 || peopleComing.length > 0) && (
-        <section className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
+        <Reveal as="section" className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
           <h2 className="text-3xl">{tf("details")}</h2>
           {plusOnes.map((g) => (
             <div key={g.id} className="grid gap-3 sm:grid-cols-2">
@@ -293,17 +296,20 @@ export function RsvpForm({
                     checked={state.people[g.id].dietaryConsent}
                     onCheckedChange={(v) => setPerson(g.id, { dietaryConsent: !!v })}
                   />
-                  <label htmlFor={`dc-${g.id}`} className="text-muted-foreground text-xs leading-snug">
+                  <label
+                    htmlFor={`dc-${g.id}`}
+                    className="text-muted-foreground text-xs leading-snug"
+                  >
                     {tf("dietaryConsent")}
                   </label>
                 </div>
               )}
             </div>
           ))}
-        </section>
+        </Reveal>
       )}
 
-      <section className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
+      <Reveal as="section" className="bg-card space-y-5 rounded-2xl border p-5 shadow-sm sm:p-7">
         {data.wedding.rsvp_ask_song && (
           <div className="space-y-1.5">
             <Label htmlFor="song">{tf("song")}</Label>
@@ -326,11 +332,15 @@ export function RsvpForm({
             onChange={(e) => onStateChange({ ...state, message: e.target.value })}
           />
         </div>
-      </section>
+      </Reveal>
 
       <p className="text-muted-foreground text-center text-xs leading-relaxed">
         {tf("consentNotice", { couple })}{" "}
-        <Link href="/privacy" target="_blank" className="underline underline-offset-2 hover:text-foreground">
+        <Link
+          href="/privacy"
+          target="_blank"
+          className="hover:text-foreground underline underline-offset-2"
+        >
           {tf("privacyLink")}
         </Link>
       </p>
@@ -360,12 +370,15 @@ function Choice({
   children: React.ReactNode;
 }) {
   return (
-    <button
+    <motion.button
       type="button"
       role="radio"
       aria-checked={selected}
       onClick={onClick}
       title={title}
+      whileHover={{ y: -1 }}
+      whileTap={{ scale: 0.95 }}
+      transition={SPRING}
       className={cn(
         "focus-visible:ring-ring inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none",
         selected
@@ -377,6 +390,6 @@ function Choice({
     >
       {selected && icon}
       {children}
-    </button>
+    </motion.button>
   );
 }

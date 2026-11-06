@@ -5,6 +5,8 @@ import { BedDouble, CalendarClock, Check, Heart, Map, Minus, X } from "lucide-re
 import { useLocale, useTranslations } from "next-intl";
 import { submitRsvp } from "@/app/r/actions";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Reveal, SPRING } from "@/components/motion/reveal";
 import { fmtDate } from "@/lib/i18n/format";
 import { answerKey, initialFormState, rsvpGuestName, type RsvpFormState } from "@/lib/rsvp/form";
 import type { RsvpOriginals } from "@/lib/rsvp/auto-localize";
@@ -97,8 +99,21 @@ export function RsvpExperience({
 
       {view === "thanks" && (
         <>
-          <div role="status" className="bg-card rounded-2xl border p-8 text-center shadow-sm">
-            <Heart className="text-primary-ink mx-auto size-10" aria-hidden />
+          <Reveal
+            immediate
+            y={24}
+            role="status"
+            className="bg-card rounded-2xl border p-8 text-center shadow-sm"
+          >
+            {/* the heart pops in after the card */}
+            <motion.span
+              className="mx-auto flex w-fit"
+              initial={{ scale: 0, rotate: -15 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ ...SPRING, delay: 0.25 }}
+            >
+              <Heart className="text-primary-ink size-10" aria-hidden />
+            </motion.span>
             <h2 className="font-script mt-4 text-5xl font-normal">
               {anyAttending ? t("thanks") : t("missYouTitle")}
             </h2>
@@ -111,7 +126,7 @@ export function RsvpExperience({
                     : t("thanksText", { couple })))}
             </p>
             {autoNote(anyAttending ? "rsvp_thanks" : "rsvp_sorry")}
-          </div>
+          </Reveal>
           {showTravelPrompt && (
             <Button
               size="lg"

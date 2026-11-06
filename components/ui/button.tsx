@@ -1,10 +1,20 @@
+"use client";
+
 import * as React from "react";
+import { motion } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Slot } from "radix-ui";
+import { SPRING } from "@/components/motion/reveal";
+
+// Framer Motion handles the movement (a small lift on hover, a press on tap);
+// colours still change with a short CSS transition. Links and other elements
+// passed with asChild move the same way.
+const MotionButton = motion.button;
+const MotionSlot = motion.create(Slot.Root);
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,opacity] duration-200 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -37,27 +47,39 @@ const buttonVariants = cva(
   },
 );
 
+// Text-like buttons only fade their colour; the rest also lift and press.
+const STILL = new Set(["link", "ghost"]);
+
+type ButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };
+
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  disabled,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot.Root : "button";
+}: ButtonProps) {
+  const moves = !disabled && !STILL.has(variant ?? "default");
+  const motionProps = moves
+    ? { whileHover: { y: -1 }, whileTap: { scale: 0.97, y: 0 }, transition: SPRING }
+    : { whileTap: disabled ? undefined : { scale: 0.97 }, transition: SPRING };
+  const shared = {
+    "data-slot": "button",
+    "data-variant": variant,
+    "data-size": size,
+    className: cn(buttonVariants({ variant, size, className })),
+    disabled,
+    ...motionProps,
+  };
 
-  return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
+  // Framer Motion's own drag/animation handlers share names with DOM events;
+  // the button only ever receives plain DOM props, so this cast is safe.
+  const rest = props as React.ComponentProps<typeof MotionButton>;
+  return asChild ? <MotionSlot {...shared} {...rest} /> : <MotionButton {...shared} {...rest} />;
 }
 
 export { Button, buttonVariants };
