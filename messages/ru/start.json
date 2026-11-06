@@ -112,6 +112,14 @@
       "table": "Стол 3 · с семьёй Ковач",
       "passport": "Паспорт действителен минимум до июня 2027",
       "yourTrip": "Ваша поездка"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

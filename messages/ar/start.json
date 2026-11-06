@@ -112,6 +112,14 @@
       "table": "الطاولة 3 · مع عائلة Kovač",
       "passport": "جواز السفر صالح حتى يونيو 2027 على الأقل",
       "yourTrip": "رحلتك"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

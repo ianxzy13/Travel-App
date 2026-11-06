@@ -14,9 +14,8 @@ import {
   Wallet,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { AppLanguagePicker } from "@/components/app-language-picker";
 import { InsideDialog } from "@/components/landing/inside-dialog";
-import { Logo } from "@/components/logo";
+import { LandingNavbar } from "@/components/landing/navbar";
 import { HoverIcon, Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 
@@ -42,18 +41,7 @@ export default async function LandingPage() {
   const t = await getTranslations("landing");
   return (
     <div className="min-h-dvh overflow-x-clip">
-      <header className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 sm:px-6">
-        <Logo />
-        <nav className="flex flex-wrap items-center gap-2">
-          <AppLanguagePicker />
-          <Button asChild variant="ghost" className="caps">
-            <Link href="/login">{t("signIn")}</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/login">{t("getStarted")}</Link>
-          </Button>
-        </nav>
-      </header>
+      <LandingNavbar />
 
       <main>
         {/* Hero: the Vow picture. It already shows the logo and tagline,

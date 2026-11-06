@@ -112,6 +112,14 @@
       "table": "Bord 3 · med familjen Kovač",
       "passport": "Passet gäller minst till juni 2027",
       "yourTrip": "Din resa"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

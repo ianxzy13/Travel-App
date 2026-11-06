@@ -112,6 +112,14 @@
       "table": "테이블 3 · Kovač 가족과 함께",
       "passport": "여권은 최소 2027년 6월까지 유효해야 함",
       "yourTrip": "내 여행"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

@@ -112,6 +112,14 @@
       "table": "โต๊ะ 3 · กับครอบครัว Kovač",
       "passport": "หนังสือเดินทางต้องใช้ได้อย่างน้อยถึงมิถุนายน 2027",
       "yourTrip": "ทริปของคุณ"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

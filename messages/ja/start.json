@@ -112,6 +112,14 @@
       "table": "テーブル3 · Kovač 家と",
       "passport": "パスポートは2027年6月まで有効であること",
       "yourTrip": "あなたの旅程"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

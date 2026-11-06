@@ -12,12 +12,30 @@
     "differenceTitle": "Česar druge poročne aplikacije ne počnejo",
     "differenceText": "Narejeno za poroke, kjer gostje prečkajo meje, ne le zveznih držav.",
     "difference": {
-      "trip": { "title": "Osebna stran za pot", "text": "Vsak gost dobi svojo stran: leti, hotelska soba, čas prevoza, številka mize in seznam, kaj prinesti." },
-      "entry": { "title": "Kontrolni seznam za vstop v EU", "text": "Pravila za potni list, vizumske zahteve, ETIAS — pripravljeno za domovino vsakega gosta." },
-      "rooms": { "title": "Tabla hotelskih sob", "text": "Rezervirajte sobe v več hotelih, dodelite goste, spremljajte, kdo je potrjen." },
-      "shuttle": { "title": "Načrtovalnik prevozov", "text": "Združite prihode po času, načrtujte prevoze in obvestite goste, kdaj gre njihov prevoz." },
-      "paperwork": { "title": "Poročni dokumenti", "text": "Dokumenti, ki jih potrebujete za zakonsko poroko v 64 državah: apostile, prevodi, roki." },
-      "languages": { "title": "25 jezikov za vsakega gosta", "text": "Slovenska babica vidi vse v slovenščini. Ameriška prijatelja v angleščini. Samodejno." }
+      "trip": {
+        "title": "Osebna stran za pot",
+        "text": "Vsak gost dobi svojo stran: leti, hotelska soba, čas prevoza, številka mize in seznam, kaj prinesti."
+      },
+      "entry": {
+        "title": "Kontrolni seznam za vstop v EU",
+        "text": "Pravila za potni list, vizumske zahteve, ETIAS — pripravljeno za domovino vsakega gosta."
+      },
+      "rooms": {
+        "title": "Tabla hotelskih sob",
+        "text": "Rezervirajte sobe v več hotelih, dodelite goste, spremljajte, kdo je potrjen."
+      },
+      "shuttle": {
+        "title": "Načrtovalnik prevozov",
+        "text": "Združite prihode po času, načrtujte prevoze in obvestite goste, kdaj gre njihov prevoz."
+      },
+      "paperwork": {
+        "title": "Poročni dokumenti",
+        "text": "Dokumenti, ki jih potrebujete za zakonsko poroko v 64 državah: apostile, prevodi, roki."
+      },
+      "languages": {
+        "title": "25 jezikov za vsakega gosta",
+        "text": "Slovenska babica vidi vse v slovenščini. Ameriška prijatelja v angleščini. Samodejno."
+      }
     },
     "compareTitle": "Vow v primerjavi s tipičnimi ameriškimi aplikacijami",
     "compare": {
@@ -94,6 +112,14 @@
       "table": "Miza 3 · z družino Kovač",
       "passport": "Potni list veljaven vsaj do junija 2027",
       "yourTrip": "Vaša pot"
+    },
+    "nav": {
+      "label": "Glavni meni",
+      "features": "Funkcije",
+      "pricing": "Cena",
+      "faq": "Pogosta vprašanja",
+      "menu": "Odpri meni",
+      "close": "Zapri meni"
     }
   },
   "login": {

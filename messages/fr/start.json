@@ -112,6 +112,14 @@
       "table": "Table 3 · avec la famille Kovač",
       "passport": "Passeport valable au moins jusqu’en juin 2027",
       "yourTrip": "Votre voyage"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

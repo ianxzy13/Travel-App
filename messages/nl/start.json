@@ -112,6 +112,14 @@
       "table": "Tafel 3 · met de familie Kovač",
       "passport": "Paspoort geldig tot minstens juni 2027",
       "yourTrip": "Jouw reis"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

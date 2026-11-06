@@ -112,6 +112,14 @@
       "table": "Стіл 3 · з родиною Ковач",
       "passport": "Паспорт дійсний щонайменше до червня 2027",
       "yourTrip": "Ваша поїздка"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {
