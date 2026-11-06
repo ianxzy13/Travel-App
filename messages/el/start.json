@@ -112,6 +112,14 @@
       "table": "Τραπέζι 3 · με την οικογένεια Kovač",
       "passport": "Διαβατήριο σε ισχύ τουλάχιστον έως τον Ιούνιο του 2027",
       "yourTrip": "Το ταξίδι σας"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

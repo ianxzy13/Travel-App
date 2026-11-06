@@ -112,6 +112,14 @@
       "table": "Bàn 3 · cùng gia đình Kovač",
       "passport": "Hộ chiếu còn hạn ít nhất đến tháng 6/2027",
       "yourTrip": "Chuyến đi của bạn"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

@@ -112,6 +112,14 @@
       "table": "Masa 3 · Kovač ailesiyle",
       "passport": "Pasaport en az Haziran 2027'ye kadar geçerli olmalı",
       "yourTrip": "Seyahatiniz"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

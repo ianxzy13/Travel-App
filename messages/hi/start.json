@@ -112,6 +112,14 @@
       "table": "टेबल 3 · Kovač परिवार के साथ",
       "passport": "पासपोर्ट कम से कम जून 2027 तक वैध",
       "yourTrip": "आपकी यात्रा"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

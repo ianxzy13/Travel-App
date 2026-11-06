@@ -112,6 +112,14 @@
       "table": "Meja 3 · bersama keluarga Kovač",
       "passport": "Paspor berlaku setidaknya sampai Juni 2027",
       "yourTrip": "Perjalanan Anda"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

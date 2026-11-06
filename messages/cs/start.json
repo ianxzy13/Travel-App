@@ -112,6 +112,14 @@
       "table": "Stůl 3 · s rodinou Kovačových",
       "passport": "Pas platný alespoň do června 2027",
       "yourTrip": "Vaše cesta"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {

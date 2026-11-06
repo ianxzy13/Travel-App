@@ -12,12 +12,30 @@
     "differenceTitle": "What other wedding apps don’t do",
     "differenceText": "Built for weddings where guests cross borders, not just state lines.",
     "difference": {
-      "trip": { "title": "Personal trip page", "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring." },
-      "entry": { "title": "EU entry checklist", "text": "Passport rules, visa requirements, ETIAS — generated for each guest’s home country so nobody gets stuck at the border." },
-      "rooms": { "title": "Hotel room board", "text": "Block rooms across hotels, assign guests, track who’s confirmed and who still needs a bed." },
-      "shuttle": { "title": "Shuttle planner", "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves." },
-      "paperwork": { "title": "Marriage paperwork", "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked." },
-      "languages": { "title": "25 languages per guest", "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic." }
+      "trip": {
+        "title": "Personal trip page",
+        "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
+      },
+      "entry": {
+        "title": "EU entry checklist",
+        "text": "Passport rules, visa requirements, ETIAS — generated for each guest’s home country so nobody gets stuck at the border."
+      },
+      "rooms": {
+        "title": "Hotel room board",
+        "text": "Block rooms across hotels, assign guests, track who’s confirmed and who still needs a bed."
+      },
+      "shuttle": {
+        "title": "Shuttle planner",
+        "text": "Group arrivals by time, plan pickups, and let guests know when their ride leaves."
+      },
+      "paperwork": {
+        "title": "Marriage paperwork",
+        "text": "The documents you need to legally marry in 64 countries: apostilles, translations, deadlines, all tracked."
+      },
+      "languages": {
+        "title": "25 languages per guest",
+        "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
+      }
     },
     "compareTitle": "Vow vs. typical US wedding apps",
     "compare": {
@@ -37,16 +55,46 @@
     "featuresTitle": "And everything else you’d expect",
     "featuresText": "Every part of your plan talks to the others. RSVPs flow into the seating chart, booked venues flow into your website.",
     "features": {
-      "guests": { "title": "Guest list", "text": "Households, sides, dietary needs and CSV import in minutes." },
-      "rsvp": { "title": "RSVPs", "text": "One private link per household. Answers arrive live." },
-      "seating": { "title": "Seating chart", "text": "Drag guests onto seats. Keep families together, exes apart." },
-      "budget": { "title": "Budget", "text": "Categories, deposits and due dates, with no surprises." },
-      "venues": { "title": "Venues & vendors", "text": "Compare side by side, then book with confidence." },
-      "travel": { "title": "Hotels & travel", "text": "Room blocks, flights and an arrivals board for pickups." },
-      "inspiration": { "title": "Inspiration", "text": "Pin ideas, pull colour palettes and decide together." },
-      "website": { "title": "Wedding website", "text": "Five beautiful templates with RSVP built in." },
-      "timeline": { "title": "Timeline", "text": "A to-do plan from twelve months out to the big day." },
-      "languages": { "title": "25 languages", "text": "You plan in your language; every guest gets the website, RSVP and emails in theirs." }
+      "guests": {
+        "title": "Guest list",
+        "text": "Households, sides, dietary needs and CSV import in minutes."
+      },
+      "rsvp": {
+        "title": "RSVPs",
+        "text": "One private link per household. Answers arrive live."
+      },
+      "seating": {
+        "title": "Seating chart",
+        "text": "Drag guests onto seats. Keep families together, exes apart."
+      },
+      "budget": {
+        "title": "Budget",
+        "text": "Categories, deposits and due dates, with no surprises."
+      },
+      "venues": {
+        "title": "Venues & vendors",
+        "text": "Compare side by side, then book with confidence."
+      },
+      "travel": {
+        "title": "Hotels & travel",
+        "text": "Room blocks, flights and an arrivals board for pickups."
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "text": "Pin ideas, pull colour palettes and decide together."
+      },
+      "website": {
+        "title": "Wedding website",
+        "text": "Five beautiful templates with RSVP built in."
+      },
+      "timeline": {
+        "title": "Timeline",
+        "text": "A to-do plan from twelve months out to the big day."
+      },
+      "languages": {
+        "title": "25 languages",
+        "text": "You plan in your language; every guest gets the website, RSVP and emails in theirs."
+      }
     },
     "closingTitle": "Your wedding crosses borders. Your planner should too.",
     "closingText": "Invite your partner, parents or planner, and plan it all together in real time — no matter where everyone lives.",
@@ -64,6 +112,14 @@
       "table": "Table 3 · with the Kovač family",
       "passport": "Passport valid until at least June 2027",
       "yourTrip": "Your trip"
+    },
+    "nav": {
+      "label": "Main menu",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "menu": "Open menu",
+      "close": "Close menu"
     }
   },
   "login": {
@@ -105,11 +161,26 @@
     "continue": "Continue",
     "create": "Create our wedding",
     "steps": {
-      "names": { "title": "Who’s getting married?", "text": "Congratulations! Let’s start with your names." },
-      "when": { "title": "When and where?", "text": "It’s fine if you don’t know yet." },
-      "size": { "title": "How big is the party?", "text": "This helps us plan your budget and seating." },
-      "countries": { "title": "Where are your guests coming from?", "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists." },
-      "style": { "title": "What’s your vibe?", "text": "We’ll use this for inspiration and website suggestions." }
+      "names": {
+        "title": "Who’s getting married?",
+        "text": "Congratulations! Let’s start with your names."
+      },
+      "when": {
+        "title": "When and where?",
+        "text": "It’s fine if you don’t know yet."
+      },
+      "size": {
+        "title": "How big is the party?",
+        "text": "This helps us plan your budget and seating."
+      },
+      "countries": {
+        "title": "Where are your guests coming from?",
+        "text": "Select the countries your guests will travel from. This helps us prepare trip pages and entry checklists."
+      },
+      "style": {
+        "title": "What’s your vibe?",
+        "text": "We’ll use this for inspiration and website suggestions."
+      }
     },
     "defaults": {
       "ceremony": "Ceremony",
@@ -149,7 +220,10 @@
     "guestCountriesSearch": "Search countries…",
     "style": "Style (pick any that feel like you)",
     "accent": "Accent colour for the app",
-    "accents": { "rose": "Dusty rose", "sage": "Sage" },
+    "accents": {
+      "rose": "Dusty rose",
+      "sage": "Sage"
+    },
     "styles": {
       "Classic": "Classic",
       "Modern": "Modern",
@@ -171,11 +245,26 @@
     "saved": "Wedding details saved"
   },
   "roles": {
-    "owner": { "label": "Owner", "description": "Full access, manages collaborators" },
-    "editor": { "label": "Editor", "description": "Can add and change everything" },
-    "parent": { "label": "Parent", "description": "Can edit guests, tasks and travel, not settings" },
-    "helper": { "label": "Helper", "description": "Can edit tasks assigned to them, view the rest" },
-    "viewer": { "label": "Viewer", "description": "Can look but not change" }
+    "owner": {
+      "label": "Owner",
+      "description": "Full access, manages collaborators"
+    },
+    "editor": {
+      "label": "Editor",
+      "description": "Can add and change everything"
+    },
+    "parent": {
+      "label": "Parent",
+      "description": "Can edit guests, tasks and travel, not settings"
+    },
+    "helper": {
+      "label": "Helper",
+      "description": "Can edit tasks assigned to them, view the rest"
+    },
+    "viewer": {
+      "label": "Viewer",
+      "description": "Can look but not change"
+    }
   },
   "invite": {
     "metaTitle": "You’re invited",
