@@ -351,7 +351,7 @@
       "back": "返回",
       "print": "打印",
       "roomingList": "住房名单",
-      "csv": "导出 CSV",
+      "csv": "导出到 Excel",
       "pdf": "打印 / PDF"
     },
     "groupRate": "团体价申请",

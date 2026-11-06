@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "next-intl";
+
 import { useMemo, useState } from "react";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { Accessibility, GripVertical, Search, Utensils, X } from "lucide-react";
@@ -54,6 +56,7 @@ export function GuestPanel({
   const [tag, setTag] = useState("all");
   const { setNodeRef, isOver } = useDroppable({ id: "panel", disabled: !canEdit });
   const { t } = useSeatingWords();
+  const locale = useLocale();
 
   const attending = guests.filter((g) => g.rsvp === "attending");
   const seatedAttending = attending.filter((g) => state.assignments[g.id]).length;
@@ -81,8 +84,8 @@ export function GuestPanel({
       group.guests.push(g);
       map.set(g.householdId, group);
     }
-    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
-  }, [guests, attendingOnly, unseatedOnly, side, tag, search, state.assignments]);
+    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, locale));
+  }, [guests, attendingOnly, unseatedOnly, side, tag, search, state.assignments, locale]);
 
   return (
     <div

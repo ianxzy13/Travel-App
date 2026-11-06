@@ -347,7 +347,9 @@
     "love": "满怀爱意，",
     "personal": "{you, select, one {此链接仅供你本人使用，请勿分享。} other {此链接仅供你们家庭使用，请勿分享。}}",
     "subjectInvite": "婚礼邀请：{couple}的婚礼",
-    "subjectReminder": "提醒：请回复是否出席{couple}的婚礼"
+    "subjectReminder": "提醒：请回复是否出席{couple}的婚礼",
+    "smsInvite": "{sender}：诚邀你参加婚礼！请在此回复：{link}",
+    "smsReminder": "{sender}：温馨提醒，请回复是否出席：{link}"
   },
   "travelEmail": {
     "preview": "请分享您参加{couple}婚礼的行程计划",

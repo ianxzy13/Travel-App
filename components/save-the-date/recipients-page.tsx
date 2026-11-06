@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import {
   AlertTriangle,
   ArrowLeft,
-  Check,
   Copy,
   Download,
   ExternalLink,

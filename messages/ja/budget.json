@@ -2,7 +2,7 @@
   "budget": {
     "title": "予算",
     "description": "すべての費用の計画、管理、支払いを 1 か所で。",
-    "exportCsv": "CSV をエクスポート",
+    "exportCsv": "Excelに書き出す",
     "category": "カテゴリー",
     "expense": "費用",
     "startTitle": "予算を立てましょう",

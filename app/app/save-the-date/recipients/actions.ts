@@ -429,7 +429,6 @@ export async function sendSaveTheDates(
   }
 
   const householdMap = new Map(households.map((h) => [h.id, h]));
-  const sendMap = new Map(sends.map((s) => [s.household_id, s]));
   const couple = `${wedding.partner_a_name} & ${wedding.partner_b_name}`;
   const siteUrl = await getSiteUrl();
   const { accent } = await import("@/lib/save-the-date/templates").then((m) => {
@@ -502,7 +501,6 @@ export async function sendSaveTheDates(
     for (let j = 0; j < chunk.length; j++) {
       const send = chunk[j];
       const resendId = error ? null : (ids[j]?.id ?? null);
-      const h = householdMap.get(send.household_id)!;
       const emails = emailsByHousehold.get(send.household_id)!;
 
       const { error: updateErr } = await supabase
@@ -574,7 +572,7 @@ export async function sendSaveTheDateSms(
     return { ok: true, data: { sent: 0, failed: 0, noPhone: [] } };
 
   const householdIds = sends.map((s) => s.household_id);
-  const households: { id: string; name: string }[] = [];
+  const households: { id: string; name: string; preferred_language: string | null }[] = [];
   const guestPhones: { household_id: string; phone: string }[] = [];
 
   for (let i = 0; i < householdIds.length; i += 100) {
@@ -582,7 +580,7 @@ export async function sendSaveTheDateSms(
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name")
+        .select("id, name, preferred_language")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -621,6 +619,7 @@ export async function sendSaveTheDateSms(
   let sent = 0;
   let failed = 0;
   const noPhone: string[] = [];
+  const sizes = await householdSizes(supabase, wedding.id, householdIds);
 
   for (const send of sends) {
     const h = householdMap.get(send.household_id);
@@ -632,7 +631,13 @@ export async function sendSaveTheDateSms(
     }
 
     const link = `${siteUrl}/s/${send.token}`;
-    const body = `${couple} — Save the Date!\n${link}`;
+    // "Save the Date" in the household's own language, like the email
+    const t = await guestTranslations(
+      stdLocale(wedding, h.preferred_language),
+      "stdEmail",
+      sizes.get(send.household_id),
+    );
+    const body = `${couple} — ${t("heading")}\n${link}`;
 
     try {
       const msg = await tw.messages.create({

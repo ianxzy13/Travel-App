@@ -145,9 +145,9 @@
     "thanks": "Thank you!",
     "thanksText": "Your RSVP has been sent to {couple}. You can change it any time using this same link.",
     "thanksTextUntil": "Your RSVP has been sent to {couple}. You can change it any time until {date} using this same link.",
-    "send": "Send our RSVP",
+    "send": "{you, select, one {Send my RSVP} other {Send our RSVP}}",
     "save": "Save changes",
-    "change": "Change our answers",
+    "change": "{you, select, one {Change my answers} other {Change our answers}}",
     "yourAnswers": "Your answers",
     "attending": "Attending",
     "notAttending": "Not attending",
@@ -347,7 +347,9 @@
     "love": "With love,",
     "personal": "This link is personal to your household. Please don’t share it.",
     "subjectInvite": "You’re invited: {couple}’s wedding",
-    "subjectReminder": "Reminder: please RSVP for {couple}’s wedding"
+    "subjectReminder": "Reminder: please RSVP for {couple}’s wedding",
+    "smsInvite": "{sender}: You’re invited! RSVP here: {link}",
+    "smsReminder": "{sender}: A friendly reminder to RSVP: {link}"
   },
   "travelEmail": {
     "preview": "Please share your travel plans for {couple}’s wedding",

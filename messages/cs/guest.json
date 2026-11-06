@@ -347,7 +347,9 @@
     "love": "S láskou",
     "personal": "{you, select, one {Tento odkaz je jen pro tebe. Prosíme, nesdílej ho.} other {Tento odkaz je jen pro vaši domácnost. Prosíme, nesdílejte ho.}}",
     "subjectInvite": "Pozvánka na svatbu: {couple}",
-    "subjectReminder": "{you, select, one {Připomínka: potvrď účast na svatbě: {couple}} other {Připomínka: potvrďte účast na svatbě: {couple}}}"
+    "subjectReminder": "{you, select, one {Připomínka: potvrď účast na svatbě: {couple}} other {Připomínka: potvrďte účast na svatbě: {couple}}}",
+    "smsInvite": "{sender}: Pozvánka na svatbu! {you, select, one {Potvrď} other {Potvrďte}} účast zde: {link}",
+    "smsReminder": "{sender}: Připomínka – {you, select, one {potvrď} other {potvrďte}} prosím účast zde: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Pošli své cestovní plány na svatbu: {couple}} other {Pošlete své cestovní plány na svatbu: {couple}}}",

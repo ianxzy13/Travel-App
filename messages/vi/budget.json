@@ -2,7 +2,7 @@
   "budget": {
     "title": "Ngân sách",
     "description": "Lên kế hoạch, theo dõi và thanh toán mọi chi phí ở một nơi.",
-    "exportCsv": "Xuất CSV",
+    "exportCsv": "Xuất sang Excel",
     "category": "Hạng mục",
     "expense": "Khoản chi",
     "startTitle": "Hãy lập ngân sách của bạn",

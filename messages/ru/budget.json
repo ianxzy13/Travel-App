@@ -2,7 +2,7 @@
   "budget": {
     "title": "Бюджет",
     "description": "Планируйте, отслеживайте и оплачивайте всё в одном месте.",
-    "exportCsv": "Экспорт CSV",
+    "exportCsv": "Экспорт в Excel",
     "category": "Статья",
     "expense": "Расход",
     "startTitle": "Давайте спланируем ваш бюджет",

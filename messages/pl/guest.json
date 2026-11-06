@@ -347,7 +347,9 @@
     "love": "Z miłością,",
     "personal": "{you, select, one {Ten link jest tylko dla Ciebie. Prosimy, nie udostępniaj go.} other {Ten link jest tylko dla Waszego domu. Prosimy, nie udostępniajcie go.}}",
     "subjectInvite": "Zaproszenie na ślub: {couple}",
-    "subjectReminder": "{you, select, one {Przypomnienie: potwierdź obecność na weselu: {couple}} other {Przypomnienie: potwierdźcie obecność na weselu: {couple}}}"
+    "subjectReminder": "{you, select, one {Przypomnienie: potwierdź obecność na weselu: {couple}} other {Przypomnienie: potwierdźcie obecność na weselu: {couple}}}",
+    "smsInvite": "{sender}: Zaproszenie na wesele! {you, select, one {Potwierdź} other {Potwierdźcie}} obecność tutaj: {link}",
+    "smsReminder": "{sender}: Przypomnienie – {you, select, one {potwierdź} other {potwierdźcie}} obecność tutaj: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Podziel się planami podróży na wesele: {couple}} other {Podzielcie się planami podróży na wesele: {couple}}}",

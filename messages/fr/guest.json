@@ -143,9 +143,9 @@
     "thanks": "Merci !",
     "thanksText": "{you, select, one {Ta réponse a été envoyée à {couple}. Tu peux la modifier à tout moment avec ce même lien.} other {Votre réponse a été envoyée à {couple}. Vous pouvez la modifier à tout moment avec ce même lien.}}",
     "thanksTextUntil": "{you, select, one {Ta réponse a été envoyée à {couple}. Tu peux la modifier jusqu’au {date} avec ce même lien.} other {Votre réponse a été envoyée à {couple}. Vous pouvez la modifier jusqu’au {date} avec ce même lien.}}",
-    "send": "Envoyer notre réponse",
+    "send": "{you, select, one {Envoyer ma réponse} other {Envoyer notre réponse}}",
     "save": "Enregistrer les modifications",
-    "change": "Modifier nos réponses",
+    "change": "{you, select, one {Modifier mes réponses} other {Modifier nos réponses}}",
     "yourAnswers": "{you, select, one {Tes réponses} other {Vos réponses}}",
     "attending": "Présent",
     "notAttending": "Absent",
@@ -347,7 +347,9 @@
     "love": "Avec toute notre affection,",
     "personal": "{you, select, one {Ce lien est rien que pour toi. Merci de ne pas le partager.} other {Ce lien est personnel à votre foyer. Merci de ne pas le partager.}}",
     "subjectInvite": "Vous êtes invités : le mariage de {couple}",
-    "subjectReminder": "{you, select, one {Rappel : réponds à l’invitation au mariage de {couple}} other {Rappel : répondez à l’invitation au mariage de {couple}}}"
+    "subjectReminder": "{you, select, one {Rappel : réponds à l’invitation au mariage de {couple}} other {Rappel : répondez à l’invitation au mariage de {couple}}}",
+    "smsInvite": "{sender} : Invitation au mariage ! {you, select, one {Réponds} other {Répondez}} ici : {link}",
+    "smsReminder": "{sender} : Petit rappel : {you, select, one {réponds} other {répondez}} à l’invitation ici : {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Partage tes projets de voyage pour le mariage de {couple}} other {Partagez vos projets de voyage pour le mariage de {couple}}}",

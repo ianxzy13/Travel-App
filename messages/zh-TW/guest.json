@@ -347,7 +347,9 @@
     "love": "滿懷愛意，",
     "personal": "{you, select, one {此連結僅供你本人使用，請勿分享。} other {此連結僅供你們家庭使用，請勿分享。}}",
     "subjectInvite": "婚禮邀請：{couple}的婚禮",
-    "subjectReminder": "提醒：請回覆是否出席{couple}的婚禮"
+    "subjectReminder": "提醒：請回覆是否出席{couple}的婚禮",
+    "smsInvite": "{sender}：誠摯邀請你參加婚禮！請在此回覆：{link}",
+    "smsReminder": "{sender}：溫馨提醒，請回覆是否出席：{link}"
   },
   "travelEmail": {
     "preview": "請分享您參加{couple}婚禮的行程計畫",

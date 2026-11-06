@@ -107,7 +107,12 @@ export function extraRoomNights(rows: NightRow[]) {
 export type StaySummaryGuest = { id: string; name: string; stay: Stay | null };
 
 /** Everything the hotel needs to know, from a list of guests and the booking. */
-export function staySummary(guests: StaySummaryGuest[], booked: Stay | null, perRoom: number) {
+export function staySummary(
+  guests: StaySummaryGuest[],
+  booked: Stay | null,
+  perRoom: number,
+  locale?: string,
+) {
   const early: { id: string; name: string; date: string; nights: number }[] = [];
   const late: { id: string; name: string; date: string; nights: number }[] = [];
   const shorter: { id: string; name: string; stay: Stay; nights: number }[] = [];
@@ -120,10 +125,12 @@ export function staySummary(guests: StaySummaryGuest[], booked: Stay | null, per
       shorter.push({ id: g.id, name: g.name, stay: g.stay, nights: d.skipStart + d.skipEnd });
   }
   const byDate = <T extends { date: string; name: string }>(a: T, b: T) =>
-    a.date.localeCompare(b.date) || a.name.localeCompare(b.name);
+    a.date.localeCompare(b.date) || a.name.localeCompare(b.name, locale);
   early.sort(byDate);
   late.sort(byDate);
-  shorter.sort((a, b) => a.stay.from.localeCompare(b.stay.from) || a.name.localeCompare(b.name));
+  shorter.sort(
+    (a, b) => a.stay.from.localeCompare(b.stay.from) || a.name.localeCompare(b.name, locale),
+  );
   const nights = nightTable(
     guests.map((g) => g.stay),
     perRoom,

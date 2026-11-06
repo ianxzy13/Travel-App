@@ -2,7 +2,7 @@
   "budget": {
     "title": "预算",
     "description": "在一个地方规划、追踪和支付所有费用。",
-    "exportCsv": "导出 CSV",
+    "exportCsv": "导出到 Excel",
     "category": "类别",
     "expense": "支出",
     "startTitle": "一起来规划预算",

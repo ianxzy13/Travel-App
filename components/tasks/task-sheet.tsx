@@ -4,7 +4,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Send, Trash2, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { addComment, deleteComment, deleteTask, loadComments, saveTask } from "@/app/app/tasks/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -52,6 +52,7 @@ export function TaskSheet({
   onOpenChange: (open: boolean) => void;
 }) {
   const t = useTranslations("tasks.sheet");
+  const locale = useLocale();
   const [pending, startTransition] = useTransition();
   const form = useForm<TaskValues>({
     resolver: zodResolver(taskSchema),
@@ -193,7 +194,7 @@ export function TaskSheet({
                         {memberNames.get(c.author_id) ?? t("unknown")}
                       </span>
                       <span className="text-muted-foreground flex items-center gap-1 text-xs">
-                        {new Date(c.created_at).toLocaleDateString()}
+                        {new Date(c.created_at).toLocaleDateString(locale)}
                         {c.author_id === currentUserId && (
                           <button
                             type="button"

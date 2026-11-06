@@ -12,7 +12,7 @@ import {
   Search,
   Trash2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteGift, saveGift, toggleThankYou } from "@/app/app/gifts/actions";
 import { PageHeader } from "@/components/app/page-header";
@@ -55,14 +55,15 @@ type Props = {
 
 export function GiftsPage({ gifts, households, currency, canEdit }: Props) {
   const t = useTranslations("app.gifts");
+  const locale = useLocale();
   const [search, setSearch] = useState("");
   const [catFilter, setCatFilter] = useState<string>("all");
   const [tyFilter, setTyFilter] = useState<string>("all");
   const [editing, setEditing] = useState<GiftItem | null>(null);
   const [adding, setAdding] = useState(false);
-  const [pending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
-  const money = (n: number) => formatMoney(n, currency);
+  const money = (n: number) => formatMoney(n, currency, { locale });
 
   const filtered = useMemo(() => {
     const q = normalize(search);

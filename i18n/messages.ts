@@ -66,7 +66,7 @@ export const GUEST_NAMESPACES = ["common", "site", "rsvp", "board", "validation"
  * addressed (one person, two, or more; see ./you.ts), plural if not known.
  */
 export async function loadMessages(locale: string, you: YouForm = "other"): Promise<Messages> {
-  if (locale === "en" || !isLocale(locale)) return EN;
+  if (locale === "en" || !isLocale(locale)) return pickYouAll(EN, you);
   const parts = await Promise.all(
     PARTS.map((p) =>
       import(`../messages/${locale}/${p}.json`)

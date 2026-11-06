@@ -220,8 +220,10 @@ async function emailFor(
 export async function previewRsvpEmail(
   kind: Kind,
   note: string,
-): Promise<ActionResult<{ html: string; subject: string }>> {
+): Promise<ActionResult<{ html: string; subject: string; sms: string }>> {
   const { wedding } = await requireWedding();
+  const siteUrl = await getSiteUrl();
+  const sms = await smsFor(wedding, kind, note.slice(0, 300), { code: "K7P2QX" }, coupleName(wedding), siteUrl);
   const { props, subject } = await emailFor(
     wedding,
     kind,
@@ -230,7 +232,7 @@ export async function previewRsvpEmail(
     await getSiteUrl(),
   );
   const html = await render(RsvpEmail(props));
-  return { ok: true, data: { html, subject } };
+  return { ok: true, data: { html, subject, sms } };
 }
 
 export type SendSummary = {
@@ -383,6 +385,22 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
 
 // ---------- SMS invitations ----------
 
+/** The SMS text, in the household's language (like the emails). */
+async function smsFor(
+  wedding: Wedding,
+  kind: Kind,
+  note: string,
+  household: { code: string; language?: string | null; people?: number },
+  sender: string,
+  siteUrl: string,
+) {
+  const locale = emailLocale(wedding, household.language);
+  const t = await guestTranslations(locale, "email", household.people);
+  const link = `${siteUrl}/r/${household.code}?lang=${locale}`;
+  const body = t(kind === "invitation" ? "smsInvite" : "smsReminder", { sender, link });
+  return note ? `${body}\n${note}` : body;
+}
+
 type SmsSummary = { sent: number; failed: number; noPhone: string[] };
 
 export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSummary>> {
@@ -399,7 +417,13 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
   const { householdIds, kind, note } = parsed.data;
   const { wedding, supabase } = ctx;
 
-  const households: { id: string; name: string; rsvp_code: string; managed_by: string | null }[] = [];
+  const households: {
+    id: string;
+    name: string;
+    rsvp_code: string;
+    preferred_language: string | null;
+    managed_by: string | null;
+  }[] = [];
   const guestPhones: { household_id: string; phone: string }[] = [];
 
   for (let i = 0; i < householdIds.length; i += 100) {
@@ -407,7 +431,7 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
     const [h, g] = await Promise.all([
       supabase
         .from("households")
-        .select("id, name, rsvp_code, managed_by")
+        .select("id, name, rsvp_code, preferred_language, managed_by")
         .eq("wedding_id", wedding.id)
         .in("id", batch),
       supabase
@@ -456,15 +480,18 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
   let sent = 0;
   let failed = 0;
 
+  const sizes = await householdSizes(supabase, wedding.id, sendable.map((h) => h.id));
   for (const h of sendable) {
     const phone = phoneByHousehold.get(h.id)!;
-    const link = `${siteUrl}/r/${h.rsvp_code}`;
-    const invite = kind === "invitation";
     const sender = (h.managed_by ? memberNames.get(h.managed_by) : null) ?? couple;
-    let body = invite
-      ? `${sender}: You're invited! RSVP here: ${link}`
-      : `${sender}: Friendly reminder to RSVP: ${link}`;
-    if (note) body += `\n${note}`;
+    const body = await smsFor(
+      wedding,
+      kind,
+      note,
+      { code: h.rsvp_code, language: h.preferred_language, people: sizes.get(h.id) },
+      sender,
+      siteUrl,
+    );
 
     try {
       const msg = await tw.messages.create({ from, to: phone, body });

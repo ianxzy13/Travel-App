@@ -2,7 +2,7 @@
   "budget": {
     "title": "Presupuesto",
     "description": "Planifica, controla y paga todo en un solo lugar.",
-    "exportCsv": "Exportar CSV",
+    "exportCsv": "Exportar a Excel",
     "category": "Categoría",
     "expense": "Gasto",
     "startTitle": "Vamos a planificar tu presupuesto",
