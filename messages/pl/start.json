@@ -120,6 +120,58 @@
       "faq": "FAQ",
       "menu": "Open menu",
       "close": "Close menu"
+    },
+    "marquee": "Every guest reads Vow in their own language",
+    "facts": {
+      "title": "Made for weddings that cross borders",
+      "languages": "languages, chosen per guest",
+      "countries": "countries’ marriage paperwork, step by step",
+      "currencies": "currencies side by side in your budget",
+      "roles": "ways to plan together: couple, family, planner and helpers"
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "Free to plan your wedding",
+      "text": "No trial, no card. Everything on this page is included.",
+      "plan": "Vow",
+      "price": "Free",
+      "priceNote": "for the couple, the family and every guest",
+      "includes": {
+        "guests": "Guest list, RSVPs and seating chart",
+        "trip": "A trip page for every guest",
+        "rooms": "Hotel rooms, shuttles and flights",
+        "paperwork": "Entry and marriage paperwork checklists",
+        "languages": "25 languages, chosen per guest",
+        "family": "Plan together with family and your planner"
+      },
+      "cta": "Start planning for free"
+    },
+    "faq": {
+      "title": "Questions",
+      "free": {
+        "q": "Is Vow really free?",
+        "a": "Yes. You can plan your whole wedding in Vow, with your family and every guest, without paying."
+      },
+      "guests": {
+        "q": "Do our guests need an account?",
+        "a": "No. Each household gets its own private link and code. They open it to reply, pick a meal and see their trip page."
+      },
+      "languages": {
+        "q": "Which languages can guests use?",
+        "a": "25, including Slovenian, German, Croatian, Spanish and Arabic. Each guest sees their RSVP, trip page and emails in their own language."
+      },
+      "family": {
+        "q": "Can our parents help plan?",
+        "a": "Yes. Invite your partner, parents, planner or helpers. Each gets the right access, and everyone sees changes as they happen."
+      },
+      "phone": {
+        "q": "Does it work on a phone?",
+        "a": "Yes. Vow is built for phones first, for you and for guests opening their link at the airport."
+      },
+      "privacy": {
+        "q": "What happens to our guests’ data?",
+        "a": "Only you and the people you invite can see it. Guests can see what you have saved about them and delete it themselves."
+      }
     }
   },
   "login": {

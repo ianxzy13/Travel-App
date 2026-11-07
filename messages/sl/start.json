@@ -120,6 +120,58 @@
       "faq": "Pogosta vprašanja",
       "menu": "Odpri meni",
       "close": "Zapri meni"
+    },
+    "marquee": "Vsak gost bere Vow v svojem jeziku",
+    "facts": {
+      "title": "Narejeno za poroke čez meje",
+      "languages": "jezikov, za vsakega gosta posebej",
+      "countries": "držav: dokumenti za poroko, korak za korakom",
+      "currencies": "valuti druga ob drugi v proračunu",
+      "roles": "načini skupnega načrtovanja: par, družina, organizator in pomočniki"
+    },
+    "pricing": {
+      "eyebrow": "Cena",
+      "title": "Načrtovanje poroke je brezplačno",
+      "text": "Brez preizkusa in brez kartice. Vse na tej strani je vključeno.",
+      "plan": "Vow",
+      "price": "Brezplačno",
+      "priceNote": "za par, družino in vse goste",
+      "includes": {
+        "guests": "Seznam gostov, odgovori in sedežni red",
+        "trip": "Stran za pot za vsakega gosta",
+        "rooms": "Hotelske sobe, prevozi in leti",
+        "paperwork": "Seznami za vstop in dokumente za poroko",
+        "languages": "25 jezikov, za vsakega gosta posebej",
+        "family": "Skupno načrtovanje z družino in organizatorjem"
+      },
+      "cta": "Začnite načrtovati brezplačno"
+    },
+    "faq": {
+      "title": "Vprašanja",
+      "free": {
+        "q": "Je Vow res brezplačen?",
+        "a": "Da. Celotno poroko lahko v Vow načrtujete skupaj z družino in vsemi gosti, ne da bi kaj plačali."
+      },
+      "guests": {
+        "q": "Ali gostje potrebujejo račun?",
+        "a": "Ne. Vsako gospodinjstvo dobi svojo zasebno povezavo in kodo. Z njo odgovorijo, izberejo meni in vidijo svojo stran za pot."
+      },
+      "languages": {
+        "q": "Katere jezike lahko uporabljajo gostje?",
+        "a": "25, med njimi slovenščino, nemščino, hrvaščino, španščino in arabščino. Vsak gost vidi odgovor, stran za pot in e-pošto v svojem jeziku."
+      },
+      "family": {
+        "q": "Lahko pri načrtovanju pomagajo starši?",
+        "a": "Da. Povabite partnerja, starše, organizatorja ali pomočnike. Vsak dobi pravi dostop in vsi vidijo spremembe takoj."
+      },
+      "phone": {
+        "q": "Deluje na telefonu?",
+        "a": "Da. Vow je narejen najprej za telefone, za vas in za goste, ki povezavo odprejo na letališču."
+      },
+      "privacy": {
+        "q": "Kaj se zgodi s podatki gostov?",
+        "a": "Vidite jih le vi in ljudje, ki jih povabite. Gostje lahko vidijo, kaj je shranjeno o njih, in to sami izbrišejo."
+      }
     }
   },
   "login": {

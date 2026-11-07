@@ -76,7 +76,7 @@ export function InsideDialog({ triggerClassName }: { triggerClassName?: string }
           </Button>
           <WarpDialogClose asChild>
             <Button asChild variant="ghost">
-              <a href="#features">{t("featuresTitle")}</a>
+              <a href="#all-features">{t("featuresTitle")}</a>
             </Button>
           </WarpDialogClose>
         </div>

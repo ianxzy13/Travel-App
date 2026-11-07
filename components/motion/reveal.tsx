@@ -14,7 +14,9 @@ export const EASE: Transition["ease"] = [0.22, 1, 0.36, 1];
 /** Soft spring for hover and tap. */
 export const SPRING: Transition = { type: "spring", stiffness: 400, damping: 30, mass: 0.6 };
 
-const VIEWPORT = { once: true, amount: 0.15, margin: "0px 0px -8% 0px" } as const;
+// Start as soon as the top edge is a little way onto the screen. A share of the
+// block ("amount") would never be reached by tall lists or wide tables on phones.
+const VIEWPORT = { once: true, amount: 0, margin: "0px 0px -12% 0px" } as const;
 
 type Tag = "div" | "section" | "header" | "ul" | "ol" | "li" | "article" | "p" | "footer" | "aside";
 
@@ -180,15 +182,21 @@ export function GrowBar({ percent, className }: { percent: number; className?: s
 export function SettleIn({
   children,
   className,
+  onView,
 }: {
   children: React.ReactNode;
   className?: string;
+  /** wait until it scrolls into view instead of starting on page load */
+  onView?: boolean;
 }) {
+  const settled = { scale: 1 };
   return (
     <motion.div
       className={className}
       initial={{ scale: 1.08 }}
-      animate={{ scale: 1 }}
+      {...(onView
+        ? { whileInView: settled, viewport: { once: true, amount: 0.3 } }
+        : { animate: settled })}
       transition={{ duration: 1.6, ease: EASE }}
     >
       {children}
