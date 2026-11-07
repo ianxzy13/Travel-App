@@ -124,7 +124,7 @@ export async function addComment(
   body: string,
 ): Promise<ActionResult<{ id: string }>> {
   const user = await requireUser();
-  const { wedding, role } = await requireWedding();
+  const { wedding } = await requireWedding();
   if (!id.safeParse(taskId).success) return noPermission();
   const trimmed = body.trim();
   if (!trimmed || trimmed.length > 2000) return await err("generic");

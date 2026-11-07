@@ -72,6 +72,7 @@ type Props = {
 
 export function StayPlanner({ hotels, guests, guestSaid, weddingDate, canEdit }: Props) {
   const t = useTranslations("hotels.stays");
+  const locale = useLocale();
   const summaryText = useSummaryText();
   const [hotelId, setHotelId] = useState(() => mainHotelId(hotels));
   const [filters, setFilters] = useState<StayFilters>({ notReplied: false, noRoom: false });
@@ -88,7 +89,10 @@ export function StayPlanner({ hotels, guests, guestSaid, weddingDate, canEdit }:
   );
   const stays = useMemo(() => guestStays(list, booked), [list, booked]);
   const stayOf = new Map(stays.map((s) => [s.id, s.stay]));
-  const summary = useMemo(() => staySummary(stays, booked, perRoom), [stays, booked, perRoom]);
+  const summary = useMemo(
+    () => staySummary(stays, booked, perRoom, locale),
+    [stays, booked, perRoom, locale],
+  );
   const byId = new Map(guests.map((g) => [g.id, g]));
   const openDialog = (mode: Mode, ids: string[]) => setDialog({ mode, ids });
 
@@ -99,8 +103,8 @@ export function StayPlanner({ hotels, guests, guestSaid, weddingDate, canEdit }:
       h.members.push(g);
       map.set(g.householdId, h);
     }
-    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
-  }, [list]);
+    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, locale));
+  }, [list, locale]);
 
   const visibleSelected = list.filter((g) => selected.has(g.id)).map((g) => g.id);
 

@@ -93,11 +93,11 @@ describe("every language file", () => {
         const translated = String(get(messages, k));
         expect(translated.trim(), `${code} ${k} is empty`).not.toBe("");
         // plural forms may differ, so only compare the variable names; "you" (one
-        // guest, two or more) is chosen when texts load, so English needs none
+        // guest, two or more) is chosen when texts load, so it may be in any language
         const used = new Set(placeholders(translated));
         used.delete("you");
         expect(used, `${code} ${k} placeholders`).toEqual(
-          new Set(placeholders(source)),
+          new Set(placeholders(source).filter((p) => p !== "you")),
         );
         expect(tags(translated), `${code} ${k} tags`).toEqual(tags(source));
         // valid message syntax for this language (plural rules, braces, tags)

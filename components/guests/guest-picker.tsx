@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { normalize } from "@/lib/guests/filter";
@@ -28,6 +28,7 @@ export function GuestPicker({
   maxHeight?: string;
 }) {
   const t = useTranslations("guests.picker");
+  const locale = useLocale();
   const [search, setSearch] = useState("");
   const chosen = new Set(selected);
 
@@ -45,7 +46,7 @@ export function GuestPicker({
       group.guests.push(g);
       map.set(g.householdId, group);
     }
-    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
+    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, locale));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guests, search]);
 

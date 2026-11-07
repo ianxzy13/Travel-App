@@ -2,7 +2,7 @@
   "budget": {
     "title": "बजट",
     "description": "सब कुछ एक जगह योजना बनाएँ, ट्रैक करें और भुगतान करें।",
-    "exportCsv": "CSV एक्सपोर्ट करें",
+    "exportCsv": "Excel में निर्यात करें",
     "category": "श्रेणी",
     "expense": "खर्च",
     "startTitle": "चलिए आपका बजट बनाते हैं",

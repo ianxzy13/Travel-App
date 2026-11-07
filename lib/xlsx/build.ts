@@ -29,9 +29,12 @@ export function sheetName(name: string) {
   );
 }
 
-function sheetXml(rows: string[][]) {
+/** A cell: text, or a number Excel can add up. */
+export type Cell = string | number | null | undefined;
+
+function sheetXml(rows: Cell[][]) {
   const widths = (rows[0] ?? []).map((_, c) =>
-    Math.min(60, Math.max(10, ...rows.map((r) => [...(r[c] ?? "")].length + 2))),
+    Math.min(60, Math.max(10, ...rows.map((r) => [...String(r[c] ?? "")].length + 2))),
   );
   const cols = widths.map(
     (w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`,
@@ -41,10 +44,11 @@ function sheetXml(rows: string[][]) {
       (r, ri) =>
         `<row r="${ri + 1}">` +
         r
-          .map(
-            (v, ci) =>
-              `<c r="${col(ci)}${ri + 1}" t="inlineStr"${ri === 0 ? ' s="1"' : ""}>` +
-              `<is><t xml:space="preserve">${xml(v ?? "")}</t></is></c>`,
+          .map((v, ci) =>
+            typeof v === "number" && Number.isFinite(v)
+              ? `<c r="${col(ci)}${ri + 1}"${ri === 0 ? ' s="1"' : ""}><v>${v}</v></c>`
+              : `<c r="${col(ci)}${ri + 1}" t="inlineStr"${ri === 0 ? ' s="1"' : ""}>` +
+                `<is><t xml:space="preserve">${xml(String(v ?? ""))}</t></is></c>`,
           )
           .join("") +
         `</row>`,
@@ -135,7 +139,7 @@ export function zip(files: { name: string; data: Uint8Array }[]) {
 }
 
 /** An .xlsx file with one sheet; the first row is the bold header. */
-export function buildXlsx(name: string, rows: string[][]) {
+export function buildXlsx(name: string, rows: Cell[][]) {
   const files: [string, string][] = [
     [
       "[Content_Types].xml",
@@ -176,3 +180,15 @@ export function buildXlsx(name: string, rows: string[][]) {
 }
 
 export const XLSX_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+/** A download response for an .xlsx file; the name may have accents (é, č…). */
+export function xlsxResponse(fileName: string, sheet: string, rows: Cell[][]) {
+  const ascii = fileName.normalize("NFD").replace(/[^\w.-]+/g, "") || "export.xlsx";
+  return new Response(buildXlsx(sheet, rows), {
+    headers: {
+      "Content-Type": XLSX_TYPE,
+      "Content-Disposition": `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(fileName)}`,
+      "Cache-Control": "no-store",
+    },
+  });
+}

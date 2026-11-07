@@ -119,7 +119,7 @@ export function LanguagesCard({
               value={timeZone}
               disabled={readOnly}
               onChange={(e) => setTimeZone(e.target.value)}
-              className="border-input bg-background h-9 min-w-0 flex-1 rounded-md border px-2 text-sm"
+              className="border-input bg-background h-9 min-w-40 flex-1 rounded-md border px-2 text-sm"
             >
               <option value="">{t("noTimeZone")}</option>
               {zones.map((z) => (

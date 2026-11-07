@@ -347,7 +347,9 @@
     "love": "Dengan cinta",
     "personal": "Tautan ini khusus untuk keluarga Anda. Mohon jangan dibagikan.",
     "subjectInvite": "Anda diundang: pernikahan {couple}",
-    "subjectReminder": "Pengingat: konfirmasi kehadiran di pernikahan {couple}"
+    "subjectReminder": "Pengingat: konfirmasi kehadiran di pernikahan {couple}",
+    "smsInvite": "{sender}: Undangan pernikahan! Konfirmasi kehadiran di sini: {link}",
+    "smsReminder": "{sender}: Pengingat untuk konfirmasi kehadiran: {link}"
   },
   "travelEmail": {
     "preview": "Bagikan rencana perjalanan Anda untuk pernikahan {couple}",

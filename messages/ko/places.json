@@ -351,7 +351,7 @@
       "back": "뒤로",
       "print": "인쇄",
       "roomingList": "객실 배정표",
-      "csv": "CSV 내보내기",
+      "csv": "Excel로 내보내기",
       "pdf": "인쇄 / PDF"
     },
     "groupRate": "단체 요금 요청",

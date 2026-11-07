@@ -351,7 +351,7 @@
       "back": "Terug",
       "print": "Afdrukken",
       "roomingList": "Kamerlijst",
-      "csv": "CSV exporteren",
+      "csv": "Exporteren naar Excel",
       "pdf": "Afdrukken / PDF"
     },
     "groupRate": "Groepsprijs aanvragen",

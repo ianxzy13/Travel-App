@@ -676,7 +676,9 @@ export function RoomBoard({
               <div className="bg-muted/50 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border px-4 py-2 text-sm">
                 <span className="font-medium">{t("board.costSummary")}</span>
                 <span>
-                  {t("board.costPerNight", { amount: formatMoney(costs.totalPerNight, currency) })}
+                  {t("board.costPerNight", {
+                    amount: formatMoney(costs.totalPerNight, currency, { locale }),
+                  })}
                 </span>
                 <span className="text-muted-foreground">
                   {t("board.occupancy", {

@@ -347,7 +347,9 @@
     "love": "Con affetto,",
     "personal": "{you, select, one {Questo link è solo per te. Per favore non condividerlo.} other {Questo link è personale per la vostra famiglia. Per favore non condividetelo.}}",
     "subjectInvite": "Siete invitati: il matrimonio di {couple}",
-    "subjectReminder": "{you, select, one {Promemoria: conferma la tua presenza al matrimonio di {couple}} other {Promemoria: confermate la vostra presenza al matrimonio di {couple}}}"
+    "subjectReminder": "{you, select, one {Promemoria: conferma la tua presenza al matrimonio di {couple}} other {Promemoria: confermate la vostra presenza al matrimonio di {couple}}}",
+    "smsInvite": "{sender}: Invito al matrimonio! {you, select, one {Rispondi} other {Rispondete}} qui: {link}",
+    "smsReminder": "{sender}: Promemoria: {you, select, one {conferma la tua presenza} other {confermate la vostra presenza}} qui: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Condividi i tuoi piani di viaggio per il matrimonio di {couple}} other {Condividete i vostri piani di viaggio per il matrimonio di {couple}}}",

@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budget",
     "description": "Alles an einem Ort planen, verfolgen und bezahlen.",
-    "exportCsv": "CSV exportieren",
+    "exportCsv": "Nach Excel exportieren",
     "category": "Kategorie",
     "expense": "Ausgabe",
     "startTitle": "Lass uns euer Budget planen",

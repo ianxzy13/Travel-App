@@ -82,11 +82,12 @@ export function EventsCard({
 
   return (
     <Card id="events" className="scroll-mt-20">
-      <CardHeader>
+      {/* On phones the button goes under the text, so long labels (e.g. German) fit. */}
+      <CardHeader className="max-sm:grid-cols-1!">
         <CardTitle className="font-serif text-2xl">{t("title")}</CardTitle>
         <CardDescription>{t("description")}</CardDescription>
         {!readOnly && events.length > 0 && (
-          <CardAction>
+          <CardAction className="max-sm:col-start-1 max-sm:row-span-1 max-sm:row-start-3 max-sm:justify-self-start">
             <Button size="sm" onClick={() => setEditing("new")}>
               <Plus aria-hidden /> {t("add")}
             </Button>

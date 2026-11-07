@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budget",
     "description": "Plan, volg en betaal alles op één plek.",
-    "exportCsv": "CSV exporteren",
+    "exportCsv": "Exporteren naar Excel",
     "category": "Categorie",
     "expense": "Uitgave",
     "startTitle": "Laten we jullie budget plannen",

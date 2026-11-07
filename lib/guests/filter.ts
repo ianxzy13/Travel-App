@@ -96,9 +96,21 @@ export type SortState = { key: SortKey; dir: "asc" | "desc" };
 
 const AGE_ORDER = { adult: 0, child: 1, infant: 2 };
 const SIDE_ORDER = { partner_a: 0, partner_b: 1, both: 2 };
-const collator = new Intl.Collator(undefined, { sensitivity: "base", numeric: true });
+// One collator per language. The locale must be passed in: the server and the
+// browser have different defaults, and a different order breaks the page.
+const collators = new Map<string, Intl.Collator>();
+function collatorFor(locale: string | undefined) {
+  const key = locale ?? "";
+  let c = collators.get(key);
+  if (!c) {
+    c = new Intl.Collator(locale, { sensitivity: "base", numeric: true });
+    collators.set(key, c);
+  }
+  return c;
+}
 
-function compareBy(key: SortKey, a: GuestView, b: GuestView) {
+function compareBy(key: SortKey, a: GuestView, b: GuestView, locale?: string) {
+  const collator = collatorFor(locale);
   switch (key) {
     case "name":
       // last name first, like a printed guest list; unnamed plus-ones sort by display name
@@ -113,21 +125,23 @@ function compareBy(key: SortKey, a: GuestView, b: GuestView) {
     case "age":
       return AGE_ORDER[a.ageGroup] - AGE_ORDER[b.ageGroup];
     case "list":
-      return a.list.localeCompare(b.list);
+      return collator.compare(a.list, b.list);
   }
 }
 
 /** Returns a new sorted array; ties fall back to name so the order is stable. */
-export function sortGuests(guests: GuestView[], sort: SortState): GuestView[] {
+export function sortGuests(guests: GuestView[], sort: SortState, locale?: string): GuestView[] {
   const sign = sort.dir === "asc" ? 1 : -1;
-  return [...guests].sort((a, b) => sign * compareBy(sort.key, a, b) || compareBy("name", a, b));
+  return [...guests].sort(
+    (a, b) => sign * compareBy(sort.key, a, b, locale) || compareBy("name", a, b, locale),
+  );
 }
 
 /**
  * Orders guests so each household's members sit together (households sorted by
  * name) and every plus-one comes right after the guest who brings them.
  */
-export function groupByHousehold(guests: GuestView[]) {
+export function groupByHousehold(guests: GuestView[], locale?: string) {
   const groups = new Map<string, { id: string; name: string; guests: GuestView[] }>();
   for (const g of guests) {
     const group = groups.get(g.householdId) ?? {
@@ -139,6 +153,7 @@ export function groupByHousehold(guests: GuestView[]) {
     groups.set(g.householdId, group);
   }
   for (const group of groups.values()) group.guests = plusOnesAfterHosts(group.guests);
+  const collator = collatorFor(locale);
   return [...groups.values()].sort((a, b) => collator.compare(a.name, b.name));
 }
 

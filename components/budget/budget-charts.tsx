@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney } from "@/lib/budget/money";
 import { donutSlices, type BudgetSummary } from "@/lib/budget/stats";
@@ -23,12 +23,13 @@ const SLOT = (i: number) => `var(--chart-${i + 1})`;
 
 export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; currency: string }) {
   const t = useTranslations("budget");
+  const locale = useLocale();
   const slices = donutSlices(summary, 7, (count) => t("other", { count }));
   const total = slices.reduce((n, s) => n + s.value, 0);
   const bars = summary.categories
     .filter((c) => c.allocated > 0 || c.totals.committed > 0)
     .map((c) => ({ name: c.name, planned: c.allocated, committed: c.totals.committed }));
-  const money = (v: number) => formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
 
   if (slices.length === 0 && bars.length === 0) return null;
 
@@ -117,7 +118,7 @@ export function BudgetCharts({ summary, currency }: { summary: BudgetSummary; cu
                 <CartesianGrid horizontal={false} stroke="var(--border)" strokeDasharray="3 3" />
                 <XAxis
                   type="number"
-                  tickFormatter={(v: number) => formatMoney(v, currency, { cents: false })}
+                  tickFormatter={(v: number) => formatMoney(v, currency, { cents: false, locale })}
                   tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
                   axisLine={false}
                   tickLine={false}

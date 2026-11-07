@@ -543,7 +543,7 @@ function FlightList({
               {p(`flightCategory.${f.category}`)}
             </span>
             <span className="w-20 text-end tabular-nums">
-              {f.price != null ? formatMoney(f.price, currency) : ""}
+              {f.price != null ? formatMoney(f.price, currency, { locale }) : ""}
             </span>
           </button>
         </li>

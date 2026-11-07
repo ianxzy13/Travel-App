@@ -2,7 +2,7 @@
   "budget": {
     "title": "預算",
     "description": "在同一個地方規劃、追蹤和支付所有費用。",
-    "exportCsv": "匯出 CSV",
+    "exportCsv": "匯出至 Excel",
     "category": "類別",
     "expense": "支出",
     "startTitle": "一起來規劃預算",

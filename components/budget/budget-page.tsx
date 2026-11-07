@@ -79,14 +79,10 @@ type Props = BudgetData & {
 export function BudgetPage(props: Props) {
   const { currency, canEdit, secondaryCurrency, exchangeRate } = props;
   const t = useTranslations("budget");
+  const locale = useLocale();
   const summary = summarizeBudget(props.total, props.categories, props.expenses, props.payments);
   const upcoming = upcomingPayments(props.payments, props.expenses, props.categories, props.today);
-  const money = (v: number) => formatMoney(v, currency);
-  const hasDual = !!secondaryCurrency && !!exchangeRate && exchangeRate > 0;
-  const dual = (v: number) =>
-    hasDual
-      ? `${formatMoney(v, currency)} ≈ ${formatMoney(v * exchangeRate!, secondaryCurrency!)}`
-      : formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
 
   const [sheet, setSheet] = useState<ExpenseSheetMode>(null);
   const [categoryDialog, setCategoryDialog] = useState<BudgetCategory | "new" | null>(null);
@@ -251,10 +247,11 @@ function SummaryTiles({
   canEdit: boolean;
 }) {
   const t = useTranslations("budget");
-  const money = (v: number) => formatMoney(v, currency);
+  const locale = useLocale();
+  const money = (v: number) => formatMoney(v, currency, { locale });
   const hasDual = !!secondaryCurrency && !!exchangeRate && exchangeRate > 0;
   const secondary = (v: number) =>
-    hasDual ? formatMoney(v * exchangeRate!, secondaryCurrency!) : null;
+    hasDual ? formatMoney(v * exchangeRate!, secondaryCurrency!, { locale }) : null;
   const { totals, total, remaining } = summary;
   const base = Math.max(total ?? 0, totals.committed, 1);
   const pct = (v: number) => `${Math.min(100, (v / base) * 100)}%`;
@@ -473,7 +470,7 @@ function UpcomingPayments({
                   {p.note ? ` · ${p.note}` : ""}
                 </span>
               </span>
-              <span className="font-medium tabular-nums">{formatMoney(p.amount, currency)}</span>
+              <span className="font-medium tabular-nums">{formatMoney(p.amount, currency, { locale })}</span>
               <span
                 className={cn(
                   "w-24 text-end text-xs",
@@ -495,7 +492,7 @@ function UpcomingPayments({
                     startTransition(async () => {
                       const r = await setPaymentPaid(p.id, true);
                       if (r.ok)
-                        toast.success(t("markedPaid", { amount: formatMoney(p.amount, currency) }));
+                        toast.success(t("markedPaid", { amount: formatMoney(p.amount, currency, { locale }) }));
                       else toast.error(r.error);
                     })
                   }
@@ -543,7 +540,7 @@ function CategoryRow({
 }) {
   const t = useTranslations("budget");
   const locale = useLocale();
-  const money = (v: number) => formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
   const over = c.allocated > 0 && c.over > 0;
   const fill =
     c.allocated > 0

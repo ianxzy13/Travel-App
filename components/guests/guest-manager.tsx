@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Download, Plus, Tags, Upload, Users } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { PageHeader } from "@/components/app/page-header";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,6 +33,7 @@ export function GuestManager(data: GuestPageData) {
     currentMemberId, currentRole, members,
   } = data;
   const t = useTranslations("guests");
+  const locale = useLocale();
 
   // Parents start on "My guests", but only once they manage someone:
   // an empty list on day one looks like the guests are gone.
@@ -71,12 +72,12 @@ export function GuestManager(data: GuestPageData) {
   );
 
   const visible = useMemo(
-    () => sortGuests(filterGuests(guests, filters, coupleLanguage), sort),
-    [guests, filters, sort, coupleLanguage],
+    () => sortGuests(filterGuests(guests, filters, coupleLanguage), sort, locale),
+    [guests, filters, sort, coupleLanguage, locale],
   );
   const groups: GuestGroup[] = useMemo(
-    () => (grouped ? groupByHousehold(visible) : [{ id: "all", name: "", guests: visible }]),
-    [grouped, visible],
+    () => (grouped ? groupByHousehold(visible, locale) : [{ id: "all", name: "", guests: visible }]),
+    [grouped, visible, locale],
   );
 
   // Forget selected guests that were deleted or filtered out.

@@ -215,7 +215,7 @@ export default async function DashboardPage({
         </Reveal>
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3 [&>*]:min-w-0">
         {/* Next steps */}
         <Reveal immediate delay={0.1} className="lg:col-span-1">
           <Card className="h-full">
@@ -261,7 +261,7 @@ export default async function DashboardPage({
           immediate
           delay={0.15}
           stagger={0.06}
-          className="grid gap-4 sm:grid-cols-2 lg:col-span-2"
+          className="grid min-w-0 gap-4 sm:grid-cols-2 lg:col-span-2 [&>*]:min-w-0"
         >
           <SummaryCard
             icon={Wallet}

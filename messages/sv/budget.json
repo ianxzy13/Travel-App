@@ -2,7 +2,7 @@
   "budget": {
     "title": "Budget",
     "description": "Planera, följ upp och betala allt på ett ställe.",
-    "exportCsv": "Exportera CSV",
+    "exportCsv": "Exportera till Excel",
     "category": "Kategori",
     "expense": "Utgift",
     "startTitle": "Nu planerar vi er budget",

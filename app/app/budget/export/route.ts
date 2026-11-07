@@ -1,21 +1,22 @@
 import { format } from "date-fns";
-import Papa from "papaparse";
 import { getTranslations } from "next-intl/server";
 import { loadBudget } from "@/lib/budget/load";
 import { sumMoney } from "@/lib/budget/money";
 import { summarizeBudget } from "@/lib/budget/stats";
-import { safeCell } from "@/lib/guests/csv";
 import { createClient } from "@/lib/supabase/server";
 import { requireWedding } from "@/lib/wedding";
+import { type Cell, xlsxResponse } from "@/lib/xlsx/build";
 
-/** GET /app/budget/export → the budget as a CSV file (one row per expense). */
+/** GET /app/budget/export → the budget as an Excel file (one row per expense). */
 export async function GET() {
   const { wedding } = await requireWedding();
   const data = await loadBudget(await createClient(), wedding.id);
   const summary = summarizeBudget(null, data.categories, data.expenses, data.payments);
   const vendorName = new Map(data.vendors.map((v) => [v.id, v.name]));
-  const n = (v: number | null) => (v == null ? "" : v.toFixed(2));
+  // amounts stay numbers, so Excel can add them up
+  const n = (v: number | null): Cell => (v == null ? "" : Math.round(v * 100) / 100);
   const c = await getTranslations("budget.csv");
+  const title = (await getTranslations("budget"))("title");
 
   const rows = summary.categories.flatMap((cat) =>
     (cat.expenses.length ? cat.expenses : [null]).map((e) => {
@@ -24,7 +25,7 @@ export async function GET() {
       const next = own
         .filter((p) => !p.paid && p.dueDate)
         .sort((a, b) => a.dueDate!.localeCompare(b.dueDate!))[0];
-      return {
+      const row: Record<string, Cell> = {
         [c("category")]: cat.name,
         [c("planned")]: n(cat.allocated),
         [c("expense")]: e?.name ?? "",
@@ -37,18 +38,25 @@ export async function GET() {
         [c("currency")]: wedding.currency,
         [c("notes")]: e?.notes ?? "",
       };
+      return row;
     }),
   );
 
-  const safe = rows.map((r) =>
-    Object.fromEntries(Object.entries(r).map(([k, v]) => [k, safeCell(v)])),
-  );
-  const csv = "﻿" + Papa.unparse(safe, { newline: "\r\n" });
-  return new Response(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="${c("file")}-${format(new Date(), "yyyy-MM-dd")}.csv"`,
-      "Cache-Control": "no-store",
-    },
-  });
+  const header = [
+    c("category"),
+    c("planned"),
+    c("expense"),
+    c("vendor"),
+    c("estimated"),
+    c("actual"),
+    c("paid"),
+    c("nextDue"),
+    c("nextAmount"),
+    c("currency"),
+    c("notes"),
+  ];
+  return xlsxResponse(`${c("file")}-${format(new Date(), "yyyy-MM-dd")}.xlsx`, title, [
+    header,
+    ...rows.map((r) => header.map((h) => r[h])),
+  ]);
 }

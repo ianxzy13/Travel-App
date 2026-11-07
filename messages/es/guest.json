@@ -143,9 +143,9 @@
     "thanks": "¡Gracias!",
     "thanksText": "{you, select, one {Tu respuesta se ha enviado a {couple}. Puedes cambiarla cuando quieras con este mismo enlace.} other {Vuestra respuesta se ha enviado a {couple}. Podéis cambiarla cuando queráis con este mismo enlace.}}",
     "thanksTextUntil": "{you, select, one {Tu respuesta se ha enviado a {couple}. Puedes cambiarla hasta el {date} con este mismo enlace.} other {Vuestra respuesta se ha enviado a {couple}. Podéis cambiarla hasta el {date} con este mismo enlace.}}",
-    "send": "Enviar nuestra respuesta",
+    "send": "{you, select, one {Enviar mi respuesta} other {Enviar nuestra respuesta}}",
     "save": "Guardar cambios",
-    "change": "Cambiar nuestras respuestas",
+    "change": "{you, select, one {Cambiar mis respuestas} other {Cambiar nuestras respuestas}}",
     "yourAnswers": "{you, select, one {Tus respuestas} other {Vuestras respuestas}}",
     "attending": "Asiste",
     "notAttending": "No asiste",
@@ -347,7 +347,9 @@
     "love": "Con cariño,",
     "personal": "{you, select, one {Este enlace es solo para ti. Por favor, no lo compartas.} other {Este enlace es personal para vuestro hogar. Por favor, no lo compartáis.}}",
     "subjectInvite": "Estás invitado: la boda de {couple}",
-    "subjectReminder": "{you, select, one {Recordatorio: confirma tu asistencia a la boda de {couple}} other {Recordatorio: confirmad vuestra asistencia a la boda de {couple}}}"
+    "subjectReminder": "{you, select, one {Recordatorio: confirma tu asistencia a la boda de {couple}} other {Recordatorio: confirmad vuestra asistencia a la boda de {couple}}}",
+    "smsInvite": "{sender}: ¡Invitación de boda! {you, select, one {Confirma tu asistencia} other {Confirmad vuestra asistencia}} aquí: {link}",
+    "smsReminder": "{sender}: Recordatorio: {you, select, one {confirma tu asistencia} other {confirmad vuestra asistencia}} aquí: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Comparte tus planes de viaje para la boda de {couple}} other {Compartid vuestros planes de viaje para la boda de {couple}}}",

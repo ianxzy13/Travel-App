@@ -347,7 +347,9 @@
     "love": "Liefs,",
     "personal": "{you, select, one {Deze link is alleen voor jou. Deel hem alsjeblieft niet.} other {Deze link is persoonlijk voor jullie huishouden. Deel hem alsjeblieft niet.}}",
     "subjectInvite": "Uitnodiging: de bruiloft van {couple}",
-    "subjectReminder": "{you, select, one {Herinnering: laat {couple} weten of je komt} other {Herinnering: laat {couple} weten of jullie komen}}"
+    "subjectReminder": "{you, select, one {Herinnering: laat {couple} weten of je komt} other {Herinnering: laat {couple} weten of jullie komen}}",
+    "smsInvite": "{sender}: Uitnodiging voor de bruiloft! Laat hier weten of {you, select, one {je komt} other {jullie komen}}: {link}",
+    "smsReminder": "{sender}: Herinnering: laat even weten of {you, select, one {je komt} other {jullie komen}}: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Deel je reisplannen voor de bruiloft van {couple}} other {Deel jullie reisplannen voor de bruiloft van {couple}}}",

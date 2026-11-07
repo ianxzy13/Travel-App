@@ -347,7 +347,9 @@
     "love": "S ljubavlju,",
     "personal": "{you, select, one {Ova poveznica je samo za tebe. Molimo, ne dijeli je.} other {Ova poveznica je samo za vaše kućanstvo. Molimo, ne dijelite je.}}",
     "subjectInvite": "Pozivnica za vjenčanje: {couple}",
-    "subjectReminder": "{you, select, one {Podsjetnik: potvrdi dolazak na vjenčanje para {couple}} other {Podsjetnik: potvrdite dolazak na vjenčanje para {couple}}}"
+    "subjectReminder": "{you, select, one {Podsjetnik: potvrdi dolazak na vjenčanje para {couple}} other {Podsjetnik: potvrdite dolazak na vjenčanje para {couple}}}",
+    "smsInvite": "{sender}: Pozivnica za vjenčanje! {you, select, one {Potvrdi} other {Potvrdite}} dolazak ovdje: {link}",
+    "smsReminder": "{sender}: Podsjetnik – {you, select, one {potvrdi} other {potvrdite}} dolazak ovdje: {link}"
   },
   "travelEmail": {
     "preview": "{you, select, one {Podijeli svoje planove putovanja za vjenčanje para {couple}} other {Podijelite svoje planove putovanja za vjenčanje para {couple}}}",

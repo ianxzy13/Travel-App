@@ -17,7 +17,7 @@ import {
   Trash2,
   WalletCards,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { previewLink } from "@/app/app/inspiration/actions";
 import { addQuoteToBudget, deleteVendor, saveVendor } from "@/app/app/vendors/actions";
@@ -84,12 +84,13 @@ export function VendorsPage({
   canEdit,
 }: Props) {
   const t = useTranslations("vendors");
+  const locale = useLocale();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [category, setCategory] = useState("all");
   const [sheet, setSheet] = useState<VendorItem | "new" | null>(null);
   const categoryName = new Map(categories.map((c) => [c.id, c.name]));
-  const money = (v: number) => formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
 
   const visible = useMemo(() => {
     const words = normalize(search).split(/\s+/).filter(Boolean);
@@ -291,6 +292,7 @@ function VendorForm({
   onClose: () => void;
 }) {
   const t = useTranslations("vendors");
+  const locale = useLocale();
   const [pending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(vendorSchema),
@@ -312,7 +314,7 @@ function VendorForm({
     } satisfies VendorValues,
   });
   const { errors } = form.formState;
-  const money = (v: number) => formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
 
   const onSubmit = form.handleSubmit((values) =>
     startTransition(async () => {

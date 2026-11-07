@@ -4,7 +4,7 @@ import { useTransition } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Plus, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { deleteExpense, saveExpense } from "@/app/app/budget/actions";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -76,6 +76,7 @@ function ExpenseForm({
 }: Props & { mode: NonNullable<ExpenseSheetMode> }) {
   const editing = mode.kind === "edit" ? mode.expense : null;
   const t = useTranslations("budget.sheet");
+  const locale = useLocale();
   const vt = useValidationText();
   const [pending, startTransition] = useTransition();
 
@@ -119,7 +120,7 @@ function ExpenseForm({
   const cost = watched.actual ?? watched.estimated ?? 0;
   const paid = sumMoney(watched.payments.filter((p) => p.paid).map((p) => p.amount));
   const scheduled = sumMoney(watched.payments.map((p) => p.amount));
-  const money = (v: number) => formatMoney(v, currency);
+  const money = (v: number) => formatMoney(v, currency, { locale });
 
   const onSubmit = form.handleSubmit((values) =>
     startTransition(async () => {

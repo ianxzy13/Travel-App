@@ -5,7 +5,7 @@ import { Controller, useForm, type UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Link2, Loader2, Plus, Trash2, Unlink } from "lucide-react";
 import { LanguageMultiSelect } from "@/components/guests/language-multi-select";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   addRelationship,
@@ -139,6 +139,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
   const { mode, onModeChange, households, events, names, guests, coupleLanguage } = props;
   const t = useTranslations("guests.sheet");
   const g = useTranslations("guests");
+  const locale = useLocale();
   const usedLanguages = [...new Set(households.map((h) => h.language).filter(Boolean))];
   const editing = mode.kind === "edit" ? mode.guest : null;
   const isPlusOne = !!editing?.plusOneOf;
@@ -241,7 +242,7 @@ function GuestForm(props: Props & { mode: NonNullable<SheetMode> }) {
                         <SelectContent>
                           <SelectItem value="new">{t("newHousehold")}</SelectItem>
                           {[...households]
-                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .sort((a, b) => a.name.localeCompare(b.name, locale))
                             .map((h) => (
                               <SelectItem key={h.id} value={h.id}>
                                 {h.name}
@@ -667,6 +668,7 @@ function RelationshipsEditor({
   relationships: RelationshipItem[];
 }) {
   const t = useTranslations("guests.sheet");
+  const locale = useLocale();
   const [type, setType] = useState<RelationshipType>("keep_apart");
   const [other, setOther] = useState("");
   const [pending, startTransition] = useTransition();
@@ -675,7 +677,7 @@ function RelationshipsEditor({
   const taken = new Set(mine.map((r) => (r.guestA === guest.id ? r.guestB : r.guestA)));
   const options = guests
     .filter((g) => g.id !== guest.id && !taken.has(g.id))
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => a.name.localeCompare(b.name, locale));
 
   function add() {
     startTransition(async () => {
