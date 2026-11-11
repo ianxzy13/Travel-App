@@ -103,13 +103,13 @@
       "soon": "Скоро"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Майами → Любляна",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Лондон → Канкун",
       "flightDetail": "Прибытие: чт, 5 марта, 14:20",
       "hotel": "Hotel Park · Номер 204",
-      "shuttle": "Трансфер на озеро Блед · 16:00",
-      "table": "Стол 3 · с семьёй Ковач",
+      "shuttle": "Трансфер к месту свадьбы · 16:00",
+      "table": "Стол 3 · с семьёй Беннетт",
       "passport": "Паспорт действителен минимум до июня 2027",
       "yourTrip": "Ваша поездка"
     },

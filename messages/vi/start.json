@@ -103,13 +103,13 @@
       "soon": "Sắp ra mắt"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Đến T5 5/3, 14:20",
       "hotel": "Hotel Park · Phòng 204",
-      "shuttle": "Xe đến hồ Bled · 16:00",
-      "table": "Bàn 3 · cùng gia đình Kovač",
+      "shuttle": "Xe đến địa điểm tổ chức · 16:00",
+      "table": "Bàn 3 · cùng gia đình Bennett",
       "passport": "Hộ chiếu còn hạn ít nhất đến tháng 6/2027",
       "yourTrip": "Chuyến đi của bạn"
     },

@@ -103,13 +103,13 @@
       "soon": "Uskoro"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Dolazak čet 5. ožu, 14:20",
       "hotel": "Hotel Park · Soba 204",
-      "shuttle": "Prijevoz do Bledskog jezera · 16:00",
-      "table": "Stol 3 · s obitelji Kovač",
+      "shuttle": "Prijevoz do mjesta vjenčanja · 16:00",
+      "table": "Stol 3 · s obitelji Bennett",
       "passport": "Putovnica valjana najmanje do lipnja 2027.",
       "yourTrip": "Vaše putovanje"
     },

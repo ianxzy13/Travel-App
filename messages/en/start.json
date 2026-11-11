@@ -103,13 +103,13 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Arrives Thu 5 Mar, 14:20",
       "hotel": "Hotel Park · Room 204",
-      "shuttle": "Shuttle to Lake Bled · 16:00",
-      "table": "Table 3 · with the Kovač family",
+      "shuttle": "Shuttle to the venue · 16:00",
+      "table": "Table 3 · with the Bennett family",
       "passport": "Passport valid until at least June 2027",
       "yourTrip": "Your trip"
     },

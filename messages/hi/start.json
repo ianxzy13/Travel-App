@@ -103,13 +103,13 @@
       "soon": "जल्द आ रहा है"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "मियामी → ल्युब्ल्याना",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "लंदन → कैनकन",
       "flightDetail": "आगमन गुरु 5 मार्च, 14:20",
       "hotel": "Hotel Park · कमरा 204",
-      "shuttle": "लेक ब्लेड के लिए शटल · 16:00",
-      "table": "टेबल 3 · Kovač परिवार के साथ",
+      "shuttle": "समारोह स्थल के लिए शटल · 16:00",
+      "table": "टेबल 3 · Bennett परिवार के साथ",
       "passport": "पासपोर्ट कम से कम जून 2027 तक वैध",
       "yourTrip": "आपकी यात्रा"
     },

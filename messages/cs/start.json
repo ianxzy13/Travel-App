@@ -103,13 +103,13 @@
       "soon": "Brzy"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Lublaň",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londýn → Cancún",
       "flightDetail": "Přílet čt 5. bře, 14:20",
       "hotel": "Hotel Park · Pokoj 204",
-      "shuttle": "Transfer k Bledskému jezeru · 16:00",
-      "table": "Stůl 3 · s rodinou Kovačových",
+      "shuttle": "Transfer na místo svatby · 16:00",
+      "table": "Stůl 3 · s rodinou Bennettových",
       "passport": "Pas platný alespoň do června 2027",
       "yourTrip": "Vaše cesta"
     },

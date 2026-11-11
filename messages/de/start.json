@@ -103,13 +103,13 @@
       "soon": "Bald verfügbar"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Ankunft Do 5. März, 14:20",
       "hotel": "Hotel Park · Zimmer 204",
-      "shuttle": "Shuttle zum Bleder See · 16:00",
-      "table": "Tisch 3 · mit Familie Kovač",
+      "shuttle": "Shuttle zur Location · 16:00",
+      "table": "Tisch 3 · mit Familie Bennett",
       "passport": "Reisepass gültig bis mindestens Juni 2027",
       "yourTrip": "Deine Reise"
     },

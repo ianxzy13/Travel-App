@@ -103,13 +103,13 @@
       "soon": "เร็วๆ นี้"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "ไมอามี → ลูบลิยานา",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "ลอนดอน → แคนคูน",
       "flightDetail": "ถึง พฤ. 5 มี.ค. 14:20",
       "hotel": "Hotel Park · ห้อง 204",
-      "shuttle": "รถรับส่งไปทะเลสาบเบลด · 16:00",
-      "table": "โต๊ะ 3 · กับครอบครัว Kovač",
+      "shuttle": "รถรับส่งไปสถานที่จัดงาน · 16:00",
+      "table": "โต๊ะ 3 · กับครอบครัว Bennett",
       "passport": "หนังสือเดินทางต้องใช้ได้อย่างน้อยถึงมิถุนายน 2027",
       "yourTrip": "ทริปของคุณ"
     },

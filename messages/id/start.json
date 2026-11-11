@@ -103,13 +103,13 @@
       "soon": "Segera hadir"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Tiba Kam 5 Mar, 14.20",
       "hotel": "Hotel Park · Kamar 204",
-      "shuttle": "Antar-jemput ke Danau Bled · 16.00",
-      "table": "Meja 3 · bersama keluarga Kovač",
+      "shuttle": "Antar-jemput ke lokasi acara · 16.00",
+      "table": "Meja 3 · bersama keluarga Bennett",
       "passport": "Paspor berlaku setidaknya sampai Juni 2027",
       "yourTrip": "Perjalanan Anda"
     },

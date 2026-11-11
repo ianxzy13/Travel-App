@@ -103,13 +103,13 @@
       "soon": "Binnenkort"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londen → Cancún",
       "flightDetail": "Aankomst do 5 mrt, 14:20",
       "hotel": "Hotel Park · Kamer 204",
-      "shuttle": "Shuttle naar het meer van Bled · 16:00",
-      "table": "Tafel 3 · met de familie Kovač",
+      "shuttle": "Shuttle naar de trouwlocatie · 16:00",
+      "table": "Tafel 3 · met de familie Bennett",
       "passport": "Paspoort geldig tot minstens juni 2027",
       "yourTrip": "Jouw reis"
     },

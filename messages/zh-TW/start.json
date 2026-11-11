@@ -103,13 +103,13 @@
       "soon": "即將推出"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "邁阿密 → 盧布林雅那",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "倫敦 → 坎昆",
       "flightDetail": "3 月 5 日（週四）14:20 抵達",
       "hotel": "Hotel Park · 204 房",
-      "shuttle": "前往布萊德湖的接駁車 · 16:00",
-      "table": "第 3 桌 · 與 Kovač 一家同桌",
+      "shuttle": "前往婚禮場地的接駁車 · 16:00",
+      "table": "第 3 桌 · 與 Bennett 一家同桌",
       "passport": "護照有效期至少到 2027 年 6 月",
       "yourTrip": "你的行程"
     },

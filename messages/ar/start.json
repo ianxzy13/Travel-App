@@ -103,13 +103,13 @@
       "soon": "قريبًا"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "ميامي → ليوبليانا",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "لندن → كانكون",
       "flightDetail": "الوصول الخميس 5 مارس، 14:20",
       "hotel": "Hotel Park · الغرفة 204",
-      "shuttle": "حافلة إلى بحيرة بليد · 16:00",
-      "table": "الطاولة 3 · مع عائلة Kovač",
+      "shuttle": "حافلة إلى مكان الحفل · 16:00",
+      "table": "الطاولة 3 · مع عائلة Bennett",
       "passport": "جواز السفر صالح حتى يونيو 2027 على الأقل",
       "yourTrip": "رحلتك"
     },

@@ -103,13 +103,13 @@
       "soon": "곧 출시"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "마이애미 → 류블랴나",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "런던 → 칸쿤",
       "flightDetail": "3월 5일 (목) 14:20 도착",
       "hotel": "Hotel Park · 204호",
-      "shuttle": "블레드 호수행 셔틀 · 16:00",
-      "table": "테이블 3 · Kovač 가족과 함께",
+      "shuttle": "예식장행 셔틀 · 16:00",
+      "table": "테이블 3 · Bennett 가족과 함께",
       "passport": "여권은 최소 2027년 6월까지 유효해야 함",
       "yourTrip": "내 여행"
     },

@@ -103,13 +103,13 @@
       "soon": "近日公開"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "マイアミ → リュブリャナ",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "ロンドン → カンクン",
       "flightDetail": "到着 3月5日（木）14:20",
       "hotel": "Hotel Park · 204号室",
-      "shuttle": "ブレッド湖への送迎 · 16:00",
-      "table": "テーブル3 · Kovač 家と",
+      "shuttle": "会場への送迎 · 16:00",
+      "table": "テーブル3 · Bennett 家と",
       "passport": "パスポートは2027年6月まで有効であること",
       "yourTrip": "あなたの旅程"
     },

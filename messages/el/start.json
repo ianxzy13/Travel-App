@@ -103,13 +103,13 @@
       "soon": "Σύντομα"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Μαϊάμι → Λιουμπλιάνα",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Λονδίνο → Κανκούν",
       "flightDetail": "Άφιξη Πέμ 5 Μαρ, 14:20",
       "hotel": "Hotel Park · Δωμάτιο 204",
-      "shuttle": "Μεταφορά στη λίμνη Μπλεντ · 16:00",
-      "table": "Τραπέζι 3 · με την οικογένεια Kovač",
+      "shuttle": "Μεταφορά στον χώρο του γάμου · 16:00",
+      "table": "Τραπέζι 3 · με την οικογένεια Bennett",
       "passport": "Διαβατήριο σε ισχύ τουλάχιστον έως τον Ιούνιο του 2027",
       "yourTrip": "Το ταξίδι σας"
     },

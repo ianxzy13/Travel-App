@@ -103,13 +103,13 @@
       "soon": "Yakında"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londra → Cancún",
       "flightDetail": "Varış Per 5 Mar, 14:20",
       "hotel": "Hotel Park · Oda 204",
-      "shuttle": "Bled Gölü'ne servis · 16:00",
-      "table": "Masa 3 · Kovač ailesiyle",
+      "shuttle": "Düğün mekânına servis · 16:00",
+      "table": "Masa 3 · Bennett ailesiyle",
       "passport": "Pasaport en az Haziran 2027'ye kadar geçerli olmalı",
       "yourTrip": "Seyahatiniz"
     },

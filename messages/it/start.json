@@ -103,13 +103,13 @@
       "soon": "In arrivo"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Lubiana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londra → Cancún",
       "flightDetail": "Arriva gio 5 mar, 14:20",
       "hotel": "Hotel Park · Camera 204",
-      "shuttle": "Navetta per il lago di Bled · 16:00",
-      "table": "Tavolo 3 · con la famiglia Kovač",
+      "shuttle": "Navetta per la location · 16:00",
+      "table": "Tavolo 3 · con la famiglia Bennett",
       "passport": "Passaporto valido almeno fino a giugno 2027",
       "yourTrip": "Il tuo viaggio"
     },

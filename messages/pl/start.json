@@ -103,13 +103,13 @@
       "soon": "Wkrótce"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Lublana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londyn → Cancún",
       "flightDetail": "Przylot czw. 5 mar, 14:20",
       "hotel": "Hotel Park · Pokój 204",
-      "shuttle": "Transfer nad jezioro Bled · 16:00",
-      "table": "Stół 3 · z rodziną Kovač",
+      "shuttle": "Transfer na miejsce wesela · 16:00",
+      "table": "Stół 3 · z rodziną Bennett",
       "passport": "Paszport ważny co najmniej do czerwca 2027",
       "yourTrip": "Twoja podróż"
     },

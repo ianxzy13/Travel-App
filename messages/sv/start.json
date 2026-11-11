@@ -103,13 +103,13 @@
       "soon": "Kommer snart"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Ankommer tors 5 mars, 14:20",
       "hotel": "Hotel Park · Rum 204",
-      "shuttle": "Transfer till Bledsjön · 16:00",
-      "table": "Bord 3 · med familjen Kovač",
+      "shuttle": "Transfer till bröllopsplatsen · 16:00",
+      "table": "Bord 3 · med familjen Bennett",
       "passport": "Passet gäller minst till juni 2027",
       "yourTrip": "Din resa"
     },
