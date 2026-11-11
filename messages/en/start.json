@@ -17,8 +17,8 @@
         "text": "Every guest gets their own page: flights, hotel room, shuttle time, table number, and a checklist of what to bring."
       },
       "entry": {
-        "title": "EU entry checklist",
-        "text": "Passport rules, visa requirements, ETIAS — generated for each guest’s home country so nobody gets stuck at the border."
+        "title": "Entry checklist for every guest",
+        "text": "Passport, visa and travel permit steps for the country you marry in, matched to each guest’s home country, whichever continent they fly in from."
       },
       "rooms": {
         "title": "Hotel room board",
@@ -37,7 +37,7 @@
         "text": "Your Slovenian grandma sees everything in Slovenian. Your college friends see it in English. Automatic."
       }
     },
-    "compareTitle": "Vow vs. typical US wedding apps",
+    "compareTitle": "Vow vs. typical wedding apps",
     "compare": {
       "tripPage": "Personal trip page per guest",
       "entryChecklist": "Entry/visa checklist by country",

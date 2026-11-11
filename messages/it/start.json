@@ -67,8 +67,8 @@
         "text": "Ogni ospite ha la sua pagina: voli, camera d'albergo, orario della navetta, numero del tavolo e una checklist di cosa portare."
       },
       "entry": {
-        "title": "Checklist d'ingresso nell'UE",
-        "text": "Regole sul passaporto, visti, ETIAS — generati per il paese di ogni ospite, così nessuno resta bloccato alla frontiera."
+        "title": "Checklist d’ingresso per ogni ospite",
+        "text": "Passaporto, visto e permessi di viaggio per il paese delle nozze, in base al paese di ogni ospite, da qualunque continente arrivi."
       },
       "rooms": {
         "title": "Bacheca camere d'albergo",
@@ -87,7 +87,7 @@
         "text": "La tua nonna slovena vede tutto in sloveno. I tuoi amici dell'università lo vedono in inglese. In automatico."
       }
     },
-    "compareTitle": "Vow vs. le classiche app di matrimonio USA",
+    "compareTitle": "Vow vs. le classiche app di matrimonio",
     "compare": {
       "tripPage": "Pagina di viaggio personale per ogni ospite",
       "entryChecklist": "Checklist ingresso/visti per paese",

@@ -67,8 +67,8 @@
         "text": "Mỗi khách có trang riêng: chuyến bay, phòng khách sạn, giờ xe đưa đón, số bàn và danh sách đồ cần mang."
       },
       "entry": {
-        "title": "Danh sách nhập cảnh EU",
-        "text": "Quy định hộ chiếu, yêu cầu thị thực, ETIAS — tạo riêng cho quốc gia của từng khách để không ai bị kẹt ở biên giới."
+        "title": "Danh sách nhập cảnh cho từng khách",
+        "text": "Hộ chiếu, thị thực và giấy phép đi lại cho quốc gia tổ chức cưới, theo quốc gia của từng khách, dù họ bay đến từ châu lục nào."
       },
       "rooms": {
         "title": "Bảng phòng khách sạn",
@@ -87,7 +87,7 @@
         "text": "Bà ngoại người Slovenia của bạn xem mọi thứ bằng tiếng Slovenia. Bạn đại học xem bằng tiếng Anh. Tự động."
       }
     },
-    "compareTitle": "Vow so với các ứng dụng cưới phổ biến ở Mỹ",
+    "compareTitle": "Vow so với các ứng dụng cưới phổ biến",
     "compare": {
       "tripPage": "Trang chuyến đi riêng cho mỗi khách",
       "entryChecklist": "Danh sách nhập cảnh/thị thực theo quốc gia",

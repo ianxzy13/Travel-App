@@ -67,8 +67,8 @@
         "text": "Jeder Gast bekommt eine eigene Seite: Flüge, Hotelzimmer, Shuttle-Zeit, Tischnummer und eine Liste, was mit muss."
       },
       "entry": {
-        "title": "EU-Einreise-Checkliste",
-        "text": "Passregeln, Visumpflicht, ETIAS — für das Herkunftsland jedes Gastes erstellt, damit niemand an der Grenze hängen bleibt."
+        "title": "Einreise-Checkliste für jeden Gast",
+        "text": "Pass, Visum und Reisegenehmigung für das Land der Hochzeit, passend zum Herkunftsland jedes Gastes, egal von welchem Kontinent er anreist."
       },
       "rooms": {
         "title": "Hotelzimmer-Board",
@@ -87,7 +87,7 @@
         "text": "Deine slowenische Oma sieht alles auf Slowenisch. Deine Uni-Freunde sehen es auf Englisch. Automatisch."
       }
     },
-    "compareTitle": "Vow vs. typische US-Hochzeits-Apps",
+    "compareTitle": "Vow vs. typische Hochzeits-Apps",
     "compare": {
       "tripPage": "Persönliche Reiseseite pro Gast",
       "entryChecklist": "Einreise-/Visa-Checkliste nach Land",

@@ -67,8 +67,8 @@
         "text": "Chaque invité a sa propre page : vols, chambre d’hôtel, horaire de la navette, numéro de table et une checklist de ce qu’il faut emporter."
       },
       "entry": {
-        "title": "Checklist d’entrée dans l’UE",
-        "text": "Règles de passeport, visas, ETIAS — générés pour le pays de chaque invité, pour que personne ne reste bloqué à la frontière."
+        "title": "Checklist d’entrée pour chaque invité",
+        "text": "Passeport, visa et autorisation de voyage pour le pays du mariage, selon le pays de chaque invité, quel que soit le continent d’où il arrive."
       },
       "rooms": {
         "title": "Tableau des chambres d’hôtel",
@@ -87,7 +87,7 @@
         "text": "Votre grand-mère slovène voit tout en slovène. Vos amis de fac le voient en anglais. Automatiquement."
       }
     },
-    "compareTitle": "Vow vs les applis de mariage américaines classiques",
+    "compareTitle": "Vow vs les applis de mariage classiques",
     "compare": {
       "tripPage": "Page de voyage personnelle par invité",
       "entryChecklist": "Checklist entrée/visa par pays",

@@ -67,8 +67,8 @@
         "text": "Setiap tamu punya halamannya sendiri: penerbangan, kamar hotel, jam antar-jemput, nomor meja, dan daftar barang bawaan."
       },
       "entry": {
-        "title": "Daftar periksa masuk UE",
-        "text": "Aturan paspor, persyaratan visa, ETIAS — dibuat untuk negara asal setiap tamu agar tidak ada yang tertahan di perbatasan."
+        "title": "Daftar periksa masuk untuk setiap tamu",
+        "text": "Paspor, visa, dan izin perjalanan untuk negara tempat pernikahan, disesuaikan dengan negara asal setiap tamu, dari benua mana pun mereka datang."
       },
       "rooms": {
         "title": "Papan kamar hotel",
@@ -87,7 +87,7 @@
         "text": "Nenek Anda di Slovenia melihat semuanya dalam bahasa Slovenia. Teman kuliah Anda melihatnya dalam bahasa Inggris. Otomatis."
       }
     },
-    "compareTitle": "Vow vs. aplikasi pernikahan AS pada umumnya",
+    "compareTitle": "Vow vs. aplikasi pernikahan pada umumnya",
     "compare": {
       "tripPage": "Halaman perjalanan pribadi per tamu",
       "entryChecklist": "Daftar periksa masuk/visa per negara",

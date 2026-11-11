@@ -67,8 +67,8 @@
         "text": "Elke gast krijgt een eigen pagina: vluchten, hotelkamer, shuttletijd, tafelnummer en een checklist van wat mee moet."
       },
       "entry": {
-        "title": "EU-inreischecklist",
-        "text": "Paspoortregels, visumplicht, ETIAS — gemaakt voor het land van elke gast, zodat niemand vastloopt aan de grens."
+        "title": "Inreischecklist voor elke gast",
+        "text": "Paspoort, visum en reisvergunning voor het land van de bruiloft, afgestemd op het land van elke gast, van welk continent ze ook komen."
       },
       "rooms": {
         "title": "Overzicht hotelkamers",
@@ -87,7 +87,7 @@
         "text": "Je Sloveense oma ziet alles in het Sloveens. Je studievrienden zien het in het Engels. Automatisch."
       }
     },
-    "compareTitle": "Vow vs. typische Amerikaanse trouwapps",
+    "compareTitle": "Vow vs. typische trouwapps",
     "compare": {
       "tripPage": "Persoonlijke reispagina per gast",
       "entryChecklist": "Inreis-/visumchecklist per land",

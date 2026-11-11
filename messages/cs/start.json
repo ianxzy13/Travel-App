@@ -67,8 +67,8 @@
         "text": "Každý host má vlastní stránku: lety, hotelový pokoj, čas transferu, číslo stolu a seznam věcí s sebou."
       },
       "entry": {
-        "title": "Seznam pro vstup do EU",
-        "text": "Pasová pravidla, víza, ETIAS — připravené pro zemi každého hosta, aby nikdo neuvízl na hranicích."
+        "title": "Vstupní seznam pro každého hosta",
+        "text": "Pas, vízum a cestovní povolení pro zemi svatby, podle země každého hosta, ať přiletí z kteréhokoli kontinentu."
       },
       "rooms": {
         "title": "Přehled hotelových pokojů",
@@ -87,7 +87,7 @@
         "text": "Vaše slovinská babička vidí vše slovinsky. Kamarádi z vysoké anglicky. Automaticky."
       }
     },
-    "compareTitle": "Vow vs. typické americké svatební aplikace",
+    "compareTitle": "Vow vs. typické svatební aplikace",
     "compare": {
       "tripPage": "Osobní stránka cesty pro každého hosta",
       "entryChecklist": "Seznam pro vstup/víza podle země",

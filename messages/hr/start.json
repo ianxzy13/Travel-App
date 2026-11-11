@@ -67,8 +67,8 @@
         "text": "Svaki gost dobiva vlastitu stranicu: letovi, hotelska soba, vrijeme prijevoza, broj stola i popis stvari za ponijeti."
       },
       "entry": {
-        "title": "Popis za ulazak u EU",
-        "text": "Pravila za putovnice, vize, ETIAS — pripremljeno za zemlju svakog gosta da nitko ne zapne na granici."
+        "title": "Popis za ulazak za svakog gosta",
+        "text": "Putovnica, viza i putne dozvole za zemlju vjenčanja, prema zemlji svakog gosta, s kojeg god kontinenta dolazi."
       },
       "rooms": {
         "title": "Ploča hotelskih soba",
@@ -87,7 +87,7 @@
         "text": "Vaša baka iz Slovenije sve vidi na slovenskom. Vaši prijatelji s faksa vide sve na engleskom. Automatski."
       }
     },
-    "compareTitle": "Vow u usporedbi s tipičnim američkim aplikacijama za vjenčanja",
+    "compareTitle": "Vow u usporedbi s tipičnim aplikacijama za vjenčanja",
     "compare": {
       "tripPage": "Osobna stranica putovanja za svakog gosta",
       "entryChecklist": "Popis za ulazak/vize po zemlji",
