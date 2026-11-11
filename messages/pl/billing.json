@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Plan i płatności",
+    "title": "Plan i płatności",
+    "description": "To wesele korzysta z planu {plan}.",
+    "notEnabled": "Płatności nie są jeszcze włączone, więc na razie wszystko w Vow jest w cenie.",
+    "thanks": "Dziękujemy! Nowy plan będzie gotowy w ciągu minuty. Jeśli go nie widać, odśwież stronę.",
+    "yours": "Za co płacisz",
+    "renewsOn": "odnawia się {date}",
+    "endsOn": "kończy się {date}",
+    "validUntil": "w cenie do {date}",
+    "current": "Obecny plan",
+    "perMonth": "miesięcznie",
+    "buyMonthly": "Wybierz miesięczny",
+    "buyOnce": "Zapłać raz, {price}",
+    "buyPro": "Wybierz Vow Pro",
+    "ownerBuys": "Plan tego wesela może wybrać para lub edytor.",
+    "manage": "Zarządzaj płatnościami",
+    "seePlans": "Zobacz plany",
+    "checkoutFailed": "Okno płatności się nie otworzyło. Sprawdź połączenie i spróbuj ponownie.",
+    "fineprint": "Ceny zawierają VAT, jeśli ma zastosowanie. Płatności obsługuje Paddle jako nasz sprzedawca. Plan miesięczny można anulować w każdej chwili: działa do końca opłaconego miesiąca. Jednorazowy Vow Plus działa do 90 dni po ślubie, i co najmniej rok.",
+    "landingTitle": "Za darmo na start, więcej, gdy trzeba",
+    "landingText": "Każda para planuje za darmo. Vow Plus dodaje to, czego potrzebują większe wesela, a Vow Pro jest dla konsultantów ślubnych.",
+    "landingCta": "Zacznij planować za darmo",
+    "plans": {
+      "free": {
+        "name": "Za darmo",
+        "note": "Dla każdej pary, rodziny i gościa.",
+        "features": {
+          "guests": "Do {guests} gości",
+          "languages": "Wszystkie 25 języków, wybierane dla gościa",
+          "everything": "Strona, RSVP, budżet, stoły i podróże"
+        }
+      },
+      "plus": {
+        "note": "Albo jednorazowo {once}, do 90 dni po ślubie.",
+        "features": {
+          "unlimitedGuests": "Tylu gości, ilu zaprosisz",
+          "sms": "SMS-y do gości",
+          "exports": "Eksport do Excela gości, budżetu i muzyki",
+          "shuttles": "Planer transferów z lotniska",
+          "seatingScenarios": "Kilka wersji planu stołów",
+          "noBranding": "Bez oznaczenia Vow na Twojej stronie"
+        }
+      },
+      "pro": {
+        "note": "Dla konsultantów ślubnych i agencji.",
+        "features": {
+          "allWeddings": "Wszystko z Vow Plus, dla każdego wesela, które organizujesz",
+          "manyWeddings": "Tyle wesel, ile potrzebujesz",
+          "couplesFree": "Pary i rodziny planują z Tobą za darmo"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Plan darmowy mieści {guests} gości. {plan} nie ma limitu.",
+      "sms": "SMS-y do gości są częścią planu {plan}.",
+      "exports": "Eksport do Excela jest częścią planu {plan}.",
+      "seatingScenarios": "Więcej wersji planu stołów jest częścią planu {plan}.",
+      "shuttles": "Planer transferów jest częścią planu {plan}.",
+      "noBranding": "Usunięcie oznaczenia Vow ze strony jest częścią planu {plan}.",
+      "manyWeddings": "Organizowanie więcej niż jednego wesela jest częścią planu {plan}, stworzonego dla konsultantów ślubnych."
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { hasFeature } from "@/lib/billing/server";
 import { format } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import { localeInfo } from "@/i18n/locales";
@@ -16,6 +18,7 @@ import { requireWedding } from "@/lib/wedding";
  */
 export async function GET() {
   const { wedding } = await requireWedding();
+  if (!(await hasFeature(wedding.id, "exports"))) redirect("/app/billing?need=exports");
   const data = await loadGuestData(await createClient(), wedding.id);
   const names = { a: wedding.partner_a_name, b: wedding.partner_b_name };
   const g = await getTranslations("guests");

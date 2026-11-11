@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Tarif a platby",
+    "title": "Tarif a platby",
+    "description": "Tato svatba má tarif {plan}.",
+    "notEnabled": "Platby zatím nejsou zapnuté, takže je zatím ve Vow vše zahrnuto.",
+    "thanks": "Děkujeme! Nový tarif bude připravený do minuty. Pokud ho ještě nevidíte, obnovte stránku.",
+    "yours": "Za co platíte",
+    "renewsOn": "obnoví se {date}",
+    "endsOn": "skončí {date}",
+    "validUntil": "zahrnuto do {date}",
+    "current": "Současný tarif",
+    "perMonth": "měsíčně",
+    "buyMonthly": "Zvolit měsíční",
+    "buyOnce": "Zaplatit jednou, {price}",
+    "buyPro": "Zvolit Vow Pro",
+    "ownerBuys": "Tarif této svatby může zvolit pár nebo editor.",
+    "manage": "Spravovat platby",
+    "seePlans": "Zobrazit tarify",
+    "checkoutFailed": "Platební okno se neotevřelo. Zkontrolujte připojení a zkuste to znovu.",
+    "fineprint": "Ceny zahrnují DPH, kde se uplatňuje. Platby jako náš prodejce vyřizuje Paddle. Měsíční tarif můžete kdykoli zrušit: platí do konce zaplaceného měsíce. Jednorázový Vow Plus platí do 90 dnů po svatbě, a nejméně rok.",
+    "landingTitle": "Zdarma na začátek, víc, když je třeba",
+    "landingText": "Každý pár plánuje zdarma. Vow Plus přidává, co potřebují větší svatby, a Vow Pro je pro svatební koordinátory.",
+    "landingCta": "Začněte plánovat zdarma",
+    "plans": {
+      "free": {
+        "name": "Zdarma",
+        "note": "Pro každý pár, rodinu i hosta.",
+        "features": {
+          "guests": "Až {guests} hostů",
+          "languages": "Všech 25 jazyků, pro každého hosta zvlášť",
+          "everything": "Web, RSVP, rozpočet, zasedací pořádek a cestování"
+        }
+      },
+      "plus": {
+        "note": "Nebo jednorázově {once}, do 90 dnů po svatbě.",
+        "features": {
+          "unlimitedGuests": "Tolik hostů, kolik pozvete",
+          "sms": "SMS hostům",
+          "exports": "Export hostů, rozpočtu a hudby do Excelu",
+          "shuttles": "Plánovač odvozů z letiště",
+          "seatingScenarios": "Více verzí zasedacího pořádku",
+          "noBranding": "Bez označení Vow na vašem webu"
+        }
+      },
+      "pro": {
+        "note": "Pro svatební koordinátory a agentury.",
+        "features": {
+          "allWeddings": "Vše z Vow Plus pro každou svatbu, kterou plánujete",
+          "manyWeddings": "Tolik svateb, kolik potřebujete",
+          "couplesFree": "Páry a rodiny s vámi plánují zdarma"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Bezplatný tarif má místo pro {guests} hostů. {plan} nemá limit.",
+      "sms": "SMS hostům jsou součástí tarifu {plan}.",
+      "exports": "Exporty do Excelu jsou součástí tarifu {plan}.",
+      "seatingScenarios": "Více verzí zasedacího pořádku je součástí tarifu {plan}.",
+      "shuttles": "Plánovač odvozů je součástí tarifu {plan}.",
+      "noBranding": "Odstranění označení Vow z webu je součástí tarifu {plan}.",
+      "manyWeddings": "Plánování více svateb je součástí tarifu {plan}, určeného pro svatební koordinátory."
+    }
+  }
+}

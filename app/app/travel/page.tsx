@@ -1,3 +1,4 @@
+import { hasFeature } from "@/lib/billing/server";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { TravelPage } from "@/components/travel/travel-page";
@@ -46,6 +47,7 @@ export default async function Travel() {
 
   return (
     <TravelPage
+      shuttlesLocked={!(await hasFeature(wedding.id, "shuttles"))}
       flights={flights.map((f) => ({
         ...f,
         price: f.price == null ? null : Number(f.price),

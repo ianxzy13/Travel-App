@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Paket dan pembayaran",
+    "title": "Paket dan pembayaran",
+    "description": "Pernikahan ini memakai {plan}.",
+    "notEnabled": "Pembayaran belum diaktifkan, jadi untuk sementara semua fitur Vow sudah termasuk.",
+    "thanks": "Terima kasih! Paket baru Anda siap dalam satu menit. Muat ulang halaman jika belum terlihat.",
+    "yours": "Yang Anda bayar",
+    "renewsOn": "diperpanjang {date}",
+    "endsOn": "berakhir {date}",
+    "validUntil": "termasuk sampai {date}",
+    "current": "Paket saat ini",
+    "perMonth": "per bulan",
+    "buyMonthly": "Pilih bulanan",
+    "buyOnce": "Bayar sekali, {price}",
+    "buyPro": "Pilih Vow Pro",
+    "ownerBuys": "Pasangan atau editor dapat memilih paket pernikahan ini.",
+    "manage": "Kelola pembayaran",
+    "seePlans": "Lihat paket",
+    "checkoutFailed": "Jendela pembayaran tidak terbuka. Periksa koneksi Anda lalu coba lagi.",
+    "fineprint": "Harga sudah termasuk PPN jika berlaku. Paddle memproses pembayaran sebagai penjual kami. Paket bulanan bisa dibatalkan kapan saja dan tetap aktif sampai akhir bulan yang dibayar. Vow Plus sekali bayar berlaku sampai 90 hari setelah pernikahan, dan minimal satu tahun.",
+    "landingTitle": "Gratis untuk mulai, lebih saat dibutuhkan",
+    "landingText": "Setiap pasangan merencanakan secara gratis. Vow Plus menambah yang dibutuhkan pernikahan besar, dan Vow Pro untuk wedding planner.",
+    "landingCta": "Mulai merencanakan gratis",
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "note": "Untuk setiap pasangan, keluarga, dan tamu.",
+        "features": {
+          "guests": "Hingga {guests} tamu",
+          "languages": "Semua 25 bahasa, dipilih per tamu",
+          "everything": "Situs, RSVP, anggaran, tempat duduk, dan perjalanan"
+        }
+      },
+      "plus": {
+        "note": "Atau sekali {once}, sampai 90 hari setelah pernikahan.",
+        "features": {
+          "unlimitedGuests": "Tamu sebanyak yang Anda undang",
+          "sms": "SMS ke tamu",
+          "exports": "Unduhan Excel untuk tamu, anggaran, dan musik",
+          "shuttles": "Perencana antar-jemput bandara",
+          "seatingScenarios": "Beberapa versi denah tempat duduk",
+          "noBranding": "Tanpa tanda Vow di situs Anda"
+        }
+      },
+      "pro": {
+        "note": "Untuk wedding planner dan agensi.",
+        "features": {
+          "allWeddings": "Semua fitur Vow Plus untuk setiap pernikahan yang Anda tangani",
+          "manyWeddings": "Pernikahan sebanyak yang Anda perlukan",
+          "couplesFree": "Pasangan dan keluarga merencanakan bersama Anda secara gratis"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Paket gratis menampung {guests} tamu. {plan} tanpa batas.",
+      "sms": "SMS ke tamu termasuk dalam {plan}.",
+      "exports": "Unduhan Excel termasuk dalam {plan}.",
+      "seatingScenarios": "Versi tambahan denah tempat duduk termasuk dalam {plan}.",
+      "shuttles": "Perencana antar-jemput termasuk dalam {plan}.",
+      "noBranding": "Menghapus tanda Vow dari situs termasuk dalam {plan}.",
+      "manyWeddings": "Merencanakan lebih dari satu pernikahan termasuk dalam {plan}, dibuat untuk wedding planner."
+    }
+  }
+}

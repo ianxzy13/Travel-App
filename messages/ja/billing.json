@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "プランとお支払い",
+    "title": "プランとお支払い",
+    "description": "この結婚式は {plan} です。",
+    "notEnabled": "お支払いはまだ有効になっていないため、現在は Vow のすべての機能をご利用いただけます。",
+    "thanks": "ありがとうございます。新しいプランは1分以内に反映されます。表示されない場合はページを再読み込みしてください。",
+    "yours": "お支払い中のプラン",
+    "renewsOn": "{date} に更新",
+    "endsOn": "{date} に終了",
+    "validUntil": "{date} まで利用可能",
+    "current": "現在のプラン",
+    "perMonth": "/月",
+    "buyMonthly": "月額を選ぶ",
+    "buyOnce": "一括で支払う（{price}）",
+    "buyPro": "Vow Pro を選ぶ",
+    "ownerBuys": "この結婚式のプランは新郎新婦または編集者が選べます。",
+    "manage": "お支払いの管理",
+    "seePlans": "プランを見る",
+    "checkoutFailed": "支払い画面が開きませんでした。接続を確認してもう一度お試しください。",
+    "fineprint": "価格には該当する場合 VAT が含まれます。お支払いは販売代理店の Paddle が処理します。月額プランはいつでも解約でき、支払済みの月末まで有効です。一括払いの Vow Plus は結婚式の90日後まで、最低1年間有効です。",
+    "landingTitle": "無料で始めて、必要なときにアップグレード",
+    "landingText": "すべてのカップルが無料で準備できます。Vow Plus は大きな結婚式に必要な機能を、Vow Pro はウェディングプランナー向けの機能を追加します。",
+    "landingCta": "無料で準備を始める",
+    "plans": {
+      "free": {
+        "name": "無料",
+        "note": "すべてのカップル、ご家族、ゲストに。",
+        "features": {
+          "guests": "ゲスト {guests} 名まで",
+          "languages": "全25言語をゲストごとに選択",
+          "everything": "ウェブサイト、出欠、予算、席次、旅程"
+        }
+      },
+      "plus": {
+        "note": "または一括 {once}（結婚式の90日後まで）。",
+        "features": {
+          "unlimitedGuests": "招待したいだけのゲスト",
+          "sms": "ゲストへの SMS",
+          "exports": "ゲスト・予算・プレイリストの Excel ダウンロード",
+          "shuttles": "空港送迎のシャトル計画",
+          "seatingScenarios": "席次表の複数バージョン",
+          "noBranding": "ウェブサイトに Vow の表示なし"
+        }
+      },
+      "pro": {
+        "note": "ウェディングプランナーと会社向け。",
+        "features": {
+          "allWeddings": "担当するすべての結婚式で Vow Plus の全機能",
+          "manyWeddings": "必要なだけの結婚式",
+          "couplesFree": "カップルとご家族は無料で一緒に準備できます"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "無料プランはゲスト {guests} 名までです。{plan} には上限がありません。",
+      "sms": "ゲストへの SMS は {plan} の機能です。",
+      "exports": "Excel ダウンロードは {plan} の機能です。",
+      "seatingScenarios": "席次表の追加バージョンは {plan} の機能です。",
+      "shuttles": "シャトル計画は {plan} の機能です。",
+      "noBranding": "ウェブサイトから Vow の表示を外すのは {plan} の機能です。",
+      "manyWeddings": "複数の結婚式の管理は、ウェディングプランナー向けの {plan} の機能です。"
+    }
+  }
+}

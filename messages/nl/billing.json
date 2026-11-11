@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Abonnement en betalingen",
+    "title": "Abonnement en betalingen",
+    "description": "Deze bruiloft gebruikt {plan}.",
+    "notEnabled": "Betalingen staan nog niet aan, dus voorlopig is alles in Vow inbegrepen.",
+    "thanks": "Bedankt! Je nieuwe abonnement is binnen een minuut klaar. Vernieuw de pagina als je het nog niet ziet.",
+    "yours": "Waarvoor je betaalt",
+    "renewsOn": "verlengt op {date}",
+    "endsOn": "stopt op {date}",
+    "validUntil": "inbegrepen tot {date}",
+    "current": "Huidig abonnement",
+    "perMonth": "per maand",
+    "buyMonthly": "Kies maandelijks",
+    "buyOnce": "Eenmalig betalen, {price}",
+    "buyPro": "Kies Vow Pro",
+    "ownerBuys": "Het bruidspaar of een bewerker kan het abonnement kiezen.",
+    "manage": "Betalingen beheren",
+    "seePlans": "Bekijk abonnementen",
+    "checkoutFailed": "Het betaalvenster ging niet open. Controleer je verbinding en probeer het opnieuw.",
+    "fineprint": "Prijzen zijn inclusief btw waar die geldt. Paddle regelt de betalingen als onze wederverkoper. Een maandabonnement kun je altijd opzeggen: het blijft actief tot het eind van de betaalde maand. Eenmalig Vow Plus geldt tot 90 dagen na de bruiloft, en minstens een jaar.",
+    "landingTitle": "Gratis beginnen, meer als je het nodig hebt",
+    "landingText": "Elk paar plant gratis. Vow Plus voegt toe wat grotere bruiloften nodig hebben, en Vow Pro is voor weddingplanners.",
+    "landingCta": "Begin gratis met plannen",
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "note": "Voor elk paar, elke familie en elke gast.",
+        "features": {
+          "guests": "Tot {guests} gasten",
+          "languages": "Alle 25 talen, per gast gekozen",
+          "everything": "Website, RSVP, budget, tafelschikking en reizen"
+        }
+      },
+      "plus": {
+        "note": "Of eenmalig {once}, tot 90 dagen na de bruiloft.",
+        "features": {
+          "unlimitedGuests": "Zoveel gasten als je uitnodigt",
+          "sms": "Sms’jes naar gasten",
+          "exports": "Excel-downloads van gasten, budget en muziek",
+          "shuttles": "Shuttleplanner voor vervoer vanaf het vliegveld",
+          "seatingScenarios": "Meerdere versies van de tafelschikking",
+          "noBranding": "Zonder Vow-vermelding op je website"
+        }
+      },
+      "pro": {
+        "note": "Voor weddingplanners en bureaus.",
+        "features": {
+          "allWeddings": "Alles van Vow Plus, voor elke bruiloft die je plant",
+          "manyWeddings": "Zoveel bruiloften als je nodig hebt",
+          "couplesFree": "Paren en families plannen gratis met je mee"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Het gratis abonnement heeft plaats voor {guests} gasten. {plan} heeft geen limiet.",
+      "sms": "Sms’jes naar gasten horen bij {plan}.",
+      "exports": "Excel-downloads horen bij {plan}.",
+      "seatingScenarios": "Meer versies van de tafelschikking horen bij {plan}.",
+      "shuttles": "De shuttleplanner hoort bij {plan}.",
+      "noBranding": "De Vow-vermelding van je website halen hoort bij {plan}.",
+      "manyWeddings": "Meer dan één bruiloft plannen hoort bij {plan}, gemaakt voor weddingplanners."
+    }
+  }
+}

@@ -1,5 +1,6 @@
 "use server";
 
+import { guestLimitError } from "@/lib/billing/server";
 import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -169,6 +170,11 @@ export async function saveGuest(
   const parsed = guestFormSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
   const v = parsed.data;
+
+  if (!guestId) {
+    const limit = await guestLimitError(weddingId, v.plusOneName.trim() ? 2 : 1);
+    if (limit) return limit;
+  }
 
   try {
     // Existing guest (if editing): needed to know if they changed household.
@@ -541,6 +547,8 @@ export async function importGuests(input: unknown): Promise<ActionResult<ImportS
   if (!parsed.success) return await invalid(parsed.error);
   const rows: ImportGuest[] = parsed.data;
   const { supabase: sb, weddingId } = ctx;
+  const limit = await guestLimitError(weddingId, rows.length);
+  if (limit) return limit;
   const key = (s: string) => s.trim().toLowerCase();
 
   const [{ data: households }, { data: tags }, { data: events }] = await Promise.all([

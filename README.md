@@ -192,6 +192,39 @@ normally and no disclosure is shown.
 When any affiliate ID is set, a small disclosure note appears under booking and flight links.
 All outgoing booking links use `rel="sponsored noopener noreferrer"`.
 
+### Payments: Free, Vow Plus and Vow Pro (Paddle)
+
+Vow has three plans. Until you switch payments on, **everything stays free and nothing changes**
+for people already using Vow.
+
+| Plan | Price | Adds |
+|---|---|---|
+| Free | 0 € | up to 75 guests, one wedding, all 25 languages |
+| Vow Plus (couples) | 9.99 €/month or 79 € once | unlimited guests, SMS, Excel downloads, shuttle planner, seating versions, no "Made with Vow" |
+| Vow Pro (planners) | 49 €/month | everything in Plus for every wedding the planner is an owner or editor of, many weddings |
+
+Limits live in `lib/billing/plans.ts`. Payments go through **Paddle**, which sells to the customer
+for you and handles VAT and sales tax in every country.
+
+1. Run the migration `20261111000000_billing.sql` (step 2c).
+2. Create a **sandbox** account at <https://sandbox-vendors.paddle.com> (test cards, no real money).
+3. **Catalog → Products**: create "Vow Plus" with two prices (9.99 EUR monthly, 79 EUR one-time)
+   and "Vow Pro" with one price (49 EUR monthly). Copy each price id (`pri_…`).
+4. **Developer tools → Authentication**: create a client-side token (`test_…`) and an API key.
+5. **Developer tools → Notifications**: add a destination
+   `https://www.vowanywhere.com/api/paddle/webhook` with the events `subscription.*`,
+   `transaction.completed` and `adjustment.*`. Copy its secret key.
+6. **Checkout → Checkout settings**: set the default payment link to `https://www.vowanywhere.com`.
+7. Fill in the `PADDLE_` and `NEXT_PUBLIC_PADDLE_` variables in `.env.local` and on Vercel, plus
+   `SUPABASE_SECRET_KEY` (the webhook needs it), then set `NEXT_PUBLIC_BILLING_ENABLED=true`.
+8. Test with card `4242 4242 4242 4242`, any future date, any CVC. The plan shows on
+   **Plan & billing** (user menu) within a few seconds.
+
+When everything works, repeat steps 3–5 in the live account at <https://vendors.paddle.com> and set
+`NEXT_PUBLIC_PADDLE_ENV=production`. You need a registered business (s.p. or d.o.o.) for the live
+account. To give a wedding Plus or Pro for free (early users, friends), add a row to the
+`plan_overrides` table in the Supabase Table Editor.
+
 ---
 
 ## 4. Demo data

@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "方案與付款",
+    "title": "方案與付款",
+    "description": "這場婚禮使用 {plan}。",
+    "notEnabled": "付款尚未開啟，因此目前 Vow 的所有功能都包含在內。",
+    "thanks": "謝謝！新方案將在一分鐘內生效。如果還沒看到，請重新整理頁面。",
+    "yours": "您的付費項目",
+    "renewsOn": "{date} 續訂",
+    "endsOn": "{date} 結束",
+    "validUntil": "包含至 {date}",
+    "current": "目前方案",
+    "perMonth": "每月",
+    "buyMonthly": "按月選擇",
+    "buyOnce": "一次付款，{price}",
+    "buyPro": "選擇 Vow Pro",
+    "ownerBuys": "新人或編輯者可以為這場婚禮選擇方案。",
+    "manage": "管理付款",
+    "seePlans": "查看方案",
+    "checkoutFailed": "付款視窗未能開啟。請檢查網路連線後重試。",
+    "fineprint": "價格在適用時包含營業稅。Paddle 作為我們的經銷商處理付款。月繳方案可隨時取消，有效期至已付款月份結束。一次付款的 Vow Plus 有效期至婚禮後 90 天，且至少一年。",
+    "landingTitle": "免費開始，需要時再升級",
+    "landingText": "每對新人都能免費籌備。Vow Plus 為大型婚禮增加所需功能，Vow Pro 適合婚禮企劃師。",
+    "landingCta": "免費開始籌備",
+    "plans": {
+      "free": {
+        "name": "免費",
+        "note": "適合每一對新人、家人和賓客。",
+        "features": {
+          "guests": "最多 {guests} 位賓客",
+          "languages": "全部 25 種語言，依賓客選擇",
+          "everything": "網站、回覆、預算、座位與行程"
+        }
+      },
+      "plus": {
+        "note": "或一次付款 {once}，有效至婚禮後 90 天。",
+        "features": {
+          "unlimitedGuests": "邀請多少賓客都可以",
+          "sms": "傳簡訊給賓客",
+          "exports": "賓客、預算和歌單匯出為 Excel",
+          "shuttles": "機場接送規劃",
+          "seatingScenarios": "多個版本的座位安排",
+          "noBranding": "網站上不顯示 Vow 標示"
+        }
+      },
+      "pro": {
+        "note": "適合婚禮企劃師和企劃公司。",
+        "features": {
+          "allWeddings": "您企劃的每場婚禮都享有 Vow Plus 的全部功能",
+          "manyWeddings": "需要多少場婚禮都可以",
+          "couplesFree": "新人和家人與您一起免費籌備"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "免費方案最多容納 {guests} 位賓客。{plan} 沒有上限。",
+      "sms": "傳簡訊給賓客屬於 {plan}。",
+      "exports": "匯出 Excel 屬於 {plan}。",
+      "seatingScenarios": "更多版本的座位安排屬於 {plan}。",
+      "shuttles": "接送規劃屬於 {plan}。",
+      "noBranding": "從網站移除 Vow 標示屬於 {plan}。",
+      "manyWeddings": "同時企劃多場婚禮屬於 {plan}，專為婚禮企劃師設計。"
+    }
+  }
+}

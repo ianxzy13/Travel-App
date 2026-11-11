@@ -17,6 +17,7 @@ import websiteEditor from "../messages/en/websiteEditor.json";
 import plan from "../messages/en/plan.json";
 import notices from "../messages/en/notices.json";
 import playlist from "../messages/en/playlist.json";
+import billing from "../messages/en/billing.json";
 import { isLocale } from "./locales";
 import { withFallback } from "./resolve";
 import { pickYouAll, type YouForm } from "./you";
@@ -37,6 +38,7 @@ export const PARTS = [
   "plan",
   "notices",
   "playlist",
+  "billing",
 ] as const;
 
 export const EN = {
@@ -55,6 +57,7 @@ export const EN = {
   ...plan,
   ...notices,
   ...playlist,
+  ...billing,
 };
 export type Messages = typeof EN;
 

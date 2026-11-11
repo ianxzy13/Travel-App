@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { hasFeature } from "@/lib/billing/server";
 import { format } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import { loadBudget } from "@/lib/budget/load";
@@ -10,6 +12,7 @@ import { type Cell, xlsxResponse } from "@/lib/xlsx/build";
 /** GET /app/budget/export → the budget as an Excel file (one row per expense). */
 export async function GET() {
   const { wedding } = await requireWedding();
+  if (!(await hasFeature(wedding.id, "exports"))) redirect("/app/billing?need=exports");
   const data = await loadBudget(await createClient(), wedding.id);
   const summary = summarizeBudget(null, data.categories, data.expenses, data.payments);
   const vendorName = new Map(data.vendors.map((v) => [v.id, v.name]));

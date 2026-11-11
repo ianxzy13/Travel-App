@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { hasFeature } from "@/lib/billing/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Car, Users } from "lucide-react";
@@ -19,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function PrintShuttle() {
   const { wedding } = await requireWedding();
+  if (!(await hasFeature(wedding.id, "shuttles"))) redirect("/app/billing?need=shuttles");
   const locale = await getLocale();
   const t = await getTranslations("travel.shuttle");
   const sb = await createClient();

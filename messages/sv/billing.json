@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Plan och betalningar",
+    "title": "Plan och betalningar",
+    "description": "Det här bröllopet har {plan}.",
+    "notEnabled": "Betalningar är inte påslagna än, så allt i Vow ingår tills vidare.",
+    "thanks": "Tack! Din nya plan är klar inom en minut. Ladda om sidan om du inte ser den än.",
+    "yours": "Det du betalar för",
+    "renewsOn": "förnyas {date}",
+    "endsOn": "upphör {date}",
+    "validUntil": "ingår till {date}",
+    "current": "Nuvarande plan",
+    "perMonth": "per månad",
+    "buyMonthly": "Välj månadsvis",
+    "buyOnce": "Betala en gång, {price}",
+    "buyPro": "Välj Vow Pro",
+    "ownerBuys": "Paret eller en redaktör kan välja plan för bröllopet.",
+    "manage": "Hantera betalningar",
+    "seePlans": "Se planer",
+    "checkoutFailed": "Betalfönstret öppnades inte. Kontrollera anslutningen och försök igen.",
+    "fineprint": "Priserna inkluderar moms där det gäller. Paddle sköter betalningarna som vår återförsäljare. En månadsplan kan sägas upp när som helst: den gäller till slutet av den betalda månaden. Vow Plus med engångsbetalning gäller till 90 dagar efter bröllopet, och minst ett år.",
+    "landingTitle": "Gratis att börja, mer när du behöver",
+    "landingText": "Alla par planerar gratis. Vow Plus lägger till det större bröllop behöver, och Vow Pro är för bröllopsplanerare.",
+    "landingCta": "Börja planera gratis",
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "note": "För varje par, familj och gäst.",
+        "features": {
+          "guests": "Upp till {guests} gäster",
+          "languages": "Alla 25 språk, valda per gäst",
+          "everything": "Webbplats, OSA, budget, bordsplacering och resor"
+        }
+      },
+      "plus": {
+        "note": "Eller {once} en gång, till 90 dagar efter bröllopet.",
+        "features": {
+          "unlimitedGuests": "Så många gäster som du bjuder in",
+          "sms": "Sms till gästerna",
+          "exports": "Excel-nedladdningar av gäster, budget och musik",
+          "shuttles": "Shuttleplanerare för flygplatstransfer",
+          "seatingScenarios": "Flera versioner av bordsplaceringen",
+          "noBranding": "Utan Vow-märkning på din webbplats"
+        }
+      },
+      "pro": {
+        "note": "För bröllopsplanerare och byråer.",
+        "features": {
+          "allWeddings": "Allt i Vow Plus, för varje bröllop du planerar",
+          "manyWeddings": "Så många bröllop du behöver",
+          "couplesFree": "Par och familjer planerar med dig gratis"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Gratisplanen har plats för {guests} gäster. {plan} har ingen gräns.",
+      "sms": "Sms till gästerna ingår i {plan}.",
+      "exports": "Excel-nedladdningar ingår i {plan}.",
+      "seatingScenarios": "Fler versioner av bordsplaceringen ingår i {plan}.",
+      "shuttles": "Shuttleplaneraren ingår i {plan}.",
+      "noBranding": "Att ta bort Vow-märkningen från webbplatsen ingår i {plan}.",
+      "manyWeddings": "Att planera mer än ett bröllop ingår i {plan}, gjord för bröllopsplanerare."
+    }
+  }
+}

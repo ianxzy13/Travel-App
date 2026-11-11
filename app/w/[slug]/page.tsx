@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eye } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { BILLING_ENABLED } from "@/lib/billing/config";
 import { PasswordGate } from "@/components/website/password-gate";
 import { Site } from "@/components/website/site";
 import { LOCALE_CODES } from "@/i18n/locales";
@@ -61,6 +62,14 @@ export async function generateMetadata({
   };
 }
 
+/** "Made with Vow" in the footer: always while payments are off, then only on the free plan. */
+async function showsBranding(slug: string) {
+  if (!BILLING_ENABLED) return true;
+  const { data, error } = await (await createClient()).rpc("site_shows_branding", { p_slug: slug });
+  if (error) console.error("[site_shows_branding]", error);
+  return data ?? true;
+}
+
 /** /w/ian-and-maria — the couple's public wedding website, in the visitor's language. */
 export default async function WeddingWebsite({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -90,7 +99,7 @@ export default async function WeddingWebsite({ params }: { params: Promise<{ slu
               </Link>
             </div>
           )}
-          <Site data={site.data} />
+          <Site data={site.data} branding={await showsBranding(slug)} />
         </>
       )}
     </div>

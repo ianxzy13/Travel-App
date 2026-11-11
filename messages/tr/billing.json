@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Plan ve ödemeler",
+    "title": "Plan ve ödemeler",
+    "description": "Bu düğün {plan} planında.",
+    "notEnabled": "Ödemeler henüz açılmadı, bu yüzden şimdilik Vow’daki her şey dahil.",
+    "thanks": "Teşekkürler! Yeni planınız bir dakika içinde hazır olur. Henüz görmüyorsanız sayfayı yenileyin.",
+    "yours": "Ödediğiniz",
+    "renewsOn": "{date} tarihinde yenilenir",
+    "endsOn": "{date} tarihinde sona erer",
+    "validUntil": "{date} tarihine kadar dahil",
+    "current": "Mevcut plan",
+    "perMonth": "aylık",
+    "buyMonthly": "Aylık seç",
+    "buyOnce": "Bir kez öde, {price}",
+    "buyPro": "Vow Pro seç",
+    "ownerBuys": "Bu düğünün planını çift veya bir düzenleyici seçebilir.",
+    "manage": "Ödemeleri yönet",
+    "seePlans": "Planları gör",
+    "checkoutFailed": "Ödeme penceresi açılmadı. Bağlantınızı kontrol edip tekrar deneyin.",
+    "fineprint": "Fiyatlara geçerli olduğu yerlerde KDV dahildir. Ödemeleri bayimiz olarak Paddle yürütür. Aylık planı istediğiniz zaman iptal edebilirsiniz: ödenen ayın sonuna kadar geçerlidir. Tek ödemeli Vow Plus düğünden 90 gün sonrasına kadar, en az bir yıl geçerlidir.",
+    "landingTitle": "Başlamak ücretsiz, gerekince daha fazlası",
+    "landingText": "Her çift ücretsiz planlar. Vow Plus büyük düğünlerin ihtiyaçlarını ekler, Vow Pro ise düğün organizatörleri içindir.",
+    "landingCta": "Ücretsiz planlamaya başlayın",
+    "plans": {
+      "free": {
+        "name": "Ücretsiz",
+        "note": "Her çift, aile ve misafir için.",
+        "features": {
+          "guests": "En fazla {guests} misafir",
+          "languages": "25 dilin tamamı, misafire göre",
+          "everything": "Web sitesi, LCV, bütçe, oturma düzeni ve seyahat"
+        }
+      },
+      "plus": {
+        "note": "Ya da bir kez {once}, düğünden 90 gün sonrasına kadar.",
+        "features": {
+          "unlimitedGuests": "Davet ettiğiniz kadar misafir",
+          "sms": "Misafirlere SMS",
+          "exports": "Misafir, bütçe ve müzik listesinin Excel’e aktarımı",
+          "shuttles": "Havalimanı transfer planlayıcısı",
+          "seatingScenarios": "Oturma düzeninin birkaç sürümü",
+          "noBranding": "Web sitenizde Vow ibaresi yok"
+        }
+      },
+      "pro": {
+        "note": "Düğün organizatörleri ve ajanslar için.",
+        "features": {
+          "allWeddings": "Planladığınız her düğün için Vow Plus’ın tamamı",
+          "manyWeddings": "İhtiyacınız kadar düğün",
+          "couplesFree": "Çiftler ve aileler sizinle ücretsiz planlar"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Ücretsiz plan {guests} misafir alır. {plan} sınırsızdır.",
+      "sms": "Misafirlere SMS {plan} kapsamındadır.",
+      "exports": "Excel aktarımları {plan} kapsamındadır.",
+      "seatingScenarios": "Oturma düzeninin ek sürümleri {plan} kapsamındadır.",
+      "shuttles": "Transfer planlayıcısı {plan} kapsamındadır.",
+      "noBranding": "Vow ibaresini web sitenizden kaldırmak {plan} kapsamındadır.",
+      "manyWeddings": "Birden fazla düğün planlamak, düğün organizatörleri için hazırlanan {plan} kapsamındadır."
+    }
+  }
+}
