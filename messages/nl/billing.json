@@ -60,6 +60,8 @@
       "shuttles": "De shuttleplanner hoort bij {plan}.",
       "noBranding": "De Vow-vermelding van je website halen hoort bij {plan}.",
       "manyWeddings": "Meer dan één bruiloft plannen hoort bij {plan}, gemaakt voor weddingplanners."
-    }
+    },
+    "soon": "Binnenkort",
+    "soonNote": "Vow Plus en Vow Pro komen binnenkort. Tot die tijd is alles in Vow gratis."
   }
 }

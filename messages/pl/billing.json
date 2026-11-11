@@ -60,6 +60,8 @@
       "shuttles": "Planer transferów jest częścią planu {plan}.",
       "noBranding": "Usunięcie oznaczenia Vow ze strony jest częścią planu {plan}.",
       "manyWeddings": "Organizowanie więcej niż jednego wesela jest częścią planu {plan}, stworzonego dla konsultantów ślubnych."
-    }
+    },
+    "soon": "Wkrótce",
+    "soonNote": "Vow Plus i Vow Pro już wkrótce. Do tego czasu wszystko w Vow jest za darmo."
   }
 }

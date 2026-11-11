@@ -60,6 +60,8 @@
       "shuttles": "Plánovač odvozů je součástí tarifu {plan}.",
       "noBranding": "Odstranění označení Vow z webu je součástí tarifu {plan}.",
       "manyWeddings": "Plánování více svateb je součástí tarifu {plan}, určeného pro svatební koordinátory."
-    }
+    },
+    "soon": "Brzy",
+    "soonNote": "Vow Plus a Vow Pro budou brzy. Do té doby je ve Vow vše zdarma."
   }
 }

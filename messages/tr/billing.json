@@ -60,6 +60,8 @@
       "shuttles": "Transfer planlayıcısı {plan} kapsamındadır.",
       "noBranding": "Vow ibaresini web sitenizden kaldırmak {plan} kapsamındadır.",
       "manyWeddings": "Birden fazla düğün planlamak, düğün organizatörleri için hazırlanan {plan} kapsamındadır."
-    }
+    },
+    "soon": "Yakında",
+    "soonNote": "Vow Plus ve Vow Pro yakında geliyor. O zamana kadar Vow’daki her şey ücretsiz."
   }
 }

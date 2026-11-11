@@ -60,6 +60,8 @@
       "shuttles": "The shuttle planner is part of {plan}.",
       "noBranding": "Removing the Vow branding from your website is part of {plan}.",
       "manyWeddings": "Planning more than one wedding is part of {plan}, made for wedding planners."
-    }
+    },
+    "soon": "Soon",
+    "soonNote": "Vow Plus and Vow Pro are coming soon. Until then, everything in Vow is free."
   }
 }

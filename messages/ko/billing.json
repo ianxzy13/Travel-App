@@ -60,6 +60,8 @@
       "shuttles": "셔틀 플래너는 {plan}에 포함됩니다.",
       "noBranding": "웹사이트에서 Vow 표시를 없애는 기능은 {plan}에 포함됩니다.",
       "manyWeddings": "여러 결혼식 관리는 웨딩 플래너를 위한 {plan}에 포함됩니다."
-    }
+    },
+    "soon": "곧 출시",
+    "soonNote": "Vow Plus와 Vow Pro가 곧 출시됩니다. 그때까지 Vow의 모든 기능은 무료입니다."
   }
 }
