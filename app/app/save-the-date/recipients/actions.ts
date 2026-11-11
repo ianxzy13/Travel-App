@@ -1,5 +1,6 @@
 "use server";
 
+import { requireFeature } from "@/lib/billing/server";
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
 import { guestTranslations, householdSizes } from "@/lib/i18n/guest-translations";
@@ -307,6 +308,9 @@ export async function updateSendMethod(
 export async function exportRecipientsCsv(): Promise<ActionResult<string>> {
   const result = await loadRecipients();
   if (!result.ok) return result;
+  const { wedding } = await requireWedding();
+  const locked = await requireFeature(wedding.id, "exports");
+  if (locked) return locked;
 
   const rows = result.data.recipients;
   const header = "Household,Guests,Email,Phone,Side,Tags,Method,Status\n";
@@ -538,6 +542,8 @@ export async function sendSaveTheDateSms(
 ): Promise<ActionResult<SmsSendSummary>> {
   const ctx = await editor();
   if (!ctx) return noPermission();
+  const locked = await requireFeature(ctx.wedding.id, "sms");
+  if (locked) return locked;
 
   const { getTwilio, twilioFrom } = await import("@/lib/sms/twilio");
   const tw = getTwilio();

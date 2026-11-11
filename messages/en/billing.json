@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Plan & billing",
+    "title": "Plan & billing",
+    "description": "This wedding is on {plan}.",
+    "notEnabled": "Payments aren’t switched on yet, so everything in Vow is included for now.",
+    "thanks": "Thank you! Your new plan is ready within a minute. Refresh this page if you don’t see it yet.",
+    "yours": "What you pay for",
+    "renewsOn": "renews on {date}",
+    "endsOn": "ends on {date}",
+    "validUntil": "included until {date}",
+    "current": "Current plan",
+    "perMonth": "per month",
+    "buyMonthly": "Choose monthly",
+    "buyOnce": "Pay once, {price}",
+    "buyPro": "Choose Vow Pro",
+    "ownerBuys": "The couple or an editor can choose the plan for this wedding.",
+    "manage": "Manage payments",
+    "seePlans": "See plans",
+    "checkoutFailed": "The payment window didn’t open. Check your connection and try again.",
+    "fineprint": "Prices include VAT where it applies. Paddle handles payments as our reseller. Cancel a monthly plan any time: it stays active until the end of the month you paid for. A one-time Vow Plus lasts until 90 days after the wedding, and at least a year.",
+    "landingTitle": "Free to start, more when you need it",
+    "landingText": "Every couple plans for free. Vow Plus adds what bigger weddings need, and Vow Pro is for wedding planners.",
+    "landingCta": "Start planning for free",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "note": "For every couple, family and guest.",
+        "features": {
+          "guests": "Up to {guests} guests",
+          "languages": "All 25 languages, chosen per guest",
+          "everything": "Website, RSVP, budget, seating and travel"
+        }
+      },
+      "plus": {
+        "note": "Or {once} once, until 90 days after the wedding.",
+        "features": {
+          "unlimitedGuests": "As many guests as you invite",
+          "sms": "Text messages to guests",
+          "exports": "Excel downloads of guests, budget and playlist",
+          "shuttles": "Shuttle planner for airport pick-ups",
+          "seatingScenarios": "Several versions of the seating chart",
+          "noBranding": "No Vow branding on your website"
+        }
+      },
+      "pro": {
+        "note": "For wedding planners and agencies.",
+        "features": {
+          "allWeddings": "Everything in Vow Plus, for every wedding you plan",
+          "manyWeddings": "As many weddings as you need",
+          "couplesFree": "Couples and families plan with you for free"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "The free plan has room for {guests} guests. {plan} has no limit.",
+      "sms": "Text messages to guests are part of {plan}.",
+      "exports": "Excel downloads are part of {plan}.",
+      "seatingScenarios": "More versions of the seating chart are part of {plan}.",
+      "shuttles": "The shuttle planner is part of {plan}.",
+      "noBranding": "Removing the Vow branding from your website is part of {plan}.",
+      "manyWeddings": "Planning more than one wedding is part of {plan}, made for wedding planners."
+    }
+  }
+}

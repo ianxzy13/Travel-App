@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import { hasFeature } from "@/lib/billing/server";
 import { format } from "date-fns";
 import { getLocale, getTranslations } from "next-intl/server";
 import { starterTexts } from "@/lib/i18n/defaults";
@@ -10,6 +12,7 @@ import { XLSX_TYPE, buildXlsx } from "@/lib/xlsx/build";
 /** GET /app/playlist/export → the playlist as an Excel file, in the same order as the page. */
 export async function GET() {
   const { wedding } = await requireWedding();
+  if (!(await hasFeature(wedding.id, "exports"))) redirect("/app/billing?need=exports");
   const sb = await createClient();
   const w = wedding.id;
   const [categories, songs, shown, t] = await Promise.all([

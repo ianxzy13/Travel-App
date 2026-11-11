@@ -1,5 +1,6 @@
 "use server";
 
+import { requireFeature } from "@/lib/billing/server";
 import { render } from "@react-email/components";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
@@ -409,6 +410,8 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
   if (!ctx) return noPermission();
   const parsed = sendEmailSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
+  const locked = await requireFeature(ctx.wedding.id, "sms");
+  if (locked) return locked;
 
   const { getTwilio, twilioFrom } = await import("@/lib/sms/twilio");
   const tw = getTwilio();

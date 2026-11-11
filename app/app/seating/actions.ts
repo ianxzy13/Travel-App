@@ -1,5 +1,6 @@
 "use server";
 
+import { requireFeature } from "@/lib/billing/server";
 import { revalidatePath } from "next/cache";
 import { err, fail, noPermission } from "@/lib/errors";
 import { z } from "zod";
@@ -91,6 +92,8 @@ export async function duplicateLayout(
   const ctx = await editor();
   if (!ctx) return noPermission();
   if (!z.uuid().safeParse(layoutId).success) return fail("duplicateLayout", "invalid id");
+  const locked = await requireFeature(ctx.wedding.id, "seatingScenarios");
+  if (locked) return locked;
 
   const sb = ctx.supabase;
   const { data: src } = await sb

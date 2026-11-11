@@ -166,7 +166,16 @@ function Wave({ fill, flip }: { fill: string; flip?: boolean }) {
  * layout uses container queries (@3xl:…) so the editor's phone preview
  * behaves exactly like a real phone.
  */
-export function Site({ data, preview = false }: { data: SiteData; preview?: boolean }) {
+export function Site({
+  data,
+  preview = false,
+  branding = true,
+}: {
+  data: SiteData;
+  preview?: boolean;
+  /** "Made with Vow" in the footer (hidden on paid plans). */
+  branding?: boolean;
+}) {
   const t = data.look.template;
   const tr = useTranslations("site");
   const locale = useLocale();
@@ -239,19 +248,21 @@ export function Site({ data, preview = false }: { data: SiteData; preview?: bool
             : tr("dateTbd")}
           {data.wedding.location ? ` · ${data.wedding.location}` : ""}
         </p>
-        <p className={cn(muted, "mt-6 text-xs")}>
-          {tr.rich("madeWith", {
-            link: (chunks) => (
-              // a normal link (full page load): the app uses its own language, and an
-              // in-page switch would keep parts of this page in the guest's language
-              // eslint-disable-next-line @next/next/no-html-link-for-pages
-              <a href="/" className="underline underline-offset-2">
-                {chunks}
-              </a>
-            ),
-          })}
-        </p>
-        <p className={cn(muted, "mt-2 text-xs")}>
+        {branding && (
+          <p className={cn(muted, "mt-6 text-xs")}>
+            {tr.rich("madeWith", {
+              link: (chunks) => (
+                // a normal link (full page load): the app uses its own language, and an
+                // in-page switch would keep parts of this page in the guest's language
+                // eslint-disable-next-line @next/next/no-html-link-for-pages
+                <a href="/" className="underline underline-offset-2">
+                  {chunks}
+                </a>
+              ),
+            })}
+          </p>
+        )}
+        <p className={cn(muted, branding ? "mt-2" : "mt-6", "text-xs")}>
           <a href="/privacy" className="underline underline-offset-2">
             {tr("privacy")}
           </a>

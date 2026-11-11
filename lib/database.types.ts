@@ -718,6 +718,27 @@ export type PlaylistSongRow = WeddingScoped & {
   priority: PlaylistPriority;
 };
 
+export type PlanName = "free" | "plus" | "pro";
+export type SubscriptionRow = Timestamps & {
+  id: string;
+  user_id: string;
+  wedding_id: string | null;
+  product: "plus" | "pro";
+  kind: "recurring" | "one_time";
+  provider: "paddle" | "apple" | "manual";
+  provider_id: string;
+  provider_customer_id: string | null;
+  status: string;
+  valid_until: string | null;
+  cancel_at: string | null;
+};
+export type PlanOverrideRow = {
+  wedding_id: string;
+  plan: "plus" | "pro";
+  note: string | null;
+  created_at: string;
+};
+
 // Helper: columns with DB defaults become optional on insert.
 type InsertOf<Row, Required extends keyof Row> = Pick<Row, Required> & Partial<Omit<Row, Required>>;
 
@@ -817,6 +838,11 @@ export type Database = {
       website_settings: Table<WebsiteSettingsRow, "wedding_id">;
       website_sections: Table<WebsiteSectionRow, "wedding_id" | "kind">;
       tasks: Table<TaskRow, "wedding_id" | "title">;
+      subscriptions: Table<
+        SubscriptionRow,
+        "user_id" | "product" | "kind" | "provider_id" | "status"
+      >;
+      plan_overrides: Table<PlanOverrideRow, "wedding_id" | "plan">;
       task_comments: Table<TaskCommentRow, "task_id" | "wedding_id" | "author_id" | "body">;
       activity_log: Table<ActivityLogRow, "wedding_id" | "kind">;
       gifts: Table<GiftRow, "wedding_id" | "description" | "from_name">;
@@ -837,6 +863,15 @@ export type Database = {
     };
     Views: { [_ in never]: never };
     Functions: {
+      wedding_plan: {
+        Args: { wid: string };
+        Returns: PlanName;
+      };
+      site_shows_branding: { Args: { p_slug: string }; Returns: boolean };
+      user_has_pro: {
+        Args: Record<string, never>;
+        Returns: boolean;
+      };
       find_seat: {
         Args: { p_slug: string; p_name: string };
         Returns: Json | null;

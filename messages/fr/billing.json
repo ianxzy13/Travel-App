@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Formule et paiements",
+    "title": "Formule et paiements",
+    "description": "Ce mariage est en {plan}.",
+    "notEnabled": "Les paiements ne sont pas encore activés : tout Vow est inclus pour l’instant.",
+    "thanks": "Merci ! Votre nouvelle formule sera prête dans une minute. Actualisez la page si vous ne la voyez pas encore.",
+    "yours": "Ce que vous payez",
+    "renewsOn": "renouvelé le {date}",
+    "endsOn": "se termine le {date}",
+    "validUntil": "inclus jusqu’au {date}",
+    "current": "Formule actuelle",
+    "perMonth": "par mois",
+    "buyMonthly": "Choisir le mensuel",
+    "buyOnce": "Payer une fois, {price}",
+    "buyPro": "Choisir Vow Pro",
+    "ownerBuys": "Le couple ou un éditeur peut choisir la formule de ce mariage.",
+    "manage": "Gérer les paiements",
+    "seePlans": "Voir les formules",
+    "checkoutFailed": "La fenêtre de paiement ne s’est pas ouverte. Vérifiez votre connexion et réessayez.",
+    "fineprint": "Les prix incluent la TVA le cas échéant. Paddle gère les paiements en tant que revendeur. Une formule mensuelle se résilie à tout moment : elle reste active jusqu’à la fin du mois payé. Vow Plus en paiement unique dure jusqu’à 90 jours après le mariage, et au moins un an.",
+    "landingTitle": "Gratuit pour commencer, plus quand il le faut",
+    "landingText": "Chaque couple prépare son mariage gratuitement. Vow Plus ajoute ce dont les grands mariages ont besoin, et Vow Pro est fait pour les wedding planners.",
+    "landingCta": "Commencer gratuitement",
+    "plans": {
+      "free": {
+        "name": "Gratuit",
+        "note": "Pour chaque couple, famille et invité.",
+        "features": {
+          "guests": "Jusqu’à {guests} invités",
+          "languages": "Les 25 langues, choisies par invité",
+          "everything": "Site, RSVP, budget, plan de table et voyages"
+        }
+      },
+      "plus": {
+        "note": "Ou {once} une seule fois, jusqu’à 90 jours après le mariage.",
+        "features": {
+          "unlimitedGuests": "Autant d’invités que vous voulez",
+          "sms": "SMS aux invités",
+          "exports": "Exports Excel des invités, du budget et de la musique",
+          "shuttles": "Planificateur de navettes depuis l’aéroport",
+          "seatingScenarios": "Plusieurs versions du plan de table",
+          "noBranding": "Sans la mention Vow sur votre site"
+        }
+      },
+      "pro": {
+        "note": "Pour les wedding planners et les agences.",
+        "features": {
+          "allWeddings": "Tout Vow Plus, pour chaque mariage que vous organisez",
+          "manyWeddings": "Autant de mariages que nécessaire",
+          "couplesFree": "Les couples et les familles planifient avec vous gratuitement"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "La formule gratuite accueille {guests} invités. {plan} n’a pas de limite.",
+      "sms": "Les SMS aux invités font partie de {plan}.",
+      "exports": "Les exports Excel font partie de {plan}.",
+      "seatingScenarios": "Plusieurs versions du plan de table font partie de {plan}.",
+      "shuttles": "Le planificateur de navettes fait partie de {plan}.",
+      "noBranding": "Retirer la mention Vow de votre site fait partie de {plan}.",
+      "manyWeddings": "Organiser plusieurs mariages fait partie de {plan}, conçu pour les wedding planners."
+    }
+  }
+}

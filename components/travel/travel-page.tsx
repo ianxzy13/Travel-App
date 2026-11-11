@@ -27,6 +27,7 @@ import {
 import { AirportCombobox } from "@/components/travel/airport-combobox";
 import { AirportName } from "@/components/travel/airport-name";
 import { ShuttlePlanner } from "@/components/travel/shuttle-planner";
+import { UpgradeNote } from "@/components/billing/upgrade-note";
 import { PageHeader } from "@/components/app/page-header";
 import { MoneyInput } from "@/components/budget/money-input";
 import { ConfirmDialog } from "@/components/confirm-dialog";
@@ -87,6 +88,8 @@ type Props = {
   weddingDate: string | null;
   currency: string;
   canEdit: boolean;
+  /** Free plan: the shuttle planner is part of Vow Plus. */
+  shuttlesLocked?: boolean;
 };
 
 export function TravelPage({
@@ -98,6 +101,7 @@ export function TravelPage({
   weddingDate,
   currency,
   canEdit,
+  shuttlesLocked = false,
 }: Props) {
   const t = useTranslations("travel");
   const [sheet, setSheet] = useState<string | { new: FlightValues["category"] } | null>(null);
@@ -229,7 +233,11 @@ export function TravelPage({
           )}
           {shuttleCount > 0 && (
             <TabsContent value="shuttles">
-              <ShuttlePlanner guestTravel={enrichedTravel} />
+              {shuttlesLocked ? (
+                <UpgradeNote feature="shuttles" />
+              ) : (
+                <ShuttlePlanner guestTravel={enrichedTravel} />
+              )}
             </TabsContent>
           )}
         </Tabs>

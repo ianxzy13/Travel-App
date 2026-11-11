@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "요금제 및 결제",
+    "title": "요금제 및 결제",
+    "description": "이 결혼식은 {plan} 요금제입니다.",
+    "notEnabled": "아직 결제가 켜지지 않아 지금은 Vow의 모든 기능이 포함되어 있습니다.",
+    "thanks": "감사합니다! 새 요금제가 1분 안에 적용됩니다. 아직 보이지 않으면 페이지를 새로 고치세요.",
+    "yours": "결제 중인 항목",
+    "renewsOn": "{date}에 갱신",
+    "endsOn": "{date}에 종료",
+    "validUntil": "{date}까지 포함",
+    "current": "현재 요금제",
+    "perMonth": "월",
+    "buyMonthly": "월간 선택",
+    "buyOnce": "한 번 결제, {price}",
+    "buyPro": "Vow Pro 선택",
+    "ownerBuys": "이 결혼식의 요금제는 신랑 신부 또는 편집자가 선택할 수 있습니다.",
+    "manage": "결제 관리",
+    "seePlans": "요금제 보기",
+    "checkoutFailed": "결제 창이 열리지 않았습니다. 연결을 확인하고 다시 시도하세요.",
+    "fineprint": "가격에는 해당되는 경우 부가세가 포함됩니다. 결제는 재판매자인 Paddle이 처리합니다. 월간 요금제는 언제든 해지할 수 있으며 결제한 달 말까지 유지됩니다. 일회성 Vow Plus는 결혼식 후 90일까지, 최소 1년간 유효합니다.",
+    "landingTitle": "무료로 시작하고, 필요할 때 더",
+    "landingText": "모든 커플이 무료로 준비합니다. Vow Plus는 큰 결혼식에 필요한 기능을, Vow Pro는 웨딩 플래너를 위한 기능을 더합니다.",
+    "landingCta": "무료로 준비 시작하기",
+    "plans": {
+      "free": {
+        "name": "무료",
+        "note": "모든 커플, 가족, 하객을 위해.",
+        "features": {
+          "guests": "하객 최대 {guests}명",
+          "languages": "25개 언어 전체, 하객별 선택",
+          "everything": "웹사이트, 참석 회신, 예산, 좌석, 여행"
+        }
+      },
+      "plus": {
+        "note": "또는 한 번 {once}, 결혼식 후 90일까지.",
+        "features": {
+          "unlimitedGuests": "초대하는 만큼의 하객",
+          "sms": "하객에게 문자 메시지",
+          "exports": "하객·예산·플레이리스트 Excel 다운로드",
+          "shuttles": "공항 셔틀 플래너",
+          "seatingScenarios": "좌석 배치 여러 버전",
+          "noBranding": "웹사이트에 Vow 표시 없음"
+        }
+      },
+      "pro": {
+        "note": "웨딩 플래너와 업체를 위해.",
+        "features": {
+          "allWeddings": "맡은 모든 결혼식에 Vow Plus 전체 기능",
+          "manyWeddings": "필요한 만큼의 결혼식",
+          "couplesFree": "커플과 가족은 무료로 함께 준비합니다"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "무료 요금제는 하객 {guests}명까지입니다. {plan}에는 제한이 없습니다.",
+      "sms": "하객 문자 메시지는 {plan}에 포함됩니다.",
+      "exports": "Excel 다운로드는 {plan}에 포함됩니다.",
+      "seatingScenarios": "추가 좌석 배치 버전은 {plan}에 포함됩니다.",
+      "shuttles": "셔틀 플래너는 {plan}에 포함됩니다.",
+      "noBranding": "웹사이트에서 Vow 표시를 없애는 기능은 {plan}에 포함됩니다.",
+      "manyWeddings": "여러 결혼식 관리는 웨딩 플래너를 위한 {plan}에 포함됩니다."
+    }
+  }
+}

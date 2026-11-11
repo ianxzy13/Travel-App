@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Gói và thanh toán",
+    "title": "Gói và thanh toán",
+    "description": "Đám cưới này dùng gói {plan}.",
+    "notEnabled": "Thanh toán chưa được bật, nên hiện tại mọi tính năng của Vow đều được bao gồm.",
+    "thanks": "Cảm ơn bạn! Gói mới sẽ sẵn sàng trong một phút. Nếu chưa thấy, hãy tải lại trang.",
+    "yours": "Những gì bạn trả phí",
+    "renewsOn": "gia hạn ngày {date}",
+    "endsOn": "kết thúc ngày {date}",
+    "validUntil": "bao gồm đến ngày {date}",
+    "current": "Gói hiện tại",
+    "perMonth": "mỗi tháng",
+    "buyMonthly": "Chọn theo tháng",
+    "buyOnce": "Trả một lần, {price}",
+    "buyPro": "Chọn Vow Pro",
+    "ownerBuys": "Cô dâu chú rể hoặc người chỉnh sửa có thể chọn gói cho đám cưới này.",
+    "manage": "Quản lý thanh toán",
+    "seePlans": "Xem các gói",
+    "checkoutFailed": "Cửa sổ thanh toán không mở được. Hãy kiểm tra kết nối và thử lại.",
+    "fineprint": "Giá đã gồm VAT nếu áp dụng. Paddle xử lý thanh toán với vai trò nhà bán lại của chúng tôi. Gói tháng có thể hủy bất cứ lúc nào và vẫn hoạt động đến hết tháng đã trả. Vow Plus trả một lần có hiệu lực đến 90 ngày sau đám cưới, và ít nhất một năm.",
+    "landingTitle": "Miễn phí để bắt đầu, thêm khi cần",
+    "landingText": "Mọi cặp đôi đều lên kế hoạch miễn phí. Vow Plus bổ sung những gì đám cưới lớn cần, còn Vow Pro dành cho wedding planner.",
+    "landingCta": "Bắt đầu lên kế hoạch miễn phí",
+    "plans": {
+      "free": {
+        "name": "Miễn phí",
+        "note": "Cho mọi cặp đôi, gia đình và khách mời.",
+        "features": {
+          "guests": "Tối đa {guests} khách",
+          "languages": "Đủ 25 ngôn ngữ, chọn theo từng khách",
+          "everything": "Trang web, RSVP, ngân sách, chỗ ngồi và chuyến đi"
+        }
+      },
+      "plus": {
+        "note": "Hoặc trả một lần {once}, đến 90 ngày sau đám cưới.",
+        "features": {
+          "unlimitedGuests": "Mời bao nhiêu khách cũng được",
+          "sms": "Tin nhắn SMS cho khách",
+          "exports": "Tải Excel danh sách khách, ngân sách và nhạc",
+          "shuttles": "Lập kế hoạch xe đưa đón sân bay",
+          "seatingScenarios": "Nhiều phiên bản sơ đồ chỗ ngồi",
+          "noBranding": "Không có dấu Vow trên trang web"
+        }
+      },
+      "pro": {
+        "note": "Dành cho wedding planner và công ty.",
+        "features": {
+          "allWeddings": "Mọi tính năng Vow Plus cho mỗi đám cưới bạn tổ chức",
+          "manyWeddings": "Bao nhiêu đám cưới cũng được",
+          "couplesFree": "Cặp đôi và gia đình cùng bạn lên kế hoạch miễn phí"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Gói miễn phí có chỗ cho {guests} khách. {plan} không giới hạn.",
+      "sms": "Tin nhắn SMS cho khách thuộc {plan}.",
+      "exports": "Tải Excel thuộc {plan}.",
+      "seatingScenarios": "Thêm phiên bản sơ đồ chỗ ngồi thuộc {plan}.",
+      "shuttles": "Kế hoạch xe đưa đón thuộc {plan}.",
+      "noBranding": "Bỏ dấu Vow khỏi trang web thuộc {plan}.",
+      "manyWeddings": "Tổ chức nhiều đám cưới thuộc {plan}, dành cho wedding planner."
+    }
+  }
+}

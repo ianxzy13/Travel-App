@@ -2,7 +2,8 @@
 
 import { useTransition } from "react";
 import { useTheme } from "next-themes";
-import { Check, Languages, LogOut, Monitor, Moon, Sun } from "lucide-react";
+import Link from "next/link";
+import { Check, Gem, Languages, LogOut, Monitor, Moon, Sun } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { setAppLanguage } from "@/app/app/settings/language-actions";
 import { Flag } from "@/components/flag";
@@ -35,6 +36,7 @@ export function initials(nameOrEmail: string) {
 export function UserMenu({ user, showName = true }: { user: CurrentUser; showName?: boolean }) {
   const { theme, setTheme } = useTheme();
   const t = useTranslations("app.userMenu");
+  const b = useTranslations("billing");
   const locale = useLocale();
   const [, startTransition] = useTransition();
   const display = user.name ?? user.email;
@@ -99,6 +101,11 @@ export function UserMenu({ user, showName = true }: { user: CurrentUser; showNam
             ))}
           </DropdownMenuSubContent>
         </DropdownMenuSub>
+        <DropdownMenuItem asChild>
+          <Link href="/app/billing">
+            <Gem aria-hidden /> {b("menu")}
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={() => startTransition(() => signOut())}>
           <LogOut aria-hidden /> {t("signOut")}

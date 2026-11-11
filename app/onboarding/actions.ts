@@ -1,5 +1,6 @@
 "use server";
 
+import { canCreateAnotherWedding, planLimit } from "@/lib/billing/server";
 import { redirect } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ActionResult } from "@/lib/action-result";
@@ -11,7 +12,8 @@ import { requireUser, setCurrentWedding } from "@/lib/wedding";
 
 /** Creates a wedding (the user becomes its owner) and opens the dashboard. */
 export async function createWedding(input: unknown): Promise<ActionResult> {
-  await requireUser();
+  const user = await requireUser();
+  if (!(await canCreateAnotherWedding(user.id))) return await planLimit("manyWeddings");
   const parsed = weddingSchema.safeParse(input);
   if (!parsed.success) return await invalid(parsed.error);
 

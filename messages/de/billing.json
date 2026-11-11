@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Tarif und Zahlungen",
+    "title": "Tarif und Zahlungen",
+    "description": "Diese Hochzeit nutzt {plan}.",
+    "notEnabled": "Zahlungen sind noch nicht eingeschaltet, deshalb ist vorerst alles in Vow enthalten.",
+    "thanks": "Danke! Ihr neuer Tarif ist in einer Minute bereit. Laden Sie die Seite neu, falls Sie ihn noch nicht sehen.",
+    "yours": "Wofür Sie zahlen",
+    "renewsOn": "verlängert sich am {date}",
+    "endsOn": "endet am {date}",
+    "validUntil": "enthalten bis {date}",
+    "current": "Aktueller Tarif",
+    "perMonth": "pro Monat",
+    "buyMonthly": "Monatlich wählen",
+    "buyOnce": "Einmal zahlen, {price}",
+    "buyPro": "Vow Pro wählen",
+    "ownerBuys": "Das Paar oder eine Person mit Bearbeitungsrechten kann den Tarif wählen.",
+    "manage": "Zahlungen verwalten",
+    "seePlans": "Tarife ansehen",
+    "checkoutFailed": "Das Zahlungsfenster hat sich nicht geöffnet. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "fineprint": "Preise inklusive MwSt., wo sie anfällt. Paddle wickelt die Zahlungen als unser Wiederverkäufer ab. Einen Monatstarif können Sie jederzeit kündigen: Er bleibt bis zum Ende des bezahlten Monats aktiv. Vow Plus mit Einmalzahlung gilt bis 90 Tage nach der Hochzeit, mindestens ein Jahr.",
+    "landingTitle": "Kostenlos starten, mehr bei Bedarf",
+    "landingText": "Jedes Paar plant kostenlos. Vow Plus ergänzt, was größere Hochzeiten brauchen, und Vow Pro ist für Hochzeitsplaner.",
+    "landingCta": "Kostenlos losplanen",
+    "plans": {
+      "free": {
+        "name": "Kostenlos",
+        "note": "Für jedes Paar, jede Familie und jeden Gast.",
+        "features": {
+          "guests": "Bis zu {guests} Gäste",
+          "languages": "Alle 25 Sprachen, je Gast wählbar",
+          "everything": "Website, RSVP, Budget, Sitzplan und Reisen"
+        }
+      },
+      "plus": {
+        "note": "Oder einmalig {once}, bis 90 Tage nach der Hochzeit.",
+        "features": {
+          "unlimitedGuests": "So viele Gäste, wie Sie einladen",
+          "sms": "SMS an Gäste",
+          "exports": "Excel-Downloads von Gästen, Budget und Musik",
+          "shuttles": "Shuttle-Planer für Flughafentransfers",
+          "seatingScenarios": "Mehrere Versionen des Sitzplans",
+          "noBranding": "Ohne Vow-Hinweis auf Ihrer Website"
+        }
+      },
+      "pro": {
+        "note": "Für Hochzeitsplaner und Agenturen.",
+        "features": {
+          "allWeddings": "Alles aus Vow Plus, für jede Hochzeit, die Sie planen",
+          "manyWeddings": "So viele Hochzeiten, wie Sie brauchen",
+          "couplesFree": "Paare und Familien planen kostenlos mit Ihnen"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Der kostenlose Tarif bietet Platz für {guests} Gäste. {plan} hat kein Limit.",
+      "sms": "SMS an Gäste sind Teil von {plan}.",
+      "exports": "Excel-Downloads sind Teil von {plan}.",
+      "seatingScenarios": "Weitere Versionen des Sitzplans sind Teil von {plan}.",
+      "shuttles": "Der Shuttle-Planer ist Teil von {plan}.",
+      "noBranding": "Den Vow-Hinweis von Ihrer Website entfernen ist Teil von {plan}.",
+      "manyWeddings": "Mehr als eine Hochzeit zu planen ist Teil von {plan}, gemacht für Hochzeitsplaner."
+    }
+  }
+}

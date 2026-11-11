@@ -1,0 +1,65 @@
+{
+  "billing": {
+    "menu": "Paket in plačila",
+    "title": "Paket in plačila",
+    "description": "Ta poroka je v paketu {plan}.",
+    "notEnabled": "Plačila še niso vklopljena, zato je zaenkrat vse v Vow vključeno.",
+    "thanks": "Hvala! Novi paket bo pripravljen v minuti. Če ga še ne vidite, osvežite stran.",
+    "yours": "Kaj plačujete",
+    "renewsOn": "obnovi se {date}",
+    "endsOn": "poteče {date}",
+    "validUntil": "vključeno do {date}",
+    "current": "Trenutni paket",
+    "perMonth": "na mesec",
+    "buyMonthly": "Izberite mesečno",
+    "buyOnce": "Plačajte enkrat, {price}",
+    "buyPro": "Izberite Vow Pro",
+    "ownerBuys": "Paket za to poroko lahko izbere par ali urednik.",
+    "manage": "Upravljanje plačil",
+    "seePlans": "Poglejte pakete",
+    "checkoutFailed": "Okno za plačilo se ni odprlo. Preverite povezavo in poskusite znova.",
+    "fineprint": "Cene vključujejo DDV, kjer velja. Plačila kot naš preprodajalec ureja Paddle. Mesečni paket lahko kadar koli odpoveste: velja do konca plačanega meseca. Enkratni Vow Plus velja do 90 dni po poroki in najmanj eno leto.",
+    "landingTitle": "Brezplačen začetek, več, ko potrebujete",
+    "landingText": "Vsak par načrtuje brezplačno. Vow Plus doda, kar potrebujejo večje poroke, Vow Pro pa je za poročne organizatorje.",
+    "landingCta": "Začnite načrtovati brezplačno",
+    "plans": {
+      "free": {
+        "name": "Brezplačno",
+        "note": "Za vsak par, družino in gosta.",
+        "features": {
+          "guests": "Do {guests} gostov",
+          "languages": "Vseh 25 jezikov, za vsakega gosta posebej",
+          "everything": "Spletna stran, odgovori, proračun, sedežni red in potovanja"
+        }
+      },
+      "plus": {
+        "note": "Ali enkrat {once}, do 90 dni po poroki.",
+        "features": {
+          "unlimitedGuests": "Toliko gostov, kot jih povabite",
+          "sms": "SMS sporočila gostom",
+          "exports": "Prenos gostov, proračuna in glasbe v Excel",
+          "shuttles": "Načrtovanje prevozov z letališča",
+          "seatingScenarios": "Več različic sedežnega reda",
+          "noBranding": "Brez oznake Vow na vaši spletni strani"
+        }
+      },
+      "pro": {
+        "note": "Za poročne organizatorje in agencije.",
+        "features": {
+          "allWeddings": "Vse iz Vow Plus za vsako poroko, ki jo organizirate",
+          "manyWeddings": "Toliko porok, kot jih potrebujete",
+          "couplesFree": "Pari in družine načrtujejo z vami brezplačno"
+        }
+      }
+    },
+    "locked": {
+      "unlimitedGuests": "Brezplačni paket ima prostor za {guests} gostov. {plan} nima omejitve.",
+      "sms": "SMS sporočila gostom so del paketa {plan}.",
+      "exports": "Prenosi v Excel so del paketa {plan}.",
+      "seatingScenarios": "Več različic sedežnega reda je del paketa {plan}.",
+      "shuttles": "Načrtovanje prevozov je del paketa {plan}.",
+      "noBranding": "Odstranitev oznake Vow s spletne strani je del paketa {plan}.",
+      "manyWeddings": "Več porok hkrati je del paketa {plan}, ki je namenjen poročnim organizatorjem."
+    }
+  }
+}
