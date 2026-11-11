@@ -67,8 +67,8 @@
         "text": "Cada convidado tem a sua página: voos, quarto de hotel, hora do shuttle, número da mesa e uma lista do que levar."
       },
       "entry": {
-        "title": "Lista de entrada na UE",
-        "text": "Regras de passaporte, vistos, ETIAS — gerados para o país de cada convidado, para ninguém ficar preso na fronteira."
+        "title": "Lista de entrada para cada convidado",
+        "text": "Passaporte, visto e autorizações de viagem para o país do casamento, conforme o país de cada convidado, venha de que continente vier."
       },
       "rooms": {
         "title": "Quadro de quartos de hotel",
@@ -87,7 +87,7 @@
         "text": "A sua avó eslovena vê tudo em esloveno. Os seus amigos da faculdade veem em inglês. Automaticamente."
       }
     },
-    "compareTitle": "Vow vs. apps de casamento típicas dos EUA",
+    "compareTitle": "Vow vs. apps de casamento típicas",
     "compare": {
       "tripPage": "Página de viagem pessoal por convidado",
       "entryChecklist": "Lista de entrada/vistos por país",
@@ -103,13 +103,13 @@
       "soon": "Em breve"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Liubliana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londres → Cancún",
       "flightDetail": "Chega qui 5 mar, 14:20",
       "hotel": "Hotel Park · Quarto 204",
-      "shuttle": "Shuttle para o lago Bled · 16:00",
-      "table": "Mesa 3 · com a família Kovač",
+      "shuttle": "Transfer para o local do casamento · 16:00",
+      "table": "Mesa 3 · com a família Bennett",
       "passport": "Passaporte válido até pelo menos junho de 2027",
       "yourTrip": "A sua viagem"
     },

@@ -67,8 +67,8 @@
         "text": "Každý host má vlastní stránku: lety, hotelový pokoj, čas transferu, číslo stolu a seznam věcí s sebou."
       },
       "entry": {
-        "title": "Seznam pro vstup do EU",
-        "text": "Pasová pravidla, víza, ETIAS — připravené pro zemi každého hosta, aby nikdo neuvízl na hranicích."
+        "title": "Vstupní seznam pro každého hosta",
+        "text": "Pas, vízum a cestovní povolení pro zemi svatby, podle země každého hosta, ať přiletí z kteréhokoli kontinentu."
       },
       "rooms": {
         "title": "Přehled hotelových pokojů",
@@ -87,7 +87,7 @@
         "text": "Vaše slovinská babička vidí vše slovinsky. Kamarádi z vysoké anglicky. Automaticky."
       }
     },
-    "compareTitle": "Vow vs. typické americké svatební aplikace",
+    "compareTitle": "Vow vs. typické svatební aplikace",
     "compare": {
       "tripPage": "Osobní stránka cesty pro každého hosta",
       "entryChecklist": "Seznam pro vstup/víza podle země",
@@ -103,13 +103,13 @@
       "soon": "Brzy"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Lublaň",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londýn → Cancún",
       "flightDetail": "Přílet čt 5. bře, 14:20",
       "hotel": "Hotel Park · Pokoj 204",
-      "shuttle": "Transfer k Bledskému jezeru · 16:00",
-      "table": "Stůl 3 · s rodinou Kovačových",
+      "shuttle": "Transfer na místo svatby · 16:00",
+      "table": "Stůl 3 · s rodinou Bennettových",
       "passport": "Pas platný alespoň do června 2027",
       "yourTrip": "Vaše cesta"
     },

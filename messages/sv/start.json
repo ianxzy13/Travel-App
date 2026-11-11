@@ -67,8 +67,8 @@
         "text": "Varje gäst får en egen sida: flyg, hotellrum, transfertid, bordsnummer och en checklista över vad som ska med."
       },
       "entry": {
-        "title": "Checklista för inresa i EU",
-        "text": "Passregler, visumkrav, ETIAS — tas fram för varje gästs hemland så att ingen fastnar vid gränsen."
+        "title": "Inresechecklista för varje gäst",
+        "text": "Pass, visum och resetillstånd för landet där ni gifter er, anpassat efter varje gästs hemland, oavsett vilken kontinent de flyger från."
       },
       "rooms": {
         "title": "Tavla för hotellrum",
@@ -87,7 +87,7 @@
         "text": "Din slovenska mormor ser allt på slovenska. Dina studiekompisar ser det på engelska. Automatiskt."
       }
     },
-    "compareTitle": "Vow jämfört med vanliga amerikanska bröllopsappar",
+    "compareTitle": "Vow jämfört med vanliga bröllopsappar",
     "compare": {
       "tripPage": "Personlig resesida för varje gäst",
       "entryChecklist": "Checklista för inresa/visum per land",
@@ -103,13 +103,13 @@
       "soon": "Kommer snart"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Ankommer tors 5 mars, 14:20",
       "hotel": "Hotel Park · Rum 204",
-      "shuttle": "Transfer till Bledsjön · 16:00",
-      "table": "Bord 3 · med familjen Kovač",
+      "shuttle": "Transfer till bröllopsplatsen · 16:00",
+      "table": "Bord 3 · med familjen Bennett",
       "passport": "Passet gäller minst till juni 2027",
       "yourTrip": "Din resa"
     },

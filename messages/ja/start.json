@@ -67,8 +67,8 @@
         "text": "ゲストごとの専用ページ：フライト、ホテルの部屋、送迎の時刻、テーブル番号、持ち物チェックリスト。"
       },
       "entry": {
-        "title": "EU入国チェックリスト",
-        "text": "パスポートの規則、ビザの要件、ETIAS — ゲストそれぞれの国に合わせて作成。国境で足止めされる人はいません。"
+        "title": "ゲストごとの入国チェックリスト",
+        "text": "挙式する国のパスポート・ビザ・渡航認証の手続きを、ゲストそれぞれの国に合わせて作成。どの大陸から来るゲストにも対応します。"
       },
       "rooms": {
         "title": "ホテルの部屋ボード",
@@ -87,7 +87,7 @@
         "text": "スロベニアのおばあちゃんはすべてスロベニア語で。大学の友人は英語で。自動で。"
       }
     },
-    "compareTitle": "Vowと一般的な米国のウェディングアプリ",
+    "compareTitle": "Vowと一般的なウェディングアプリ",
     "compare": {
       "tripPage": "ゲストごとの旅程ページ",
       "entryChecklist": "国別の入国・ビザチェックリスト",
@@ -103,13 +103,13 @@
       "soon": "近日公開"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "マイアミ → リュブリャナ",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "ロンドン → カンクン",
       "flightDetail": "到着 3月5日（木）14:20",
       "hotel": "Hotel Park · 204号室",
-      "shuttle": "ブレッド湖への送迎 · 16:00",
-      "table": "テーブル3 · Kovač 家と",
+      "shuttle": "会場への送迎 · 16:00",
+      "table": "テーブル3 · Bennett 家と",
       "passport": "パスポートは2027年6月まで有効であること",
       "yourTrip": "あなたの旅程"
     },

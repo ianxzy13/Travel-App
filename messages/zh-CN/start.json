@@ -67,8 +67,8 @@
         "text": "每位宾客都有自己的页面：航班、酒店房间、接驳时间、桌号，以及随身物品清单。"
       },
       "entry": {
-        "title": "欧盟入境清单",
-        "text": "护照规定、签证要求、ETIAS — 按每位宾客所在国家生成，没人会被卡在边境。"
+        "title": "每位宾客的入境清单",
+        "text": "婚礼所在国的护照、签证和旅行许可要求，按每位宾客的所在国家生成，无论他们从哪个大洲飞来。"
       },
       "rooms": {
         "title": "酒店房间看板",
@@ -87,7 +87,7 @@
         "text": "你的斯洛文尼亚奶奶看到的全是斯洛文尼亚语，大学同学看到的是英语。全自动。"
       }
     },
-    "compareTitle": "Vow 与常见美国婚礼应用对比",
+    "compareTitle": "Vow 与常见婚礼应用对比",
     "compare": {
       "tripPage": "每位宾客的个人行程页面",
       "entryChecklist": "按国家的入境/签证清单",
@@ -103,13 +103,13 @@
       "soon": "即将推出"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "迈阿密 → 卢布尔雅那",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "伦敦 → 坎昆",
       "flightDetail": "3 月 5 日（周四）14:20 抵达",
       "hotel": "Hotel Park · 204 房",
-      "shuttle": "前往布莱德湖的接驳车 · 16:00",
-      "table": "第 3 桌 · 与 Kovač 一家同桌",
+      "shuttle": "前往婚礼场地的接驳车 · 16:00",
+      "table": "第 3 桌 · 与 Bennett 一家同桌",
       "passport": "护照有效期至少到 2027 年 6 月",
       "yourTrip": "你的行程"
     },

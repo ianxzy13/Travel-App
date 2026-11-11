@@ -67,8 +67,8 @@
         "text": "Cada invitado tiene su propia página: vuelos, habitación de hotel, hora de la lanzadera, número de mesa y una lista de lo que debe llevar."
       },
       "entry": {
-        "title": "Lista de entrada en la UE",
-        "text": "Requisitos de pasaporte, visados, ETIAS — generados para el país de cada invitado para que nadie se quede atascado en la frontera."
+        "title": "Lista de entrada para cada invitado",
+        "text": "Pasaporte, visado y permisos de viaje para el país de la boda, según el país de cada invitado, venga del continente que venga."
       },
       "rooms": {
         "title": "Panel de habitaciones de hotel",
@@ -87,7 +87,7 @@
         "text": "Tu abuela eslovena lo ve todo en esloveno. Tus amigos de la universidad, en inglés. Automáticamente."
       }
     },
-    "compareTitle": "Vow frente a las típicas apps de bodas de EE. UU.",
+    "compareTitle": "Vow frente a las típicas apps de bodas",
     "compare": {
       "tripPage": "Página de viaje personal para cada invitado",
       "entryChecklist": "Lista de entrada/visados por país",
@@ -103,13 +103,13 @@
       "soon": "Próximamente"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Liubliana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londres → Cancún",
       "flightDetail": "Llega el jue 5 mar, 14:20",
       "hotel": "Hotel Park · Habitación 204",
-      "shuttle": "Lanzadera al lago Bled · 16:00",
-      "table": "Mesa 3 · con la familia Kovač",
+      "shuttle": "Traslado al lugar de la boda · 16:00",
+      "table": "Mesa 3 · con la familia Bennett",
       "passport": "Pasaporte válido hasta al menos junio de 2027",
       "yourTrip": "Tu viaje"
     },

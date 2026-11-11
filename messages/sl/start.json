@@ -17,8 +17,8 @@
         "text": "Vsak gost dobi svojo stran: leti, hotelska soba, čas prevoza, številka mize in seznam, kaj prinesti."
       },
       "entry": {
-        "title": "Kontrolni seznam za vstop v EU",
-        "text": "Pravila za potni list, vizumske zahteve, ETIAS — pripravljeno za domovino vsakega gosta."
+        "title": "Seznam za vstop za vsakega gosta",
+        "text": "Potni list, vizum in potovalna dovoljenja za državo poroke, prilagojeni domovini vsakega gosta, s katere koli celine že prihaja."
       },
       "rooms": {
         "title": "Tabla hotelskih sob",
@@ -37,7 +37,7 @@
         "text": "Slovenska babica vidi vse v slovenščini. Ameriška prijatelja v angleščini. Samodejno."
       }
     },
-    "compareTitle": "Vow v primerjavi s tipičnimi ameriškimi aplikacijami",
+    "compareTitle": "Vow v primerjavi s tipičnimi poročnimi aplikacijami",
     "compare": {
       "tripPage": "Osebna stran za pot vsakega gosta",
       "entryChecklist": "Seznam za vstop/vizum po državah",
@@ -103,13 +103,13 @@
     "privacy": "Zasebnost",
     "terms": "Pogoji",
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "London → Cancún",
       "flightDetail": "Prihod čet. 5. mar., 14:20",
       "hotel": "Hotel Park · Soba 204",
-      "shuttle": "Prevoz na Bled · 16:00",
-      "table": "Miza 3 · z družino Kovač",
+      "shuttle": "Prevoz do prizorišča · 16:00",
+      "table": "Miza 3 · z družino Bennett",
       "passport": "Potni list veljaven vsaj do junija 2027",
       "yourTrip": "Vaša pot"
     },

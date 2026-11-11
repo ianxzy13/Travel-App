@@ -67,8 +67,8 @@
         "text": "하객마다 전용 페이지: 항공편, 호텔 객실, 셔틀 시간, 테이블 번호, 챙길 물건 체크리스트."
       },
       "entry": {
-        "title": "EU 입국 체크리스트",
-        "text": "여권 규정, 비자 요건, ETIAS — 하객마다 출발 국가에 맞춰 준비해 국경에서 막히는 사람이 없습니다."
+        "title": "하객별 입국 체크리스트",
+        "text": "결혼식이 열리는 나라의 여권, 비자, 여행 허가 절차를 하객마다 출발 국가에 맞춰 준비합니다. 어느 대륙에서 오든 상관없습니다."
       },
       "rooms": {
         "title": "호텔 객실 보드",
@@ -87,7 +87,7 @@
         "text": "슬로베니아의 할머니는 모든 것을 슬로베니아어로, 대학 친구들은 영어로 봅니다. 자동으로."
       }
     },
-    "compareTitle": "Vow vs. 일반적인 미국 웨딩 앱",
+    "compareTitle": "Vow vs. 일반적인 웨딩 앱",
     "compare": {
       "tripPage": "하객별 개인 여행 페이지",
       "entryChecklist": "국가별 입국/비자 체크리스트",
@@ -103,13 +103,13 @@
       "soon": "곧 출시"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "마이애미 → 류블랴나",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "런던 → 칸쿤",
       "flightDetail": "3월 5일 (목) 14:20 도착",
       "hotel": "Hotel Park · 204호",
-      "shuttle": "블레드 호수행 셔틀 · 16:00",
-      "table": "테이블 3 · Kovač 가족과 함께",
+      "shuttle": "예식장행 셔틀 · 16:00",
+      "table": "테이블 3 · Bennett 가족과 함께",
       "passport": "여권은 최소 2027년 6월까지 유효해야 함",
       "yourTrip": "내 여행"
     },

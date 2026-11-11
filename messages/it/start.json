@@ -67,8 +67,8 @@
         "text": "Ogni ospite ha la sua pagina: voli, camera d'albergo, orario della navetta, numero del tavolo e una checklist di cosa portare."
       },
       "entry": {
-        "title": "Checklist d'ingresso nell'UE",
-        "text": "Regole sul passaporto, visti, ETIAS — generati per il paese di ogni ospite, così nessuno resta bloccato alla frontiera."
+        "title": "Checklist d’ingresso per ogni ospite",
+        "text": "Passaporto, visto e permessi di viaggio per il paese delle nozze, in base al paese di ogni ospite, da qualunque continente arrivi."
       },
       "rooms": {
         "title": "Bacheca camere d'albergo",
@@ -87,7 +87,7 @@
         "text": "La tua nonna slovena vede tutto in sloveno. I tuoi amici dell'università lo vedono in inglese. In automatico."
       }
     },
-    "compareTitle": "Vow vs. le classiche app di matrimonio USA",
+    "compareTitle": "Vow vs. le classiche app di matrimonio",
     "compare": {
       "tripPage": "Pagina di viaggio personale per ogni ospite",
       "entryChecklist": "Checklist ingresso/visti per paese",
@@ -103,13 +103,13 @@
       "soon": "In arrivo"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Lubiana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londra → Cancún",
       "flightDetail": "Arriva gio 5 mar, 14:20",
       "hotel": "Hotel Park · Camera 204",
-      "shuttle": "Navetta per il lago di Bled · 16:00",
-      "table": "Tavolo 3 · con la famiglia Kovač",
+      "shuttle": "Navetta per la location · 16:00",
+      "table": "Tavolo 3 · con la famiglia Bennett",
       "passport": "Passaporto valido almeno fino a giugno 2027",
       "yourTrip": "Il tuo viaggio"
     },

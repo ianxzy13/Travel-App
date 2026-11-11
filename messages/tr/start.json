@@ -67,8 +67,8 @@
         "text": "Her misafirin kendi sayfası var: uçuşlar, otel odası, servis saati, masa numarası ve yanına alacaklarının kontrol listesi."
       },
       "entry": {
-        "title": "AB giriş kontrol listesi",
-        "text": "Pasaport kuralları, vize şartları, ETIAS — her misafirin ülkesine göre hazırlanır, kimse sınırda takılmaz."
+        "title": "Her misafir için giriş kontrol listesi",
+        "text": "Düğünün yapılacağı ülke için pasaport, vize ve seyahat izni adımları, her misafirin kendi ülkesine göre, hangi kıtadan gelirse gelsin."
       },
       "rooms": {
         "title": "Otel oda panosu",
@@ -87,7 +87,7 @@
         "text": "Sloven büyükanneniz her şeyi Slovence görür. Üniversite arkadaşlarınız İngilizce görür. Otomatik olarak."
       }
     },
-    "compareTitle": "Vow ve tipik ABD düğün uygulamaları",
+    "compareTitle": "Vow ve tipik düğün uygulamaları",
     "compare": {
       "tripPage": "Misafir başına kişisel seyahat sayfası",
       "entryChecklist": "Ülkeye göre giriş/vize kontrol listesi",
@@ -103,13 +103,13 @@
       "soon": "Yakında"
     },
     "mock": {
-      "guestName": "Maja Novak",
-      "langLabel": "Slovenščina",
-      "flight": "Miami → Ljubljana",
+      "guestName": "Sarah Mitchell",
+      "langLabel": "English",
+      "flight": "Londra → Cancún",
       "flightDetail": "Varış Per 5 Mar, 14:20",
       "hotel": "Hotel Park · Oda 204",
-      "shuttle": "Bled Gölü'ne servis · 16:00",
-      "table": "Masa 3 · Kovač ailesiyle",
+      "shuttle": "Düğün mekânına servis · 16:00",
+      "table": "Masa 3 · Bennett ailesiyle",
       "passport": "Pasaport en az Haziran 2027'ye kadar geçerli olmalı",
       "yourTrip": "Seyahatiniz"
     },

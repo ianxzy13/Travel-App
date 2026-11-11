@@ -94,7 +94,7 @@ export function LandingHero() {
   );
 }
 
-/** Maja's trip page: lines tick in one by one; the card floats and leans toward the mouse. */
+/** A sample guest's trip page: lines tick in one by one; the card floats and leans toward the mouse. */
 function TripCard() {
   const t = useTranslations("landing.mock");
   const reduce = useReducedMotion();
