@@ -60,6 +60,8 @@
       "shuttles": "El planificador de traslados es parte de {plan}.",
       "noBranding": "Quitar la marca Vow de tu web es parte de {plan}.",
       "manyWeddings": "Organizar más de una boda es parte de {plan}, pensado para wedding planners."
-    }
+    },
+    "soon": "Pronto",
+    "soonNote": "Vow Plus y Vow Pro llegan pronto. Hasta entonces, todo Vow es gratis."
   }
 }

@@ -60,6 +60,8 @@
       "shuttles": "Kế hoạch xe đưa đón thuộc {plan}.",
       "noBranding": "Bỏ dấu Vow khỏi trang web thuộc {plan}.",
       "manyWeddings": "Tổ chức nhiều đám cưới thuộc {plan}, dành cho wedding planner."
-    }
+    },
+    "soon": "Sắp có",
+    "soonNote": "Vow Plus và Vow Pro sắp ra mắt. Cho đến lúc đó, mọi thứ trong Vow đều miễn phí."
   }
 }

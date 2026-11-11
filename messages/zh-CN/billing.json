@@ -60,6 +60,8 @@
       "shuttles": "接送规划属于 {plan}。",
       "noBranding": "从网站移除 Vow 标识属于 {plan}。",
       "manyWeddings": "同时策划多场婚礼属于 {plan}，专为婚礼策划师设计。"
-    }
+    },
+    "soon": "即将推出",
+    "soonNote": "Vow Plus 和 Vow Pro 即将推出。在此之前，Vow 的所有功能均免费。"
   }
 }

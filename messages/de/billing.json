@@ -60,6 +60,8 @@
       "shuttles": "Der Shuttle-Planer ist Teil von {plan}.",
       "noBranding": "Den Vow-Hinweis von Ihrer Website entfernen ist Teil von {plan}.",
       "manyWeddings": "Mehr als eine Hochzeit zu planen ist Teil von {plan}, gemacht für Hochzeitsplaner."
-    }
+    },
+    "soon": "Bald",
+    "soonNote": "Vow Plus und Vow Pro kommen bald. Bis dahin ist alles in Vow kostenlos."
   }
 }

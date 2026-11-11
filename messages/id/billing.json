@@ -60,6 +60,8 @@
       "shuttles": "Perencana antar-jemput termasuk dalam {plan}.",
       "noBranding": "Menghapus tanda Vow dari situs termasuk dalam {plan}.",
       "manyWeddings": "Merencanakan lebih dari satu pernikahan termasuk dalam {plan}, dibuat untuk wedding planner."
-    }
+    },
+    "soon": "Segera",
+    "soonNote": "Vow Plus dan Vow Pro segera hadir. Sampai saat itu, semua di Vow gratis."
   }
 }

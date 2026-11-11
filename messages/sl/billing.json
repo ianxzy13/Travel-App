@@ -60,6 +60,8 @@
       "shuttles": "Načrtovanje prevozov je del paketa {plan}.",
       "noBranding": "Odstranitev oznake Vow s spletne strani je del paketa {plan}.",
       "manyWeddings": "Več porok hkrati je del paketa {plan}, ki je namenjen poročnim organizatorjem."
-    }
+    },
+    "soon": "Kmalu",
+    "soonNote": "Vow Plus in Vow Pro bosta na voljo kmalu. Do takrat je vse v Vow brezplačno."
   }
 }

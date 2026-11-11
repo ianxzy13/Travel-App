@@ -60,6 +60,8 @@
       "shuttles": "Il pianificatore di navette fa parte di {plan}.",
       "noBranding": "Togliere il marchio Vow dal tuo sito fa parte di {plan}.",
       "manyWeddings": "Organizzare più di un matrimonio fa parte di {plan}, pensato per i wedding planner."
-    }
+    },
+    "soon": "Presto",
+    "soonNote": "Vow Plus e Vow Pro arrivano presto. Fino ad allora, tutto Vow è gratis."
   }
 }

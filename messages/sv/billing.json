@@ -60,6 +60,8 @@
       "shuttles": "Shuttleplaneraren ingår i {plan}.",
       "noBranding": "Att ta bort Vow-märkningen från webbplatsen ingår i {plan}.",
       "manyWeddings": "Att planera mer än ett bröllop ingår i {plan}, gjord för bröllopsplanerare."
-    }
+    },
+    "soon": "Snart",
+    "soonNote": "Vow Plus och Vow Pro kommer snart. Tills dess är allt i Vow gratis."
   }
 }

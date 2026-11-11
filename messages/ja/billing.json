@@ -60,6 +60,8 @@
       "shuttles": "シャトル計画は {plan} の機能です。",
       "noBranding": "ウェブサイトから Vow の表示を外すのは {plan} の機能です。",
       "manyWeddings": "複数の結婚式の管理は、ウェディングプランナー向けの {plan} の機能です。"
-    }
+    },
+    "soon": "近日公開",
+    "soonNote": "Vow Plus と Vow Pro は近日公開予定です。それまでは Vow のすべてを無料でご利用いただけます。"
   }
 }

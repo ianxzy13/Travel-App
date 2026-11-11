@@ -60,6 +60,8 @@
       "shuttles": "接送規劃屬於 {plan}。",
       "noBranding": "從網站移除 Vow 標示屬於 {plan}。",
       "manyWeddings": "同時企劃多場婚禮屬於 {plan}，專為婚禮企劃師設計。"
-    }
+    },
+    "soon": "即將推出",
+    "soonNote": "Vow Plus 和 Vow Pro 即將推出。在此之前，Vow 的所有功能皆免費。"
   }
 }
