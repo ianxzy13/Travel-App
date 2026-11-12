@@ -10,6 +10,13 @@
     "tabSetup": "Menus e definições",
     "nothingTitle": "Ainda nada para confirmar",
     "nothingText": "Adicionem convidados e convidem-nos para os eventos na página Convidados. Cada agregado recebe depois a sua ligação privada de confirmação.",
+    "notInvited": {
+      "title": "Alguns convidados não estão convidados para nenhum evento",
+      "text": "Agregados sem convite: {count}. Não podem responder nem aparecem nesta página até serem convidados.",
+      "more": "e mais {count}",
+      "invite": "Convidá-los para {event}",
+      "done": "Convidados para {event}"
+    },
     "households": "Agregados",
     "search": "Pesquisar agregados ou nomes…",
     "searchLabel": "Pesquisar agregados",

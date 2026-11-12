@@ -10,6 +10,13 @@
     "tabSetup": "Món ăn & cài đặt",
     "nothingTitle": "Chưa có gì để xác nhận",
     "nothingText": "Thêm khách và mời họ đến sự kiện ở trang Khách mời. Sau đó mỗi gia đình sẽ có liên kết xác nhận riêng.",
+    "notInvited": {
+      "title": "Một số khách chưa được mời đến sự kiện nào",
+      "text": "Hộ chưa có lời mời: {count}. Họ chưa thể trả lời và không hiện trên trang này cho đến khi được mời.",
+      "more": "và {count} hộ khác",
+      "invite": "Mời đến {event}",
+      "done": "Đã mời đến {event}"
+    },
     "households": "Gia đình",
     "search": "Tìm gia đình hoặc tên…",
     "searchLabel": "Tìm gia đình",

@@ -10,6 +10,13 @@
     "tabSetup": "Menu a nastavení",
     "nothingTitle": "Zatím není na co odpovídat",
     "nothingText": "Přidejte hosty a pozvěte je na události na stránce Hosté. Každá domácnost pak dostane vlastní soukromý odkaz k odpovědi.",
+    "notInvited": {
+      "title": "Někteří hosté nejsou pozvaní na žádnou událost",
+      "text": "Domácnosti bez pozvánky: {count}. Dokud nebudou pozvané, nemohou odpovědět a na této stránce se nezobrazí.",
+      "more": "a dalších {count}",
+      "invite": "Pozvat na {event}",
+      "done": "Pozváno na {event}"
+    },
     "households": "Domácnosti",
     "search": "Hledat domácnosti nebo jména…",
     "searchLabel": "Hledat domácnosti",

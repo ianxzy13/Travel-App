@@ -10,6 +10,13 @@
     "tabSetup": "餐點和設定",
     "nothingTitle": "還沒有需要回覆的內容",
     "nothingText": "在「賓客」頁新增賓客並邀請他們參加活動。之後每個家庭都會取得專屬回覆連結。",
+    "notInvited": {
+      "title": "有些賓客還沒有被邀請參加任何活動",
+      "text": "未被邀請的家庭：{count}。在被邀請之前，他們無法回覆，也不會顯示在此頁面。",
+      "more": "還有 {count} 個",
+      "invite": "邀請參加「{event}」",
+      "done": "已邀請參加「{event}」"
+    },
     "households": "家庭",
     "search": "搜尋家庭或姓名…",
     "searchLabel": "搜尋家庭",

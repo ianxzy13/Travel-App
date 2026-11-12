@@ -10,6 +10,13 @@
     "tabSetup": "Menús y ajustes",
     "nothingTitle": "Aún no hay nada que confirmar",
     "nothingText": "Añade invitados e invítalos a tus eventos en la página Invitados. Cada hogar recibe entonces su propio enlace privado de confirmación.",
+    "notInvited": {
+      "title": "Algunos invitados no están invitados a ningún evento",
+      "text": "Hogares sin invitación: {count}. No pueden responder ni aparecen en esta página hasta que los invites.",
+      "more": "y {count} más",
+      "invite": "Invitarlos a {event}",
+      "done": "Invitados a {event}"
+    },
     "households": "Hogares",
     "search": "Buscar hogares o nombres…",
     "searchLabel": "Buscar hogares",

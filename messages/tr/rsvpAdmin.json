@@ -10,6 +10,13 @@
     "tabSetup": "Menüler ve ayarlar",
     "nothingTitle": "Henüz yanıtlanacak bir şey yok",
     "nothingText": "Misafirler sayfasında misafir ekleyip etkinliklerinize davet edin. Her hane kendi özel yanıt bağlantısını alır.",
+    "notInvited": {
+      "title": "Bazı misafirler hiçbir etkinliğe davetli değil",
+      "text": "Daveti olmayan haneler: {count}. Davet edilene kadar yanıt veremez ve bu sayfada görünmezler.",
+      "more": "ve {count} tane daha",
+      "invite": "{event} etkinliğine davet et",
+      "done": "{event} etkinliğine davet edildi"
+    },
     "households": "Haneler",
     "search": "Hane veya isim ara…",
     "searchLabel": "Hane ara",

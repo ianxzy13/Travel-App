@@ -10,6 +10,13 @@
     "tabSetup": "Meniji i postavke",
     "nothingTitle": "Još nema ničega za potvrdu",
     "nothingText": "Dodajte goste i pozovite ih na događaje na stranici Gosti. Svako kućanstvo tada dobiva svoju privatnu poveznicu za potvrdu.",
+    "notInvited": {
+      "title": "Neki gosti nisu pozvani ni na jedan događaj",
+      "text": "Kućanstva bez pozivnice: {count}. Dok ih ne pozovete, ne mogu odgovoriti i ne prikazuju se na ovoj stranici.",
+      "more": "i još {count}",
+      "invite": "Pozovite ih na {event}",
+      "done": "Pozvani na {event}"
+    },
     "households": "Kućanstva",
     "search": "Traži kućanstva ili imena…",
     "searchLabel": "Traži kućanstva",

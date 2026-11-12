@@ -10,6 +10,13 @@
     "tabSetup": "Menu e impostazioni",
     "nothingTitle": "Ancora niente da confermare",
     "nothingText": "Aggiungete invitati e invitateli agli eventi nella pagina Invitati. Ogni nucleo riceverà poi il suo link privato di conferma.",
+    "notInvited": {
+      "title": "Alcuni ospiti non sono invitati a nessun evento",
+      "text": "Nuclei senza invito: {count}. Non possono rispondere e non compaiono in questa pagina finché non sono invitati.",
+      "more": "e altri {count}",
+      "invite": "Invitateli a {event}",
+      "done": "Invitati a {event}"
+    },
     "households": "Nuclei",
     "search": "Cerca nuclei o nomi…",
     "searchLabel": "Cerca nuclei",

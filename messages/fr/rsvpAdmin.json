@@ -10,6 +10,13 @@
     "tabSetup": "Menus et réglages",
     "nothingTitle": "Rien à confirmer pour l’instant",
     "nothingText": "Ajoutez des invités et conviez-les à vos événements sur la page Invités. Chaque foyer reçoit alors son propre lien de réponse privé.",
+    "notInvited": {
+      "title": "Certains invités ne sont invités à aucun événement",
+      "text": "Foyers sans invitation : {count}. Ils ne peuvent pas répondre et n’apparaissent pas sur cette page tant qu’ils ne sont pas invités.",
+      "more": "et {count} de plus",
+      "invite": "Les inviter à {event}",
+      "done": "Invités à {event}"
+    },
     "households": "Foyers",
     "search": "Rechercher des foyers ou des noms…",
     "searchLabel": "Rechercher des foyers",

@@ -10,6 +10,13 @@
     "tabSetup": "Menu’s en instellingen",
     "nothingTitle": "Nog niets om op te reageren",
     "nothingText": "Voeg gasten toe en nodig ze uit voor onderdelen op de pagina Gasten. Elk huishouden krijgt dan een eigen privé-reactielink.",
+    "notInvited": {
+      "title": "Sommige gasten zijn voor geen enkel onderdeel uitgenodigd",
+      "text": "Huishoudens zonder uitnodiging: {count}. Ze kunnen pas antwoorden en verschijnen pas op deze pagina als ze zijn uitgenodigd.",
+      "more": "en nog {count}",
+      "invite": "Uitnodigen voor {event}",
+      "done": "Uitgenodigd voor {event}"
+    },
     "households": "Huishoudens",
     "search": "Zoek huishoudens of namen…",
     "searchLabel": "Huishoudens zoeken",
