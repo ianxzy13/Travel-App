@@ -13,6 +13,7 @@ import { isLocale, isRtl, type Locale } from "@/i18n/locales";
 import { localized } from "@/lib/i18n/content";
 import { fmtDate } from "@/lib/i18n/format";
 import { rsvpErrorMessage, type RsvpData, type RsvpResult } from "@/lib/rsvp/types";
+import { inviteUninvitedGuests } from "@/lib/rsvp/invite";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -34,6 +35,26 @@ async function editor() {
 function done(): ActionResult {
   revalidatePath("/app", "layout");
   return { ok: true };
+}
+
+// ---------- invitations ----------
+
+/** Invites every guest who has no invitation yet to one event (from the RSVP page). */
+export async function inviteUninvited(eventId: unknown): Promise<ActionResult> {
+  const ctx = await editor();
+  if (!ctx) return noPermission();
+  const id = z.uuid().safeParse(eventId);
+  if (!id.success) return noPermission();
+  const { data: event } = await ctx.supabase
+    .from("events")
+    .select("id")
+    .eq("id", id.data)
+    .eq("wedding_id", ctx.wedding.id)
+    .maybeSingle();
+  if (!event) return noPermission();
+  const { error } = await inviteUninvitedGuests(ctx.supabase, ctx.wedding.id, event.id);
+  if (error) return fail("inviteUninvited", error);
+  return done();
 }
 
 // ---------- settings ----------

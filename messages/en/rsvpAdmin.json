@@ -11,6 +11,13 @@
     "tabSetup": "Meals & settings",
     "nothingTitle": "Nothing to RSVP for yet",
     "nothingText": "Add guests and invite them to your events on the Guests page. Each household then gets its own private RSVP link.",
+    "notInvited": {
+      "title": "Some guests aren’t invited to any event",
+      "text": "Households without an invitation: {count}. They can’t reply and don’t show up on this page until they’re invited.",
+      "more": "and {count} more",
+      "invite": "Invite them to {event}",
+      "done": "Invited to {event}"
+    },
     "households": "Households",
     "search": "Search households or names…",
     "searchLabel": "Search households",

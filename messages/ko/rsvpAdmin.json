@@ -10,6 +10,13 @@
     "tabSetup": "식사 및 설정",
     "nothingTitle": "아직 참석 여부를 받을 행사가 없습니다",
     "nothingText": "하객 페이지에서 하객을 추가하고 행사에 초대하세요. 그러면 각 가족에게 개인 참석 여부 링크가 생깁니다.",
+    "notInvited": {
+      "title": "어떤 일정에도 초대되지 않은 하객이 있어요",
+      "text": "초대가 없는 가구: {count}. 초대되기 전에는 답할 수 없고 이 페이지에도 표시되지 않아요.",
+      "more": "외 {count}가구",
+      "invite": "‘{event}’에 초대",
+      "done": "‘{event}’에 초대했어요"
+    },
     "households": "가족",
     "search": "가족이나 이름 검색…",
     "searchLabel": "가족 검색",

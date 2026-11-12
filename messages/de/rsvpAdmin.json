@@ -10,6 +10,13 @@
     "tabSetup": "Menüs & Einstellungen",
     "nothingTitle": "Noch nichts zum Zusagen",
     "nothingText": "Füge auf der Seite Gäste Gäste hinzu und lade sie zu Programmpunkten ein. Jeder Haushalt bekommt dann seinen eigenen privaten Zusage-Link.",
+    "notInvited": {
+      "title": "Einige Gäste sind zu keinem Programmpunkt eingeladen",
+      "text": "Haushalte ohne Einladung: {count}. Sie können erst antworten und erscheinen erst auf dieser Seite, wenn sie eingeladen sind.",
+      "more": "und {count} weitere",
+      "invite": "Zu „{event}“ einladen",
+      "done": "Zu „{event}“ eingeladen"
+    },
     "households": "Haushalte",
     "search": "Haushalte oder Namen suchen …",
     "searchLabel": "Haushalte suchen",

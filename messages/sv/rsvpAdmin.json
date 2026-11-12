@@ -10,6 +10,13 @@
     "tabSetup": "Menyer och inställningar",
     "nothingTitle": "Inget att OSA till än",
     "nothingText": "Lägg till gäster och bjud in dem till programpunkter på sidan Gäster. Varje hushåll får då sin egen privata OSA-länk.",
+    "notInvited": {
+      "title": "Några gäster är inte inbjudna till något evenemang",
+      "text": "Hushåll utan inbjudan: {count}. De kan inte svara och syns inte på den här sidan förrän de är inbjudna.",
+      "more": "och {count} till",
+      "invite": "Bjud in till {event}",
+      "done": "Inbjudna till {event}"
+    },
     "households": "Hushåll",
     "search": "Sök hushåll eller namn…",
     "searchLabel": "Sök hushåll",

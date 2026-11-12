@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import {
   Check,
   Copy,
   ExternalLink,
+  Loader2,
   Mail,
   MailOpen,
   MailWarning,
@@ -22,7 +23,7 @@ import { toast } from "sonner";
 import { PageHeader } from "@/components/app/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -33,6 +34,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { inviteUninvited } from "@/app/app/rsvp/actions";
 import { normalize } from "@/lib/guests/filter";
 import { relative } from "@/lib/i18n/format";
 import type { DashboardHousehold, RsvpDashboardData } from "@/lib/rsvp/load";
@@ -110,6 +112,11 @@ export function RsvpDashboard(props: Props) {
   }, []);
 
   const invited = data.households.filter((h) => h.reply.status !== "not_invited");
+  // households with guests but no invitation: they can't reply and aren't in the list below
+  const uninvited = data.households.filter(
+    (h) => h.reply.status === "not_invited" && h.guests.length > 0,
+  );
+  const showUninvited = canEdit && data.events.length > 0 && uninvited.length > 0;
   const counts = {
     all: invited.length,
     waiting: invited.filter((h) => h.reply.status === "waiting").length,
@@ -182,13 +189,16 @@ export function RsvpDashboard(props: Props) {
         </TabsList>
 
         <TabsContent value="replies" className="space-y-6">
+          {showUninvited && <NotInvitedCard households={uninvited} events={data.events} />}
           {data.events.length === 0 || invited.length === 0 ? (
+            showUninvited ? null : (
             <Card>
               <CardContent className="py-12 text-center">
                 <h2 className="text-3xl">{t("nothingTitle")}</h2>
                 <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("nothingText")}</p>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            )
           ) : (
             <>
               <EventTotalsGrid data={data} />
@@ -387,6 +397,54 @@ export function RsvpDashboard(props: Props) {
       />
       <RecordReplyDialog household={recording} onClose={closeRecording} />
     </>
+  );
+}
+
+/** Guests without any invitation can't reply. One click invites them to an event. */
+function NotInvitedCard({
+  households,
+  events,
+}: {
+  households: DashboardHousehold[];
+  events: RsvpDashboardData["events"];
+}) {
+  const t = useTranslations("rsvpAdmin.notInvited");
+  const [pending, startTransition] = useTransition();
+  const [busy, setBusy] = useState<string | null>(null);
+  const shown = households.slice(0, 6).map((h) => h.name);
+  const more = households.length - shown.length;
+
+  const invite = (event: { id: string; name: string }) => {
+    setBusy(event.id);
+    startTransition(async () => {
+      const r = await inviteUninvited(event.id);
+      if (r.ok) toast.success(t("done", { event: event.name }));
+      else toast.error(r.error);
+      setBusy(null);
+    });
+  };
+
+  return (
+    <Card className="border-warning/40">
+      <CardHeader>
+        <CardTitle className="font-serif text-xl font-medium">{t("title")}</CardTitle>
+        <CardDescription>{t("text", { count: households.length })}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-sm">
+          {shown.join(", ")}
+          {more > 0 && <span className="text-muted-foreground"> {t("more", { count: more })}</span>}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {events.map((e) => (
+            <Button key={e.id} size="sm" disabled={pending} onClick={() => invite(e)}>
+              {busy === e.id && <Loader2 className="animate-spin" aria-hidden />}
+              {t("invite", { event: e.name })}
+            </Button>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 

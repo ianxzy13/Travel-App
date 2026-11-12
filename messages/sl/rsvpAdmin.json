@@ -11,6 +11,13 @@
     "tabSetup": "Meniji in nastavitve",
     "nothingTitle": "Še ni ničesar za potrditi",
     "nothingText": "Dodajte goste in jih povabite na dogodke na strani Gostje. Vsako gospodinjstvo nato dobi svojo zasebno povezavo za potrditev.",
+    "notInvited": {
+      "title": "Nekateri gostje niso povabljeni na noben dogodek",
+      "text": "Gospodinjstva brez povabila: {count}. Dokler niso povabljena, ne morejo odgovoriti in jih na tej strani ni.",
+      "more": "in še {count}",
+      "invite": "Povabite jih na {event}",
+      "done": "Povabljeni na {event}"
+    },
     "households": "Gospodinjstva",
     "search": "Išči gospodinjstva ali imena …",
     "searchLabel": "Išči gospodinjstva",

@@ -10,6 +10,13 @@
     "tabSetup": "Menu & pengaturan",
     "nothingTitle": "Belum ada yang perlu di-RSVP",
     "nothingText": "Tambahkan tamu dan undang mereka ke acara Anda di halaman Tamu. Setiap keluarga lalu mendapat tautan RSVP pribadinya sendiri.",
+    "notInvited": {
+      "title": "Beberapa tamu belum diundang ke acara apa pun",
+      "text": "Keluarga tanpa undangan: {count}. Mereka belum bisa membalas dan tidak muncul di halaman ini sampai diundang.",
+      "more": "dan {count} lainnya",
+      "invite": "Undang ke {event}",
+      "done": "Diundang ke {event}"
+    },
     "households": "Keluarga",
     "search": "Cari keluarga atau nama…",
     "searchLabel": "Cari keluarga",

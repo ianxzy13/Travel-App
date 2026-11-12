@@ -10,6 +10,13 @@
     "tabSetup": "餐点和设置",
     "nothingTitle": "还没有需要回复的内容",
     "nothingText": "在“宾客”页添加宾客并邀请他们参加活动。之后每个家庭都会获得专属回复链接。",
+    "notInvited": {
+      "title": "有些宾客还没有被邀请参加任何活动",
+      "text": "未被邀请的家庭：{count}。在被邀请之前，他们无法回复，也不会显示在此页面。",
+      "more": "还有 {count} 个",
+      "invite": "邀请参加“{event}”",
+      "done": "已邀请参加“{event}”"
+    },
     "households": "家庭",
     "search": "搜索家庭或姓名…",
     "searchLabel": "搜索家庭",

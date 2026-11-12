@@ -10,6 +10,13 @@
     "tabSetup": "Menu i ustawienia",
     "nothingTitle": "Nie ma jeszcze czego potwierdzać",
     "nothingText": "Dodaj gości i zaproś ich na wydarzenia na stronie Goście. Każde gospodarstwo dostanie wtedy własny prywatny link do potwierdzenia.",
+    "notInvited": {
+      "title": "Niektórzy goście nie są zaproszeni na żadne wydarzenie",
+      "text": "Gospodarstwa bez zaproszenia: {count}. Dopóki nie zostaną zaproszone, nie mogą odpowiedzieć i nie widać ich na tej stronie.",
+      "more": "i jeszcze {count}",
+      "invite": "Zaproś na {event}",
+      "done": "Zaproszono na {event}"
+    },
     "households": "Gospodarstwa",
     "search": "Szukaj gospodarstw lub imion…",
     "searchLabel": "Szukaj gospodarstw",
