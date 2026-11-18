@@ -42,7 +42,16 @@
       "replied": "{name} ha risposto",
       "updated": "{name} ha modificato la conferma",
       "summary": "{attending} presenti, {declined} assenti",
-      "seeAll": "Vedi tutte le risposte"
+      "seeAll": "Vedi tutte le risposte",
+      "eyebrowNew": "Nuova risposta",
+      "eyebrowUpdated": "Risposta modificata",
+      "attending": "Presente",
+      "declined": "Assente",
+      "noAnswer": "Nessuna risposta",
+      "dietary": "Esigenze alimentari",
+      "song": "Canzone richiesta",
+      "message": "Il loro messaggio",
+      "why": "Ricevi questa email perché «Mandami un’email quando qualcuno risponde» è attivo nelle impostazioni RSVP."
     }
   }
 }

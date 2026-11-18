@@ -42,7 +42,16 @@
       "replied": "{name}から返信がありました",
       "updated": "{name}が出欠を更新しました",
       "summary": "出席 {attending}、欠席 {declined}",
-      "seeAll": "すべての返信を見る"
+      "seeAll": "すべての返信を見る",
+      "eyebrowNew": "新しい返信",
+      "eyebrowUpdated": "返信が更新されました",
+      "attending": "出席",
+      "declined": "欠席",
+      "noAnswer": "未回答",
+      "dietary": "食事の配慮",
+      "song": "リクエスト曲",
+      "message": "メッセージ",
+      "why": "出欠設定で「返信があったらメールで知らせる」がオンになっているため、このメールをお送りしています。"
     }
   }
 }

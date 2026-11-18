@@ -42,7 +42,16 @@
       "replied": "{name} hat geantwortet",
       "updated": "{name} hat die Zusage geändert",
       "summary": "{attending} kommen, {declined} kommen nicht",
-      "seeAll": "Alle Antworten ansehen"
+      "seeAll": "Alle Antworten ansehen",
+      "eyebrowNew": "Neue Antwort",
+      "eyebrowUpdated": "Antwort geändert",
+      "attending": "Kommt",
+      "declined": "Kommt nicht",
+      "noAnswer": "Noch keine Antwort",
+      "dietary": "Ernährung",
+      "song": "Musikwunsch",
+      "message": "Ihre Nachricht",
+      "why": "Sie erhalten diese E-Mail, weil „Mir eine E-Mail senden, wenn jemand antwortet“ in Ihren RSVP-Einstellungen eingeschaltet ist."
     }
   }
 }

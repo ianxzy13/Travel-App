@@ -42,7 +42,16 @@
       "replied": "{name} respondeu",
       "updated": "{name} alterou a confirmação",
       "summary": "{attending} vêm, {declined} não vêm",
-      "seeAll": "Ver todas as respostas"
+      "seeAll": "Ver todas as respostas",
+      "eyebrowNew": "Nova confirmação",
+      "eyebrowUpdated": "Confirmação alterada",
+      "attending": "Vem",
+      "declined": "Não vem",
+      "noAnswer": "Ainda sem resposta",
+      "dietary": "Restrições alimentares",
+      "song": "Pedido de música",
+      "message": "A mensagem deles",
+      "why": "Recebe este email porque «Enviar-me um email quando alguém responder» está ativado nas definições de confirmações."
     }
   }
 }

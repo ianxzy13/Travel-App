@@ -42,7 +42,16 @@
       "replied": "{name} yanıt verdi",
       "updated": "{name} yanıtını güncelledi",
       "summary": "{attending} katılıyor, {declined} katılmıyor",
-      "seeAll": "Tüm yanıtları gör"
+      "seeAll": "Tüm yanıtları gör",
+      "eyebrowNew": "Yeni yanıt",
+      "eyebrowUpdated": "Yanıt güncellendi",
+      "attending": "Katılıyor",
+      "declined": "Katılmıyor",
+      "noAnswer": "Henüz yanıt yok",
+      "dietary": "Beslenme ihtiyaçları",
+      "song": "Şarkı isteği",
+      "message": "Mesajları",
+      "why": "Bu e-postayı, LCV ayarlarınızda “Biri yanıt verdiğinde bana e-posta gönder” açık olduğu için alıyorsunuz."
     }
   }
 }

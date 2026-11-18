@@ -42,7 +42,16 @@
       "replied": "{name} heeft gereageerd",
       "updated": "{name} heeft de reactie gewijzigd",
       "summary": "{attending} komen, {declined} komen niet",
-      "seeAll": "Alle reacties bekijken"
+      "seeAll": "Alle reacties bekijken",
+      "eyebrowNew": "Nieuwe reactie",
+      "eyebrowUpdated": "Reactie gewijzigd",
+      "attending": "Komt",
+      "declined": "Komt niet",
+      "noAnswer": "Nog geen antwoord",
+      "dietary": "Dieetwensen",
+      "song": "Verzoeknummer",
+      "message": "Hun bericht",
+      "why": "Je krijgt deze mail omdat ‘Mail me als iemand reageert’ aan staat in je RSVP-instellingen."
     }
   }
 }

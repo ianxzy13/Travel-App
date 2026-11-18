@@ -42,7 +42,16 @@
       "replied": "{name} telah membalas",
       "updated": "{name} memperbarui RSVP mereka",
       "summary": "{attending} hadir, {declined} tidak hadir",
-      "seeAll": "Lihat semua balasan"
+      "seeAll": "Lihat semua balasan",
+      "eyebrowNew": "Balasan baru",
+      "eyebrowUpdated": "Balasan diperbarui",
+      "attending": "Hadir",
+      "declined": "Tidak hadir",
+      "noAnswer": "Belum menjawab",
+      "dietary": "Kebutuhan makanan",
+      "song": "Permintaan lagu",
+      "message": "Pesan mereka",
+      "why": "Anda menerima email ini karena “Kirimi saya email saat seseorang membalas” aktif di pengaturan RSVP."
     }
   }
 }
