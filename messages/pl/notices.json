@@ -42,7 +42,16 @@
       "replied": "{name} odpowiedział(a)",
       "updated": "{name} zmienił(a) potwierdzenie",
       "summary": "przyjdzie: {attending}, nie przyjdzie: {declined}",
-      "seeAll": "Zobacz wszystkie odpowiedzi"
+      "seeAll": "Zobacz wszystkie odpowiedzi",
+      "eyebrowNew": "Nowa odpowiedź",
+      "eyebrowUpdated": "Zmieniona odpowiedź",
+      "attending": "Przyjdzie",
+      "declined": "Nie przyjdzie",
+      "noAnswer": "Brak odpowiedzi",
+      "dietary": "Wymagania dietetyczne",
+      "song": "Prośba o piosenkę",
+      "message": "Ich wiadomość",
+      "why": "Otrzymujesz tę wiadomość, bo w ustawieniach potwierdzeń włączona jest opcja „Wyślij mi e-mail, gdy ktoś odpowie”."
     }
   }
 }

@@ -42,7 +42,16 @@
       "replied": "ردّ {name}",
       "updated": "عدّل {name} ردّه",
       "summary": "سيحضر: {attending}، لن يحضر: {declined}",
-      "seeAll": "عرض كل الردود"
+      "seeAll": "عرض كل الردود",
+      "eyebrowNew": "ردّ جديد",
+      "eyebrowUpdated": "ردّ معدّل",
+      "attending": "سيحضر",
+      "declined": "لن يحضر",
+      "noAnswer": "لا ردّ بعد",
+      "dietary": "احتياجات غذائية",
+      "song": "طلب أغنية",
+      "message": "رسالتهم",
+      "why": "تصلك هذه الرسالة لأن خيار «راسلني عندما يرد أحد» مفعّل في إعدادات الردود."
     }
   }
 }

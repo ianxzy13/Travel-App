@@ -42,7 +42,16 @@
       "replied": "{name} ha respondido",
       "updated": "{name} ha cambiado su confirmación",
       "summary": "{attending} asisten, {declined} no asisten",
-      "seeAll": "Ver todas las respuestas"
+      "seeAll": "Ver todas las respuestas",
+      "eyebrowNew": "Nueva confirmación",
+      "eyebrowUpdated": "Confirmación cambiada",
+      "attending": "Asiste",
+      "declined": "No asiste",
+      "noAnswer": "Sin respuesta aún",
+      "dietary": "Necesidades alimentarias",
+      "song": "Canción pedida",
+      "message": "Su mensaje",
+      "why": "Recibes este correo porque «Avisarme por correo cuando alguien responda» está activado en los ajustes de confirmaciones."
     }
   }
 }

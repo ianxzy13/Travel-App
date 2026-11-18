@@ -42,7 +42,16 @@
       "replied": "{name} je odgovoril(a)",
       "updated": "{name} je spremenil(a) potrditev",
       "summary": "{attending} pride, {declined} ne pride",
-      "seeAll": "Poglej vse odgovore"
+      "seeAll": "Poglej vse odgovore",
+      "eyebrowNew": "Nova potrditev",
+      "eyebrowUpdated": "Spremenjena potrditev",
+      "attending": "Pride",
+      "declined": "Ne pride",
+      "noAnswer": "Še brez odgovora",
+      "dietary": "Prehranske potrebe",
+      "song": "Želena pesem",
+      "message": "Njihovo sporočilo",
+      "why": "To e-pošto prejemate, ker je v nastavitvah potrditev vklopljeno »Pošlji mi e-pošto, ko nekdo odgovori«."
     }
   }
 }

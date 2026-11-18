@@ -42,7 +42,16 @@
       "replied": "{name} đã trả lời",
       "updated": "{name} đã cập nhật xác nhận",
       "summary": "{attending} tham dự, {declined} không tham dự",
-      "seeAll": "Xem tất cả câu trả lời"
+      "seeAll": "Xem tất cả câu trả lời",
+      "eyebrowNew": "Phản hồi mới",
+      "eyebrowUpdated": "Phản hồi đã cập nhật",
+      "attending": "Tham dự",
+      "declined": "Không tham dự",
+      "noAnswer": "Chưa trả lời",
+      "dietary": "Nhu cầu ăn uống",
+      "song": "Yêu cầu bài hát",
+      "message": "Lời nhắn của họ",
+      "why": "Bạn nhận được email này vì “Gửi email cho tôi khi có người trả lời” đang bật trong cài đặt xác nhận."
     }
   }
 }

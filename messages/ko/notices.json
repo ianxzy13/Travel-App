@@ -42,7 +42,16 @@
       "replied": "{name} 님이 답변했습니다",
       "updated": "{name} 님이 참석 여부를 수정했습니다",
       "summary": "참석 {attending}, 불참 {declined}",
-      "seeAll": "모든 답변 보기"
+      "seeAll": "모든 답변 보기",
+      "eyebrowNew": "새 답변",
+      "eyebrowUpdated": "답변 수정됨",
+      "attending": "참석",
+      "declined": "불참",
+      "noAnswer": "아직 답변 없음",
+      "dietary": "식단 요청",
+      "song": "신청곡",
+      "message": "남긴 메시지",
+      "why": "참석 여부 설정에서 ‘답변이 오면 이메일로 알림 받기’가 켜져 있어 이 이메일을 보내드립니다."
     }
   }
 }

@@ -42,7 +42,16 @@
       "replied": "{name} 已回覆",
       "updated": "{name} 更新了回覆",
       "summary": "{attending} 位出席，{declined} 位不出席",
-      "seeAll": "查看所有回覆"
+      "seeAll": "查看所有回覆",
+      "eyebrowNew": "新的回覆",
+      "eyebrowUpdated": "回覆已更新",
+      "attending": "出席",
+      "declined": "不出席",
+      "noAnswer": "尚未回覆",
+      "dietary": "飲食需求",
+      "song": "點歌",
+      "message": "他們的留言",
+      "why": "你收到這封信，是因為回覆設定中開啟了「有人回覆時寄信給我」。"
     }
   }
 }

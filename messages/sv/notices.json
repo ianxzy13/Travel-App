@@ -42,7 +42,16 @@
       "replied": "{name} har svarat",
       "updated": "{name} har ändrat sitt svar",
       "summary": "{attending} kommer, {declined} kommer inte",
-      "seeAll": "Se alla svar"
+      "seeAll": "Se alla svar",
+      "eyebrowNew": "Nytt svar",
+      "eyebrowUpdated": "Ändrat svar",
+      "attending": "Kommer",
+      "declined": "Kommer inte",
+      "noAnswer": "Inget svar än",
+      "dietary": "Matpreferenser",
+      "song": "Låtönskemål",
+      "message": "Deras meddelande",
+      "why": "Du får det här mejlet eftersom ”Mejla mig när någon svarar” är påslaget i dina OSA-inställningar."
     }
   }
 }

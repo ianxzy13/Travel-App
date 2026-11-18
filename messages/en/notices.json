@@ -25,7 +25,16 @@
       "replied": "{name} replied",
       "updated": "{name} updated their RSVP",
       "summary": "{attending} attending, {declined} not attending",
-      "seeAll": "See all replies"
+      "seeAll": "See all replies",
+      "eyebrowNew": "New RSVP",
+      "eyebrowUpdated": "RSVP updated",
+      "attending": "Attending",
+      "declined": "Not attending",
+      "noAnswer": "No answer yet",
+      "dietary": "Dietary needs",
+      "song": "Song request",
+      "message": "Their message",
+      "why": "You get this email because “Email me when someone replies” is on in your RSVP settings."
     }
   }
 }

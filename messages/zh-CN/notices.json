@@ -42,7 +42,16 @@
       "replied": "{name} 已回复",
       "updated": "{name} 更新了回复",
       "summary": "{attending} 位出席，{declined} 位不出席",
-      "seeAll": "查看所有回复"
+      "seeAll": "查看所有回复",
+      "eyebrowNew": "新的回复",
+      "eyebrowUpdated": "回复已更新",
+      "attending": "出席",
+      "declined": "不出席",
+      "noAnswer": "尚未回复",
+      "dietary": "饮食需求",
+      "song": "点歌",
+      "message": "他们的留言",
+      "why": "你收到这封邮件，是因为回复设置中开启了“有人回复时给我发邮件”。"
     }
   }
 }

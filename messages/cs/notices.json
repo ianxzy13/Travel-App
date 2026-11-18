@@ -42,7 +42,16 @@
       "replied": "{name} odpověděl(a)",
       "updated": "{name} změnil(a) odpověď",
       "summary": "přijde: {attending}, nepřijde: {declined}",
-      "seeAll": "Zobrazit všechny odpovědi"
+      "seeAll": "Zobrazit všechny odpovědi",
+      "eyebrowNew": "Nová odpověď",
+      "eyebrowUpdated": "Změněná odpověď",
+      "attending": "Přijde",
+      "declined": "Nepřijde",
+      "noAnswer": "Zatím bez odpovědi",
+      "dietary": "Stravovací omezení",
+      "song": "Přání písně",
+      "message": "Jejich vzkaz",
+      "why": "Tento e-mail dostáváte, protože v nastavení odpovědí je zapnuto „Poslat mi e-mail, když někdo odpoví“."
     }
   }
 }
