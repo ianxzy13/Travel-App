@@ -5,7 +5,12 @@ import { motion } from "framer-motion";
 import { EASE } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
-/** Cards fade up the first time they scroll into view (Framer Motion). */
+/**
+ * Cards fade up the first time they scroll into view (Framer Motion).
+ * `amount: 0` = start as soon as any part shows. A share of the card (like 0.1)
+ * can never be reached by a long card on a phone (a list of 40+ guests is more
+ * than ten screens tall), and the card would stay invisible.
+ */
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <motion.div
@@ -17,7 +22,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
       {...(props as React.ComponentProps<typeof motion.div>)}
     />
