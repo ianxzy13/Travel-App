@@ -37,6 +37,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { inviteUninvited } from "@/app/app/rsvp/actions";
 import { normalize } from "@/lib/guests/filter";
 import { relative } from "@/lib/i18n/format";
+import { guestRsvpLink, rsvpPageLink, type RsvpHome } from "@/lib/rsvp/link";
 import type { DashboardHousehold, RsvpDashboardData } from "@/lib/rsvp/load";
 import { cn } from "@/lib/utils";
 import type { RsvpSettingsValues } from "@/lib/validation/rsvp";
@@ -55,7 +56,8 @@ type Props = {
   /** the couple's RSVP page photo and texts */
   rsvpPage?: RsvpPageSetup;
   siteUrl: string;
-  slug: string;
+  /** where guests reply: the couple's website when it is live */
+  home: RsvpHome;
   couple: string;
   emailConfigured: boolean;
   smsConfigured: boolean;
@@ -89,7 +91,7 @@ function useCopy() {
 }
 
 export function RsvpDashboard(props: Props) {
-  const { data, siteUrl, slug, canEdit, emailConfigured, smsConfigured } = props;
+  const { data, siteUrl, home, canEdit, emailConfigured, smsConfigured } = props;
   const t = useTranslations("rsvpAdmin");
   const copy = useCopy();
   const [filter, setFilter] = useState<Filter>("all");
@@ -146,7 +148,7 @@ export function RsvpDashboard(props: Props) {
         hasPhone: h.guests.some((g) => g.phone && !g.isPlusOne),
       }));
 
-  const publicUrl = `${siteUrl}/rsvp/${slug}`;
+  const publicUrl = rsvpPageLink(siteUrl, home);
   const messages = data.households.filter((h) => h.message || h.songRequest);
 
   return (
@@ -171,7 +173,8 @@ export function RsvpDashboard(props: Props) {
                   setSending({
                     ids: invited.filter((h) => h.reply.status !== "replied").map((h) => h.id),
                     kind: counts.not_emailed === counts.all ? "invitation" : "reminder",
-                    channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                    channel:
+                      emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
                   })
                 }
               >
@@ -192,10 +195,10 @@ export function RsvpDashboard(props: Props) {
           {showUninvited && <NotInvitedCard households={uninvited} events={data.events} />}
           {data.events.length === 0 || invited.length === 0 ? (
             showUninvited ? null : (
-            <Card>
-              <CardContent className="py-12 text-center">
-                <h2 className="text-3xl">{t("nothingTitle")}</h2>
-                <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("nothingText")}</p>
+              <Card>
+                <CardContent className="py-12 text-center">
+                  <h2 className="text-3xl">{t("nothingTitle")}</h2>
+                  <p className="text-muted-foreground mx-auto mt-2 max-w-md">{t("nothingText")}</p>
                 </CardContent>
               </Card>
             )
@@ -205,7 +208,8 @@ export function RsvpDashboard(props: Props) {
               <MealCountsCard data={data} />
 
               {/* ---------- households ---------- */}
-              <Card>
+              {/* no fade-in: the guest list must show on every phone, even a long one */}
+              <Card reveal={false}>
                 <CardHeader className="gap-4">
                   <CardTitle className="font-serif text-2xl">{t("households")}</CardTitle>
                   <div className="flex flex-col gap-3 md:flex-row md:items-center">
@@ -280,7 +284,12 @@ export function RsvpDashboard(props: Props) {
                               setSending({
                                 ids: selectedIds,
                                 kind: "invitation",
-                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                                channel:
+                                  emailConfigured && smsConfigured
+                                    ? "both"
+                                    : emailConfigured
+                                      ? "email"
+                                      : "sms",
                               })
                             }
                           >
@@ -294,7 +303,12 @@ export function RsvpDashboard(props: Props) {
                               setSending({
                                 ids: selectedIds,
                                 kind: "reminder",
-                                channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                                channel:
+                                  emailConfigured && smsConfigured
+                                    ? "both"
+                                    : emailConfigured
+                                      ? "email"
+                                      : "sms",
                               })
                             }
                           >
@@ -312,7 +326,7 @@ export function RsvpDashboard(props: Props) {
                         <HouseholdRow
                           key={h.id}
                           household={h}
-                          link={`${siteUrl}/r/${h.code}`}
+                          link={guestRsvpLink(siteUrl, h.code, home)}
                           couple={props.couple}
                           canEdit={canEdit}
                           selected={selected.has(h.id)}
@@ -329,7 +343,12 @@ export function RsvpDashboard(props: Props) {
                             setSending({
                               ids: [h.id],
                               kind: h.lastEmail ? "reminder" : "invitation",
-                              channel: emailConfigured && smsConfigured ? "both" : emailConfigured ? "email" : "sms",
+                              channel:
+                                emailConfigured && smsConfigured
+                                  ? "both"
+                                  : emailConfigured
+                                    ? "email"
+                                    : "sms",
                             })
                           }
                         />
@@ -560,9 +579,7 @@ function HouseholdRow({
     ? `https://wa.me/${guestPhone.replace(/\D/g, "")}?text=${waText}`
     : `https://wa.me/?text=${waText}`;
   const smsBody = encodeURIComponent(shareText);
-  const smsLink = guestPhone
-    ? `sms:${guestPhone}?body=${smsBody}`
-    : `sms:?body=${smsBody}`;
+  const smsLink = guestPhone ? `sms:${guestPhone}?body=${smsBody}` : `sms:?body=${smsBody}`;
   const emailSubject = encodeURIComponent(t("shareEmailSubject", { couple }));
   const emailBody = encodeURIComponent(shareText);
   const guestEmail = h.guests.find((g) => g.email && !g.isPlusOne)?.email;

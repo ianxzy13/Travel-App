@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CODE_PATTERN, normalizeCode } from "@/lib/rsvp/types";
 
-/** "Enter the code from your invitation" box. */
-export function CodeForm() {
+/** "Enter the code from your invitation" box. With `slug`, it stays on that wedding website. */
+export function CodeForm({ slug }: { slug?: string } = {}) {
   const t = useTranslations("rsvp.code");
   const router = useRouter();
   const [code, setCode] = useState("");
@@ -26,7 +26,8 @@ export function CodeForm() {
           setError(t("invalid"));
           return;
         }
-        router.push(`/r/${clean}`);
+        // on the couple's website, the reply form opens right there
+        router.push(slug ? `/w/${slug}?code=${clean}#rsvp` : `/r/${clean}`);
       }}
     >
       <Label htmlFor="rsvp-code">{t("label")}</Label>

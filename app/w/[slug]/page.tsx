@@ -6,10 +6,12 @@ import { notFound } from "next/navigation";
 import { Eye } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { BILLING_ENABLED } from "@/lib/billing/config";
+import { RsvpExperience } from "@/components/rsvp/rsvp-experience";
 import { PasswordGate } from "@/components/website/password-gate";
 import { Site } from "@/components/website/site";
 import { LOCALE_CODES } from "@/i18n/locales";
 import { fmtDate } from "@/lib/i18n/format";
+import { loadRsvp, weddingCountry } from "@/lib/rsvp/page-data";
 import { getSiteUrl } from "@/lib/site-url";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -71,10 +73,43 @@ async function showsBranding(slug: string) {
 }
 
 /** /w/ian-and-maria — the couple's public wedding website, in the visitor's language. */
-export default async function WeddingWebsite({ params }: { params: Promise<{ slug: string }> }) {
+/**
+ * The guest's own reply form, when they came with their personal link
+ * (/w/<slug>?code=K7P2QX). Only for a code of this wedding.
+ */
+async function guestRsvp(slug: string, code: string | undefined) {
+  if (!code) return null;
+  const found = await loadRsvp(code);
+  if (!found || found.data.wedding.slug !== slug) return null;
+  if (found.data.invites.length === 0) {
+    const t = await getTranslations("rsvp");
+    return <p className="bg-card rounded-2xl border p-8 text-center">{t("nothingYet")}</p>;
+  }
+  const w = found.data.wedding;
+  return (
+    <RsvpExperience
+      data={found.data}
+      originals={found.originals}
+      siteUrl={await getSiteUrl()}
+      destination={await weddingCountry(w.destination_airport, w.location)}
+    />
+  );
+}
+
+export default async function WeddingWebsite({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ code?: string | string[] }>;
+}) {
   const { slug } = await params;
+  const { code } = await searchParams;
   const [site, t] = await Promise.all([load(slug), getTranslations("site.preview")]);
   if (!site) notFound();
+  const rsvp = site.locked
+    ? null
+    : await guestRsvp(slug, typeof code === "string" ? code : undefined);
 
   return (
     <div className={siteFontVariables}>
@@ -99,7 +134,7 @@ export default async function WeddingWebsite({ params }: { params: Promise<{ slu
               </Link>
             </div>
           )}
-          <Site data={site.data} branding={await showsBranding(slug)} />
+          <Site data={site.data} branding={await showsBranding(slug)} rsvp={rsvp} />
         </>
       )}
     </div>

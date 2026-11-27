@@ -14,6 +14,8 @@ import { localized } from "@/lib/i18n/content";
 import { fmtDate } from "@/lib/i18n/format";
 import { rsvpErrorMessage, type RsvpData, type RsvpResult } from "@/lib/rsvp/types";
 import { inviteUninvitedGuests } from "@/lib/rsvp/invite";
+import { rsvpHome } from "@/lib/rsvp/home";
+import { guestRsvpLink, type RsvpHome } from "@/lib/rsvp/link";
 import { getSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 import {
@@ -185,6 +187,16 @@ type Kind = "invitation" | "reminder";
 
 type Wedding = Awaited<ReturnType<typeof requireWedding>>["wedding"];
 
+/** Where guests' RSVP links point: the couple's website when it is live. */
+type LinkBase = { siteUrl: string; home: RsvpHome };
+async function linkBase(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  wedding: Wedding,
+): Promise<LinkBase> {
+  const [siteUrl, home] = await Promise.all([getSiteUrl(), rsvpHome(supabase, wedding)]);
+  return { siteUrl, home };
+}
+
 /** The household's own language if they chose one, otherwise the wedding's main language. */
 function emailLocale(wedding: Wedding, preferred: string | null | undefined): Locale {
   if (isLocale(preferred)) return preferred;
@@ -198,14 +210,14 @@ async function emailFor(
   kind: Kind,
   note: string,
   household: { name: string; code: string; language?: string | null; people?: number },
-  siteUrl: string,
+  at: LinkBase,
 ): Promise<{ props: RsvpEmailProps; subject: string }> {
   const locale = emailLocale(wedding, household.language);
   const t = await guestTranslations(locale, "email", household.people);
   const couple = coupleName(wedding);
   const invite = kind === "invitation";
-  // the link opens the RSVP page in the same language
-  const link = `${siteUrl}/r/${household.code}?lang=${locale}`;
+  // the link opens the couple's website (or the RSVP page) in the same language
+  const link = guestRsvpLink(at.siteUrl, household.code, at.home, locale);
   const deadline = wedding.rsvp_deadline ? fmtDate(wedding.rsvp_deadline, locale, "long") : null;
   const place = localized(wedding, locale, ["location"]).location;
   return {
@@ -244,14 +256,21 @@ export async function previewRsvpEmail(
   note: string,
 ): Promise<ActionResult<{ html: string; subject: string; sms: string }>> {
   const { wedding } = await requireWedding();
-  const siteUrl = await getSiteUrl();
-  const sms = await smsFor(wedding, kind, note.slice(0, 300), { code: "K7P2QX" }, coupleName(wedding), siteUrl);
+  const at = await linkBase(await createClient(), wedding);
+  const sms = await smsFor(
+    wedding,
+    kind,
+    note.slice(0, 300),
+    { code: "K7P2QX" },
+    coupleName(wedding),
+    at,
+  );
   const { props, subject } = await emailFor(
     wedding,
     kind,
     note.slice(0, 1000),
     { name: (await getTranslations("rsvpAdmin.email"))("sampleHousehold"), code: "K7P2QX" },
-    await getSiteUrl(),
+    at,
   );
   const html = await render(RsvpEmail(props));
   return { ok: true, data: { html, subject, sms } };
@@ -337,8 +356,13 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
 
   const noEmail = households.filter((h) => !emailsByHousehold.has(h.id)).map((h) => h.name);
   const sendable = households.filter((h) => emailsByHousehold.has(h.id));
-  const sizes = await householdSizes(supabase, wedding.id, sendable.map((h) => h.id));
-  const siteUrl = await getSiteUrl();
+  const sizes = await householdSizes(
+    supabase,
+    wedding.id,
+    sendable.map((h) => h.id),
+  );
+  const at = await linkBase(supabase, wedding);
+  const siteUrl = at.siteUrl;
   const couple = coupleName(wedding);
   let sent = 0;
   let failed = 0;
@@ -358,7 +382,7 @@ export async function sendRsvpEmails(input: unknown): Promise<ActionResult<SendS
             language: h.preferred_language,
             people: sizes.get(h.id),
           },
-          siteUrl,
+          at,
         );
         const guestId = firstGuestByHousehold.get(h.id);
         if (guestId) {
@@ -414,11 +438,11 @@ async function smsFor(
   note: string,
   household: { code: string; language?: string | null; people?: number },
   sender: string,
-  siteUrl: string,
+  at: LinkBase,
 ) {
   const locale = emailLocale(wedding, household.language);
   const t = await guestTranslations(locale, "email", household.people);
-  const link = `${siteUrl}/r/${household.code}?lang=${locale}`;
+  const link = guestRsvpLink(at.siteUrl, household.code, at.home, locale);
   const body = t(kind === "invitation" ? "smsInvite" : "smsReminder", { sender, link });
   return note ? `${body}\n${note}` : body;
 }
@@ -496,7 +520,7 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
     }
   }
 
-  const siteUrl = await getSiteUrl();
+  const at = await linkBase(supabase, wedding);
   const couple = coupleName(wedding);
   const from = twilioFrom();
   const noPhone = households.filter((h) => !phoneByHousehold.has(h.id)).map((h) => h.name);
@@ -504,7 +528,11 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
   let sent = 0;
   let failed = 0;
 
-  const sizes = await householdSizes(supabase, wedding.id, sendable.map((h) => h.id));
+  const sizes = await householdSizes(
+    supabase,
+    wedding.id,
+    sendable.map((h) => h.id),
+  );
   for (const h of sendable) {
     const phone = phoneByHousehold.get(h.id)!;
     const sender = (h.managed_by ? memberNames.get(h.managed_by) : null) ?? couple;
@@ -514,7 +542,7 @@ export async function sendRsvpSms(input: unknown): Promise<ActionResult<SmsSumma
       note,
       { code: h.rsvp_code, language: h.preferred_language, people: sizes.get(h.id) },
       sender,
-      siteUrl,
+      at,
     );
 
     try {

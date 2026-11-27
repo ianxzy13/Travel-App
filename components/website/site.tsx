@@ -39,7 +39,15 @@ const line = "border-[var(--site-line)]";
 
 type Tr = ReturnType<typeof useTranslations<"site">>;
 /** t = template, tr = translations for the visitor's language */
-type Ctx = { t: SiteTemplate; data: SiteData; preview: boolean; tr: Tr; locale: string };
+type Ctx = {
+  t: SiteTemplate;
+  data: SiteData;
+  preview: boolean;
+  tr: Tr;
+  locale: string;
+  /** a guest's own reply form (opened from their personal RSVP link) */
+  rsvp?: React.ReactNode;
+};
 
 /** Picture from storage, kept to a fixed shape by its parent box. */
 function Pic({
@@ -170,18 +178,30 @@ export function Site({
   data,
   preview = false,
   branding = true,
+  rsvp,
 }: {
   data: SiteData;
   preview?: boolean;
+  /** a guest's own reply form, shown in the RSVP section (from ?code= in the link) */
+  rsvp?: React.ReactNode;
   /** "Made with Vow" in the footer (hidden on paid plans). */
   branding?: boolean;
 }) {
   const t = data.look.template;
   const tr = useTranslations("site");
   const locale = useLocale();
-  const ctx: Ctx = { t, data, preview, tr, locale };
+  const ctx: Ctx = { t, data, preview, tr, locale, rsvp };
   // The public site hides empty sections; the preview shows a hint instead.
   const sections = data.sections.filter((s) => preview || !isSectionEmpty(s, data));
+  // A guest who came with their personal link always gets an RSVP section to reply in.
+  if (rsvp && !sections.some((s) => s.kind === "rsvp")) {
+    sections.push({
+      id: "rsvp-guest",
+      kind: "rsvp",
+      visible: true,
+      content: { intro: "" },
+    } as Section);
+  }
   const navSections = sections.filter(
     (s) => s.kind !== "home" && (!preview || !isSectionEmpty(s, data)),
   );
@@ -1149,26 +1169,32 @@ function Rsvp({ ctx, intro }: { ctx: Ctx; intro: string }) {
   return (
     <>
       <Intro ctx={ctx} text={intro} />
-      {deadline && (
-        <p className={cn(muted, "-mt-6 mb-8", ctx.t !== "modern" && "text-center")}>
-          {ctx.tr.rich("rsvp.replyBy", {
-            date: fmtDate(deadline, ctx.locale, "long"),
-            b: (c) => <strong className="text-[var(--site-fg)]">{c}</strong>,
-          })}
-        </p>
+      {ctx.rsvp ? (
+        <div className="mx-auto max-w-2xl">{ctx.rsvp}</div>
+      ) : (
+        <>
+          {deadline && (
+            <p className={cn(muted, "-mt-6 mb-8", ctx.t !== "modern" && "text-center")}>
+              {ctx.tr.rich("rsvp.replyBy", {
+                date: fmtDate(deadline, ctx.locale, "long"),
+                b: (c) => <strong className="text-[var(--site-fg)]">{c}</strong>,
+              })}
+            </p>
+          )}
+          {/* In the editor preview the forms are inert, so clicks don't leave the editor. */}
+          <div
+            inert={ctx.preview}
+            className={cn(card(ctx.t), "mx-auto max-w-md space-y-6", ctx.t === "modern" && "mx-0")}
+          >
+            <FindInvitation slug={ctx.data.wedding.slug} onWebsite />
+            <div className={cn("flex items-center gap-3 text-xs tracking-widest uppercase", muted)}>
+              <span className="h-px flex-1 bg-[var(--site-line)]" /> {ctx.tr("rsvp.or")}{" "}
+              <span className="h-px flex-1 bg-[var(--site-line)]" />
+            </div>
+            <CodeForm slug={ctx.data.wedding.slug} />
+          </div>
+        </>
       )}
-      {/* In the editor preview the forms are inert, so clicks don't leave the editor. */}
-      <div
-        inert={ctx.preview}
-        className={cn(card(ctx.t), "mx-auto max-w-md space-y-6", ctx.t === "modern" && "mx-0")}
-      >
-        <FindInvitation slug={ctx.data.wedding.slug} />
-        <div className={cn("flex items-center gap-3 text-xs tracking-widest uppercase", muted)}>
-          <span className="h-px flex-1 bg-[var(--site-line)]" /> {ctx.tr("rsvp.or")}{" "}
-          <span className="h-px flex-1 bg-[var(--site-line)]" />
-        </div>
-        <CodeForm />
-      </div>
     </>
   );
 }

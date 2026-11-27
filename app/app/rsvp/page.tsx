@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { RsvpDashboard } from "@/components/rsvp-admin/rsvp-dashboard";
 import { isEmailConfigured } from "@/lib/email/resend";
 import { isSmsConfigured } from "@/lib/sms/twilio";
+import { rsvpHome } from "@/lib/rsvp/home";
 import { loadRsvpDashboard } from "@/lib/rsvp/load";
 import { signPaths } from "@/lib/inspiration/load";
 import { getSiteUrl } from "@/lib/site-url";
@@ -21,7 +22,7 @@ export default async function RsvpPage({
   const { wedding, role } = await requireWedding();
   const { household } = await searchParams;
   const sb = await createClient();
-  const data = await loadRsvpDashboard(sb, wedding);
+  const [data, home] = await Promise.all([loadRsvpDashboard(sb, wedding), rsvpHome(sb, wedding)]);
   const cover = wedding.rsvp_cover_path ?? null;
   const coverUrl = cover ? ((await signPaths(sb, [cover])).get(cover) ?? null) : null;
 
@@ -50,7 +51,7 @@ export default async function RsvpPage({
         translations: wedding.translations ?? {},
       }}
       siteUrl={await getSiteUrl()}
-      slug={wedding.slug}
+      home={home}
       couple={coupleName(wedding)}
       emailConfigured={isEmailConfigured}
       smsConfigured={isSmsConfigured}
