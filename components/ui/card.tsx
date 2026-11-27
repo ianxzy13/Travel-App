@@ -11,15 +11,24 @@ import { cn } from "@/lib/utils";
  * can never be reached by a long card on a phone (a list of 40+ guests is more
  * than ten screens tall), and the card would stay invisible.
  */
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({
+  className,
+  reveal = true,
+  ...props
+}: React.ComponentProps<"div"> & {
+  /** false = no fade-in (for long lists people must always be able to see) */
+  reveal?: boolean;
+}) {
+  const cls = cn(
+    "bg-card text-card-foreground flex flex-col gap-6 rounded-lg border py-6",
+    className,
+  );
+  if (!reveal) return <div data-slot="card" className={cls} {...props} />;
   return (
     <motion.div
       data-slot="card"
       data-reveal
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-lg border py-6",
-        className,
-      )}
+      className={cls}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0 }}

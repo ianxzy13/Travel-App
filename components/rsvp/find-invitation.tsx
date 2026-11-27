@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 /** "Find your invitation" by full name, for one wedding. */
-export function FindInvitation({ slug }: { slug: string }) {
+export function FindInvitation({ slug, onWebsite }: { slug: string; onWebsite?: boolean }) {
   const t = useTranslations("rsvp.find");
   const router = useRouter();
   const [name, setName] = useState("");
@@ -25,7 +25,10 @@ export function FindInvitation({ slug }: { slug: string }) {
         setError(null);
         startTransition(async () => {
           const result = await findInvitation(slug, name);
-          if (result.ok) router.push(`/r/${result.data.code}`);
+          if (result.ok)
+            router.push(
+              onWebsite ? `/w/${slug}?code=${result.data.code}#rsvp` : `/r/${result.data.code}`,
+            );
           else setError(result.error);
         });
       }}
